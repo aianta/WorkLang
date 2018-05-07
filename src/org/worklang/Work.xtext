@@ -1,0 +1,92 @@
+grammar org.worklang.Work with org.eclipse.xtext.common.Terminals
+
+generate work "http://www.worklang.org/Work"
+
+Model:
+	project = Project;
+	
+Project:
+	name=ID '{' hookState=HookState '}'
+;
+	
+HookState:
+	items += Item*
+	steps += Horizontal*
+	'flow' flow = ExecutableSequence
+;
+
+ExecutableSequence:
+	startState = StartState
+	interStates += State*
+	endState = EndState
+;
+
+
+StartState:
+	'{'
+	step = 'start'
+	vertical = Vertical
+	'}'
+;
+
+State:
+	'{'
+	step = [Horizontal]
+	vertical = Vertical
+	'}'
+;
+
+EndState:
+	'{'
+	step = 'end'
+	vertical = Vertical
+	'}'
+;
+
+Vertical:
+	SyncVertical|AsyncVertical
+;
+
+SyncVertical:
+	'sync' method='phone'
+;
+
+AsyncVertical:
+	'async' method='email'
+;
+
+Horizontal:
+	'step' name = ID '{'
+		'requires''{'requires += [Item]*'}'
+		'produces''{'produces += [Item]+'}'
+		'takes'duration = Duration
+		'costs'cost = Cost
+	'}'
+;
+
+Item:
+	'item' name = ID '{'
+		features += Feature* 
+	'}' 	
+;
+
+Feature:
+	'feature' name = ID 'as' type = (ItemFeatureType|PrimitiveFeatureType)';'
+;
+
+ItemFeatureType:
+	item=[Item]|Item
+;
+
+PrimitiveFeatureType:
+	primitive=('text'|'number'|'decimal'|'file'| 'boolean')
+;
+
+Cost:
+	'$'INT
+;
+
+Duration:
+	(INT's'| INT'm'| INT'h'|INT'd'|INT'w')+
+;
+

@@ -1,0 +1,10 @@
+.launch
+.settings
+src-gen
+xtend-gen
+.project
+.classpath
+plugin.xml
+bin
+model
+.antlr*
