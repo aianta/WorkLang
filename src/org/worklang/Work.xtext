@@ -3,90 +3,149 @@ grammar org.worklang.Work with org.eclipse.xtext.common.Terminals
 generate work "http://www.worklang.org/Work"
 
 Model:
-	project = Project;
+	fields += Field*
+	experts += Expert*
+	plans += Plan*
+	;
 	
-Project:
-	name=ID '{' hookState=HookState '}'
+Field:
+	'field' name = ID '{'
+	'products' '{' productDefinitions += ProductDefinition* '}'
+	'services' '{' serviceDefinitions += ServiceDefinition* '}'
+	'}'
+;
+
+ServiceDefinition:
+	(PrimitiveServiceDefinition|CompoundServiceDefinition) ';'
+;
+
+PrimitiveServiceDefinition:
+	'primitive'
+	produces = [PrimitiveProductDefinition]
+	'requires' requires += [ProductDefinition]*
+;
+
+CompoundServiceDefinition:
+	name = ID 
+	'produces' produces += [CompoundProductDefinition]+
+	'requires' requires += [ProductDefinition]*
+	'implements' implementation = ServiceCompositionDefinition
+	'onfeedback' feedbackAction = [ServiceDefinition]|HourlyServiceDefinition
+;
+
+ServiceCompositionDefinition:
+	ServiceDefinitionSet|HourlyServiceDefinition
+;
+
+ServiceDefinitionSet:
+	flow += [ServiceDefinition]+
+;
+
+HourlyServiceDefinition:
+	service = 'hourly'
+;
+
+ProductDefinition:
+	(PrimitiveProductDefinition|CompoundProductDefinition|NullProduct)';'
+;
+
+PrimitiveProductDefinition:
+	name = ID
+	'value' valueType = ValueType
+;
+
+CompoundProductDefinition:
+	name = ID 
+	'{' components += Component+ '}'
+;
+
+Component:
+	ComponentSet|SingleComponent
+;
+
+ComponentSet:
+	'setOf' set = [ProductDefinition]
+;
+
+SingleComponent:
+	single = [ProductDefinition]
+;
+
+NullProduct:
+	nullproduct = 'nothing'
+;
+
+
+Expert:
+	'expert' name = ID '{'
+	'skills' '{' skills += Skill* '}'
+	'knowledge' '{' knowledge += Knowledge* '}'
+	'hourlyrate' hourlyRate = '$' INT
+;
+
+Skill:
+	serviceDefinition = [ServiceDefinition]
+	'duration' duration = STRING
+	'cost' cost = STRING
+	';'
+;
+
+Knowledge:
+	productDefinition = [ProductDefinition] ';'
+;
+
+Plan:
+	'goal' name = ID '{'
+	'plan''{'flow += Step* '}'
+	'}'
+;
+
+Product:
+	PrimitiveProduct|CompoundProduct|NullProduct ';'
+;
+
+PrimitiveProduct:
+	instanceof = [PrimitiveProductDefinition]
+	'called' name = STRING 
+	'value:' value = Value
+;
+
+CompoundProduct:
+	instanceof = [ProductDefinition]
+	'called' name = STRING
+	'with' '{'values += Product+'}'
+;
+
+Step:
+	'step' 
+	stepIndex = INT
+	name = STRING
+	'using' implementingService = Service ';'
+;
+
+Service:
+	instanceof = [ServiceDefinition] 
+	'{' 'requiredInfo' requires += Product*'}'
+	'target' produces += Product+
 ;
 	
-HookState:
-	items += Item*
-	steps += Horizontal*
-	'flow' flow = ExecutableSequence
+ValueType:
+	('defined'|'determined')+
 ;
 
-ExecutableSequence:
-	startState = StartState
-	interStates += State*
-	endState = EndState
+Value:
+	(DefinedValue|DeterminedValue)+
+;
+
+DefinedValue:
+	STRING
+;
+
+DeterminedValue:
+	'determined'
 ;
 
 
-StartState:
-	'{'
-	step = 'start'
-	vertical = Vertical
-	'}'
-;
 
-State:
-	'{'
-	step = [Horizontal]
-	vertical = Vertical
-	'}'
-;
 
-EndState:
-	'{'
-	step = 'end'
-	vertical = Vertical
-	'}'
-;
-
-Vertical:
-	SyncVertical|AsyncVertical
-;
-
-SyncVertical:
-	'sync' method='phone'
-;
-
-AsyncVertical:
-	'async' method='email'
-;
-
-Horizontal:
-	'step' name = ID '{'
-		'requires''{'requires += [Item]*'}'
-		'produces''{'produces += [Item]+'}'
-		'takes'duration = Duration
-		'costs'cost = Cost
-	'}'
-;
-
-Item:
-	'item' name = ID '{'
-		features += Feature* 
-	'}' 	
-;
-
-Feature:
-	'feature' name = ID 'as' type = (ItemFeatureType|PrimitiveFeatureType)';'
-;
-
-ItemFeatureType:
-	item=[Item]|Item
-;
-
-PrimitiveFeatureType:
-	primitive=('text'|'number'|'decimal'|'file'| 'boolean')
-;
-
-Cost:
-	'$'INT
-;
-
-Duration:
-	(INT's'| INT'm'| INT'h'|INT'd'|INT'w')+
-;
 
