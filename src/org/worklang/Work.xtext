@@ -10,8 +10,9 @@ Model:
 	
 Field:
 	'field' name = ID '{'
-	'products' '{' productDefinitions += ProductDefinition* '}'
-	'services' '{' serviceDefinitions += ServiceDefinition* '}'
+	('extends' parentFields += [Field]+)?
+	'productDefs' '{' productDefinitions += ProductDefinition* '}'
+	'serviceDefs' '{' serviceDefinitions += ServiceDefinition* '}'
 	'}'
 ;
 
@@ -20,38 +21,47 @@ ServiceDefinition:
 ;
 
 PrimitiveServiceDefinition:
+	NativePrimitiveServiceDefinition|ReferencePrimitiveServiceDefinition
+;
+
+NativePrimitiveServiceDefinition:
 	'primitive'
 	produces = [PrimitiveProductDefinition]
-	'requires' requires += [ProductDefinition]*
+	('requires' requires += [ProductDefinition]+)?
+;
+
+ReferencePrimitiveServiceDefinition:
+	'from' field = [Field] '.'
+	sourceName = [NativePrimitiveServiceDefinition]
+	'as' name = ID
 ;
 
 CompoundServiceDefinition:
 	name = ID 
 	'produces' produces += [CompoundProductDefinition]+
-	'requires' requires += [ProductDefinition]*
-	'implements' implementation = ServiceCompositionDefinition
-	'onfeedback' feedbackAction = [ServiceDefinition]|HourlyServiceDefinition
+	('requires' requires += [ProductDefinition]+)?
+	('onfeedback' feedbackAction = [ServiceDefinition])?
 ;
 
-ServiceCompositionDefinition:
-	ServiceDefinitionSet|HourlyServiceDefinition
-;
-
-ServiceDefinitionSet:
-	flow += [ServiceDefinition]+
-;
-
-HourlyServiceDefinition:
-	service = 'hourly'
-;
 
 ProductDefinition:
-	(PrimitiveProductDefinition|CompoundProductDefinition|NullProduct)';'
+	(PrimitiveProductDefinition|CompoundProductDefinition)';'
 ;
 
 PrimitiveProductDefinition:
+	NativePrimitiveProductDefinition|ReferencePrimitiveProductDefinition
+;
+
+NativePrimitiveProductDefinition:
 	name = ID
 	'value' valueType = ValueType
+;
+
+ReferencePrimitiveProductDefinition:
+	'from' field = [Field] '.'
+	sourceName = [NativePrimitiveProductDefinition]
+	'as'
+	name = ID
 ;
 
 CompoundProductDefinition:
@@ -60,19 +70,19 @@ CompoundProductDefinition:
 ;
 
 Component:
-	ComponentSet|SingleComponent
+	ComponentSet|SingleComponent|OptionalComponent
 ;
 
 ComponentSet:
-	'setOf' set = [ProductDefinition]
+	'setOf' (count?=INT)? set = [ProductDefinition]
 ;
 
 SingleComponent:
 	single = [ProductDefinition]
 ;
 
-NullProduct:
-	nullproduct = 'nothing'
+OptionalComponent:
+	optional = [ProductDefinition] '?'
 ;
 
 
@@ -101,7 +111,7 @@ Plan:
 ;
 
 Product:
-	PrimitiveProduct|CompoundProduct|NullProduct ';'
+	PrimitiveProduct|CompoundProduct ';'
 ;
 
 PrimitiveProduct:
