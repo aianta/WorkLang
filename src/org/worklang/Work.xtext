@@ -52,16 +52,15 @@ Expert:
 FieldDefinition:
 	field = Field
 	space = Space
-	('extends' '[' namespaces += [Space]+ ']')? 
+	extends=(ExtendsDefinition)? 
 	'{'
 	(conceptualspace = Namespace)?
-	tangiblespace = Referencespace
+	(tangiblespace = Referencespace)?
 	'}'	
 ;
 
 Space:
 	name = ID
-//	space = Namespace | Referencespace
 ;
 
 Namespace:
@@ -120,11 +119,11 @@ ReferenceState:
 	(('called'|'as')
 		state = StateID)?
 	(composition = WithStatesDefinition)?
-	';'
+	
 ;
 
 TransitionDefinition:
-	object = Transition transition = TransitionID (( in = InputDefinition out = OutputDefinition | 
+	object = Transition transition = TransitionID (( (in = InputDefinition)? out = OutputDefinition | 
 		 compoundTransitionDef = WithTransitionsDefinition))
 ;
 
@@ -139,7 +138,7 @@ ReferenceTransition:
 	(('called'|'as')
 		transition = TransitionID)?
 	(composition = WithTransitionsDefinition)?
-	';'
+	
 ;
 
 FromDefinition:
@@ -148,13 +147,17 @@ FromDefinition:
 ;
 
 InputDefinition:
-	input = Input inputState = [StateID]
+	input = Input inputState += [StateID]*
 ;
 
 OutputDefinition:
 	output = Output outputState = [StateID]
 ;
 
+ExtendsDefinition:
+	type = Extends
+	namespaces += [Space]+	
+;
 
 Primitive:
 	'primitive' 
@@ -201,6 +204,10 @@ With:
 	'with'
 ;
 
+Extends:
+	'extends'
+;
+
 NotOp:
 	'NOT'
 ;
@@ -213,6 +220,7 @@ OrOp:
 	'OR'
 ;
 
+//State Composition Expression Rules
 Predicate:
 	(negation?=NotOp)? expression = BinaryExpression
 ;
@@ -227,6 +235,8 @@ TerminalBinaryExpression returns BinaryExpression:
 	 {StateID} value = [StateID]
 ;
 
+
+//Transition Composition Expression Rules
 TransitionalExpression:
 	TerminalTransitionalExpression ({Operation.left=current}
 		op= 'THEN' right = TerminalTransitionalExpression)*	
