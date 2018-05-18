@@ -2,159 +2,222 @@ grammar org.worklang.Work with org.eclipse.xtext.common.Terminals
 
 generate work "http://www.worklang.org/Work"
 
+
 Model:
-	fields += Field*
+	fields += FieldDefinition*
 	experts += Expert*
+	practitioners += Practitioner*
 	plans += Plan*
-	;
-	
-Field:
-	'field' name = ID '{'
-	('extends' parentFields += [Field]+)?
-	'productDefs' '{' productDefinitions += ProductDefinition* '}'
-	'serviceDefs' '{' serviceDefinitions += ServiceDefinition* '}'
-	'}'
-;
-
-ServiceDefinition:
-	(PrimitiveServiceDefinition|CompoundServiceDefinition) ';'
-;
-
-PrimitiveServiceDefinition:
-	NativePrimitiveServiceDefinition|ReferencePrimitiveServiceDefinition
-;
-
-NativePrimitiveServiceDefinition:
-	'primitive'
-	produces = [PrimitiveProductDefinition]
-	('requires' requires += [ProductDefinition]+)?
-;
-
-ReferencePrimitiveServiceDefinition:
-	'from' field = [Field] '.'
-	sourceName = [NativePrimitiveServiceDefinition]
-	'as' name = ID
-;
-
-CompoundServiceDefinition:
-	name = ID 
-	'produces' produces += [CompoundProductDefinition]+
-	('requires' requires += [ProductDefinition]+)?
-	('onfeedback' feedbackAction = [ServiceDefinition])?
-;
-
-
-ProductDefinition:
-	(PrimitiveProductDefinition|CompoundProductDefinition)';'
-;
-
-PrimitiveProductDefinition:
-	NativePrimitiveProductDefinition|ReferencePrimitiveProductDefinition
-;
-
-NativePrimitiveProductDefinition:
-	name = ID
-	'value' valueType = ValueType
-;
-
-ReferencePrimitiveProductDefinition:
-	'from' field = [Field] '.'
-	sourceName = [NativePrimitiveProductDefinition]
-	'as'
-	name = ID
-;
-
-CompoundProductDefinition:
-	name = ID 
-	'{' components += Component+ '}'
-;
-
-Component:
-	ComponentSet|SingleComponent|OptionalComponent
-;
-
-ComponentSet:
-	'setOf' (count?=INT)? set = [ProductDefinition]
-;
-
-SingleComponent:
-	single = [ProductDefinition]
-;
-
-OptionalComponent:
-	optional = [ProductDefinition] '?'
-;
-
-
-Expert:
-	'expert' name = ID '{'
-	'skills' '{' skills += Skill* '}'
-	'knowledge' '{' knowledge += Knowledge* '}'
-	'hourlyrate' hourlyRate = '$' INT
-;
-
-Skill:
-	serviceDefinition = [ServiceDefinition]
-	'duration' duration = STRING
-	'cost' cost = STRING
-	';'
-;
-
-Knowledge:
-	productDefinition = [ProductDefinition] ';'
 ;
 
 Plan:
-	'goal' name = ID '{'
-	'plan''{'flow += Step* '}'
+	'plan' 
+	name = ID '{'
+	'produces' resultState = StateID
+	'{'
+	steps += Step+
+	'}'
 	'}'
 ;
 
-Product:
-	PrimitiveProduct|CompoundProduct ';'
-;
-
-PrimitiveProduct:
-	instanceof = [PrimitiveProductDefinition]
-	'called' name = STRING 
-	'value:' value = Value
-;
-
-CompoundProduct:
-	instanceof = [ProductDefinition]
-	'called' name = STRING
-	'with' '{'values += Product+'}'
-;
-
 Step:
-	'step' 
-	stepIndex = INT
-	name = STRING
-	'using' implementingService = Service ';'
+	'step' stepNumber  = INT 
+	stepTransition = ReferenceTransition
+	'$' cost = INT
+	'duration' duration = STRING
 ;
 
-Service:
-	instanceof = [ServiceDefinition] 
-	'{' 'requiredInfo' requires += Product*'}'
-	'target' produces += Product+
+Practitioner:
+	'practitioner''{'
+	name = ID
+	'knowledge''{'
+	knowledge += ReferenceState
+	'}'
+	'skills''{'
+	skills += ReferenceTransition
+	'}'
+	'}'
+;
+
+Expert:
+	'expert'
+	name = ID '{'
+	refSpace = Referencespace
+	'hourlyRate'
+	'$' rate =  INT
+	'}'
 ;
 	
-ValueType:
-	('defined'|'determined')+
+
+FieldDefinition:
+	field = Field
+	space = Space
+	('extends' '[' namespaces += [Space]+ ']')? 
+	'{'
+	(conceptualspace = Namespace)?
+	tangiblespace = Referencespace
+	'}'	
 ;
 
-Value:
-	(DefinedValue|DeterminedValue)+
+Space:
+	name = ID
+//	space = Namespace | Referencespace
 ;
 
-DefinedValue:
-	STRING
+Namespace:
+	spaceType = Definitions
+	'{'
+	states += StateObjectDefinition*
+	transitions += TransitionObjectDefinition*
+	'}'
 ;
 
-DeterminedValue:
-	'determined'
+Referencespace:
+	spaceType = References
+	'{'
+	refStates += ReferenceState*
+	refTransition += ReferenceTransition*
+	'}'
 ;
 
+StateObjectDefinition:
+	(type = Primitive| type = Compound)
+	state = StateDefinition 
+;
+
+TransitionObjectDefinition:
+	(type = Primitive| type = Compound)
+	transition = TransitionDefinition
+;
+
+
+StateDefinition:
+	object = State ((state = StateID )| (state = StateID compoundStateDef = CompoundState))
+;
+
+StateID:
+	 name = ID
+;
+
+CompoundState:
+	'{'
+	states += Predicate+	
+	'}'
+;
+
+ReferenceState:
+	object = State
+ 	refState = [StateID]
+	from = FromDefinition 
+	(('called'|'as')
+		state = StateID)?
+	('with' composition = CompoundState)?
+	';'
+;
+
+TransitionDefinition:
+	object = Transition ((transition = TransitionID in = InputDefinition out = OutputDefinition | 
+		transition = TransitionID compoundTransitionDef = CompoundTransition))
+;
+
+TransitionID:
+	name = ID
+;
+
+ReferenceTransition:
+	object = Transition
+	refTransition = [TransitionID]
+	fromDef = FromDefinition
+	(('called'|'as')
+		transition = TransitionID)?
+	('with' composition = CompoundTransition)?
+	';'
+;
+
+FromDefinition:
+	from = From
+	refSpace = [Space]
+;
+
+InputDefinition:
+	input = Input inputState = [StateID]
+;
+
+OutputDefinition:
+	output = Output outputState = [StateID]
+;
+
+CompoundTransition:
+	'{'
+	subTransitions += Transition+
+	'}'
+;
+
+
+Primitive:
+	'primitive' 
+;
+
+
+Compound:
+	'compound'
+;
+
+Field:
+	'field'
+;
+
+State:
+	'state'
+;
+
+Transition:
+	'transition'
+;
+
+Definitions:
+	'definitions'
+;
+
+References:
+	'references'
+;
+
+Input:
+	'input'
+;
+
+Output:
+	'output'
+;
+
+From:
+	'from'
+;
+
+Predicate:
+	predicate = StateID | BooleanExpression ';'
+;
+
+BooleanExpression:
+	(NotOp | BinaryOp) 
+;
+
+NotOp:
+	'NOT' notState = [StateID]
+;
+
+BinaryOp:
+	binaryOp = [StateID] ( andOp = AndOp| orOp = OrOp)
+;
+
+AndOp:
+	'AND' andState = [StateID]
+;
+
+OrOp:
+ 	'OR' orState = [StateID]
+;
 
 
 
