@@ -92,16 +92,24 @@ TransitionObjectDefinition:
 
 
 StateDefinition:
-	object = State ((state = StateID )| (state = StateID compoundStateDef = CompoundState))
+	object = State state = StateID (compoundStateDef= WithStatesDefinition)?
 ;
 
 StateID:
 	 name = ID
 ;
 
-CompoundState:
+WithStatesDefinition:
+	composition = With
 	'{'
-	states += Predicate+	
+	states= Predicate
+	'}'
+;
+
+WithTransitionsDefinition:
+	composition = With
+	'{'
+	transitions = TransitionalExpression
 	'}'
 ;
 
@@ -111,13 +119,13 @@ ReferenceState:
 	from = FromDefinition 
 	(('called'|'as')
 		state = StateID)?
-	('with' composition = CompoundState)?
+	(composition = WithStatesDefinition)?
 	';'
 ;
 
 TransitionDefinition:
-	object = Transition ((transition = TransitionID in = InputDefinition out = OutputDefinition | 
-		transition = TransitionID compoundTransitionDef = CompoundTransition))
+	object = Transition transition = TransitionID (( in = InputDefinition out = OutputDefinition | 
+		 compoundTransitionDef = WithTransitionsDefinition))
 ;
 
 TransitionID:
@@ -130,7 +138,7 @@ ReferenceTransition:
 	fromDef = FromDefinition
 	(('called'|'as')
 		transition = TransitionID)?
-	('with' composition = CompoundTransition)?
+	(composition = WithTransitionsDefinition)?
 	';'
 ;
 
@@ -145,12 +153,6 @@ InputDefinition:
 
 OutputDefinition:
 	output = Output outputState = [StateID]
-;
-
-CompoundTransition:
-	'{'
-	subTransitions += Transition+
-	'}'
 ;
 
 
@@ -195,30 +197,43 @@ From:
 	'from'
 ;
 
-Predicate:
-	predicate = StateID | BooleanExpression ';'
-;
-
-BooleanExpression:
-	(NotOp | BinaryOp) 
+With:
+	'with'
 ;
 
 NotOp:
-	'NOT' notState = [StateID]
-;
-
-BinaryOp:
-	binaryOp = [StateID] ( andOp = AndOp| orOp = OrOp)
+	'NOT'
 ;
 
 AndOp:
-	'AND' andState = [StateID]
+	'AND'
 ;
 
 OrOp:
- 	'OR' orState = [StateID]
+	'OR'
 ;
 
+Predicate:
+	(negation?=NotOp)? expression = BinaryExpression
+;
 
+BinaryExpression:
+	TerminalBinaryExpression ({Operation.left=current}
+		op= (AndOp|OrOp) right = TerminalBinaryExpression)*
+;
 
+TerminalBinaryExpression returns BinaryExpression:
+	'(' Predicate ')'|
+	 {StateID} value = [StateID]
+;
+
+TransitionalExpression:
+	TerminalTransitionalExpression ({Operation.left=current}
+		op= 'THEN' right = TerminalTransitionalExpression)*	
+;
+
+TerminalTransitionalExpression returns TransitionalExpression:
+	'(' TransitionalExpression ')'|
+	{TransitionID} value = [TransitionID]
+;
 
