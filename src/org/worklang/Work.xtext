@@ -387,7 +387,7 @@ TerminalStateInstance returns StateInstance:
 ;
 
 ToDefinition:
-	to = To STRING
+	to = To value = STRING
 ;
 
 //State Composition Expression Rules
