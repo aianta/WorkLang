@@ -7,25 +7,87 @@ Model:
 	fields += FieldDefinition*
 	experts += Expert*
 	practitioners += Practitioner*
-	plans += Plan*
+	plans += PlanDefinition*
 ;
 
-Plan:
-	'plan' 
-	name = ID '{'
-	'produces' resultState = StateID
+PlanDefinition:
+	plan = Plan
+	planId = PlanID'{'
+	objective = ObjectiveDefinition
+	solution = SolutionDefinition 
+	'}'
+;
+
+PlanID:
+	name = ID
+;
+
+ObjectiveDefinition:
+	objective = Objective '{'
+	(haves = HaveDefinition)
+	(wants = WantDefinition)
+	resolves = ResolveDefinition
+	'}'
+	
+;
+
+HaveDefinition:
+	have = Have states += [StateID]+
+;
+
+WantDefinition:
+	want = Want (states += [StateID]+ |
+	novelState = StateDefinition)
+;
+
+UseDefinition:
+	use = Use predefinedValue = [StateID] (field = FromFieldDefinition|step = FromStepDefinition)
+;
+
+
+SolutionDefinition:
+	solution = Solution 
 	'{'
-	steps += Step+
-	'}'
+	producesDef = ProducesDefinition 
+	stepsDef = StepsDefinition
 	'}'
 ;
 
-Step:
-	'step' stepNumber  = INT 
-	stepTransition = ReferenceTransition
-	'$' cost = INT
-	'duration' duration = STRING
+StepsDefinition:
+	steps = Steps '{'
+		stepCollection += StepDefinition+
+	'}'
 ;
+
+ProducesDefinition:
+	produces = Produces (result = [StateID] | novelResult = NovelStateDefinition)
+;
+
+NovelStateDefinition:
+	novel = Novel stateName = StateID 
+;
+
+StepDefinition:
+	step = Step name  = STRING 
+	stepTransition = [TransitionID]
+	(input = InstanceInputDefinition)?
+	output = InstanceOutputDefinition
+	cost = CostDefinition
+	duration = DurationDefinition
+;
+
+DurationDefinition:
+	duration = Duration time = STRING
+;
+
+CostDefinition:
+	 cost = Cost value = CostValueDefinition
+;
+
+CostValueDefinition:
+	 ('$' amount = INT| rate = 'hourlyRate')
+;
+
 
 Practitioner:
 	'practitioner''{'
@@ -94,6 +156,7 @@ StateDefinition:
 	object = State state = StateID (compoundStateDef= WithStatesDefinition)?
 ;
 
+
 StateID:
 	 name = ID
 ;
@@ -115,7 +178,7 @@ WithTransitionsDefinition:
 ReferenceState:
 	object = State
  	refState = [StateID]
-	from = FromDefinition 
+	from = FromFieldDefinition 
 	(('called'|'as')
 		state = StateID)?
 	(composition = WithStatesDefinition)?
@@ -123,7 +186,7 @@ ReferenceState:
 ;
 
 TransitionDefinition:
-	object = Transition transition = TransitionID (( (in = InputDefinition)? out = OutputDefinition | 
+	object = Transition transition = TransitionID (( in = InputDefinition out = OutputDefinition | 
 		 compoundTransitionDef = WithTransitionsDefinition))
 ;
 
@@ -134,24 +197,45 @@ TransitionID:
 ReferenceTransition:
 	object = Transition
 	refTransition = [TransitionID]
-	fromDef = FromDefinition
+	fromDef = FromFieldDefinition
 	(('called'|'as')
 		transition = TransitionID)?
 	(composition = WithTransitionsDefinition)?
 	
 ;
 
-FromDefinition:
+FromFieldDefinition:
 	from = From
 	refSpace = [Space]
+;
+
+FromStepDefinition:
+	from = From
+	stepRef = StepReference
+;
+
+StepReference:
+	step = Step refStep = [StepDefinition|STRING]
 ;
 
 InputDefinition:
 	input = Input inputState += [StateID]*
 ;
 
+InstanceInputDefinition:
+	input = Input '{' inputStates = StateInstance '}'
+;
+
+InstanceOutputDefinition:
+	output = Output (outputState = [StateID] | novelOutputState = StateDefinition)
+;
+
 OutputDefinition:
 	output = Output outputState = [StateID]
+;
+
+ObjectiveOutputDefinition:
+	next = Next count = Count 'outputs'
 ;
 
 ExtendsDefinition:
@@ -159,10 +243,17 @@ ExtendsDefinition:
 	namespaces += [Space]+	
 ;
 
+ResolveDefinition:
+	(resolve = Resolve (resolveInputs = 'inputs'| resolveOutputs = ObjectiveOutputDefinition))
+;
+
 Primitive:
 	'primitive' 
 ;
 
+Next:
+	'next'
+;
 
 Compound:
 	'compound'
@@ -174,6 +265,10 @@ Field:
 
 State:
 	'state'
+;
+
+Step:
+	'step'
 ;
 
 Transition:
@@ -218,6 +313,81 @@ AndOp:
 
 OrOp:
 	'OR'
+;
+
+Set:
+	'set'
+;
+
+To:
+	'to'
+;
+
+Use:
+	'use'
+;
+
+Solution:
+	'solution'
+;
+
+Objective:
+	'objective'
+;
+
+Have:
+	'have'
+;
+
+Want:
+	'want'
+;
+
+Resolve:
+	'resolve'
+;
+
+Plan:
+	'plan'
+;
+
+Count:
+	INT
+;
+
+Produces:
+	'produces'
+;
+
+Novel:
+	'novel'
+;
+
+Steps:
+	'steps'
+;
+
+Cost:
+	'cost'
+;
+
+Duration:
+	'duration'
+;
+
+StateInstance: 
+		substate = TerminalStateInstance ({Operation.left = current}
+			right = TerminalStateInstance)*	
+;
+
+TerminalStateInstance returns StateInstance:
+	substateId = [StateID] '{'instance = StateInstance'}' |
+	set = Set variable = [StateID] toDef = ToDefinition  |
+	UseDefinition
+;
+
+ToDefinition:
+	to = To STRING
 ;
 
 //State Composition Expression Rules
