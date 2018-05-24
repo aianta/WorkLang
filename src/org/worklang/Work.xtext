@@ -5,7 +5,7 @@ generate work "http://www.worklang.org/Work"
 
 Model:
 	fields += FieldDefinition*
-	experts += Expert*
+	experts += ExpertDefinition*
 	practitioners += Practitioner*
 	plans += PlanDefinition*
 ;
@@ -90,26 +90,49 @@ CostValueDefinition:
 
 
 Practitioner:
-	'practitioner''{'
-	name = ID
-	'knowledge''{'
-	knowledge += ReferenceState
-	'}'
-	'skills''{'
-	skills += ReferenceTransition
-	'}'
+	practitionerDef = 'practitioner'
+	user = User
+	'{'
+	knowledgeDef = KnowledgeDefinition?
+	skillsDef = SkillsDefinition?
 	'}'
 ;
 
-Expert:
-	'expert'
-	name = ID '{'
-	refSpace = Referencespace
+ExpertDefinition:
+	expertDef = 'expert' user = User
+	'{'
+	domainDef = DomainDefinition?
+	knowledgeDef = KnowledgeDefinition?
+	skillsDef = SkillsDefinition?
 	'hourlyRate'
 	'$' rate =  INT
 	'}'
 ;
+
+User:
+	name = ID
+;
 	
+
+DomainDefinition:
+	domain = 'domain'
+	'{'
+		domainAreas += ReferenceField*
+	'}'
+;
+
+KnowledgeDefinition:
+	knowledgeDef = 'knowledge''{'
+		knowledge += ReferenceState*
+	'}'
+;
+
+SkillsDefinition:
+	skillsDef = 'skills''{'
+		skills += ReferenceTransition*
+	'}'
+;
+
 
 FieldDefinition:
 	field = Field
@@ -136,9 +159,15 @@ Namespace:
 Referencespace:
 	spaceType = References
 	'{'
+	refFields += ReferenceField*
 	refStates += ReferenceState*
 	refTransition += ReferenceTransition*
 	'}'
+;
+
+ReferenceField:
+	ref = Field 
+	space = Space
 ;
 
 StateObjectDefinition:
@@ -186,8 +215,7 @@ ReferenceState:
 ;
 
 TransitionDefinition:
-	object = Transition transition = TransitionID (( in = InputDefinition out = OutputDefinition | 
-		 compoundTransitionDef = WithTransitionsDefinition))
+	object = Transition transition = TransitionID  in = InputDefinition out = OutputDefinition  
 ;
 
 TransitionID:
@@ -383,7 +411,7 @@ StateInstance:
 TerminalStateInstance returns StateInstance:
 	substateId = [StateID] '{'instance = StateInstance'}' |
 	set = Set variable = [StateID] toDef = ToDefinition  |
-	UseDefinition
+	use = UseDefinition
 ;
 
 ToDefinition:
