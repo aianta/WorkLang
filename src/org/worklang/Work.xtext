@@ -7,6 +7,14 @@ Model:
 	fields += FieldDefinition*
 	experts += ExpertDefinition*
 	practitioners += Practitioner*
+	instructions += Instruction*
+;
+
+/* Executable Structure
+ * Below are the grammar rules for defining execution requests for the work interpreter.
+ */
+Instruction:
+	objectType = 'instruction' space = [Space] transition = [TransitionID]
 ;
 
 
@@ -332,4 +340,7 @@ TerminalTransitionalExpression returns TransitionalExpression:
 	'(' TransitionalExpression ')'|
 	{TransitionID} value = [TransitionID]
 ;
+
+
+
 
