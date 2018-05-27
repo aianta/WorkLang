@@ -95,7 +95,7 @@ Referencespace:
 Instancespace:
 	spaceType  = Instances
 	'{'
-	instanceStates += StateInstance*
+		instanceStates += Instance*
 	'}'
 ;
 
@@ -269,22 +269,28 @@ Count:
 ;
 
 Instance:
-	instanceDef = 'instance' name = STRING
+	instanceDef = 'instance' 
+	objectType = (Transition|State) 
+	name = STRING 
+	(state = StateInstance | transition = TransitionInstance)
+;
+
+TransitionInstance:
+	host = STRING
+	port = INT
+	(path = STRING)?
 ;
 
 StateInstance: 
-		instanceDef = Instance 
-		'{'
-			setStatements += SetStatement*
-			useStatements += UseDefinition*
-			subInstances +=  StateInstance*
-		'}'		
+	'{'
+		members += (SetStatement| UseDefinition| Instance)+
+	'}'
+			
 ;
 
 SetStatement:
 	statement = Set variable = [StateID] toDef = ToDefinition
 ;
-
 
 ToDefinition:
 	to = To value = STRING
