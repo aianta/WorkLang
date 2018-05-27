@@ -270,19 +270,27 @@ Count:
 
 Instance:
 	instanceDef = 'instance' 
-	objectType = (Transition|State) 
+	(transitionDeclaration = TransitionDeclaration| stateDeclaration = StateDeclaration) 
 	name = STRING 
 	(state = StateInstance | transition = TransitionInstance)
 ;
 
+TransitionDeclaration:
+	objectType = Transition transition = TransitionID
+;
+
+StateDeclaration:
+	objectType = State state = StateID
+;
+
 TransitionInstance:
-	TransitionID
 	host = STRING
 	port = INT
 	(path = STRING)?
 ;
 
-StateInstance: 
+StateInstance:
+	 
 	'{'
 		members += (SetStatement| UseDefinition| Instance)+
 	'}'
