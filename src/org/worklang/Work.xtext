@@ -276,6 +276,7 @@ Instance:
 ;
 
 TransitionInstance:
+	TransitionID
 	host = STRING
 	port = INT
 	(path = STRING)?
