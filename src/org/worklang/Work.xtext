@@ -215,7 +215,7 @@ ReferenceState:
 ;
 
 TransitionDefinition:
-	object = Transition transition = TransitionID  in = InputDefinition out = OutputDefinition  
+	object = Transition transition = TransitionID (in = InputDefinition)? out = OutputDefinition (composition = WithTransitionsDefinition)?
 ;
 
 TransitionID:
@@ -430,7 +430,8 @@ BinaryExpression:
 
 TerminalBinaryExpression returns BinaryExpression:
 	'(' Predicate ')'|
-	 {StateID} value = [StateID]
+	 {StateID} value = [StateID]|
+	 {StateID}(listDef = 'setOf' value = [StateID])
 ;
 
 
