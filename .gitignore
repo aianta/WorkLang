@@ -6,5 +6,8 @@ xtend-gen
 .classpath
 plugin.xml
 bin
+.gradle
 model
 .antlr*
+.externalToolBuilders
+build

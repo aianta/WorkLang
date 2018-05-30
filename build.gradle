@@ -8,38 +8,30 @@
  plugins {
  	id 'java'
  	id 'application'
- 	id 'eclipse'
  	id 'com.github.johnrengelman.shadow' version '2.0.2'
  	id "org.xtext.xtend" version "1.0.21"
- 	id 'org.xtext.builder' version '1.0.21'
+ 	//id 'org.xtext.builder' version '1.0.21'
  }
  
- eclipse{
+
  
-    classpath {
-        containers 'org.eclipse.pde.core.requiredPlugins'
-    }
-       
- }
  
-  xtext {
- 	languages {
- 		worklang {
- 			setup = 'org.worklang.WorkStandaloneSetup'
- 			generator.outlet.producesJava = true
- 		}
- 	}
- }
- 
- apply plugin: 'eclipse'
+
  apply plugin: 'org.xtext.xtend'
- apply plugin: 'org.xtext.builder'
+// apply plugin: 'org.xtext.builder'
  
  dependencies {
- 	xtextLanguages 'org.worklang:org.worklang'
+
  	compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.13.0'
  	compile 'io.vertx:vertx-core:3.5.1'
  	compile 'io.vertx:vertx-web:3.5.1'
+ 	
+ 	compile group: 'com.google.inject', name: 'guice', version: '4.2.0'
+	compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.common', version: '2.12.0'
+	compile group: 'org.eclipse.xtext', name: 'org.eclipse.xtext.xtext.generator', version: '2.14.0'
+	compile group: 'org.eclipse.xtext', name: 'org.eclipse.xtext.util', version: '2.14.0'
+ 	
+ 	
  }
  
  
@@ -52,7 +44,7 @@
  			srcDirs += "xtend-gen/"
  		}
  		
- 		main.xtendOutputDir = 'xtend-gen'
+ 		main.xtendOutputDir = 'xtend-gen/'
  	
  		
  	}
@@ -68,7 +60,7 @@
  
  //WorkLang metadata
  version = '0.0.1'
- sourceCompatibility = '1.8'
+
  mainClassName = 'org.worklang.generator.Main'
  
 

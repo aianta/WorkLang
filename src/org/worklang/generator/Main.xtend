@@ -14,17 +14,46 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.worklang.WorkStandaloneSetup
+import io.vertx.core.Vertx
+import io.vertx.core.http.HttpServer
+import io.vertx.core.http.HttpServerOptions
 
 class Main {
+	
+	static Vertx vertx = Vertx.vertx(); 
 
 	def static main(String[] args) {
-		if (args.empty) {
-			System::err.println('Aborting: no path to EMF resource provided!')
-			return
-		}
+		
+		/* Actual Interpreter asshattery below
+		 *
+		 */
+
+//		if (args.empty) {
+//			System::err.println('Aborting: no path to EMF resource provided!')
+//			return
+//		}
 		val injector = new WorkStandaloneSetup().createInjectorAndDoEMFRegistration
 		val main = injector.getInstance(Main)
-		main.runGenerator(args.get(0))
+//		main.runGenerator(args.get(0))
+
+		/*
+		 * Vertx Code
+		 */
+		
+		val HttpServerOptions options = new HttpServerOptions
+		options.port = 9000
+		
+		val HttpServer server = vertx.createHttpServer(options)
+	
+		server.requestHandler[
+			println("Got request: " + uri)
+			
+			response.end("WorkLang Interpretor says Hi!")
+		].listen
+
+		println("Work Interpreter Ran!")
+		
+		return
 	}
 
 	@Inject Provider<ResourceSet> resourceSetProvider
