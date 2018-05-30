@@ -32,8 +32,8 @@ class Main {
 //			System::err.println('Aborting: no path to EMF resource provided!')
 //			return
 //		}
-		val injector = new WorkStandaloneSetup().createInjectorAndDoEMFRegistration
-		val main = injector.getInstance(Main)
+//		val injector = new WorkStandaloneSetup().createInjectorAndDoEMFRegistration
+//		val main = injector.getInstance(Main)
 //		main.runGenerator(args.get(0))
 
 		/*
@@ -48,7 +48,7 @@ class Main {
 		server.requestHandler[
 			println("Got request: " + uri)
 			
-			response.end("WorkLang Interpretor says Hi!")
+			response.end("WorkLang Interpreter says Hi!")
 		].listen
 
 		println("Work Interpreter Ran!")
