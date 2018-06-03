@@ -34,6 +34,7 @@
  	
  }
  
+ project.ext.WorkXtextBin = project.file("../src-gen/org/worklang")
  
  sourceSets {
  	main {
@@ -41,14 +42,22 @@
  		java {
  			srcDirs += "src/"
  			srcDirs += "src-gen/"
- 			srcDirs += "xtend-gen/"
+ 			srcDirs += "xtend-gen/"; 
+ 		}
+ 	
+ 		//Include work.xtextbin
+ 		resources{
+ 			srcDirs += ["src-gen/"]; exclude "**/*.java"
  		}
  		
- 		main.xtendOutputDir = 'xtend-gen/'
- 	
+ 		output.resourcesDir = "build/classes/java/main/"
  		
+ 		main.xtendOutputDir = 'xtend-gen/'	
  	}
  }
+ 
+ 
+
  
  repositories {
  	
@@ -72,7 +81,10 @@
     }
     mergeServiceFiles {
         include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
+        
     }
+    
+    
     zip64 true
  }
 

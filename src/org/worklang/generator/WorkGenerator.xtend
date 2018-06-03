@@ -17,7 +17,8 @@ class WorkGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		
-		
+		resource.allContents
+			.forEach[ele|println(ele.eClass.instanceTypeName)]
 		
 		
 //		fsa.generateFile('greetings.txt', 'People to greet: ' + 
