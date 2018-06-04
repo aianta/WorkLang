@@ -10,6 +10,13 @@ import org.eclipse.xtext.generator.IGeneratorContext
 import java.util.HashMap
 import java.util.Map
 import org.eclipse.xtext.resource.XtextResource
+import org.neo4j.driver.v1.Driver
+import org.neo4j.driver.v1.GraphDatabase
+import org.neo4j.driver.v1.AuthTokens
+import com.steelbridgelabs.oss.neo4j.structure.Neo4JElementIdProvider
+import com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdProvider
+import com.steelbridgelabs.oss.neo4j.structure.Neo4JGraph
+import org.apache.tinkerpop.gremlin.structure.Transaction
 
 /**
  * Generates code from your model files on save.
@@ -19,6 +26,41 @@ import org.eclipse.xtext.resource.XtextResource
 class WorkGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+		
+		val Driver graphDbDriver = GraphDatabase.driver("bolt://localhost", AuthTokens.basic("neo4j","admin")) 
+		
+		val Neo4JElementIdProvider vertexIdProvider = new Neo4JNativeElementIdProvider
+		val Neo4JElementIdProvider edgeIdProvider = new Neo4JNativeElementIdProvider
+		
+		try{
+			val Neo4JGraph graph = new Neo4JGraph(graphDbDriver,vertexIdProvider,edgeIdProvider)
+			
+			try {
+				
+				val Transaction t = graph.tx
+				
+				resource.allContents
+				.forEach[ele|
+					
+					graph.addVertex(ele.eClass.instanceTypeName)
+					
+					println(ele.eClass.instanceTypeName)
+					
+					
+	
+				]
+				
+				t.commit
+				
+			}catch (Exception it){
+				it.printStackTrace
+			}
+			
+			
+			
+		}catch (Exception it){
+			it.printStackTrace
+		}
 		
 		var XtextResource xResource = resource as XtextResource
 		
@@ -30,15 +72,7 @@ class WorkGenerator extends AbstractGenerator {
 		xResource.save(null)
 		
 	
-		resource.allContents
-			.forEach[ele|
-				
-				
-				println(ele.eClass.instanceTypeName)
-				
-				
-
-			]
+		
 		
 		
 //		fsa.generateFile('greetings.txt', 'People to greet: ' + 
