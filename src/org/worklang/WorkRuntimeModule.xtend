@@ -3,9 +3,17 @@
  */
 package org.worklang
 
+import org.eclipse.xtext.resource.XtextResource
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 class WorkRuntimeModule extends AbstractWorkRuntimeModule {
+	
+	/* Bind XtextResource to WorkResource for graph database meta-model
+	 * creation purposes.
+	 */
+	override Class<? extends XtextResource> bindXtextResource(){
+		return WorklangResource
+	}	
 }

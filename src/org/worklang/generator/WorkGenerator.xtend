@@ -7,6 +7,9 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import java.util.HashMap
+import java.util.Map
+import org.eclipse.xtext.resource.XtextResource
 
 /**
  * Generates code from your model files on save.
@@ -17,8 +20,25 @@ class WorkGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		
+		var XtextResource xResource = resource as XtextResource
+		
+		//Test WorkResource binding
+		val Map<String,String> globalWorkspaceSaveOptions = new HashMap<String,String>
+		globalWorkspaceSaveOptions.put("WorkPersistenceType", "globalWorkspace")
+		
+		xResource.save(globalWorkspaceSaveOptions)
+		xResource.save(null)
+		
+	
 		resource.allContents
-			.forEach[ele|println(ele.eClass.instanceTypeName)]
+			.forEach[ele|
+				
+				
+				println(ele.eClass.instanceTypeName)
+				
+				
+
+			]
 		
 		
 //		fsa.generateFile('greetings.txt', 'People to greet: ' + 

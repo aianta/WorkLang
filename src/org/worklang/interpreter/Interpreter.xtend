@@ -11,7 +11,7 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import java.io.ByteArrayInputStream
-
+import org.eclipse.xtext.resource.XtextResource
 
 class Interpreter {
 	
@@ -33,7 +33,9 @@ class Interpreter {
 		 * 	relative URIs within the document will be resolved relative to the
 		 *	absolute URI of the containing resource.
 		 */
-		val resource = set.createResource(URI.createURI("dummy:/data.work"))
+		val resource = set.createResource(URI.createURI("file:/data.work")) as XtextResource
+		
+		
 		
 		//Create ByteStream from input string 
 		
