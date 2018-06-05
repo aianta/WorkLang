@@ -71,7 +71,7 @@ class WorklangResource extends XtextResource{
 					fieldNamespaceVertex.property(VertexProperty.Cardinality.single, "name", field.conceptualspace.spaceType)
 					
 					val fieldReferencesVertex = graph.addVertex(org.worklang.work.Referencespace.typeName)
-					fieldReferencesVertex.property(VertexProperty.Cardinality.single, "name", field.tangiblespace.spaceType)
+					fieldReferencesVertex.property(VertexProperty.Cardinality.single, "name", field.referencespace.spaceType)
 					
 					val fieldInstancesVertex = graph.addVertex(org.worklang.work.Instancespace.typeName)
 					fieldInstancesVertex.property(VertexProperty.Cardinality.single, "name", field.instancespace.spaceType)
@@ -103,7 +103,7 @@ class WorklangResource extends XtextResource{
 					
 					
 					//TODO Create graph referencespace structure
-					var Referencespace referencespace = field.tangiblespace
+					var Referencespace referencespace = field.referencespace
 					
 					//TODO Create graph instancespace structure
 					var Instancespace instancespace = field.instancespace
