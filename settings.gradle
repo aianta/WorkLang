@@ -9,4 +9,3 @@
 
 rootProject.name = 'org.worklang'
 
-include 'xtend-gen'
