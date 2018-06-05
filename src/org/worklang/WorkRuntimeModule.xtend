@@ -4,6 +4,7 @@
 package org.worklang
 
 import org.eclipse.xtext.resource.XtextResource
+import com.google.inject.Provider
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -14,6 +15,7 @@ class WorkRuntimeModule extends AbstractWorkRuntimeModule {
 	 * creation purposes.
 	 */
 	override Class<? extends XtextResource> bindXtextResource(){
+		
 		return WorklangResource
 	}	
 }

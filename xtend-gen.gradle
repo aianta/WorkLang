@@ -1,0 +1,26 @@
+ plugins {
+	 	id 'org.xtext.builder' 
+ }
+ 
+
+ 
+ xtext {
+   	languages {
+      	worklang {
+        	fileExtension = 'work' // required, unless fileExtension == language name (here "herolang")
+        	setup = 'org.worklang.WorkStandaloneSetup'
+        	generator.outlet.producesJava = true
+	      }
+	    }
+	    
+    sourceSets {
+	      main {
+	        srcDir 'xtend-gen/'
+	        output {
+	        		dir(xtext.languages.worklang.generator.outlet, 'src-gen/')
+	        	}
+			}
+		}
+  }
+  
+   apply plugin: 'org.xtext.builder'

@@ -70,7 +70,20 @@
 
  mainClassName = 'org.worklang.generator.Main'
  
+ task copyWorkGrammar (type: Copy){
+ 	from file ("src/org/worklang/Work.xtext")
+ 	into file ("xtend-gen/org/worklang/")
+ }
+ 
+ task injectXtendGenGradle (type: Copy){
+ 	from file ("xtend-gen.gradle")
+ 	into file ("xtend-gen/")
+ 	
+ 	rename ("xtend-gen.gradle", "build.gradle")
+ }
 
+ generateXtext.dependsOn copyWorkGrammar
+ generateXtext.dependsOn injectXtendGenGradle
 
  shadowJar {
     classifier = 'fat'
@@ -88,5 +101,4 @@
 
  task wrapper(type: Wrapper) {
     gradleVersion = '4.0'
- }
- 
+}
