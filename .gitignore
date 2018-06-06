@@ -1,6 +1,5 @@
 .launch
 .settings
-src-gen
 xtend-gen
 .project
 .classpath
