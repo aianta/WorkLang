@@ -64,7 +64,8 @@ Workflow {
 		language = StandardLanguage {
 			name = "org.worklang.Work"
 			fileExtensions = "work"
-
+			
+				
 			serializer = {
 				generateStub = false
 			}

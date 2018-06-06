@@ -19,6 +19,7 @@ package org.worklang
 
 import org.eclipse.xtext.resource.XtextResource
 import com.google.inject.Provider
+import org.eclipse.xtext.linking.lazy.LazyLinkingResource
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.

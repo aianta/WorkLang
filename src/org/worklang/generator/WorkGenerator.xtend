@@ -42,12 +42,14 @@ class WorkGenerator extends AbstractGenerator {
 		
 		var XtextResource xResource = resource as XtextResource
 		
+		
 		//Test WorkResource binding
 		val Map<String,String> globalWorkspaceSaveOptions = new HashMap<String,String>
 		globalWorkspaceSaveOptions.put("WorkPersistenceType", "globalWorkspace")
 		
-		xResource.save(globalWorkspaceSaveOptions)
 		xResource.save(null)
+		xResource.save(globalWorkspaceSaveOptions)
+		
 		
 		
 		
