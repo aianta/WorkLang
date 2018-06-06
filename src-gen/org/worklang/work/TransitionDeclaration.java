@@ -63,26 +63,26 @@ public interface TransitionDeclaration extends EObject
   void setObjectType(String value);
 
   /**
-   * Returns the value of the '<em><b>Transition</b></em>' containment reference.
+   * Returns the value of the '<em><b>Transition</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Transition</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Transition</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Transition</em>' containment reference.
+   * @return the value of the '<em>Transition</em>' reference.
    * @see #setTransition(TransitionID)
    * @see org.worklang.work.WorkPackage#getTransitionDeclaration_Transition()
-   * @model containment="true"
+   * @model
    * @generated
    */
   TransitionID getTransition();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.TransitionDeclaration#getTransition <em>Transition</em>}' containment reference.
+   * Sets the value of the '{@link org.worklang.work.TransitionDeclaration#getTransition <em>Transition</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Transition</em>' containment reference.
+   * @param value the new value of the '<em>Transition</em>' reference.
    * @see #getTransition()
    * @generated
    */

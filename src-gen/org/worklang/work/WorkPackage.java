@@ -705,13 +705,13 @@ public interface WorkPackage extends EPackage
   int INSTANCESPACE__SPACE_TYPE = 0;
 
   /**
-   * The feature id for the '<em><b>Instance States</b></em>' containment reference list.
+   * The feature id for the '<em><b>Instances</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int INSTANCESPACE__INSTANCE_STATES = 1;
+  int INSTANCESPACE__INSTANCES = 1;
 
   /**
    * The number of structural features of the '<em>Instancespace</em>' class.
@@ -1599,7 +1599,7 @@ public interface WorkPackage extends EPackage
   int TRANSITION_DECLARATION__OBJECT_TYPE = 0;
 
   /**
-   * The feature id for the '<em><b>Transition</b></em>' containment reference.
+   * The feature id for the '<em><b>Transition</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -1636,7 +1636,7 @@ public interface WorkPackage extends EPackage
   int STATE_DECLARATION__OBJECT_TYPE = 0;
 
   /**
-   * The feature id for the '<em><b>State</b></em>' containment reference.
+   * The feature id for the '<em><b>State</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2497,15 +2497,15 @@ public interface WorkPackage extends EPackage
   EAttribute getInstancespace_SpaceType();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.worklang.work.Instancespace#getInstanceStates <em>Instance States</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.worklang.work.Instancespace#getInstances <em>Instances</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Instance States</em>'.
-   * @see org.worklang.work.Instancespace#getInstanceStates()
+   * @return the meta object for the containment reference list '<em>Instances</em>'.
+   * @see org.worklang.work.Instancespace#getInstances()
    * @see #getInstancespace()
    * @generated
    */
-  EReference getInstancespace_InstanceStates();
+  EReference getInstancespace_Instances();
 
   /**
    * Returns the meta object for class '{@link org.worklang.work.ReferenceField <em>Reference Field</em>}'.
@@ -3292,10 +3292,10 @@ public interface WorkPackage extends EPackage
   EAttribute getTransitionDeclaration_ObjectType();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.TransitionDeclaration#getTransition <em>Transition</em>}'.
+   * Returns the meta object for the reference '{@link org.worklang.work.TransitionDeclaration#getTransition <em>Transition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Transition</em>'.
+   * @return the meta object for the reference '<em>Transition</em>'.
    * @see org.worklang.work.TransitionDeclaration#getTransition()
    * @see #getTransitionDeclaration()
    * @generated
@@ -3324,10 +3324,10 @@ public interface WorkPackage extends EPackage
   EAttribute getStateDeclaration_ObjectType();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.StateDeclaration#getState <em>State</em>}'.
+   * Returns the meta object for the reference '{@link org.worklang.work.StateDeclaration#getState <em>State</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>State</em>'.
+   * @return the meta object for the reference '<em>State</em>'.
    * @see org.worklang.work.StateDeclaration#getState()
    * @see #getStateDeclaration()
    * @generated
@@ -4068,12 +4068,12 @@ public interface WorkPackage extends EPackage
     EAttribute INSTANCESPACE__SPACE_TYPE = eINSTANCE.getInstancespace_SpaceType();
 
     /**
-     * The meta object literal for the '<em><b>Instance States</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Instances</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference INSTANCESPACE__INSTANCE_STATES = eINSTANCE.getInstancespace_InstanceStates();
+    EReference INSTANCESPACE__INSTANCES = eINSTANCE.getInstancespace_Instances();
 
     /**
      * The meta object literal for the '{@link org.worklang.work.impl.ReferenceFieldImpl <em>Reference Field</em>}' class.
@@ -4698,7 +4698,7 @@ public interface WorkPackage extends EPackage
     EAttribute TRANSITION_DECLARATION__OBJECT_TYPE = eINSTANCE.getTransitionDeclaration_ObjectType();
 
     /**
-     * The meta object literal for the '<em><b>Transition</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Transition</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -4724,7 +4724,7 @@ public interface WorkPackage extends EPackage
     EAttribute STATE_DECLARATION__OBJECT_TYPE = eINSTANCE.getStateDeclaration_ObjectType();
 
     /**
-     * The meta object literal for the '<em><b>State</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>State</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated

@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.worklang.work.Instancespace#getSpaceType <em>Space Type</em>}</li>
- *   <li>{@link org.worklang.work.Instancespace#getInstanceStates <em>Instance States</em>}</li>
+ *   <li>{@link org.worklang.work.Instancespace#getInstances <em>Instances</em>}</li>
  * </ul>
  *
  * @see org.worklang.work.WorkPackage#getInstancespace()
@@ -65,19 +65,19 @@ public interface Instancespace extends EObject
   void setSpaceType(String value);
 
   /**
-   * Returns the value of the '<em><b>Instance States</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Instances</b></em>' containment reference list.
    * The list contents are of type {@link org.worklang.work.Instance}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Instance States</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Instances</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Instance States</em>' containment reference list.
-   * @see org.worklang.work.WorkPackage#getInstancespace_InstanceStates()
+   * @return the value of the '<em>Instances</em>' containment reference list.
+   * @see org.worklang.work.WorkPackage#getInstancespace_Instances()
    * @model containment="true"
    * @generated
    */
-  EList<Instance> getInstanceStates();
+  EList<Instance> getInstances();
 
 } // Instancespace

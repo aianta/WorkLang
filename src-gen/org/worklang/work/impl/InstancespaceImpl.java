@@ -44,7 +44,7 @@ import org.worklang.work.WorkPackage;
  * </p>
  * <ul>
  *   <li>{@link org.worklang.work.impl.InstancespaceImpl#getSpaceType <em>Space Type</em>}</li>
- *   <li>{@link org.worklang.work.impl.InstancespaceImpl#getInstanceStates <em>Instance States</em>}</li>
+ *   <li>{@link org.worklang.work.impl.InstancespaceImpl#getInstances <em>Instances</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,14 +72,14 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
   protected String spaceType = SPACE_TYPE_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getInstanceStates() <em>Instance States</em>}' containment reference list.
+   * The cached value of the '{@link #getInstances() <em>Instances</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getInstanceStates()
+   * @see #getInstances()
    * @generated
    * @ordered
    */
-  protected EList<Instance> instanceStates;
+  protected EList<Instance> instances;
 
   /**
    * <!-- begin-user-doc -->
@@ -130,13 +130,13 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Instance> getInstanceStates()
+  public EList<Instance> getInstances()
   {
-    if (instanceStates == null)
+    if (instances == null)
     {
-      instanceStates = new EObjectContainmentEList<Instance>(Instance.class, this, WorkPackage.INSTANCESPACE__INSTANCE_STATES);
+      instances = new EObjectContainmentEList<Instance>(Instance.class, this, WorkPackage.INSTANCESPACE__INSTANCES);
     }
-    return instanceStates;
+    return instances;
   }
 
   /**
@@ -149,8 +149,8 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCESPACE__INSTANCE_STATES:
-        return ((InternalEList<?>)getInstanceStates()).basicRemove(otherEnd, msgs);
+      case WorkPackage.INSTANCESPACE__INSTANCES:
+        return ((InternalEList<?>)getInstances()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -167,8 +167,8 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
     {
       case WorkPackage.INSTANCESPACE__SPACE_TYPE:
         return getSpaceType();
-      case WorkPackage.INSTANCESPACE__INSTANCE_STATES:
-        return getInstanceStates();
+      case WorkPackage.INSTANCESPACE__INSTANCES:
+        return getInstances();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -187,9 +187,9 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
       case WorkPackage.INSTANCESPACE__SPACE_TYPE:
         setSpaceType((String)newValue);
         return;
-      case WorkPackage.INSTANCESPACE__INSTANCE_STATES:
-        getInstanceStates().clear();
-        getInstanceStates().addAll((Collection<? extends Instance>)newValue);
+      case WorkPackage.INSTANCESPACE__INSTANCES:
+        getInstances().clear();
+        getInstances().addAll((Collection<? extends Instance>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -208,8 +208,8 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
       case WorkPackage.INSTANCESPACE__SPACE_TYPE:
         setSpaceType(SPACE_TYPE_EDEFAULT);
         return;
-      case WorkPackage.INSTANCESPACE__INSTANCE_STATES:
-        getInstanceStates().clear();
+      case WorkPackage.INSTANCESPACE__INSTANCES:
+        getInstances().clear();
         return;
     }
     super.eUnset(featureID);
@@ -227,8 +227,8 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
     {
       case WorkPackage.INSTANCESPACE__SPACE_TYPE:
         return SPACE_TYPE_EDEFAULT == null ? spaceType != null : !SPACE_TYPE_EDEFAULT.equals(spaceType);
-      case WorkPackage.INSTANCESPACE__INSTANCE_STATES:
-        return instanceStates != null && !instanceStates.isEmpty();
+      case WorkPackage.INSTANCESPACE__INSTANCES:
+        return instances != null && !instances.isEmpty();
     }
     return super.eIsSet(featureID);
   }

@@ -379,7 +379,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Instancespace returns Instancespace
 	 *
 	 * Constraint:
-	 *     (spaceType=Instances instanceStates+=Instance*)
+	 *     (spaceType=Instances instances+=Instance*)
 	 */
 	protected void sequence_Instancespace(ISerializationContext context, Instancespace semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -636,7 +636,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     StateDeclaration returns StateDeclaration
 	 *
 	 * Constraint:
-	 *     (objectType=State state=StateID)
+	 *     (objectType=State state=[StateID|ID])
 	 */
 	protected void sequence_StateDeclaration(ISerializationContext context, StateDeclaration semanticObject) {
 		if (errorAcceptor != null) {
@@ -647,7 +647,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getStateDeclarationAccess().getObjectTypeStateParserRuleCall_0_0(), semanticObject.getObjectType());
-		feeder.accept(grammarAccess.getStateDeclarationAccess().getStateStateIDParserRuleCall_1_0(), semanticObject.getState());
+		feeder.accept(grammarAccess.getStateDeclarationAccess().getStateStateIDIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.STATE_DECLARATION__STATE, false));
 		feeder.finish();
 	}
 	
@@ -766,7 +766,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     TransitionDeclaration returns TransitionDeclaration
 	 *
 	 * Constraint:
-	 *     (objectType=Transition transition=TransitionID)
+	 *     (objectType=Transition transition=[TransitionID|ID])
 	 */
 	protected void sequence_TransitionDeclaration(ISerializationContext context, TransitionDeclaration semanticObject) {
 		if (errorAcceptor != null) {
@@ -777,7 +777,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getTransitionDeclarationAccess().getObjectTypeTransitionParserRuleCall_0_0(), semanticObject.getObjectType());
-		feeder.accept(grammarAccess.getTransitionDeclarationAccess().getTransitionTransitionIDParserRuleCall_1_0(), semanticObject.getTransition());
+		feeder.accept(grammarAccess.getTransitionDeclarationAccess().getTransitionTransitionIDIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.TRANSITION_DECLARATION__TRANSITION, false));
 		feeder.finish();
 	}
 	

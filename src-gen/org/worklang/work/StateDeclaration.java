@@ -63,26 +63,26 @@ public interface StateDeclaration extends EObject
   void setObjectType(String value);
 
   /**
-   * Returns the value of the '<em><b>State</b></em>' containment reference.
+   * Returns the value of the '<em><b>State</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>State</em>' containment reference isn't clear,
+   * If the meaning of the '<em>State</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>State</em>' containment reference.
+   * @return the value of the '<em>State</em>' reference.
    * @see #setState(StateID)
    * @see org.worklang.work.WorkPackage#getStateDeclaration_State()
-   * @model containment="true"
+   * @model
    * @generated
    */
   StateID getState();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.StateDeclaration#getState <em>State</em>}' containment reference.
+   * Sets the value of the '{@link org.worklang.work.StateDeclaration#getState <em>State</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>State</em>' containment reference.
+   * @param value the new value of the '<em>State</em>' reference.
    * @see #getState()
    * @generated
    */

@@ -997,7 +997,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getInstancespace_InstanceStates()
+  public EReference getInstancespace_Instances()
   {
     return (EReference)instancespaceEClass.getEStructuralFeatures().get(1);
   }
@@ -2091,7 +2091,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
 
     instancespaceEClass = createEClass(INSTANCESPACE);
     createEAttribute(instancespaceEClass, INSTANCESPACE__SPACE_TYPE);
-    createEReference(instancespaceEClass, INSTANCESPACE__INSTANCE_STATES);
+    createEReference(instancespaceEClass, INSTANCESPACE__INSTANCES);
 
     referenceFieldEClass = createEClass(REFERENCE_FIELD);
     createEAttribute(referenceFieldEClass, REFERENCE_FIELD__REF);
@@ -2326,7 +2326,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
 
     initEClass(instancespaceEClass, Instancespace.class, "Instancespace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getInstancespace_SpaceType(), ecorePackage.getEString(), "spaceType", null, 0, 1, Instancespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getInstancespace_InstanceStates(), this.getInstance(), null, "instanceStates", null, 0, -1, Instancespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getInstancespace_Instances(), this.getInstance(), null, "instances", null, 0, -1, Instancespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(referenceFieldEClass, ReferenceField.class, "ReferenceField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getReferenceField_Ref(), ecorePackage.getEString(), "ref", null, 0, 1, ReferenceField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2419,11 +2419,11 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
 
     initEClass(transitionDeclarationEClass, TransitionDeclaration.class, "TransitionDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTransitionDeclaration_ObjectType(), ecorePackage.getEString(), "objectType", null, 0, 1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTransitionDeclaration_Transition(), this.getTransitionID(), null, "transition", null, 0, 1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransitionDeclaration_Transition(), this.getTransitionID(), null, "transition", null, 0, 1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stateDeclarationEClass, StateDeclaration.class, "StateDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStateDeclaration_ObjectType(), ecorePackage.getEString(), "objectType", null, 0, 1, StateDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStateDeclaration_State(), this.getStateID(), null, "state", null, 0, 1, StateDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStateDeclaration_State(), this.getStateID(), null, "state", null, 0, 1, StateDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(transitionInstanceEClass, TransitionInstance.class, "TransitionInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTransitionInstance_Host(), ecorePackage.getEString(), "host", null, 0, 1, TransitionInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

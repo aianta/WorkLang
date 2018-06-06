@@ -120,7 +120,7 @@ Referencespace:
 Instancespace:
 	spaceType  = Instances
 	'{'
-		instanceStates += Instance*
+		instances += Instance*
 	'}'
 ;
 
@@ -308,11 +308,11 @@ Instance:
 ;
 
 TransitionDeclaration:
-	objectType = Transition transition = TransitionID
+	objectType = Transition transition = [TransitionID]
 ;
 
 StateDeclaration:
-	objectType = State state = StateID
+	objectType = State state = [StateID]
 ;
 
 TransitionInstance:

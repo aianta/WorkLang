@@ -52,6 +52,10 @@ import org.worklang.work.impl.StateIDImpl
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource
 import org.worklang.work.TransitionObjectDefinition
+import org.worklang.work.Instance
+import org.worklang.work.TransitionID
+import java.util.Date
+import java.time.Instant
 
 class WorklangResource extends LazyLinkingResource{
 	
@@ -68,10 +72,46 @@ class WorklangResource extends LazyLinkingResource{
 	
 	var Neo4JGraph graph
 	
+	var Vertex globalWorkspace
+	
+	val WLS = "workLangStructure"
+	
+	val GLOBAL_PREFIX = "globalWorkspace."
+	val FIELD_INFIX = "field."
+	val NAMESPACE_INFIX = "namespace."
+	val REFERENCESPACE_INFIX = "referencespace."
+	val INSTANCESPACE_INFIX = "instancespace."
+	
+	var String namespaceIndexLabel
+	var String namespaceStatesIndexLabel
+	var String namespaceTransitionsIndexLabel
+		
+	var String referencespaceIndexLabel
+
+	var String instancespaceIndexLabel
+	var String instancespaceTransitionsIndexLabel
+	
 	new (){
 		super()
 		try{
 			graph = new Neo4JGraph(graphDBDriver, vertexIdProvider, edgeIdProvider)
+			
+			val t = graph.tx
+			
+			//Check to see if global workspace vertex exists, if not, create it
+			var globalWorkspaceQuery  = graph.vertices("match (n:globalWorkspace) return n")
+			
+			if (globalWorkspaceQuery.size > 1 || globalWorkspaceQuery.size < 0){
+				throw new Exception ("Multiple (or Negative??) Global Workspaces, something has gone horribly wrong!")
+			}else if (globalWorkspaceQuery.size == 0){
+				this.globalWorkspace = graph.addVertex("globalWorkspace")
+				this.globalWorkspace.property(VertexProperty.Cardinality.single, "name", "Global Workspace")
+				
+			}else{
+				this.globalWorkspace = globalWorkspaceQuery.head
+			}
+			
+			t.commit
 			
 		}catch (Exception it){
 			it.printStackTrace
@@ -105,20 +145,35 @@ class WorklangResource extends LazyLinkingResource{
 					val FieldDefinition field = ele as FieldDefinition
 					
 					
+					val fieldIndexLabel = GLOBAL_PREFIX+FIELD_INFIX+field.space.name
+					
 					//Create a vertex for the field
-					var fieldVertex = graph.addVertex(ele.eClass.instanceTypeName)
+					var fieldVertex = graph.addVertex(fieldIndexLabel)
 					fieldVertex.property(VertexProperty.Cardinality.single, "type", "field")
-					fieldVertex.property(VertexProperty.Cardinality.single, "name", field.space.name)
+					fieldVertex.property(VertexProperty.Cardinality.single, WLS, field.eClass.instanceTypeName)
+					
+					//Add field to global workspace
+					globalWorkspace.addEdge("containsField",fieldVertex)
+						.property("defined on", Date.from(Instant.now).toString)
+					
+					namespaceIndexLabel = fieldIndexLabel + "." + NAMESPACE_INFIX + field.conceptualspace.spaceType
 					
 					//Create vertices for all field spaces
-					val fieldNamespaceVertex = graph.addVertex(org.worklang.work.Namespace.typeName)
+					val fieldNamespaceVertex = graph.addVertex(namespaceIndexLabel)
 					fieldNamespaceVertex.property(VertexProperty.Cardinality.single, "name", field.conceptualspace.spaceType)
+					fieldNamespaceVertex.property(VertexProperty.Cardinality.single, WLS, field.conceptualspace.eClass.instanceTypeName)
 					
-					val fieldReferencesVertex = graph.addVertex(org.worklang.work.Referencespace.typeName)
+					referencespaceIndexLabel = fieldIndexLabel + "." + REFERENCESPACE_INFIX + field.referencespace.spaceType
+					
+					val fieldReferencesVertex = graph.addVertex(referencespaceIndexLabel)
 					fieldReferencesVertex.property(VertexProperty.Cardinality.single, "name", field.referencespace.spaceType)
+					fieldReferencesVertex.property(VertexProperty.Cardinality.single, WLS, field.referencespace.eClass.instanceTypeName)
 					
-					val fieldInstancesVertex = graph.addVertex(org.worklang.work.Instancespace.typeName)
+					instancespaceIndexLabel = fieldIndexLabel + "." + INSTANCESPACE_INFIX + field.instancespace.spaceType
+					
+					val fieldInstancesVertex = graph.addVertex(instancespaceIndexLabel)
 					fieldInstancesVertex.property(VertexProperty.Cardinality.single, "name", field.instancespace.spaceType)
+					fieldInstancesVertex.property(VertexProperty.Cardinality.single, WLS, field.instancespace.eClass.instanceTypeName)
 					
 					//Create edges from field to fieldspaces
 					fieldVertex.addEdge("nameSpace", fieldNamespaceVertex, "field", field.space.name)
@@ -128,12 +183,15 @@ class WorklangResource extends LazyLinkingResource{
 					//Create graph namespace structure
 					var Namespace namespace = field.conceptualspace
 					
+					namespaceStatesIndexLabel = namespaceIndexLabel + ".states"
+					
 					//Create graph structures for namepsace states
 					namespace.states.forEach[state|
 						
-						var stateVertex = graph.addVertex(org.worklang.work.StateObjectDefinition.typeName)
+						var stateVertex = graph.addVertex(namespaceStatesIndexLabel)
 						stateVertex.property(VertexProperty.Cardinality.single, "stateType", state.type)
 						stateVertex.property(VertexProperty.Cardinality.single, "name", state.state.state.name)
+						stateVertex.property(VertexProperty.Cardinality.single, WLS, state.eClass.instanceTypeName)
 						
 						fieldNamespaceVertex.addEdge("definesState", stateVertex, 
 							"field", field.space.name,
@@ -148,9 +206,11 @@ class WorklangResource extends LazyLinkingResource{
 					
 					val t2 = graph.tx
 					
+					namespaceTransitionsIndexLabel = namespaceIndexLabel + ".transitions"
+					
 					//Create graph structure for namespace transitions
 					namespace.transitions.forEach[transition|
-						var transitionVertex = generateTransitionGraphStructure(transition)
+						var transitionVertex = generateNamespaceTransitionGraphStructure(transition, namespaceTransitionsIndexLabel)
 						fieldNamespaceVertex.addEdge("definesTransition", transitionVertex,
 							"field", field.space.name,
 							"space", field.conceptualspace.spaceType
@@ -167,14 +227,17 @@ class WorklangResource extends LazyLinkingResource{
 							var compoundStateName = stateObjectDefinition.state.state.name
 							
 							println("in dosave stateID name= " + compoundStateName)
-							var compoundStateVertex = graph.vertices("match (n:`org.worklang.work.StateObjectDefinition` {name:'"+ compoundStateName +"'}) return n").head
+							var compoundStateVertex = graph.vertices("match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ compoundStateName +"'}) return n").head
 							
 							
 							//Create With vertex
-							var withVertex = graph.addVertex(org.worklang.work.WithStatesDefinition.typeName)
+							var withVertex = graph.addVertex(namespaceStatesIndexLabel)
 							withVertex.property(VertexProperty.Cardinality.single, "name", "with")
+							withVertex.property(VertexProperty.Cardinality.single, WLS, with.eClass.instanceTypeName)
 							
-							var predicateVertex = generatePredicateGraphStructure(with.predicate)
+							val namespaceStatesCompositionIndexLabel = namespaceStatesIndexLabel + ".compositions" 
+							
+							var predicateVertex = generatePredicateGraphStructure(with.predicate, namespaceStatesCompositionIndexLabel)
 							
 							//Connect predicate to with With
 							withVertex.addEdge("has", predicateVertex).property("type","composition")
@@ -183,8 +246,10 @@ class WorklangResource extends LazyLinkingResource{
 							compoundStateVertex.addEdge("composedWith", withVertex).property("type","composition")
 						]
 					
-					println("commit transition and computed compound state structures")
+					println("commit namespace transitions and computed compound state structures")
 					t2.commit
+					
+					val t3 = graph.tx
 					
 					//TODO Create graph referencespace structure
 					var Referencespace referencespace = field.referencespace
@@ -192,6 +257,25 @@ class WorklangResource extends LazyLinkingResource{
 					//TODO Create graph instancespace structure
 					var Instancespace instancespace = field.instancespace
 					
+					instancespaceTransitionsIndexLabel = instancespaceIndexLabel + ".transitions"
+					
+					//Create graph structures for transition instances
+					instancespace.instances.filter[instance| 
+						instance.eContents.exists[instanceElement| 
+							instanceElement.eClass.instanceClass.equals(org.worklang.work.TransitionInstance)
+						]
+					].forEach[transitionInstance|
+						
+						//Generate transition instance vertex
+						var transitionInstanceVertex = generateInstanceTransitionGraphStructure(transitionInstance, instancespaceTransitionsIndexLabel)
+						
+						//Connect field instancespace vertex to transition instance vertex
+						fieldInstancesVertex.addEdge("definesInstance", transitionInstanceVertex)
+					]
+					
+					println("commit instance transitions")
+					t3.commit	
+				
 				]
 				
 
@@ -208,10 +292,11 @@ class WorklangResource extends LazyLinkingResource{
 		
 	}
 	
-	def generatePredicateGraphStructure (Predicate predicate){
+	def generatePredicateGraphStructure (Predicate predicate, String label){
 		
-		val predicateVertex = graph.addVertex(org.worklang.work.Predicate.typeName)
+		val predicateVertex = graph.addVertex(label)
 		predicateVertex.property(VertexProperty.Cardinality.single, "name", "predicate")
+		predicateVertex.property(VertexProperty.Cardinality.single, WLS, predicate.eClass.instanceTypeName)
 		
 		//NOTE: if negation behaves wierd, this is probably why. Look at the grammar implementation for Predicate
 		predicateVertex.property(VertexProperty.Cardinality.single, "negation", predicate.negation)
@@ -226,7 +311,7 @@ class WorklangResource extends LazyLinkingResource{
 		predicate.eContents.filter[predicateEle| predicateEle.eClass.instanceClass.equals(org.worklang.work.StateID)]
 			.forEach[stateId|
 				
-				var composedStateVertex = generateComposedStateGraphStructure(stateId as StateID)
+				var composedStateVertex = generateComposedStateGraphStructure(stateId as StateID, label)
 			
 				//Attach composed state to predicate vertex
 				predicateVertex.addEdge("has", composedStateVertex).property("type","composition")
@@ -237,7 +322,7 @@ class WorklangResource extends LazyLinkingResource{
 		//If predicate contains an operation
 		predicate.eContents.filter[predicateEle| predicateEle.eClass.instanceClass.equals(org.worklang.work.Operation)]
 			.forEach[operation|
-				var operationVertex = generateOperationGraphStructure(operation as Operation)
+				var operationVertex = generateOperationGraphStructure(operation as Operation, label)
 				var operationEdge = predicateVertex.addEdge("has", operationVertex)
 				operationEdge.property("type","composition")			
 			]					
@@ -245,10 +330,11 @@ class WorklangResource extends LazyLinkingResource{
 		return predicateVertex
 	} 
 	
-	def Vertex generateOperationGraphStructure (Operation operation){
+	def Vertex generateOperationGraphStructure (Operation operation, String label){
 		
-		var operationVertex = graph.addVertex(org.worklang.work.Operation.typeName)
+		var operationVertex = graph.addVertex(label)
 		operationVertex.property(VertexProperty.Cardinality.single, "name", operation.op)
+		operationVertex.property(VertexProperty.Cardinality.single, WLS, operation.eClass.instanceTypeName)
 		
 		/* Either side of the operation can only be one of the following:
 		 * 	Predicate, StateID, another operation.
@@ -260,11 +346,11 @@ class WorklangResource extends LazyLinkingResource{
 		var leftVertex = 
 			switch (leftType){
 				case org.worklang.work.Operation:
-					generateOperationGraphStructure(operation.left as Operation)
+					generateOperationGraphStructure(operation.left as Operation, label)
 				case org.worklang.work.Predicate:
-					generatePredicateGraphStructure(operation.left as Predicate)
+					generatePredicateGraphStructure(operation.left as Predicate, label)
 				case org.worklang.work.StateID:
-					generateComposedStateGraphStructure(operation.left as StateID)
+					generateComposedStateGraphStructure(operation.left as StateID, label)
 				default: throw new IllegalArgumentException("Operation element wasn't Predicate, StateID, or another operation")
 			}
 		
@@ -278,11 +364,11 @@ class WorklangResource extends LazyLinkingResource{
 		var rightVertex = 
 			switch (rightType){
 				case org.worklang.work.Operation:
-					generateOperationGraphStructure(operation.right as Operation)
+					generateOperationGraphStructure(operation.right as Operation, label)
 				case org.worklang.work.Predicate:
-					generatePredicateGraphStructure(operation.right as Predicate)
+					generatePredicateGraphStructure(operation.right as Predicate, label)
 				case org.worklang.work.StateID:
-					generateComposedStateGraphStructure(operation.right as StateID)
+					generateComposedStateGraphStructure(operation.right as StateID, label)
 				default: throw new IllegalArgumentException("Operation element wasn't Predicate, StateID, or another operation")
 	
 			}
@@ -293,9 +379,10 @@ class WorklangResource extends LazyLinkingResource{
 		return operationVertex
 	}
 	
-	def generateComposedStateGraphStructure(StateID stateId){
-		var composedStateVertex = graph.addVertex(org.worklang.work.StateID.typeName)
+	def generateComposedStateGraphStructure(StateID stateId, String label){
+		var composedStateVertex = graph.addVertex(label)
 		composedStateVertex.property(VertexProperty.Cardinality.single, "name", "composedState")
+		composedStateVertex.property(VertexProperty.Cardinality.single, WLS, stateId.eClass.instanceTypeName)
 		
 		var lookupStateName = (stateId.eCrossReferences.get(0) as StateID).name
 		
@@ -303,7 +390,7 @@ class WorklangResource extends LazyLinkingResource{
 		
 		//NOTE: Potential Cypher injection exploit 
 		var refStateIdLookup = graph.vertices(
-			"match (n:`org.worklang.work.StateObjectDefinition` {name:'"+ lookupStateName +"'}) return n"
+			"match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ lookupStateName +"'}) return n"
 			)
 							
 		var refStateIdVertex = refStateIdLookup.head
@@ -321,10 +408,11 @@ class WorklangResource extends LazyLinkingResource{
 		return composedStateVertex
 	}
 	
-	def generateTransitionGraphStructure(TransitionObjectDefinition transition){
+	def generateNamespaceTransitionGraphStructure(TransitionObjectDefinition transition, String label){
 		
-		var transitionVertex = graph.addVertex(org.worklang.work.TransitionObjectDefinition.typeName)
+		var transitionVertex = graph.addVertex(label)
 		transitionVertex.property(VertexProperty.Cardinality.single, "name", transition.transition.transition.name)
+		transitionVertex.property(VertexProperty.Cardinality.single, WLS, transition.eClass.instanceTypeName)
 		
 		var transitionDefinition = transition.transition
 		var hasInput = if (transitionDefinition.in !== null) true else false
@@ -336,8 +424,9 @@ class WorklangResource extends LazyLinkingResource{
 		if (hasInput){
 			
 			//Create input vertex
-			val inputVertex = graph.addVertex(org.worklang.work.InputDefinition.typeName)
+			val inputVertex = graph.addVertex(label)
 			inputVertex.property(VertexProperty.Cardinality.single, "name", "input")
+			inputVertex.property(VertexProperty.Cardinality.single,WLS,transitionDefinition.in.eClass.instanceTypeName)
 			
 			//Create graph structures for input parameters
 			transitionDefinition.in.eCrossReferences.forEach[input|
@@ -348,7 +437,7 @@ class WorklangResource extends LazyLinkingResource{
 			inputVertex.property(VertexProperty.Cardinality.list, "parameter", inputStateName)
 			
 			//Find input state vertex in graph and connect it to input vertex
-			var inputStateVertex = graph.vertices("match (n:`org.worklang.work.StateObjectDefinition` {name:'"+ inputStateName +"'}) return n").head
+			var inputStateVertex = graph.vertices("match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ inputStateName +"'}) return n").head
 			inputVertex.addEdge("hasParameter", inputStateVertex)
 				.property("resolves", inputStateName)
 		
@@ -359,8 +448,9 @@ class WorklangResource extends LazyLinkingResource{
 		}
 		
 		
-		val outputVertex = graph.addVertex(org.worklang.work.OutputDefinition.typeName)
+		val outputVertex = graph.addVertex(label)
 		outputVertex.property(VertexProperty.Cardinality.single, "name", "output")
+		outputVertex.property(VertexProperty.Cardinality.single, WLS, transitionDefinition.out.eClass.instanceTypeName)
 		
 		//Create graph structures for output parameters
 		transitionDefinition.out.eCrossReferences.forEach[output|
@@ -373,7 +463,7 @@ class WorklangResource extends LazyLinkingResource{
 			outputVertex.property(VertexProperty.Cardinality.list, "parameter", outputStateName)
 			
 			//Find output state vertex in graph and connect it to output vertex
-			var outputStateVertex = graph.vertices("match (n:`org.worklang.work.StateObjectDefinition` {name:'"+ outputStateName +"'}) return n").head
+			var outputStateVertex = graph.vertices("match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ outputStateName +"'}) return n").head
 			outputVertex.addEdge("hasParameter", outputStateVertex)
 				.property("resolves", outputStateName)
 		
@@ -383,5 +473,31 @@ class WorklangResource extends LazyLinkingResource{
 		transitionVertex.addEdge("produces", outputVertex)
 		
 		return transitionVertex
+	}
+	
+	def generateInstanceTransitionGraphStructure(Instance instance, String label){
+		
+		var instanceVertex = graph.addVertex(label)
+		instanceVertex.property(VertexProperty.Cardinality.single, WLS, instance.eClass.instanceTypeName)
+		instanceVertex.property(VertexProperty.Cardinality.single, "type", "transition")
+		instanceVertex.property(VertexProperty.Cardinality.single, "name", instance.name)
+		instanceVertex.property(VertexProperty.Cardinality.single, "host", instance.transition.host)
+		instanceVertex.property(VertexProperty.Cardinality.single, "port", Integer.toString(instance.transition.port))
+		instanceVertex.property(VertexProperty.Cardinality.single, 
+			"path", 
+			if (instance.transition.path !== null) 
+				instance.transition.path else
+				"/" //Default path
+		)
+		
+		
+		var transitionName = (instance.transitionDeclaration.eCrossReferences.get(0)as TransitionID).name
+		
+		//Find the transition vertex of the transition this instance implements
+		var instanceOfVertex = graph.vertices("match (n:`"+namespaceTransitionsIndexLabel+"` {name:'"+ transitionName +"'}) return n").head
+	
+		instanceVertex.addEdge("instanceOf", instanceOfVertex)
+		
+		return instanceVertex
 	}
 }

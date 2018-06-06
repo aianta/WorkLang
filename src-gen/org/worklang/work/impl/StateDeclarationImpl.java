@@ -16,7 +16,6 @@
 package org.worklang.work.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -65,7 +64,7 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   protected String objectType = OBJECT_TYPE_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getState() <em>State</em>}' containment reference.
+   * The cached value of the '{@link #getState() <em>State</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getState()
@@ -125,6 +124,16 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
    */
   public StateID getState()
   {
+    if (state != null && state.eIsProxy())
+    {
+      InternalEObject oldState = (InternalEObject)state;
+      state = (StateID)eResolveProxy(oldState);
+      if (state != oldState)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkPackage.STATE_DECLARATION__STATE, oldState, state));
+      }
+    }
     return state;
   }
 
@@ -133,16 +142,9 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetState(StateID newState, NotificationChain msgs)
+  public StateID basicGetState()
   {
-    StateID oldState = state;
-    state = newState;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DECLARATION__STATE, oldState, newState);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
+    return state;
   }
 
   /**
@@ -152,34 +154,10 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
    */
   public void setState(StateID newState)
   {
-    if (newState != state)
-    {
-      NotificationChain msgs = null;
-      if (state != null)
-        msgs = ((InternalEObject)state).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.STATE_DECLARATION__STATE, null, msgs);
-      if (newState != null)
-        msgs = ((InternalEObject)newState).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.STATE_DECLARATION__STATE, null, msgs);
-      msgs = basicSetState(newState, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DECLARATION__STATE, newState, newState));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case WorkPackage.STATE_DECLARATION__STATE:
-        return basicSetState(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    StateID oldState = state;
+    state = newState;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DECLARATION__STATE, oldState, state));
   }
 
   /**
@@ -195,7 +173,8 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
       case WorkPackage.STATE_DECLARATION__OBJECT_TYPE:
         return getObjectType();
       case WorkPackage.STATE_DECLARATION__STATE:
-        return getState();
+        if (resolve) return getState();
+        return basicGetState();
     }
     return super.eGet(featureID, resolve, coreType);
   }

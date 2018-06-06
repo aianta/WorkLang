@@ -1158,17 +1158,17 @@ ruleInstancespace returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getInstancespaceAccess().getInstanceStatesInstanceParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getInstancespaceAccess().getInstancesInstanceParserRuleCall_2_0());
 				}
-				lv_instanceStates_2_0=ruleInstance
+				lv_instances_2_0=ruleInstance
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getInstancespaceRule());
 					}
 					add(
 						$current,
-						"instanceStates",
-						lv_instanceStates_2_0,
+						"instances",
+						lv_instances_2_0,
 						"org.worklang.Work.Instance");
 					afterParserOrEnumRuleCall();
 				}
@@ -2821,19 +2821,13 @@ ruleTransitionDeclaration returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTransitionDeclarationAccess().getTransitionTransitionIDParserRuleCall_1_0());
-				}
-				lv_transition_1_0=ruleTransitionID
-				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getTransitionDeclarationRule());
+						$current = createModelElement(grammarAccess.getTransitionDeclarationRule());
 					}
-					set(
-						$current,
-						"transition",
-						lv_transition_1_0,
-						"org.worklang.Work.TransitionID");
-					afterParserOrEnumRuleCall();
+				}
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getTransitionDeclarationAccess().getTransitionTransitionIDCrossReference_1_0());
 				}
 			)
 		)
@@ -2878,19 +2872,13 @@ ruleStateDeclaration returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getStateDeclarationAccess().getStateStateIDParserRuleCall_1_0());
-				}
-				lv_state_1_0=ruleStateID
-				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getStateDeclarationRule());
+						$current = createModelElement(grammarAccess.getStateDeclarationRule());
 					}
-					set(
-						$current,
-						"state",
-						lv_state_1_0,
-						"org.worklang.Work.StateID");
-					afterParserOrEnumRuleCall();
+				}
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getStateDeclarationAccess().getStateStateIDCrossReference_1_0());
 				}
 			)
 		)

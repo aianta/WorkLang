@@ -16,7 +16,6 @@
 package org.worklang.work.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -65,7 +64,7 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
   protected String objectType = OBJECT_TYPE_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getTransition() <em>Transition</em>}' containment reference.
+   * The cached value of the '{@link #getTransition() <em>Transition</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getTransition()
@@ -125,6 +124,16 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
    */
   public TransitionID getTransition()
   {
+    if (transition != null && transition.eIsProxy())
+    {
+      InternalEObject oldTransition = (InternalEObject)transition;
+      transition = (TransitionID)eResolveProxy(oldTransition);
+      if (transition != oldTransition)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkPackage.TRANSITION_DECLARATION__TRANSITION, oldTransition, transition));
+      }
+    }
     return transition;
   }
 
@@ -133,16 +142,9 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTransition(TransitionID newTransition, NotificationChain msgs)
+  public TransitionID basicGetTransition()
   {
-    TransitionID oldTransition = transition;
-    transition = newTransition;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_DECLARATION__TRANSITION, oldTransition, newTransition);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
+    return transition;
   }
 
   /**
@@ -152,34 +154,10 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
    */
   public void setTransition(TransitionID newTransition)
   {
-    if (newTransition != transition)
-    {
-      NotificationChain msgs = null;
-      if (transition != null)
-        msgs = ((InternalEObject)transition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.TRANSITION_DECLARATION__TRANSITION, null, msgs);
-      if (newTransition != null)
-        msgs = ((InternalEObject)newTransition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.TRANSITION_DECLARATION__TRANSITION, null, msgs);
-      msgs = basicSetTransition(newTransition, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_DECLARATION__TRANSITION, newTransition, newTransition));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case WorkPackage.TRANSITION_DECLARATION__TRANSITION:
-        return basicSetTransition(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    TransitionID oldTransition = transition;
+    transition = newTransition;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_DECLARATION__TRANSITION, oldTransition, transition));
   }
 
   /**
@@ -195,7 +173,8 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
       case WorkPackage.TRANSITION_DECLARATION__OBJECT_TYPE:
         return getObjectType();
       case WorkPackage.TRANSITION_DECLARATION__TRANSITION:
-        return getTransition();
+        if (resolve) return getTransition();
+        return basicGetTransition();
     }
     return super.eGet(featureID, resolve, coreType);
   }
