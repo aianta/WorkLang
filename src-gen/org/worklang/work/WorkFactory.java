@@ -54,15 +54,6 @@ public interface WorkFactory extends EFactory
   Instruction createInstruction();
 
   /**
-   * Returns a new object of class '<em>Use Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Use Definition</em>'.
-   * @generated
-   */
-  UseDefinition createUseDefinition();
-
-  /**
    * Returns a new object of class '<em>Practitioner</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -358,6 +349,15 @@ public interface WorkFactory extends EFactory
    * @generated
    */
   StateInstance createStateInstance();
+
+  /**
+   * Returns a new object of class '<em>Use Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Use Definition</em>'.
+   * @generated
+   */
+  UseDefinition createUseDefinition();
 
   /**
    * Returns a new object of class '<em>Set Statement</em>'.

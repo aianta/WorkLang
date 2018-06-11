@@ -35,10 +35,6 @@ Instruction:
 ;
 
 
-UseDefinition:
-	use = Use predefinedValue = [StateID] field = FromFieldDefinition
-;
-
 
 Practitioner:
 	practitionerDef = 'practitioner'
@@ -327,6 +323,10 @@ StateInstance:
 		members += (SetStatement| UseDefinition| Instance)+
 	'}'
 			
+;
+
+UseDefinition:
+	use = Use predefinedValue = [Instance] 
 ;
 
 SetStatement:

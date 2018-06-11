@@ -99,13 +99,6 @@ public class WorkSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case WorkPackage.USE_DEFINITION:
-      {
-        UseDefinition useDefinition = (UseDefinition)theEObject;
-        T result = caseUseDefinition(useDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case WorkPackage.PRACTITIONER:
       {
         Practitioner practitioner = (Practitioner)theEObject;
@@ -339,6 +332,13 @@ public class WorkSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case WorkPackage.USE_DEFINITION:
+      {
+        UseDefinition useDefinition = (UseDefinition)theEObject;
+        T result = caseUseDefinition(useDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case WorkPackage.SET_STATEMENT:
       {
         SetStatement setStatement = (SetStatement)theEObject;
@@ -416,22 +416,6 @@ public class WorkSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseInstruction(Instruction object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Use Definition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Use Definition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseUseDefinition(UseDefinition object)
   {
     return null;
   }
@@ -960,6 +944,22 @@ public class WorkSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseStateInstance(StateInstance object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Use Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Use Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUseDefinition(UseDefinition object)
   {
     return null;
   }

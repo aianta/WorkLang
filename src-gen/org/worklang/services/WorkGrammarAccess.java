@@ -128,45 +128,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getTransitionTransitionIDIDTerminalRuleCall_2_0_1() { return cTransitionTransitionIDIDTerminalRuleCall_2_0_1; }
 	}
-	public class UseDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.UseDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cUseAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cUseUseParserRuleCall_0_0 = (RuleCall)cUseAssignment_0.eContents().get(0);
-		private final Assignment cPredefinedValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cPredefinedValueStateIDCrossReference_1_0 = (CrossReference)cPredefinedValueAssignment_1.eContents().get(0);
-		private final RuleCall cPredefinedValueStateIDIDTerminalRuleCall_1_0_1 = (RuleCall)cPredefinedValueStateIDCrossReference_1_0.eContents().get(1);
-		private final Assignment cFieldAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cFieldFromFieldDefinitionParserRuleCall_2_0 = (RuleCall)cFieldAssignment_2.eContents().get(0);
-		
-		//UseDefinition:
-		//	use=Use predefinedValue=[StateID] field=FromFieldDefinition;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//use=Use predefinedValue=[StateID] field=FromFieldDefinition
-		public Group getGroup() { return cGroup; }
-		
-		//use=Use
-		public Assignment getUseAssignment_0() { return cUseAssignment_0; }
-		
-		//Use
-		public RuleCall getUseUseParserRuleCall_0_0() { return cUseUseParserRuleCall_0_0; }
-		
-		//predefinedValue=[StateID]
-		public Assignment getPredefinedValueAssignment_1() { return cPredefinedValueAssignment_1; }
-		
-		//[StateID]
-		public CrossReference getPredefinedValueStateIDCrossReference_1_0() { return cPredefinedValueStateIDCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getPredefinedValueStateIDIDTerminalRuleCall_1_0_1() { return cPredefinedValueStateIDIDTerminalRuleCall_1_0_1; }
-		
-		//field=FromFieldDefinition
-		public Assignment getFieldAssignment_2() { return cFieldAssignment_2; }
-		
-		//FromFieldDefinition
-		public RuleCall getFieldFromFieldDefinitionParserRuleCall_2_0() { return cFieldFromFieldDefinitionParserRuleCall_2_0; }
-	}
 	public class PractitionerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Practitioner");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1729,6 +1690,37 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
 	}
+	public class UseDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.UseDefinition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cUseAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cUseUseParserRuleCall_0_0 = (RuleCall)cUseAssignment_0.eContents().get(0);
+		private final Assignment cPredefinedValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cPredefinedValueInstanceCrossReference_1_0 = (CrossReference)cPredefinedValueAssignment_1.eContents().get(0);
+		private final RuleCall cPredefinedValueInstanceIDTerminalRuleCall_1_0_1 = (RuleCall)cPredefinedValueInstanceCrossReference_1_0.eContents().get(1);
+		
+		//UseDefinition:
+		//	use=Use predefinedValue=[Instance];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//use=Use predefinedValue=[Instance]
+		public Group getGroup() { return cGroup; }
+		
+		//use=Use
+		public Assignment getUseAssignment_0() { return cUseAssignment_0; }
+		
+		//Use
+		public RuleCall getUseUseParserRuleCall_0_0() { return cUseUseParserRuleCall_0_0; }
+		
+		//predefinedValue=[Instance]
+		public Assignment getPredefinedValueAssignment_1() { return cPredefinedValueAssignment_1; }
+		
+		//[Instance]
+		public CrossReference getPredefinedValueInstanceCrossReference_1_0() { return cPredefinedValueInstanceCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getPredefinedValueInstanceIDTerminalRuleCall_1_0_1() { return cPredefinedValueInstanceIDTerminalRuleCall_1_0_1; }
+	}
 	public class SetStatementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.SetStatement");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -2040,7 +2032,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private final ModelElements pModel;
 	private final InstructionElements pInstruction;
-	private final UseDefinitionElements pUseDefinition;
 	private final PractitionerElements pPractitioner;
 	private final ExpertDefinitionElements pExpertDefinition;
 	private final UserElements pUser;
@@ -2094,6 +2085,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	private final StateDeclarationElements pStateDeclaration;
 	private final TransitionInstanceElements pTransitionInstance;
 	private final StateInstanceElements pStateInstance;
+	private final UseDefinitionElements pUseDefinition;
 	private final SetStatementElements pSetStatement;
 	private final ToDefinitionElements pToDefinition;
 	private final PredicateElements pPredicate;
@@ -2113,7 +2105,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
 		this.pInstruction = new InstructionElements();
-		this.pUseDefinition = new UseDefinitionElements();
 		this.pPractitioner = new PractitionerElements();
 		this.pExpertDefinition = new ExpertDefinitionElements();
 		this.pUser = new UserElements();
@@ -2167,6 +2158,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		this.pStateDeclaration = new StateDeclarationElements();
 		this.pTransitionInstance = new TransitionInstanceElements();
 		this.pStateInstance = new StateInstanceElements();
+		this.pUseDefinition = new UseDefinitionElements();
 		this.pSetStatement = new SetStatementElements();
 		this.pToDefinition = new ToDefinitionElements();
 		this.pPredicate = new PredicateElements();
@@ -2226,16 +2218,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getInstructionRule() {
 		return getInstructionAccess().getRule();
-	}
-	
-	//UseDefinition:
-	//	use=Use predefinedValue=[StateID] field=FromFieldDefinition;
-	public UseDefinitionElements getUseDefinitionAccess() {
-		return pUseDefinition;
-	}
-	
-	public ParserRule getUseDefinitionRule() {
-		return getUseDefinitionAccess().getRule();
 	}
 	
 	//Practitioner:
@@ -2823,6 +2805,16 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getStateInstanceRule() {
 		return getStateInstanceAccess().getRule();
+	}
+	
+	//UseDefinition:
+	//	use=Use predefinedValue=[Instance];
+	public UseDefinitionElements getUseDefinitionAccess() {
+		return pUseDefinition;
+	}
+	
+	public ParserRule getUseDefinitionRule() {
+		return getUseDefinitionAccess().getRule();
 	}
 	
 	//SetStatement:

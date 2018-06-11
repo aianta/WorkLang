@@ -16,7 +16,6 @@
 package org.worklang.work.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -24,8 +23,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.worklang.work.FromFieldDefinition;
-import org.worklang.work.StateID;
+import org.worklang.work.Instance;
 import org.worklang.work.UseDefinition;
 import org.worklang.work.WorkPackage;
 
@@ -39,7 +37,6 @@ import org.worklang.work.WorkPackage;
  * <ul>
  *   <li>{@link org.worklang.work.impl.UseDefinitionImpl#getUse <em>Use</em>}</li>
  *   <li>{@link org.worklang.work.impl.UseDefinitionImpl#getPredefinedValue <em>Predefined Value</em>}</li>
- *   <li>{@link org.worklang.work.impl.UseDefinitionImpl#getField <em>Field</em>}</li>
  * </ul>
  *
  * @generated
@@ -74,17 +71,7 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
    * @generated
    * @ordered
    */
-  protected StateID predefinedValue;
-
-  /**
-   * The cached value of the '{@link #getField() <em>Field</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getField()
-   * @generated
-   * @ordered
-   */
-  protected FromFieldDefinition field;
+  protected Instance predefinedValue;
 
   /**
    * <!-- begin-user-doc -->
@@ -135,12 +122,12 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateID getPredefinedValue()
+  public Instance getPredefinedValue()
   {
     if (predefinedValue != null && predefinedValue.eIsProxy())
     {
       InternalEObject oldPredefinedValue = (InternalEObject)predefinedValue;
-      predefinedValue = (StateID)eResolveProxy(oldPredefinedValue);
+      predefinedValue = (Instance)eResolveProxy(oldPredefinedValue);
       if (predefinedValue != oldPredefinedValue)
       {
         if (eNotificationRequired())
@@ -155,7 +142,7 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateID basicGetPredefinedValue()
+  public Instance basicGetPredefinedValue()
   {
     return predefinedValue;
   }
@@ -165,76 +152,12 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPredefinedValue(StateID newPredefinedValue)
+  public void setPredefinedValue(Instance newPredefinedValue)
   {
-    StateID oldPredefinedValue = predefinedValue;
+    Instance oldPredefinedValue = predefinedValue;
     predefinedValue = newPredefinedValue;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.USE_DEFINITION__PREDEFINED_VALUE, oldPredefinedValue, predefinedValue));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public FromFieldDefinition getField()
-  {
-    return field;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetField(FromFieldDefinition newField, NotificationChain msgs)
-  {
-    FromFieldDefinition oldField = field;
-    field = newField;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.USE_DEFINITION__FIELD, oldField, newField);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setField(FromFieldDefinition newField)
-  {
-    if (newField != field)
-    {
-      NotificationChain msgs = null;
-      if (field != null)
-        msgs = ((InternalEObject)field).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.USE_DEFINITION__FIELD, null, msgs);
-      if (newField != null)
-        msgs = ((InternalEObject)newField).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.USE_DEFINITION__FIELD, null, msgs);
-      msgs = basicSetField(newField, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.USE_DEFINITION__FIELD, newField, newField));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case WorkPackage.USE_DEFINITION__FIELD:
-        return basicSetField(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -252,8 +175,6 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
       case WorkPackage.USE_DEFINITION__PREDEFINED_VALUE:
         if (resolve) return getPredefinedValue();
         return basicGetPredefinedValue();
-      case WorkPackage.USE_DEFINITION__FIELD:
-        return getField();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -272,10 +193,7 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
         setUse((String)newValue);
         return;
       case WorkPackage.USE_DEFINITION__PREDEFINED_VALUE:
-        setPredefinedValue((StateID)newValue);
-        return;
-      case WorkPackage.USE_DEFINITION__FIELD:
-        setField((FromFieldDefinition)newValue);
+        setPredefinedValue((Instance)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -295,10 +213,7 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
         setUse(USE_EDEFAULT);
         return;
       case WorkPackage.USE_DEFINITION__PREDEFINED_VALUE:
-        setPredefinedValue((StateID)null);
-        return;
-      case WorkPackage.USE_DEFINITION__FIELD:
-        setField((FromFieldDefinition)null);
+        setPredefinedValue((Instance)null);
         return;
     }
     super.eUnset(featureID);
@@ -318,8 +233,6 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
         return USE_EDEFAULT == null ? use != null : !USE_EDEFAULT.equals(use);
       case WorkPackage.USE_DEFINITION__PREDEFINED_VALUE:
         return predefinedValue != null;
-      case WorkPackage.USE_DEFINITION__FIELD:
-        return field != null;
     }
     return super.eIsSet(featureID);
   }

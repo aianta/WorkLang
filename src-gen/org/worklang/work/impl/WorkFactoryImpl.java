@@ -79,7 +79,6 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
     {
       case WorkPackage.MODEL: return createModel();
       case WorkPackage.INSTRUCTION: return createInstruction();
-      case WorkPackage.USE_DEFINITION: return createUseDefinition();
       case WorkPackage.PRACTITIONER: return createPractitioner();
       case WorkPackage.EXPERT_DEFINITION: return createExpertDefinition();
       case WorkPackage.USER: return createUser();
@@ -113,6 +112,7 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
       case WorkPackage.STATE_DECLARATION: return createStateDeclaration();
       case WorkPackage.TRANSITION_INSTANCE: return createTransitionInstance();
       case WorkPackage.STATE_INSTANCE: return createStateInstance();
+      case WorkPackage.USE_DEFINITION: return createUseDefinition();
       case WorkPackage.SET_STATEMENT: return createSetStatement();
       case WorkPackage.TO_DEFINITION: return createToDefinition();
       case WorkPackage.PREDICATE: return createPredicate();
@@ -144,17 +144,6 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
   {
     InstructionImpl instruction = new InstructionImpl();
     return instruction;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public UseDefinition createUseDefinition()
-  {
-    UseDefinitionImpl useDefinition = new UseDefinitionImpl();
-    return useDefinition;
   }
 
   /**
@@ -518,6 +507,17 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
   {
     StateInstanceImpl stateInstance = new StateInstanceImpl();
     return stateInstance;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UseDefinition createUseDefinition()
+  {
+    UseDefinitionImpl useDefinition = new UseDefinitionImpl();
+    return useDefinition;
   }
 
   /**

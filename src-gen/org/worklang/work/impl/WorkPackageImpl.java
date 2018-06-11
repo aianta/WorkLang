@@ -94,13 +94,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass useDefinitionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass practitionerEClass = null;
 
   /**
@@ -332,6 +325,13 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass useDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass setStatementEClass = null;
 
   /**
@@ -520,46 +520,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
   public EReference getInstruction_Transition()
   {
     return (EReference)instructionEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getUseDefinition()
-  {
-    return useDefinitionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getUseDefinition_Use()
-  {
-    return (EAttribute)useDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getUseDefinition_PredefinedValue()
-  {
-    return (EReference)useDefinitionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getUseDefinition_Field()
-  {
-    return (EReference)useDefinitionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1837,6 +1797,36 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getUseDefinition()
+  {
+    return useDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUseDefinition_Use()
+  {
+    return (EAttribute)useDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getUseDefinition_PredefinedValue()
+  {
+    return (EReference)useDefinitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getSetStatement()
   {
     return setStatementEClass;
@@ -2033,11 +2023,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     createEReference(instructionEClass, INSTRUCTION__SPACE);
     createEReference(instructionEClass, INSTRUCTION__TRANSITION);
 
-    useDefinitionEClass = createEClass(USE_DEFINITION);
-    createEAttribute(useDefinitionEClass, USE_DEFINITION__USE);
-    createEReference(useDefinitionEClass, USE_DEFINITION__PREDEFINED_VALUE);
-    createEReference(useDefinitionEClass, USE_DEFINITION__FIELD);
-
     practitionerEClass = createEClass(PRACTITIONER);
     createEAttribute(practitionerEClass, PRACTITIONER__PRACTITIONER_DEF);
     createEReference(practitionerEClass, PRACTITIONER__USER);
@@ -2198,6 +2183,10 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     stateInstanceEClass = createEClass(STATE_INSTANCE);
     createEReference(stateInstanceEClass, STATE_INSTANCE__MEMBERS);
 
+    useDefinitionEClass = createEClass(USE_DEFINITION);
+    createEAttribute(useDefinitionEClass, USE_DEFINITION__USE);
+    createEReference(useDefinitionEClass, USE_DEFINITION__PREDEFINED_VALUE);
+
     setStatementEClass = createEClass(SET_STATEMENT);
     createEAttribute(setStatementEClass, SET_STATEMENT__STATEMENT);
     createEReference(setStatementEClass, SET_STATEMENT__VARIABLE);
@@ -2267,11 +2256,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     initEAttribute(getInstruction_ObjectType(), ecorePackage.getEString(), "objectType", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getInstruction_Space(), this.getSpace(), null, "space", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getInstruction_Transition(), this.getTransitionID(), null, "transition", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(useDefinitionEClass, UseDefinition.class, "UseDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getUseDefinition_Use(), ecorePackage.getEString(), "use", null, 0, 1, UseDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getUseDefinition_PredefinedValue(), this.getStateID(), null, "predefinedValue", null, 0, 1, UseDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getUseDefinition_Field(), this.getFromFieldDefinition(), null, "field", null, 0, 1, UseDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(practitionerEClass, Practitioner.class, "Practitioner", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPractitioner_PractitionerDef(), ecorePackage.getEString(), "practitionerDef", null, 0, 1, Practitioner.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2432,6 +2416,10 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
 
     initEClass(stateInstanceEClass, StateInstance.class, "StateInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getStateInstance_Members(), ecorePackage.getEObject(), null, "members", null, 0, -1, StateInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(useDefinitionEClass, UseDefinition.class, "UseDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getUseDefinition_Use(), ecorePackage.getEString(), "use", null, 0, 1, UseDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getUseDefinition_PredefinedValue(), this.getInstance(), null, "predefinedValue", null, 0, 1, UseDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(setStatementEClass, SetStatement.class, "SetStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSetStatement_Statement(), ecorePackage.getEString(), "statement", null, 0, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

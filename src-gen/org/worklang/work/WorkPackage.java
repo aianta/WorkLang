@@ -171,52 +171,6 @@ public interface WorkPackage extends EPackage
   int INSTRUCTION_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link org.worklang.work.impl.UseDefinitionImpl <em>Use Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.UseDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getUseDefinition()
-   * @generated
-   */
-  int USE_DEFINITION = 2;
-
-  /**
-   * The feature id for the '<em><b>Use</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int USE_DEFINITION__USE = 0;
-
-  /**
-   * The feature id for the '<em><b>Predefined Value</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int USE_DEFINITION__PREDEFINED_VALUE = 1;
-
-  /**
-   * The feature id for the '<em><b>Field</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int USE_DEFINITION__FIELD = 2;
-
-  /**
-   * The number of structural features of the '<em>Use Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int USE_DEFINITION_FEATURE_COUNT = 3;
-
-  /**
    * The meta object id for the '{@link org.worklang.work.impl.PractitionerImpl <em>Practitioner</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -224,7 +178,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getPractitioner()
    * @generated
    */
-  int PRACTITIONER = 3;
+  int PRACTITIONER = 2;
 
   /**
    * The feature id for the '<em><b>Practitioner Def</b></em>' attribute.
@@ -279,7 +233,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getExpertDefinition()
    * @generated
    */
-  int EXPERT_DEFINITION = 4;
+  int EXPERT_DEFINITION = 3;
 
   /**
    * The feature id for the '<em><b>Expert Def</b></em>' attribute.
@@ -352,7 +306,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getUser()
    * @generated
    */
-  int USER = 5;
+  int USER = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -380,7 +334,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getDomainDefinition()
    * @generated
    */
-  int DOMAIN_DEFINITION = 6;
+  int DOMAIN_DEFINITION = 5;
 
   /**
    * The feature id for the '<em><b>Domain</b></em>' attribute.
@@ -417,7 +371,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getKnowledgeDefinition()
    * @generated
    */
-  int KNOWLEDGE_DEFINITION = 7;
+  int KNOWLEDGE_DEFINITION = 6;
 
   /**
    * The feature id for the '<em><b>Knowledge Def</b></em>' attribute.
@@ -454,7 +408,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getSkillsDefinition()
    * @generated
    */
-  int SKILLS_DEFINITION = 8;
+  int SKILLS_DEFINITION = 7;
 
   /**
    * The feature id for the '<em><b>Skills Def</b></em>' attribute.
@@ -491,7 +445,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getFieldDefinition()
    * @generated
    */
-  int FIELD_DEFINITION = 9;
+  int FIELD_DEFINITION = 8;
 
   /**
    * The feature id for the '<em><b>Field</b></em>' attribute.
@@ -564,7 +518,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getSpace()
    * @generated
    */
-  int SPACE = 10;
+  int SPACE = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -592,7 +546,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getNamespace()
    * @generated
    */
-  int NAMESPACE = 11;
+  int NAMESPACE = 10;
 
   /**
    * The feature id for the '<em><b>Space Type</b></em>' attribute.
@@ -638,7 +592,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getReferencespace()
    * @generated
    */
-  int REFERENCESPACE = 12;
+  int REFERENCESPACE = 11;
 
   /**
    * The feature id for the '<em><b>Space Type</b></em>' attribute.
@@ -693,7 +647,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getInstancespace()
    * @generated
    */
-  int INSTANCESPACE = 13;
+  int INSTANCESPACE = 12;
 
   /**
    * The feature id for the '<em><b>Space Type</b></em>' attribute.
@@ -730,7 +684,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getReferenceField()
    * @generated
    */
-  int REFERENCE_FIELD = 14;
+  int REFERENCE_FIELD = 13;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' attribute.
@@ -767,7 +721,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getStateObjectDefinition()
    * @generated
    */
-  int STATE_OBJECT_DEFINITION = 15;
+  int STATE_OBJECT_DEFINITION = 14;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -804,7 +758,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getTransitionObjectDefinition()
    * @generated
    */
-  int TRANSITION_OBJECT_DEFINITION = 16;
+  int TRANSITION_OBJECT_DEFINITION = 15;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -841,7 +795,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getPrimitiveStateDefinition()
    * @generated
    */
-  int PRIMITIVE_STATE_DEFINITION = 17;
+  int PRIMITIVE_STATE_DEFINITION = 16;
 
   /**
    * The feature id for the '<em><b>Object</b></em>' attribute.
@@ -878,7 +832,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getCompoundStateDefinition()
    * @generated
    */
-  int COMPOUND_STATE_DEFINITION = 18;
+  int COMPOUND_STATE_DEFINITION = 17;
 
   /**
    * The feature id for the '<em><b>Object</b></em>' attribute.
@@ -924,7 +878,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getStateDefinition()
    * @generated
    */
-  int STATE_DEFINITION = 19;
+  int STATE_DEFINITION = 18;
 
   /**
    * The feature id for the '<em><b>Object</b></em>' attribute.
@@ -989,7 +943,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getStateID()
    * @generated
    */
-  int STATE_ID = 20;
+  int STATE_ID = 19;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1044,7 +998,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getWithStatesDefinition()
    * @generated
    */
-  int WITH_STATES_DEFINITION = 21;
+  int WITH_STATES_DEFINITION = 20;
 
   /**
    * The feature id for the '<em><b>Composition</b></em>' attribute.
@@ -1081,7 +1035,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getWithTransitionsDefinition()
    * @generated
    */
-  int WITH_TRANSITIONS_DEFINITION = 22;
+  int WITH_TRANSITIONS_DEFINITION = 21;
 
   /**
    * The feature id for the '<em><b>Composition</b></em>' attribute.
@@ -1118,7 +1072,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getReferenceState()
    * @generated
    */
-  int REFERENCE_STATE = 23;
+  int REFERENCE_STATE = 22;
 
   /**
    * The feature id for the '<em><b>Object</b></em>' attribute.
@@ -1182,7 +1136,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getTransitionDefinition()
    * @generated
    */
-  int TRANSITION_DEFINITION = 24;
+  int TRANSITION_DEFINITION = 23;
 
   /**
    * The feature id for the '<em><b>Object</b></em>' attribute.
@@ -1265,7 +1219,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getTransitionID()
    * @generated
    */
-  int TRANSITION_ID = 25;
+  int TRANSITION_ID = 24;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1302,7 +1256,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getReferenceTransition()
    * @generated
    */
-  int REFERENCE_TRANSITION = 26;
+  int REFERENCE_TRANSITION = 25;
 
   /**
    * The feature id for the '<em><b>Object</b></em>' attribute.
@@ -1366,7 +1320,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getFromFieldDefinition()
    * @generated
    */
-  int FROM_FIELD_DEFINITION = 27;
+  int FROM_FIELD_DEFINITION = 26;
 
   /**
    * The feature id for the '<em><b>From</b></em>' attribute.
@@ -1403,7 +1357,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getInputDefinition()
    * @generated
    */
-  int INPUT_DEFINITION = 28;
+  int INPUT_DEFINITION = 27;
 
   /**
    * The feature id for the '<em><b>Input</b></em>' attribute.
@@ -1440,7 +1394,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getOutputDefinition()
    * @generated
    */
-  int OUTPUT_DEFINITION = 29;
+  int OUTPUT_DEFINITION = 28;
 
   /**
    * The feature id for the '<em><b>Output</b></em>' attribute.
@@ -1477,7 +1431,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getExtendsDefinition()
    * @generated
    */
-  int EXTENDS_DEFINITION = 30;
+  int EXTENDS_DEFINITION = 29;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1514,7 +1468,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getInstance()
    * @generated
    */
-  int INSTANCE = 31;
+  int INSTANCE = 30;
 
   /**
    * The feature id for the '<em><b>Instance Def</b></em>' attribute.
@@ -1587,7 +1541,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getTransitionDeclaration()
    * @generated
    */
-  int TRANSITION_DECLARATION = 32;
+  int TRANSITION_DECLARATION = 31;
 
   /**
    * The feature id for the '<em><b>Object Type</b></em>' attribute.
@@ -1624,7 +1578,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getStateDeclaration()
    * @generated
    */
-  int STATE_DECLARATION = 33;
+  int STATE_DECLARATION = 32;
 
   /**
    * The feature id for the '<em><b>Object Type</b></em>' attribute.
@@ -1661,7 +1615,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getTransitionInstance()
    * @generated
    */
-  int TRANSITION_INSTANCE = 34;
+  int TRANSITION_INSTANCE = 33;
 
   /**
    * The feature id for the '<em><b>Host</b></em>' attribute.
@@ -1707,7 +1661,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getStateInstance()
    * @generated
    */
-  int STATE_INSTANCE = 35;
+  int STATE_INSTANCE = 34;
 
   /**
    * The feature id for the '<em><b>Members</b></em>' containment reference list.
@@ -1726,6 +1680,43 @@ public interface WorkPackage extends EPackage
    * @ordered
    */
   int STATE_INSTANCE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.UseDefinitionImpl <em>Use Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.UseDefinitionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getUseDefinition()
+   * @generated
+   */
+  int USE_DEFINITION = 35;
+
+  /**
+   * The feature id for the '<em><b>Use</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int USE_DEFINITION__USE = 0;
+
+  /**
+   * The feature id for the '<em><b>Predefined Value</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int USE_DEFINITION__PREDEFINED_VALUE = 1;
+
+  /**
+   * The number of structural features of the '<em>Use Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int USE_DEFINITION_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.SetStatementImpl <em>Set Statement</em>}' class.
@@ -1990,49 +1981,6 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   EReference getInstruction_Transition();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.UseDefinition <em>Use Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Use Definition</em>'.
-   * @see org.worklang.work.UseDefinition
-   * @generated
-   */
-  EClass getUseDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.UseDefinition#getUse <em>Use</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Use</em>'.
-   * @see org.worklang.work.UseDefinition#getUse()
-   * @see #getUseDefinition()
-   * @generated
-   */
-  EAttribute getUseDefinition_Use();
-
-  /**
-   * Returns the meta object for the reference '{@link org.worklang.work.UseDefinition#getPredefinedValue <em>Predefined Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Predefined Value</em>'.
-   * @see org.worklang.work.UseDefinition#getPredefinedValue()
-   * @see #getUseDefinition()
-   * @generated
-   */
-  EReference getUseDefinition_PredefinedValue();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.UseDefinition#getField <em>Field</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Field</em>'.
-   * @see org.worklang.work.UseDefinition#getField()
-   * @see #getUseDefinition()
-   * @generated
-   */
-  EReference getUseDefinition_Field();
 
   /**
    * Returns the meta object for class '{@link org.worklang.work.Practitioner <em>Practitioner</em>}'.
@@ -3399,6 +3347,38 @@ public interface WorkPackage extends EPackage
   EReference getStateInstance_Members();
 
   /**
+   * Returns the meta object for class '{@link org.worklang.work.UseDefinition <em>Use Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Use Definition</em>'.
+   * @see org.worklang.work.UseDefinition
+   * @generated
+   */
+  EClass getUseDefinition();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.worklang.work.UseDefinition#getUse <em>Use</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Use</em>'.
+   * @see org.worklang.work.UseDefinition#getUse()
+   * @see #getUseDefinition()
+   * @generated
+   */
+  EAttribute getUseDefinition_Use();
+
+  /**
+   * Returns the meta object for the reference '{@link org.worklang.work.UseDefinition#getPredefinedValue <em>Predefined Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Predefined Value</em>'.
+   * @see org.worklang.work.UseDefinition#getPredefinedValue()
+   * @see #getUseDefinition()
+   * @generated
+   */
+  EReference getUseDefinition_PredefinedValue();
+
+  /**
    * Returns the meta object for class '{@link org.worklang.work.SetStatement <em>Set Statement</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3666,40 +3646,6 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EReference INSTRUCTION__TRANSITION = eINSTANCE.getInstruction_Transition();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.UseDefinitionImpl <em>Use Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.UseDefinitionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getUseDefinition()
-     * @generated
-     */
-    EClass USE_DEFINITION = eINSTANCE.getUseDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Use</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute USE_DEFINITION__USE = eINSTANCE.getUseDefinition_Use();
-
-    /**
-     * The meta object literal for the '<em><b>Predefined Value</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference USE_DEFINITION__PREDEFINED_VALUE = eINSTANCE.getUseDefinition_PredefinedValue();
-
-    /**
-     * The meta object literal for the '<em><b>Field</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference USE_DEFINITION__FIELD = eINSTANCE.getUseDefinition_Field();
 
     /**
      * The meta object literal for the '{@link org.worklang.work.impl.PractitionerImpl <em>Practitioner</em>}' class.
@@ -4782,6 +4728,32 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EReference STATE_INSTANCE__MEMBERS = eINSTANCE.getStateInstance_Members();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.UseDefinitionImpl <em>Use Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.UseDefinitionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getUseDefinition()
+     * @generated
+     */
+    EClass USE_DEFINITION = eINSTANCE.getUseDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Use</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute USE_DEFINITION__USE = eINSTANCE.getUseDefinition_Use();
+
+    /**
+     * The meta object literal for the '<em><b>Predefined Value</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference USE_DEFINITION__PREDEFINED_VALUE = eINSTANCE.getUseDefinition_PredefinedValue();
 
     /**
      * The meta object literal for the '{@link org.worklang.work.impl.SetStatementImpl <em>Set Statement</em>}' class.

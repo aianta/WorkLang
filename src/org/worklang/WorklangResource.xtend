@@ -56,6 +56,7 @@ import org.worklang.work.Instance
 import org.worklang.work.TransitionID
 import java.util.Date
 import java.time.Instant
+import org.worklang.work.UseDefinition
 
 class WorklangResource extends LazyLinkingResource{
 	
@@ -90,6 +91,7 @@ class WorklangResource extends LazyLinkingResource{
 
 	var String instancespaceIndexLabel
 	var String instancespaceTransitionsIndexLabel
+	var String instancespaceStatesIndexLabel
 	
 	new (){
 		super()
@@ -257,6 +259,80 @@ class WorklangResource extends LazyLinkingResource{
 					//TODO Create graph instancespace structure
 					var Instancespace instancespace = field.instancespace
 					
+					instancespaceStatesIndexLabel = instancespaceIndexLabel + ".states"
+					
+					//Create graph structures for state instances
+					instancespace.instances.filter[instance|
+						instance.eContents.exists[instanceElement|
+							instanceElement.eClass.instanceClass.equals(org.worklang.work.StateInstance)
+						]
+					].forEach[instance|
+						
+					println("instance " + instance.eClass.instanceTypeName +"|"+  instance)
+						
+					var instanceVertex = graph.addVertex(instancespaceStatesIndexLabel)
+					instanceVertex.property(VertexProperty.Cardinality.single, WLS, instance.eClass.instanceTypeName)
+					instanceVertex.property(VertexProperty.Cardinality.single, "type", "state")
+					instanceVertex.property(VertexProperty.Cardinality.single, "name", instance.name)
+					
+					fieldInstancesVertex.addEdge("definesInstance", instanceVertex)
+					
+					//Find vertex of state this is an instance of
+					var instancedState = instance.stateDeclaration.eCrossReferences.get(0) as StateID 
+					
+					var Vertex instancedStateVertex = graph.vertices("match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ instancedState.name +"'}) return n").head
+					
+					//Hookup instance vertex to state it is an instance of
+					instanceVertex.addEdge("instanceOf", instancedStateVertex)
+						
+					]
+					
+					t3.commit
+					
+					
+					//Resolve graph structures for use and set statements in state instances
+					val t4 = graph.tx
+					
+					instancespace.instances.filter[instance|
+						instance.eContents.exists[instanceElement|
+							instanceElement.eClass.instanceClass.equals(org.worklang.work.StateInstance)
+						]
+					].forEach[instance|
+						
+					var Vertex instanceVertex = graph.vertices("match (n:`"+instancespaceStatesIndexLabel+"` {name:'"+ instance.name +"'}) return n").head
+					
+					
+					//Create nodes for every instance attribute
+					for (EObject obj: instance.state.members){
+						
+						//Deal with all possible cases (set statement, use statement or instance)
+						
+						//Create graph structure for set statement
+						if (obj.eClass.instanceClass.equals(org.worklang.work.SetStatement)){
+							
+							var setStmt = obj as org.worklang.work.SetStatement
+							
+							var valueVertex = graph.addVertex(instancespaceStatesIndexLabel)
+							valueVertex.property(VertexProperty.Cardinality.single, "name", (setStmt.eCrossReferences.get(0)as StateID).name)
+							valueVertex.property(VertexProperty.Cardinality.single, "value", setStmt.toDef.value)
+							
+							instanceVertex.addEdge("set", valueVertex)
+				
+						}
+						
+						//Create graph structure for use statement
+						if (obj.eClass.instanceClass.equals(org.worklang.work.UseDefinition)){
+							
+							var useState = obj as UseDefinition
+							
+							var useStateVertex = graph.vertices("match (n:`"+instancespaceStatesIndexLabel+"` {name:'"+ (useState.eCrossReferences.get(0) as Instance).name +"'}) return n").head
+							
+							instanceVertex.addEdge("use", useStateVertex)
+						}
+					}
+						
+					]
+					
 					instancespaceTransitionsIndexLabel = instancespaceIndexLabel + ".transitions"
 					
 					//Create graph structures for transition instances
@@ -274,7 +350,7 @@ class WorklangResource extends LazyLinkingResource{
 					]
 					
 					println("commit instance transitions")
-					t3.commit	
+					t4.commit	
 				
 				]
 				
@@ -500,4 +576,6 @@ class WorklangResource extends LazyLinkingResource{
 		
 		return instanceVertex
 	}
+	
+
 }

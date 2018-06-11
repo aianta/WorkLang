@@ -867,7 +867,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     UseDefinition returns UseDefinition
 	 *
 	 * Constraint:
-	 *     (use=Use predefinedValue=[StateID|ID] field=FromFieldDefinition)
+	 *     (use=Use predefinedValue=[Instance|ID])
 	 */
 	protected void sequence_UseDefinition(ISerializationContext context, UseDefinition semanticObject) {
 		if (errorAcceptor != null) {
@@ -875,13 +875,10 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.USE_DEFINITION__USE));
 			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.USE_DEFINITION__PREDEFINED_VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.USE_DEFINITION__PREDEFINED_VALUE));
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.USE_DEFINITION__FIELD) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.USE_DEFINITION__FIELD));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getUseDefinitionAccess().getUseUseParserRuleCall_0_0(), semanticObject.getUse());
-		feeder.accept(grammarAccess.getUseDefinitionAccess().getPredefinedValueStateIDIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.USE_DEFINITION__PREDEFINED_VALUE, false));
-		feeder.accept(grammarAccess.getUseDefinitionAccess().getFieldFromFieldDefinitionParserRuleCall_2_0(), semanticObject.getField());
+		feeder.accept(grammarAccess.getUseDefinitionAccess().getPredefinedValueInstanceIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.USE_DEFINITION__PREDEFINED_VALUE, false));
 		feeder.finish();
 	}
 	

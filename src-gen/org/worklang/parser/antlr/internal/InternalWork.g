@@ -227,76 +227,6 @@ ruleInstruction returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleUseDefinition
-entryRuleUseDefinition returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getUseDefinitionRule()); }
-	iv_ruleUseDefinition=ruleUseDefinition
-	{ $current=$iv_ruleUseDefinition.current; }
-	EOF;
-
-// Rule UseDefinition
-ruleUseDefinition returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getUseDefinitionAccess().getUseUseParserRuleCall_0_0());
-				}
-				lv_use_0_0=ruleUse
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getUseDefinitionRule());
-					}
-					set(
-						$current,
-						"use",
-						lv_use_0_0,
-						"org.worklang.Work.Use");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		(
-			(
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getUseDefinitionRule());
-					}
-				}
-				otherlv_1=RULE_ID
-				{
-					newLeafNode(otherlv_1, grammarAccess.getUseDefinitionAccess().getPredefinedValueStateIDCrossReference_1_0());
-				}
-			)
-		)
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getUseDefinitionAccess().getFieldFromFieldDefinitionParserRuleCall_2_0());
-				}
-				lv_field_2_0=ruleFromFieldDefinition
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getUseDefinitionRule());
-					}
-					set(
-						$current,
-						"field",
-						lv_field_2_0,
-						"org.worklang.Work.FromFieldDefinition");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-	)
-;
-
 // Entry rule entryRulePractitioner
 entryRulePractitioner returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getPractitionerRule()); }
@@ -3035,6 +2965,57 @@ ruleStateInstance returns [EObject current=null]
 		{
 			newLeafNode(otherlv_2, grammarAccess.getStateInstanceAccess().getRightCurlyBracketKeyword_2());
 		}
+	)
+;
+
+// Entry rule entryRuleUseDefinition
+entryRuleUseDefinition returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getUseDefinitionRule()); }
+	iv_ruleUseDefinition=ruleUseDefinition
+	{ $current=$iv_ruleUseDefinition.current; }
+	EOF;
+
+// Rule UseDefinition
+ruleUseDefinition returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getUseDefinitionAccess().getUseUseParserRuleCall_0_0());
+				}
+				lv_use_0_0=ruleUse
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getUseDefinitionRule());
+					}
+					set(
+						$current,
+						"use",
+						lv_use_0_0,
+						"org.worklang.Work.Use");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getUseDefinitionRule());
+					}
+				}
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getUseDefinitionAccess().getPredefinedValueInstanceCrossReference_1_0());
+				}
+			)
+		)
 	)
 ;
 

@@ -98,11 +98,6 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
         return createInstructionAdapter();
       }
       @Override
-      public Adapter caseUseDefinition(UseDefinition object)
-      {
-        return createUseDefinitionAdapter();
-      }
-      @Override
       public Adapter casePractitioner(Practitioner object)
       {
         return createPractitionerAdapter();
@@ -268,6 +263,11 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
         return createStateInstanceAdapter();
       }
       @Override
+      public Adapter caseUseDefinition(UseDefinition object)
+      {
+        return createUseDefinitionAdapter();
+      }
+      @Override
       public Adapter caseSetStatement(SetStatement object)
       {
         return createSetStatementAdapter();
@@ -345,21 +345,6 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createInstructionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.UseDefinition <em>Use Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.UseDefinition
-   * @generated
-   */
-  public Adapter createUseDefinitionAdapter()
   {
     return null;
   }
@@ -855,6 +840,21 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStateInstanceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.UseDefinition <em>Use Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.UseDefinition
+   * @generated
+   */
+  public Adapter createUseDefinitionAdapter()
   {
     return null;
   }
