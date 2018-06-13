@@ -103,15 +103,17 @@ class WorklangResource extends LazyLinkingResource{
 			//Check to see if global workspace vertex exists, if not, create it
 			var globalWorkspaceQuery  = graph.vertices("match (n:globalWorkspace) return n")
 			
-			if (globalWorkspaceQuery.size > 1 || globalWorkspaceQuery.size < 0){
-				throw new Exception ("Multiple (or Negative??) Global Workspaces, something has gone horribly wrong!")
-			}else if (globalWorkspaceQuery.size == 0){
+			var head =  globalWorkspaceQuery.head
+			
+			if ( head !== null){
+				println("found global workspace")
+				this.globalWorkspace = head
+			}else{
+				println("new global workspace")
 				this.globalWorkspace = graph.addVertex("globalWorkspace")
 				this.globalWorkspace.property(VertexProperty.Cardinality.single, "name", "Global Workspace")
-				
-			}else{
-				this.globalWorkspace = globalWorkspaceQuery.head
 			}
+			
 			
 			t.commit
 			
@@ -136,7 +138,7 @@ class WorklangResource extends LazyLinkingResource{
 		 	
 		 	try {
 				
-				val Transaction t = graph.tx
+				val Transaction fieldt = graph.tx
 				
 				
 				allContents
@@ -158,202 +160,237 @@ class WorklangResource extends LazyLinkingResource{
 					globalWorkspace.addEdge("containsField",fieldVertex)
 						.property("defined on", Date.from(Instant.now).toString)
 					
-					namespaceIndexLabel = fieldIndexLabel + "." + NAMESPACE_INFIX + field.conceptualspace.spaceType
+					fieldt.commit
 					
-					//Create vertices for all field spaces
-					val fieldNamespaceVertex = graph.addVertex(namespaceIndexLabel)
-					fieldNamespaceVertex.property(VertexProperty.Cardinality.single, "name", field.conceptualspace.spaceType)
-					fieldNamespaceVertex.property(VertexProperty.Cardinality.single, WLS, field.conceptualspace.eClass.instanceTypeName)
-					
-					referencespaceIndexLabel = fieldIndexLabel + "." + REFERENCESPACE_INFIX + field.referencespace.spaceType
-					
-					val fieldReferencesVertex = graph.addVertex(referencespaceIndexLabel)
-					fieldReferencesVertex.property(VertexProperty.Cardinality.single, "name", field.referencespace.spaceType)
-					fieldReferencesVertex.property(VertexProperty.Cardinality.single, WLS, field.referencespace.eClass.instanceTypeName)
-					
-					instancespaceIndexLabel = fieldIndexLabel + "." + INSTANCESPACE_INFIX + field.instancespace.spaceType
-					
-					val fieldInstancesVertex = graph.addVertex(instancespaceIndexLabel)
-					fieldInstancesVertex.property(VertexProperty.Cardinality.single, "name", field.instancespace.spaceType)
-					fieldInstancesVertex.property(VertexProperty.Cardinality.single, WLS, field.instancespace.eClass.instanceTypeName)
-					
-					//Create edges from field to fieldspaces
-					fieldVertex.addEdge("nameSpace", fieldNamespaceVertex, "field", field.space.name)
-					fieldVertex.addEdge("referenceSpace", fieldReferencesVertex, "field", field.space.name)
-					fieldVertex.addEdge("instanceSpace", fieldInstancesVertex, "field", field.space.name)
-					
-					//Create graph namespace structure
-					var Namespace namespace = field.conceptualspace
-					
-					namespaceStatesIndexLabel = namespaceIndexLabel + ".states"
-					
-					//Create graph structures for namepsace states
-					namespace.states.forEach[state|
+					//Create graph structures for all field spaces if they exist		
+					if (field.conceptualspace !== null){
+						val t = graph.tx
+						namespaceIndexLabel = fieldIndexLabel + "." + NAMESPACE_INFIX + field.conceptualspace.spaceType
 						
-						var stateVertex = graph.addVertex(namespaceStatesIndexLabel)
-						stateVertex.property(VertexProperty.Cardinality.single, "stateType", state.type)
-						stateVertex.property(VertexProperty.Cardinality.single, "name", state.state.state.name)
-						stateVertex.property(VertexProperty.Cardinality.single, WLS, state.eClass.instanceTypeName)
+						val fieldNamespaceVertex = graph.addVertex(namespaceIndexLabel)
+						fieldNamespaceVertex.property(VertexProperty.Cardinality.single, "name", field.conceptualspace.spaceType)
+						fieldNamespaceVertex.property(VertexProperty.Cardinality.single, WLS, field.conceptualspace.eClass.instanceTypeName)
 						
-						fieldNamespaceVertex.addEdge("definesState", stateVertex, 
-							"field", field.space.name,
-							"space", field.conceptualspace.spaceType
+						fieldVertex.addEdge("nameSpace", fieldNamespaceVertex, "field", field.space.name)
+						
+						//Create graph namespace structure
+						var Namespace namespace = field.conceptualspace
+						
+						namespaceStatesIndexLabel = namespaceIndexLabel + ".states"
+						
+						//Create graph structures for namepsace states
+						namespace.states.forEach[state|
+							
+							var stateVertex = graph.addVertex(namespaceStatesIndexLabel)
+							stateVertex.property(VertexProperty.Cardinality.single, "stateType", state.type)
+							stateVertex.property(VertexProperty.Cardinality.single, "name", state.state.state.name)
+							stateVertex.property(VertexProperty.Cardinality.single, WLS, state.eClass.instanceTypeName)
+							
+							fieldNamespaceVertex.addEdge("definesState", stateVertex, 
+								"field", field.space.name,
+								"space", field.conceptualspace.spaceType
+								)
+							
+						]
+						
+						//Commit state structures
+						println("commit state structures")
+						t.commit
+						
+						val t2 = graph.tx
+						
+						//Resolve relationships between states for compound states
+						namespace.states.filter[state| state.type.equals("compound")]
+							.forEach[stateObjectDefinition|
+								
+								var with = stateObjectDefinition.state.withDefinition
+								
+								var compoundStateName = stateObjectDefinition.state.state.name
+								
+								println("in dosave stateID name= " + compoundStateName)
+								var compoundStateVertex = graph.vertices("match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ compoundStateName +"'}) return n").head
+								
+								
+								//Create With vertex
+								var withVertex = graph.addVertex(namespaceStatesIndexLabel)
+								withVertex.property(VertexProperty.Cardinality.single, "name", "with")
+								withVertex.property(VertexProperty.Cardinality.single, WLS, with.eClass.instanceTypeName)
+								
+								val namespaceStatesCompositionIndexLabel = namespaceStatesIndexLabel + ".compositions" 
+								
+								var predicateVertex = generatePredicateGraphStructure(with.predicate, namespaceStatesCompositionIndexLabel)
+								
+								//Connect predicate to with With
+								withVertex.addEdge("has", predicateVertex).property("type","composition")
+								
+								//Connect With to compound state
+								compoundStateVertex.addEdge("composedWith", withVertex).property("type","composition")
+							]
+						
+						println("commit computed compound state structures")
+						
+						t2.commit
+					
+						var namespaceTransitionsTx = graph.tx
+						
+						namespaceTransitionsIndexLabel = namespaceIndexLabel + ".transitions"
+						
+						//Create graph structure for namespace transitions
+						namespace.transitions.forEach[transition|
+							var transitionVertex = generateNamespaceTransitionGraphStructure(transition, namespaceTransitionsIndexLabel)
+							fieldNamespaceVertex.addEdge("definesTransition", transitionVertex,
+								"field", field.space.name,
+								"space", field.conceptualspace.spaceType
 							)
-						
-					]
-					
-					//Commit state structures
-					println("commit state structures")
-					t.commit
-					
-					val t2 = graph.tx
-					
-					namespaceTransitionsIndexLabel = namespaceIndexLabel + ".transitions"
-					
-					//Create graph structure for namespace transitions
-					namespace.transitions.forEach[transition|
-						var transitionVertex = generateNamespaceTransitionGraphStructure(transition, namespaceTransitionsIndexLabel)
-						fieldNamespaceVertex.addEdge("definesTransition", transitionVertex,
-							"field", field.space.name,
-							"space", field.conceptualspace.spaceType
-						)
-					]
-					
-					
-					//Resolve relationships between states for compound states
-					namespace.states.filter[state| state.type.equals("compound")]
-						.forEach[stateObjectDefinition|
-							
-							var with = stateObjectDefinition.state.withDefinition
-							
-							var compoundStateName = stateObjectDefinition.state.state.name
-							
-							println("in dosave stateID name= " + compoundStateName)
-							var compoundStateVertex = graph.vertices("match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ compoundStateName +"'}) return n").head
-							
-							
-							//Create With vertex
-							var withVertex = graph.addVertex(namespaceStatesIndexLabel)
-							withVertex.property(VertexProperty.Cardinality.single, "name", "with")
-							withVertex.property(VertexProperty.Cardinality.single, WLS, with.eClass.instanceTypeName)
-							
-							val namespaceStatesCompositionIndexLabel = namespaceStatesIndexLabel + ".compositions" 
-							
-							var predicateVertex = generatePredicateGraphStructure(with.predicate, namespaceStatesCompositionIndexLabel)
-							
-							//Connect predicate to with With
-							withVertex.addEdge("has", predicateVertex).property("type","composition")
-							
-							//Connect With to compound state
-							compoundStateVertex.addEdge("composedWith", withVertex).property("type","composition")
 						]
+						
+						namespaceTransitionsTx.commit
+						
+					}
 					
-					println("commit namespace transitions and computed compound state structures")
-					t2.commit
+										
+					if (field.referencespace !== null){
+						referencespaceIndexLabel = fieldIndexLabel + "." + REFERENCESPACE_INFIX + field.referencespace.spaceType
+											
+						//TODO Create graph referencespace structure
+						var Referencespace referencespace = field.referencespace
+						
+						val fieldReferencesVertex = graph.addVertex(referencespaceIndexLabel)
+						fieldReferencesVertex.property(VertexProperty.Cardinality.single, "name", field.referencespace.spaceType)
+						fieldReferencesVertex.property(VertexProperty.Cardinality.single, WLS, field.referencespace.eClass.instanceTypeName)
+						
+						fieldVertex.addEdge("referenceSpace", fieldReferencesVertex, "field", field.space.name)
+					}
 					
-					val t3 = graph.tx
+
 					
-					//TODO Create graph referencespace structure
-					var Referencespace referencespace = field.referencespace
 					
-					//TODO Create graph instancespace structure
-					var Instancespace instancespace = field.instancespace
-					
-					instancespaceStatesIndexLabel = instancespaceIndexLabel + ".states"
-					
-					//Create graph structures for state instances
-					instancespace.instances.filter[instance|
-						instance.eContents.exists[instanceElement|
-							instanceElement.eClass.instanceClass.equals(org.worklang.work.StateInstance)
+					if (field.instancespace !== null){
+						val t3 = graph.tx
+						
+						instancespaceIndexLabel = fieldIndexLabel + "." + INSTANCESPACE_INFIX + field.instancespace.spaceType
+						
+						val fieldInstancesVertex = graph.addVertex(instancespaceIndexLabel)
+						fieldInstancesVertex.property(VertexProperty.Cardinality.single, "name", field.instancespace.spaceType)
+						fieldInstancesVertex.property(VertexProperty.Cardinality.single, WLS, field.instancespace.eClass.instanceTypeName)
+						
+						fieldVertex.addEdge("instanceSpace", fieldInstancesVertex, "field", field.space.name)
+						
+						//Create graph instancespace structure
+						var Instancespace instancespace = field.instancespace
+						
+						instancespaceStatesIndexLabel = instancespaceIndexLabel + ".states"
+						
+						//Create graph structures for state instances
+						instancespace.instances.filter[instance|
+							instance.eContents.exists[instanceElement|
+								instanceElement.eClass.instanceClass.equals(org.worklang.work.StateInstance)
+							]
+						].forEach[instance|
+							
+						println("instance " + instance.eClass.instanceTypeName +"|"+  instance)
+							
+						var instanceVertex = graph.addVertex(instancespaceStatesIndexLabel)
+						instanceVertex.property(VertexProperty.Cardinality.single, WLS, instance.eClass.instanceTypeName)
+						instanceVertex.property(VertexProperty.Cardinality.single, "type", "state")
+						instanceVertex.property(VertexProperty.Cardinality.single, "name", instance.name)
+						
+						fieldInstancesVertex.addEdge("definesInstance", instanceVertex)
+						
+						//Find vertex of state this is an instance of
+						var instancedState = instance.stateDeclaration.eCrossReferences.get(0) as StateID 
+						
+						var Vertex instancedStateVertex = graph.vertices("match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ instancedState.name +"'}) return n").head
+						
+						//Hookup instance vertex to state it is an instance of
+						instanceVertex.addEdge("instanceOf", instancedStateVertex)
+							
 						]
-					].forEach[instance|
 						
-					println("instance " + instance.eClass.instanceTypeName +"|"+  instance)
+						t3.commit
 						
-					var instanceVertex = graph.addVertex(instancespaceStatesIndexLabel)
-					instanceVertex.property(VertexProperty.Cardinality.single, WLS, instance.eClass.instanceTypeName)
-					instanceVertex.property(VertexProperty.Cardinality.single, "type", "state")
-					instanceVertex.property(VertexProperty.Cardinality.single, "name", instance.name)
-					
-					fieldInstancesVertex.addEdge("definesInstance", instanceVertex)
-					
-					//Find vertex of state this is an instance of
-					var instancedState = instance.stateDeclaration.eCrossReferences.get(0) as StateID 
-					
-					var Vertex instancedStateVertex = graph.vertices("match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ instancedState.name +"'}) return n").head
-					
-					//Hookup instance vertex to state it is an instance of
-					instanceVertex.addEdge("instanceOf", instancedStateVertex)
 						
-					]
-					
-					t3.commit
-					
-					
-					//Resolve graph structures for use and set statements in state instances
-					val t4 = graph.tx
-					
-					instancespace.instances.filter[instance|
-						instance.eContents.exists[instanceElement|
-							instanceElement.eClass.instanceClass.equals(org.worklang.work.StateInstance)
-						]
-					].forEach[instance|
+						//Resolve graph structures for use and set statements in state instances
+						val t4 = graph.tx
 						
-					var Vertex instanceVertex = graph.vertices("match (n:`"+instancespaceStatesIndexLabel+"` {name:'"+ instance.name +"'}) return n").head
-					
-					
-					//Create nodes for every instance attribute
-					for (EObject obj: instance.state.members){
-						
-						//Deal with all possible cases (set statement, use statement or instance)
-						
-						//Create graph structure for set statement
-						if (obj.eClass.instanceClass.equals(org.worklang.work.SetStatement)){
+						instancespace.instances.filter[instance|
+							instance.eContents.exists[instanceElement|
+								instanceElement.eClass.instanceClass.equals(org.worklang.work.StateInstance)
+							]
+						].forEach[instance|
 							
-							var setStmt = obj as org.worklang.work.SetStatement
+						var Vertex instanceVertex = graph.vertices("match (n:`"+instancespaceStatesIndexLabel+"` {name:'"+ instance.name +"'}) return n").head
+						
+						
+						//Create nodes for every instance attribute
+						for (EObject obj: instance.state.members){
 							
-							var valueVertex = graph.addVertex(instancespaceStatesIndexLabel)
-							valueVertex.property(VertexProperty.Cardinality.single, "name", (setStmt.eCrossReferences.get(0)as StateID).name)
-							valueVertex.property(VertexProperty.Cardinality.single, "value", setStmt.toDef.value)
+							//Deal with all possible cases (set statement, use statement or instance)
+							if (obj.eClass.instanceClass.equals(org.worklang.work.Instance)){
+								var subInstanceVertex = generateSubStateInstanceGraphStructure(obj as Instance, instancespaceStatesIndexLabel)
+								
+								instanceVertex.addEdge("has", subInstanceVertex)
+							}
 							
-							instanceVertex.addEdge("set", valueVertex)
-				
+							
+							//Create graph structure for set statement
+							if (obj.eClass.instanceClass.equals(org.worklang.work.SetStatement)){
+								
+								var setStmt = obj as org.worklang.work.SetStatement
+								
+								//find the namespace state this set statement sets the value of
+								var setStmtInstanced = setStmt.eCrossReferences.get(0) as StateID
+								var setStmtInstancedVertex = graph.vertices("match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ setStmtInstanced.name +"'}) return n").head
+								
+								var valueVertex = graph.addVertex(instancespaceStatesIndexLabel)
+								valueVertex.property(VertexProperty.Cardinality.single, "name", setStmtInstanced.name)
+								valueVertex.property(VertexProperty.Cardinality.single, "value", setStmt.toDef.value)
+								
+								//Attach setValue node to state it is an instance of
+								valueVertex.addEdge("instanceOf", setStmtInstancedVertex)
+								
+								//Attach instance node to setValue node
+								instanceVertex.addEdge("set", valueVertex)
+					
+							}
+							
+							//Create graph structure for use statement
+							if (obj.eClass.instanceClass.equals(org.worklang.work.UseDefinition)){
+								
+								var useState = obj as UseDefinition
+								
+								var useStateVertex = graph.vertices("match (n:`"+instancespaceStatesIndexLabel+"` {name:'"+ (useState.eCrossReferences.get(0) as Instance).name +"'}) return n").head
+								
+								instanceVertex.addEdge("use", useStateVertex)
+							}
 						}
+							
+						]
 						
-						//Create graph structure for use statement
-						if (obj.eClass.instanceClass.equals(org.worklang.work.UseDefinition)){
+						instancespaceTransitionsIndexLabel = instancespaceIndexLabel + ".transitions"
+						
+						//Create graph structures for transition instances
+						instancespace.instances.filter[instance| 
+							instance.eContents.exists[instanceElement| 
+								instanceElement.eClass.instanceClass.equals(org.worklang.work.TransitionInstance)
+							]
+						].forEach[transitionInstance|
 							
-							var useState = obj as UseDefinition
+							//Generate transition instance vertex
+							var transitionInstanceVertex = generateInstanceTransitionGraphStructure(transitionInstance, instancespaceTransitionsIndexLabel)
 							
-							var useStateVertex = graph.vertices("match (n:`"+instancespaceStatesIndexLabel+"` {name:'"+ (useState.eCrossReferences.get(0) as Instance).name +"'}) return n").head
-							
-							instanceVertex.addEdge("use", useStateVertex)
-						}
+							//Connect field instancespace vertex to transition instance vertex
+							fieldInstancesVertex.addEdge("definesInstance", transitionInstanceVertex)
+						]
+						
+						println("commit instance transitions")
+						t4.commit	
+					
+					
+						
 					}
 						
-					]
-					
-					instancespaceTransitionsIndexLabel = instancespaceIndexLabel + ".transitions"
-					
-					//Create graph structures for transition instances
-					instancespace.instances.filter[instance| 
-						instance.eContents.exists[instanceElement| 
-							instanceElement.eClass.instanceClass.equals(org.worklang.work.TransitionInstance)
-						]
-					].forEach[transitionInstance|
-						
-						//Generate transition instance vertex
-						var transitionInstanceVertex = generateInstanceTransitionGraphStructure(transitionInstance, instancespaceTransitionsIndexLabel)
-						
-						//Connect field instancespace vertex to transition instance vertex
-						fieldInstancesVertex.addEdge("definesInstance", transitionInstanceVertex)
-					]
-					
-					println("commit instance transitions")
-					t4.commit	
-				
-				]
-				
+				]				
 
 				
 			}catch (Exception it){
@@ -512,8 +549,13 @@ class WorklangResource extends LazyLinkingResource{
 			//Add a parameter property to input vertex with the state name
 			inputVertex.property(VertexProperty.Cardinality.list, "parameter", inputStateName)
 			
+			println("Query to run:\n" + "match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ inputStateName +"'}) return n")
+			
 			//Find input state vertex in graph and connect it to input vertex
 			var inputStateVertex = graph.vertices("match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ inputStateName +"'}) return n").head
+			println("inputStateVertex="+inputStateVertex)
+			println("inputVertex=" + inputVertex)
+			
 			inputVertex.addEdge("hasParameter", inputStateVertex)
 				.property("resolves", inputStateName)
 		
@@ -528,6 +570,8 @@ class WorklangResource extends LazyLinkingResource{
 		outputVertex.property(VertexProperty.Cardinality.single, "name", "output")
 		outputVertex.property(VertexProperty.Cardinality.single, WLS, transitionDefinition.out.eClass.instanceTypeName)
 		
+		println("After create outputVertex=" + outputVertex)
+		
 		//Create graph structures for output parameters
 		transitionDefinition.out.eCrossReferences.forEach[output|
 			
@@ -538,8 +582,13 @@ class WorklangResource extends LazyLinkingResource{
 			//Add a parameter property to output vertex with the state name
 			outputVertex.property(VertexProperty.Cardinality.list, "parameter", outputStateName)
 			
+			println("Query to run:\n" + "match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ outputStateName +"'}) return n")
+			
 			//Find output state vertex in graph and connect it to output vertex
 			var outputStateVertex = graph.vertices("match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ outputStateName +"'}) return n").head
+			println("outputStateVertex=" + outputStateVertex)
+			println("outputVertex=" + outputVertex)
+			
 			outputVertex.addEdge("hasParameter", outputStateVertex)
 				.property("resolves", outputStateName)
 		
@@ -577,5 +626,64 @@ class WorklangResource extends LazyLinkingResource{
 		return instanceVertex
 	}
 	
+	def Vertex generateSubStateInstanceGraphStructure(Instance instance, String label){
+		
+		var subInstanceVertex = graph.addVertex(label)
+		subInstanceVertex.property(VertexProperty.Cardinality.single, WLS, instance.eClass.instanceTypeName)
+		subInstanceVertex.property(VertexProperty.Cardinality.single, "type", "state")
+		subInstanceVertex.property(VertexProperty.Cardinality.single, "name", instance.name)
+		
+		//Find vertex of state this is an instance of
+		var instancedState = instance.stateDeclaration.eCrossReferences.get(0) as StateID 
+					
+		var Vertex instancedStateVertex = graph.vertices("match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ instancedState.name +"'}) return n").head
+		
+		subInstanceVertex.addEdge("instanceOf", instancedStateVertex)
+		
+		//Create nodes for every instance attribute
+		for (EObject obj: instance.state.members){
+						
+			//Deal with all possible cases (set statement, use statement or instance)
+			if (obj.eClass.instanceClass.equals(org.worklang.work.Instance)){
+				
+				var subSubInstanceVertex = generateSubStateInstanceGraphStructure(obj as Instance, label)	
+				
+				subInstanceVertex.addEdge("has", subSubInstanceVertex)
+			}
+						
+			//Create graph structure for set statement
+			if (obj.eClass.instanceClass.equals(org.worklang.work.SetStatement)){
+							
+				var setStmt = obj as org.worklang.work.SetStatement
+							
+				//find the namespace state this set statement sets the value of
+				var setStmtInstanced = setStmt.eCrossReferences.get(0) as StateID
+				var setStmtInstancedVertex = graph.vertices("match (n:`"+namespaceStatesIndexLabel+"` {name:'"+ setStmtInstanced.name +"'}) return n").head
+							
+				var valueVertex = graph.addVertex(instancespaceStatesIndexLabel)
+				valueVertex.property(VertexProperty.Cardinality.single, "name", setStmtInstanced.name)
+				valueVertex.property(VertexProperty.Cardinality.single, "value", setStmt.toDef.value)
+							
+				//Attach setValue node to state it is an instance of
+				valueVertex.addEdge("instanceOf", setStmtInstancedVertex)
+							
+				//Attach instance node to setValue node
+				subInstanceVertex.addEdge("set", valueVertex)
+				
+			}
+						
+			//Create graph structure for use statement
+			if (obj.eClass.instanceClass.equals(org.worklang.work.UseDefinition)){
+							
+				var useState = obj as UseDefinition
+							
+				var useStateVertex = graph.vertices("match (n:`"+instancespaceStatesIndexLabel+"` {name:'"+ (useState.eCrossReferences.get(0) as Instance).name +"'}) return n").head
+							
+				subInstanceVertex.addEdge("use", useStateVertex)
+			}
+		}
+		
+		return subInstanceVertex
+	}
 
 }
