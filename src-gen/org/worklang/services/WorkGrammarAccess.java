@@ -43,11 +43,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cFieldsFieldDefinitionParserRuleCall_0 = (RuleCall)cFieldsAssignment.eContents().get(0);
 		
 		//Model:
-		//	fields+=FieldDefinition*
-		//	//experts += ExpertDefinition*
-		//	//practitioners += Practitioner*
-		//	//instructions += Instruction*
-		//;
+		//	fields+=FieldDefinition*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//fields+=FieldDefinition*
@@ -73,59 +69,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cInstanceSpaceInstanceSpaceParserRuleCall_6_0 = (RuleCall)cInstanceSpaceAssignment_6.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		///* Executable Structure
-		// * Below are the grammar rules for defining execution requests for the work interpreter.
-		// */ //Instruction:
-		////	objectType = 'instruction' space = [Space] transition = [TransitionID]
-		////;
-		////Practitioner:
-		////	practitionerDef = 'practitioner'
-		////	user = User
-		////	'{'
-		////	knowledgeDef = KnowledgeDefinition?
-		////	skillsDef = SkillsDefinition?
-		////	'}'
-		////;
-		////ExpertDefinition:
-		////	expertDef = 'expert' user = User
-		////	'{'
-		////	domainDef = DomainDefinition?
-		////	knowledgeDef = KnowledgeDefinition?
-		////	skillsDef = SkillsDefinition?
-		////	'hourlyRate'
-		////	'$' rate =  INT
-		////	'}'
-		////;
-		////User:
-		////	name = ID
-		////;
-		////DomainDefinition:
-		////	domain = 'domain'
-		////	'{'
-		////		domainAreas += ReferenceField*
-		////	'}'
-		////;
-		////KnowledgeDefinition:
-		////	knowledgeDef = 'knowledge''{'
-		////		knowledge += ReferenceState*
-		////	'}'
-		////;
-		////SkillsDefinition:
-		////	skillsDef = 'skills''{'
-		////		skills += ReferenceTransition*
-		////	'}'
-		////;
-		////FieldDefinition:
-		////	field = Field
-		////	space = Space
-		////	extends=(ExtendsDefinition)? 
-		////	'{'
-		////	(conceptualspace = Namespace)?
-		////	(referencespace = Referencespace)?
-		////	(mappedspace = Mapspace)?
-		////	(instancespace = Instancespace)?
-		////	'}'	
-		////;
 		//FieldDefinition:
 		//	'field'
 		//	name=ID
@@ -192,9 +135,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cMappedTransitionsTransitionMappingParserRuleCall_4_0 = (RuleCall)cMappedTransitionsAssignment_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		////Space:
-		////	name = ID
-		////;
 		//MapSpace:
 		//	{MapSpace} 'mappings' '{'
 		//	mappedStates+=StateMapping*
@@ -359,13 +299,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTransitionsTransitionDefinitionParserRuleCall_4_0 = (RuleCall)cTransitionsAssignment_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		////Namespace:
-		////	spaceType = Definitions
-		////	'{'
-		////	states += StateObjectDefinition*
-		////	transitions += TransitionObjectDefinition*
-		////	'}'
-		////;
 		//DefinitionSpace:
 		//	{DefinitionSpace} 'definitions'
 		//	'{'
@@ -637,17 +570,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRefTransitionsReferenceTransitionParserRuleCall_4_0 = (RuleCall)cRefTransitionsAssignment_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		////TransitionDefinition:
-		////	object = Transition transition = TransitionID (in = InputDefinition)? out = OutputDefinition (composition = WithTransitionsDefinition)?
-		////;
-		////Referencespace:
-		////	spaceType = References
-		////	'{'
-		////	refFields += ReferenceField*
-		////	refStates += ReferenceState*
-		////	refTransition += ReferenceTransition*
-		////	'}'
-		////;
 		//ReferenceSpace:
 		//	{ReferenceSpace} 'references'
 		//	'{'
@@ -785,13 +707,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cInstancesInstanceParserRuleCall_3_0 = (RuleCall)cInstancesAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		////
-		////Instancespace:
-		////	spaceType  = Instances
-		////	'{'
-		////		instances += Instance*
-		////	'}'
-		////;
 		//InstanceSpace:
 		//	{InstanceSpace} 'instances'
 		//	'{'
@@ -829,32 +744,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cPredicatePredicateParserRuleCall_2_0 = (RuleCall)cPredicateAssignment_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		////ReferenceField:
-		////	ref = Field 
-		////	space = Space
-		////;
-		////StateObjectDefinition:
-		////	(type = Primitive| type = Compound)
-		////	state = StateDefinition 
-		////;
-		////
-		////TransitionObjectDefinition:
-		////	(type = Primitive| type = Compound)
-		////	transition = TransitionDefinition
-		////;
-		////PrimitiveStateDefinition:
-		////	object = State id = StateID 
-		////;
-		////
-		////CompoundStateDefinition:
-		////	object = State state = StateID (compoundStateDef= WithStatesDefinition)?
-		////;
-		////StateDefinition:
-		////	object = State state = StateID (withDefinition= WithStatesDefinition)?
-		////;
-		////StateID:
-		////	 name = ID
-		////;
 		//WithStatesDefinition:
 		//	'with'
 		//	'{'
@@ -923,13 +812,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cInputStateStateDefinitionCrossReference_2_0 = (CrossReference)cInputStateAssignment_2.eContents().get(0);
 		private final RuleCall cInputStateStateDefinitionIDTerminalRuleCall_2_0_1 = (RuleCall)cInputStateStateDefinitionCrossReference_2_0.eContents().get(1);
 		
-		////TransitionID:
-		////	name = ID
-		////;
-		////FromFieldDefinition:
-		////	from = From
-		////	refSpace = [Space]
-		////;
 		//InputDefinition:
 		//	{InputDefinition} 'input' inputState+=[StateDefinition]*;
 		@Override public ParserRule getRule() { return rule; }
@@ -996,93 +878,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cTransitionAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
 		private final RuleCall cTransitionTransitionInstanceParserRuleCall_3_1_0 = (RuleCall)cTransitionAssignment_3_1.eContents().get(0);
 		
-		////ExtendsDefinition:
-		////	type = Extends
-		////	namespaces += [Space]+	
-		////;
-		////
-		////
-		////Primitive:
-		////	'primitive' 
-		////;
-		////
-		////Compound:
-		////	'compound'
-		////;
-		////
-		////Field:
-		////	'field'
-		////;
-		////
-		////State:
-		////	'state'
-		////;
-		////
-		////
-		////Transition:
-		////	'transition'
-		////;
-		////
-		////Definitions:
-		////	'definitions'
-		////;
-		////
-		////References:
-		////	'references'
-		////;
-		////
-		////Instances:
-		////	'instances'
-		////;
-		////
-		////Input:
-		////	'input'
-		////;
-		////
-		////Output:
-		////	'output'
-		////;
-		////
-		////From:
-		////	'from'
-		////;
-		////
-		////With:
-		////	'with'
-		////;
-		////
-		////Extends:
-		////	'extends'
-		////;
-		////
-		////NotOp:
-		////	'NOT'
-		////;
-		////
-		////AndOp:
-		////	'AND'
-		////;
-		////
-		////OrOp:
-		////	'OR'
-		////;
-		////
-		////Set:
-		////	'set'
-		////;
-		////
-		////To:
-		////	'to'
-		////;
-		////
-		////Use:
-		////	'use'
-		////;
-		////
-		////
-		////Count:
-		////	INT
-		////;
 		//Instance:
 		//	'instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) name=STRING
 		//	(state=StateInstance | transition=TransitionInstance);
@@ -1699,11 +1494,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Model:
-	//	fields+=FieldDefinition*
-	//	//experts += ExpertDefinition*
-	//	//practitioners += Practitioner*
-	//	//instructions += Instruction*
-	//;
+	//	fields+=FieldDefinition*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -1712,59 +1503,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getModelAccess().getRule();
 	}
 	
-	///* Executable Structure
-	// * Below are the grammar rules for defining execution requests for the work interpreter.
-	// */ //Instruction:
-	////	objectType = 'instruction' space = [Space] transition = [TransitionID]
-	////;
-	////Practitioner:
-	////	practitionerDef = 'practitioner'
-	////	user = User
-	////	'{'
-	////	knowledgeDef = KnowledgeDefinition?
-	////	skillsDef = SkillsDefinition?
-	////	'}'
-	////;
-	////ExpertDefinition:
-	////	expertDef = 'expert' user = User
-	////	'{'
-	////	domainDef = DomainDefinition?
-	////	knowledgeDef = KnowledgeDefinition?
-	////	skillsDef = SkillsDefinition?
-	////	'hourlyRate'
-	////	'$' rate =  INT
-	////	'}'
-	////;
-	////User:
-	////	name = ID
-	////;
-	////DomainDefinition:
-	////	domain = 'domain'
-	////	'{'
-	////		domainAreas += ReferenceField*
-	////	'}'
-	////;
-	////KnowledgeDefinition:
-	////	knowledgeDef = 'knowledge''{'
-	////		knowledge += ReferenceState*
-	////	'}'
-	////;
-	////SkillsDefinition:
-	////	skillsDef = 'skills''{'
-	////		skills += ReferenceTransition*
-	////	'}'
-	////;
-	////FieldDefinition:
-	////	field = Field
-	////	space = Space
-	////	extends=(ExtendsDefinition)? 
-	////	'{'
-	////	(conceptualspace = Namespace)?
-	////	(referencespace = Referencespace)?
-	////	(mappedspace = Mapspace)?
-	////	(instancespace = Instancespace)?
-	////	'}'	
-	////;
 	//FieldDefinition:
 	//	'field'
 	//	name=ID
@@ -1782,9 +1520,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getFieldDefinitionAccess().getRule();
 	}
 	
-	////Space:
-	////	name = ID
-	////;
 	//MapSpace:
 	//	{MapSpace} 'mappings' '{'
 	//	mappedStates+=StateMapping*
@@ -1818,13 +1553,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getTransitionMappingAccess().getRule();
 	}
 	
-	////Namespace:
-	////	spaceType = Definitions
-	////	'{'
-	////	states += StateObjectDefinition*
-	////	transitions += TransitionObjectDefinition*
-	////	'}'
-	////;
 	//DefinitionSpace:
 	//	{DefinitionSpace} 'definitions'
 	//	'{'
@@ -1913,17 +1641,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getCompoundTransitionDefinitionAccess().getRule();
 	}
 	
-	////TransitionDefinition:
-	////	object = Transition transition = TransitionID (in = InputDefinition)? out = OutputDefinition (composition = WithTransitionsDefinition)?
-	////;
-	////Referencespace:
-	////	spaceType = References
-	////	'{'
-	////	refFields += ReferenceField*
-	////	refStates += ReferenceState*
-	////	refTransition += ReferenceTransition*
-	////	'}'
-	////;
 	//ReferenceSpace:
 	//	{ReferenceSpace} 'references'
 	//	'{'
@@ -1964,13 +1681,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getReferenceStateAccess().getRule();
 	}
 	
-	////
-	////Instancespace:
-	////	spaceType  = Instances
-	////	'{'
-	////		instances += Instance*
-	////	'}'
-	////;
 	//InstanceSpace:
 	//	{InstanceSpace} 'instances'
 	//	'{'
@@ -1984,32 +1694,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getInstanceSpaceAccess().getRule();
 	}
 	
-	////ReferenceField:
-	////	ref = Field 
-	////	space = Space
-	////;
-	////StateObjectDefinition:
-	////	(type = Primitive| type = Compound)
-	////	state = StateDefinition 
-	////;
-	////
-	////TransitionObjectDefinition:
-	////	(type = Primitive| type = Compound)
-	////	transition = TransitionDefinition
-	////;
-	////PrimitiveStateDefinition:
-	////	object = State id = StateID 
-	////;
-	////
-	////CompoundStateDefinition:
-	////	object = State state = StateID (compoundStateDef= WithStatesDefinition)?
-	////;
-	////StateDefinition:
-	////	object = State state = StateID (withDefinition= WithStatesDefinition)?
-	////;
-	////StateID:
-	////	 name = ID
-	////;
 	//WithStatesDefinition:
 	//	'with'
 	//	'{'
@@ -2036,13 +1720,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getWithTransitionsDefinitionAccess().getRule();
 	}
 	
-	////TransitionID:
-	////	name = ID
-	////;
-	////FromFieldDefinition:
-	////	from = From
-	////	refSpace = [Space]
-	////;
 	//InputDefinition:
 	//	{InputDefinition} 'input' inputState+=[StateDefinition]*;
 	public InputDefinitionElements getInputDefinitionAccess() {
@@ -2063,93 +1740,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getOutputDefinitionAccess().getRule();
 	}
 	
-	////ExtendsDefinition:
-	////	type = Extends
-	////	namespaces += [Space]+	
-	////;
-	////
-	////
-	////Primitive:
-	////	'primitive' 
-	////;
-	////
-	////Compound:
-	////	'compound'
-	////;
-	////
-	////Field:
-	////	'field'
-	////;
-	////
-	////State:
-	////	'state'
-	////;
-	////
-	////
-	////Transition:
-	////	'transition'
-	////;
-	////
-	////Definitions:
-	////	'definitions'
-	////;
-	////
-	////References:
-	////	'references'
-	////;
-	////
-	////Instances:
-	////	'instances'
-	////;
-	////
-	////Input:
-	////	'input'
-	////;
-	////
-	////Output:
-	////	'output'
-	////;
-	////
-	////From:
-	////	'from'
-	////;
-	////
-	////With:
-	////	'with'
-	////;
-	////
-	////Extends:
-	////	'extends'
-	////;
-	////
-	////NotOp:
-	////	'NOT'
-	////;
-	////
-	////AndOp:
-	////	'AND'
-	////;
-	////
-	////OrOp:
-	////	'OR'
-	////;
-	////
-	////Set:
-	////	'set'
-	////;
-	////
-	////To:
-	////	'to'
-	////;
-	////
-	////Use:
-	////	'use'
-	////;
-	////
-	////
-	////Count:
-	////	INT
-	////;
 	//Instance:
 	//	'instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) name=STRING
 	//	(state=StateInstance | transition=TransitionInstance);

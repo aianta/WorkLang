@@ -22,76 +22,7 @@ generate work "http://www.worklang.org/Work"
 
 Model:
 	fields += FieldDefinition*
-	//experts += ExpertDefinition*
-	//practitioners += Practitioner*
-	//instructions += Instruction*
 ;
-
-/* Executable Structure
- * Below are the grammar rules for defining execution requests for the work interpreter.
- */
-//Instruction:
-//	objectType = 'instruction' space = [Space] transition = [TransitionID]
-//;
-
-
-
-//Practitioner:
-//	practitionerDef = 'practitioner'
-//	user = User
-//	'{'
-//	knowledgeDef = KnowledgeDefinition?
-//	skillsDef = SkillsDefinition?
-//	'}'
-//;
-
-//ExpertDefinition:
-//	expertDef = 'expert' user = User
-//	'{'
-//	domainDef = DomainDefinition?
-//	knowledgeDef = KnowledgeDefinition?
-//	skillsDef = SkillsDefinition?
-//	'hourlyRate'
-//	'$' rate =  INT
-//	'}'
-//;
-
-//User:
-//	name = ID
-//;
-	
-
-//DomainDefinition:
-//	domain = 'domain'
-//	'{'
-//		domainAreas += ReferenceField*
-//	'}'
-//;
-
-//KnowledgeDefinition:
-//	knowledgeDef = 'knowledge''{'
-//		knowledge += ReferenceState*
-//	'}'
-//;
-
-//SkillsDefinition:
-//	skillsDef = 'skills''{'
-//		skills += ReferenceTransition*
-//	'}'
-//;
-
-
-//FieldDefinition:
-//	field = Field
-//	space = Space
-//	extends=(ExtendsDefinition)? 
-//	'{'
-//	(conceptualspace = Namespace)?
-//	(referencespace = Referencespace)?
-//	(mappedspace = Mapspace)?
-//	(instancespace = Instancespace)?
-//	'}'	
-//;
 
 FieldDefinition:
 	'field'
@@ -103,10 +34,6 @@ FieldDefinition:
 	(instanceSpace = InstanceSpace)?
 	'}'
 ;
-
-//Space:
-//	name = ID
-//;
 
 MapSpace:
 	{MapSpace} 'mappings''{'
@@ -123,13 +50,6 @@ TransitionMapping:
 	'transition' foreignTransition=[TransitionID] 'from' field = [FieldDefinition] 'to' localTransition=[TransitionID]
 ;
 
-//Namespace:
-//	spaceType = Definitions
-//	'{'
-//	states += StateObjectDefinition*
-//	transitions += TransitionObjectDefinition*
-//	'}'
-//;
 
 DefinitionSpace:
 	{DefinitionSpace} 'definitions'
@@ -177,21 +97,6 @@ CompoundTransitionDefinition:
 	composition = WithTransitionsDefinition
 ;
 
-//TransitionDefinition:
-//	object = Transition transition = TransitionID (in = InputDefinition)? out = OutputDefinition (composition = WithTransitionsDefinition)?
-//;
-
-
-
-//Referencespace:
-//	spaceType = References
-//	'{'
-//	refFields += ReferenceField*
-//	refStates += ReferenceState*
-//	refTransition += ReferenceTransition*
-//	'}'
-//;
-
 ReferenceSpace:
 	{ReferenceSpace} 'references'
 	'{'
@@ -215,13 +120,6 @@ ReferenceState:
 	foreignField = [FieldDefinition] 
 ;
 
-//
-//Instancespace:
-//	spaceType  = Instances
-//	'{'
-//		instances += Instance*
-//	'}'
-//;
 
 InstanceSpace:
 	{InstanceSpace} 'instances'
@@ -229,38 +127,6 @@ InstanceSpace:
 	instances += Instance*
 	'}'
 ;
-
-//ReferenceField:
-//	ref = Field 
-//	space = Space
-//;
-
-//StateObjectDefinition:
-//	(type = Primitive| type = Compound)
-//	state = StateDefinition 
-//;
-//
-//TransitionObjectDefinition:
-//	(type = Primitive| type = Compound)
-//	transition = TransitionDefinition
-//;
-
-//PrimitiveStateDefinition:
-//	object = State id = StateID 
-//;
-//
-//CompoundStateDefinition:
-//	object = State state = StateID (compoundStateDef= WithStatesDefinition)?
-//;
-
-//StateDefinition:
-//	object = State state = StateID (withDefinition= WithStatesDefinition)?
-//;
-
-
-//StateID:
-//	 name = ID
-//;
 
 WithStatesDefinition:
 	'with'
@@ -277,21 +143,6 @@ WithTransitionsDefinition:
 ;
 
 
-
-
-
-//TransitionID:
-//	name = ID
-//;
-
-
-
-//FromFieldDefinition:
-//	from = From
-//	refSpace = [Space]
-//;
-
-
 InputDefinition:
 	{InputDefinition} 'input' inputState += [StateDefinition]*
 ;
@@ -299,94 +150,6 @@ InputDefinition:
 OutputDefinition:
 	'output' outputState = [StateDefinition]
 ;
-
-//ExtendsDefinition:
-//	type = Extends
-//	namespaces += [Space]+	
-//;
-//
-//
-//Primitive:
-//	'primitive' 
-//;
-//
-//Compound:
-//	'compound'
-//;
-//
-//Field:
-//	'field'
-//;
-//
-//State:
-//	'state'
-//;
-//
-//
-//Transition:
-//	'transition'
-//;
-//
-//Definitions:
-//	'definitions'
-//;
-//
-//References:
-//	'references'
-//;
-//
-//Instances:
-//	'instances'
-//;
-//
-//Input:
-//	'input'
-//;
-//
-//Output:
-//	'output'
-//;
-//
-//From:
-//	'from'
-//;
-//
-//With:
-//	'with'
-//;
-//
-//Extends:
-//	'extends'
-//;
-//
-//NotOp:
-//	'NOT'
-//;
-//
-//AndOp:
-//	'AND'
-//;
-//
-//OrOp:
-//	'OR'
-//;
-//
-//Set:
-//	'set'
-//;
-//
-//To:
-//	'to'
-//;
-//
-//Use:
-//	'use'
-//;
-//
-//
-//Count:
-//	INT
-//;
 
 Instance:
 	'instance' 
