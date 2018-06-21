@@ -33,9 +33,11 @@ import org.worklang.work.Predicate
 import org.worklang.work.StateDefinition
 import org.worklang.work.Operation
 import org.worklang.work.TransitionDefinition
-import org.worklang.work.StateInstance
 import org.worklang.work.Instance
 import org.worklang.work.UseDefinition
+import org.worklang.work.MapSpace
+import org.worklang.work.ReferenceSpace
+import org.apache.tinkerpop.gremlin.structure.Transaction
 
 /* Create static meta-model for a field.
  * - Definition Space
@@ -55,18 +57,26 @@ class FieldModelFactory extends MetaModelVertexFactory {
 	var stateCompositionMeta = "state composition logic"
 	var stateInstanceMeta = "state instance"
 	var transitionInstanceMeta = "transition instance"
+	var stateMappingMeta = "mapped state"
+	var referenceMeta = "reference"
+	
+	
 	
 	var String fieldName
 	
 	//WorkLang Bindings
 	var DefinitionSpace definitionSpace
 	var InstanceSpace instanceSpace
+	var MapSpace mapSpace
+	var ReferenceSpace referenceSpace
 	
 	//Meta Model Bindings
 	var Vertex workspaceVertex
 	var Vertex fieldVertex
 	var Vertex definitionSpaceVertex
-	var Vertex instanceSpaceVertex	
+	var Vertex instanceSpaceVertex
+	var Vertex mapSpaceVertex
+	var Vertex referenceSpaceVertex	
 
 	
 	var protected FieldDefinition field
@@ -89,41 +99,97 @@ class FieldModelFactory extends MetaModelVertexFactory {
 			logger.info("Discovered instance space for {}", fieldName)
 			instanceSpace = field.instanceSpace
 		}
+		
+		if (field.mapSpace !== null){
+			logger.info("Discovered map space for {}", fieldName)
+			mapSpace = field.mapSpace
+		}
+		
+		if (field.referenceSpace !== null){
+			logger.info("Discovered reference space for {}", fieldName)
+			referenceSpace = field.referenceSpace
+		}
 	}
 	
-	def generate (){
+	//Generates dynamic field meta model, that, structures that connect fields together
+	def generateExternal(){
+		
+		try{
+			
+			var Transaction tx
+			
+			if (mapSpace !== null){
+				logger.info("Generating mappings for {}", fieldName)
+				tx = graph.tx
+				generateMappings
+				tx.commit
+			}
+
+			if (referenceSpace !== null){
+				logger.info("Generating references for {}", fieldName)
+				tx = graph.tx
+				generateReferences
+				tx.commit
+			}
+
+			
+		}catch(Exception it){
+			it.printStackTrace
+		}
+		
+	}
+	
+	//Generates static field meta model, that is, structures entirely contained in the field
+	def generateInternal (){
 		
 		logger.info("Generating field ({}) static meta model", fieldName)
 		
 		try{
-			var tx = graph.tx
+			var Transaction tx
+			
+			//Field Vertex
+			tx = graph.tx
 			generateField
 			tx.commit
 			
+			//Space Vertices 
 			tx = graph.tx
 			generateSpaces
 			tx.commit
 			
-			tx = graph.tx
-			firstPassStates
-			tx.commit
+			if (definitionSpace !== null){
+				logger.info("Generating definition space for {}", fieldName)
+				//Definition space states 
+				tx = graph.tx
+				firstPassStates
+				tx.commit
+				
+				tx = graph.tx
+				secondPassStates
+				tx.commit
+				
+				//Definition space transitions
+				tx = graph.tx
+				generateTransitions
+				tx.commit
+			}
 			
-			tx = graph.tx
-			secondPassStates
-			tx.commit
-			
-			tx = graph.tx
-			firstPassStateInstances
-			tx.commit
-			
-			tx = graph.tx
-			secondPassStateInstances
-			tx.commit
-			
-			tx = graph.tx
-			generateInstanceTransitions
-			tx.commit
-			
+			if (instanceSpace !== null){
+				logger.info("Generating instance space for {}", fieldName)
+				//Instance space states
+				tx = graph.tx
+				firstPassStateInstances
+				tx.commit
+				
+				tx = graph.tx
+				secondPassStateInstances
+				tx.commit
+				
+				//Instance space transitions
+				tx = graph.tx
+				generateInstanceTransitions
+				tx.commit
+			}
 			
 		}catch(Exception it){
 			it.printStackTrace
@@ -132,9 +198,54 @@ class FieldModelFactory extends MetaModelVertexFactory {
 
 	}
 	
+	def private generateReferences(){
+		referenceSpace.refStates.forEach[refState|
+			var refVertex = createVertex(refState,referenceMeta)
+			refVertex.property(VertexProperty.Cardinality.single, "name", refState.refState.name)
+			
+			//Find foreign concept being referenced
+			logger.info("ref query2: \n" + "match (n {name:'{}'}) return n", refState.refState.name)
+			var foreignVertex = graph.vertices("match (n {name:'"+refState.refState.name+"'}) return n").head
+			createEdge(refVertex,foreignVertex,"references")
+							
+			//Attach reference node to referenceSpace node
+			createEdge(referenceSpaceVertex,refVertex,"definesReference")
+		]
+	}
+	
+	//Utility method for populating the structures in the map space 
+	def private generateMappings(){
+		
+		mapSpace.mappedStates.forEach[state|
+			var foreignField = state.field
+			var foreignState = state.foreignState
+			var localState = state.localState
+							
+			//Find related vertices in graph
+			logger.info("match (n {field:'"+foreignField.name+"',name:'"+foreignField.name+"'}) return n")
+			var foreignFieldVertex = graph.vertices("match (n {field:'"+foreignField.name+"',name:'"+foreignField.name+"'}) return n").head
+			var foreignStateVertex = graph.vertices("match (n {name:'"+foreignState.name+"'}) return n").head
+			var localStateVertex = graph.vertices("match (n {name:'"+localState.name+"'}) return n").head
+			
+			logger.info("foreignStateVertex = {}", foreignStateVertex)
+			logger.info("mapSpaceVertex = {}", mapSpaceVertex)
+			logger.info("localStateVertex = {}", localStateVertex)
+			
+			//connect foreign state vertex to local state vertex
+			createEdge(foreignStateVertex, localStateVertex, "mapsTo")
+							
+			//connect local field's mapping vertex to local state vertex
+			createEdge(mapSpaceVertex, localStateVertex, "mappedState")
+							
+			//connect foreign field vertex to local field's mapping vertex
+			createEdge(mapSpaceVertex, foreignFieldVertex, "requires")
+		]
+	}
+	
 	def private generateField(){
 		logger.info("Generating field vertex for {}", fieldName)
 		fieldVertex = createVertex(field, fieldMeta)
+		fieldVertex.property(VertexProperty.Cardinality.single,"name", field.name)
 		createEdge(workspaceVertex, fieldVertex, "containsField")
 	}
 	
@@ -154,6 +265,17 @@ class FieldModelFactory extends MetaModelVertexFactory {
 			createEdge(fieldVertex, instanceSpaceVertex, "instanceSpace")
 		}
 		
+		if (mapSpace !== null){
+			mapSpaceVertex = createVertex(mapSpace, fieldMeta)
+			mapSpaceVertex.property(VertexProperty.Cardinality.single, "name",  "map space")
+			createEdge(fieldVertex, mapSpaceVertex, "mapSpace")
+		}
+		
+		if (referenceSpace !== null){
+			referenceSpaceVertex = createVertex(referenceSpace, fieldMeta)
+			referenceSpaceVertex.property(VertexProperty.Cardinality.single, "name",  "reference space")
+			createEdge(fieldVertex, referenceSpaceVertex, "referenceSpace")
+		}
 		
 	}
 	

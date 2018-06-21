@@ -52,6 +52,7 @@ import java.util.Date
 import java.time.Instant
 import org.worklang.work.UseDefinition
 import org.worklang.metamodel.FieldModelFactory
+import java.util.ArrayList
 
 class WorklangResource extends LazyLinkingResource{
 	
@@ -131,15 +132,26 @@ class WorklangResource extends LazyLinkingResource{
 		 	&& options.get("WorkPersistenceType").equals("globalWorkspace")
 		 ){
 		 	
+		 	val fieldFactories = new ArrayList<FieldModelFactory>
+		 	
+		 	//Generate static meta models for all fields in the work file
 		 	allContents.filter[ele|
 		 		ele.eClass.instanceClass.equals(org.worklang.work.FieldDefinition)
 		 	].forEach[ele|
 		 		
 		 		val field = ele as FieldDefinition
 		 		
-		 		val fieldFactory =  new FieldModelFactory(graph, field, globalWorkspace)
-		 		fieldFactory.generate
+		 		var fieldFactory =  new FieldModelFactory(graph, field, globalWorkspace)
+		 		fieldFactory.generateInternal
+		 		
+		 		fieldFactories.add(fieldFactory)
 		 	]
+		 	
+		 	//Generate dynamic meta models for all fields in the work file
+			fieldFactories.forEach[fieldFactory|
+				fieldFactory.generateExternal
+			]
+		 	
 		 
 		 }else{
 		 	println("We should save to the .work file!")
