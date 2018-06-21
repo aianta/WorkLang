@@ -33,6 +33,9 @@ import org.worklang.work.Predicate
 import org.worklang.work.StateDefinition
 import org.worklang.work.Operation
 import org.worklang.work.TransitionDefinition
+import org.worklang.work.StateInstance
+import org.worklang.work.Instance
+import org.worklang.work.UseDefinition
 
 /* Create static meta-model for a field.
  * - Definition Space
@@ -50,6 +53,8 @@ class FieldModelFactory extends MetaModelVertexFactory {
 	var stateMeta = "state"
 	var transitionMeta = "transition"
 	var stateCompositionMeta = "state composition logic"
+	var stateInstanceMeta = "state instance"
+	var transitionInstanceMeta = "transition instance"
 	
 	var String fieldName
 	
@@ -82,6 +87,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		
 		if (field.instanceSpace !== null){
 			logger.info("Discovered instance space for {}", fieldName)
+			instanceSpace = field.instanceSpace
 		}
 	}
 	
@@ -106,6 +112,19 @@ class FieldModelFactory extends MetaModelVertexFactory {
 			secondPassStates
 			tx.commit
 			
+			tx = graph.tx
+			firstPassStateInstances
+			tx.commit
+			
+			tx = graph.tx
+			secondPassStateInstances
+			tx.commit
+			
+			tx = graph.tx
+			generateInstanceTransitions
+			tx.commit
+			
+			
 		}catch(Exception it){
 			it.printStackTrace
 			logger.error("Failed to generate field meta model")
@@ -125,11 +144,13 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		
 		if (definitionSpace !== null){
 			definitionSpaceVertex = createVertex(definitionSpace, fieldMeta)
+			definitionSpaceVertex.property(VertexProperty.Cardinality.single, "name", "definition space")
 			createEdge(fieldVertex, definitionSpaceVertex, "definitionSpace")
 		}
 		
 		if (instanceSpace !== null){
 			instanceSpaceVertex = createVertex(instanceSpace, fieldMeta)
+			instanceSpaceVertex.property(VertexProperty.Cardinality.single, "name", "instance space")
 			createEdge(fieldVertex, instanceSpaceVertex, "instanceSpace")
 		}
 		
@@ -168,9 +189,118 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		
 	}
 	
-	def private firstPassInstances(){
+	def private firstPassStateInstances(){
 		
+		logger.info ("Generating instance stubs for {}", fieldName)
 		
+		logger.info("instanceSpace = {}", instanceSpace)
+		
+		//Create graph structures for state instances
+		instanceSpace.instances.filter[instance|
+			instance.eContents.exists[instanceElement|
+				instanceElement.eClass.instanceClass.equals(org.worklang.work.StateInstance)
+			]
+		].forEach[instance|
+			
+			var state = instance.state
+			
+			logger.info("Creating {} stub ", instance.name)
+			
+			var vertex = createVertex(state, stateInstanceMeta)
+			vertex.property(VertexProperty.Cardinality.single,"name", instance.name)
+			createEdge(instanceSpaceVertex, vertex, "definesInstance")
+			
+			//Find vertex of state this is an instance of
+			var instancedState = instance.stateDeclaration.eCrossReferences.get(0) as StateDefinition 
+						
+			var Vertex instancedStateVertex = graph.vertices("match (n:`"+stateMeta+"` {field:'"+fieldName+"',name:'"+ instancedState.name +"'}) return n").head
+						
+			//Hookup instance vertex to state it is an instance of
+			createEdge(vertex, instancedStateVertex, "instanceOf")
+		]
+		
+	}
+	
+	//Resolve graph structures for use and set statements in state instances
+	def private secondPassStateInstances(){
+		
+		instanceSpace.instances.filter[instance|
+			instance.eContents.exists[instanceElement|
+				instanceElement.eClass.instanceClass.equals(org.worklang.work.StateInstance)
+			]
+		].forEach[instance|
+			logger.info("instance vertex query\nmatch (n:`"+stateInstanceMeta+"` {field:'"+fieldName+"',name:'"+ instance.name +"'}) return n")
+			
+			var Vertex instanceVertex = graph.vertices("match (n:`"+stateInstanceMeta+"` {field:'"+fieldName+"',name:'"+ instance.name +"'}) return n").head
+						
+						
+			//Create nodes for every instance attribute
+			for (EObject obj: instance.state.members){
+							
+				//Deal with all possible cases (set statement, use statement or instance)
+				if (obj.eClass.instanceClass.equals(org.worklang.work.Instance)){
+					var subInstanceVertex = generateSubStateInstanceGraphStructure(obj as Instance, stateInstanceMeta)
+
+					createEdge(instanceVertex,subInstanceVertex,"has")
+				}
+							
+						
+				//Create graph structure for set statement
+				if (obj.eClass.instanceClass.equals(org.worklang.work.SetStatement)){
+								
+					var setStmt = obj as org.worklang.work.SetStatement
+								
+					//find the namespace state this set statement sets the value of
+					var setStmtInstanced = setStmt.eCrossReferences.get(0) as StateDefinition
+					
+					logger.info("Query\nmatch (n:`"+stateMeta+"` {field:'"+fieldName+"',name:'"+ setStmtInstanced.name +"'}) return n")
+
+					var setStmtInstancedVertex = graph.vertices("match (n:`"+stateMeta+"` {field:'"+fieldName+"',name:'"+ setStmtInstanced.name +"'}) return n").head
+						
+					var valueVertex = createVertex(setStmtInstanced, "value")
+					valueVertex.property(VertexProperty.Cardinality.single, "name", setStmtInstanced.name)
+					valueVertex.property(VertexProperty.Cardinality.single, "value", setStmt.toDef.value)
+					
+					logger.info("instanceVertx = {}", instanceVertex)
+					logger.info("valueVertex = {}", valueVertex)
+					logger.info("setStmtInstancedVertex = {}", setStmtInstancedVertex)
+							
+					//Attach setValue node to state it is an instance of
+					createEdge(valueVertex, setStmtInstancedVertex, "instanceOf")
+					
+					//Attach instance node to setValue node
+					createEdge(instanceVertex,valueVertex,"set")
+					
+				}
+							
+				//Create graph structure for use statement
+				if (obj.eClass.instanceClass.equals(org.worklang.work.UseDefinition)){
+								
+					var useState = obj as UseDefinition
+								
+					var useStateVertex = graph.vertices("match (n:`"+stateInstanceMeta+"` {field:'"+fieldName+"',name:'"+ (useState.eCrossReferences.get(0) as Instance).name +"'}) return n").head
+								
+					instanceVertex.addEdge("use", useStateVertex)
+				}
+			}
+		]
+		
+	}
+	
+	def private generateInstanceTransitions(){
+		//Create graph structures for transition instances
+		instanceSpace.instances.filter[instance| 
+			instance.eContents.exists[instanceElement| 
+				instanceElement.eClass.instanceClass.equals(org.worklang.work.TransitionInstance)
+			]
+		].forEach[transitionInstance|
+							
+			//Generate transition instance vertex
+			var transitionInstanceVertex = generateInstanceTransitionGraphStructure(transitionInstance, transitionInstanceMeta)
+						
+			//Connect field instancespace vertex to transition instance vertex
+			createEdge(instanceSpaceVertex,transitionInstanceVertex, "definesInstance")
+		]
 	}
 	
 	//Utility method for generating edges with meta data for this field
@@ -186,7 +316,91 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		return vertex
 	}
 	
+	def private generateInstanceTransitionGraphStructure(Instance instance, String label){
 		
+		var instanceVertex = graph.addVertex(label)
+		instanceVertex.property(VertexProperty.Cardinality.single, "type", "transition")
+		instanceVertex.property(VertexProperty.Cardinality.single, "name", instance.name)
+		instanceVertex.property(VertexProperty.Cardinality.single, "host", instance.transition.host)
+		instanceVertex.property(VertexProperty.Cardinality.single, "port", Integer.toString(instance.transition.port))
+		instanceVertex.property(VertexProperty.Cardinality.single, 
+			"path", 
+			if (instance.transition.path !== null) 
+				instance.transition.path else
+				"/" //Default path
+		)
+		
+		
+		var transitionName = (instance.transitionDeclaration.eCrossReferences.get(0)as TransitionDefinition).name
+		
+		//Find the transition vertex of the transition this instance implements
+		var instanceOfVertex = graph.vertices("match (n:`"+transitionMeta+"` {field:'"+fieldName+"',name:'"+ transitionName +"'}) return n").head
+	
+		createEdge(instanceVertex,instanceOfVertex, "instanceOf")
+		
+		return instanceVertex
+	}
+	
+	def private Vertex generateSubStateInstanceGraphStructure(Instance instance, String label){
+		
+		var subInstanceVertex = graph.addVertex(label)
+		subInstanceVertex.property(VertexProperty.Cardinality.single, "type", "state")
+		subInstanceVertex.property(VertexProperty.Cardinality.single, "name", instance.name)
+		
+		//Find vertex of state this is an instance of
+		var instancedState = instance.stateDeclaration.eCrossReferences.get(0) as StateDefinition 
+					
+		var Vertex instancedStateVertex = graph.vertices("match (n:`"+stateMeta+"` {field:'"+fieldName+"',name:'"+ instancedState.name +"'}) return n").head
+		
+		createEdge(subInstanceVertex, instancedStateVertex, "instanceOf")
+		
+		//Create nodes for every instance attribute
+		for (EObject obj: instance.state.members){
+						
+			//Deal with all possible cases (set statement, use statement or instance)
+			if (obj.eClass.instanceClass.equals(org.worklang.work.Instance)){
+				
+				var subSubInstanceVertex = generateSubStateInstanceGraphStructure(obj as Instance, label)	
+				
+				subInstanceVertex.addEdge("has", subSubInstanceVertex)
+			}
+						
+			//Create graph structure for set statement
+			if (obj.eClass.instanceClass.equals(org.worklang.work.SetStatement)){
+							
+				var setStmt = obj as org.worklang.work.SetStatement
+							
+				//find the namespace state this set statement sets the value of
+				var setStmtInstanced = setStmt.eCrossReferences.get(0) as StateDefinition
+				var setStmtInstancedVertex = graph.vertices("match (n:`"+stateMeta+"` {field:'"+fieldName+"',name:'"+ setStmtInstanced.name +"'}) return n").head
+							
+				var valueVertex = createVertex(setStmtInstanced, "value")
+				valueVertex.property(VertexProperty.Cardinality.single, "name", setStmtInstanced.name)
+				valueVertex.property(VertexProperty.Cardinality.single, "value", setStmt.toDef.value)
+							
+				//Attach setValue node to state it is an instance of
+				createEdge(valueVertex,setStmtInstancedVertex,"instanceOf")
+				
+				//Attach instance node to setValue node
+				createEdge(subInstanceVertex,valueVertex,"set")
+				
+			}
+						
+			//Create graph structure for use statement
+			if (obj.eClass.instanceClass.equals(org.worklang.work.UseDefinition)){
+							
+				var useState = obj as UseDefinition
+							
+				var useStateVertex = graph.vertices("match (n:`"+stateInstanceMeta+"` {field:'"+fieldName+"',name:'"+ (useState.eCrossReferences.get(0) as Instance).name +"'}) return n").head
+				
+				createEdge(subInstanceVertex, useStateVertex, "use")
+			}
+		}
+		
+		return subInstanceVertex
+	}
+	
+	
 	//Utility methods for generating compound state meta model structures
 	def private resolveCompoundState(CompoundStateDefinition compoundState, Vertex compoundStateVertex){
 		
