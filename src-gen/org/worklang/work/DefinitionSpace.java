@@ -21,53 +21,26 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Namespace</b></em>'.
+ * A representation of the model object '<em><b>Definition Space</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.Namespace#getSpaceType <em>Space Type</em>}</li>
- *   <li>{@link org.worklang.work.Namespace#getStates <em>States</em>}</li>
- *   <li>{@link org.worklang.work.Namespace#getTransitions <em>Transitions</em>}</li>
+ *   <li>{@link org.worklang.work.DefinitionSpace#getStates <em>States</em>}</li>
+ *   <li>{@link org.worklang.work.DefinitionSpace#getTransitions <em>Transitions</em>}</li>
  * </ul>
  *
- * @see org.worklang.work.WorkPackage#getNamespace()
+ * @see org.worklang.work.WorkPackage#getDefinitionSpace()
  * @model
  * @generated
  */
-public interface Namespace extends EObject
+public interface DefinitionSpace extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Space Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Space Type</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Space Type</em>' attribute.
-   * @see #setSpaceType(String)
-   * @see org.worklang.work.WorkPackage#getNamespace_SpaceType()
-   * @model
-   * @generated
-   */
-  String getSpaceType();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.Namespace#getSpaceType <em>Space Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Space Type</em>' attribute.
-   * @see #getSpaceType()
-   * @generated
-   */
-  void setSpaceType(String value);
-
-  /**
    * Returns the value of the '<em><b>States</b></em>' containment reference list.
-   * The list contents are of type {@link org.worklang.work.StateObjectDefinition}.
+   * The list contents are of type {@link org.worklang.work.StateDefinition}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>States</em>' containment reference list isn't clear,
@@ -75,15 +48,15 @@ public interface Namespace extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>States</em>' containment reference list.
-   * @see org.worklang.work.WorkPackage#getNamespace_States()
+   * @see org.worklang.work.WorkPackage#getDefinitionSpace_States()
    * @model containment="true"
    * @generated
    */
-  EList<StateObjectDefinition> getStates();
+  EList<StateDefinition> getStates();
 
   /**
    * Returns the value of the '<em><b>Transitions</b></em>' containment reference list.
-   * The list contents are of type {@link org.worklang.work.TransitionObjectDefinition}.
+   * The list contents are of type {@link org.worklang.work.TransitionDefinition}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Transitions</em>' containment reference list isn't clear,
@@ -91,10 +64,10 @@ public interface Namespace extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Transitions</em>' containment reference list.
-   * @see org.worklang.work.WorkPackage#getNamespace_Transitions()
+   * @see org.worklang.work.WorkPackage#getDefinitionSpace_Transitions()
    * @model containment="true"
    * @generated
    */
-  EList<TransitionObjectDefinition> getTransitions();
+  EList<TransitionDefinition> getTransitions();
 
-} // Namespace
+} // DefinitionSpace

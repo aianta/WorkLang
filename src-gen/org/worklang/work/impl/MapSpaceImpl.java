@@ -29,53 +29,53 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.worklang.work.ReferenceSpace;
-import org.worklang.work.ReferenceState;
-import org.worklang.work.ReferenceTransition;
+import org.worklang.work.MapSpace;
+import org.worklang.work.StateMapping;
+import org.worklang.work.TransitionMapping;
 import org.worklang.work.WorkPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Reference Space</b></em>'.
+ * An implementation of the model object '<em><b>Map Space</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.ReferenceSpaceImpl#getRefStates <em>Ref States</em>}</li>
- *   <li>{@link org.worklang.work.impl.ReferenceSpaceImpl#getRefTransitions <em>Ref Transitions</em>}</li>
+ *   <li>{@link org.worklang.work.impl.MapSpaceImpl#getMappedStates <em>Mapped States</em>}</li>
+ *   <li>{@link org.worklang.work.impl.MapSpaceImpl#getMappedTransitions <em>Mapped Transitions</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ReferenceSpaceImpl extends MinimalEObjectImpl.Container implements ReferenceSpace
+public class MapSpaceImpl extends MinimalEObjectImpl.Container implements MapSpace
 {
   /**
-   * The cached value of the '{@link #getRefStates() <em>Ref States</em>}' containment reference list.
+   * The cached value of the '{@link #getMappedStates() <em>Mapped States</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRefStates()
+   * @see #getMappedStates()
    * @generated
    * @ordered
    */
-  protected EList<ReferenceState> refStates;
+  protected EList<StateMapping> mappedStates;
 
   /**
-   * The cached value of the '{@link #getRefTransitions() <em>Ref Transitions</em>}' containment reference list.
+   * The cached value of the '{@link #getMappedTransitions() <em>Mapped Transitions</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRefTransitions()
+   * @see #getMappedTransitions()
    * @generated
    * @ordered
    */
-  protected EList<ReferenceTransition> refTransitions;
+  protected EList<TransitionMapping> mappedTransitions;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ReferenceSpaceImpl()
+  protected MapSpaceImpl()
   {
     super();
   }
@@ -88,7 +88,7 @@ public class ReferenceSpaceImpl extends MinimalEObjectImpl.Container implements 
   @Override
   protected EClass eStaticClass()
   {
-    return WorkPackage.Literals.REFERENCE_SPACE;
+    return WorkPackage.Literals.MAP_SPACE;
   }
 
   /**
@@ -96,13 +96,13 @@ public class ReferenceSpaceImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ReferenceState> getRefStates()
+  public EList<StateMapping> getMappedStates()
   {
-    if (refStates == null)
+    if (mappedStates == null)
     {
-      refStates = new EObjectContainmentEList<ReferenceState>(ReferenceState.class, this, WorkPackage.REFERENCE_SPACE__REF_STATES);
+      mappedStates = new EObjectContainmentEList<StateMapping>(StateMapping.class, this, WorkPackage.MAP_SPACE__MAPPED_STATES);
     }
-    return refStates;
+    return mappedStates;
   }
 
   /**
@@ -110,13 +110,13 @@ public class ReferenceSpaceImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ReferenceTransition> getRefTransitions()
+  public EList<TransitionMapping> getMappedTransitions()
   {
-    if (refTransitions == null)
+    if (mappedTransitions == null)
     {
-      refTransitions = new EObjectContainmentEList<ReferenceTransition>(ReferenceTransition.class, this, WorkPackage.REFERENCE_SPACE__REF_TRANSITIONS);
+      mappedTransitions = new EObjectContainmentEList<TransitionMapping>(TransitionMapping.class, this, WorkPackage.MAP_SPACE__MAPPED_TRANSITIONS);
     }
-    return refTransitions;
+    return mappedTransitions;
   }
 
   /**
@@ -129,10 +129,10 @@ public class ReferenceSpaceImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case WorkPackage.REFERENCE_SPACE__REF_STATES:
-        return ((InternalEList<?>)getRefStates()).basicRemove(otherEnd, msgs);
-      case WorkPackage.REFERENCE_SPACE__REF_TRANSITIONS:
-        return ((InternalEList<?>)getRefTransitions()).basicRemove(otherEnd, msgs);
+      case WorkPackage.MAP_SPACE__MAPPED_STATES:
+        return ((InternalEList<?>)getMappedStates()).basicRemove(otherEnd, msgs);
+      case WorkPackage.MAP_SPACE__MAPPED_TRANSITIONS:
+        return ((InternalEList<?>)getMappedTransitions()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -147,10 +147,10 @@ public class ReferenceSpaceImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case WorkPackage.REFERENCE_SPACE__REF_STATES:
-        return getRefStates();
-      case WorkPackage.REFERENCE_SPACE__REF_TRANSITIONS:
-        return getRefTransitions();
+      case WorkPackage.MAP_SPACE__MAPPED_STATES:
+        return getMappedStates();
+      case WorkPackage.MAP_SPACE__MAPPED_TRANSITIONS:
+        return getMappedTransitions();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -166,13 +166,13 @@ public class ReferenceSpaceImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case WorkPackage.REFERENCE_SPACE__REF_STATES:
-        getRefStates().clear();
-        getRefStates().addAll((Collection<? extends ReferenceState>)newValue);
+      case WorkPackage.MAP_SPACE__MAPPED_STATES:
+        getMappedStates().clear();
+        getMappedStates().addAll((Collection<? extends StateMapping>)newValue);
         return;
-      case WorkPackage.REFERENCE_SPACE__REF_TRANSITIONS:
-        getRefTransitions().clear();
-        getRefTransitions().addAll((Collection<? extends ReferenceTransition>)newValue);
+      case WorkPackage.MAP_SPACE__MAPPED_TRANSITIONS:
+        getMappedTransitions().clear();
+        getMappedTransitions().addAll((Collection<? extends TransitionMapping>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -188,11 +188,11 @@ public class ReferenceSpaceImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case WorkPackage.REFERENCE_SPACE__REF_STATES:
-        getRefStates().clear();
+      case WorkPackage.MAP_SPACE__MAPPED_STATES:
+        getMappedStates().clear();
         return;
-      case WorkPackage.REFERENCE_SPACE__REF_TRANSITIONS:
-        getRefTransitions().clear();
+      case WorkPackage.MAP_SPACE__MAPPED_TRANSITIONS:
+        getMappedTransitions().clear();
         return;
     }
     super.eUnset(featureID);
@@ -208,12 +208,12 @@ public class ReferenceSpaceImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case WorkPackage.REFERENCE_SPACE__REF_STATES:
-        return refStates != null && !refStates.isEmpty();
-      case WorkPackage.REFERENCE_SPACE__REF_TRANSITIONS:
-        return refTransitions != null && !refTransitions.isEmpty();
+      case WorkPackage.MAP_SPACE__MAPPED_STATES:
+        return mappedStates != null && !mappedStates.isEmpty();
+      case WorkPackage.MAP_SPACE__MAPPED_TRANSITIONS:
+        return mappedTransitions != null && !mappedTransitions.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ReferenceSpaceImpl
+} //MapSpaceImpl

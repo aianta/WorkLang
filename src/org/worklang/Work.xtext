@@ -22,293 +22,385 @@ generate work "http://www.worklang.org/Work"
 
 Model:
 	fields += FieldDefinition*
-	experts += ExpertDefinition*
-	practitioners += Practitioner*
-	instructions += Instruction*
+	//experts += ExpertDefinition*
+	//practitioners += Practitioner*
+	//instructions += Instruction*
 ;
 
 /* Executable Structure
  * Below are the grammar rules for defining execution requests for the work interpreter.
  */
-Instruction:
-	objectType = 'instruction' space = [Space] transition = [TransitionID]
-;
+//Instruction:
+//	objectType = 'instruction' space = [Space] transition = [TransitionID]
+//;
 
 
 
-Practitioner:
-	practitionerDef = 'practitioner'
-	user = User
-	'{'
-	knowledgeDef = KnowledgeDefinition?
-	skillsDef = SkillsDefinition?
-	'}'
-;
+//Practitioner:
+//	practitionerDef = 'practitioner'
+//	user = User
+//	'{'
+//	knowledgeDef = KnowledgeDefinition?
+//	skillsDef = SkillsDefinition?
+//	'}'
+//;
 
-ExpertDefinition:
-	expertDef = 'expert' user = User
-	'{'
-	domainDef = DomainDefinition?
-	knowledgeDef = KnowledgeDefinition?
-	skillsDef = SkillsDefinition?
-	'hourlyRate'
-	'$' rate =  INT
-	'}'
-;
+//ExpertDefinition:
+//	expertDef = 'expert' user = User
+//	'{'
+//	domainDef = DomainDefinition?
+//	knowledgeDef = KnowledgeDefinition?
+//	skillsDef = SkillsDefinition?
+//	'hourlyRate'
+//	'$' rate =  INT
+//	'}'
+//;
 
-User:
-	name = ID
-;
+//User:
+//	name = ID
+//;
 	
 
-DomainDefinition:
-	domain = 'domain'
-	'{'
-		domainAreas += ReferenceField*
-	'}'
-;
+//DomainDefinition:
+//	domain = 'domain'
+//	'{'
+//		domainAreas += ReferenceField*
+//	'}'
+//;
 
-KnowledgeDefinition:
-	knowledgeDef = 'knowledge''{'
-		knowledge += ReferenceState*
-	'}'
-;
+//KnowledgeDefinition:
+//	knowledgeDef = 'knowledge''{'
+//		knowledge += ReferenceState*
+//	'}'
+//;
 
-SkillsDefinition:
-	skillsDef = 'skills''{'
-		skills += ReferenceTransition*
-	'}'
-;
+//SkillsDefinition:
+//	skillsDef = 'skills''{'
+//		skills += ReferenceTransition*
+//	'}'
+//;
 
+
+//FieldDefinition:
+//	field = Field
+//	space = Space
+//	extends=(ExtendsDefinition)? 
+//	'{'
+//	(conceptualspace = Namespace)?
+//	(referencespace = Referencespace)?
+//	(mappedspace = Mapspace)?
+//	(instancespace = Instancespace)?
+//	'}'	
+//;
 
 FieldDefinition:
-	field = Field
-	space = Space
-	extends=(ExtendsDefinition)? 
-	'{'
-	(conceptualspace = Namespace)?
-	(referencespace = Referencespace)?
-	(instancespace = Instancespace)?
-	'}'	
-;
-
-Space:
+	'field'
 	name = ID
-;
-
-Namespace:
-	spaceType = Definitions
 	'{'
-	states += StateObjectDefinition*
-	transitions += TransitionObjectDefinition*
+	(definitionSpace = DefinitionSpace)?
+	(referenceSpace = ReferenceSpace)?
+	(mapSpace = MapSpace)?
+	(instanceSpace = InstanceSpace)?
 	'}'
 ;
 
-Referencespace:
-	spaceType = References
-	'{'
-	refFields += ReferenceField*
-	refStates += ReferenceState*
-	refTransition += ReferenceTransition*
+//Space:
+//	name = ID
+//;
+
+MapSpace:
+	{MapSpace} 'mappings''{'
+	mappedStates += StateMapping*
+	mappedTransitions += TransitionMapping*
 	'}'
 ;
 
-Instancespace:
-	spaceType  = Instances
+StateMapping:
+	'state' foreignState=[StateDefinition] 'from' field = [FieldDefinition] 'to' localState=[StateDefinition]
+;
+
+TransitionMapping:
+	'transition' foreignTransition=[TransitionID] 'from' field = [FieldDefinition] 'to' localTransition=[TransitionID]
+;
+
+//Namespace:
+//	spaceType = Definitions
+//	'{'
+//	states += StateObjectDefinition*
+//	transitions += TransitionObjectDefinition*
+//	'}'
+//;
+
+DefinitionSpace:
+	{DefinitionSpace} 'definitions'
 	'{'
-		instances += Instance*
+	states += StateDefinition*
+	transitions += TransitionDefinition*
 	'}'
-;
-
-ReferenceField:
-	ref = Field 
-	space = Space
-;
-
-StateObjectDefinition:
-	(type = Primitive| type = Compound)
-	state = StateDefinition 
-;
-
-TransitionObjectDefinition:
-	(type = Primitive| type = Compound)
-	transition = TransitionDefinition
-;
-
-PrimitiveStateDefinition:
-	object = State id = StateID 
-;
-
-CompoundStateDefinition:
-	object = State state = StateID (compoundStateDef= WithStatesDefinition)?
 ;
 
 StateDefinition:
-	object = State state = StateID (withDefinition= WithStatesDefinition)?
+	PrimitiveStateDefinition|CompoundStateDefinition
 ;
 
-
-StateID:
-	 name = ID
+PrimitiveStateDefinition:
+	type = 'primitive'
+	'state'
+	name = ID
 ;
+
+CompoundStateDefinition:
+	type = 'compound'
+	'state'
+	name = ID
+	composition= WithStatesDefinition
+;
+
+TransitionDefinition:
+	PrimitiveTransitionDefinition|CompoundTransitionDefinition
+;
+
+PrimitiveTransitionDefinition:
+	type = 'primitive'
+	'transition'
+	name = ID
+	(in = InputDefinition)?
+	out = OutputDefinition
+;
+
+CompoundTransitionDefinition:
+	type = 'compound'
+	'transition'
+	name = ID
+	(in = InputDefinition)?
+	out = OutputDefinition
+	composition = WithTransitionsDefinition
+;
+
+//TransitionDefinition:
+//	object = Transition transition = TransitionID (in = InputDefinition)? out = OutputDefinition (composition = WithTransitionsDefinition)?
+//;
+
+
+
+//Referencespace:
+//	spaceType = References
+//	'{'
+//	refFields += ReferenceField*
+//	refStates += ReferenceState*
+//	refTransition += ReferenceTransition*
+//	'}'
+//;
+
+ReferenceSpace:
+	{ReferenceSpace} 'references'
+	'{'
+	refStates += ReferenceState*
+	refTransitions += ReferenceTransition*
+	'}'
+;
+
+ReferenceTransition:
+	'transition'
+	refTransition = [TransitionDefinition]
+	'from'
+	foreignField = [FieldDefinition]
+	
+;
+
+ReferenceState:
+	'state'
+ 	refState = [StateDefinition]
+	'from'
+	foreignField = [FieldDefinition] 
+;
+
+//
+//Instancespace:
+//	spaceType  = Instances
+//	'{'
+//		instances += Instance*
+//	'}'
+//;
+
+InstanceSpace:
+	{InstanceSpace} 'instances'
+	'{'
+	instances += Instance*
+	'}'
+;
+
+//ReferenceField:
+//	ref = Field 
+//	space = Space
+//;
+
+//StateObjectDefinition:
+//	(type = Primitive| type = Compound)
+//	state = StateDefinition 
+//;
+//
+//TransitionObjectDefinition:
+//	(type = Primitive| type = Compound)
+//	transition = TransitionDefinition
+//;
+
+//PrimitiveStateDefinition:
+//	object = State id = StateID 
+//;
+//
+//CompoundStateDefinition:
+//	object = State state = StateID (compoundStateDef= WithStatesDefinition)?
+//;
+
+//StateDefinition:
+//	object = State state = StateID (withDefinition= WithStatesDefinition)?
+//;
+
+
+//StateID:
+//	 name = ID
+//;
 
 WithStatesDefinition:
-	composition = With
+	'with'
 	'{'
 	predicate= Predicate
 	'}'
 ;
 
 WithTransitionsDefinition:
-	composition = With
+	'with'
 	'{'
 	transitions = TransitionalExpression
 	'}'
 ;
 
-ReferenceState:
-	object = State
- 	refState = [StateID]
-	from = FromFieldDefinition 
-	(('called'|'as')
-		state = StateID)?
-	(composition = WithStatesDefinition)?
-	
-;
 
-TransitionDefinition:
-	object = Transition transition = TransitionID (in = InputDefinition)? out = OutputDefinition (composition = WithTransitionsDefinition)?
-;
 
-TransitionID:
-	name = ID
-;
 
-ReferenceTransition:
-	object = Transition
-	refTransition = [TransitionID]
-	fromDef = FromFieldDefinition
-	(('called'|'as')
-		transition = TransitionID)?
-	(composition = WithTransitionsDefinition)?
-	
-;
 
-FromFieldDefinition:
-	from = From
-	refSpace = [Space]
-;
+//TransitionID:
+//	name = ID
+//;
+
+
+
+//FromFieldDefinition:
+//	from = From
+//	refSpace = [Space]
+//;
 
 
 InputDefinition:
-	input = Input inputState += [StateID]*
+	{InputDefinition} 'input' inputState += [StateDefinition]*
 ;
 
 OutputDefinition:
-	output = Output outputState = [StateID]
+	'output' outputState = [StateDefinition]
 ;
 
-ExtendsDefinition:
-	type = Extends
-	namespaces += [Space]+	
-;
-
-
-Primitive:
-	'primitive' 
-;
-
-Compound:
-	'compound'
-;
-
-Field:
-	'field'
-;
-
-State:
-	'state'
-;
-
-
-Transition:
-	'transition'
-;
-
-Definitions:
-	'definitions'
-;
-
-References:
-	'references'
-;
-
-Instances:
-	'instances'
-;
-
-Input:
-	'input'
-;
-
-Output:
-	'output'
-;
-
-From:
-	'from'
-;
-
-With:
-	'with'
-;
-
-Extends:
-	'extends'
-;
-
-NotOp:
-	'NOT'
-;
-
-AndOp:
-	'AND'
-;
-
-OrOp:
-	'OR'
-;
-
-Set:
-	'set'
-;
-
-To:
-	'to'
-;
-
-Use:
-	'use'
-;
-
-
-Count:
-	INT
-;
+//ExtendsDefinition:
+//	type = Extends
+//	namespaces += [Space]+	
+//;
+//
+//
+//Primitive:
+//	'primitive' 
+//;
+//
+//Compound:
+//	'compound'
+//;
+//
+//Field:
+//	'field'
+//;
+//
+//State:
+//	'state'
+//;
+//
+//
+//Transition:
+//	'transition'
+//;
+//
+//Definitions:
+//	'definitions'
+//;
+//
+//References:
+//	'references'
+//;
+//
+//Instances:
+//	'instances'
+//;
+//
+//Input:
+//	'input'
+//;
+//
+//Output:
+//	'output'
+//;
+//
+//From:
+//	'from'
+//;
+//
+//With:
+//	'with'
+//;
+//
+//Extends:
+//	'extends'
+//;
+//
+//NotOp:
+//	'NOT'
+//;
+//
+//AndOp:
+//	'AND'
+//;
+//
+//OrOp:
+//	'OR'
+//;
+//
+//Set:
+//	'set'
+//;
+//
+//To:
+//	'to'
+//;
+//
+//Use:
+//	'use'
+//;
+//
+//
+//Count:
+//	INT
+//;
 
 Instance:
-	instanceDef = 'instance' 
+	'instance' 
 	(transitionDeclaration = TransitionDeclaration| stateDeclaration = StateDeclaration) 
 	name = STRING 
 	(state = StateInstance | transition = TransitionInstance)
 ;
 
 TransitionDeclaration:
-	objectType = Transition transition = [TransitionID]
+	'transition' transition = [TransitionID]
 ;
 
 StateDeclaration:
-	objectType = State state = [StateID]
+	'state' state = [StateDefinition]
 ;
 
 TransitionInstance:
@@ -326,31 +418,31 @@ StateInstance:
 ;
 
 UseDefinition:
-	use = Use predefinedValue = [Instance] 
+	'use' predefinedValue = [Instance] 
 ;
 
 SetStatement:
-	statement = Set variable = [StateID] toDef = ToDefinition
+	'set' variable = [StateDefinition] toDef = ToDefinition
 ;
 
 ToDefinition:
-	to = To value = STRING
+	'to' value = STRING
 ;
 
 //State Composition Expression Rules
 Predicate:
-	(negation?=NotOp)? expression = BinaryExpression
+	(negation?='NOT')? expression = BinaryExpression
 ;
 
 BinaryExpression:
 	TerminalBinaryExpression ({Operation.left=current}
-		op= (AndOp|OrOp) right = TerminalBinaryExpression)*
+		op= ('AND'|'OR') right = TerminalBinaryExpression)*
 ;
 
 TerminalBinaryExpression returns BinaryExpression:
 	'(' Predicate ')'|
-	 {StateID} instance = [StateID]|
-	 {StateID}(list ?= 'setOf' value = [StateID])
+	 {StateDefinition} instance = [StateDefinition]|
+	 {StateDefinition}(list ?= 'setOf' value = [StateDefinition])
 ;
 
 

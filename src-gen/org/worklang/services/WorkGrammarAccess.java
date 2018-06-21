@@ -39,538 +39,634 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Model");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cFieldsAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cFieldsFieldDefinitionParserRuleCall_0_0 = (RuleCall)cFieldsAssignment_0.eContents().get(0);
-		private final Assignment cExpertsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cExpertsExpertDefinitionParserRuleCall_1_0 = (RuleCall)cExpertsAssignment_1.eContents().get(0);
-		private final Assignment cPractitionersAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cPractitionersPractitionerParserRuleCall_2_0 = (RuleCall)cPractitionersAssignment_2.eContents().get(0);
-		private final Assignment cInstructionsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cInstructionsInstructionParserRuleCall_3_0 = (RuleCall)cInstructionsAssignment_3.eContents().get(0);
+		private final Assignment cFieldsAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cFieldsFieldDefinitionParserRuleCall_0 = (RuleCall)cFieldsAssignment.eContents().get(0);
 		
 		//Model:
 		//	fields+=FieldDefinition*
-		//	experts+=ExpertDefinition*
-		//	practitioners+=Practitioner*
-		//	instructions+=Instruction*;
+		//	//experts += ExpertDefinition*
+		//	//practitioners += Practitioner*
+		//	//instructions += Instruction*
+		//;
 		@Override public ParserRule getRule() { return rule; }
-		
-		//fields+=FieldDefinition* experts+=ExpertDefinition* practitioners+=Practitioner* instructions+=Instruction*
-		public Group getGroup() { return cGroup; }
 		
 		//fields+=FieldDefinition*
-		public Assignment getFieldsAssignment_0() { return cFieldsAssignment_0; }
+		public Assignment getFieldsAssignment() { return cFieldsAssignment; }
 		
 		//FieldDefinition
-		public RuleCall getFieldsFieldDefinitionParserRuleCall_0_0() { return cFieldsFieldDefinitionParserRuleCall_0_0; }
-		
-		//experts+=ExpertDefinition*
-		public Assignment getExpertsAssignment_1() { return cExpertsAssignment_1; }
-		
-		//ExpertDefinition
-		public RuleCall getExpertsExpertDefinitionParserRuleCall_1_0() { return cExpertsExpertDefinitionParserRuleCall_1_0; }
-		
-		//practitioners+=Practitioner*
-		public Assignment getPractitionersAssignment_2() { return cPractitionersAssignment_2; }
-		
-		//Practitioner
-		public RuleCall getPractitionersPractitionerParserRuleCall_2_0() { return cPractitionersPractitionerParserRuleCall_2_0; }
-		
-		//instructions+=Instruction*
-		public Assignment getInstructionsAssignment_3() { return cInstructionsAssignment_3; }
-		
-		//Instruction
-		public RuleCall getInstructionsInstructionParserRuleCall_3_0() { return cInstructionsInstructionParserRuleCall_3_0; }
-	}
-	public class InstructionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Instruction");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cObjectTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cObjectTypeInstructionKeyword_0_0 = (Keyword)cObjectTypeAssignment_0.eContents().get(0);
-		private final Assignment cSpaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cSpaceSpaceCrossReference_1_0 = (CrossReference)cSpaceAssignment_1.eContents().get(0);
-		private final RuleCall cSpaceSpaceIDTerminalRuleCall_1_0_1 = (RuleCall)cSpaceSpaceCrossReference_1_0.eContents().get(1);
-		private final Assignment cTransitionAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cTransitionTransitionIDCrossReference_2_0 = (CrossReference)cTransitionAssignment_2.eContents().get(0);
-		private final RuleCall cTransitionTransitionIDIDTerminalRuleCall_2_0_1 = (RuleCall)cTransitionTransitionIDCrossReference_2_0.eContents().get(1);
-		
-		///* Executable Structure
-		// * Below are the grammar rules for defining execution requests for the work interpreter.
-		// */ Instruction:
-		//	objectType='instruction' space=[Space] transition=[TransitionID];
-		@Override public ParserRule getRule() { return rule; }
-		
-		//objectType='instruction' space=[Space] transition=[TransitionID]
-		public Group getGroup() { return cGroup; }
-		
-		//objectType='instruction'
-		public Assignment getObjectTypeAssignment_0() { return cObjectTypeAssignment_0; }
-		
-		//'instruction'
-		public Keyword getObjectTypeInstructionKeyword_0_0() { return cObjectTypeInstructionKeyword_0_0; }
-		
-		//space=[Space]
-		public Assignment getSpaceAssignment_1() { return cSpaceAssignment_1; }
-		
-		//[Space]
-		public CrossReference getSpaceSpaceCrossReference_1_0() { return cSpaceSpaceCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getSpaceSpaceIDTerminalRuleCall_1_0_1() { return cSpaceSpaceIDTerminalRuleCall_1_0_1; }
-		
-		//transition=[TransitionID]
-		public Assignment getTransitionAssignment_2() { return cTransitionAssignment_2; }
-		
-		//[TransitionID]
-		public CrossReference getTransitionTransitionIDCrossReference_2_0() { return cTransitionTransitionIDCrossReference_2_0; }
-		
-		//ID
-		public RuleCall getTransitionTransitionIDIDTerminalRuleCall_2_0_1() { return cTransitionTransitionIDIDTerminalRuleCall_2_0_1; }
-	}
-	public class PractitionerElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Practitioner");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cPractitionerDefAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cPractitionerDefPractitionerKeyword_0_0 = (Keyword)cPractitionerDefAssignment_0.eContents().get(0);
-		private final Assignment cUserAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cUserUserParserRuleCall_1_0 = (RuleCall)cUserAssignment_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cKnowledgeDefAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cKnowledgeDefKnowledgeDefinitionParserRuleCall_3_0 = (RuleCall)cKnowledgeDefAssignment_3.eContents().get(0);
-		private final Assignment cSkillsDefAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cSkillsDefSkillsDefinitionParserRuleCall_4_0 = (RuleCall)cSkillsDefAssignment_4.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		
-		//Practitioner:
-		//	practitionerDef='practitioner'
-		//	user=User
-		//	'{'
-		//	knowledgeDef=KnowledgeDefinition?
-		//	skillsDef=SkillsDefinition?
-		//	'}';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//practitionerDef='practitioner' user=User '{' knowledgeDef=KnowledgeDefinition? skillsDef=SkillsDefinition? '}'
-		public Group getGroup() { return cGroup; }
-		
-		//practitionerDef='practitioner'
-		public Assignment getPractitionerDefAssignment_0() { return cPractitionerDefAssignment_0; }
-		
-		//'practitioner'
-		public Keyword getPractitionerDefPractitionerKeyword_0_0() { return cPractitionerDefPractitionerKeyword_0_0; }
-		
-		//user=User
-		public Assignment getUserAssignment_1() { return cUserAssignment_1; }
-		
-		//User
-		public RuleCall getUserUserParserRuleCall_1_0() { return cUserUserParserRuleCall_1_0; }
-		
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-		
-		//knowledgeDef=KnowledgeDefinition?
-		public Assignment getKnowledgeDefAssignment_3() { return cKnowledgeDefAssignment_3; }
-		
-		//KnowledgeDefinition
-		public RuleCall getKnowledgeDefKnowledgeDefinitionParserRuleCall_3_0() { return cKnowledgeDefKnowledgeDefinitionParserRuleCall_3_0; }
-		
-		//skillsDef=SkillsDefinition?
-		public Assignment getSkillsDefAssignment_4() { return cSkillsDefAssignment_4; }
-		
-		//SkillsDefinition
-		public RuleCall getSkillsDefSkillsDefinitionParserRuleCall_4_0() { return cSkillsDefSkillsDefinitionParserRuleCall_4_0; }
-		
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
-	}
-	public class ExpertDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.ExpertDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cExpertDefAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cExpertDefExpertKeyword_0_0 = (Keyword)cExpertDefAssignment_0.eContents().get(0);
-		private final Assignment cUserAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cUserUserParserRuleCall_1_0 = (RuleCall)cUserAssignment_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cDomainDefAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cDomainDefDomainDefinitionParserRuleCall_3_0 = (RuleCall)cDomainDefAssignment_3.eContents().get(0);
-		private final Assignment cKnowledgeDefAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cKnowledgeDefKnowledgeDefinitionParserRuleCall_4_0 = (RuleCall)cKnowledgeDefAssignment_4.eContents().get(0);
-		private final Assignment cSkillsDefAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cSkillsDefSkillsDefinitionParserRuleCall_5_0 = (RuleCall)cSkillsDefAssignment_5.eContents().get(0);
-		private final Keyword cHourlyRateKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Keyword cDollarSignKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		private final Assignment cRateAssignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall cRateINTTerminalRuleCall_8_0 = (RuleCall)cRateAssignment_8.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
-		
-		//ExpertDefinition:
-		//	expertDef='expert' user=User
-		//	'{'
-		//	domainDef=DomainDefinition?
-		//	knowledgeDef=KnowledgeDefinition?
-		//	skillsDef=SkillsDefinition?
-		//	'hourlyRate'
-		//	'$' rate=INT
-		//	'}';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//expertDef='expert' user=User '{' domainDef=DomainDefinition? knowledgeDef=KnowledgeDefinition?
-		//skillsDef=SkillsDefinition? 'hourlyRate' '$' rate=INT '}'
-		public Group getGroup() { return cGroup; }
-		
-		//expertDef='expert'
-		public Assignment getExpertDefAssignment_0() { return cExpertDefAssignment_0; }
-		
-		//'expert'
-		public Keyword getExpertDefExpertKeyword_0_0() { return cExpertDefExpertKeyword_0_0; }
-		
-		//user=User
-		public Assignment getUserAssignment_1() { return cUserAssignment_1; }
-		
-		//User
-		public RuleCall getUserUserParserRuleCall_1_0() { return cUserUserParserRuleCall_1_0; }
-		
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-		
-		//domainDef=DomainDefinition?
-		public Assignment getDomainDefAssignment_3() { return cDomainDefAssignment_3; }
-		
-		//DomainDefinition
-		public RuleCall getDomainDefDomainDefinitionParserRuleCall_3_0() { return cDomainDefDomainDefinitionParserRuleCall_3_0; }
-		
-		//knowledgeDef=KnowledgeDefinition?
-		public Assignment getKnowledgeDefAssignment_4() { return cKnowledgeDefAssignment_4; }
-		
-		//KnowledgeDefinition
-		public RuleCall getKnowledgeDefKnowledgeDefinitionParserRuleCall_4_0() { return cKnowledgeDefKnowledgeDefinitionParserRuleCall_4_0; }
-		
-		//skillsDef=SkillsDefinition?
-		public Assignment getSkillsDefAssignment_5() { return cSkillsDefAssignment_5; }
-		
-		//SkillsDefinition
-		public RuleCall getSkillsDefSkillsDefinitionParserRuleCall_5_0() { return cSkillsDefSkillsDefinitionParserRuleCall_5_0; }
-		
-		//'hourlyRate'
-		public Keyword getHourlyRateKeyword_6() { return cHourlyRateKeyword_6; }
-		
-		//'$'
-		public Keyword getDollarSignKeyword_7() { return cDollarSignKeyword_7; }
-		
-		//rate=INT
-		public Assignment getRateAssignment_8() { return cRateAssignment_8; }
-		
-		//INT
-		public RuleCall getRateINTTerminalRuleCall_8_0() { return cRateINTTerminalRuleCall_8_0; }
-		
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
-	}
-	public class UserElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.User");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
-		
-		//User:
-		//	name=ID;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//name=ID
-		public Assignment getNameAssignment() { return cNameAssignment; }
-		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
-	}
-	public class DomainDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.DomainDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cDomainAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cDomainDomainKeyword_0_0 = (Keyword)cDomainAssignment_0.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cDomainAreasAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cDomainAreasReferenceFieldParserRuleCall_2_0 = (RuleCall)cDomainAreasAssignment_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		
-		//DomainDefinition:
-		//	domain='domain'
-		//	'{'
-		//	domainAreas+=ReferenceField*
-		//	'}';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//domain='domain' '{' domainAreas+=ReferenceField* '}'
-		public Group getGroup() { return cGroup; }
-		
-		//domain='domain'
-		public Assignment getDomainAssignment_0() { return cDomainAssignment_0; }
-		
-		//'domain'
-		public Keyword getDomainDomainKeyword_0_0() { return cDomainDomainKeyword_0_0; }
-		
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
-		
-		//domainAreas+=ReferenceField*
-		public Assignment getDomainAreasAssignment_2() { return cDomainAreasAssignment_2; }
-		
-		//ReferenceField
-		public RuleCall getDomainAreasReferenceFieldParserRuleCall_2_0() { return cDomainAreasReferenceFieldParserRuleCall_2_0; }
-		
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
-	}
-	public class KnowledgeDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.KnowledgeDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cKnowledgeDefAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cKnowledgeDefKnowledgeKeyword_0_0 = (Keyword)cKnowledgeDefAssignment_0.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cKnowledgeAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cKnowledgeReferenceStateParserRuleCall_2_0 = (RuleCall)cKnowledgeAssignment_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		
-		//KnowledgeDefinition:
-		//	knowledgeDef='knowledge' '{'
-		//	knowledge+=ReferenceState*
-		//	'}';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//knowledgeDef='knowledge' '{' knowledge+=ReferenceState* '}'
-		public Group getGroup() { return cGroup; }
-		
-		//knowledgeDef='knowledge'
-		public Assignment getKnowledgeDefAssignment_0() { return cKnowledgeDefAssignment_0; }
-		
-		//'knowledge'
-		public Keyword getKnowledgeDefKnowledgeKeyword_0_0() { return cKnowledgeDefKnowledgeKeyword_0_0; }
-		
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
-		
-		//knowledge+=ReferenceState*
-		public Assignment getKnowledgeAssignment_2() { return cKnowledgeAssignment_2; }
-		
-		//ReferenceState
-		public RuleCall getKnowledgeReferenceStateParserRuleCall_2_0() { return cKnowledgeReferenceStateParserRuleCall_2_0; }
-		
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
-	}
-	public class SkillsDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.SkillsDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cSkillsDefAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cSkillsDefSkillsKeyword_0_0 = (Keyword)cSkillsDefAssignment_0.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cSkillsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cSkillsReferenceTransitionParserRuleCall_2_0 = (RuleCall)cSkillsAssignment_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		
-		//SkillsDefinition:
-		//	skillsDef='skills' '{'
-		//	skills+=ReferenceTransition*
-		//	'}';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//skillsDef='skills' '{' skills+=ReferenceTransition* '}'
-		public Group getGroup() { return cGroup; }
-		
-		//skillsDef='skills'
-		public Assignment getSkillsDefAssignment_0() { return cSkillsDefAssignment_0; }
-		
-		//'skills'
-		public Keyword getSkillsDefSkillsKeyword_0_0() { return cSkillsDefSkillsKeyword_0_0; }
-		
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
-		
-		//skills+=ReferenceTransition*
-		public Assignment getSkillsAssignment_2() { return cSkillsAssignment_2; }
-		
-		//ReferenceTransition
-		public RuleCall getSkillsReferenceTransitionParserRuleCall_2_0() { return cSkillsReferenceTransitionParserRuleCall_2_0; }
-		
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+		public RuleCall getFieldsFieldDefinitionParserRuleCall_0() { return cFieldsFieldDefinitionParserRuleCall_0; }
 	}
 	public class FieldDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.FieldDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cFieldAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cFieldFieldParserRuleCall_0_0 = (RuleCall)cFieldAssignment_0.eContents().get(0);
-		private final Assignment cSpaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cSpaceSpaceParserRuleCall_1_0 = (RuleCall)cSpaceAssignment_1.eContents().get(0);
-		private final Assignment cExtendsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cExtendsExtendsDefinitionParserRuleCall_2_0 = (RuleCall)cExtendsAssignment_2.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cConceptualspaceAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cConceptualspaceNamespaceParserRuleCall_4_0 = (RuleCall)cConceptualspaceAssignment_4.eContents().get(0);
-		private final Assignment cReferencespaceAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cReferencespaceReferencespaceParserRuleCall_5_0 = (RuleCall)cReferencespaceAssignment_5.eContents().get(0);
-		private final Assignment cInstancespaceAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cInstancespaceInstancespaceParserRuleCall_6_0 = (RuleCall)cInstancespaceAssignment_6.eContents().get(0);
+		private final Keyword cFieldKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cDefinitionSpaceAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cDefinitionSpaceDefinitionSpaceParserRuleCall_3_0 = (RuleCall)cDefinitionSpaceAssignment_3.eContents().get(0);
+		private final Assignment cReferenceSpaceAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cReferenceSpaceReferenceSpaceParserRuleCall_4_0 = (RuleCall)cReferenceSpaceAssignment_4.eContents().get(0);
+		private final Assignment cMapSpaceAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cMapSpaceMapSpaceParserRuleCall_5_0 = (RuleCall)cMapSpaceAssignment_5.eContents().get(0);
+		private final Assignment cInstanceSpaceAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cInstanceSpaceInstanceSpaceParserRuleCall_6_0 = (RuleCall)cInstanceSpaceAssignment_6.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
+		///* Executable Structure
+		// * Below are the grammar rules for defining execution requests for the work interpreter.
+		// */ //Instruction:
+		////	objectType = 'instruction' space = [Space] transition = [TransitionID]
+		////;
+		////Practitioner:
+		////	practitionerDef = 'practitioner'
+		////	user = User
+		////	'{'
+		////	knowledgeDef = KnowledgeDefinition?
+		////	skillsDef = SkillsDefinition?
+		////	'}'
+		////;
+		////ExpertDefinition:
+		////	expertDef = 'expert' user = User
+		////	'{'
+		////	domainDef = DomainDefinition?
+		////	knowledgeDef = KnowledgeDefinition?
+		////	skillsDef = SkillsDefinition?
+		////	'hourlyRate'
+		////	'$' rate =  INT
+		////	'}'
+		////;
+		////User:
+		////	name = ID
+		////;
+		////DomainDefinition:
+		////	domain = 'domain'
+		////	'{'
+		////		domainAreas += ReferenceField*
+		////	'}'
+		////;
+		////KnowledgeDefinition:
+		////	knowledgeDef = 'knowledge''{'
+		////		knowledge += ReferenceState*
+		////	'}'
+		////;
+		////SkillsDefinition:
+		////	skillsDef = 'skills''{'
+		////		skills += ReferenceTransition*
+		////	'}'
+		////;
+		////FieldDefinition:
+		////	field = Field
+		////	space = Space
+		////	extends=(ExtendsDefinition)? 
+		////	'{'
+		////	(conceptualspace = Namespace)?
+		////	(referencespace = Referencespace)?
+		////	(mappedspace = Mapspace)?
+		////	(instancespace = Instancespace)?
+		////	'}'	
+		////;
 		//FieldDefinition:
-		//	field=Field
-		//	space=Space
-		//	extends=ExtendsDefinition?
+		//	'field'
+		//	name=ID
 		//	'{'
-		//	conceptualspace=Namespace?
-		//	referencespace=Referencespace?
-		//	instancespace=Instancespace?
+		//	definitionSpace=DefinitionSpace?
+		//	referenceSpace=ReferenceSpace?
+		//	mapSpace=MapSpace?
+		//	instanceSpace=InstanceSpace?
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//field=Field space=Space extends=ExtendsDefinition? '{' conceptualspace=Namespace? referencespace=Referencespace?
-		//instancespace=Instancespace? '}'
+		//'field' name=ID '{' definitionSpace=DefinitionSpace? referenceSpace=ReferenceSpace? mapSpace=MapSpace?
+		//instanceSpace=InstanceSpace? '}'
 		public Group getGroup() { return cGroup; }
 		
-		//field=Field
-		public Assignment getFieldAssignment_0() { return cFieldAssignment_0; }
+		//'field'
+		public Keyword getFieldKeyword_0() { return cFieldKeyword_0; }
 		
-		//Field
-		public RuleCall getFieldFieldParserRuleCall_0_0() { return cFieldFieldParserRuleCall_0_0; }
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
-		//space=Space
-		public Assignment getSpaceAssignment_1() { return cSpaceAssignment_1; }
-		
-		//Space
-		public RuleCall getSpaceSpaceParserRuleCall_1_0() { return cSpaceSpaceParserRuleCall_1_0; }
-		
-		//extends=ExtendsDefinition?
-		public Assignment getExtendsAssignment_2() { return cExtendsAssignment_2; }
-		
-		//ExtendsDefinition
-		public RuleCall getExtendsExtendsDefinitionParserRuleCall_2_0() { return cExtendsExtendsDefinitionParserRuleCall_2_0; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		//conceptualspace=Namespace?
-		public Assignment getConceptualspaceAssignment_4() { return cConceptualspaceAssignment_4; }
+		//definitionSpace=DefinitionSpace?
+		public Assignment getDefinitionSpaceAssignment_3() { return cDefinitionSpaceAssignment_3; }
 		
-		//Namespace
-		public RuleCall getConceptualspaceNamespaceParserRuleCall_4_0() { return cConceptualspaceNamespaceParserRuleCall_4_0; }
+		//DefinitionSpace
+		public RuleCall getDefinitionSpaceDefinitionSpaceParserRuleCall_3_0() { return cDefinitionSpaceDefinitionSpaceParserRuleCall_3_0; }
 		
-		//referencespace=Referencespace?
-		public Assignment getReferencespaceAssignment_5() { return cReferencespaceAssignment_5; }
+		//referenceSpace=ReferenceSpace?
+		public Assignment getReferenceSpaceAssignment_4() { return cReferenceSpaceAssignment_4; }
 		
-		//Referencespace
-		public RuleCall getReferencespaceReferencespaceParserRuleCall_5_0() { return cReferencespaceReferencespaceParserRuleCall_5_0; }
+		//ReferenceSpace
+		public RuleCall getReferenceSpaceReferenceSpaceParserRuleCall_4_0() { return cReferenceSpaceReferenceSpaceParserRuleCall_4_0; }
 		
-		//instancespace=Instancespace?
-		public Assignment getInstancespaceAssignment_6() { return cInstancespaceAssignment_6; }
+		//mapSpace=MapSpace?
+		public Assignment getMapSpaceAssignment_5() { return cMapSpaceAssignment_5; }
 		
-		//Instancespace
-		public RuleCall getInstancespaceInstancespaceParserRuleCall_6_0() { return cInstancespaceInstancespaceParserRuleCall_6_0; }
+		//MapSpace
+		public RuleCall getMapSpaceMapSpaceParserRuleCall_5_0() { return cMapSpaceMapSpaceParserRuleCall_5_0; }
+		
+		//instanceSpace=InstanceSpace?
+		public Assignment getInstanceSpaceAssignment_6() { return cInstanceSpaceAssignment_6; }
+		
+		//InstanceSpace
+		public RuleCall getInstanceSpaceInstanceSpaceParserRuleCall_6_0() { return cInstanceSpaceInstanceSpaceParserRuleCall_6_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
-	public class SpaceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Space");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+	public class MapSpaceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.MapSpace");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cMapSpaceAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cMappingsKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cMappedStatesAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cMappedStatesStateMappingParserRuleCall_3_0 = (RuleCall)cMappedStatesAssignment_3.eContents().get(0);
+		private final Assignment cMappedTransitionsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cMappedTransitionsTransitionMappingParserRuleCall_4_0 = (RuleCall)cMappedTransitionsAssignment_4.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Space:
+		////Space:
+		////	name = ID
+		////;
+		//MapSpace:
+		//	{MapSpace} 'mappings' '{'
+		//	mappedStates+=StateMapping*
+		//	mappedTransitions+=TransitionMapping*
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{MapSpace} 'mappings' '{' mappedStates+=StateMapping* mappedTransitions+=TransitionMapping* '}'
+		public Group getGroup() { return cGroup; }
+		
+		//{MapSpace}
+		public Action getMapSpaceAction_0() { return cMapSpaceAction_0; }
+		
+		//'mappings'
+		public Keyword getMappingsKeyword_1() { return cMappingsKeyword_1; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//mappedStates+=StateMapping*
+		public Assignment getMappedStatesAssignment_3() { return cMappedStatesAssignment_3; }
+		
+		//StateMapping
+		public RuleCall getMappedStatesStateMappingParserRuleCall_3_0() { return cMappedStatesStateMappingParserRuleCall_3_0; }
+		
+		//mappedTransitions+=TransitionMapping*
+		public Assignment getMappedTransitionsAssignment_4() { return cMappedTransitionsAssignment_4; }
+		
+		//TransitionMapping
+		public RuleCall getMappedTransitionsTransitionMappingParserRuleCall_4_0() { return cMappedTransitionsTransitionMappingParserRuleCall_4_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+	}
+	public class StateMappingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.StateMapping");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cStateKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cForeignStateAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cForeignStateStateDefinitionCrossReference_1_0 = (CrossReference)cForeignStateAssignment_1.eContents().get(0);
+		private final RuleCall cForeignStateStateDefinitionIDTerminalRuleCall_1_0_1 = (RuleCall)cForeignStateStateDefinitionCrossReference_1_0.eContents().get(1);
+		private final Keyword cFromKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cFieldAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cFieldFieldDefinitionCrossReference_3_0 = (CrossReference)cFieldAssignment_3.eContents().get(0);
+		private final RuleCall cFieldFieldDefinitionIDTerminalRuleCall_3_0_1 = (RuleCall)cFieldFieldDefinitionCrossReference_3_0.eContents().get(1);
+		private final Keyword cToKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cLocalStateAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final CrossReference cLocalStateStateDefinitionCrossReference_5_0 = (CrossReference)cLocalStateAssignment_5.eContents().get(0);
+		private final RuleCall cLocalStateStateDefinitionIDTerminalRuleCall_5_0_1 = (RuleCall)cLocalStateStateDefinitionCrossReference_5_0.eContents().get(1);
+		
+		//StateMapping:
+		//	'state' foreignState=[StateDefinition] 'from' field=[FieldDefinition] 'to' localState=[StateDefinition];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'state' foreignState=[StateDefinition] 'from' field=[FieldDefinition] 'to' localState=[StateDefinition]
+		public Group getGroup() { return cGroup; }
+		
+		//'state'
+		public Keyword getStateKeyword_0() { return cStateKeyword_0; }
+		
+		//foreignState=[StateDefinition]
+		public Assignment getForeignStateAssignment_1() { return cForeignStateAssignment_1; }
+		
+		//[StateDefinition]
+		public CrossReference getForeignStateStateDefinitionCrossReference_1_0() { return cForeignStateStateDefinitionCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getForeignStateStateDefinitionIDTerminalRuleCall_1_0_1() { return cForeignStateStateDefinitionIDTerminalRuleCall_1_0_1; }
+		
+		//'from'
+		public Keyword getFromKeyword_2() { return cFromKeyword_2; }
+		
+		//field=[FieldDefinition]
+		public Assignment getFieldAssignment_3() { return cFieldAssignment_3; }
+		
+		//[FieldDefinition]
+		public CrossReference getFieldFieldDefinitionCrossReference_3_0() { return cFieldFieldDefinitionCrossReference_3_0; }
+		
+		//ID
+		public RuleCall getFieldFieldDefinitionIDTerminalRuleCall_3_0_1() { return cFieldFieldDefinitionIDTerminalRuleCall_3_0_1; }
+		
+		//'to'
+		public Keyword getToKeyword_4() { return cToKeyword_4; }
+		
+		//localState=[StateDefinition]
+		public Assignment getLocalStateAssignment_5() { return cLocalStateAssignment_5; }
+		
+		//[StateDefinition]
+		public CrossReference getLocalStateStateDefinitionCrossReference_5_0() { return cLocalStateStateDefinitionCrossReference_5_0; }
+		
+		//ID
+		public RuleCall getLocalStateStateDefinitionIDTerminalRuleCall_5_0_1() { return cLocalStateStateDefinitionIDTerminalRuleCall_5_0_1; }
+	}
+	public class TransitionMappingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TransitionMapping");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cTransitionKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cForeignTransitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cForeignTransitionTransitionIDCrossReference_1_0 = (CrossReference)cForeignTransitionAssignment_1.eContents().get(0);
+		private final RuleCall cForeignTransitionTransitionIDIDTerminalRuleCall_1_0_1 = (RuleCall)cForeignTransitionTransitionIDCrossReference_1_0.eContents().get(1);
+		private final Keyword cFromKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cFieldAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cFieldFieldDefinitionCrossReference_3_0 = (CrossReference)cFieldAssignment_3.eContents().get(0);
+		private final RuleCall cFieldFieldDefinitionIDTerminalRuleCall_3_0_1 = (RuleCall)cFieldFieldDefinitionCrossReference_3_0.eContents().get(1);
+		private final Keyword cToKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cLocalTransitionAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final CrossReference cLocalTransitionTransitionIDCrossReference_5_0 = (CrossReference)cLocalTransitionAssignment_5.eContents().get(0);
+		private final RuleCall cLocalTransitionTransitionIDIDTerminalRuleCall_5_0_1 = (RuleCall)cLocalTransitionTransitionIDCrossReference_5_0.eContents().get(1);
+		
+		//TransitionMapping:
+		//	'transition' foreignTransition=[TransitionID] 'from' field=[FieldDefinition] 'to' localTransition=[TransitionID];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'transition' foreignTransition=[TransitionID] 'from' field=[FieldDefinition] 'to' localTransition=[TransitionID]
+		public Group getGroup() { return cGroup; }
+		
+		//'transition'
+		public Keyword getTransitionKeyword_0() { return cTransitionKeyword_0; }
+		
+		//foreignTransition=[TransitionID]
+		public Assignment getForeignTransitionAssignment_1() { return cForeignTransitionAssignment_1; }
+		
+		//[TransitionID]
+		public CrossReference getForeignTransitionTransitionIDCrossReference_1_0() { return cForeignTransitionTransitionIDCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getForeignTransitionTransitionIDIDTerminalRuleCall_1_0_1() { return cForeignTransitionTransitionIDIDTerminalRuleCall_1_0_1; }
+		
+		//'from'
+		public Keyword getFromKeyword_2() { return cFromKeyword_2; }
+		
+		//field=[FieldDefinition]
+		public Assignment getFieldAssignment_3() { return cFieldAssignment_3; }
+		
+		//[FieldDefinition]
+		public CrossReference getFieldFieldDefinitionCrossReference_3_0() { return cFieldFieldDefinitionCrossReference_3_0; }
+		
+		//ID
+		public RuleCall getFieldFieldDefinitionIDTerminalRuleCall_3_0_1() { return cFieldFieldDefinitionIDTerminalRuleCall_3_0_1; }
+		
+		//'to'
+		public Keyword getToKeyword_4() { return cToKeyword_4; }
+		
+		//localTransition=[TransitionID]
+		public Assignment getLocalTransitionAssignment_5() { return cLocalTransitionAssignment_5; }
+		
+		//[TransitionID]
+		public CrossReference getLocalTransitionTransitionIDCrossReference_5_0() { return cLocalTransitionTransitionIDCrossReference_5_0; }
+		
+		//ID
+		public RuleCall getLocalTransitionTransitionIDIDTerminalRuleCall_5_0_1() { return cLocalTransitionTransitionIDIDTerminalRuleCall_5_0_1; }
+	}
+	public class DefinitionSpaceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.DefinitionSpace");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cDefinitionSpaceAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cDefinitionsKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cStatesAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cStatesStateDefinitionParserRuleCall_3_0 = (RuleCall)cStatesAssignment_3.eContents().get(0);
+		private final Assignment cTransitionsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTransitionsTransitionDefinitionParserRuleCall_4_0 = (RuleCall)cTransitionsAssignment_4.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		
+		////Namespace:
+		////	spaceType = Definitions
+		////	'{'
+		////	states += StateObjectDefinition*
+		////	transitions += TransitionObjectDefinition*
+		////	'}'
+		////;
+		//DefinitionSpace:
+		//	{DefinitionSpace} 'definitions'
+		//	'{'
+		//	states+=StateDefinition*
+		//	transitions+=TransitionDefinition*
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{DefinitionSpace} 'definitions' '{' states+=StateDefinition* transitions+=TransitionDefinition* '}'
+		public Group getGroup() { return cGroup; }
+		
+		//{DefinitionSpace}
+		public Action getDefinitionSpaceAction_0() { return cDefinitionSpaceAction_0; }
+		
+		//'definitions'
+		public Keyword getDefinitionsKeyword_1() { return cDefinitionsKeyword_1; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//states+=StateDefinition*
+		public Assignment getStatesAssignment_3() { return cStatesAssignment_3; }
+		
+		//StateDefinition
+		public RuleCall getStatesStateDefinitionParserRuleCall_3_0() { return cStatesStateDefinitionParserRuleCall_3_0; }
+		
+		//transitions+=TransitionDefinition*
+		public Assignment getTransitionsAssignment_4() { return cTransitionsAssignment_4; }
+		
+		//TransitionDefinition
+		public RuleCall getTransitionsTransitionDefinitionParserRuleCall_4_0() { return cTransitionsTransitionDefinitionParserRuleCall_4_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+	}
+	public class StateDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.StateDefinition");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cPrimitiveStateDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cCompoundStateDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//StateDefinition:
+		//	PrimitiveStateDefinition | CompoundStateDefinition;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//PrimitiveStateDefinition | CompoundStateDefinition
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//PrimitiveStateDefinition
+		public RuleCall getPrimitiveStateDefinitionParserRuleCall_0() { return cPrimitiveStateDefinitionParserRuleCall_0; }
+		
+		//CompoundStateDefinition
+		public RuleCall getCompoundStateDefinitionParserRuleCall_1() { return cCompoundStateDefinitionParserRuleCall_1; }
+	}
+	public class PrimitiveStateDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.PrimitiveStateDefinition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cTypePrimitiveKeyword_0_0 = (Keyword)cTypeAssignment_0.eContents().get(0);
+		private final Keyword cStateKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		
+		//PrimitiveStateDefinition:
+		//	type='primitive'
+		//	'state'
 		//	name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//type='primitive' 'state' name=ID
+		public Group getGroup() { return cGroup; }
+		
+		//type='primitive'
+		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
+		
+		//'primitive'
+		public Keyword getTypePrimitiveKeyword_0_0() { return cTypePrimitiveKeyword_0_0; }
+		
+		//'state'
+		public Keyword getStateKeyword_1() { return cStateKeyword_1; }
+		
 		//name=ID
-		public Assignment getNameAssignment() { return cNameAssignment; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
-	public class NamespaceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Namespace");
+	public class CompoundStateDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.CompoundStateDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cSpaceTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cSpaceTypeDefinitionsParserRuleCall_0_0 = (RuleCall)cSpaceTypeAssignment_0.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cStatesAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cStatesStateObjectDefinitionParserRuleCall_2_0 = (RuleCall)cStatesAssignment_2.eContents().get(0);
-		private final Assignment cTransitionsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cTransitionsTransitionObjectDefinitionParserRuleCall_3_0 = (RuleCall)cTransitionsAssignment_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cTypeCompoundKeyword_0_0 = (Keyword)cTypeAssignment_0.eContents().get(0);
+		private final Keyword cStateKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Assignment cCompositionAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cCompositionWithStatesDefinitionParserRuleCall_3_0 = (RuleCall)cCompositionAssignment_3.eContents().get(0);
 		
-		//Namespace:
-		//	spaceType=Definitions
-		//	'{'
-		//	states+=StateObjectDefinition*
-		//	transitions+=TransitionObjectDefinition*
-		//	'}';
+		//CompoundStateDefinition:
+		//	type='compound'
+		//	'state'
+		//	name=ID
+		//	composition=WithStatesDefinition;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//spaceType=Definitions '{' states+=StateObjectDefinition* transitions+=TransitionObjectDefinition* '}'
+		//type='compound' 'state' name=ID composition=WithStatesDefinition
 		public Group getGroup() { return cGroup; }
 		
-		//spaceType=Definitions
-		public Assignment getSpaceTypeAssignment_0() { return cSpaceTypeAssignment_0; }
+		//type='compound'
+		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
 		
-		//Definitions
-		public RuleCall getSpaceTypeDefinitionsParserRuleCall_0_0() { return cSpaceTypeDefinitionsParserRuleCall_0_0; }
+		//'compound'
+		public Keyword getTypeCompoundKeyword_0_0() { return cTypeCompoundKeyword_0_0; }
 		
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		//'state'
+		public Keyword getStateKeyword_1() { return cStateKeyword_1; }
 		
-		//states+=StateObjectDefinition*
-		public Assignment getStatesAssignment_2() { return cStatesAssignment_2; }
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
-		//StateObjectDefinition
-		public RuleCall getStatesStateObjectDefinitionParserRuleCall_2_0() { return cStatesStateObjectDefinitionParserRuleCall_2_0; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
-		//transitions+=TransitionObjectDefinition*
-		public Assignment getTransitionsAssignment_3() { return cTransitionsAssignment_3; }
+		//composition=WithStatesDefinition
+		public Assignment getCompositionAssignment_3() { return cCompositionAssignment_3; }
 		
-		//TransitionObjectDefinition
-		public RuleCall getTransitionsTransitionObjectDefinitionParserRuleCall_3_0() { return cTransitionsTransitionObjectDefinitionParserRuleCall_3_0; }
-		
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+		//WithStatesDefinition
+		public RuleCall getCompositionWithStatesDefinitionParserRuleCall_3_0() { return cCompositionWithStatesDefinitionParserRuleCall_3_0; }
 	}
-	public class ReferencespaceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Referencespace");
+	public class TransitionDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TransitionDefinition");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cPrimitiveTransitionDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cCompoundTransitionDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//TransitionDefinition:
+		//	PrimitiveTransitionDefinition | CompoundTransitionDefinition;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//PrimitiveTransitionDefinition | CompoundTransitionDefinition
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//PrimitiveTransitionDefinition
+		public RuleCall getPrimitiveTransitionDefinitionParserRuleCall_0() { return cPrimitiveTransitionDefinitionParserRuleCall_0; }
+		
+		//CompoundTransitionDefinition
+		public RuleCall getCompoundTransitionDefinitionParserRuleCall_1() { return cCompoundTransitionDefinitionParserRuleCall_1; }
+	}
+	public class PrimitiveTransitionDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.PrimitiveTransitionDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cSpaceTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cSpaceTypeReferencesParserRuleCall_0_0 = (RuleCall)cSpaceTypeAssignment_0.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cRefFieldsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cRefFieldsReferenceFieldParserRuleCall_2_0 = (RuleCall)cRefFieldsAssignment_2.eContents().get(0);
+		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cTypePrimitiveKeyword_0_0 = (Keyword)cTypeAssignment_0.eContents().get(0);
+		private final Keyword cTransitionKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Assignment cInAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cInInputDefinitionParserRuleCall_3_0 = (RuleCall)cInAssignment_3.eContents().get(0);
+		private final Assignment cOutAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cOutOutputDefinitionParserRuleCall_4_0 = (RuleCall)cOutAssignment_4.eContents().get(0);
+		
+		//PrimitiveTransitionDefinition:
+		//	type='primitive'
+		//	'transition'
+		//	name=ID
+		//	in=InputDefinition?
+		//	out=OutputDefinition;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//type='primitive' 'transition' name=ID in=InputDefinition? out=OutputDefinition
+		public Group getGroup() { return cGroup; }
+		
+		//type='primitive'
+		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
+		
+		//'primitive'
+		public Keyword getTypePrimitiveKeyword_0_0() { return cTypePrimitiveKeyword_0_0; }
+		
+		//'transition'
+		public Keyword getTransitionKeyword_1() { return cTransitionKeyword_1; }
+		
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+		
+		//in=InputDefinition?
+		public Assignment getInAssignment_3() { return cInAssignment_3; }
+		
+		//InputDefinition
+		public RuleCall getInInputDefinitionParserRuleCall_3_0() { return cInInputDefinitionParserRuleCall_3_0; }
+		
+		//out=OutputDefinition
+		public Assignment getOutAssignment_4() { return cOutAssignment_4; }
+		
+		//OutputDefinition
+		public RuleCall getOutOutputDefinitionParserRuleCall_4_0() { return cOutOutputDefinitionParserRuleCall_4_0; }
+	}
+	public class CompoundTransitionDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.CompoundTransitionDefinition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cTypeCompoundKeyword_0_0 = (Keyword)cTypeAssignment_0.eContents().get(0);
+		private final Keyword cTransitionKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Assignment cInAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cInInputDefinitionParserRuleCall_3_0 = (RuleCall)cInAssignment_3.eContents().get(0);
+		private final Assignment cOutAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cOutOutputDefinitionParserRuleCall_4_0 = (RuleCall)cOutAssignment_4.eContents().get(0);
+		private final Assignment cCompositionAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cCompositionWithTransitionsDefinitionParserRuleCall_5_0 = (RuleCall)cCompositionAssignment_5.eContents().get(0);
+		
+		//CompoundTransitionDefinition:
+		//	type='compound'
+		//	'transition'
+		//	name=ID
+		//	in=InputDefinition?
+		//	out=OutputDefinition
+		//	composition=WithTransitionsDefinition;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//type='compound' 'transition' name=ID in=InputDefinition? out=OutputDefinition composition=WithTransitionsDefinition
+		public Group getGroup() { return cGroup; }
+		
+		//type='compound'
+		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
+		
+		//'compound'
+		public Keyword getTypeCompoundKeyword_0_0() { return cTypeCompoundKeyword_0_0; }
+		
+		//'transition'
+		public Keyword getTransitionKeyword_1() { return cTransitionKeyword_1; }
+		
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+		
+		//in=InputDefinition?
+		public Assignment getInAssignment_3() { return cInAssignment_3; }
+		
+		//InputDefinition
+		public RuleCall getInInputDefinitionParserRuleCall_3_0() { return cInInputDefinitionParserRuleCall_3_0; }
+		
+		//out=OutputDefinition
+		public Assignment getOutAssignment_4() { return cOutAssignment_4; }
+		
+		//OutputDefinition
+		public RuleCall getOutOutputDefinitionParserRuleCall_4_0() { return cOutOutputDefinitionParserRuleCall_4_0; }
+		
+		//composition=WithTransitionsDefinition
+		public Assignment getCompositionAssignment_5() { return cCompositionAssignment_5; }
+		
+		//WithTransitionsDefinition
+		public RuleCall getCompositionWithTransitionsDefinitionParserRuleCall_5_0() { return cCompositionWithTransitionsDefinitionParserRuleCall_5_0; }
+	}
+	public class ReferenceSpaceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.ReferenceSpace");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cReferenceSpaceAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cReferencesKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cRefStatesAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cRefStatesReferenceStateParserRuleCall_3_0 = (RuleCall)cRefStatesAssignment_3.eContents().get(0);
-		private final Assignment cRefTransitionAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cRefTransitionReferenceTransitionParserRuleCall_4_0 = (RuleCall)cRefTransitionAssignment_4.eContents().get(0);
+		private final Assignment cRefTransitionsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cRefTransitionsReferenceTransitionParserRuleCall_4_0 = (RuleCall)cRefTransitionsAssignment_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Referencespace:
-		//	spaceType=References
+		////TransitionDefinition:
+		////	object = Transition transition = TransitionID (in = InputDefinition)? out = OutputDefinition (composition = WithTransitionsDefinition)?
+		////;
+		////Referencespace:
+		////	spaceType = References
+		////	'{'
+		////	refFields += ReferenceField*
+		////	refStates += ReferenceState*
+		////	refTransition += ReferenceTransition*
+		////	'}'
+		////;
+		//ReferenceSpace:
+		//	{ReferenceSpace} 'references'
 		//	'{'
-		//	refFields+=ReferenceField*
 		//	refStates+=ReferenceState*
-		//	refTransition+=ReferenceTransition*
+		//	refTransitions+=ReferenceTransition*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//spaceType=References '{' refFields+=ReferenceField* refStates+=ReferenceState* refTransition+=ReferenceTransition* '}'
+		//{ReferenceSpace} 'references' '{' refStates+=ReferenceState* refTransitions+=ReferenceTransition* '}'
 		public Group getGroup() { return cGroup; }
 		
-		//spaceType=References
-		public Assignment getSpaceTypeAssignment_0() { return cSpaceTypeAssignment_0; }
+		//{ReferenceSpace}
+		public Action getReferenceSpaceAction_0() { return cReferenceSpaceAction_0; }
 		
-		//References
-		public RuleCall getSpaceTypeReferencesParserRuleCall_0_0() { return cSpaceTypeReferencesParserRuleCall_0_0; }
+		//'references'
+		public Keyword getReferencesKeyword_1() { return cReferencesKeyword_1; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
-		
-		//refFields+=ReferenceField*
-		public Assignment getRefFieldsAssignment_2() { return cRefFieldsAssignment_2; }
-		
-		//ReferenceField
-		public RuleCall getRefFieldsReferenceFieldParserRuleCall_2_0() { return cRefFieldsReferenceFieldParserRuleCall_2_0; }
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
 		//refStates+=ReferenceState*
 		public Assignment getRefStatesAssignment_3() { return cRefStatesAssignment_3; }
@@ -578,296 +674,199 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//ReferenceState
 		public RuleCall getRefStatesReferenceStateParserRuleCall_3_0() { return cRefStatesReferenceStateParserRuleCall_3_0; }
 		
-		//refTransition+=ReferenceTransition*
-		public Assignment getRefTransitionAssignment_4() { return cRefTransitionAssignment_4; }
+		//refTransitions+=ReferenceTransition*
+		public Assignment getRefTransitionsAssignment_4() { return cRefTransitionsAssignment_4; }
 		
 		//ReferenceTransition
-		public RuleCall getRefTransitionReferenceTransitionParserRuleCall_4_0() { return cRefTransitionReferenceTransitionParserRuleCall_4_0; }
+		public RuleCall getRefTransitionsReferenceTransitionParserRuleCall_4_0() { return cRefTransitionsReferenceTransitionParserRuleCall_4_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
-	public class InstancespaceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Instancespace");
+	public class ReferenceTransitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.ReferenceTransition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cSpaceTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cSpaceTypeInstancesParserRuleCall_0_0 = (RuleCall)cSpaceTypeAssignment_0.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cInstancesAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cInstancesInstanceParserRuleCall_2_0 = (RuleCall)cInstancesAssignment_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cTransitionKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cRefTransitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cRefTransitionTransitionDefinitionCrossReference_1_0 = (CrossReference)cRefTransitionAssignment_1.eContents().get(0);
+		private final RuleCall cRefTransitionTransitionDefinitionIDTerminalRuleCall_1_0_1 = (RuleCall)cRefTransitionTransitionDefinitionCrossReference_1_0.eContents().get(1);
+		private final Keyword cFromKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cForeignFieldAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cForeignFieldFieldDefinitionCrossReference_3_0 = (CrossReference)cForeignFieldAssignment_3.eContents().get(0);
+		private final RuleCall cForeignFieldFieldDefinitionIDTerminalRuleCall_3_0_1 = (RuleCall)cForeignFieldFieldDefinitionCrossReference_3_0.eContents().get(1);
 		
-		//Instancespace:
-		//	spaceType=Instances
+		//ReferenceTransition:
+		//	'transition'
+		//	refTransition=[TransitionDefinition]
+		//	'from'
+		//	foreignField=[FieldDefinition];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'transition' refTransition=[TransitionDefinition] 'from' foreignField=[FieldDefinition]
+		public Group getGroup() { return cGroup; }
+		
+		//'transition'
+		public Keyword getTransitionKeyword_0() { return cTransitionKeyword_0; }
+		
+		//refTransition=[TransitionDefinition]
+		public Assignment getRefTransitionAssignment_1() { return cRefTransitionAssignment_1; }
+		
+		//[TransitionDefinition]
+		public CrossReference getRefTransitionTransitionDefinitionCrossReference_1_0() { return cRefTransitionTransitionDefinitionCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getRefTransitionTransitionDefinitionIDTerminalRuleCall_1_0_1() { return cRefTransitionTransitionDefinitionIDTerminalRuleCall_1_0_1; }
+		
+		//'from'
+		public Keyword getFromKeyword_2() { return cFromKeyword_2; }
+		
+		//foreignField=[FieldDefinition]
+		public Assignment getForeignFieldAssignment_3() { return cForeignFieldAssignment_3; }
+		
+		//[FieldDefinition]
+		public CrossReference getForeignFieldFieldDefinitionCrossReference_3_0() { return cForeignFieldFieldDefinitionCrossReference_3_0; }
+		
+		//ID
+		public RuleCall getForeignFieldFieldDefinitionIDTerminalRuleCall_3_0_1() { return cForeignFieldFieldDefinitionIDTerminalRuleCall_3_0_1; }
+	}
+	public class ReferenceStateElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.ReferenceState");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cStateKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cRefStateAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cRefStateStateDefinitionCrossReference_1_0 = (CrossReference)cRefStateAssignment_1.eContents().get(0);
+		private final RuleCall cRefStateStateDefinitionIDTerminalRuleCall_1_0_1 = (RuleCall)cRefStateStateDefinitionCrossReference_1_0.eContents().get(1);
+		private final Keyword cFromKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cForeignFieldAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cForeignFieldFieldDefinitionCrossReference_3_0 = (CrossReference)cForeignFieldAssignment_3.eContents().get(0);
+		private final RuleCall cForeignFieldFieldDefinitionIDTerminalRuleCall_3_0_1 = (RuleCall)cForeignFieldFieldDefinitionCrossReference_3_0.eContents().get(1);
+		
+		//ReferenceState:
+		//	'state'
+		//	refState=[StateDefinition]
+		//	'from'
+		//	foreignField=[FieldDefinition];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'state' refState=[StateDefinition] 'from' foreignField=[FieldDefinition]
+		public Group getGroup() { return cGroup; }
+		
+		//'state'
+		public Keyword getStateKeyword_0() { return cStateKeyword_0; }
+		
+		//refState=[StateDefinition]
+		public Assignment getRefStateAssignment_1() { return cRefStateAssignment_1; }
+		
+		//[StateDefinition]
+		public CrossReference getRefStateStateDefinitionCrossReference_1_0() { return cRefStateStateDefinitionCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getRefStateStateDefinitionIDTerminalRuleCall_1_0_1() { return cRefStateStateDefinitionIDTerminalRuleCall_1_0_1; }
+		
+		//'from'
+		public Keyword getFromKeyword_2() { return cFromKeyword_2; }
+		
+		//foreignField=[FieldDefinition]
+		public Assignment getForeignFieldAssignment_3() { return cForeignFieldAssignment_3; }
+		
+		//[FieldDefinition]
+		public CrossReference getForeignFieldFieldDefinitionCrossReference_3_0() { return cForeignFieldFieldDefinitionCrossReference_3_0; }
+		
+		//ID
+		public RuleCall getForeignFieldFieldDefinitionIDTerminalRuleCall_3_0_1() { return cForeignFieldFieldDefinitionIDTerminalRuleCall_3_0_1; }
+	}
+	public class InstanceSpaceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.InstanceSpace");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cInstanceSpaceAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cInstancesKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cInstancesAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cInstancesInstanceParserRuleCall_3_0 = (RuleCall)cInstancesAssignment_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		////
+		////Instancespace:
+		////	spaceType  = Instances
+		////	'{'
+		////		instances += Instance*
+		////	'}'
+		////;
+		//InstanceSpace:
+		//	{InstanceSpace} 'instances'
 		//	'{'
 		//	instances+=Instance*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//spaceType=Instances '{' instances+=Instance* '}'
+		//{InstanceSpace} 'instances' '{' instances+=Instance* '}'
 		public Group getGroup() { return cGroup; }
 		
-		//spaceType=Instances
-		public Assignment getSpaceTypeAssignment_0() { return cSpaceTypeAssignment_0; }
+		//{InstanceSpace}
+		public Action getInstanceSpaceAction_0() { return cInstanceSpaceAction_0; }
 		
-		//Instances
-		public RuleCall getSpaceTypeInstancesParserRuleCall_0_0() { return cSpaceTypeInstancesParserRuleCall_0_0; }
+		//'instances'
+		public Keyword getInstancesKeyword_1() { return cInstancesKeyword_1; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
 		//instances+=Instance*
-		public Assignment getInstancesAssignment_2() { return cInstancesAssignment_2; }
+		public Assignment getInstancesAssignment_3() { return cInstancesAssignment_3; }
 		
 		//Instance
-		public RuleCall getInstancesInstanceParserRuleCall_2_0() { return cInstancesInstanceParserRuleCall_2_0; }
+		public RuleCall getInstancesInstanceParserRuleCall_3_0() { return cInstancesInstanceParserRuleCall_3_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
-	}
-	public class ReferenceFieldElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.ReferenceField");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cRefAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cRefFieldParserRuleCall_0_0 = (RuleCall)cRefAssignment_0.eContents().get(0);
-		private final Assignment cSpaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cSpaceSpaceParserRuleCall_1_0 = (RuleCall)cSpaceAssignment_1.eContents().get(0);
-		
-		//ReferenceField:
-		//	ref=Field
-		//	space=Space;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//ref=Field space=Space
-		public Group getGroup() { return cGroup; }
-		
-		//ref=Field
-		public Assignment getRefAssignment_0() { return cRefAssignment_0; }
-		
-		//Field
-		public RuleCall getRefFieldParserRuleCall_0_0() { return cRefFieldParserRuleCall_0_0; }
-		
-		//space=Space
-		public Assignment getSpaceAssignment_1() { return cSpaceAssignment_1; }
-		
-		//Space
-		public RuleCall getSpaceSpaceParserRuleCall_1_0() { return cSpaceSpaceParserRuleCall_1_0; }
-	}
-	public class StateObjectDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.StateObjectDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
-		private final Assignment cTypeAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
-		private final RuleCall cTypePrimitiveParserRuleCall_0_0_0 = (RuleCall)cTypeAssignment_0_0.eContents().get(0);
-		private final Assignment cTypeAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
-		private final RuleCall cTypeCompoundParserRuleCall_0_1_0 = (RuleCall)cTypeAssignment_0_1.eContents().get(0);
-		private final Assignment cStateAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cStateStateDefinitionParserRuleCall_1_0 = (RuleCall)cStateAssignment_1.eContents().get(0);
-		
-		//StateObjectDefinition:
-		//	(type=Primitive | type=Compound) state=StateDefinition;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//(type=Primitive | type=Compound) state=StateDefinition
-		public Group getGroup() { return cGroup; }
-		
-		//(type=Primitive | type=Compound)
-		public Alternatives getAlternatives_0() { return cAlternatives_0; }
-		
-		//type=Primitive
-		public Assignment getTypeAssignment_0_0() { return cTypeAssignment_0_0; }
-		
-		//Primitive
-		public RuleCall getTypePrimitiveParserRuleCall_0_0_0() { return cTypePrimitiveParserRuleCall_0_0_0; }
-		
-		//type=Compound
-		public Assignment getTypeAssignment_0_1() { return cTypeAssignment_0_1; }
-		
-		//Compound
-		public RuleCall getTypeCompoundParserRuleCall_0_1_0() { return cTypeCompoundParserRuleCall_0_1_0; }
-		
-		//state=StateDefinition
-		public Assignment getStateAssignment_1() { return cStateAssignment_1; }
-		
-		//StateDefinition
-		public RuleCall getStateStateDefinitionParserRuleCall_1_0() { return cStateStateDefinitionParserRuleCall_1_0; }
-	}
-	public class TransitionObjectDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TransitionObjectDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
-		private final Assignment cTypeAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
-		private final RuleCall cTypePrimitiveParserRuleCall_0_0_0 = (RuleCall)cTypeAssignment_0_0.eContents().get(0);
-		private final Assignment cTypeAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
-		private final RuleCall cTypeCompoundParserRuleCall_0_1_0 = (RuleCall)cTypeAssignment_0_1.eContents().get(0);
-		private final Assignment cTransitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTransitionTransitionDefinitionParserRuleCall_1_0 = (RuleCall)cTransitionAssignment_1.eContents().get(0);
-		
-		//TransitionObjectDefinition:
-		//	(type=Primitive | type=Compound) transition=TransitionDefinition;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//(type=Primitive | type=Compound) transition=TransitionDefinition
-		public Group getGroup() { return cGroup; }
-		
-		//(type=Primitive | type=Compound)
-		public Alternatives getAlternatives_0() { return cAlternatives_0; }
-		
-		//type=Primitive
-		public Assignment getTypeAssignment_0_0() { return cTypeAssignment_0_0; }
-		
-		//Primitive
-		public RuleCall getTypePrimitiveParserRuleCall_0_0_0() { return cTypePrimitiveParserRuleCall_0_0_0; }
-		
-		//type=Compound
-		public Assignment getTypeAssignment_0_1() { return cTypeAssignment_0_1; }
-		
-		//Compound
-		public RuleCall getTypeCompoundParserRuleCall_0_1_0() { return cTypeCompoundParserRuleCall_0_1_0; }
-		
-		//transition=TransitionDefinition
-		public Assignment getTransitionAssignment_1() { return cTransitionAssignment_1; }
-		
-		//TransitionDefinition
-		public RuleCall getTransitionTransitionDefinitionParserRuleCall_1_0() { return cTransitionTransitionDefinitionParserRuleCall_1_0; }
-	}
-	public class PrimitiveStateDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.PrimitiveStateDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cObjectAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cObjectStateParserRuleCall_0_0 = (RuleCall)cObjectAssignment_0.eContents().get(0);
-		private final Assignment cIdAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cIdStateIDParserRuleCall_1_0 = (RuleCall)cIdAssignment_1.eContents().get(0);
-		
-		//PrimitiveStateDefinition:
-		//	object=State id=StateID;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//object=State id=StateID
-		public Group getGroup() { return cGroup; }
-		
-		//object=State
-		public Assignment getObjectAssignment_0() { return cObjectAssignment_0; }
-		
-		//State
-		public RuleCall getObjectStateParserRuleCall_0_0() { return cObjectStateParserRuleCall_0_0; }
-		
-		//id=StateID
-		public Assignment getIdAssignment_1() { return cIdAssignment_1; }
-		
-		//StateID
-		public RuleCall getIdStateIDParserRuleCall_1_0() { return cIdStateIDParserRuleCall_1_0; }
-	}
-	public class CompoundStateDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.CompoundStateDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cObjectAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cObjectStateParserRuleCall_0_0 = (RuleCall)cObjectAssignment_0.eContents().get(0);
-		private final Assignment cStateAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cStateStateIDParserRuleCall_1_0 = (RuleCall)cStateAssignment_1.eContents().get(0);
-		private final Assignment cCompoundStateDefAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cCompoundStateDefWithStatesDefinitionParserRuleCall_2_0 = (RuleCall)cCompoundStateDefAssignment_2.eContents().get(0);
-		
-		//CompoundStateDefinition:
-		//	object=State state=StateID compoundStateDef=WithStatesDefinition?;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//object=State state=StateID compoundStateDef=WithStatesDefinition?
-		public Group getGroup() { return cGroup; }
-		
-		//object=State
-		public Assignment getObjectAssignment_0() { return cObjectAssignment_0; }
-		
-		//State
-		public RuleCall getObjectStateParserRuleCall_0_0() { return cObjectStateParserRuleCall_0_0; }
-		
-		//state=StateID
-		public Assignment getStateAssignment_1() { return cStateAssignment_1; }
-		
-		//StateID
-		public RuleCall getStateStateIDParserRuleCall_1_0() { return cStateStateIDParserRuleCall_1_0; }
-		
-		//compoundStateDef=WithStatesDefinition?
-		public Assignment getCompoundStateDefAssignment_2() { return cCompoundStateDefAssignment_2; }
-		
-		//WithStatesDefinition
-		public RuleCall getCompoundStateDefWithStatesDefinitionParserRuleCall_2_0() { return cCompoundStateDefWithStatesDefinitionParserRuleCall_2_0; }
-	}
-	public class StateDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.StateDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cObjectAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cObjectStateParserRuleCall_0_0 = (RuleCall)cObjectAssignment_0.eContents().get(0);
-		private final Assignment cStateAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cStateStateIDParserRuleCall_1_0 = (RuleCall)cStateAssignment_1.eContents().get(0);
-		private final Assignment cWithDefinitionAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cWithDefinitionWithStatesDefinitionParserRuleCall_2_0 = (RuleCall)cWithDefinitionAssignment_2.eContents().get(0);
-		
-		//StateDefinition:
-		//	object=State state=StateID withDefinition=WithStatesDefinition?;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//object=State state=StateID withDefinition=WithStatesDefinition?
-		public Group getGroup() { return cGroup; }
-		
-		//object=State
-		public Assignment getObjectAssignment_0() { return cObjectAssignment_0; }
-		
-		//State
-		public RuleCall getObjectStateParserRuleCall_0_0() { return cObjectStateParserRuleCall_0_0; }
-		
-		//state=StateID
-		public Assignment getStateAssignment_1() { return cStateAssignment_1; }
-		
-		//StateID
-		public RuleCall getStateStateIDParserRuleCall_1_0() { return cStateStateIDParserRuleCall_1_0; }
-		
-		//withDefinition=WithStatesDefinition?
-		public Assignment getWithDefinitionAssignment_2() { return cWithDefinitionAssignment_2; }
-		
-		//WithStatesDefinition
-		public RuleCall getWithDefinitionWithStatesDefinitionParserRuleCall_2_0() { return cWithDefinitionWithStatesDefinitionParserRuleCall_2_0; }
-	}
-	public class StateIDElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.StateID");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
-		
-		//StateID:
-		//	name=ID;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//name=ID
-		public Assignment getNameAssignment() { return cNameAssignment; }
-		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 	public class WithStatesDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.WithStatesDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cCompositionAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cCompositionWithParserRuleCall_0_0 = (RuleCall)cCompositionAssignment_0.eContents().get(0);
+		private final Keyword cWithKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cPredicateAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cPredicatePredicateParserRuleCall_2_0 = (RuleCall)cPredicateAssignment_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
+		////ReferenceField:
+		////	ref = Field 
+		////	space = Space
+		////;
+		////StateObjectDefinition:
+		////	(type = Primitive| type = Compound)
+		////	state = StateDefinition 
+		////;
+		////
+		////TransitionObjectDefinition:
+		////	(type = Primitive| type = Compound)
+		////	transition = TransitionDefinition
+		////;
+		////PrimitiveStateDefinition:
+		////	object = State id = StateID 
+		////;
+		////
+		////CompoundStateDefinition:
+		////	object = State state = StateID (compoundStateDef= WithStatesDefinition)?
+		////;
+		////StateDefinition:
+		////	object = State state = StateID (withDefinition= WithStatesDefinition)?
+		////;
+		////StateID:
+		////	 name = ID
+		////;
 		//WithStatesDefinition:
-		//	composition=With
+		//	'with'
 		//	'{'
 		//	predicate=Predicate
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//composition=With '{' predicate=Predicate '}'
+		//'with' '{' predicate=Predicate '}'
 		public Group getGroup() { return cGroup; }
 		
-		//composition=With
-		public Assignment getCompositionAssignment_0() { return cCompositionAssignment_0; }
-		
-		//With
-		public RuleCall getCompositionWithParserRuleCall_0_0() { return cCompositionWithParserRuleCall_0_0; }
+		//'with'
+		public Keyword getWithKeyword_0() { return cWithKeyword_0; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
@@ -884,28 +883,24 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	public class WithTransitionsDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.WithTransitionsDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cCompositionAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cCompositionWithParserRuleCall_0_0 = (RuleCall)cCompositionAssignment_0.eContents().get(0);
+		private final Keyword cWithKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cTransitionsAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cTransitionsTransitionalExpressionParserRuleCall_2_0 = (RuleCall)cTransitionsAssignment_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//WithTransitionsDefinition:
-		//	composition=With
+		//	'with'
 		//	'{'
 		//	transitions=TransitionalExpression
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//composition=With '{' transitions=TransitionalExpression '}'
+		//'with' '{' transitions=TransitionalExpression '}'
 		public Group getGroup() { return cGroup; }
 		
-		//composition=With
-		public Assignment getCompositionAssignment_0() { return cCompositionAssignment_0; }
-		
-		//With
-		public RuleCall getCompositionWithParserRuleCall_0_0() { return cCompositionWithParserRuleCall_0_0; }
+		//'with'
+		public Keyword getWithKeyword_0() { return cWithKeyword_0; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
@@ -919,573 +914,75 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
-	public class ReferenceStateElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.ReferenceState");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cObjectAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cObjectStateParserRuleCall_0_0 = (RuleCall)cObjectAssignment_0.eContents().get(0);
-		private final Assignment cRefStateAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cRefStateStateIDCrossReference_1_0 = (CrossReference)cRefStateAssignment_1.eContents().get(0);
-		private final RuleCall cRefStateStateIDIDTerminalRuleCall_1_0_1 = (RuleCall)cRefStateStateIDCrossReference_1_0.eContents().get(1);
-		private final Assignment cFromAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cFromFromFieldDefinitionParserRuleCall_2_0 = (RuleCall)cFromAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Alternatives cAlternatives_3_0 = (Alternatives)cGroup_3.eContents().get(0);
-		private final Keyword cCalledKeyword_3_0_0 = (Keyword)cAlternatives_3_0.eContents().get(0);
-		private final Keyword cAsKeyword_3_0_1 = (Keyword)cAlternatives_3_0.eContents().get(1);
-		private final Assignment cStateAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cStateStateIDParserRuleCall_3_1_0 = (RuleCall)cStateAssignment_3_1.eContents().get(0);
-		private final Assignment cCompositionAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cCompositionWithStatesDefinitionParserRuleCall_4_0 = (RuleCall)cCompositionAssignment_4.eContents().get(0);
-		
-		//ReferenceState:
-		//	object=State
-		//	refState=[StateID] from=FromFieldDefinition (('called' | 'as') state=StateID)?
-		//	composition=WithStatesDefinition?;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//object=State refState=[StateID] from=FromFieldDefinition (('called' | 'as') state=StateID)?
-		//composition=WithStatesDefinition?
-		public Group getGroup() { return cGroup; }
-		
-		//object=State
-		public Assignment getObjectAssignment_0() { return cObjectAssignment_0; }
-		
-		//State
-		public RuleCall getObjectStateParserRuleCall_0_0() { return cObjectStateParserRuleCall_0_0; }
-		
-		//refState=[StateID]
-		public Assignment getRefStateAssignment_1() { return cRefStateAssignment_1; }
-		
-		//[StateID]
-		public CrossReference getRefStateStateIDCrossReference_1_0() { return cRefStateStateIDCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getRefStateStateIDIDTerminalRuleCall_1_0_1() { return cRefStateStateIDIDTerminalRuleCall_1_0_1; }
-		
-		//from=FromFieldDefinition
-		public Assignment getFromAssignment_2() { return cFromAssignment_2; }
-		
-		//FromFieldDefinition
-		public RuleCall getFromFromFieldDefinitionParserRuleCall_2_0() { return cFromFromFieldDefinitionParserRuleCall_2_0; }
-		
-		//(('called' | 'as') state=StateID)?
-		public Group getGroup_3() { return cGroup_3; }
-		
-		//('called' | 'as')
-		public Alternatives getAlternatives_3_0() { return cAlternatives_3_0; }
-		
-		//'called'
-		public Keyword getCalledKeyword_3_0_0() { return cCalledKeyword_3_0_0; }
-		
-		//'as'
-		public Keyword getAsKeyword_3_0_1() { return cAsKeyword_3_0_1; }
-		
-		//state=StateID
-		public Assignment getStateAssignment_3_1() { return cStateAssignment_3_1; }
-		
-		//StateID
-		public RuleCall getStateStateIDParserRuleCall_3_1_0() { return cStateStateIDParserRuleCall_3_1_0; }
-		
-		//composition=WithStatesDefinition?
-		public Assignment getCompositionAssignment_4() { return cCompositionAssignment_4; }
-		
-		//WithStatesDefinition
-		public RuleCall getCompositionWithStatesDefinitionParserRuleCall_4_0() { return cCompositionWithStatesDefinitionParserRuleCall_4_0; }
-	}
-	public class TransitionDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TransitionDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cObjectAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cObjectTransitionParserRuleCall_0_0 = (RuleCall)cObjectAssignment_0.eContents().get(0);
-		private final Assignment cTransitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTransitionTransitionIDParserRuleCall_1_0 = (RuleCall)cTransitionAssignment_1.eContents().get(0);
-		private final Assignment cInAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cInInputDefinitionParserRuleCall_2_0 = (RuleCall)cInAssignment_2.eContents().get(0);
-		private final Assignment cOutAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cOutOutputDefinitionParserRuleCall_3_0 = (RuleCall)cOutAssignment_3.eContents().get(0);
-		private final Assignment cCompositionAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cCompositionWithTransitionsDefinitionParserRuleCall_4_0 = (RuleCall)cCompositionAssignment_4.eContents().get(0);
-		
-		//TransitionDefinition:
-		//	object=Transition transition=TransitionID in=InputDefinition? out=OutputDefinition
-		//	composition=WithTransitionsDefinition?;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//object=Transition transition=TransitionID in=InputDefinition? out=OutputDefinition
-		//composition=WithTransitionsDefinition?
-		public Group getGroup() { return cGroup; }
-		
-		//object=Transition
-		public Assignment getObjectAssignment_0() { return cObjectAssignment_0; }
-		
-		//Transition
-		public RuleCall getObjectTransitionParserRuleCall_0_0() { return cObjectTransitionParserRuleCall_0_0; }
-		
-		//transition=TransitionID
-		public Assignment getTransitionAssignment_1() { return cTransitionAssignment_1; }
-		
-		//TransitionID
-		public RuleCall getTransitionTransitionIDParserRuleCall_1_0() { return cTransitionTransitionIDParserRuleCall_1_0; }
-		
-		//in=InputDefinition?
-		public Assignment getInAssignment_2() { return cInAssignment_2; }
-		
-		//InputDefinition
-		public RuleCall getInInputDefinitionParserRuleCall_2_0() { return cInInputDefinitionParserRuleCall_2_0; }
-		
-		//out=OutputDefinition
-		public Assignment getOutAssignment_3() { return cOutAssignment_3; }
-		
-		//OutputDefinition
-		public RuleCall getOutOutputDefinitionParserRuleCall_3_0() { return cOutOutputDefinitionParserRuleCall_3_0; }
-		
-		//composition=WithTransitionsDefinition?
-		public Assignment getCompositionAssignment_4() { return cCompositionAssignment_4; }
-		
-		//WithTransitionsDefinition
-		public RuleCall getCompositionWithTransitionsDefinitionParserRuleCall_4_0() { return cCompositionWithTransitionsDefinitionParserRuleCall_4_0; }
-	}
-	public class TransitionIDElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TransitionID");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
-		
-		//TransitionID:
-		//	name=ID;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//name=ID
-		public Assignment getNameAssignment() { return cNameAssignment; }
-		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
-	}
-	public class ReferenceTransitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.ReferenceTransition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cObjectAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cObjectTransitionParserRuleCall_0_0 = (RuleCall)cObjectAssignment_0.eContents().get(0);
-		private final Assignment cRefTransitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cRefTransitionTransitionIDCrossReference_1_0 = (CrossReference)cRefTransitionAssignment_1.eContents().get(0);
-		private final RuleCall cRefTransitionTransitionIDIDTerminalRuleCall_1_0_1 = (RuleCall)cRefTransitionTransitionIDCrossReference_1_0.eContents().get(1);
-		private final Assignment cFromDefAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cFromDefFromFieldDefinitionParserRuleCall_2_0 = (RuleCall)cFromDefAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Alternatives cAlternatives_3_0 = (Alternatives)cGroup_3.eContents().get(0);
-		private final Keyword cCalledKeyword_3_0_0 = (Keyword)cAlternatives_3_0.eContents().get(0);
-		private final Keyword cAsKeyword_3_0_1 = (Keyword)cAlternatives_3_0.eContents().get(1);
-		private final Assignment cTransitionAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cTransitionTransitionIDParserRuleCall_3_1_0 = (RuleCall)cTransitionAssignment_3_1.eContents().get(0);
-		private final Assignment cCompositionAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cCompositionWithTransitionsDefinitionParserRuleCall_4_0 = (RuleCall)cCompositionAssignment_4.eContents().get(0);
-		
-		//ReferenceTransition:
-		//	object=Transition
-		//	refTransition=[TransitionID] fromDef=FromFieldDefinition (('called' | 'as') transition=TransitionID)?
-		//	composition=WithTransitionsDefinition?;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//object=Transition refTransition=[TransitionID] fromDef=FromFieldDefinition (('called' | 'as') transition=TransitionID)?
-		//composition=WithTransitionsDefinition?
-		public Group getGroup() { return cGroup; }
-		
-		//object=Transition
-		public Assignment getObjectAssignment_0() { return cObjectAssignment_0; }
-		
-		//Transition
-		public RuleCall getObjectTransitionParserRuleCall_0_0() { return cObjectTransitionParserRuleCall_0_0; }
-		
-		//refTransition=[TransitionID]
-		public Assignment getRefTransitionAssignment_1() { return cRefTransitionAssignment_1; }
-		
-		//[TransitionID]
-		public CrossReference getRefTransitionTransitionIDCrossReference_1_0() { return cRefTransitionTransitionIDCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getRefTransitionTransitionIDIDTerminalRuleCall_1_0_1() { return cRefTransitionTransitionIDIDTerminalRuleCall_1_0_1; }
-		
-		//fromDef=FromFieldDefinition
-		public Assignment getFromDefAssignment_2() { return cFromDefAssignment_2; }
-		
-		//FromFieldDefinition
-		public RuleCall getFromDefFromFieldDefinitionParserRuleCall_2_0() { return cFromDefFromFieldDefinitionParserRuleCall_2_0; }
-		
-		//(('called' | 'as') transition=TransitionID)?
-		public Group getGroup_3() { return cGroup_3; }
-		
-		//('called' | 'as')
-		public Alternatives getAlternatives_3_0() { return cAlternatives_3_0; }
-		
-		//'called'
-		public Keyword getCalledKeyword_3_0_0() { return cCalledKeyword_3_0_0; }
-		
-		//'as'
-		public Keyword getAsKeyword_3_0_1() { return cAsKeyword_3_0_1; }
-		
-		//transition=TransitionID
-		public Assignment getTransitionAssignment_3_1() { return cTransitionAssignment_3_1; }
-		
-		//TransitionID
-		public RuleCall getTransitionTransitionIDParserRuleCall_3_1_0() { return cTransitionTransitionIDParserRuleCall_3_1_0; }
-		
-		//composition=WithTransitionsDefinition?
-		public Assignment getCompositionAssignment_4() { return cCompositionAssignment_4; }
-		
-		//WithTransitionsDefinition
-		public RuleCall getCompositionWithTransitionsDefinitionParserRuleCall_4_0() { return cCompositionWithTransitionsDefinitionParserRuleCall_4_0; }
-	}
-	public class FromFieldDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.FromFieldDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cFromAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cFromFromParserRuleCall_0_0 = (RuleCall)cFromAssignment_0.eContents().get(0);
-		private final Assignment cRefSpaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cRefSpaceSpaceCrossReference_1_0 = (CrossReference)cRefSpaceAssignment_1.eContents().get(0);
-		private final RuleCall cRefSpaceSpaceIDTerminalRuleCall_1_0_1 = (RuleCall)cRefSpaceSpaceCrossReference_1_0.eContents().get(1);
-		
-		//FromFieldDefinition:
-		//	from=From
-		//	refSpace=[Space];
-		@Override public ParserRule getRule() { return rule; }
-		
-		//from=From refSpace=[Space]
-		public Group getGroup() { return cGroup; }
-		
-		//from=From
-		public Assignment getFromAssignment_0() { return cFromAssignment_0; }
-		
-		//From
-		public RuleCall getFromFromParserRuleCall_0_0() { return cFromFromParserRuleCall_0_0; }
-		
-		//refSpace=[Space]
-		public Assignment getRefSpaceAssignment_1() { return cRefSpaceAssignment_1; }
-		
-		//[Space]
-		public CrossReference getRefSpaceSpaceCrossReference_1_0() { return cRefSpaceSpaceCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getRefSpaceSpaceIDTerminalRuleCall_1_0_1() { return cRefSpaceSpaceIDTerminalRuleCall_1_0_1; }
-	}
 	public class InputDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.InputDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cInputAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cInputInputParserRuleCall_0_0 = (RuleCall)cInputAssignment_0.eContents().get(0);
-		private final Assignment cInputStateAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cInputStateStateIDCrossReference_1_0 = (CrossReference)cInputStateAssignment_1.eContents().get(0);
-		private final RuleCall cInputStateStateIDIDTerminalRuleCall_1_0_1 = (RuleCall)cInputStateStateIDCrossReference_1_0.eContents().get(1);
+		private final Action cInputDefinitionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cInputKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cInputStateAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cInputStateStateDefinitionCrossReference_2_0 = (CrossReference)cInputStateAssignment_2.eContents().get(0);
+		private final RuleCall cInputStateStateDefinitionIDTerminalRuleCall_2_0_1 = (RuleCall)cInputStateStateDefinitionCrossReference_2_0.eContents().get(1);
 		
+		////TransitionID:
+		////	name = ID
+		////;
+		////FromFieldDefinition:
+		////	from = From
+		////	refSpace = [Space]
+		////;
 		//InputDefinition:
-		//	input=Input inputState+=[StateID]*;
+		//	{InputDefinition} 'input' inputState+=[StateDefinition]*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//input=Input inputState+=[StateID]*
+		//{InputDefinition} 'input' inputState+=[StateDefinition]*
 		public Group getGroup() { return cGroup; }
 		
-		//input=Input
-		public Assignment getInputAssignment_0() { return cInputAssignment_0; }
+		//{InputDefinition}
+		public Action getInputDefinitionAction_0() { return cInputDefinitionAction_0; }
 		
-		//Input
-		public RuleCall getInputInputParserRuleCall_0_0() { return cInputInputParserRuleCall_0_0; }
+		//'input'
+		public Keyword getInputKeyword_1() { return cInputKeyword_1; }
 		
-		//inputState+=[StateID]*
-		public Assignment getInputStateAssignment_1() { return cInputStateAssignment_1; }
+		//inputState+=[StateDefinition]*
+		public Assignment getInputStateAssignment_2() { return cInputStateAssignment_2; }
 		
-		//[StateID]
-		public CrossReference getInputStateStateIDCrossReference_1_0() { return cInputStateStateIDCrossReference_1_0; }
+		//[StateDefinition]
+		public CrossReference getInputStateStateDefinitionCrossReference_2_0() { return cInputStateStateDefinitionCrossReference_2_0; }
 		
 		//ID
-		public RuleCall getInputStateStateIDIDTerminalRuleCall_1_0_1() { return cInputStateStateIDIDTerminalRuleCall_1_0_1; }
+		public RuleCall getInputStateStateDefinitionIDTerminalRuleCall_2_0_1() { return cInputStateStateDefinitionIDTerminalRuleCall_2_0_1; }
 	}
 	public class OutputDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.OutputDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cOutputAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cOutputOutputParserRuleCall_0_0 = (RuleCall)cOutputAssignment_0.eContents().get(0);
+		private final Keyword cOutputKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cOutputStateAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cOutputStateStateIDCrossReference_1_0 = (CrossReference)cOutputStateAssignment_1.eContents().get(0);
-		private final RuleCall cOutputStateStateIDIDTerminalRuleCall_1_0_1 = (RuleCall)cOutputStateStateIDCrossReference_1_0.eContents().get(1);
+		private final CrossReference cOutputStateStateDefinitionCrossReference_1_0 = (CrossReference)cOutputStateAssignment_1.eContents().get(0);
+		private final RuleCall cOutputStateStateDefinitionIDTerminalRuleCall_1_0_1 = (RuleCall)cOutputStateStateDefinitionCrossReference_1_0.eContents().get(1);
 		
 		//OutputDefinition:
-		//	output=Output outputState=[StateID];
+		//	'output' outputState=[StateDefinition];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//output=Output outputState=[StateID]
+		//'output' outputState=[StateDefinition]
 		public Group getGroup() { return cGroup; }
-		
-		//output=Output
-		public Assignment getOutputAssignment_0() { return cOutputAssignment_0; }
-		
-		//Output
-		public RuleCall getOutputOutputParserRuleCall_0_0() { return cOutputOutputParserRuleCall_0_0; }
-		
-		//outputState=[StateID]
-		public Assignment getOutputStateAssignment_1() { return cOutputStateAssignment_1; }
-		
-		//[StateID]
-		public CrossReference getOutputStateStateIDCrossReference_1_0() { return cOutputStateStateIDCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getOutputStateStateIDIDTerminalRuleCall_1_0_1() { return cOutputStateStateIDIDTerminalRuleCall_1_0_1; }
-	}
-	public class ExtendsDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.ExtendsDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cTypeExtendsParserRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
-		private final Assignment cNamespacesAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cNamespacesSpaceCrossReference_1_0 = (CrossReference)cNamespacesAssignment_1.eContents().get(0);
-		private final RuleCall cNamespacesSpaceIDTerminalRuleCall_1_0_1 = (RuleCall)cNamespacesSpaceCrossReference_1_0.eContents().get(1);
-		
-		//ExtendsDefinition:
-		//	type=Extends
-		//	namespaces+=[Space]+;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//type=Extends namespaces+=[Space]+
-		public Group getGroup() { return cGroup; }
-		
-		//type=Extends
-		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
-		
-		//Extends
-		public RuleCall getTypeExtendsParserRuleCall_0_0() { return cTypeExtendsParserRuleCall_0_0; }
-		
-		//namespaces+=[Space]+
-		public Assignment getNamespacesAssignment_1() { return cNamespacesAssignment_1; }
-		
-		//[Space]
-		public CrossReference getNamespacesSpaceCrossReference_1_0() { return cNamespacesSpaceCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getNamespacesSpaceIDTerminalRuleCall_1_0_1() { return cNamespacesSpaceIDTerminalRuleCall_1_0_1; }
-	}
-	public class PrimitiveElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Primitive");
-		private final Keyword cPrimitiveKeyword = (Keyword)rule.eContents().get(1);
-		
-		//Primitive:
-		//	'primitive';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'primitive'
-		public Keyword getPrimitiveKeyword() { return cPrimitiveKeyword; }
-	}
-	public class CompoundElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Compound");
-		private final Keyword cCompoundKeyword = (Keyword)rule.eContents().get(1);
-		
-		//Compound:
-		//	'compound';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'compound'
-		public Keyword getCompoundKeyword() { return cCompoundKeyword; }
-	}
-	public class FieldElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Field");
-		private final Keyword cFieldKeyword = (Keyword)rule.eContents().get(1);
-		
-		//Field:
-		//	'field';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'field'
-		public Keyword getFieldKeyword() { return cFieldKeyword; }
-	}
-	public class StateElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.State");
-		private final Keyword cStateKeyword = (Keyword)rule.eContents().get(1);
-		
-		//State:
-		//	'state';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'state'
-		public Keyword getStateKeyword() { return cStateKeyword; }
-	}
-	public class TransitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Transition");
-		private final Keyword cTransitionKeyword = (Keyword)rule.eContents().get(1);
-		
-		//Transition:
-		//	'transition';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'transition'
-		public Keyword getTransitionKeyword() { return cTransitionKeyword; }
-	}
-	public class DefinitionsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Definitions");
-		private final Keyword cDefinitionsKeyword = (Keyword)rule.eContents().get(1);
-		
-		//Definitions:
-		//	'definitions';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'definitions'
-		public Keyword getDefinitionsKeyword() { return cDefinitionsKeyword; }
-	}
-	public class ReferencesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.References");
-		private final Keyword cReferencesKeyword = (Keyword)rule.eContents().get(1);
-		
-		//References:
-		//	'references';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'references'
-		public Keyword getReferencesKeyword() { return cReferencesKeyword; }
-	}
-	public class InstancesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Instances");
-		private final Keyword cInstancesKeyword = (Keyword)rule.eContents().get(1);
-		
-		//Instances:
-		//	'instances';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'instances'
-		public Keyword getInstancesKeyword() { return cInstancesKeyword; }
-	}
-	public class InputElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Input");
-		private final Keyword cInputKeyword = (Keyword)rule.eContents().get(1);
-		
-		//Input:
-		//	'input';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'input'
-		public Keyword getInputKeyword() { return cInputKeyword; }
-	}
-	public class OutputElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Output");
-		private final Keyword cOutputKeyword = (Keyword)rule.eContents().get(1);
-		
-		//Output:
-		//	'output';
-		@Override public ParserRule getRule() { return rule; }
 		
 		//'output'
-		public Keyword getOutputKeyword() { return cOutputKeyword; }
-	}
-	public class FromElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.From");
-		private final Keyword cFromKeyword = (Keyword)rule.eContents().get(1);
+		public Keyword getOutputKeyword_0() { return cOutputKeyword_0; }
 		
-		//From:
-		//	'from';
-		@Override public ParserRule getRule() { return rule; }
+		//outputState=[StateDefinition]
+		public Assignment getOutputStateAssignment_1() { return cOutputStateAssignment_1; }
 		
-		//'from'
-		public Keyword getFromKeyword() { return cFromKeyword; }
-	}
-	public class WithElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.With");
-		private final Keyword cWithKeyword = (Keyword)rule.eContents().get(1);
+		//[StateDefinition]
+		public CrossReference getOutputStateStateDefinitionCrossReference_1_0() { return cOutputStateStateDefinitionCrossReference_1_0; }
 		
-		//With:
-		//	'with';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'with'
-		public Keyword getWithKeyword() { return cWithKeyword; }
-	}
-	public class ExtendsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Extends");
-		private final Keyword cExtendsKeyword = (Keyword)rule.eContents().get(1);
-		
-		//Extends:
-		//	'extends';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'extends'
-		public Keyword getExtendsKeyword() { return cExtendsKeyword; }
-	}
-	public class NotOpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.NotOp");
-		private final Keyword cNOTKeyword = (Keyword)rule.eContents().get(1);
-		
-		//NotOp:
-		//	'NOT';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'NOT'
-		public Keyword getNOTKeyword() { return cNOTKeyword; }
-	}
-	public class AndOpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.AndOp");
-		private final Keyword cANDKeyword = (Keyword)rule.eContents().get(1);
-		
-		//AndOp:
-		//	'AND';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'AND'
-		public Keyword getANDKeyword() { return cANDKeyword; }
-	}
-	public class OrOpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.OrOp");
-		private final Keyword cORKeyword = (Keyword)rule.eContents().get(1);
-		
-		//OrOp:
-		//	'OR';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'OR'
-		public Keyword getORKeyword() { return cORKeyword; }
-	}
-	public class SetElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Set");
-		private final Keyword cSetKeyword = (Keyword)rule.eContents().get(1);
-		
-		//Set:
-		//	'set';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'set'
-		public Keyword getSetKeyword() { return cSetKeyword; }
-	}
-	public class ToElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.To");
-		private final Keyword cToKeyword = (Keyword)rule.eContents().get(1);
-		
-		//To:
-		//	'to';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'to'
-		public Keyword getToKeyword() { return cToKeyword; }
-	}
-	public class UseElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Use");
-		private final Keyword cUseKeyword = (Keyword)rule.eContents().get(1);
-		
-		//Use:
-		//	'use';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'use'
-		public Keyword getUseKeyword() { return cUseKeyword; }
-	}
-	public class CountElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Count");
-		private final RuleCall cINTTerminalRuleCall = (RuleCall)rule.eContents().get(1);
-		
-		//Count:
-		//	INT;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//INT
-		public RuleCall getINTTerminalRuleCall() { return cINTTerminalRuleCall; }
+		//ID
+		public RuleCall getOutputStateStateDefinitionIDTerminalRuleCall_1_0_1() { return cOutputStateStateDefinitionIDTerminalRuleCall_1_0_1; }
 	}
 	public class InstanceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Instance");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cInstanceDefAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cInstanceDefInstanceKeyword_0_0 = (Keyword)cInstanceDefAssignment_0.eContents().get(0);
+		private final Keyword cInstanceKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
 		private final Assignment cTransitionDeclarationAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
 		private final RuleCall cTransitionDeclarationTransitionDeclarationParserRuleCall_1_0_0 = (RuleCall)cTransitionDeclarationAssignment_1_0.eContents().get(0);
@@ -1499,20 +996,104 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cTransitionAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
 		private final RuleCall cTransitionTransitionInstanceParserRuleCall_3_1_0 = (RuleCall)cTransitionAssignment_3_1.eContents().get(0);
 		
+		////ExtendsDefinition:
+		////	type = Extends
+		////	namespaces += [Space]+	
+		////;
+		////
+		////
+		////Primitive:
+		////	'primitive' 
+		////;
+		////
+		////Compound:
+		////	'compound'
+		////;
+		////
+		////Field:
+		////	'field'
+		////;
+		////
+		////State:
+		////	'state'
+		////;
+		////
+		////
+		////Transition:
+		////	'transition'
+		////;
+		////
+		////Definitions:
+		////	'definitions'
+		////;
+		////
+		////References:
+		////	'references'
+		////;
+		////
+		////Instances:
+		////	'instances'
+		////;
+		////
+		////Input:
+		////	'input'
+		////;
+		////
+		////Output:
+		////	'output'
+		////;
+		////
+		////From:
+		////	'from'
+		////;
+		////
+		////With:
+		////	'with'
+		////;
+		////
+		////Extends:
+		////	'extends'
+		////;
+		////
+		////NotOp:
+		////	'NOT'
+		////;
+		////
+		////AndOp:
+		////	'AND'
+		////;
+		////
+		////OrOp:
+		////	'OR'
+		////;
+		////
+		////Set:
+		////	'set'
+		////;
+		////
+		////To:
+		////	'to'
+		////;
+		////
+		////Use:
+		////	'use'
+		////;
+		////
+		////
+		////Count:
+		////	INT
+		////;
 		//Instance:
-		//	instanceDef='instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) name=STRING
+		//	'instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) name=STRING
 		//	(state=StateInstance | transition=TransitionInstance);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//instanceDef='instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) name=STRING
+		//'instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) name=STRING
 		//(state=StateInstance | transition=TransitionInstance)
 		public Group getGroup() { return cGroup; }
 		
-		//instanceDef='instance'
-		public Assignment getInstanceDefAssignment_0() { return cInstanceDefAssignment_0; }
-		
 		//'instance'
-		public Keyword getInstanceDefInstanceKeyword_0_0() { return cInstanceDefInstanceKeyword_0_0; }
+		public Keyword getInstanceKeyword_0() { return cInstanceKeyword_0; }
 		
 		//(transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
@@ -1553,24 +1134,20 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	public class TransitionDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TransitionDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cObjectTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cObjectTypeTransitionParserRuleCall_0_0 = (RuleCall)cObjectTypeAssignment_0.eContents().get(0);
+		private final Keyword cTransitionKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cTransitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cTransitionTransitionIDCrossReference_1_0 = (CrossReference)cTransitionAssignment_1.eContents().get(0);
 		private final RuleCall cTransitionTransitionIDIDTerminalRuleCall_1_0_1 = (RuleCall)cTransitionTransitionIDCrossReference_1_0.eContents().get(1);
 		
 		//TransitionDeclaration:
-		//	objectType=Transition transition=[TransitionID];
+		//	'transition' transition=[TransitionID];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//objectType=Transition transition=[TransitionID]
+		//'transition' transition=[TransitionID]
 		public Group getGroup() { return cGroup; }
 		
-		//objectType=Transition
-		public Assignment getObjectTypeAssignment_0() { return cObjectTypeAssignment_0; }
-		
-		//Transition
-		public RuleCall getObjectTypeTransitionParserRuleCall_0_0() { return cObjectTypeTransitionParserRuleCall_0_0; }
+		//'transition'
+		public Keyword getTransitionKeyword_0() { return cTransitionKeyword_0; }
 		
 		//transition=[TransitionID]
 		public Assignment getTransitionAssignment_1() { return cTransitionAssignment_1; }
@@ -1584,33 +1161,29 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	public class StateDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.StateDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cObjectTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cObjectTypeStateParserRuleCall_0_0 = (RuleCall)cObjectTypeAssignment_0.eContents().get(0);
+		private final Keyword cStateKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cStateAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cStateStateIDCrossReference_1_0 = (CrossReference)cStateAssignment_1.eContents().get(0);
-		private final RuleCall cStateStateIDIDTerminalRuleCall_1_0_1 = (RuleCall)cStateStateIDCrossReference_1_0.eContents().get(1);
+		private final CrossReference cStateStateDefinitionCrossReference_1_0 = (CrossReference)cStateAssignment_1.eContents().get(0);
+		private final RuleCall cStateStateDefinitionIDTerminalRuleCall_1_0_1 = (RuleCall)cStateStateDefinitionCrossReference_1_0.eContents().get(1);
 		
 		//StateDeclaration:
-		//	objectType=State state=[StateID];
+		//	'state' state=[StateDefinition];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//objectType=State state=[StateID]
+		//'state' state=[StateDefinition]
 		public Group getGroup() { return cGroup; }
 		
-		//objectType=State
-		public Assignment getObjectTypeAssignment_0() { return cObjectTypeAssignment_0; }
+		//'state'
+		public Keyword getStateKeyword_0() { return cStateKeyword_0; }
 		
-		//State
-		public RuleCall getObjectTypeStateParserRuleCall_0_0() { return cObjectTypeStateParserRuleCall_0_0; }
-		
-		//state=[StateID]
+		//state=[StateDefinition]
 		public Assignment getStateAssignment_1() { return cStateAssignment_1; }
 		
-		//[StateID]
-		public CrossReference getStateStateIDCrossReference_1_0() { return cStateStateIDCrossReference_1_0; }
+		//[StateDefinition]
+		public CrossReference getStateStateDefinitionCrossReference_1_0() { return cStateStateDefinitionCrossReference_1_0; }
 		
 		//ID
-		public RuleCall getStateStateIDIDTerminalRuleCall_1_0_1() { return cStateStateIDIDTerminalRuleCall_1_0_1; }
+		public RuleCall getStateStateDefinitionIDTerminalRuleCall_1_0_1() { return cStateStateDefinitionIDTerminalRuleCall_1_0_1; }
 	}
 	public class TransitionInstanceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TransitionInstance");
@@ -1693,24 +1266,20 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	public class UseDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.UseDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cUseAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cUseUseParserRuleCall_0_0 = (RuleCall)cUseAssignment_0.eContents().get(0);
+		private final Keyword cUseKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cPredefinedValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cPredefinedValueInstanceCrossReference_1_0 = (CrossReference)cPredefinedValueAssignment_1.eContents().get(0);
 		private final RuleCall cPredefinedValueInstanceIDTerminalRuleCall_1_0_1 = (RuleCall)cPredefinedValueInstanceCrossReference_1_0.eContents().get(1);
 		
 		//UseDefinition:
-		//	use=Use predefinedValue=[Instance];
+		//	'use' predefinedValue=[Instance];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//use=Use predefinedValue=[Instance]
+		//'use' predefinedValue=[Instance]
 		public Group getGroup() { return cGroup; }
 		
-		//use=Use
-		public Assignment getUseAssignment_0() { return cUseAssignment_0; }
-		
-		//Use
-		public RuleCall getUseUseParserRuleCall_0_0() { return cUseUseParserRuleCall_0_0; }
+		//'use'
+		public Keyword getUseKeyword_0() { return cUseKeyword_0; }
 		
 		//predefinedValue=[Instance]
 		public Assignment getPredefinedValueAssignment_1() { return cPredefinedValueAssignment_1; }
@@ -1724,35 +1293,31 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	public class SetStatementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.SetStatement");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cStatementAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cStatementSetParserRuleCall_0_0 = (RuleCall)cStatementAssignment_0.eContents().get(0);
+		private final Keyword cSetKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVariableAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cVariableStateIDCrossReference_1_0 = (CrossReference)cVariableAssignment_1.eContents().get(0);
-		private final RuleCall cVariableStateIDIDTerminalRuleCall_1_0_1 = (RuleCall)cVariableStateIDCrossReference_1_0.eContents().get(1);
+		private final CrossReference cVariableStateDefinitionCrossReference_1_0 = (CrossReference)cVariableAssignment_1.eContents().get(0);
+		private final RuleCall cVariableStateDefinitionIDTerminalRuleCall_1_0_1 = (RuleCall)cVariableStateDefinitionCrossReference_1_0.eContents().get(1);
 		private final Assignment cToDefAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cToDefToDefinitionParserRuleCall_2_0 = (RuleCall)cToDefAssignment_2.eContents().get(0);
 		
 		//SetStatement:
-		//	statement=Set variable=[StateID] toDef=ToDefinition;
+		//	'set' variable=[StateDefinition] toDef=ToDefinition;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//statement=Set variable=[StateID] toDef=ToDefinition
+		//'set' variable=[StateDefinition] toDef=ToDefinition
 		public Group getGroup() { return cGroup; }
 		
-		//statement=Set
-		public Assignment getStatementAssignment_0() { return cStatementAssignment_0; }
+		//'set'
+		public Keyword getSetKeyword_0() { return cSetKeyword_0; }
 		
-		//Set
-		public RuleCall getStatementSetParserRuleCall_0_0() { return cStatementSetParserRuleCall_0_0; }
-		
-		//variable=[StateID]
+		//variable=[StateDefinition]
 		public Assignment getVariableAssignment_1() { return cVariableAssignment_1; }
 		
-		//[StateID]
-		public CrossReference getVariableStateIDCrossReference_1_0() { return cVariableStateIDCrossReference_1_0; }
+		//[StateDefinition]
+		public CrossReference getVariableStateDefinitionCrossReference_1_0() { return cVariableStateDefinitionCrossReference_1_0; }
 		
 		//ID
-		public RuleCall getVariableStateIDIDTerminalRuleCall_1_0_1() { return cVariableStateIDIDTerminalRuleCall_1_0_1; }
+		public RuleCall getVariableStateDefinitionIDTerminalRuleCall_1_0_1() { return cVariableStateDefinitionIDTerminalRuleCall_1_0_1; }
 		
 		//toDef=ToDefinition
 		public Assignment getToDefAssignment_2() { return cToDefAssignment_2; }
@@ -1763,23 +1328,19 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	public class ToDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.ToDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cToAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cToToParserRuleCall_0_0 = (RuleCall)cToAssignment_0.eContents().get(0);
+		private final Keyword cToKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cValueSTRINGTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//ToDefinition:
-		//	to=To value=STRING;
+		//	'to' value=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//to=To value=STRING
+		//'to' value=STRING
 		public Group getGroup() { return cGroup; }
 		
-		//to=To
-		public Assignment getToAssignment_0() { return cToAssignment_0; }
-		
-		//To
-		public RuleCall getToToParserRuleCall_0_0() { return cToToParserRuleCall_0_0; }
+		//'to'
+		public Keyword getToKeyword_0() { return cToKeyword_0; }
 		
 		//value=STRING
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
@@ -1791,23 +1352,23 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.Predicate");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNegationAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cNegationNotOpParserRuleCall_0_0 = (RuleCall)cNegationAssignment_0.eContents().get(0);
+		private final Keyword cNegationNOTKeyword_0_0 = (Keyword)cNegationAssignment_0.eContents().get(0);
 		private final Assignment cExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cExpressionBinaryExpressionParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
 		
 		////State Composition Expression Rules
 		//Predicate:
-		//	negation?=NotOp? expression=BinaryExpression;
+		//	negation?='NOT'? expression=BinaryExpression;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//negation?=NotOp? expression=BinaryExpression
+		//negation?='NOT'? expression=BinaryExpression
 		public Group getGroup() { return cGroup; }
 		
-		//negation?=NotOp?
+		//negation?='NOT'?
 		public Assignment getNegationAssignment_0() { return cNegationAssignment_0; }
 		
-		//NotOp
-		public RuleCall getNegationNotOpParserRuleCall_0_0() { return cNegationNotOpParserRuleCall_0_0; }
+		//'NOT'
+		public Keyword getNegationNOTKeyword_0_0() { return cNegationNOTKeyword_0_0; }
 		
 		//expression=BinaryExpression
 		public Assignment getExpressionAssignment_1() { return cExpressionAssignment_1; }
@@ -1823,38 +1384,38 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cOperationLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cOpAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final Alternatives cOpAlternatives_1_1_0 = (Alternatives)cOpAssignment_1_1.eContents().get(0);
-		private final RuleCall cOpAndOpParserRuleCall_1_1_0_0 = (RuleCall)cOpAlternatives_1_1_0.eContents().get(0);
-		private final RuleCall cOpOrOpParserRuleCall_1_1_0_1 = (RuleCall)cOpAlternatives_1_1_0.eContents().get(1);
+		private final Keyword cOpANDKeyword_1_1_0_0 = (Keyword)cOpAlternatives_1_1_0.eContents().get(0);
+		private final Keyword cOpORKeyword_1_1_0_1 = (Keyword)cOpAlternatives_1_1_0.eContents().get(1);
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightTerminalBinaryExpressionParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//BinaryExpression:
-		//	TerminalBinaryExpression ({Operation.left=current} op=(AndOp | OrOp) right=TerminalBinaryExpression)*;
+		//	TerminalBinaryExpression ({Operation.left=current} op=('AND' | 'OR') right=TerminalBinaryExpression)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//TerminalBinaryExpression ({Operation.left=current} op=(AndOp | OrOp) right=TerminalBinaryExpression)*
+		//TerminalBinaryExpression ({Operation.left=current} op=('AND' | 'OR') right=TerminalBinaryExpression)*
 		public Group getGroup() { return cGroup; }
 		
 		//TerminalBinaryExpression
 		public RuleCall getTerminalBinaryExpressionParserRuleCall_0() { return cTerminalBinaryExpressionParserRuleCall_0; }
 		
-		//({Operation.left=current} op=(AndOp | OrOp) right=TerminalBinaryExpression)*
+		//({Operation.left=current} op=('AND' | 'OR') right=TerminalBinaryExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//{Operation.left=current}
 		public Action getOperationLeftAction_1_0() { return cOperationLeftAction_1_0; }
 		
-		//op=(AndOp | OrOp)
+		//op=('AND' | 'OR')
 		public Assignment getOpAssignment_1_1() { return cOpAssignment_1_1; }
 		
-		//(AndOp | OrOp)
+		//('AND' | 'OR')
 		public Alternatives getOpAlternatives_1_1_0() { return cOpAlternatives_1_1_0; }
 		
-		//AndOp
-		public RuleCall getOpAndOpParserRuleCall_1_1_0_0() { return cOpAndOpParserRuleCall_1_1_0_0; }
+		//'AND'
+		public Keyword getOpANDKeyword_1_1_0_0() { return cOpANDKeyword_1_1_0_0; }
 		
-		//OrOp
-		public RuleCall getOpOrOpParserRuleCall_1_1_0_1() { return cOpOrOpParserRuleCall_1_1_0_1; }
+		//'OR'
+		public Keyword getOpORKeyword_1_1_0_1() { return cOpORKeyword_1_1_0_1; }
 		
 		//right=TerminalBinaryExpression
 		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
@@ -1870,24 +1431,26 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cPredicateParserRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Action cStateIDAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cStateDefinitionAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cInstanceAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final CrossReference cInstanceStateIDCrossReference_1_1_0 = (CrossReference)cInstanceAssignment_1_1.eContents().get(0);
-		private final RuleCall cInstanceStateIDIDTerminalRuleCall_1_1_0_1 = (RuleCall)cInstanceStateIDCrossReference_1_1_0.eContents().get(1);
+		private final CrossReference cInstanceStateDefinitionCrossReference_1_1_0 = (CrossReference)cInstanceAssignment_1_1.eContents().get(0);
+		private final RuleCall cInstanceStateDefinitionIDTerminalRuleCall_1_1_0_1 = (RuleCall)cInstanceStateDefinitionCrossReference_1_1_0.eContents().get(1);
 		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
-		private final Action cStateIDAction_2_0 = (Action)cGroup_2.eContents().get(0);
+		private final Action cStateDefinitionAction_2_0 = (Action)cGroup_2.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
 		private final Assignment cListAssignment_2_1_0 = (Assignment)cGroup_2_1.eContents().get(0);
 		private final Keyword cListSetOfKeyword_2_1_0_0 = (Keyword)cListAssignment_2_1_0.eContents().get(0);
 		private final Assignment cValueAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final CrossReference cValueStateIDCrossReference_2_1_1_0 = (CrossReference)cValueAssignment_2_1_1.eContents().get(0);
-		private final RuleCall cValueStateIDIDTerminalRuleCall_2_1_1_0_1 = (RuleCall)cValueStateIDCrossReference_2_1_1_0.eContents().get(1);
+		private final CrossReference cValueStateDefinitionCrossReference_2_1_1_0 = (CrossReference)cValueAssignment_2_1_1.eContents().get(0);
+		private final RuleCall cValueStateDefinitionIDTerminalRuleCall_2_1_1_0_1 = (RuleCall)cValueStateDefinitionCrossReference_2_1_1_0.eContents().get(1);
 		
 		//TerminalBinaryExpression BinaryExpression:
-		//	'(' Predicate ')' | {StateID} instance=[StateID] | {StateID} (list?='setOf' value=[StateID]);
+		//	'(' Predicate ')' | {StateDefinition} instance=[StateDefinition] | {StateDefinition} (list?='setOf'
+		//	value=[StateDefinition]);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'(' Predicate ')' | {StateID} instance=[StateID] | {StateID} (list?='setOf' value=[StateID])
+		//'(' Predicate ')' | {StateDefinition} instance=[StateDefinition] | {StateDefinition} (list?='setOf'
+		//value=[StateDefinition])
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'(' Predicate ')'
@@ -1902,28 +1465,28 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//')'
 		public Keyword getRightParenthesisKeyword_0_2() { return cRightParenthesisKeyword_0_2; }
 		
-		//{StateID} instance=[StateID]
+		//{StateDefinition} instance=[StateDefinition]
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{StateID}
-		public Action getStateIDAction_1_0() { return cStateIDAction_1_0; }
+		//{StateDefinition}
+		public Action getStateDefinitionAction_1_0() { return cStateDefinitionAction_1_0; }
 		
-		//instance=[StateID]
+		//instance=[StateDefinition]
 		public Assignment getInstanceAssignment_1_1() { return cInstanceAssignment_1_1; }
 		
-		//[StateID]
-		public CrossReference getInstanceStateIDCrossReference_1_1_0() { return cInstanceStateIDCrossReference_1_1_0; }
+		//[StateDefinition]
+		public CrossReference getInstanceStateDefinitionCrossReference_1_1_0() { return cInstanceStateDefinitionCrossReference_1_1_0; }
 		
 		//ID
-		public RuleCall getInstanceStateIDIDTerminalRuleCall_1_1_0_1() { return cInstanceStateIDIDTerminalRuleCall_1_1_0_1; }
+		public RuleCall getInstanceStateDefinitionIDTerminalRuleCall_1_1_0_1() { return cInstanceStateDefinitionIDTerminalRuleCall_1_1_0_1; }
 		
-		//{StateID} (list?='setOf' value=[StateID])
+		//{StateDefinition} (list?='setOf' value=[StateDefinition])
 		public Group getGroup_2() { return cGroup_2; }
 		
-		//{StateID}
-		public Action getStateIDAction_2_0() { return cStateIDAction_2_0; }
+		//{StateDefinition}
+		public Action getStateDefinitionAction_2_0() { return cStateDefinitionAction_2_0; }
 		
-		//(list?='setOf' value=[StateID])
+		//(list?='setOf' value=[StateDefinition])
 		public Group getGroup_2_1() { return cGroup_2_1; }
 		
 		//list?='setOf'
@@ -1932,14 +1495,14 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//'setOf'
 		public Keyword getListSetOfKeyword_2_1_0_0() { return cListSetOfKeyword_2_1_0_0; }
 		
-		//value=[StateID]
+		//value=[StateDefinition]
 		public Assignment getValueAssignment_2_1_1() { return cValueAssignment_2_1_1; }
 		
-		//[StateID]
-		public CrossReference getValueStateIDCrossReference_2_1_1_0() { return cValueStateIDCrossReference_2_1_1_0; }
+		//[StateDefinition]
+		public CrossReference getValueStateDefinitionCrossReference_2_1_1_0() { return cValueStateDefinitionCrossReference_2_1_1_0; }
 		
 		//ID
-		public RuleCall getValueStateIDIDTerminalRuleCall_2_1_1_0_1() { return cValueStateIDIDTerminalRuleCall_2_1_1_0_1; }
+		public RuleCall getValueStateDefinitionIDTerminalRuleCall_2_1_1_0_1() { return cValueStateDefinitionIDTerminalRuleCall_2_1_1_0_1; }
 	}
 	public class TransitionalExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TransitionalExpression");
@@ -2031,55 +1594,25 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	private final ModelElements pModel;
-	private final InstructionElements pInstruction;
-	private final PractitionerElements pPractitioner;
-	private final ExpertDefinitionElements pExpertDefinition;
-	private final UserElements pUser;
-	private final DomainDefinitionElements pDomainDefinition;
-	private final KnowledgeDefinitionElements pKnowledgeDefinition;
-	private final SkillsDefinitionElements pSkillsDefinition;
 	private final FieldDefinitionElements pFieldDefinition;
-	private final SpaceElements pSpace;
-	private final NamespaceElements pNamespace;
-	private final ReferencespaceElements pReferencespace;
-	private final InstancespaceElements pInstancespace;
-	private final ReferenceFieldElements pReferenceField;
-	private final StateObjectDefinitionElements pStateObjectDefinition;
-	private final TransitionObjectDefinitionElements pTransitionObjectDefinition;
+	private final MapSpaceElements pMapSpace;
+	private final StateMappingElements pStateMapping;
+	private final TransitionMappingElements pTransitionMapping;
+	private final DefinitionSpaceElements pDefinitionSpace;
+	private final StateDefinitionElements pStateDefinition;
 	private final PrimitiveStateDefinitionElements pPrimitiveStateDefinition;
 	private final CompoundStateDefinitionElements pCompoundStateDefinition;
-	private final StateDefinitionElements pStateDefinition;
-	private final StateIDElements pStateID;
+	private final TransitionDefinitionElements pTransitionDefinition;
+	private final PrimitiveTransitionDefinitionElements pPrimitiveTransitionDefinition;
+	private final CompoundTransitionDefinitionElements pCompoundTransitionDefinition;
+	private final ReferenceSpaceElements pReferenceSpace;
+	private final ReferenceTransitionElements pReferenceTransition;
+	private final ReferenceStateElements pReferenceState;
+	private final InstanceSpaceElements pInstanceSpace;
 	private final WithStatesDefinitionElements pWithStatesDefinition;
 	private final WithTransitionsDefinitionElements pWithTransitionsDefinition;
-	private final ReferenceStateElements pReferenceState;
-	private final TransitionDefinitionElements pTransitionDefinition;
-	private final TransitionIDElements pTransitionID;
-	private final ReferenceTransitionElements pReferenceTransition;
-	private final FromFieldDefinitionElements pFromFieldDefinition;
 	private final InputDefinitionElements pInputDefinition;
 	private final OutputDefinitionElements pOutputDefinition;
-	private final ExtendsDefinitionElements pExtendsDefinition;
-	private final PrimitiveElements pPrimitive;
-	private final CompoundElements pCompound;
-	private final FieldElements pField;
-	private final StateElements pState;
-	private final TransitionElements pTransition;
-	private final DefinitionsElements pDefinitions;
-	private final ReferencesElements pReferences;
-	private final InstancesElements pInstances;
-	private final InputElements pInput;
-	private final OutputElements pOutput;
-	private final FromElements pFrom;
-	private final WithElements pWith;
-	private final ExtendsElements pExtends;
-	private final NotOpElements pNotOp;
-	private final AndOpElements pAndOp;
-	private final OrOpElements pOrOp;
-	private final SetElements pSet;
-	private final ToElements pTo;
-	private final UseElements pUse;
-	private final CountElements pCount;
 	private final InstanceElements pInstance;
 	private final TransitionDeclarationElements pTransitionDeclaration;
 	private final StateDeclarationElements pStateDeclaration;
@@ -2104,55 +1637,25 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
-		this.pInstruction = new InstructionElements();
-		this.pPractitioner = new PractitionerElements();
-		this.pExpertDefinition = new ExpertDefinitionElements();
-		this.pUser = new UserElements();
-		this.pDomainDefinition = new DomainDefinitionElements();
-		this.pKnowledgeDefinition = new KnowledgeDefinitionElements();
-		this.pSkillsDefinition = new SkillsDefinitionElements();
 		this.pFieldDefinition = new FieldDefinitionElements();
-		this.pSpace = new SpaceElements();
-		this.pNamespace = new NamespaceElements();
-		this.pReferencespace = new ReferencespaceElements();
-		this.pInstancespace = new InstancespaceElements();
-		this.pReferenceField = new ReferenceFieldElements();
-		this.pStateObjectDefinition = new StateObjectDefinitionElements();
-		this.pTransitionObjectDefinition = new TransitionObjectDefinitionElements();
+		this.pMapSpace = new MapSpaceElements();
+		this.pStateMapping = new StateMappingElements();
+		this.pTransitionMapping = new TransitionMappingElements();
+		this.pDefinitionSpace = new DefinitionSpaceElements();
+		this.pStateDefinition = new StateDefinitionElements();
 		this.pPrimitiveStateDefinition = new PrimitiveStateDefinitionElements();
 		this.pCompoundStateDefinition = new CompoundStateDefinitionElements();
-		this.pStateDefinition = new StateDefinitionElements();
-		this.pStateID = new StateIDElements();
+		this.pTransitionDefinition = new TransitionDefinitionElements();
+		this.pPrimitiveTransitionDefinition = new PrimitiveTransitionDefinitionElements();
+		this.pCompoundTransitionDefinition = new CompoundTransitionDefinitionElements();
+		this.pReferenceSpace = new ReferenceSpaceElements();
+		this.pReferenceTransition = new ReferenceTransitionElements();
+		this.pReferenceState = new ReferenceStateElements();
+		this.pInstanceSpace = new InstanceSpaceElements();
 		this.pWithStatesDefinition = new WithStatesDefinitionElements();
 		this.pWithTransitionsDefinition = new WithTransitionsDefinitionElements();
-		this.pReferenceState = new ReferenceStateElements();
-		this.pTransitionDefinition = new TransitionDefinitionElements();
-		this.pTransitionID = new TransitionIDElements();
-		this.pReferenceTransition = new ReferenceTransitionElements();
-		this.pFromFieldDefinition = new FromFieldDefinitionElements();
 		this.pInputDefinition = new InputDefinitionElements();
 		this.pOutputDefinition = new OutputDefinitionElements();
-		this.pExtendsDefinition = new ExtendsDefinitionElements();
-		this.pPrimitive = new PrimitiveElements();
-		this.pCompound = new CompoundElements();
-		this.pField = new FieldElements();
-		this.pState = new StateElements();
-		this.pTransition = new TransitionElements();
-		this.pDefinitions = new DefinitionsElements();
-		this.pReferences = new ReferencesElements();
-		this.pInstances = new InstancesElements();
-		this.pInput = new InputElements();
-		this.pOutput = new OutputElements();
-		this.pFrom = new FromElements();
-		this.pWith = new WithElements();
-		this.pExtends = new ExtendsElements();
-		this.pNotOp = new NotOpElements();
-		this.pAndOp = new AndOpElements();
-		this.pOrOp = new OrOpElements();
-		this.pSet = new SetElements();
-		this.pTo = new ToElements();
-		this.pUse = new UseElements();
-		this.pCount = new CountElements();
 		this.pInstance = new InstanceElements();
 		this.pTransitionDeclaration = new TransitionDeclarationElements();
 		this.pStateDeclaration = new StateDeclarationElements();
@@ -2197,9 +1700,10 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//Model:
 	//	fields+=FieldDefinition*
-	//	experts+=ExpertDefinition*
-	//	practitioners+=Practitioner*
-	//	instructions+=Instruction*;
+	//	//experts += ExpertDefinition*
+	//	//practitioners += Practitioner*
+	//	//instructions += Instruction*
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -2210,103 +1714,65 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	
 	///* Executable Structure
 	// * Below are the grammar rules for defining execution requests for the work interpreter.
-	// */ Instruction:
-	//	objectType='instruction' space=[Space] transition=[TransitionID];
-	public InstructionElements getInstructionAccess() {
-		return pInstruction;
-	}
-	
-	public ParserRule getInstructionRule() {
-		return getInstructionAccess().getRule();
-	}
-	
-	//Practitioner:
-	//	practitionerDef='practitioner'
-	//	user=User
-	//	'{'
-	//	knowledgeDef=KnowledgeDefinition?
-	//	skillsDef=SkillsDefinition?
-	//	'}';
-	public PractitionerElements getPractitionerAccess() {
-		return pPractitioner;
-	}
-	
-	public ParserRule getPractitionerRule() {
-		return getPractitionerAccess().getRule();
-	}
-	
-	//ExpertDefinition:
-	//	expertDef='expert' user=User
-	//	'{'
-	//	domainDef=DomainDefinition?
-	//	knowledgeDef=KnowledgeDefinition?
-	//	skillsDef=SkillsDefinition?
-	//	'hourlyRate'
-	//	'$' rate=INT
-	//	'}';
-	public ExpertDefinitionElements getExpertDefinitionAccess() {
-		return pExpertDefinition;
-	}
-	
-	public ParserRule getExpertDefinitionRule() {
-		return getExpertDefinitionAccess().getRule();
-	}
-	
-	//User:
-	//	name=ID;
-	public UserElements getUserAccess() {
-		return pUser;
-	}
-	
-	public ParserRule getUserRule() {
-		return getUserAccess().getRule();
-	}
-	
-	//DomainDefinition:
-	//	domain='domain'
-	//	'{'
-	//	domainAreas+=ReferenceField*
-	//	'}';
-	public DomainDefinitionElements getDomainDefinitionAccess() {
-		return pDomainDefinition;
-	}
-	
-	public ParserRule getDomainDefinitionRule() {
-		return getDomainDefinitionAccess().getRule();
-	}
-	
-	//KnowledgeDefinition:
-	//	knowledgeDef='knowledge' '{'
-	//	knowledge+=ReferenceState*
-	//	'}';
-	public KnowledgeDefinitionElements getKnowledgeDefinitionAccess() {
-		return pKnowledgeDefinition;
-	}
-	
-	public ParserRule getKnowledgeDefinitionRule() {
-		return getKnowledgeDefinitionAccess().getRule();
-	}
-	
-	//SkillsDefinition:
-	//	skillsDef='skills' '{'
-	//	skills+=ReferenceTransition*
-	//	'}';
-	public SkillsDefinitionElements getSkillsDefinitionAccess() {
-		return pSkillsDefinition;
-	}
-	
-	public ParserRule getSkillsDefinitionRule() {
-		return getSkillsDefinitionAccess().getRule();
-	}
-	
+	// */ //Instruction:
+	////	objectType = 'instruction' space = [Space] transition = [TransitionID]
+	////;
+	////Practitioner:
+	////	practitionerDef = 'practitioner'
+	////	user = User
+	////	'{'
+	////	knowledgeDef = KnowledgeDefinition?
+	////	skillsDef = SkillsDefinition?
+	////	'}'
+	////;
+	////ExpertDefinition:
+	////	expertDef = 'expert' user = User
+	////	'{'
+	////	domainDef = DomainDefinition?
+	////	knowledgeDef = KnowledgeDefinition?
+	////	skillsDef = SkillsDefinition?
+	////	'hourlyRate'
+	////	'$' rate =  INT
+	////	'}'
+	////;
+	////User:
+	////	name = ID
+	////;
+	////DomainDefinition:
+	////	domain = 'domain'
+	////	'{'
+	////		domainAreas += ReferenceField*
+	////	'}'
+	////;
+	////KnowledgeDefinition:
+	////	knowledgeDef = 'knowledge''{'
+	////		knowledge += ReferenceState*
+	////	'}'
+	////;
+	////SkillsDefinition:
+	////	skillsDef = 'skills''{'
+	////		skills += ReferenceTransition*
+	////	'}'
+	////;
+	////FieldDefinition:
+	////	field = Field
+	////	space = Space
+	////	extends=(ExtendsDefinition)? 
+	////	'{'
+	////	(conceptualspace = Namespace)?
+	////	(referencespace = Referencespace)?
+	////	(mappedspace = Mapspace)?
+	////	(instancespace = Instancespace)?
+	////	'}'	
+	////;
 	//FieldDefinition:
-	//	field=Field
-	//	space=Space
-	//	extends=ExtendsDefinition?
+	//	'field'
+	//	name=ID
 	//	'{'
-	//	conceptualspace=Namespace?
-	//	referencespace=Referencespace?
-	//	instancespace=Instancespace?
+	//	definitionSpace=DefinitionSpace?
+	//	referenceSpace=ReferenceSpace?
+	//	mapSpace=MapSpace?
+	//	instanceSpace=InstanceSpace?
 	//	'}';
 	public FieldDefinitionElements getFieldDefinitionAccess() {
 		return pFieldDefinition;
@@ -2316,91 +1782,77 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getFieldDefinitionAccess().getRule();
 	}
 	
-	//Space:
-	//	name=ID;
-	public SpaceElements getSpaceAccess() {
-		return pSpace;
-	}
-	
-	public ParserRule getSpaceRule() {
-		return getSpaceAccess().getRule();
-	}
-	
-	//Namespace:
-	//	spaceType=Definitions
-	//	'{'
-	//	states+=StateObjectDefinition*
-	//	transitions+=TransitionObjectDefinition*
+	////Space:
+	////	name = ID
+	////;
+	//MapSpace:
+	//	{MapSpace} 'mappings' '{'
+	//	mappedStates+=StateMapping*
+	//	mappedTransitions+=TransitionMapping*
 	//	'}';
-	public NamespaceElements getNamespaceAccess() {
-		return pNamespace;
+	public MapSpaceElements getMapSpaceAccess() {
+		return pMapSpace;
 	}
 	
-	public ParserRule getNamespaceRule() {
-		return getNamespaceAccess().getRule();
+	public ParserRule getMapSpaceRule() {
+		return getMapSpaceAccess().getRule();
 	}
 	
-	//Referencespace:
-	//	spaceType=References
+	//StateMapping:
+	//	'state' foreignState=[StateDefinition] 'from' field=[FieldDefinition] 'to' localState=[StateDefinition];
+	public StateMappingElements getStateMappingAccess() {
+		return pStateMapping;
+	}
+	
+	public ParserRule getStateMappingRule() {
+		return getStateMappingAccess().getRule();
+	}
+	
+	//TransitionMapping:
+	//	'transition' foreignTransition=[TransitionID] 'from' field=[FieldDefinition] 'to' localTransition=[TransitionID];
+	public TransitionMappingElements getTransitionMappingAccess() {
+		return pTransitionMapping;
+	}
+	
+	public ParserRule getTransitionMappingRule() {
+		return getTransitionMappingAccess().getRule();
+	}
+	
+	////Namespace:
+	////	spaceType = Definitions
+	////	'{'
+	////	states += StateObjectDefinition*
+	////	transitions += TransitionObjectDefinition*
+	////	'}'
+	////;
+	//DefinitionSpace:
+	//	{DefinitionSpace} 'definitions'
 	//	'{'
-	//	refFields+=ReferenceField*
-	//	refStates+=ReferenceState*
-	//	refTransition+=ReferenceTransition*
+	//	states+=StateDefinition*
+	//	transitions+=TransitionDefinition*
 	//	'}';
-	public ReferencespaceElements getReferencespaceAccess() {
-		return pReferencespace;
+	public DefinitionSpaceElements getDefinitionSpaceAccess() {
+		return pDefinitionSpace;
 	}
 	
-	public ParserRule getReferencespaceRule() {
-		return getReferencespaceAccess().getRule();
+	public ParserRule getDefinitionSpaceRule() {
+		return getDefinitionSpaceAccess().getRule();
 	}
 	
-	//Instancespace:
-	//	spaceType=Instances
-	//	'{'
-	//	instances+=Instance*
-	//	'}';
-	public InstancespaceElements getInstancespaceAccess() {
-		return pInstancespace;
+	//StateDefinition:
+	//	PrimitiveStateDefinition | CompoundStateDefinition;
+	public StateDefinitionElements getStateDefinitionAccess() {
+		return pStateDefinition;
 	}
 	
-	public ParserRule getInstancespaceRule() {
-		return getInstancespaceAccess().getRule();
-	}
-	
-	//ReferenceField:
-	//	ref=Field
-	//	space=Space;
-	public ReferenceFieldElements getReferenceFieldAccess() {
-		return pReferenceField;
-	}
-	
-	public ParserRule getReferenceFieldRule() {
-		return getReferenceFieldAccess().getRule();
-	}
-	
-	//StateObjectDefinition:
-	//	(type=Primitive | type=Compound) state=StateDefinition;
-	public StateObjectDefinitionElements getStateObjectDefinitionAccess() {
-		return pStateObjectDefinition;
-	}
-	
-	public ParserRule getStateObjectDefinitionRule() {
-		return getStateObjectDefinitionAccess().getRule();
-	}
-	
-	//TransitionObjectDefinition:
-	//	(type=Primitive | type=Compound) transition=TransitionDefinition;
-	public TransitionObjectDefinitionElements getTransitionObjectDefinitionAccess() {
-		return pTransitionObjectDefinition;
-	}
-	
-	public ParserRule getTransitionObjectDefinitionRule() {
-		return getTransitionObjectDefinitionAccess().getRule();
+	public ParserRule getStateDefinitionRule() {
+		return getStateDefinitionAccess().getRule();
 	}
 	
 	//PrimitiveStateDefinition:
-	//	object=State id=StateID;
+	//	type='primitive'
+	//	'state'
+	//	name=ID;
 	public PrimitiveStateDefinitionElements getPrimitiveStateDefinitionAccess() {
 		return pPrimitiveStateDefinition;
 	}
@@ -2410,7 +1862,10 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//CompoundStateDefinition:
-	//	object=State state=StateID compoundStateDef=WithStatesDefinition?;
+	//	type='compound'
+	//	'state'
+	//	name=ID
+	//	composition=WithStatesDefinition;
 	public CompoundStateDefinitionElements getCompoundStateDefinitionAccess() {
 		return pCompoundStateDefinition;
 	}
@@ -2419,28 +1874,144 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getCompoundStateDefinitionAccess().getRule();
 	}
 	
-	//StateDefinition:
-	//	object=State state=StateID withDefinition=WithStatesDefinition?;
-	public StateDefinitionElements getStateDefinitionAccess() {
-		return pStateDefinition;
+	//TransitionDefinition:
+	//	PrimitiveTransitionDefinition | CompoundTransitionDefinition;
+	public TransitionDefinitionElements getTransitionDefinitionAccess() {
+		return pTransitionDefinition;
 	}
 	
-	public ParserRule getStateDefinitionRule() {
-		return getStateDefinitionAccess().getRule();
+	public ParserRule getTransitionDefinitionRule() {
+		return getTransitionDefinitionAccess().getRule();
 	}
 	
-	//StateID:
-	//	name=ID;
-	public StateIDElements getStateIDAccess() {
-		return pStateID;
+	//PrimitiveTransitionDefinition:
+	//	type='primitive'
+	//	'transition'
+	//	name=ID
+	//	in=InputDefinition?
+	//	out=OutputDefinition;
+	public PrimitiveTransitionDefinitionElements getPrimitiveTransitionDefinitionAccess() {
+		return pPrimitiveTransitionDefinition;
 	}
 	
-	public ParserRule getStateIDRule() {
-		return getStateIDAccess().getRule();
+	public ParserRule getPrimitiveTransitionDefinitionRule() {
+		return getPrimitiveTransitionDefinitionAccess().getRule();
 	}
 	
+	//CompoundTransitionDefinition:
+	//	type='compound'
+	//	'transition'
+	//	name=ID
+	//	in=InputDefinition?
+	//	out=OutputDefinition
+	//	composition=WithTransitionsDefinition;
+	public CompoundTransitionDefinitionElements getCompoundTransitionDefinitionAccess() {
+		return pCompoundTransitionDefinition;
+	}
+	
+	public ParserRule getCompoundTransitionDefinitionRule() {
+		return getCompoundTransitionDefinitionAccess().getRule();
+	}
+	
+	////TransitionDefinition:
+	////	object = Transition transition = TransitionID (in = InputDefinition)? out = OutputDefinition (composition = WithTransitionsDefinition)?
+	////;
+	////Referencespace:
+	////	spaceType = References
+	////	'{'
+	////	refFields += ReferenceField*
+	////	refStates += ReferenceState*
+	////	refTransition += ReferenceTransition*
+	////	'}'
+	////;
+	//ReferenceSpace:
+	//	{ReferenceSpace} 'references'
+	//	'{'
+	//	refStates+=ReferenceState*
+	//	refTransitions+=ReferenceTransition*
+	//	'}';
+	public ReferenceSpaceElements getReferenceSpaceAccess() {
+		return pReferenceSpace;
+	}
+	
+	public ParserRule getReferenceSpaceRule() {
+		return getReferenceSpaceAccess().getRule();
+	}
+	
+	//ReferenceTransition:
+	//	'transition'
+	//	refTransition=[TransitionDefinition]
+	//	'from'
+	//	foreignField=[FieldDefinition];
+	public ReferenceTransitionElements getReferenceTransitionAccess() {
+		return pReferenceTransition;
+	}
+	
+	public ParserRule getReferenceTransitionRule() {
+		return getReferenceTransitionAccess().getRule();
+	}
+	
+	//ReferenceState:
+	//	'state'
+	//	refState=[StateDefinition]
+	//	'from'
+	//	foreignField=[FieldDefinition];
+	public ReferenceStateElements getReferenceStateAccess() {
+		return pReferenceState;
+	}
+	
+	public ParserRule getReferenceStateRule() {
+		return getReferenceStateAccess().getRule();
+	}
+	
+	////
+	////Instancespace:
+	////	spaceType  = Instances
+	////	'{'
+	////		instances += Instance*
+	////	'}'
+	////;
+	//InstanceSpace:
+	//	{InstanceSpace} 'instances'
+	//	'{'
+	//	instances+=Instance*
+	//	'}';
+	public InstanceSpaceElements getInstanceSpaceAccess() {
+		return pInstanceSpace;
+	}
+	
+	public ParserRule getInstanceSpaceRule() {
+		return getInstanceSpaceAccess().getRule();
+	}
+	
+	////ReferenceField:
+	////	ref = Field 
+	////	space = Space
+	////;
+	////StateObjectDefinition:
+	////	(type = Primitive| type = Compound)
+	////	state = StateDefinition 
+	////;
+	////
+	////TransitionObjectDefinition:
+	////	(type = Primitive| type = Compound)
+	////	transition = TransitionDefinition
+	////;
+	////PrimitiveStateDefinition:
+	////	object = State id = StateID 
+	////;
+	////
+	////CompoundStateDefinition:
+	////	object = State state = StateID (compoundStateDef= WithStatesDefinition)?
+	////;
+	////StateDefinition:
+	////	object = State state = StateID (withDefinition= WithStatesDefinition)?
+	////;
+	////StateID:
+	////	 name = ID
+	////;
 	//WithStatesDefinition:
-	//	composition=With
+	//	'with'
 	//	'{'
 	//	predicate=Predicate
 	//	'}';
@@ -2453,7 +2024,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//WithTransitionsDefinition:
-	//	composition=With
+	//	'with'
 	//	'{'
 	//	transitions=TransitionalExpression
 	//	'}';
@@ -2465,64 +2036,15 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getWithTransitionsDefinitionAccess().getRule();
 	}
 	
-	//ReferenceState:
-	//	object=State
-	//	refState=[StateID] from=FromFieldDefinition (('called' | 'as') state=StateID)?
-	//	composition=WithStatesDefinition?;
-	public ReferenceStateElements getReferenceStateAccess() {
-		return pReferenceState;
-	}
-	
-	public ParserRule getReferenceStateRule() {
-		return getReferenceStateAccess().getRule();
-	}
-	
-	//TransitionDefinition:
-	//	object=Transition transition=TransitionID in=InputDefinition? out=OutputDefinition
-	//	composition=WithTransitionsDefinition?;
-	public TransitionDefinitionElements getTransitionDefinitionAccess() {
-		return pTransitionDefinition;
-	}
-	
-	public ParserRule getTransitionDefinitionRule() {
-		return getTransitionDefinitionAccess().getRule();
-	}
-	
-	//TransitionID:
-	//	name=ID;
-	public TransitionIDElements getTransitionIDAccess() {
-		return pTransitionID;
-	}
-	
-	public ParserRule getTransitionIDRule() {
-		return getTransitionIDAccess().getRule();
-	}
-	
-	//ReferenceTransition:
-	//	object=Transition
-	//	refTransition=[TransitionID] fromDef=FromFieldDefinition (('called' | 'as') transition=TransitionID)?
-	//	composition=WithTransitionsDefinition?;
-	public ReferenceTransitionElements getReferenceTransitionAccess() {
-		return pReferenceTransition;
-	}
-	
-	public ParserRule getReferenceTransitionRule() {
-		return getReferenceTransitionAccess().getRule();
-	}
-	
-	//FromFieldDefinition:
-	//	from=From
-	//	refSpace=[Space];
-	public FromFieldDefinitionElements getFromFieldDefinitionAccess() {
-		return pFromFieldDefinition;
-	}
-	
-	public ParserRule getFromFieldDefinitionRule() {
-		return getFromFieldDefinitionAccess().getRule();
-	}
-	
+	////TransitionID:
+	////	name = ID
+	////;
+	////FromFieldDefinition:
+	////	from = From
+	////	refSpace = [Space]
+	////;
 	//InputDefinition:
-	//	input=Input inputState+=[StateID]*;
+	//	{InputDefinition} 'input' inputState+=[StateDefinition]*;
 	public InputDefinitionElements getInputDefinitionAccess() {
 		return pInputDefinition;
 	}
@@ -2532,7 +2054,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//OutputDefinition:
-	//	output=Output outputState=[StateID];
+	//	'output' outputState=[StateDefinition];
 	public OutputDefinitionElements getOutputDefinitionAccess() {
 		return pOutputDefinition;
 	}
@@ -2541,219 +2063,95 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getOutputDefinitionAccess().getRule();
 	}
 	
-	//ExtendsDefinition:
-	//	type=Extends
-	//	namespaces+=[Space]+;
-	public ExtendsDefinitionElements getExtendsDefinitionAccess() {
-		return pExtendsDefinition;
-	}
-	
-	public ParserRule getExtendsDefinitionRule() {
-		return getExtendsDefinitionAccess().getRule();
-	}
-	
-	//Primitive:
-	//	'primitive';
-	public PrimitiveElements getPrimitiveAccess() {
-		return pPrimitive;
-	}
-	
-	public ParserRule getPrimitiveRule() {
-		return getPrimitiveAccess().getRule();
-	}
-	
-	//Compound:
-	//	'compound';
-	public CompoundElements getCompoundAccess() {
-		return pCompound;
-	}
-	
-	public ParserRule getCompoundRule() {
-		return getCompoundAccess().getRule();
-	}
-	
-	//Field:
-	//	'field';
-	public FieldElements getFieldAccess() {
-		return pField;
-	}
-	
-	public ParserRule getFieldRule() {
-		return getFieldAccess().getRule();
-	}
-	
-	//State:
-	//	'state';
-	public StateElements getStateAccess() {
-		return pState;
-	}
-	
-	public ParserRule getStateRule() {
-		return getStateAccess().getRule();
-	}
-	
-	//Transition:
-	//	'transition';
-	public TransitionElements getTransitionAccess() {
-		return pTransition;
-	}
-	
-	public ParserRule getTransitionRule() {
-		return getTransitionAccess().getRule();
-	}
-	
-	//Definitions:
-	//	'definitions';
-	public DefinitionsElements getDefinitionsAccess() {
-		return pDefinitions;
-	}
-	
-	public ParserRule getDefinitionsRule() {
-		return getDefinitionsAccess().getRule();
-	}
-	
-	//References:
-	//	'references';
-	public ReferencesElements getReferencesAccess() {
-		return pReferences;
-	}
-	
-	public ParserRule getReferencesRule() {
-		return getReferencesAccess().getRule();
-	}
-	
-	//Instances:
-	//	'instances';
-	public InstancesElements getInstancesAccess() {
-		return pInstances;
-	}
-	
-	public ParserRule getInstancesRule() {
-		return getInstancesAccess().getRule();
-	}
-	
-	//Input:
-	//	'input';
-	public InputElements getInputAccess() {
-		return pInput;
-	}
-	
-	public ParserRule getInputRule() {
-		return getInputAccess().getRule();
-	}
-	
-	//Output:
-	//	'output';
-	public OutputElements getOutputAccess() {
-		return pOutput;
-	}
-	
-	public ParserRule getOutputRule() {
-		return getOutputAccess().getRule();
-	}
-	
-	//From:
-	//	'from';
-	public FromElements getFromAccess() {
-		return pFrom;
-	}
-	
-	public ParserRule getFromRule() {
-		return getFromAccess().getRule();
-	}
-	
-	//With:
-	//	'with';
-	public WithElements getWithAccess() {
-		return pWith;
-	}
-	
-	public ParserRule getWithRule() {
-		return getWithAccess().getRule();
-	}
-	
-	//Extends:
-	//	'extends';
-	public ExtendsElements getExtendsAccess() {
-		return pExtends;
-	}
-	
-	public ParserRule getExtendsRule() {
-		return getExtendsAccess().getRule();
-	}
-	
-	//NotOp:
-	//	'NOT';
-	public NotOpElements getNotOpAccess() {
-		return pNotOp;
-	}
-	
-	public ParserRule getNotOpRule() {
-		return getNotOpAccess().getRule();
-	}
-	
-	//AndOp:
-	//	'AND';
-	public AndOpElements getAndOpAccess() {
-		return pAndOp;
-	}
-	
-	public ParserRule getAndOpRule() {
-		return getAndOpAccess().getRule();
-	}
-	
-	//OrOp:
-	//	'OR';
-	public OrOpElements getOrOpAccess() {
-		return pOrOp;
-	}
-	
-	public ParserRule getOrOpRule() {
-		return getOrOpAccess().getRule();
-	}
-	
-	//Set:
-	//	'set';
-	public SetElements getSetAccess() {
-		return pSet;
-	}
-	
-	public ParserRule getSetRule() {
-		return getSetAccess().getRule();
-	}
-	
-	//To:
-	//	'to';
-	public ToElements getToAccess() {
-		return pTo;
-	}
-	
-	public ParserRule getToRule() {
-		return getToAccess().getRule();
-	}
-	
-	//Use:
-	//	'use';
-	public UseElements getUseAccess() {
-		return pUse;
-	}
-	
-	public ParserRule getUseRule() {
-		return getUseAccess().getRule();
-	}
-	
-	//Count:
-	//	INT;
-	public CountElements getCountAccess() {
-		return pCount;
-	}
-	
-	public ParserRule getCountRule() {
-		return getCountAccess().getRule();
-	}
-	
+	////ExtendsDefinition:
+	////	type = Extends
+	////	namespaces += [Space]+	
+	////;
+	////
+	////
+	////Primitive:
+	////	'primitive' 
+	////;
+	////
+	////Compound:
+	////	'compound'
+	////;
+	////
+	////Field:
+	////	'field'
+	////;
+	////
+	////State:
+	////	'state'
+	////;
+	////
+	////
+	////Transition:
+	////	'transition'
+	////;
+	////
+	////Definitions:
+	////	'definitions'
+	////;
+	////
+	////References:
+	////	'references'
+	////;
+	////
+	////Instances:
+	////	'instances'
+	////;
+	////
+	////Input:
+	////	'input'
+	////;
+	////
+	////Output:
+	////	'output'
+	////;
+	////
+	////From:
+	////	'from'
+	////;
+	////
+	////With:
+	////	'with'
+	////;
+	////
+	////Extends:
+	////	'extends'
+	////;
+	////
+	////NotOp:
+	////	'NOT'
+	////;
+	////
+	////AndOp:
+	////	'AND'
+	////;
+	////
+	////OrOp:
+	////	'OR'
+	////;
+	////
+	////Set:
+	////	'set'
+	////;
+	////
+	////To:
+	////	'to'
+	////;
+	////
+	////Use:
+	////	'use'
+	////;
+	////
+	////
+	////Count:
+	////	INT
+	////;
 	//Instance:
-	//	instanceDef='instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) name=STRING
+	//	'instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) name=STRING
 	//	(state=StateInstance | transition=TransitionInstance);
 	public InstanceElements getInstanceAccess() {
 		return pInstance;
@@ -2764,7 +2162,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//TransitionDeclaration:
-	//	objectType=Transition transition=[TransitionID];
+	//	'transition' transition=[TransitionID];
 	public TransitionDeclarationElements getTransitionDeclarationAccess() {
 		return pTransitionDeclaration;
 	}
@@ -2774,7 +2172,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//StateDeclaration:
-	//	objectType=State state=[StateID];
+	//	'state' state=[StateDefinition];
 	public StateDeclarationElements getStateDeclarationAccess() {
 		return pStateDeclaration;
 	}
@@ -2808,7 +2206,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//UseDefinition:
-	//	use=Use predefinedValue=[Instance];
+	//	'use' predefinedValue=[Instance];
 	public UseDefinitionElements getUseDefinitionAccess() {
 		return pUseDefinition;
 	}
@@ -2818,7 +2216,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//SetStatement:
-	//	statement=Set variable=[StateID] toDef=ToDefinition;
+	//	'set' variable=[StateDefinition] toDef=ToDefinition;
 	public SetStatementElements getSetStatementAccess() {
 		return pSetStatement;
 	}
@@ -2828,7 +2226,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ToDefinition:
-	//	to=To value=STRING;
+	//	'to' value=STRING;
 	public ToDefinitionElements getToDefinitionAccess() {
 		return pToDefinition;
 	}
@@ -2839,7 +2237,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	
 	////State Composition Expression Rules
 	//Predicate:
-	//	negation?=NotOp? expression=BinaryExpression;
+	//	negation?='NOT'? expression=BinaryExpression;
 	public PredicateElements getPredicateAccess() {
 		return pPredicate;
 	}
@@ -2849,7 +2247,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//BinaryExpression:
-	//	TerminalBinaryExpression ({Operation.left=current} op=(AndOp | OrOp) right=TerminalBinaryExpression)*;
+	//	TerminalBinaryExpression ({Operation.left=current} op=('AND' | 'OR') right=TerminalBinaryExpression)*;
 	public BinaryExpressionElements getBinaryExpressionAccess() {
 		return pBinaryExpression;
 	}
@@ -2859,7 +2257,8 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//TerminalBinaryExpression BinaryExpression:
-	//	'(' Predicate ')' | {StateID} instance=[StateID] | {StateID} (list?='setOf' value=[StateID]);
+	//	'(' Predicate ')' | {StateDefinition} instance=[StateDefinition] | {StateDefinition} (list?='setOf'
+	//	value=[StateDefinition]);
 	public TerminalBinaryExpressionElements getTerminalBinaryExpressionAccess() {
 		return pTerminalBinaryExpression;
 	}

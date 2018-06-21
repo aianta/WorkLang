@@ -29,11 +29,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.worklang.work.ExpertDefinition;
 import org.worklang.work.FieldDefinition;
-import org.worklang.work.Instruction;
 import org.worklang.work.Model;
-import org.worklang.work.Practitioner;
 import org.worklang.work.WorkPackage;
 
 /**
@@ -45,9 +42,6 @@ import org.worklang.work.WorkPackage;
  * </p>
  * <ul>
  *   <li>{@link org.worklang.work.impl.ModelImpl#getFields <em>Fields</em>}</li>
- *   <li>{@link org.worklang.work.impl.ModelImpl#getExperts <em>Experts</em>}</li>
- *   <li>{@link org.worklang.work.impl.ModelImpl#getPractitioners <em>Practitioners</em>}</li>
- *   <li>{@link org.worklang.work.impl.ModelImpl#getInstructions <em>Instructions</em>}</li>
  * </ul>
  *
  * @generated
@@ -63,36 +57,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected EList<FieldDefinition> fields;
-
-  /**
-   * The cached value of the '{@link #getExperts() <em>Experts</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getExperts()
-   * @generated
-   * @ordered
-   */
-  protected EList<ExpertDefinition> experts;
-
-  /**
-   * The cached value of the '{@link #getPractitioners() <em>Practitioners</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getPractitioners()
-   * @generated
-   * @ordered
-   */
-  protected EList<Practitioner> practitioners;
-
-  /**
-   * The cached value of the '{@link #getInstructions() <em>Instructions</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getInstructions()
-   * @generated
-   * @ordered
-   */
-  protected EList<Instruction> instructions;
 
   /**
    * <!-- begin-user-doc -->
@@ -134,48 +98,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ExpertDefinition> getExperts()
-  {
-    if (experts == null)
-    {
-      experts = new EObjectContainmentEList<ExpertDefinition>(ExpertDefinition.class, this, WorkPackage.MODEL__EXPERTS);
-    }
-    return experts;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Practitioner> getPractitioners()
-  {
-    if (practitioners == null)
-    {
-      practitioners = new EObjectContainmentEList<Practitioner>(Practitioner.class, this, WorkPackage.MODEL__PRACTITIONERS);
-    }
-    return practitioners;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Instruction> getInstructions()
-  {
-    if (instructions == null)
-    {
-      instructions = new EObjectContainmentEList<Instruction>(Instruction.class, this, WorkPackage.MODEL__INSTRUCTIONS);
-    }
-    return instructions;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -183,12 +105,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case WorkPackage.MODEL__FIELDS:
         return ((InternalEList<?>)getFields()).basicRemove(otherEnd, msgs);
-      case WorkPackage.MODEL__EXPERTS:
-        return ((InternalEList<?>)getExperts()).basicRemove(otherEnd, msgs);
-      case WorkPackage.MODEL__PRACTITIONERS:
-        return ((InternalEList<?>)getPractitioners()).basicRemove(otherEnd, msgs);
-      case WorkPackage.MODEL__INSTRUCTIONS:
-        return ((InternalEList<?>)getInstructions()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -205,12 +121,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case WorkPackage.MODEL__FIELDS:
         return getFields();
-      case WorkPackage.MODEL__EXPERTS:
-        return getExperts();
-      case WorkPackage.MODEL__PRACTITIONERS:
-        return getPractitioners();
-      case WorkPackage.MODEL__INSTRUCTIONS:
-        return getInstructions();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -230,18 +140,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         getFields().clear();
         getFields().addAll((Collection<? extends FieldDefinition>)newValue);
         return;
-      case WorkPackage.MODEL__EXPERTS:
-        getExperts().clear();
-        getExperts().addAll((Collection<? extends ExpertDefinition>)newValue);
-        return;
-      case WorkPackage.MODEL__PRACTITIONERS:
-        getPractitioners().clear();
-        getPractitioners().addAll((Collection<? extends Practitioner>)newValue);
-        return;
-      case WorkPackage.MODEL__INSTRUCTIONS:
-        getInstructions().clear();
-        getInstructions().addAll((Collection<? extends Instruction>)newValue);
-        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -259,15 +157,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case WorkPackage.MODEL__FIELDS:
         getFields().clear();
         return;
-      case WorkPackage.MODEL__EXPERTS:
-        getExperts().clear();
-        return;
-      case WorkPackage.MODEL__PRACTITIONERS:
-        getPractitioners().clear();
-        return;
-      case WorkPackage.MODEL__INSTRUCTIONS:
-        getInstructions().clear();
-        return;
     }
     super.eUnset(featureID);
   }
@@ -284,12 +173,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case WorkPackage.MODEL__FIELDS:
         return fields != null && !fields.isEmpty();
-      case WorkPackage.MODEL__EXPERTS:
-        return experts != null && !experts.isEmpty();
-      case WorkPackage.MODEL__PRACTITIONERS:
-        return practitioners != null && !practitioners.isEmpty();
-      case WorkPackage.MODEL__INSTRUCTIONS:
-        return instructions != null && !instructions.isEmpty();
     }
     return super.eIsSet(featureID);
   }

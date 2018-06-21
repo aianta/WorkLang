@@ -16,17 +16,13 @@
 package org.worklang.work.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.worklang.work.StateDefinition;
-import org.worklang.work.StateID;
-import org.worklang.work.WithStatesDefinition;
 import org.worklang.work.WorkPackage;
 
 /**
@@ -37,54 +33,96 @@ import org.worklang.work.WorkPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.StateDefinitionImpl#getObject <em>Object</em>}</li>
- *   <li>{@link org.worklang.work.impl.StateDefinitionImpl#getState <em>State</em>}</li>
- *   <li>{@link org.worklang.work.impl.StateDefinitionImpl#getWithDefinition <em>With Definition</em>}</li>
+ *   <li>{@link org.worklang.work.impl.StateDefinitionImpl#getInstance <em>Instance</em>}</li>
+ *   <li>{@link org.worklang.work.impl.StateDefinitionImpl#isList <em>List</em>}</li>
+ *   <li>{@link org.worklang.work.impl.StateDefinitionImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.worklang.work.impl.StateDefinitionImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.worklang.work.impl.StateDefinitionImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class StateDefinitionImpl extends MinimalEObjectImpl.Container implements StateDefinition
+public class StateDefinitionImpl extends BinaryExpressionImpl implements StateDefinition
 {
   /**
-   * The default value of the '{@link #getObject() <em>Object</em>}' attribute.
+   * The cached value of the '{@link #getInstance() <em>Instance</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getObject()
+   * @see #getInstance()
    * @generated
    * @ordered
    */
-  protected static final String OBJECT_EDEFAULT = null;
+  protected StateDefinition instance;
 
   /**
-   * The cached value of the '{@link #getObject() <em>Object</em>}' attribute.
+   * The default value of the '{@link #isList() <em>List</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getObject()
+   * @see #isList()
    * @generated
    * @ordered
    */
-  protected String object = OBJECT_EDEFAULT;
+  protected static final boolean LIST_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #getState() <em>State</em>}' containment reference.
+   * The cached value of the '{@link #isList() <em>List</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getState()
+   * @see #isList()
    * @generated
    * @ordered
    */
-  protected StateID state;
+  protected boolean list = LIST_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getWithDefinition() <em>With Definition</em>}' containment reference.
+   * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getWithDefinition()
+   * @see #getValue()
    * @generated
    * @ordered
    */
-  protected WithStatesDefinition withDefinition;
+  protected StateDefinition value;
+
+  /**
+   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected static final String TYPE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected String type = TYPE_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -112,9 +150,19 @@ public class StateDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getObject()
+  public StateDefinition getInstance()
   {
-    return object;
+    if (instance != null && instance.eIsProxy())
+    {
+      InternalEObject oldInstance = (InternalEObject)instance;
+      instance = (StateDefinition)eResolveProxy(oldInstance);
+      if (instance != oldInstance)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkPackage.STATE_DEFINITION__INSTANCE, oldInstance, instance));
+      }
+    }
+    return instance;
   }
 
   /**
@@ -122,12 +170,22 @@ public class StateDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setObject(String newObject)
+  public StateDefinition basicGetInstance()
   {
-    String oldObject = object;
-    object = newObject;
+    return instance;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setInstance(StateDefinition newInstance)
+  {
+    StateDefinition oldInstance = instance;
+    instance = newInstance;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DEFINITION__OBJECT, oldObject, object));
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DEFINITION__INSTANCE, oldInstance, instance));
   }
 
   /**
@@ -135,9 +193,9 @@ public class StateDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateID getState()
+  public boolean isList()
   {
-    return state;
+    return list;
   }
 
   /**
@@ -145,16 +203,32 @@ public class StateDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetState(StateID newState, NotificationChain msgs)
+  public void setList(boolean newList)
   {
-    StateID oldState = state;
-    state = newState;
+    boolean oldList = list;
+    list = newList;
     if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DEFINITION__LIST, oldList, list));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StateDefinition getValue()
+  {
+    if (value != null && value.eIsProxy())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DEFINITION__STATE, oldState, newState);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      InternalEObject oldValue = (InternalEObject)value;
+      value = (StateDefinition)eResolveProxy(oldValue);
+      if (value != oldValue)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkPackage.STATE_DEFINITION__VALUE, oldValue, value));
+      }
     }
-    return msgs;
+    return value;
   }
 
   /**
@@ -162,20 +236,9 @@ public class StateDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setState(StateID newState)
+  public StateDefinition basicGetValue()
   {
-    if (newState != state)
-    {
-      NotificationChain msgs = null;
-      if (state != null)
-        msgs = ((InternalEObject)state).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.STATE_DEFINITION__STATE, null, msgs);
-      if (newState != null)
-        msgs = ((InternalEObject)newState).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.STATE_DEFINITION__STATE, null, msgs);
-      msgs = basicSetState(newState, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DEFINITION__STATE, newState, newState));
+    return value;
   }
 
   /**
@@ -183,26 +246,12 @@ public class StateDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public WithStatesDefinition getWithDefinition()
+  public void setValue(StateDefinition newValue)
   {
-    return withDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetWithDefinition(WithStatesDefinition newWithDefinition, NotificationChain msgs)
-  {
-    WithStatesDefinition oldWithDefinition = withDefinition;
-    withDefinition = newWithDefinition;
+    StateDefinition oldValue = value;
+    value = newValue;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DEFINITION__WITH_DEFINITION, oldWithDefinition, newWithDefinition);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DEFINITION__VALUE, oldValue, value));
   }
 
   /**
@@ -210,20 +259,9 @@ public class StateDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setWithDefinition(WithStatesDefinition newWithDefinition)
+  public String getType()
   {
-    if (newWithDefinition != withDefinition)
-    {
-      NotificationChain msgs = null;
-      if (withDefinition != null)
-        msgs = ((InternalEObject)withDefinition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.STATE_DEFINITION__WITH_DEFINITION, null, msgs);
-      if (newWithDefinition != null)
-        msgs = ((InternalEObject)newWithDefinition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.STATE_DEFINITION__WITH_DEFINITION, null, msgs);
-      msgs = basicSetWithDefinition(newWithDefinition, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DEFINITION__WITH_DEFINITION, newWithDefinition, newWithDefinition));
+    return type;
   }
 
   /**
@@ -231,17 +269,35 @@ public class StateDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  public void setType(String newType)
   {
-    switch (featureID)
-    {
-      case WorkPackage.STATE_DEFINITION__STATE:
-        return basicSetState(null, msgs);
-      case WorkPackage.STATE_DEFINITION__WITH_DEFINITION:
-        return basicSetWithDefinition(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    String oldType = type;
+    type = newType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DEFINITION__TYPE, oldType, type));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DEFINITION__NAME, oldName, name));
   }
 
   /**
@@ -254,12 +310,18 @@ public class StateDefinitionImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case WorkPackage.STATE_DEFINITION__OBJECT:
-        return getObject();
-      case WorkPackage.STATE_DEFINITION__STATE:
-        return getState();
-      case WorkPackage.STATE_DEFINITION__WITH_DEFINITION:
-        return getWithDefinition();
+      case WorkPackage.STATE_DEFINITION__INSTANCE:
+        if (resolve) return getInstance();
+        return basicGetInstance();
+      case WorkPackage.STATE_DEFINITION__LIST:
+        return isList();
+      case WorkPackage.STATE_DEFINITION__VALUE:
+        if (resolve) return getValue();
+        return basicGetValue();
+      case WorkPackage.STATE_DEFINITION__TYPE:
+        return getType();
+      case WorkPackage.STATE_DEFINITION__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -274,14 +336,20 @@ public class StateDefinitionImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case WorkPackage.STATE_DEFINITION__OBJECT:
-        setObject((String)newValue);
+      case WorkPackage.STATE_DEFINITION__INSTANCE:
+        setInstance((StateDefinition)newValue);
         return;
-      case WorkPackage.STATE_DEFINITION__STATE:
-        setState((StateID)newValue);
+      case WorkPackage.STATE_DEFINITION__LIST:
+        setList((Boolean)newValue);
         return;
-      case WorkPackage.STATE_DEFINITION__WITH_DEFINITION:
-        setWithDefinition((WithStatesDefinition)newValue);
+      case WorkPackage.STATE_DEFINITION__VALUE:
+        setValue((StateDefinition)newValue);
+        return;
+      case WorkPackage.STATE_DEFINITION__TYPE:
+        setType((String)newValue);
+        return;
+      case WorkPackage.STATE_DEFINITION__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -297,14 +365,20 @@ public class StateDefinitionImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case WorkPackage.STATE_DEFINITION__OBJECT:
-        setObject(OBJECT_EDEFAULT);
+      case WorkPackage.STATE_DEFINITION__INSTANCE:
+        setInstance((StateDefinition)null);
         return;
-      case WorkPackage.STATE_DEFINITION__STATE:
-        setState((StateID)null);
+      case WorkPackage.STATE_DEFINITION__LIST:
+        setList(LIST_EDEFAULT);
         return;
-      case WorkPackage.STATE_DEFINITION__WITH_DEFINITION:
-        setWithDefinition((WithStatesDefinition)null);
+      case WorkPackage.STATE_DEFINITION__VALUE:
+        setValue((StateDefinition)null);
+        return;
+      case WorkPackage.STATE_DEFINITION__TYPE:
+        setType(TYPE_EDEFAULT);
+        return;
+      case WorkPackage.STATE_DEFINITION__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -320,12 +394,16 @@ public class StateDefinitionImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case WorkPackage.STATE_DEFINITION__OBJECT:
-        return OBJECT_EDEFAULT == null ? object != null : !OBJECT_EDEFAULT.equals(object);
-      case WorkPackage.STATE_DEFINITION__STATE:
-        return state != null;
-      case WorkPackage.STATE_DEFINITION__WITH_DEFINITION:
-        return withDefinition != null;
+      case WorkPackage.STATE_DEFINITION__INSTANCE:
+        return instance != null;
+      case WorkPackage.STATE_DEFINITION__LIST:
+        return list != LIST_EDEFAULT;
+      case WorkPackage.STATE_DEFINITION__VALUE:
+        return value != null;
+      case WorkPackage.STATE_DEFINITION__TYPE:
+        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+      case WorkPackage.STATE_DEFINITION__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }
@@ -341,8 +419,12 @@ public class StateDefinitionImpl extends MinimalEObjectImpl.Container implements
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (object: ");
-    result.append(object);
+    result.append(" (list: ");
+    result.append(list);
+    result.append(", type: ");
+    result.append(type);
+    result.append(", name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }

@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.UseDefinition#getUse <em>Use</em>}</li>
  *   <li>{@link org.worklang.work.UseDefinition#getPredefinedValue <em>Predefined Value</em>}</li>
  * </ul>
  *
@@ -36,32 +35,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface UseDefinition extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Use</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Use</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Use</em>' attribute.
-   * @see #setUse(String)
-   * @see org.worklang.work.WorkPackage#getUseDefinition_Use()
-   * @model
-   * @generated
-   */
-  String getUse();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.UseDefinition#getUse <em>Use</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Use</em>' attribute.
-   * @see #getUse()
-   * @generated
-   */
-  void setUse(String value);
-
   /**
    * Returns the value of the '<em><b>Predefined Value</b></em>' reference.
    * <!-- begin-user-doc -->

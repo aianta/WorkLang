@@ -89,353 +89,13 @@ public interface WorkPackage extends EPackage
   int MODEL__FIELDS = 0;
 
   /**
-   * The feature id for the '<em><b>Experts</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MODEL__EXPERTS = 1;
-
-  /**
-   * The feature id for the '<em><b>Practitioners</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MODEL__PRACTITIONERS = 2;
-
-  /**
-   * The feature id for the '<em><b>Instructions</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MODEL__INSTRUCTIONS = 3;
-
-  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 4;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.InstructionImpl <em>Instruction</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.InstructionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getInstruction()
-   * @generated
-   */
-  int INSTRUCTION = 1;
-
-  /**
-   * The feature id for the '<em><b>Object Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INSTRUCTION__OBJECT_TYPE = 0;
-
-  /**
-   * The feature id for the '<em><b>Space</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INSTRUCTION__SPACE = 1;
-
-  /**
-   * The feature id for the '<em><b>Transition</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INSTRUCTION__TRANSITION = 2;
-
-  /**
-   * The number of structural features of the '<em>Instruction</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INSTRUCTION_FEATURE_COUNT = 3;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.PractitionerImpl <em>Practitioner</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.PractitionerImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getPractitioner()
-   * @generated
-   */
-  int PRACTITIONER = 2;
-
-  /**
-   * The feature id for the '<em><b>Practitioner Def</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PRACTITIONER__PRACTITIONER_DEF = 0;
-
-  /**
-   * The feature id for the '<em><b>User</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PRACTITIONER__USER = 1;
-
-  /**
-   * The feature id for the '<em><b>Knowledge Def</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PRACTITIONER__KNOWLEDGE_DEF = 2;
-
-  /**
-   * The feature id for the '<em><b>Skills Def</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PRACTITIONER__SKILLS_DEF = 3;
-
-  /**
-   * The number of structural features of the '<em>Practitioner</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PRACTITIONER_FEATURE_COUNT = 4;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.ExpertDefinitionImpl <em>Expert Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.ExpertDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getExpertDefinition()
-   * @generated
-   */
-  int EXPERT_DEFINITION = 3;
-
-  /**
-   * The feature id for the '<em><b>Expert Def</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPERT_DEFINITION__EXPERT_DEF = 0;
-
-  /**
-   * The feature id for the '<em><b>User</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPERT_DEFINITION__USER = 1;
-
-  /**
-   * The feature id for the '<em><b>Domain Def</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPERT_DEFINITION__DOMAIN_DEF = 2;
-
-  /**
-   * The feature id for the '<em><b>Knowledge Def</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPERT_DEFINITION__KNOWLEDGE_DEF = 3;
-
-  /**
-   * The feature id for the '<em><b>Skills Def</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPERT_DEFINITION__SKILLS_DEF = 4;
-
-  /**
-   * The feature id for the '<em><b>Rate</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPERT_DEFINITION__RATE = 5;
-
-  /**
-   * The number of structural features of the '<em>Expert Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPERT_DEFINITION_FEATURE_COUNT = 6;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.UserImpl <em>User</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.UserImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getUser()
-   * @generated
-   */
-  int USER = 4;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int USER__NAME = 0;
-
-  /**
-   * The number of structural features of the '<em>User</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int USER_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.DomainDefinitionImpl <em>Domain Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.DomainDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getDomainDefinition()
-   * @generated
-   */
-  int DOMAIN_DEFINITION = 5;
-
-  /**
-   * The feature id for the '<em><b>Domain</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DOMAIN_DEFINITION__DOMAIN = 0;
-
-  /**
-   * The feature id for the '<em><b>Domain Areas</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DOMAIN_DEFINITION__DOMAIN_AREAS = 1;
-
-  /**
-   * The number of structural features of the '<em>Domain Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DOMAIN_DEFINITION_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.KnowledgeDefinitionImpl <em>Knowledge Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.KnowledgeDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getKnowledgeDefinition()
-   * @generated
-   */
-  int KNOWLEDGE_DEFINITION = 6;
-
-  /**
-   * The feature id for the '<em><b>Knowledge Def</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int KNOWLEDGE_DEFINITION__KNOWLEDGE_DEF = 0;
-
-  /**
-   * The feature id for the '<em><b>Knowledge</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int KNOWLEDGE_DEFINITION__KNOWLEDGE = 1;
-
-  /**
-   * The number of structural features of the '<em>Knowledge Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int KNOWLEDGE_DEFINITION_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.SkillsDefinitionImpl <em>Skills Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.SkillsDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getSkillsDefinition()
-   * @generated
-   */
-  int SKILLS_DEFINITION = 7;
-
-  /**
-   * The feature id for the '<em><b>Skills Def</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SKILLS_DEFINITION__SKILLS_DEF = 0;
-
-  /**
-   * The feature id for the '<em><b>Skills</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SKILLS_DEFINITION__SKILLS = 1;
-
-  /**
-   * The number of structural features of the '<em>Skills Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SKILLS_DEFINITION_FEATURE_COUNT = 2;
+  int MODEL_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.FieldDefinitionImpl <em>Field Definition</em>}' class.
@@ -445,80 +105,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getFieldDefinition()
    * @generated
    */
-  int FIELD_DEFINITION = 8;
-
-  /**
-   * The feature id for the '<em><b>Field</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FIELD_DEFINITION__FIELD = 0;
-
-  /**
-   * The feature id for the '<em><b>Space</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FIELD_DEFINITION__SPACE = 1;
-
-  /**
-   * The feature id for the '<em><b>Extends</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FIELD_DEFINITION__EXTENDS = 2;
-
-  /**
-   * The feature id for the '<em><b>Conceptualspace</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FIELD_DEFINITION__CONCEPTUALSPACE = 3;
-
-  /**
-   * The feature id for the '<em><b>Referencespace</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FIELD_DEFINITION__REFERENCESPACE = 4;
-
-  /**
-   * The feature id for the '<em><b>Instancespace</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FIELD_DEFINITION__INSTANCESPACE = 5;
-
-  /**
-   * The number of structural features of the '<em>Field Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FIELD_DEFINITION_FEATURE_COUNT = 6;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.SpaceImpl <em>Space</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.SpaceImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getSpace()
-   * @generated
-   */
-  int SPACE = 9;
+  int FIELD_DEFINITION = 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -527,35 +114,191 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SPACE__NAME = 0;
+  int FIELD_DEFINITION__NAME = 0;
 
   /**
-   * The number of structural features of the '<em>Space</em>' class.
+   * The feature id for the '<em><b>Definition Space</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SPACE_FEATURE_COUNT = 1;
+  int FIELD_DEFINITION__DEFINITION_SPACE = 1;
 
   /**
-   * The meta object id for the '{@link org.worklang.work.impl.NamespaceImpl <em>Namespace</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.NamespaceImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getNamespace()
-   * @generated
-   */
-  int NAMESPACE = 10;
-
-  /**
-   * The feature id for the '<em><b>Space Type</b></em>' attribute.
+   * The feature id for the '<em><b>Reference Space</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int NAMESPACE__SPACE_TYPE = 0;
+  int FIELD_DEFINITION__REFERENCE_SPACE = 2;
+
+  /**
+   * The feature id for the '<em><b>Map Space</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FIELD_DEFINITION__MAP_SPACE = 3;
+
+  /**
+   * The feature id for the '<em><b>Instance Space</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FIELD_DEFINITION__INSTANCE_SPACE = 4;
+
+  /**
+   * The number of structural features of the '<em>Field Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FIELD_DEFINITION_FEATURE_COUNT = 5;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.MapSpaceImpl <em>Map Space</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.MapSpaceImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getMapSpace()
+   * @generated
+   */
+  int MAP_SPACE = 2;
+
+  /**
+   * The feature id for the '<em><b>Mapped States</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MAP_SPACE__MAPPED_STATES = 0;
+
+  /**
+   * The feature id for the '<em><b>Mapped Transitions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MAP_SPACE__MAPPED_TRANSITIONS = 1;
+
+  /**
+   * The number of structural features of the '<em>Map Space</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MAP_SPACE_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.StateMappingImpl <em>State Mapping</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.StateMappingImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getStateMapping()
+   * @generated
+   */
+  int STATE_MAPPING = 3;
+
+  /**
+   * The feature id for the '<em><b>Foreign State</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE_MAPPING__FOREIGN_STATE = 0;
+
+  /**
+   * The feature id for the '<em><b>Field</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE_MAPPING__FIELD = 1;
+
+  /**
+   * The feature id for the '<em><b>Local State</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE_MAPPING__LOCAL_STATE = 2;
+
+  /**
+   * The number of structural features of the '<em>State Mapping</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE_MAPPING_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.TransitionMappingImpl <em>Transition Mapping</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.TransitionMappingImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getTransitionMapping()
+   * @generated
+   */
+  int TRANSITION_MAPPING = 4;
+
+  /**
+   * The feature id for the '<em><b>Foreign Transition</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_MAPPING__FOREIGN_TRANSITION = 0;
+
+  /**
+   * The feature id for the '<em><b>Field</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_MAPPING__FIELD = 1;
+
+  /**
+   * The feature id for the '<em><b>Local Transition</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_MAPPING__LOCAL_TRANSITION = 2;
+
+  /**
+   * The number of structural features of the '<em>Transition Mapping</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_MAPPING_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.DefinitionSpaceImpl <em>Definition Space</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.DefinitionSpaceImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getDefinitionSpace()
+   * @generated
+   */
+  int DEFINITION_SPACE = 5;
 
   /**
    * The feature id for the '<em><b>States</b></em>' containment reference list.
@@ -564,7 +307,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NAMESPACE__STATES = 1;
+  int DEFINITION_SPACE__STATES = 0;
 
   /**
    * The feature id for the '<em><b>Transitions</b></em>' containment reference list.
@@ -573,348 +316,16 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NAMESPACE__TRANSITIONS = 2;
+  int DEFINITION_SPACE__TRANSITIONS = 1;
 
   /**
-   * The number of structural features of the '<em>Namespace</em>' class.
+   * The number of structural features of the '<em>Definition Space</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int NAMESPACE_FEATURE_COUNT = 3;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.ReferencespaceImpl <em>Referencespace</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.ReferencespaceImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getReferencespace()
-   * @generated
-   */
-  int REFERENCESPACE = 11;
-
-  /**
-   * The feature id for the '<em><b>Space Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCESPACE__SPACE_TYPE = 0;
-
-  /**
-   * The feature id for the '<em><b>Ref Fields</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCESPACE__REF_FIELDS = 1;
-
-  /**
-   * The feature id for the '<em><b>Ref States</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCESPACE__REF_STATES = 2;
-
-  /**
-   * The feature id for the '<em><b>Ref Transition</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCESPACE__REF_TRANSITION = 3;
-
-  /**
-   * The number of structural features of the '<em>Referencespace</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCESPACE_FEATURE_COUNT = 4;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.InstancespaceImpl <em>Instancespace</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.InstancespaceImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getInstancespace()
-   * @generated
-   */
-  int INSTANCESPACE = 12;
-
-  /**
-   * The feature id for the '<em><b>Space Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INSTANCESPACE__SPACE_TYPE = 0;
-
-  /**
-   * The feature id for the '<em><b>Instances</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INSTANCESPACE__INSTANCES = 1;
-
-  /**
-   * The number of structural features of the '<em>Instancespace</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INSTANCESPACE_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.ReferenceFieldImpl <em>Reference Field</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.ReferenceFieldImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getReferenceField()
-   * @generated
-   */
-  int REFERENCE_FIELD = 13;
-
-  /**
-   * The feature id for the '<em><b>Ref</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCE_FIELD__REF = 0;
-
-  /**
-   * The feature id for the '<em><b>Space</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCE_FIELD__SPACE = 1;
-
-  /**
-   * The number of structural features of the '<em>Reference Field</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCE_FIELD_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.StateObjectDefinitionImpl <em>State Object Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.StateObjectDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getStateObjectDefinition()
-   * @generated
-   */
-  int STATE_OBJECT_DEFINITION = 14;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_OBJECT_DEFINITION__TYPE = 0;
-
-  /**
-   * The feature id for the '<em><b>State</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_OBJECT_DEFINITION__STATE = 1;
-
-  /**
-   * The number of structural features of the '<em>State Object Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_OBJECT_DEFINITION_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.TransitionObjectDefinitionImpl <em>Transition Object Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.TransitionObjectDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getTransitionObjectDefinition()
-   * @generated
-   */
-  int TRANSITION_OBJECT_DEFINITION = 15;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_OBJECT_DEFINITION__TYPE = 0;
-
-  /**
-   * The feature id for the '<em><b>Transition</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_OBJECT_DEFINITION__TRANSITION = 1;
-
-  /**
-   * The number of structural features of the '<em>Transition Object Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_OBJECT_DEFINITION_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.PrimitiveStateDefinitionImpl <em>Primitive State Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.PrimitiveStateDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getPrimitiveStateDefinition()
-   * @generated
-   */
-  int PRIMITIVE_STATE_DEFINITION = 16;
-
-  /**
-   * The feature id for the '<em><b>Object</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PRIMITIVE_STATE_DEFINITION__OBJECT = 0;
-
-  /**
-   * The feature id for the '<em><b>Id</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PRIMITIVE_STATE_DEFINITION__ID = 1;
-
-  /**
-   * The number of structural features of the '<em>Primitive State Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PRIMITIVE_STATE_DEFINITION_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.CompoundStateDefinitionImpl <em>Compound State Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.CompoundStateDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getCompoundStateDefinition()
-   * @generated
-   */
-  int COMPOUND_STATE_DEFINITION = 17;
-
-  /**
-   * The feature id for the '<em><b>Object</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPOUND_STATE_DEFINITION__OBJECT = 0;
-
-  /**
-   * The feature id for the '<em><b>State</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPOUND_STATE_DEFINITION__STATE = 1;
-
-  /**
-   * The feature id for the '<em><b>Compound State Def</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPOUND_STATE_DEFINITION__COMPOUND_STATE_DEF = 2;
-
-  /**
-   * The number of structural features of the '<em>Compound State Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPOUND_STATE_DEFINITION_FEATURE_COUNT = 3;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.StateDefinitionImpl <em>State Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.StateDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getStateDefinition()
-   * @generated
-   */
-  int STATE_DEFINITION = 18;
-
-  /**
-   * The feature id for the '<em><b>Object</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_DEFINITION__OBJECT = 0;
-
-  /**
-   * The feature id for the '<em><b>State</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_DEFINITION__STATE = 1;
-
-  /**
-   * The feature id for the '<em><b>With Definition</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_DEFINITION__WITH_DEFINITION = 2;
-
-  /**
-   * The number of structural features of the '<em>State Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_DEFINITION_FEATURE_COUNT = 3;
+  int DEFINITION_SPACE_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.BinaryExpressionImpl <em>Binary Expression</em>}' class.
@@ -924,7 +335,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getBinaryExpression()
    * @generated
    */
-  int BINARY_EXPRESSION = 39;
+  int BINARY_EXPRESSION = 29;
 
   /**
    * The number of structural features of the '<em>Binary Expression</em>' class.
@@ -936,23 +347,14 @@ public interface WorkPackage extends EPackage
   int BINARY_EXPRESSION_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link org.worklang.work.impl.StateIDImpl <em>State ID</em>}' class.
+   * The meta object id for the '{@link org.worklang.work.impl.StateDefinitionImpl <em>State Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.StateIDImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getStateID()
+   * @see org.worklang.work.impl.StateDefinitionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getStateDefinition()
    * @generated
    */
-  int STATE_ID = 19;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_ID__NAME = BINARY_EXPRESSION_FEATURE_COUNT + 0;
+  int STATE_DEFINITION = 6;
 
   /**
    * The feature id for the '<em><b>Instance</b></em>' reference.
@@ -961,7 +363,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE_ID__INSTANCE = BINARY_EXPRESSION_FEATURE_COUNT + 1;
+  int STATE_DEFINITION__INSTANCE = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>List</b></em>' attribute.
@@ -970,7 +372,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE_ID__LIST = BINARY_EXPRESSION_FEATURE_COUNT + 2;
+  int STATE_DEFINITION__LIST = BINARY_EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' reference.
@@ -979,136 +381,153 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE_ID__VALUE = BINARY_EXPRESSION_FEATURE_COUNT + 3;
+  int STATE_DEFINITION__VALUE = BINARY_EXPRESSION_FEATURE_COUNT + 2;
 
   /**
-   * The number of structural features of the '<em>State ID</em>' class.
+   * The feature id for the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATE_ID_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 4;
+  int STATE_DEFINITION__TYPE = BINARY_EXPRESSION_FEATURE_COUNT + 3;
 
   /**
-   * The meta object id for the '{@link org.worklang.work.impl.WithStatesDefinitionImpl <em>With States Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.WithStatesDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getWithStatesDefinition()
-   * @generated
-   */
-  int WITH_STATES_DEFINITION = 20;
-
-  /**
-   * The feature id for the '<em><b>Composition</b></em>' attribute.
+   * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WITH_STATES_DEFINITION__COMPOSITION = 0;
+  int STATE_DEFINITION__NAME = BINARY_EXPRESSION_FEATURE_COUNT + 4;
 
   /**
-   * The feature id for the '<em><b>Predicate</b></em>' containment reference.
+   * The number of structural features of the '<em>State Definition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WITH_STATES_DEFINITION__PREDICATE = 1;
+  int STATE_DEFINITION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 5;
 
   /**
-   * The number of structural features of the '<em>With States Definition</em>' class.
+   * The meta object id for the '{@link org.worklang.work.impl.PrimitiveStateDefinitionImpl <em>Primitive State Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.PrimitiveStateDefinitionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getPrimitiveStateDefinition()
+   * @generated
+   */
+  int PRIMITIVE_STATE_DEFINITION = 7;
+
+  /**
+   * The feature id for the '<em><b>Instance</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WITH_STATES_DEFINITION_FEATURE_COUNT = 2;
+  int PRIMITIVE_STATE_DEFINITION__INSTANCE = STATE_DEFINITION__INSTANCE;
 
   /**
-   * The meta object id for the '{@link org.worklang.work.impl.WithTransitionsDefinitionImpl <em>With Transitions Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.WithTransitionsDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getWithTransitionsDefinition()
-   * @generated
-   */
-  int WITH_TRANSITIONS_DEFINITION = 21;
-
-  /**
-   * The feature id for the '<em><b>Composition</b></em>' attribute.
+   * The feature id for the '<em><b>List</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WITH_TRANSITIONS_DEFINITION__COMPOSITION = 0;
+  int PRIMITIVE_STATE_DEFINITION__LIST = STATE_DEFINITION__LIST;
 
   /**
-   * The feature id for the '<em><b>Transitions</b></em>' containment reference.
+   * The feature id for the '<em><b>Value</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WITH_TRANSITIONS_DEFINITION__TRANSITIONS = 1;
+  int PRIMITIVE_STATE_DEFINITION__VALUE = STATE_DEFINITION__VALUE;
 
   /**
-   * The number of structural features of the '<em>With Transitions Definition</em>' class.
+   * The feature id for the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WITH_TRANSITIONS_DEFINITION_FEATURE_COUNT = 2;
+  int PRIMITIVE_STATE_DEFINITION__TYPE = STATE_DEFINITION__TYPE;
 
   /**
-   * The meta object id for the '{@link org.worklang.work.impl.ReferenceStateImpl <em>Reference State</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.ReferenceStateImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getReferenceState()
-   * @generated
-   */
-  int REFERENCE_STATE = 22;
-
-  /**
-   * The feature id for the '<em><b>Object</b></em>' attribute.
+   * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REFERENCE_STATE__OBJECT = 0;
+  int PRIMITIVE_STATE_DEFINITION__NAME = STATE_DEFINITION__NAME;
 
   /**
-   * The feature id for the '<em><b>Ref State</b></em>' reference.
+   * The number of structural features of the '<em>Primitive State Definition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REFERENCE_STATE__REF_STATE = 1;
+  int PRIMITIVE_STATE_DEFINITION_FEATURE_COUNT = STATE_DEFINITION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>From</b></em>' containment reference.
+   * The meta object id for the '{@link org.worklang.work.impl.CompoundStateDefinitionImpl <em>Compound State Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.CompoundStateDefinitionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getCompoundStateDefinition()
+   * @generated
+   */
+  int COMPOUND_STATE_DEFINITION = 8;
+
+  /**
+   * The feature id for the '<em><b>Instance</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REFERENCE_STATE__FROM = 2;
+  int COMPOUND_STATE_DEFINITION__INSTANCE = STATE_DEFINITION__INSTANCE;
 
   /**
-   * The feature id for the '<em><b>State</b></em>' containment reference.
+   * The feature id for the '<em><b>List</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REFERENCE_STATE__STATE = 3;
+  int COMPOUND_STATE_DEFINITION__LIST = STATE_DEFINITION__LIST;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_STATE_DEFINITION__VALUE = STATE_DEFINITION__VALUE;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_STATE_DEFINITION__TYPE = STATE_DEFINITION__TYPE;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_STATE_DEFINITION__NAME = STATE_DEFINITION__NAME;
 
   /**
    * The feature id for the '<em><b>Composition</b></em>' containment reference.
@@ -1117,16 +536,16 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REFERENCE_STATE__COMPOSITION = 4;
+  int COMPOUND_STATE_DEFINITION__COMPOSITION = STATE_DEFINITION_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Reference State</em>' class.
+   * The number of structural features of the '<em>Compound State Definition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REFERENCE_STATE_FEATURE_COUNT = 5;
+  int COMPOUND_STATE_DEFINITION_FEATURE_COUNT = STATE_DEFINITION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.TransitionDefinitionImpl <em>Transition Definition</em>}' class.
@@ -1136,25 +555,25 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getTransitionDefinition()
    * @generated
    */
-  int TRANSITION_DEFINITION = 23;
+  int TRANSITION_DEFINITION = 9;
 
   /**
-   * The feature id for the '<em><b>Object</b></em>' attribute.
+   * The feature id for the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TRANSITION_DEFINITION__OBJECT = 0;
+  int TRANSITION_DEFINITION__TYPE = 0;
 
   /**
-   * The feature id for the '<em><b>Transition</b></em>' containment reference.
+   * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TRANSITION_DEFINITION__TRANSITION = 1;
+  int TRANSITION_DEFINITION__NAME = 1;
 
   /**
    * The feature id for the '<em><b>In</b></em>' containment reference.
@@ -1175,51 +594,32 @@ public interface WorkPackage extends EPackage
   int TRANSITION_DEFINITION__OUT = 3;
 
   /**
-   * The feature id for the '<em><b>Composition</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_DEFINITION__COMPOSITION = 4;
-
-  /**
    * The number of structural features of the '<em>Transition Definition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TRANSITION_DEFINITION_FEATURE_COUNT = 5;
+  int TRANSITION_DEFINITION_FEATURE_COUNT = 4;
 
   /**
-   * The meta object id for the '{@link org.worklang.work.impl.TransitionalExpressionImpl <em>Transitional Expression</em>}' class.
+   * The meta object id for the '{@link org.worklang.work.impl.PrimitiveTransitionDefinitionImpl <em>Primitive Transition Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.TransitionalExpressionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getTransitionalExpression()
+   * @see org.worklang.work.impl.PrimitiveTransitionDefinitionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getPrimitiveTransitionDefinition()
    * @generated
    */
-  int TRANSITIONAL_EXPRESSION = 40;
+  int PRIMITIVE_TRANSITION_DEFINITION = 10;
 
   /**
-   * The number of structural features of the '<em>Transitional Expression</em>' class.
+   * The feature id for the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TRANSITIONAL_EXPRESSION_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.TransitionIDImpl <em>Transition ID</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.TransitionIDImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getTransitionID()
-   * @generated
-   */
-  int TRANSITION_ID = 24;
+  int PRIMITIVE_TRANSITION_DEFINITION__TYPE = TRANSITION_DEFINITION__TYPE;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1228,25 +628,135 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_ID__NAME = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 0;
+  int PRIMITIVE_TRANSITION_DEFINITION__NAME = TRANSITION_DEFINITION__NAME;
 
   /**
-   * The feature id for the '<em><b>Value</b></em>' reference.
+   * The feature id for the '<em><b>In</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TRANSITION_ID__VALUE = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 1;
+  int PRIMITIVE_TRANSITION_DEFINITION__IN = TRANSITION_DEFINITION__IN;
 
   /**
-   * The number of structural features of the '<em>Transition ID</em>' class.
+   * The feature id for the '<em><b>Out</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TRANSITION_ID_FEATURE_COUNT = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 2;
+  int PRIMITIVE_TRANSITION_DEFINITION__OUT = TRANSITION_DEFINITION__OUT;
+
+  /**
+   * The number of structural features of the '<em>Primitive Transition Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PRIMITIVE_TRANSITION_DEFINITION_FEATURE_COUNT = TRANSITION_DEFINITION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.CompoundTransitionDefinitionImpl <em>Compound Transition Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.CompoundTransitionDefinitionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getCompoundTransitionDefinition()
+   * @generated
+   */
+  int COMPOUND_TRANSITION_DEFINITION = 11;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_TRANSITION_DEFINITION__TYPE = TRANSITION_DEFINITION__TYPE;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_TRANSITION_DEFINITION__NAME = TRANSITION_DEFINITION__NAME;
+
+  /**
+   * The feature id for the '<em><b>In</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_TRANSITION_DEFINITION__IN = TRANSITION_DEFINITION__IN;
+
+  /**
+   * The feature id for the '<em><b>Out</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_TRANSITION_DEFINITION__OUT = TRANSITION_DEFINITION__OUT;
+
+  /**
+   * The feature id for the '<em><b>Composition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_TRANSITION_DEFINITION__COMPOSITION = TRANSITION_DEFINITION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Compound Transition Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_TRANSITION_DEFINITION_FEATURE_COUNT = TRANSITION_DEFINITION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.ReferenceSpaceImpl <em>Reference Space</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.ReferenceSpaceImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getReferenceSpace()
+   * @generated
+   */
+  int REFERENCE_SPACE = 12;
+
+  /**
+   * The feature id for the '<em><b>Ref States</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFERENCE_SPACE__REF_STATES = 0;
+
+  /**
+   * The feature id for the '<em><b>Ref Transitions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFERENCE_SPACE__REF_TRANSITIONS = 1;
+
+  /**
+   * The number of structural features of the '<em>Reference Space</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFERENCE_SPACE_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.ReferenceTransitionImpl <em>Reference Transition</em>}' class.
@@ -1256,16 +766,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getReferenceTransition()
    * @generated
    */
-  int REFERENCE_TRANSITION = 25;
-
-  /**
-   * The feature id for the '<em><b>Object</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCE_TRANSITION__OBJECT = 0;
+  int REFERENCE_TRANSITION = 13;
 
   /**
    * The feature id for the '<em><b>Ref Transition</b></em>' reference.
@@ -1274,34 +775,16 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REFERENCE_TRANSITION__REF_TRANSITION = 1;
+  int REFERENCE_TRANSITION__REF_TRANSITION = 0;
 
   /**
-   * The feature id for the '<em><b>From Def</b></em>' containment reference.
+   * The feature id for the '<em><b>Foreign Field</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REFERENCE_TRANSITION__FROM_DEF = 2;
-
-  /**
-   * The feature id for the '<em><b>Transition</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCE_TRANSITION__TRANSITION = 3;
-
-  /**
-   * The feature id for the '<em><b>Composition</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCE_TRANSITION__COMPOSITION = 4;
+  int REFERENCE_TRANSITION__FOREIGN_FIELD = 1;
 
   /**
    * The number of structural features of the '<em>Reference Transition</em>' class.
@@ -1310,44 +793,128 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REFERENCE_TRANSITION_FEATURE_COUNT = 5;
+  int REFERENCE_TRANSITION_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.worklang.work.impl.FromFieldDefinitionImpl <em>From Field Definition</em>}' class.
+   * The meta object id for the '{@link org.worklang.work.impl.ReferenceStateImpl <em>Reference State</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.FromFieldDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getFromFieldDefinition()
+   * @see org.worklang.work.impl.ReferenceStateImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getReferenceState()
    * @generated
    */
-  int FROM_FIELD_DEFINITION = 26;
+  int REFERENCE_STATE = 14;
 
   /**
-   * The feature id for the '<em><b>From</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FROM_FIELD_DEFINITION__FROM = 0;
-
-  /**
-   * The feature id for the '<em><b>Ref Space</b></em>' reference.
+   * The feature id for the '<em><b>Ref State</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FROM_FIELD_DEFINITION__REF_SPACE = 1;
+  int REFERENCE_STATE__REF_STATE = 0;
 
   /**
-   * The number of structural features of the '<em>From Field Definition</em>' class.
+   * The feature id for the '<em><b>Foreign Field</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FROM_FIELD_DEFINITION_FEATURE_COUNT = 2;
+  int REFERENCE_STATE__FOREIGN_FIELD = 1;
+
+  /**
+   * The number of structural features of the '<em>Reference State</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFERENCE_STATE_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.InstanceSpaceImpl <em>Instance Space</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.InstanceSpaceImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getInstanceSpace()
+   * @generated
+   */
+  int INSTANCE_SPACE = 15;
+
+  /**
+   * The feature id for the '<em><b>Instances</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INSTANCE_SPACE__INSTANCES = 0;
+
+  /**
+   * The number of structural features of the '<em>Instance Space</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INSTANCE_SPACE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.WithStatesDefinitionImpl <em>With States Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.WithStatesDefinitionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getWithStatesDefinition()
+   * @generated
+   */
+  int WITH_STATES_DEFINITION = 16;
+
+  /**
+   * The feature id for the '<em><b>Predicate</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WITH_STATES_DEFINITION__PREDICATE = 0;
+
+  /**
+   * The number of structural features of the '<em>With States Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WITH_STATES_DEFINITION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.WithTransitionsDefinitionImpl <em>With Transitions Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.WithTransitionsDefinitionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getWithTransitionsDefinition()
+   * @generated
+   */
+  int WITH_TRANSITIONS_DEFINITION = 17;
+
+  /**
+   * The feature id for the '<em><b>Transitions</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WITH_TRANSITIONS_DEFINITION__TRANSITIONS = 0;
+
+  /**
+   * The number of structural features of the '<em>With Transitions Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WITH_TRANSITIONS_DEFINITION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.InputDefinitionImpl <em>Input Definition</em>}' class.
@@ -1357,16 +924,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getInputDefinition()
    * @generated
    */
-  int INPUT_DEFINITION = 27;
-
-  /**
-   * The feature id for the '<em><b>Input</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INPUT_DEFINITION__INPUT = 0;
+  int INPUT_DEFINITION = 18;
 
   /**
    * The feature id for the '<em><b>Input State</b></em>' reference list.
@@ -1375,7 +933,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INPUT_DEFINITION__INPUT_STATE = 1;
+  int INPUT_DEFINITION__INPUT_STATE = 0;
 
   /**
    * The number of structural features of the '<em>Input Definition</em>' class.
@@ -1384,7 +942,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INPUT_DEFINITION_FEATURE_COUNT = 2;
+  int INPUT_DEFINITION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.OutputDefinitionImpl <em>Output Definition</em>}' class.
@@ -1394,16 +952,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getOutputDefinition()
    * @generated
    */
-  int OUTPUT_DEFINITION = 28;
-
-  /**
-   * The feature id for the '<em><b>Output</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OUTPUT_DEFINITION__OUTPUT = 0;
+  int OUTPUT_DEFINITION = 19;
 
   /**
    * The feature id for the '<em><b>Output State</b></em>' reference.
@@ -1412,7 +961,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int OUTPUT_DEFINITION__OUTPUT_STATE = 1;
+  int OUTPUT_DEFINITION__OUTPUT_STATE = 0;
 
   /**
    * The number of structural features of the '<em>Output Definition</em>' class.
@@ -1421,44 +970,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int OUTPUT_DEFINITION_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.ExtendsDefinitionImpl <em>Extends Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.ExtendsDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getExtendsDefinition()
-   * @generated
-   */
-  int EXTENDS_DEFINITION = 29;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXTENDS_DEFINITION__TYPE = 0;
-
-  /**
-   * The feature id for the '<em><b>Namespaces</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXTENDS_DEFINITION__NAMESPACES = 1;
-
-  /**
-   * The number of structural features of the '<em>Extends Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXTENDS_DEFINITION_FEATURE_COUNT = 2;
+  int OUTPUT_DEFINITION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.InstanceImpl <em>Instance</em>}' class.
@@ -1468,16 +980,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getInstance()
    * @generated
    */
-  int INSTANCE = 30;
-
-  /**
-   * The feature id for the '<em><b>Instance Def</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INSTANCE__INSTANCE_DEF = 0;
+  int INSTANCE = 20;
 
   /**
    * The feature id for the '<em><b>Transition Declaration</b></em>' containment reference.
@@ -1486,7 +989,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INSTANCE__TRANSITION_DECLARATION = 1;
+  int INSTANCE__TRANSITION_DECLARATION = 0;
 
   /**
    * The feature id for the '<em><b>State Declaration</b></em>' containment reference.
@@ -1495,7 +998,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INSTANCE__STATE_DECLARATION = 2;
+  int INSTANCE__STATE_DECLARATION = 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1504,7 +1007,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INSTANCE__NAME = 3;
+  int INSTANCE__NAME = 2;
 
   /**
    * The feature id for the '<em><b>State</b></em>' containment reference.
@@ -1513,7 +1016,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INSTANCE__STATE = 4;
+  int INSTANCE__STATE = 3;
 
   /**
    * The feature id for the '<em><b>Transition</b></em>' containment reference.
@@ -1522,7 +1025,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INSTANCE__TRANSITION = 5;
+  int INSTANCE__TRANSITION = 4;
 
   /**
    * The number of structural features of the '<em>Instance</em>' class.
@@ -1531,7 +1034,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INSTANCE_FEATURE_COUNT = 6;
+  int INSTANCE_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.TransitionDeclarationImpl <em>Transition Declaration</em>}' class.
@@ -1541,16 +1044,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getTransitionDeclaration()
    * @generated
    */
-  int TRANSITION_DECLARATION = 31;
-
-  /**
-   * The feature id for the '<em><b>Object Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_DECLARATION__OBJECT_TYPE = 0;
+  int TRANSITION_DECLARATION = 21;
 
   /**
    * The feature id for the '<em><b>Transition</b></em>' reference.
@@ -1559,7 +1053,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_DECLARATION__TRANSITION = 1;
+  int TRANSITION_DECLARATION__TRANSITION = 0;
 
   /**
    * The number of structural features of the '<em>Transition Declaration</em>' class.
@@ -1568,7 +1062,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_DECLARATION_FEATURE_COUNT = 2;
+  int TRANSITION_DECLARATION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.StateDeclarationImpl <em>State Declaration</em>}' class.
@@ -1578,16 +1072,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getStateDeclaration()
    * @generated
    */
-  int STATE_DECLARATION = 32;
-
-  /**
-   * The feature id for the '<em><b>Object Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_DECLARATION__OBJECT_TYPE = 0;
+  int STATE_DECLARATION = 22;
 
   /**
    * The feature id for the '<em><b>State</b></em>' reference.
@@ -1596,7 +1081,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE_DECLARATION__STATE = 1;
+  int STATE_DECLARATION__STATE = 0;
 
   /**
    * The number of structural features of the '<em>State Declaration</em>' class.
@@ -1605,7 +1090,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE_DECLARATION_FEATURE_COUNT = 2;
+  int STATE_DECLARATION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.TransitionInstanceImpl <em>Transition Instance</em>}' class.
@@ -1615,7 +1100,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getTransitionInstance()
    * @generated
    */
-  int TRANSITION_INSTANCE = 33;
+  int TRANSITION_INSTANCE = 23;
 
   /**
    * The feature id for the '<em><b>Host</b></em>' attribute.
@@ -1661,7 +1146,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getStateInstance()
    * @generated
    */
-  int STATE_INSTANCE = 34;
+  int STATE_INSTANCE = 24;
 
   /**
    * The feature id for the '<em><b>Members</b></em>' containment reference list.
@@ -1689,16 +1174,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getUseDefinition()
    * @generated
    */
-  int USE_DEFINITION = 35;
-
-  /**
-   * The feature id for the '<em><b>Use</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int USE_DEFINITION__USE = 0;
+  int USE_DEFINITION = 25;
 
   /**
    * The feature id for the '<em><b>Predefined Value</b></em>' reference.
@@ -1707,7 +1183,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int USE_DEFINITION__PREDEFINED_VALUE = 1;
+  int USE_DEFINITION__PREDEFINED_VALUE = 0;
 
   /**
    * The number of structural features of the '<em>Use Definition</em>' class.
@@ -1716,7 +1192,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int USE_DEFINITION_FEATURE_COUNT = 2;
+  int USE_DEFINITION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.SetStatementImpl <em>Set Statement</em>}' class.
@@ -1726,16 +1202,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getSetStatement()
    * @generated
    */
-  int SET_STATEMENT = 36;
-
-  /**
-   * The feature id for the '<em><b>Statement</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SET_STATEMENT__STATEMENT = 0;
+  int SET_STATEMENT = 26;
 
   /**
    * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -1744,7 +1211,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SET_STATEMENT__VARIABLE = 1;
+  int SET_STATEMENT__VARIABLE = 0;
 
   /**
    * The feature id for the '<em><b>To Def</b></em>' containment reference.
@@ -1753,7 +1220,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SET_STATEMENT__TO_DEF = 2;
+  int SET_STATEMENT__TO_DEF = 1;
 
   /**
    * The number of structural features of the '<em>Set Statement</em>' class.
@@ -1762,7 +1229,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SET_STATEMENT_FEATURE_COUNT = 3;
+  int SET_STATEMENT_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.ToDefinitionImpl <em>To Definition</em>}' class.
@@ -1772,16 +1239,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getToDefinition()
    * @generated
    */
-  int TO_DEFINITION = 37;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TO_DEFINITION__TO = 0;
+  int TO_DEFINITION = 27;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1790,7 +1248,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TO_DEFINITION__VALUE = 1;
+  int TO_DEFINITION__VALUE = 0;
 
   /**
    * The number of structural features of the '<em>To Definition</em>' class.
@@ -1799,7 +1257,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TO_DEFINITION_FEATURE_COUNT = 2;
+  int TO_DEFINITION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.PredicateImpl <em>Predicate</em>}' class.
@@ -1809,7 +1267,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getPredicate()
    * @generated
    */
-  int PREDICATE = 38;
+  int PREDICATE = 28;
 
   /**
    * The feature id for the '<em><b>Negation</b></em>' attribute.
@@ -1839,6 +1297,25 @@ public interface WorkPackage extends EPackage
   int PREDICATE_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link org.worklang.work.impl.TransitionalExpressionImpl <em>Transitional Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.TransitionalExpressionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getTransitionalExpression()
+   * @generated
+   */
+  int TRANSITIONAL_EXPRESSION = 30;
+
+  /**
+   * The number of structural features of the '<em>Transitional Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITIONAL_EXPRESSION_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link org.worklang.work.impl.OperationImpl <em>Operation</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1846,7 +1323,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getOperation()
    * @generated
    */
-  int OPERATION = 41;
+  int OPERATION = 31;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1884,6 +1361,34 @@ public interface WorkPackage extends EPackage
    */
   int OPERATION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 3;
 
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.TransitionIDImpl <em>Transition ID</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.TransitionIDImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getTransitionID()
+   * @generated
+   */
+  int TRANSITION_ID = 32;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_ID__VALUE = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Transition ID</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_ID_FEATURE_COUNT = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 1;
+
 
   /**
    * Returns the meta object for class '{@link org.worklang.work.Model <em>Model</em>}'.
@@ -1907,329 +1412,6 @@ public interface WorkPackage extends EPackage
   EReference getModel_Fields();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.worklang.work.Model#getExperts <em>Experts</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Experts</em>'.
-   * @see org.worklang.work.Model#getExperts()
-   * @see #getModel()
-   * @generated
-   */
-  EReference getModel_Experts();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.worklang.work.Model#getPractitioners <em>Practitioners</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Practitioners</em>'.
-   * @see org.worklang.work.Model#getPractitioners()
-   * @see #getModel()
-   * @generated
-   */
-  EReference getModel_Practitioners();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.worklang.work.Model#getInstructions <em>Instructions</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Instructions</em>'.
-   * @see org.worklang.work.Model#getInstructions()
-   * @see #getModel()
-   * @generated
-   */
-  EReference getModel_Instructions();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.Instruction <em>Instruction</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Instruction</em>'.
-   * @see org.worklang.work.Instruction
-   * @generated
-   */
-  EClass getInstruction();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.Instruction#getObjectType <em>Object Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Object Type</em>'.
-   * @see org.worklang.work.Instruction#getObjectType()
-   * @see #getInstruction()
-   * @generated
-   */
-  EAttribute getInstruction_ObjectType();
-
-  /**
-   * Returns the meta object for the reference '{@link org.worklang.work.Instruction#getSpace <em>Space</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Space</em>'.
-   * @see org.worklang.work.Instruction#getSpace()
-   * @see #getInstruction()
-   * @generated
-   */
-  EReference getInstruction_Space();
-
-  /**
-   * Returns the meta object for the reference '{@link org.worklang.work.Instruction#getTransition <em>Transition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Transition</em>'.
-   * @see org.worklang.work.Instruction#getTransition()
-   * @see #getInstruction()
-   * @generated
-   */
-  EReference getInstruction_Transition();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.Practitioner <em>Practitioner</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Practitioner</em>'.
-   * @see org.worklang.work.Practitioner
-   * @generated
-   */
-  EClass getPractitioner();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.Practitioner#getPractitionerDef <em>Practitioner Def</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Practitioner Def</em>'.
-   * @see org.worklang.work.Practitioner#getPractitionerDef()
-   * @see #getPractitioner()
-   * @generated
-   */
-  EAttribute getPractitioner_PractitionerDef();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.Practitioner#getUser <em>User</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>User</em>'.
-   * @see org.worklang.work.Practitioner#getUser()
-   * @see #getPractitioner()
-   * @generated
-   */
-  EReference getPractitioner_User();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.Practitioner#getKnowledgeDef <em>Knowledge Def</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Knowledge Def</em>'.
-   * @see org.worklang.work.Practitioner#getKnowledgeDef()
-   * @see #getPractitioner()
-   * @generated
-   */
-  EReference getPractitioner_KnowledgeDef();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.Practitioner#getSkillsDef <em>Skills Def</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Skills Def</em>'.
-   * @see org.worklang.work.Practitioner#getSkillsDef()
-   * @see #getPractitioner()
-   * @generated
-   */
-  EReference getPractitioner_SkillsDef();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.ExpertDefinition <em>Expert Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expert Definition</em>'.
-   * @see org.worklang.work.ExpertDefinition
-   * @generated
-   */
-  EClass getExpertDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.ExpertDefinition#getExpertDef <em>Expert Def</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Expert Def</em>'.
-   * @see org.worklang.work.ExpertDefinition#getExpertDef()
-   * @see #getExpertDefinition()
-   * @generated
-   */
-  EAttribute getExpertDefinition_ExpertDef();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.ExpertDefinition#getUser <em>User</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>User</em>'.
-   * @see org.worklang.work.ExpertDefinition#getUser()
-   * @see #getExpertDefinition()
-   * @generated
-   */
-  EReference getExpertDefinition_User();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.ExpertDefinition#getDomainDef <em>Domain Def</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Domain Def</em>'.
-   * @see org.worklang.work.ExpertDefinition#getDomainDef()
-   * @see #getExpertDefinition()
-   * @generated
-   */
-  EReference getExpertDefinition_DomainDef();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.ExpertDefinition#getKnowledgeDef <em>Knowledge Def</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Knowledge Def</em>'.
-   * @see org.worklang.work.ExpertDefinition#getKnowledgeDef()
-   * @see #getExpertDefinition()
-   * @generated
-   */
-  EReference getExpertDefinition_KnowledgeDef();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.ExpertDefinition#getSkillsDef <em>Skills Def</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Skills Def</em>'.
-   * @see org.worklang.work.ExpertDefinition#getSkillsDef()
-   * @see #getExpertDefinition()
-   * @generated
-   */
-  EReference getExpertDefinition_SkillsDef();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.ExpertDefinition#getRate <em>Rate</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Rate</em>'.
-   * @see org.worklang.work.ExpertDefinition#getRate()
-   * @see #getExpertDefinition()
-   * @generated
-   */
-  EAttribute getExpertDefinition_Rate();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.User <em>User</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>User</em>'.
-   * @see org.worklang.work.User
-   * @generated
-   */
-  EClass getUser();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.User#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.worklang.work.User#getName()
-   * @see #getUser()
-   * @generated
-   */
-  EAttribute getUser_Name();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.DomainDefinition <em>Domain Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Domain Definition</em>'.
-   * @see org.worklang.work.DomainDefinition
-   * @generated
-   */
-  EClass getDomainDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.DomainDefinition#getDomain <em>Domain</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Domain</em>'.
-   * @see org.worklang.work.DomainDefinition#getDomain()
-   * @see #getDomainDefinition()
-   * @generated
-   */
-  EAttribute getDomainDefinition_Domain();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.worklang.work.DomainDefinition#getDomainAreas <em>Domain Areas</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Domain Areas</em>'.
-   * @see org.worklang.work.DomainDefinition#getDomainAreas()
-   * @see #getDomainDefinition()
-   * @generated
-   */
-  EReference getDomainDefinition_DomainAreas();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.KnowledgeDefinition <em>Knowledge Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Knowledge Definition</em>'.
-   * @see org.worklang.work.KnowledgeDefinition
-   * @generated
-   */
-  EClass getKnowledgeDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.KnowledgeDefinition#getKnowledgeDef <em>Knowledge Def</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Knowledge Def</em>'.
-   * @see org.worklang.work.KnowledgeDefinition#getKnowledgeDef()
-   * @see #getKnowledgeDefinition()
-   * @generated
-   */
-  EAttribute getKnowledgeDefinition_KnowledgeDef();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.worklang.work.KnowledgeDefinition#getKnowledge <em>Knowledge</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Knowledge</em>'.
-   * @see org.worklang.work.KnowledgeDefinition#getKnowledge()
-   * @see #getKnowledgeDefinition()
-   * @generated
-   */
-  EReference getKnowledgeDefinition_Knowledge();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.SkillsDefinition <em>Skills Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Skills Definition</em>'.
-   * @see org.worklang.work.SkillsDefinition
-   * @generated
-   */
-  EClass getSkillsDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.SkillsDefinition#getSkillsDef <em>Skills Def</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Skills Def</em>'.
-   * @see org.worklang.work.SkillsDefinition#getSkillsDef()
-   * @see #getSkillsDefinition()
-   * @generated
-   */
-  EAttribute getSkillsDefinition_SkillsDef();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.worklang.work.SkillsDefinition#getSkills <em>Skills</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Skills</em>'.
-   * @see org.worklang.work.SkillsDefinition#getSkills()
-   * @see #getSkillsDefinition()
-   * @generated
-   */
-  EReference getSkillsDefinition_Skills();
-
-  /**
    * Returns the meta object for class '{@link org.worklang.work.FieldDefinition <em>Field Definition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2240,391 +1422,209 @@ public interface WorkPackage extends EPackage
   EClass getFieldDefinition();
 
   /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.FieldDefinition#getField <em>Field</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Field</em>'.
-   * @see org.worklang.work.FieldDefinition#getField()
-   * @see #getFieldDefinition()
-   * @generated
-   */
-  EAttribute getFieldDefinition_Field();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.FieldDefinition#getSpace <em>Space</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Space</em>'.
-   * @see org.worklang.work.FieldDefinition#getSpace()
-   * @see #getFieldDefinition()
-   * @generated
-   */
-  EReference getFieldDefinition_Space();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.FieldDefinition#getExtends <em>Extends</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Extends</em>'.
-   * @see org.worklang.work.FieldDefinition#getExtends()
-   * @see #getFieldDefinition()
-   * @generated
-   */
-  EReference getFieldDefinition_Extends();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.FieldDefinition#getConceptualspace <em>Conceptualspace</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Conceptualspace</em>'.
-   * @see org.worklang.work.FieldDefinition#getConceptualspace()
-   * @see #getFieldDefinition()
-   * @generated
-   */
-  EReference getFieldDefinition_Conceptualspace();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.FieldDefinition#getReferencespace <em>Referencespace</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Referencespace</em>'.
-   * @see org.worklang.work.FieldDefinition#getReferencespace()
-   * @see #getFieldDefinition()
-   * @generated
-   */
-  EReference getFieldDefinition_Referencespace();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.FieldDefinition#getInstancespace <em>Instancespace</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Instancespace</em>'.
-   * @see org.worklang.work.FieldDefinition#getInstancespace()
-   * @see #getFieldDefinition()
-   * @generated
-   */
-  EReference getFieldDefinition_Instancespace();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.Space <em>Space</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Space</em>'.
-   * @see org.worklang.work.Space
-   * @generated
-   */
-  EClass getSpace();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.Space#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.worklang.work.FieldDefinition#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.worklang.work.Space#getName()
-   * @see #getSpace()
+   * @see org.worklang.work.FieldDefinition#getName()
+   * @see #getFieldDefinition()
    * @generated
    */
-  EAttribute getSpace_Name();
+  EAttribute getFieldDefinition_Name();
 
   /**
-   * Returns the meta object for class '{@link org.worklang.work.Namespace <em>Namespace</em>}'.
+   * Returns the meta object for the containment reference '{@link org.worklang.work.FieldDefinition#getDefinitionSpace <em>Definition Space</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Namespace</em>'.
-   * @see org.worklang.work.Namespace
+   * @return the meta object for the containment reference '<em>Definition Space</em>'.
+   * @see org.worklang.work.FieldDefinition#getDefinitionSpace()
+   * @see #getFieldDefinition()
    * @generated
    */
-  EClass getNamespace();
+  EReference getFieldDefinition_DefinitionSpace();
 
   /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.Namespace#getSpaceType <em>Space Type</em>}'.
+   * Returns the meta object for the containment reference '{@link org.worklang.work.FieldDefinition#getReferenceSpace <em>Reference Space</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Space Type</em>'.
-   * @see org.worklang.work.Namespace#getSpaceType()
-   * @see #getNamespace()
+   * @return the meta object for the containment reference '<em>Reference Space</em>'.
+   * @see org.worklang.work.FieldDefinition#getReferenceSpace()
+   * @see #getFieldDefinition()
    * @generated
    */
-  EAttribute getNamespace_SpaceType();
+  EReference getFieldDefinition_ReferenceSpace();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.worklang.work.Namespace#getStates <em>States</em>}'.
+   * Returns the meta object for the containment reference '{@link org.worklang.work.FieldDefinition#getMapSpace <em>Map Space</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Map Space</em>'.
+   * @see org.worklang.work.FieldDefinition#getMapSpace()
+   * @see #getFieldDefinition()
+   * @generated
+   */
+  EReference getFieldDefinition_MapSpace();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.FieldDefinition#getInstanceSpace <em>Instance Space</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Instance Space</em>'.
+   * @see org.worklang.work.FieldDefinition#getInstanceSpace()
+   * @see #getFieldDefinition()
+   * @generated
+   */
+  EReference getFieldDefinition_InstanceSpace();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.MapSpace <em>Map Space</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Map Space</em>'.
+   * @see org.worklang.work.MapSpace
+   * @generated
+   */
+  EClass getMapSpace();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.worklang.work.MapSpace#getMappedStates <em>Mapped States</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Mapped States</em>'.
+   * @see org.worklang.work.MapSpace#getMappedStates()
+   * @see #getMapSpace()
+   * @generated
+   */
+  EReference getMapSpace_MappedStates();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.worklang.work.MapSpace#getMappedTransitions <em>Mapped Transitions</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Mapped Transitions</em>'.
+   * @see org.worklang.work.MapSpace#getMappedTransitions()
+   * @see #getMapSpace()
+   * @generated
+   */
+  EReference getMapSpace_MappedTransitions();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.StateMapping <em>State Mapping</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>State Mapping</em>'.
+   * @see org.worklang.work.StateMapping
+   * @generated
+   */
+  EClass getStateMapping();
+
+  /**
+   * Returns the meta object for the reference '{@link org.worklang.work.StateMapping#getForeignState <em>Foreign State</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Foreign State</em>'.
+   * @see org.worklang.work.StateMapping#getForeignState()
+   * @see #getStateMapping()
+   * @generated
+   */
+  EReference getStateMapping_ForeignState();
+
+  /**
+   * Returns the meta object for the reference '{@link org.worklang.work.StateMapping#getField <em>Field</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Field</em>'.
+   * @see org.worklang.work.StateMapping#getField()
+   * @see #getStateMapping()
+   * @generated
+   */
+  EReference getStateMapping_Field();
+
+  /**
+   * Returns the meta object for the reference '{@link org.worklang.work.StateMapping#getLocalState <em>Local State</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Local State</em>'.
+   * @see org.worklang.work.StateMapping#getLocalState()
+   * @see #getStateMapping()
+   * @generated
+   */
+  EReference getStateMapping_LocalState();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.TransitionMapping <em>Transition Mapping</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Transition Mapping</em>'.
+   * @see org.worklang.work.TransitionMapping
+   * @generated
+   */
+  EClass getTransitionMapping();
+
+  /**
+   * Returns the meta object for the reference '{@link org.worklang.work.TransitionMapping#getForeignTransition <em>Foreign Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Foreign Transition</em>'.
+   * @see org.worklang.work.TransitionMapping#getForeignTransition()
+   * @see #getTransitionMapping()
+   * @generated
+   */
+  EReference getTransitionMapping_ForeignTransition();
+
+  /**
+   * Returns the meta object for the reference '{@link org.worklang.work.TransitionMapping#getField <em>Field</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Field</em>'.
+   * @see org.worklang.work.TransitionMapping#getField()
+   * @see #getTransitionMapping()
+   * @generated
+   */
+  EReference getTransitionMapping_Field();
+
+  /**
+   * Returns the meta object for the reference '{@link org.worklang.work.TransitionMapping#getLocalTransition <em>Local Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Local Transition</em>'.
+   * @see org.worklang.work.TransitionMapping#getLocalTransition()
+   * @see #getTransitionMapping()
+   * @generated
+   */
+  EReference getTransitionMapping_LocalTransition();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.DefinitionSpace <em>Definition Space</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Definition Space</em>'.
+   * @see org.worklang.work.DefinitionSpace
+   * @generated
+   */
+  EClass getDefinitionSpace();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.worklang.work.DefinitionSpace#getStates <em>States</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>States</em>'.
-   * @see org.worklang.work.Namespace#getStates()
-   * @see #getNamespace()
+   * @see org.worklang.work.DefinitionSpace#getStates()
+   * @see #getDefinitionSpace()
    * @generated
    */
-  EReference getNamespace_States();
+  EReference getDefinitionSpace_States();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.worklang.work.Namespace#getTransitions <em>Transitions</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.worklang.work.DefinitionSpace#getTransitions <em>Transitions</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Transitions</em>'.
-   * @see org.worklang.work.Namespace#getTransitions()
-   * @see #getNamespace()
+   * @see org.worklang.work.DefinitionSpace#getTransitions()
+   * @see #getDefinitionSpace()
    * @generated
    */
-  EReference getNamespace_Transitions();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.Referencespace <em>Referencespace</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Referencespace</em>'.
-   * @see org.worklang.work.Referencespace
-   * @generated
-   */
-  EClass getReferencespace();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.Referencespace#getSpaceType <em>Space Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Space Type</em>'.
-   * @see org.worklang.work.Referencespace#getSpaceType()
-   * @see #getReferencespace()
-   * @generated
-   */
-  EAttribute getReferencespace_SpaceType();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.worklang.work.Referencespace#getRefFields <em>Ref Fields</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Ref Fields</em>'.
-   * @see org.worklang.work.Referencespace#getRefFields()
-   * @see #getReferencespace()
-   * @generated
-   */
-  EReference getReferencespace_RefFields();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.worklang.work.Referencespace#getRefStates <em>Ref States</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Ref States</em>'.
-   * @see org.worklang.work.Referencespace#getRefStates()
-   * @see #getReferencespace()
-   * @generated
-   */
-  EReference getReferencespace_RefStates();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.worklang.work.Referencespace#getRefTransition <em>Ref Transition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Ref Transition</em>'.
-   * @see org.worklang.work.Referencespace#getRefTransition()
-   * @see #getReferencespace()
-   * @generated
-   */
-  EReference getReferencespace_RefTransition();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.Instancespace <em>Instancespace</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Instancespace</em>'.
-   * @see org.worklang.work.Instancespace
-   * @generated
-   */
-  EClass getInstancespace();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.Instancespace#getSpaceType <em>Space Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Space Type</em>'.
-   * @see org.worklang.work.Instancespace#getSpaceType()
-   * @see #getInstancespace()
-   * @generated
-   */
-  EAttribute getInstancespace_SpaceType();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.worklang.work.Instancespace#getInstances <em>Instances</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Instances</em>'.
-   * @see org.worklang.work.Instancespace#getInstances()
-   * @see #getInstancespace()
-   * @generated
-   */
-  EReference getInstancespace_Instances();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.ReferenceField <em>Reference Field</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Reference Field</em>'.
-   * @see org.worklang.work.ReferenceField
-   * @generated
-   */
-  EClass getReferenceField();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.ReferenceField#getRef <em>Ref</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Ref</em>'.
-   * @see org.worklang.work.ReferenceField#getRef()
-   * @see #getReferenceField()
-   * @generated
-   */
-  EAttribute getReferenceField_Ref();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.ReferenceField#getSpace <em>Space</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Space</em>'.
-   * @see org.worklang.work.ReferenceField#getSpace()
-   * @see #getReferenceField()
-   * @generated
-   */
-  EReference getReferenceField_Space();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.StateObjectDefinition <em>State Object Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>State Object Definition</em>'.
-   * @see org.worklang.work.StateObjectDefinition
-   * @generated
-   */
-  EClass getStateObjectDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.StateObjectDefinition#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Type</em>'.
-   * @see org.worklang.work.StateObjectDefinition#getType()
-   * @see #getStateObjectDefinition()
-   * @generated
-   */
-  EAttribute getStateObjectDefinition_Type();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.StateObjectDefinition#getState <em>State</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>State</em>'.
-   * @see org.worklang.work.StateObjectDefinition#getState()
-   * @see #getStateObjectDefinition()
-   * @generated
-   */
-  EReference getStateObjectDefinition_State();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.TransitionObjectDefinition <em>Transition Object Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Transition Object Definition</em>'.
-   * @see org.worklang.work.TransitionObjectDefinition
-   * @generated
-   */
-  EClass getTransitionObjectDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.TransitionObjectDefinition#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Type</em>'.
-   * @see org.worklang.work.TransitionObjectDefinition#getType()
-   * @see #getTransitionObjectDefinition()
-   * @generated
-   */
-  EAttribute getTransitionObjectDefinition_Type();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.TransitionObjectDefinition#getTransition <em>Transition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Transition</em>'.
-   * @see org.worklang.work.TransitionObjectDefinition#getTransition()
-   * @see #getTransitionObjectDefinition()
-   * @generated
-   */
-  EReference getTransitionObjectDefinition_Transition();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.PrimitiveStateDefinition <em>Primitive State Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Primitive State Definition</em>'.
-   * @see org.worklang.work.PrimitiveStateDefinition
-   * @generated
-   */
-  EClass getPrimitiveStateDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.PrimitiveStateDefinition#getObject <em>Object</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Object</em>'.
-   * @see org.worklang.work.PrimitiveStateDefinition#getObject()
-   * @see #getPrimitiveStateDefinition()
-   * @generated
-   */
-  EAttribute getPrimitiveStateDefinition_Object();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.PrimitiveStateDefinition#getId <em>Id</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Id</em>'.
-   * @see org.worklang.work.PrimitiveStateDefinition#getId()
-   * @see #getPrimitiveStateDefinition()
-   * @generated
-   */
-  EReference getPrimitiveStateDefinition_Id();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.CompoundStateDefinition <em>Compound State Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Compound State Definition</em>'.
-   * @see org.worklang.work.CompoundStateDefinition
-   * @generated
-   */
-  EClass getCompoundStateDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.CompoundStateDefinition#getObject <em>Object</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Object</em>'.
-   * @see org.worklang.work.CompoundStateDefinition#getObject()
-   * @see #getCompoundStateDefinition()
-   * @generated
-   */
-  EAttribute getCompoundStateDefinition_Object();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.CompoundStateDefinition#getState <em>State</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>State</em>'.
-   * @see org.worklang.work.CompoundStateDefinition#getState()
-   * @see #getCompoundStateDefinition()
-   * @generated
-   */
-  EReference getCompoundStateDefinition_State();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.CompoundStateDefinition#getCompoundStateDef <em>Compound State Def</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Compound State Def</em>'.
-   * @see org.worklang.work.CompoundStateDefinition#getCompoundStateDef()
-   * @see #getCompoundStateDefinition()
-   * @generated
-   */
-  EReference getCompoundStateDefinition_CompoundStateDef();
+  EReference getDefinitionSpace_Transitions();
 
   /**
    * Returns the meta object for class '{@link org.worklang.work.StateDefinition <em>State Definition</em>}'.
@@ -2637,220 +1637,90 @@ public interface WorkPackage extends EPackage
   EClass getStateDefinition();
 
   /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.StateDefinition#getObject <em>Object</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Object</em>'.
-   * @see org.worklang.work.StateDefinition#getObject()
-   * @see #getStateDefinition()
-   * @generated
-   */
-  EAttribute getStateDefinition_Object();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.StateDefinition#getState <em>State</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>State</em>'.
-   * @see org.worklang.work.StateDefinition#getState()
-   * @see #getStateDefinition()
-   * @generated
-   */
-  EReference getStateDefinition_State();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.StateDefinition#getWithDefinition <em>With Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>With Definition</em>'.
-   * @see org.worklang.work.StateDefinition#getWithDefinition()
-   * @see #getStateDefinition()
-   * @generated
-   */
-  EReference getStateDefinition_WithDefinition();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.StateID <em>State ID</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>State ID</em>'.
-   * @see org.worklang.work.StateID
-   * @generated
-   */
-  EClass getStateID();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.StateID#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.worklang.work.StateID#getName()
-   * @see #getStateID()
-   * @generated
-   */
-  EAttribute getStateID_Name();
-
-  /**
-   * Returns the meta object for the reference '{@link org.worklang.work.StateID#getInstance <em>Instance</em>}'.
+   * Returns the meta object for the reference '{@link org.worklang.work.StateDefinition#getInstance <em>Instance</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Instance</em>'.
-   * @see org.worklang.work.StateID#getInstance()
-   * @see #getStateID()
+   * @see org.worklang.work.StateDefinition#getInstance()
+   * @see #getStateDefinition()
    * @generated
    */
-  EReference getStateID_Instance();
+  EReference getStateDefinition_Instance();
 
   /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.StateID#isList <em>List</em>}'.
+   * Returns the meta object for the attribute '{@link org.worklang.work.StateDefinition#isList <em>List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>List</em>'.
-   * @see org.worklang.work.StateID#isList()
-   * @see #getStateID()
+   * @see org.worklang.work.StateDefinition#isList()
+   * @see #getStateDefinition()
    * @generated
    */
-  EAttribute getStateID_List();
+  EAttribute getStateDefinition_List();
 
   /**
-   * Returns the meta object for the reference '{@link org.worklang.work.StateID#getValue <em>Value</em>}'.
+   * Returns the meta object for the reference '{@link org.worklang.work.StateDefinition#getValue <em>Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Value</em>'.
-   * @see org.worklang.work.StateID#getValue()
-   * @see #getStateID()
+   * @see org.worklang.work.StateDefinition#getValue()
+   * @see #getStateDefinition()
    * @generated
    */
-  EReference getStateID_Value();
+  EReference getStateDefinition_Value();
 
   /**
-   * Returns the meta object for class '{@link org.worklang.work.WithStatesDefinition <em>With States Definition</em>}'.
+   * Returns the meta object for the attribute '{@link org.worklang.work.StateDefinition#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>With States Definition</em>'.
-   * @see org.worklang.work.WithStatesDefinition
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.worklang.work.StateDefinition#getType()
+   * @see #getStateDefinition()
    * @generated
    */
-  EClass getWithStatesDefinition();
+  EAttribute getStateDefinition_Type();
 
   /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.WithStatesDefinition#getComposition <em>Composition</em>}'.
+   * Returns the meta object for the attribute '{@link org.worklang.work.StateDefinition#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Composition</em>'.
-   * @see org.worklang.work.WithStatesDefinition#getComposition()
-   * @see #getWithStatesDefinition()
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.worklang.work.StateDefinition#getName()
+   * @see #getStateDefinition()
    * @generated
    */
-  EAttribute getWithStatesDefinition_Composition();
+  EAttribute getStateDefinition_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.WithStatesDefinition#getPredicate <em>Predicate</em>}'.
+   * Returns the meta object for class '{@link org.worklang.work.PrimitiveStateDefinition <em>Primitive State Definition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Predicate</em>'.
-   * @see org.worklang.work.WithStatesDefinition#getPredicate()
-   * @see #getWithStatesDefinition()
+   * @return the meta object for class '<em>Primitive State Definition</em>'.
+   * @see org.worklang.work.PrimitiveStateDefinition
    * @generated
    */
-  EReference getWithStatesDefinition_Predicate();
+  EClass getPrimitiveStateDefinition();
 
   /**
-   * Returns the meta object for class '{@link org.worklang.work.WithTransitionsDefinition <em>With Transitions Definition</em>}'.
+   * Returns the meta object for class '{@link org.worklang.work.CompoundStateDefinition <em>Compound State Definition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>With Transitions Definition</em>'.
-   * @see org.worklang.work.WithTransitionsDefinition
+   * @return the meta object for class '<em>Compound State Definition</em>'.
+   * @see org.worklang.work.CompoundStateDefinition
    * @generated
    */
-  EClass getWithTransitionsDefinition();
+  EClass getCompoundStateDefinition();
 
   /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.WithTransitionsDefinition#getComposition <em>Composition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Composition</em>'.
-   * @see org.worklang.work.WithTransitionsDefinition#getComposition()
-   * @see #getWithTransitionsDefinition()
-   * @generated
-   */
-  EAttribute getWithTransitionsDefinition_Composition();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.WithTransitionsDefinition#getTransitions <em>Transitions</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Transitions</em>'.
-   * @see org.worklang.work.WithTransitionsDefinition#getTransitions()
-   * @see #getWithTransitionsDefinition()
-   * @generated
-   */
-  EReference getWithTransitionsDefinition_Transitions();
-
-  /**
-   * Returns the meta object for class '{@link org.worklang.work.ReferenceState <em>Reference State</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Reference State</em>'.
-   * @see org.worklang.work.ReferenceState
-   * @generated
-   */
-  EClass getReferenceState();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.ReferenceState#getObject <em>Object</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Object</em>'.
-   * @see org.worklang.work.ReferenceState#getObject()
-   * @see #getReferenceState()
-   * @generated
-   */
-  EAttribute getReferenceState_Object();
-
-  /**
-   * Returns the meta object for the reference '{@link org.worklang.work.ReferenceState#getRefState <em>Ref State</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Ref State</em>'.
-   * @see org.worklang.work.ReferenceState#getRefState()
-   * @see #getReferenceState()
-   * @generated
-   */
-  EReference getReferenceState_RefState();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.ReferenceState#getFrom <em>From</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>From</em>'.
-   * @see org.worklang.work.ReferenceState#getFrom()
-   * @see #getReferenceState()
-   * @generated
-   */
-  EReference getReferenceState_From();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.ReferenceState#getState <em>State</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>State</em>'.
-   * @see org.worklang.work.ReferenceState#getState()
-   * @see #getReferenceState()
-   * @generated
-   */
-  EReference getReferenceState_State();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.ReferenceState#getComposition <em>Composition</em>}'.
+   * Returns the meta object for the containment reference '{@link org.worklang.work.CompoundStateDefinition#getComposition <em>Composition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Composition</em>'.
-   * @see org.worklang.work.ReferenceState#getComposition()
-   * @see #getReferenceState()
+   * @see org.worklang.work.CompoundStateDefinition#getComposition()
+   * @see #getCompoundStateDefinition()
    * @generated
    */
-  EReference getReferenceState_Composition();
+  EReference getCompoundStateDefinition_Composition();
 
   /**
    * Returns the meta object for class '{@link org.worklang.work.TransitionDefinition <em>Transition Definition</em>}'.
@@ -2863,26 +1733,26 @@ public interface WorkPackage extends EPackage
   EClass getTransitionDefinition();
 
   /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.TransitionDefinition#getObject <em>Object</em>}'.
+   * Returns the meta object for the attribute '{@link org.worklang.work.TransitionDefinition#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Object</em>'.
-   * @see org.worklang.work.TransitionDefinition#getObject()
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.worklang.work.TransitionDefinition#getType()
    * @see #getTransitionDefinition()
    * @generated
    */
-  EAttribute getTransitionDefinition_Object();
+  EAttribute getTransitionDefinition_Type();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.TransitionDefinition#getTransition <em>Transition</em>}'.
+   * Returns the meta object for the attribute '{@link org.worklang.work.TransitionDefinition#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Transition</em>'.
-   * @see org.worklang.work.TransitionDefinition#getTransition()
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.worklang.work.TransitionDefinition#getName()
    * @see #getTransitionDefinition()
    * @generated
    */
-  EReference getTransitionDefinition_Transition();
+  EAttribute getTransitionDefinition_Name();
 
   /**
    * Returns the meta object for the containment reference '{@link org.worklang.work.TransitionDefinition#getIn <em>In</em>}'.
@@ -2907,47 +1777,67 @@ public interface WorkPackage extends EPackage
   EReference getTransitionDefinition_Out();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.TransitionDefinition#getComposition <em>Composition</em>}'.
+   * Returns the meta object for class '{@link org.worklang.work.PrimitiveTransitionDefinition <em>Primitive Transition Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Primitive Transition Definition</em>'.
+   * @see org.worklang.work.PrimitiveTransitionDefinition
+   * @generated
+   */
+  EClass getPrimitiveTransitionDefinition();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.CompoundTransitionDefinition <em>Compound Transition Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Compound Transition Definition</em>'.
+   * @see org.worklang.work.CompoundTransitionDefinition
+   * @generated
+   */
+  EClass getCompoundTransitionDefinition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.CompoundTransitionDefinition#getComposition <em>Composition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Composition</em>'.
-   * @see org.worklang.work.TransitionDefinition#getComposition()
-   * @see #getTransitionDefinition()
+   * @see org.worklang.work.CompoundTransitionDefinition#getComposition()
+   * @see #getCompoundTransitionDefinition()
    * @generated
    */
-  EReference getTransitionDefinition_Composition();
+  EReference getCompoundTransitionDefinition_Composition();
 
   /**
-   * Returns the meta object for class '{@link org.worklang.work.TransitionID <em>Transition ID</em>}'.
+   * Returns the meta object for class '{@link org.worklang.work.ReferenceSpace <em>Reference Space</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Transition ID</em>'.
-   * @see org.worklang.work.TransitionID
+   * @return the meta object for class '<em>Reference Space</em>'.
+   * @see org.worklang.work.ReferenceSpace
    * @generated
    */
-  EClass getTransitionID();
+  EClass getReferenceSpace();
 
   /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.TransitionID#getName <em>Name</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.worklang.work.ReferenceSpace#getRefStates <em>Ref States</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.worklang.work.TransitionID#getName()
-   * @see #getTransitionID()
+   * @return the meta object for the containment reference list '<em>Ref States</em>'.
+   * @see org.worklang.work.ReferenceSpace#getRefStates()
+   * @see #getReferenceSpace()
    * @generated
    */
-  EAttribute getTransitionID_Name();
+  EReference getReferenceSpace_RefStates();
 
   /**
-   * Returns the meta object for the reference '{@link org.worklang.work.TransitionID#getValue <em>Value</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.worklang.work.ReferenceSpace#getRefTransitions <em>Ref Transitions</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Value</em>'.
-   * @see org.worklang.work.TransitionID#getValue()
-   * @see #getTransitionID()
+   * @return the meta object for the containment reference list '<em>Ref Transitions</em>'.
+   * @see org.worklang.work.ReferenceSpace#getRefTransitions()
+   * @see #getReferenceSpace()
    * @generated
    */
-  EReference getTransitionID_Value();
+  EReference getReferenceSpace_RefTransitions();
 
   /**
    * Returns the meta object for class '{@link org.worklang.work.ReferenceTransition <em>Reference Transition</em>}'.
@@ -2958,17 +1848,6 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   EClass getReferenceTransition();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.ReferenceTransition#getObject <em>Object</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Object</em>'.
-   * @see org.worklang.work.ReferenceTransition#getObject()
-   * @see #getReferenceTransition()
-   * @generated
-   */
-  EAttribute getReferenceTransition_Object();
 
   /**
    * Returns the meta object for the reference '{@link org.worklang.work.ReferenceTransition#getRefTransition <em>Ref Transition</em>}'.
@@ -2982,69 +1861,110 @@ public interface WorkPackage extends EPackage
   EReference getReferenceTransition_RefTransition();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.ReferenceTransition#getFromDef <em>From Def</em>}'.
+   * Returns the meta object for the reference '{@link org.worklang.work.ReferenceTransition#getForeignField <em>Foreign Field</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>From Def</em>'.
-   * @see org.worklang.work.ReferenceTransition#getFromDef()
+   * @return the meta object for the reference '<em>Foreign Field</em>'.
+   * @see org.worklang.work.ReferenceTransition#getForeignField()
    * @see #getReferenceTransition()
    * @generated
    */
-  EReference getReferenceTransition_FromDef();
+  EReference getReferenceTransition_ForeignField();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.ReferenceTransition#getTransition <em>Transition</em>}'.
+   * Returns the meta object for class '{@link org.worklang.work.ReferenceState <em>Reference State</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Transition</em>'.
-   * @see org.worklang.work.ReferenceTransition#getTransition()
-   * @see #getReferenceTransition()
+   * @return the meta object for class '<em>Reference State</em>'.
+   * @see org.worklang.work.ReferenceState
    * @generated
    */
-  EReference getReferenceTransition_Transition();
+  EClass getReferenceState();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.ReferenceTransition#getComposition <em>Composition</em>}'.
+   * Returns the meta object for the reference '{@link org.worklang.work.ReferenceState#getRefState <em>Ref State</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Composition</em>'.
-   * @see org.worklang.work.ReferenceTransition#getComposition()
-   * @see #getReferenceTransition()
+   * @return the meta object for the reference '<em>Ref State</em>'.
+   * @see org.worklang.work.ReferenceState#getRefState()
+   * @see #getReferenceState()
    * @generated
    */
-  EReference getReferenceTransition_Composition();
+  EReference getReferenceState_RefState();
 
   /**
-   * Returns the meta object for class '{@link org.worklang.work.FromFieldDefinition <em>From Field Definition</em>}'.
+   * Returns the meta object for the reference '{@link org.worklang.work.ReferenceState#getForeignField <em>Foreign Field</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>From Field Definition</em>'.
-   * @see org.worklang.work.FromFieldDefinition
+   * @return the meta object for the reference '<em>Foreign Field</em>'.
+   * @see org.worklang.work.ReferenceState#getForeignField()
+   * @see #getReferenceState()
    * @generated
    */
-  EClass getFromFieldDefinition();
+  EReference getReferenceState_ForeignField();
 
   /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.FromFieldDefinition#getFrom <em>From</em>}'.
+   * Returns the meta object for class '{@link org.worklang.work.InstanceSpace <em>Instance Space</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>From</em>'.
-   * @see org.worklang.work.FromFieldDefinition#getFrom()
-   * @see #getFromFieldDefinition()
+   * @return the meta object for class '<em>Instance Space</em>'.
+   * @see org.worklang.work.InstanceSpace
    * @generated
    */
-  EAttribute getFromFieldDefinition_From();
+  EClass getInstanceSpace();
 
   /**
-   * Returns the meta object for the reference '{@link org.worklang.work.FromFieldDefinition#getRefSpace <em>Ref Space</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.worklang.work.InstanceSpace#getInstances <em>Instances</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Ref Space</em>'.
-   * @see org.worklang.work.FromFieldDefinition#getRefSpace()
-   * @see #getFromFieldDefinition()
+   * @return the meta object for the containment reference list '<em>Instances</em>'.
+   * @see org.worklang.work.InstanceSpace#getInstances()
+   * @see #getInstanceSpace()
    * @generated
    */
-  EReference getFromFieldDefinition_RefSpace();
+  EReference getInstanceSpace_Instances();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.WithStatesDefinition <em>With States Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>With States Definition</em>'.
+   * @see org.worklang.work.WithStatesDefinition
+   * @generated
+   */
+  EClass getWithStatesDefinition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.WithStatesDefinition#getPredicate <em>Predicate</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Predicate</em>'.
+   * @see org.worklang.work.WithStatesDefinition#getPredicate()
+   * @see #getWithStatesDefinition()
+   * @generated
+   */
+  EReference getWithStatesDefinition_Predicate();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.WithTransitionsDefinition <em>With Transitions Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>With Transitions Definition</em>'.
+   * @see org.worklang.work.WithTransitionsDefinition
+   * @generated
+   */
+  EClass getWithTransitionsDefinition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.WithTransitionsDefinition#getTransitions <em>Transitions</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Transitions</em>'.
+   * @see org.worklang.work.WithTransitionsDefinition#getTransitions()
+   * @see #getWithTransitionsDefinition()
+   * @generated
+   */
+  EReference getWithTransitionsDefinition_Transitions();
 
   /**
    * Returns the meta object for class '{@link org.worklang.work.InputDefinition <em>Input Definition</em>}'.
@@ -3055,17 +1975,6 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   EClass getInputDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.InputDefinition#getInput <em>Input</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Input</em>'.
-   * @see org.worklang.work.InputDefinition#getInput()
-   * @see #getInputDefinition()
-   * @generated
-   */
-  EAttribute getInputDefinition_Input();
 
   /**
    * Returns the meta object for the reference list '{@link org.worklang.work.InputDefinition#getInputState <em>Input State</em>}'.
@@ -3089,17 +1998,6 @@ public interface WorkPackage extends EPackage
   EClass getOutputDefinition();
 
   /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.OutputDefinition#getOutput <em>Output</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Output</em>'.
-   * @see org.worklang.work.OutputDefinition#getOutput()
-   * @see #getOutputDefinition()
-   * @generated
-   */
-  EAttribute getOutputDefinition_Output();
-
-  /**
    * Returns the meta object for the reference '{@link org.worklang.work.OutputDefinition#getOutputState <em>Output State</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3111,38 +2009,6 @@ public interface WorkPackage extends EPackage
   EReference getOutputDefinition_OutputState();
 
   /**
-   * Returns the meta object for class '{@link org.worklang.work.ExtendsDefinition <em>Extends Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Extends Definition</em>'.
-   * @see org.worklang.work.ExtendsDefinition
-   * @generated
-   */
-  EClass getExtendsDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.ExtendsDefinition#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Type</em>'.
-   * @see org.worklang.work.ExtendsDefinition#getType()
-   * @see #getExtendsDefinition()
-   * @generated
-   */
-  EAttribute getExtendsDefinition_Type();
-
-  /**
-   * Returns the meta object for the reference list '{@link org.worklang.work.ExtendsDefinition#getNamespaces <em>Namespaces</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference list '<em>Namespaces</em>'.
-   * @see org.worklang.work.ExtendsDefinition#getNamespaces()
-   * @see #getExtendsDefinition()
-   * @generated
-   */
-  EReference getExtendsDefinition_Namespaces();
-
-  /**
    * Returns the meta object for class '{@link org.worklang.work.Instance <em>Instance</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3151,17 +2017,6 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   EClass getInstance();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.Instance#getInstanceDef <em>Instance Def</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Instance Def</em>'.
-   * @see org.worklang.work.Instance#getInstanceDef()
-   * @see #getInstance()
-   * @generated
-   */
-  EAttribute getInstance_InstanceDef();
 
   /**
    * Returns the meta object for the containment reference '{@link org.worklang.work.Instance#getTransitionDeclaration <em>Transition Declaration</em>}'.
@@ -3229,17 +2084,6 @@ public interface WorkPackage extends EPackage
   EClass getTransitionDeclaration();
 
   /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.TransitionDeclaration#getObjectType <em>Object Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Object Type</em>'.
-   * @see org.worklang.work.TransitionDeclaration#getObjectType()
-   * @see #getTransitionDeclaration()
-   * @generated
-   */
-  EAttribute getTransitionDeclaration_ObjectType();
-
-  /**
    * Returns the meta object for the reference '{@link org.worklang.work.TransitionDeclaration#getTransition <em>Transition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3259,17 +2103,6 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   EClass getStateDeclaration();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.StateDeclaration#getObjectType <em>Object Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Object Type</em>'.
-   * @see org.worklang.work.StateDeclaration#getObjectType()
-   * @see #getStateDeclaration()
-   * @generated
-   */
-  EAttribute getStateDeclaration_ObjectType();
 
   /**
    * Returns the meta object for the reference '{@link org.worklang.work.StateDeclaration#getState <em>State</em>}'.
@@ -3357,17 +2190,6 @@ public interface WorkPackage extends EPackage
   EClass getUseDefinition();
 
   /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.UseDefinition#getUse <em>Use</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Use</em>'.
-   * @see org.worklang.work.UseDefinition#getUse()
-   * @see #getUseDefinition()
-   * @generated
-   */
-  EAttribute getUseDefinition_Use();
-
-  /**
    * Returns the meta object for the reference '{@link org.worklang.work.UseDefinition#getPredefinedValue <em>Predefined Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3387,17 +2209,6 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   EClass getSetStatement();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.SetStatement#getStatement <em>Statement</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Statement</em>'.
-   * @see org.worklang.work.SetStatement#getStatement()
-   * @see #getSetStatement()
-   * @generated
-   */
-  EAttribute getSetStatement_Statement();
 
   /**
    * Returns the meta object for the reference '{@link org.worklang.work.SetStatement#getVariable <em>Variable</em>}'.
@@ -3430,17 +2241,6 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   EClass getToDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.worklang.work.ToDefinition#getTo <em>To</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>To</em>'.
-   * @see org.worklang.work.ToDefinition#getTo()
-   * @see #getToDefinition()
-   * @generated
-   */
-  EAttribute getToDefinition_To();
 
   /**
    * Returns the meta object for the attribute '{@link org.worklang.work.ToDefinition#getValue <em>Value</em>}'.
@@ -3549,6 +2349,27 @@ public interface WorkPackage extends EPackage
   EReference getOperation_Right();
 
   /**
+   * Returns the meta object for class '{@link org.worklang.work.TransitionID <em>Transition ID</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Transition ID</em>'.
+   * @see org.worklang.work.TransitionID
+   * @generated
+   */
+  EClass getTransitionID();
+
+  /**
+   * Returns the meta object for the reference '{@link org.worklang.work.TransitionID#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Value</em>'.
+   * @see org.worklang.work.TransitionID#getValue()
+   * @see #getTransitionID()
+   * @generated
+   */
+  EReference getTransitionID_Value();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3590,260 +2411,6 @@ public interface WorkPackage extends EPackage
     EReference MODEL__FIELDS = eINSTANCE.getModel_Fields();
 
     /**
-     * The meta object literal for the '<em><b>Experts</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MODEL__EXPERTS = eINSTANCE.getModel_Experts();
-
-    /**
-     * The meta object literal for the '<em><b>Practitioners</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MODEL__PRACTITIONERS = eINSTANCE.getModel_Practitioners();
-
-    /**
-     * The meta object literal for the '<em><b>Instructions</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MODEL__INSTRUCTIONS = eINSTANCE.getModel_Instructions();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.InstructionImpl <em>Instruction</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.InstructionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getInstruction()
-     * @generated
-     */
-    EClass INSTRUCTION = eINSTANCE.getInstruction();
-
-    /**
-     * The meta object literal for the '<em><b>Object Type</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute INSTRUCTION__OBJECT_TYPE = eINSTANCE.getInstruction_ObjectType();
-
-    /**
-     * The meta object literal for the '<em><b>Space</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference INSTRUCTION__SPACE = eINSTANCE.getInstruction_Space();
-
-    /**
-     * The meta object literal for the '<em><b>Transition</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference INSTRUCTION__TRANSITION = eINSTANCE.getInstruction_Transition();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.PractitionerImpl <em>Practitioner</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.PractitionerImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getPractitioner()
-     * @generated
-     */
-    EClass PRACTITIONER = eINSTANCE.getPractitioner();
-
-    /**
-     * The meta object literal for the '<em><b>Practitioner Def</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute PRACTITIONER__PRACTITIONER_DEF = eINSTANCE.getPractitioner_PractitionerDef();
-
-    /**
-     * The meta object literal for the '<em><b>User</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PRACTITIONER__USER = eINSTANCE.getPractitioner_User();
-
-    /**
-     * The meta object literal for the '<em><b>Knowledge Def</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PRACTITIONER__KNOWLEDGE_DEF = eINSTANCE.getPractitioner_KnowledgeDef();
-
-    /**
-     * The meta object literal for the '<em><b>Skills Def</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PRACTITIONER__SKILLS_DEF = eINSTANCE.getPractitioner_SkillsDef();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.ExpertDefinitionImpl <em>Expert Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.ExpertDefinitionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getExpertDefinition()
-     * @generated
-     */
-    EClass EXPERT_DEFINITION = eINSTANCE.getExpertDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Expert Def</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EXPERT_DEFINITION__EXPERT_DEF = eINSTANCE.getExpertDefinition_ExpertDef();
-
-    /**
-     * The meta object literal for the '<em><b>User</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPERT_DEFINITION__USER = eINSTANCE.getExpertDefinition_User();
-
-    /**
-     * The meta object literal for the '<em><b>Domain Def</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPERT_DEFINITION__DOMAIN_DEF = eINSTANCE.getExpertDefinition_DomainDef();
-
-    /**
-     * The meta object literal for the '<em><b>Knowledge Def</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPERT_DEFINITION__KNOWLEDGE_DEF = eINSTANCE.getExpertDefinition_KnowledgeDef();
-
-    /**
-     * The meta object literal for the '<em><b>Skills Def</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPERT_DEFINITION__SKILLS_DEF = eINSTANCE.getExpertDefinition_SkillsDef();
-
-    /**
-     * The meta object literal for the '<em><b>Rate</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EXPERT_DEFINITION__RATE = eINSTANCE.getExpertDefinition_Rate();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.UserImpl <em>User</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.UserImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getUser()
-     * @generated
-     */
-    EClass USER = eINSTANCE.getUser();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute USER__NAME = eINSTANCE.getUser_Name();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.DomainDefinitionImpl <em>Domain Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.DomainDefinitionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getDomainDefinition()
-     * @generated
-     */
-    EClass DOMAIN_DEFINITION = eINSTANCE.getDomainDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Domain</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute DOMAIN_DEFINITION__DOMAIN = eINSTANCE.getDomainDefinition_Domain();
-
-    /**
-     * The meta object literal for the '<em><b>Domain Areas</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference DOMAIN_DEFINITION__DOMAIN_AREAS = eINSTANCE.getDomainDefinition_DomainAreas();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.KnowledgeDefinitionImpl <em>Knowledge Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.KnowledgeDefinitionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getKnowledgeDefinition()
-     * @generated
-     */
-    EClass KNOWLEDGE_DEFINITION = eINSTANCE.getKnowledgeDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Knowledge Def</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute KNOWLEDGE_DEFINITION__KNOWLEDGE_DEF = eINSTANCE.getKnowledgeDefinition_KnowledgeDef();
-
-    /**
-     * The meta object literal for the '<em><b>Knowledge</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference KNOWLEDGE_DEFINITION__KNOWLEDGE = eINSTANCE.getKnowledgeDefinition_Knowledge();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.SkillsDefinitionImpl <em>Skills Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.SkillsDefinitionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getSkillsDefinition()
-     * @generated
-     */
-    EClass SKILLS_DEFINITION = eINSTANCE.getSkillsDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Skills Def</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute SKILLS_DEFINITION__SKILLS_DEF = eINSTANCE.getSkillsDefinition_SkillsDef();
-
-    /**
-     * The meta object literal for the '<em><b>Skills</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SKILLS_DEFINITION__SKILLS = eINSTANCE.getSkillsDefinition_Skills();
-
-    /**
      * The meta object literal for the '{@link org.worklang.work.impl.FieldDefinitionImpl <em>Field Definition</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3854,88 +2421,148 @@ public interface WorkPackage extends EPackage
     EClass FIELD_DEFINITION = eINSTANCE.getFieldDefinition();
 
     /**
-     * The meta object literal for the '<em><b>Field</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute FIELD_DEFINITION__FIELD = eINSTANCE.getFieldDefinition_Field();
-
-    /**
-     * The meta object literal for the '<em><b>Space</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FIELD_DEFINITION__SPACE = eINSTANCE.getFieldDefinition_Space();
-
-    /**
-     * The meta object literal for the '<em><b>Extends</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FIELD_DEFINITION__EXTENDS = eINSTANCE.getFieldDefinition_Extends();
-
-    /**
-     * The meta object literal for the '<em><b>Conceptualspace</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FIELD_DEFINITION__CONCEPTUALSPACE = eINSTANCE.getFieldDefinition_Conceptualspace();
-
-    /**
-     * The meta object literal for the '<em><b>Referencespace</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FIELD_DEFINITION__REFERENCESPACE = eINSTANCE.getFieldDefinition_Referencespace();
-
-    /**
-     * The meta object literal for the '<em><b>Instancespace</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FIELD_DEFINITION__INSTANCESPACE = eINSTANCE.getFieldDefinition_Instancespace();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.SpaceImpl <em>Space</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.SpaceImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getSpace()
-     * @generated
-     */
-    EClass SPACE = eINSTANCE.getSpace();
-
-    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute SPACE__NAME = eINSTANCE.getSpace_Name();
+    EAttribute FIELD_DEFINITION__NAME = eINSTANCE.getFieldDefinition_Name();
 
     /**
-     * The meta object literal for the '{@link org.worklang.work.impl.NamespaceImpl <em>Namespace</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.NamespaceImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getNamespace()
-     * @generated
-     */
-    EClass NAMESPACE = eINSTANCE.getNamespace();
-
-    /**
-     * The meta object literal for the '<em><b>Space Type</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Definition Space</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute NAMESPACE__SPACE_TYPE = eINSTANCE.getNamespace_SpaceType();
+    EReference FIELD_DEFINITION__DEFINITION_SPACE = eINSTANCE.getFieldDefinition_DefinitionSpace();
+
+    /**
+     * The meta object literal for the '<em><b>Reference Space</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FIELD_DEFINITION__REFERENCE_SPACE = eINSTANCE.getFieldDefinition_ReferenceSpace();
+
+    /**
+     * The meta object literal for the '<em><b>Map Space</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FIELD_DEFINITION__MAP_SPACE = eINSTANCE.getFieldDefinition_MapSpace();
+
+    /**
+     * The meta object literal for the '<em><b>Instance Space</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FIELD_DEFINITION__INSTANCE_SPACE = eINSTANCE.getFieldDefinition_InstanceSpace();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.MapSpaceImpl <em>Map Space</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.MapSpaceImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getMapSpace()
+     * @generated
+     */
+    EClass MAP_SPACE = eINSTANCE.getMapSpace();
+
+    /**
+     * The meta object literal for the '<em><b>Mapped States</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MAP_SPACE__MAPPED_STATES = eINSTANCE.getMapSpace_MappedStates();
+
+    /**
+     * The meta object literal for the '<em><b>Mapped Transitions</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MAP_SPACE__MAPPED_TRANSITIONS = eINSTANCE.getMapSpace_MappedTransitions();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.StateMappingImpl <em>State Mapping</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.StateMappingImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getStateMapping()
+     * @generated
+     */
+    EClass STATE_MAPPING = eINSTANCE.getStateMapping();
+
+    /**
+     * The meta object literal for the '<em><b>Foreign State</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STATE_MAPPING__FOREIGN_STATE = eINSTANCE.getStateMapping_ForeignState();
+
+    /**
+     * The meta object literal for the '<em><b>Field</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STATE_MAPPING__FIELD = eINSTANCE.getStateMapping_Field();
+
+    /**
+     * The meta object literal for the '<em><b>Local State</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STATE_MAPPING__LOCAL_STATE = eINSTANCE.getStateMapping_LocalState();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.TransitionMappingImpl <em>Transition Mapping</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.TransitionMappingImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getTransitionMapping()
+     * @generated
+     */
+    EClass TRANSITION_MAPPING = eINSTANCE.getTransitionMapping();
+
+    /**
+     * The meta object literal for the '<em><b>Foreign Transition</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_MAPPING__FOREIGN_TRANSITION = eINSTANCE.getTransitionMapping_ForeignTransition();
+
+    /**
+     * The meta object literal for the '<em><b>Field</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_MAPPING__FIELD = eINSTANCE.getTransitionMapping_Field();
+
+    /**
+     * The meta object literal for the '<em><b>Local Transition</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_MAPPING__LOCAL_TRANSITION = eINSTANCE.getTransitionMapping_LocalTransition();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.DefinitionSpaceImpl <em>Definition Space</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.DefinitionSpaceImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getDefinitionSpace()
+     * @generated
+     */
+    EClass DEFINITION_SPACE = eINSTANCE.getDefinitionSpace();
 
     /**
      * The meta object literal for the '<em><b>States</b></em>' containment reference list feature.
@@ -3943,7 +2570,7 @@ public interface WorkPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference NAMESPACE__STATES = eINSTANCE.getNamespace_States();
+    EReference DEFINITION_SPACE__STATES = eINSTANCE.getDefinitionSpace_States();
 
     /**
      * The meta object literal for the '<em><b>Transitions</b></em>' containment reference list feature.
@@ -3951,213 +2578,7 @@ public interface WorkPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference NAMESPACE__TRANSITIONS = eINSTANCE.getNamespace_Transitions();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.ReferencespaceImpl <em>Referencespace</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.ReferencespaceImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getReferencespace()
-     * @generated
-     */
-    EClass REFERENCESPACE = eINSTANCE.getReferencespace();
-
-    /**
-     * The meta object literal for the '<em><b>Space Type</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute REFERENCESPACE__SPACE_TYPE = eINSTANCE.getReferencespace_SpaceType();
-
-    /**
-     * The meta object literal for the '<em><b>Ref Fields</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFERENCESPACE__REF_FIELDS = eINSTANCE.getReferencespace_RefFields();
-
-    /**
-     * The meta object literal for the '<em><b>Ref States</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFERENCESPACE__REF_STATES = eINSTANCE.getReferencespace_RefStates();
-
-    /**
-     * The meta object literal for the '<em><b>Ref Transition</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFERENCESPACE__REF_TRANSITION = eINSTANCE.getReferencespace_RefTransition();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.InstancespaceImpl <em>Instancespace</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.InstancespaceImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getInstancespace()
-     * @generated
-     */
-    EClass INSTANCESPACE = eINSTANCE.getInstancespace();
-
-    /**
-     * The meta object literal for the '<em><b>Space Type</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute INSTANCESPACE__SPACE_TYPE = eINSTANCE.getInstancespace_SpaceType();
-
-    /**
-     * The meta object literal for the '<em><b>Instances</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference INSTANCESPACE__INSTANCES = eINSTANCE.getInstancespace_Instances();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.ReferenceFieldImpl <em>Reference Field</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.ReferenceFieldImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getReferenceField()
-     * @generated
-     */
-    EClass REFERENCE_FIELD = eINSTANCE.getReferenceField();
-
-    /**
-     * The meta object literal for the '<em><b>Ref</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute REFERENCE_FIELD__REF = eINSTANCE.getReferenceField_Ref();
-
-    /**
-     * The meta object literal for the '<em><b>Space</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFERENCE_FIELD__SPACE = eINSTANCE.getReferenceField_Space();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.StateObjectDefinitionImpl <em>State Object Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.StateObjectDefinitionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getStateObjectDefinition()
-     * @generated
-     */
-    EClass STATE_OBJECT_DEFINITION = eINSTANCE.getStateObjectDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute STATE_OBJECT_DEFINITION__TYPE = eINSTANCE.getStateObjectDefinition_Type();
-
-    /**
-     * The meta object literal for the '<em><b>State</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE_OBJECT_DEFINITION__STATE = eINSTANCE.getStateObjectDefinition_State();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.TransitionObjectDefinitionImpl <em>Transition Object Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.TransitionObjectDefinitionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getTransitionObjectDefinition()
-     * @generated
-     */
-    EClass TRANSITION_OBJECT_DEFINITION = eINSTANCE.getTransitionObjectDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TRANSITION_OBJECT_DEFINITION__TYPE = eINSTANCE.getTransitionObjectDefinition_Type();
-
-    /**
-     * The meta object literal for the '<em><b>Transition</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION_OBJECT_DEFINITION__TRANSITION = eINSTANCE.getTransitionObjectDefinition_Transition();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.PrimitiveStateDefinitionImpl <em>Primitive State Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.PrimitiveStateDefinitionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getPrimitiveStateDefinition()
-     * @generated
-     */
-    EClass PRIMITIVE_STATE_DEFINITION = eINSTANCE.getPrimitiveStateDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Object</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute PRIMITIVE_STATE_DEFINITION__OBJECT = eINSTANCE.getPrimitiveStateDefinition_Object();
-
-    /**
-     * The meta object literal for the '<em><b>Id</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PRIMITIVE_STATE_DEFINITION__ID = eINSTANCE.getPrimitiveStateDefinition_Id();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.CompoundStateDefinitionImpl <em>Compound State Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.CompoundStateDefinitionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getCompoundStateDefinition()
-     * @generated
-     */
-    EClass COMPOUND_STATE_DEFINITION = eINSTANCE.getCompoundStateDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Object</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute COMPOUND_STATE_DEFINITION__OBJECT = eINSTANCE.getCompoundStateDefinition_Object();
-
-    /**
-     * The meta object literal for the '<em><b>State</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference COMPOUND_STATE_DEFINITION__STATE = eINSTANCE.getCompoundStateDefinition_State();
-
-    /**
-     * The meta object literal for the '<em><b>Compound State Def</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference COMPOUND_STATE_DEFINITION__COMPOUND_STATE_DEF = eINSTANCE.getCompoundStateDefinition_CompoundStateDef();
+    EReference DEFINITION_SPACE__TRANSITIONS = eINSTANCE.getDefinitionSpace_Transitions();
 
     /**
      * The meta object literal for the '{@link org.worklang.work.impl.StateDefinitionImpl <em>State Definition</em>}' class.
@@ -4170,54 +2591,12 @@ public interface WorkPackage extends EPackage
     EClass STATE_DEFINITION = eINSTANCE.getStateDefinition();
 
     /**
-     * The meta object literal for the '<em><b>Object</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute STATE_DEFINITION__OBJECT = eINSTANCE.getStateDefinition_Object();
-
-    /**
-     * The meta object literal for the '<em><b>State</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE_DEFINITION__STATE = eINSTANCE.getStateDefinition_State();
-
-    /**
-     * The meta object literal for the '<em><b>With Definition</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE_DEFINITION__WITH_DEFINITION = eINSTANCE.getStateDefinition_WithDefinition();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.StateIDImpl <em>State ID</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.StateIDImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getStateID()
-     * @generated
-     */
-    EClass STATE_ID = eINSTANCE.getStateID();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute STATE_ID__NAME = eINSTANCE.getStateID_Name();
-
-    /**
      * The meta object literal for the '<em><b>Instance</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference STATE_ID__INSTANCE = eINSTANCE.getStateID_Instance();
+    EReference STATE_DEFINITION__INSTANCE = eINSTANCE.getStateDefinition_Instance();
 
     /**
      * The meta object literal for the '<em><b>List</b></em>' attribute feature.
@@ -4225,7 +2604,7 @@ public interface WorkPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute STATE_ID__LIST = eINSTANCE.getStateID_List();
+    EAttribute STATE_DEFINITION__LIST = eINSTANCE.getStateDefinition_List();
 
     /**
      * The meta object literal for the '<em><b>Value</b></em>' reference feature.
@@ -4233,7 +2612,217 @@ public interface WorkPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference STATE_ID__VALUE = eINSTANCE.getStateID_Value();
+    EReference STATE_DEFINITION__VALUE = eINSTANCE.getStateDefinition_Value();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STATE_DEFINITION__TYPE = eINSTANCE.getStateDefinition_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STATE_DEFINITION__NAME = eINSTANCE.getStateDefinition_Name();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.PrimitiveStateDefinitionImpl <em>Primitive State Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.PrimitiveStateDefinitionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getPrimitiveStateDefinition()
+     * @generated
+     */
+    EClass PRIMITIVE_STATE_DEFINITION = eINSTANCE.getPrimitiveStateDefinition();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.CompoundStateDefinitionImpl <em>Compound State Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.CompoundStateDefinitionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getCompoundStateDefinition()
+     * @generated
+     */
+    EClass COMPOUND_STATE_DEFINITION = eINSTANCE.getCompoundStateDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Composition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COMPOUND_STATE_DEFINITION__COMPOSITION = eINSTANCE.getCompoundStateDefinition_Composition();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.TransitionDefinitionImpl <em>Transition Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.TransitionDefinitionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getTransitionDefinition()
+     * @generated
+     */
+    EClass TRANSITION_DEFINITION = eINSTANCE.getTransitionDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TRANSITION_DEFINITION__TYPE = eINSTANCE.getTransitionDefinition_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TRANSITION_DEFINITION__NAME = eINSTANCE.getTransitionDefinition_Name();
+
+    /**
+     * The meta object literal for the '<em><b>In</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_DEFINITION__IN = eINSTANCE.getTransitionDefinition_In();
+
+    /**
+     * The meta object literal for the '<em><b>Out</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_DEFINITION__OUT = eINSTANCE.getTransitionDefinition_Out();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.PrimitiveTransitionDefinitionImpl <em>Primitive Transition Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.PrimitiveTransitionDefinitionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getPrimitiveTransitionDefinition()
+     * @generated
+     */
+    EClass PRIMITIVE_TRANSITION_DEFINITION = eINSTANCE.getPrimitiveTransitionDefinition();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.CompoundTransitionDefinitionImpl <em>Compound Transition Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.CompoundTransitionDefinitionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getCompoundTransitionDefinition()
+     * @generated
+     */
+    EClass COMPOUND_TRANSITION_DEFINITION = eINSTANCE.getCompoundTransitionDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Composition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COMPOUND_TRANSITION_DEFINITION__COMPOSITION = eINSTANCE.getCompoundTransitionDefinition_Composition();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.ReferenceSpaceImpl <em>Reference Space</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.ReferenceSpaceImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getReferenceSpace()
+     * @generated
+     */
+    EClass REFERENCE_SPACE = eINSTANCE.getReferenceSpace();
+
+    /**
+     * The meta object literal for the '<em><b>Ref States</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REFERENCE_SPACE__REF_STATES = eINSTANCE.getReferenceSpace_RefStates();
+
+    /**
+     * The meta object literal for the '<em><b>Ref Transitions</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REFERENCE_SPACE__REF_TRANSITIONS = eINSTANCE.getReferenceSpace_RefTransitions();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.ReferenceTransitionImpl <em>Reference Transition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.ReferenceTransitionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getReferenceTransition()
+     * @generated
+     */
+    EClass REFERENCE_TRANSITION = eINSTANCE.getReferenceTransition();
+
+    /**
+     * The meta object literal for the '<em><b>Ref Transition</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REFERENCE_TRANSITION__REF_TRANSITION = eINSTANCE.getReferenceTransition_RefTransition();
+
+    /**
+     * The meta object literal for the '<em><b>Foreign Field</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REFERENCE_TRANSITION__FOREIGN_FIELD = eINSTANCE.getReferenceTransition_ForeignField();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.ReferenceStateImpl <em>Reference State</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.ReferenceStateImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getReferenceState()
+     * @generated
+     */
+    EClass REFERENCE_STATE = eINSTANCE.getReferenceState();
+
+    /**
+     * The meta object literal for the '<em><b>Ref State</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REFERENCE_STATE__REF_STATE = eINSTANCE.getReferenceState_RefState();
+
+    /**
+     * The meta object literal for the '<em><b>Foreign Field</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REFERENCE_STATE__FOREIGN_FIELD = eINSTANCE.getReferenceState_ForeignField();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.InstanceSpaceImpl <em>Instance Space</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.InstanceSpaceImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getInstanceSpace()
+     * @generated
+     */
+    EClass INSTANCE_SPACE = eINSTANCE.getInstanceSpace();
+
+    /**
+     * The meta object literal for the '<em><b>Instances</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference INSTANCE_SPACE__INSTANCES = eINSTANCE.getInstanceSpace_Instances();
 
     /**
      * The meta object literal for the '{@link org.worklang.work.impl.WithStatesDefinitionImpl <em>With States Definition</em>}' class.
@@ -4244,14 +2833,6 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EClass WITH_STATES_DEFINITION = eINSTANCE.getWithStatesDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Composition</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute WITH_STATES_DEFINITION__COMPOSITION = eINSTANCE.getWithStatesDefinition_Composition();
 
     /**
      * The meta object literal for the '<em><b>Predicate</b></em>' containment reference feature.
@@ -4272,222 +2853,12 @@ public interface WorkPackage extends EPackage
     EClass WITH_TRANSITIONS_DEFINITION = eINSTANCE.getWithTransitionsDefinition();
 
     /**
-     * The meta object literal for the '<em><b>Composition</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute WITH_TRANSITIONS_DEFINITION__COMPOSITION = eINSTANCE.getWithTransitionsDefinition_Composition();
-
-    /**
      * The meta object literal for the '<em><b>Transitions</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference WITH_TRANSITIONS_DEFINITION__TRANSITIONS = eINSTANCE.getWithTransitionsDefinition_Transitions();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.ReferenceStateImpl <em>Reference State</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.ReferenceStateImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getReferenceState()
-     * @generated
-     */
-    EClass REFERENCE_STATE = eINSTANCE.getReferenceState();
-
-    /**
-     * The meta object literal for the '<em><b>Object</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute REFERENCE_STATE__OBJECT = eINSTANCE.getReferenceState_Object();
-
-    /**
-     * The meta object literal for the '<em><b>Ref State</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFERENCE_STATE__REF_STATE = eINSTANCE.getReferenceState_RefState();
-
-    /**
-     * The meta object literal for the '<em><b>From</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFERENCE_STATE__FROM = eINSTANCE.getReferenceState_From();
-
-    /**
-     * The meta object literal for the '<em><b>State</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFERENCE_STATE__STATE = eINSTANCE.getReferenceState_State();
-
-    /**
-     * The meta object literal for the '<em><b>Composition</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFERENCE_STATE__COMPOSITION = eINSTANCE.getReferenceState_Composition();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.TransitionDefinitionImpl <em>Transition Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.TransitionDefinitionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getTransitionDefinition()
-     * @generated
-     */
-    EClass TRANSITION_DEFINITION = eINSTANCE.getTransitionDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Object</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TRANSITION_DEFINITION__OBJECT = eINSTANCE.getTransitionDefinition_Object();
-
-    /**
-     * The meta object literal for the '<em><b>Transition</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION_DEFINITION__TRANSITION = eINSTANCE.getTransitionDefinition_Transition();
-
-    /**
-     * The meta object literal for the '<em><b>In</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION_DEFINITION__IN = eINSTANCE.getTransitionDefinition_In();
-
-    /**
-     * The meta object literal for the '<em><b>Out</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION_DEFINITION__OUT = eINSTANCE.getTransitionDefinition_Out();
-
-    /**
-     * The meta object literal for the '<em><b>Composition</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION_DEFINITION__COMPOSITION = eINSTANCE.getTransitionDefinition_Composition();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.TransitionIDImpl <em>Transition ID</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.TransitionIDImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getTransitionID()
-     * @generated
-     */
-    EClass TRANSITION_ID = eINSTANCE.getTransitionID();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TRANSITION_ID__NAME = eINSTANCE.getTransitionID_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Value</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION_ID__VALUE = eINSTANCE.getTransitionID_Value();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.ReferenceTransitionImpl <em>Reference Transition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.ReferenceTransitionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getReferenceTransition()
-     * @generated
-     */
-    EClass REFERENCE_TRANSITION = eINSTANCE.getReferenceTransition();
-
-    /**
-     * The meta object literal for the '<em><b>Object</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute REFERENCE_TRANSITION__OBJECT = eINSTANCE.getReferenceTransition_Object();
-
-    /**
-     * The meta object literal for the '<em><b>Ref Transition</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFERENCE_TRANSITION__REF_TRANSITION = eINSTANCE.getReferenceTransition_RefTransition();
-
-    /**
-     * The meta object literal for the '<em><b>From Def</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFERENCE_TRANSITION__FROM_DEF = eINSTANCE.getReferenceTransition_FromDef();
-
-    /**
-     * The meta object literal for the '<em><b>Transition</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFERENCE_TRANSITION__TRANSITION = eINSTANCE.getReferenceTransition_Transition();
-
-    /**
-     * The meta object literal for the '<em><b>Composition</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFERENCE_TRANSITION__COMPOSITION = eINSTANCE.getReferenceTransition_Composition();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.FromFieldDefinitionImpl <em>From Field Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.FromFieldDefinitionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getFromFieldDefinition()
-     * @generated
-     */
-    EClass FROM_FIELD_DEFINITION = eINSTANCE.getFromFieldDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>From</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute FROM_FIELD_DEFINITION__FROM = eINSTANCE.getFromFieldDefinition_From();
-
-    /**
-     * The meta object literal for the '<em><b>Ref Space</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FROM_FIELD_DEFINITION__REF_SPACE = eINSTANCE.getFromFieldDefinition_RefSpace();
 
     /**
      * The meta object literal for the '{@link org.worklang.work.impl.InputDefinitionImpl <em>Input Definition</em>}' class.
@@ -4498,14 +2869,6 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EClass INPUT_DEFINITION = eINSTANCE.getInputDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Input</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute INPUT_DEFINITION__INPUT = eINSTANCE.getInputDefinition_Input();
 
     /**
      * The meta object literal for the '<em><b>Input State</b></em>' reference list feature.
@@ -4526,46 +2889,12 @@ public interface WorkPackage extends EPackage
     EClass OUTPUT_DEFINITION = eINSTANCE.getOutputDefinition();
 
     /**
-     * The meta object literal for the '<em><b>Output</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute OUTPUT_DEFINITION__OUTPUT = eINSTANCE.getOutputDefinition_Output();
-
-    /**
      * The meta object literal for the '<em><b>Output State</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference OUTPUT_DEFINITION__OUTPUT_STATE = eINSTANCE.getOutputDefinition_OutputState();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.ExtendsDefinitionImpl <em>Extends Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.ExtendsDefinitionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getExtendsDefinition()
-     * @generated
-     */
-    EClass EXTENDS_DEFINITION = eINSTANCE.getExtendsDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EXTENDS_DEFINITION__TYPE = eINSTANCE.getExtendsDefinition_Type();
-
-    /**
-     * The meta object literal for the '<em><b>Namespaces</b></em>' reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXTENDS_DEFINITION__NAMESPACES = eINSTANCE.getExtendsDefinition_Namespaces();
 
     /**
      * The meta object literal for the '{@link org.worklang.work.impl.InstanceImpl <em>Instance</em>}' class.
@@ -4576,14 +2905,6 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EClass INSTANCE = eINSTANCE.getInstance();
-
-    /**
-     * The meta object literal for the '<em><b>Instance Def</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute INSTANCE__INSTANCE_DEF = eINSTANCE.getInstance_InstanceDef();
 
     /**
      * The meta object literal for the '<em><b>Transition Declaration</b></em>' containment reference feature.
@@ -4636,14 +2957,6 @@ public interface WorkPackage extends EPackage
     EClass TRANSITION_DECLARATION = eINSTANCE.getTransitionDeclaration();
 
     /**
-     * The meta object literal for the '<em><b>Object Type</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TRANSITION_DECLARATION__OBJECT_TYPE = eINSTANCE.getTransitionDeclaration_ObjectType();
-
-    /**
      * The meta object literal for the '<em><b>Transition</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -4660,14 +2973,6 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EClass STATE_DECLARATION = eINSTANCE.getStateDeclaration();
-
-    /**
-     * The meta object literal for the '<em><b>Object Type</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute STATE_DECLARATION__OBJECT_TYPE = eINSTANCE.getStateDeclaration_ObjectType();
 
     /**
      * The meta object literal for the '<em><b>State</b></em>' reference feature.
@@ -4740,14 +3045,6 @@ public interface WorkPackage extends EPackage
     EClass USE_DEFINITION = eINSTANCE.getUseDefinition();
 
     /**
-     * The meta object literal for the '<em><b>Use</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute USE_DEFINITION__USE = eINSTANCE.getUseDefinition_Use();
-
-    /**
      * The meta object literal for the '<em><b>Predefined Value</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -4764,14 +3061,6 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EClass SET_STATEMENT = eINSTANCE.getSetStatement();
-
-    /**
-     * The meta object literal for the '<em><b>Statement</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute SET_STATEMENT__STATEMENT = eINSTANCE.getSetStatement_Statement();
 
     /**
      * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
@@ -4798,14 +3087,6 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EClass TO_DEFINITION = eINSTANCE.getToDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>To</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TO_DEFINITION__TO = eINSTANCE.getToDefinition_To();
 
     /**
      * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -4894,6 +3175,24 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EReference OPERATION__RIGHT = eINSTANCE.getOperation_Right();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.TransitionIDImpl <em>Transition ID</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.TransitionIDImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getTransitionID()
+     * @generated
+     */
+    EClass TRANSITION_ID = eINSTANCE.getTransitionID();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_ID__VALUE = eINSTANCE.getTransitionID_Value();
 
   }
 

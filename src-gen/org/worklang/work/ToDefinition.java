@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.ToDefinition#getTo <em>To</em>}</li>
  *   <li>{@link org.worklang.work.ToDefinition#getValue <em>Value</em>}</li>
  * </ul>
  *
@@ -36,32 +35,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ToDefinition extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>To</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>To</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>To</em>' attribute.
-   * @see #setTo(String)
-   * @see org.worklang.work.WorkPackage#getToDefinition_To()
-   * @model
-   * @generated
-   */
-  String getTo();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.ToDefinition#getTo <em>To</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>To</em>' attribute.
-   * @see #getTo()
-   * @generated
-   */
-  void setTo(String value);
-
   /**
    * Returns the value of the '<em><b>Value</b></em>' attribute.
    * <!-- begin-user-doc -->

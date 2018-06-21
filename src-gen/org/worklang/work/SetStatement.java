@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.SetStatement#getStatement <em>Statement</em>}</li>
  *   <li>{@link org.worklang.work.SetStatement#getVariable <em>Variable</em>}</li>
  *   <li>{@link org.worklang.work.SetStatement#getToDef <em>To Def</em>}</li>
  * </ul>
@@ -38,32 +37,6 @@ import org.eclipse.emf.ecore.EObject;
 public interface SetStatement extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Statement</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Statement</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Statement</em>' attribute.
-   * @see #setStatement(String)
-   * @see org.worklang.work.WorkPackage#getSetStatement_Statement()
-   * @model
-   * @generated
-   */
-  String getStatement();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.SetStatement#getStatement <em>Statement</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Statement</em>' attribute.
-   * @see #getStatement()
-   * @generated
-   */
-  void setStatement(String value);
-
-  /**
    * Returns the value of the '<em><b>Variable</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
@@ -72,12 +45,12 @@ public interface SetStatement extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Variable</em>' reference.
-   * @see #setVariable(StateID)
+   * @see #setVariable(StateDefinition)
    * @see org.worklang.work.WorkPackage#getSetStatement_Variable()
    * @model
    * @generated
    */
-  StateID getVariable();
+  StateDefinition getVariable();
 
   /**
    * Sets the value of the '{@link org.worklang.work.SetStatement#getVariable <em>Variable</em>}' reference.
@@ -87,7 +60,7 @@ public interface SetStatement extends EObject
    * @see #getVariable()
    * @generated
    */
-  void setVariable(StateID value);
+  void setVariable(StateDefinition value);
 
   /**
    * Returns the value of the '<em><b>To Def</b></em>' containment reference.

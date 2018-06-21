@@ -39,7 +39,6 @@ import org.worklang.work.WorkPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.InstanceImpl#getInstanceDef <em>Instance Def</em>}</li>
  *   <li>{@link org.worklang.work.impl.InstanceImpl#getTransitionDeclaration <em>Transition Declaration</em>}</li>
  *   <li>{@link org.worklang.work.impl.InstanceImpl#getStateDeclaration <em>State Declaration</em>}</li>
  *   <li>{@link org.worklang.work.impl.InstanceImpl#getName <em>Name</em>}</li>
@@ -51,26 +50,6 @@ import org.worklang.work.WorkPackage;
  */
 public class InstanceImpl extends MinimalEObjectImpl.Container implements Instance
 {
-  /**
-   * The default value of the '{@link #getInstanceDef() <em>Instance Def</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getInstanceDef()
-   * @generated
-   * @ordered
-   */
-  protected static final String INSTANCE_DEF_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getInstanceDef() <em>Instance Def</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getInstanceDef()
-   * @generated
-   * @ordered
-   */
-  protected String instanceDef = INSTANCE_DEF_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getTransitionDeclaration() <em>Transition Declaration</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -150,29 +129,6 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
   protected EClass eStaticClass()
   {
     return WorkPackage.Literals.INSTANCE;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getInstanceDef()
-  {
-    return instanceDef;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setInstanceDef(String newInstanceDef)
-  {
-    String oldInstanceDef = instanceDef;
-    instanceDef = newInstanceDef;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__INSTANCE_DEF, oldInstanceDef, instanceDef));
   }
 
   /**
@@ -422,8 +378,6 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCE__INSTANCE_DEF:
-        return getInstanceDef();
       case WorkPackage.INSTANCE__TRANSITION_DECLARATION:
         return getTransitionDeclaration();
       case WorkPackage.INSTANCE__STATE_DECLARATION:
@@ -448,9 +402,6 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCE__INSTANCE_DEF:
-        setInstanceDef((String)newValue);
-        return;
       case WorkPackage.INSTANCE__TRANSITION_DECLARATION:
         setTransitionDeclaration((TransitionDeclaration)newValue);
         return;
@@ -480,9 +431,6 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCE__INSTANCE_DEF:
-        setInstanceDef(INSTANCE_DEF_EDEFAULT);
-        return;
       case WorkPackage.INSTANCE__TRANSITION_DECLARATION:
         setTransitionDeclaration((TransitionDeclaration)null);
         return;
@@ -512,8 +460,6 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCE__INSTANCE_DEF:
-        return INSTANCE_DEF_EDEFAULT == null ? instanceDef != null : !INSTANCE_DEF_EDEFAULT.equals(instanceDef);
       case WorkPackage.INSTANCE__TRANSITION_DECLARATION:
         return transitionDeclaration != null;
       case WorkPackage.INSTANCE__STATE_DECLARATION:
@@ -539,9 +485,7 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (instanceDef: ");
-    result.append(instanceDef);
-    result.append(", name: ");
+    result.append(" (name: ");
     result.append(name);
     result.append(')');
     return result.toString();

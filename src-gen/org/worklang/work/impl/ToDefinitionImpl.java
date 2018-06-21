@@ -33,7 +33,6 @@ import org.worklang.work.WorkPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.ToDefinitionImpl#getTo <em>To</em>}</li>
  *   <li>{@link org.worklang.work.impl.ToDefinitionImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
@@ -41,26 +40,6 @@ import org.worklang.work.WorkPackage;
  */
 public class ToDefinitionImpl extends MinimalEObjectImpl.Container implements ToDefinition
 {
-  /**
-   * The default value of the '{@link #getTo() <em>To</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTo()
-   * @generated
-   * @ordered
-   */
-  protected static final String TO_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getTo() <em>To</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTo()
-   * @generated
-   * @ordered
-   */
-  protected String to = TO_EDEFAULT;
-
   /**
    * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -107,29 +86,6 @@ public class ToDefinitionImpl extends MinimalEObjectImpl.Container implements To
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getTo()
-  {
-    return to;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTo(String newTo)
-  {
-    String oldTo = to;
-    to = newTo;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TO_DEFINITION__TO, oldTo, to));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public String getValue()
   {
     return value;
@@ -158,8 +114,6 @@ public class ToDefinitionImpl extends MinimalEObjectImpl.Container implements To
   {
     switch (featureID)
     {
-      case WorkPackage.TO_DEFINITION__TO:
-        return getTo();
       case WorkPackage.TO_DEFINITION__VALUE:
         return getValue();
     }
@@ -176,9 +130,6 @@ public class ToDefinitionImpl extends MinimalEObjectImpl.Container implements To
   {
     switch (featureID)
     {
-      case WorkPackage.TO_DEFINITION__TO:
-        setTo((String)newValue);
-        return;
       case WorkPackage.TO_DEFINITION__VALUE:
         setValue((String)newValue);
         return;
@@ -196,9 +147,6 @@ public class ToDefinitionImpl extends MinimalEObjectImpl.Container implements To
   {
     switch (featureID)
     {
-      case WorkPackage.TO_DEFINITION__TO:
-        setTo(TO_EDEFAULT);
-        return;
       case WorkPackage.TO_DEFINITION__VALUE:
         setValue(VALUE_EDEFAULT);
         return;
@@ -216,8 +164,6 @@ public class ToDefinitionImpl extends MinimalEObjectImpl.Container implements To
   {
     switch (featureID)
     {
-      case WorkPackage.TO_DEFINITION__TO:
-        return TO_EDEFAULT == null ? to != null : !TO_EDEFAULT.equals(to);
       case WorkPackage.TO_DEFINITION__VALUE:
         return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
     }
@@ -235,9 +181,7 @@ public class ToDefinitionImpl extends MinimalEObjectImpl.Container implements To
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (to: ");
-    result.append(to);
-    result.append(", value: ");
+    result.append(" (value: ");
     result.append(value);
     result.append(')');
     return result.toString();

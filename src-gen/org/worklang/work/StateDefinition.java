@@ -15,7 +15,6 @@
  */
 package org.worklang.work;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,93 +25,147 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.StateDefinition#getObject <em>Object</em>}</li>
- *   <li>{@link org.worklang.work.StateDefinition#getState <em>State</em>}</li>
- *   <li>{@link org.worklang.work.StateDefinition#getWithDefinition <em>With Definition</em>}</li>
+ *   <li>{@link org.worklang.work.StateDefinition#getInstance <em>Instance</em>}</li>
+ *   <li>{@link org.worklang.work.StateDefinition#isList <em>List</em>}</li>
+ *   <li>{@link org.worklang.work.StateDefinition#getValue <em>Value</em>}</li>
+ *   <li>{@link org.worklang.work.StateDefinition#getType <em>Type</em>}</li>
+ *   <li>{@link org.worklang.work.StateDefinition#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see org.worklang.work.WorkPackage#getStateDefinition()
  * @model
  * @generated
  */
-public interface StateDefinition extends EObject
+public interface StateDefinition extends BinaryExpression
 {
   /**
-   * Returns the value of the '<em><b>Object</b></em>' attribute.
+   * Returns the value of the '<em><b>Instance</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Object</em>' attribute isn't clear,
+   * If the meaning of the '<em>Instance</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Object</em>' attribute.
-   * @see #setObject(String)
-   * @see org.worklang.work.WorkPackage#getStateDefinition_Object()
+   * @return the value of the '<em>Instance</em>' reference.
+   * @see #setInstance(StateDefinition)
+   * @see org.worklang.work.WorkPackage#getStateDefinition_Instance()
    * @model
    * @generated
    */
-  String getObject();
+  StateDefinition getInstance();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.StateDefinition#getObject <em>Object</em>}' attribute.
+   * Sets the value of the '{@link org.worklang.work.StateDefinition#getInstance <em>Instance</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Object</em>' attribute.
-   * @see #getObject()
+   * @param value the new value of the '<em>Instance</em>' reference.
+   * @see #getInstance()
    * @generated
    */
-  void setObject(String value);
+  void setInstance(StateDefinition value);
 
   /**
-   * Returns the value of the '<em><b>State</b></em>' containment reference.
+   * Returns the value of the '<em><b>List</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>State</em>' containment reference isn't clear,
+   * If the meaning of the '<em>List</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>State</em>' containment reference.
-   * @see #setState(StateID)
-   * @see org.worklang.work.WorkPackage#getStateDefinition_State()
-   * @model containment="true"
+   * @return the value of the '<em>List</em>' attribute.
+   * @see #setList(boolean)
+   * @see org.worklang.work.WorkPackage#getStateDefinition_List()
+   * @model
    * @generated
    */
-  StateID getState();
+  boolean isList();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.StateDefinition#getState <em>State</em>}' containment reference.
+   * Sets the value of the '{@link org.worklang.work.StateDefinition#isList <em>List</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>State</em>' containment reference.
-   * @see #getState()
+   * @param value the new value of the '<em>List</em>' attribute.
+   * @see #isList()
    * @generated
    */
-  void setState(StateID value);
+  void setList(boolean value);
 
   /**
-   * Returns the value of the '<em><b>With Definition</b></em>' containment reference.
+   * Returns the value of the '<em><b>Value</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>With Definition</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Value</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>With Definition</em>' containment reference.
-   * @see #setWithDefinition(WithStatesDefinition)
-   * @see org.worklang.work.WorkPackage#getStateDefinition_WithDefinition()
-   * @model containment="true"
+   * @return the value of the '<em>Value</em>' reference.
+   * @see #setValue(StateDefinition)
+   * @see org.worklang.work.WorkPackage#getStateDefinition_Value()
+   * @model
    * @generated
    */
-  WithStatesDefinition getWithDefinition();
+  StateDefinition getValue();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.StateDefinition#getWithDefinition <em>With Definition</em>}' containment reference.
+   * Sets the value of the '{@link org.worklang.work.StateDefinition#getValue <em>Value</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>With Definition</em>' containment reference.
-   * @see #getWithDefinition()
+   * @param value the new value of the '<em>Value</em>' reference.
+   * @see #getValue()
    * @generated
    */
-  void setWithDefinition(WithStatesDefinition value);
+  void setValue(StateDefinition value);
+
+  /**
+   * Returns the value of the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Type</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Type</em>' attribute.
+   * @see #setType(String)
+   * @see org.worklang.work.WorkPackage#getStateDefinition_Type()
+   * @model
+   * @generated
+   */
+  String getType();
+
+  /**
+   * Sets the value of the '{@link org.worklang.work.StateDefinition#getType <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Type</em>' attribute.
+   * @see #getType()
+   * @generated
+   */
+  void setType(String value);
+
+  /**
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Name</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.worklang.work.WorkPackage#getStateDefinition_Name()
+   * @model
+   * @generated
+   */
+  String getName();
+
+  /**
+   * Sets the value of the '{@link org.worklang.work.StateDefinition#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
+  void setName(String value);
 
 } // StateDefinition

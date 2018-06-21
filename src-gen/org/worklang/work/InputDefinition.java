@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.InputDefinition#getInput <em>Input</em>}</li>
  *   <li>{@link org.worklang.work.InputDefinition#getInputState <em>Input State</em>}</li>
  * </ul>
  *
@@ -39,34 +38,8 @@ import org.eclipse.emf.ecore.EObject;
 public interface InputDefinition extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Input</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Input</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Input</em>' attribute.
-   * @see #setInput(String)
-   * @see org.worklang.work.WorkPackage#getInputDefinition_Input()
-   * @model
-   * @generated
-   */
-  String getInput();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.InputDefinition#getInput <em>Input</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Input</em>' attribute.
-   * @see #getInput()
-   * @generated
-   */
-  void setInput(String value);
-
-  /**
    * Returns the value of the '<em><b>Input State</b></em>' reference list.
-   * The list contents are of type {@link org.worklang.work.StateID}.
+   * The list contents are of type {@link org.worklang.work.StateDefinition}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Input State</em>' reference list isn't clear,
@@ -78,6 +51,6 @@ public interface InputDefinition extends EObject
    * @model
    * @generated
    */
-  EList<StateID> getInputState();
+  EList<StateDefinition> getInputState();
 
 } // InputDefinition

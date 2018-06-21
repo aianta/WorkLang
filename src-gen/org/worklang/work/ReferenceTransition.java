@@ -26,11 +26,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.ReferenceTransition#getObject <em>Object</em>}</li>
  *   <li>{@link org.worklang.work.ReferenceTransition#getRefTransition <em>Ref Transition</em>}</li>
- *   <li>{@link org.worklang.work.ReferenceTransition#getFromDef <em>From Def</em>}</li>
- *   <li>{@link org.worklang.work.ReferenceTransition#getTransition <em>Transition</em>}</li>
- *   <li>{@link org.worklang.work.ReferenceTransition#getComposition <em>Composition</em>}</li>
+ *   <li>{@link org.worklang.work.ReferenceTransition#getForeignField <em>Foreign Field</em>}</li>
  * </ul>
  *
  * @see org.worklang.work.WorkPackage#getReferenceTransition()
@@ -40,32 +37,6 @@ import org.eclipse.emf.ecore.EObject;
 public interface ReferenceTransition extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Object</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Object</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Object</em>' attribute.
-   * @see #setObject(String)
-   * @see org.worklang.work.WorkPackage#getReferenceTransition_Object()
-   * @model
-   * @generated
-   */
-  String getObject();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.ReferenceTransition#getObject <em>Object</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Object</em>' attribute.
-   * @see #getObject()
-   * @generated
-   */
-  void setObject(String value);
-
-  /**
    * Returns the value of the '<em><b>Ref Transition</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
@@ -74,12 +45,12 @@ public interface ReferenceTransition extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ref Transition</em>' reference.
-   * @see #setRefTransition(TransitionID)
+   * @see #setRefTransition(TransitionDefinition)
    * @see org.worklang.work.WorkPackage#getReferenceTransition_RefTransition()
    * @model
    * @generated
    */
-  TransitionID getRefTransition();
+  TransitionDefinition getRefTransition();
 
   /**
    * Sets the value of the '{@link org.worklang.work.ReferenceTransition#getRefTransition <em>Ref Transition</em>}' reference.
@@ -89,84 +60,32 @@ public interface ReferenceTransition extends EObject
    * @see #getRefTransition()
    * @generated
    */
-  void setRefTransition(TransitionID value);
+  void setRefTransition(TransitionDefinition value);
 
   /**
-   * Returns the value of the '<em><b>From Def</b></em>' containment reference.
+   * Returns the value of the '<em><b>Foreign Field</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>From Def</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Foreign Field</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>From Def</em>' containment reference.
-   * @see #setFromDef(FromFieldDefinition)
-   * @see org.worklang.work.WorkPackage#getReferenceTransition_FromDef()
-   * @model containment="true"
+   * @return the value of the '<em>Foreign Field</em>' reference.
+   * @see #setForeignField(FieldDefinition)
+   * @see org.worklang.work.WorkPackage#getReferenceTransition_ForeignField()
+   * @model
    * @generated
    */
-  FromFieldDefinition getFromDef();
+  FieldDefinition getForeignField();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.ReferenceTransition#getFromDef <em>From Def</em>}' containment reference.
+   * Sets the value of the '{@link org.worklang.work.ReferenceTransition#getForeignField <em>Foreign Field</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>From Def</em>' containment reference.
-   * @see #getFromDef()
+   * @param value the new value of the '<em>Foreign Field</em>' reference.
+   * @see #getForeignField()
    * @generated
    */
-  void setFromDef(FromFieldDefinition value);
-
-  /**
-   * Returns the value of the '<em><b>Transition</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Transition</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Transition</em>' containment reference.
-   * @see #setTransition(TransitionID)
-   * @see org.worklang.work.WorkPackage#getReferenceTransition_Transition()
-   * @model containment="true"
-   * @generated
-   */
-  TransitionID getTransition();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.ReferenceTransition#getTransition <em>Transition</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Transition</em>' containment reference.
-   * @see #getTransition()
-   * @generated
-   */
-  void setTransition(TransitionID value);
-
-  /**
-   * Returns the value of the '<em><b>Composition</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Composition</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Composition</em>' containment reference.
-   * @see #setComposition(WithTransitionsDefinition)
-   * @see org.worklang.work.WorkPackage#getReferenceTransition_Composition()
-   * @model containment="true"
-   * @generated
-   */
-  WithTransitionsDefinition getComposition();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.ReferenceTransition#getComposition <em>Composition</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Composition</em>' containment reference.
-   * @see #getComposition()
-   * @generated
-   */
-  void setComposition(WithTransitionsDefinition value);
+  void setForeignField(FieldDefinition value);
 
 } // ReferenceTransition

@@ -26,11 +26,10 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.TransitionDefinition#getObject <em>Object</em>}</li>
- *   <li>{@link org.worklang.work.TransitionDefinition#getTransition <em>Transition</em>}</li>
+ *   <li>{@link org.worklang.work.TransitionDefinition#getType <em>Type</em>}</li>
+ *   <li>{@link org.worklang.work.TransitionDefinition#getName <em>Name</em>}</li>
  *   <li>{@link org.worklang.work.TransitionDefinition#getIn <em>In</em>}</li>
  *   <li>{@link org.worklang.work.TransitionDefinition#getOut <em>Out</em>}</li>
- *   <li>{@link org.worklang.work.TransitionDefinition#getComposition <em>Composition</em>}</li>
  * </ul>
  *
  * @see org.worklang.work.WorkPackage#getTransitionDefinition()
@@ -40,56 +39,56 @@ import org.eclipse.emf.ecore.EObject;
 public interface TransitionDefinition extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Object</b></em>' attribute.
+   * Returns the value of the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Object</em>' attribute isn't clear,
+   * If the meaning of the '<em>Type</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Object</em>' attribute.
-   * @see #setObject(String)
-   * @see org.worklang.work.WorkPackage#getTransitionDefinition_Object()
+   * @return the value of the '<em>Type</em>' attribute.
+   * @see #setType(String)
+   * @see org.worklang.work.WorkPackage#getTransitionDefinition_Type()
    * @model
    * @generated
    */
-  String getObject();
+  String getType();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.TransitionDefinition#getObject <em>Object</em>}' attribute.
+   * Sets the value of the '{@link org.worklang.work.TransitionDefinition#getType <em>Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Object</em>' attribute.
-   * @see #getObject()
+   * @param value the new value of the '<em>Type</em>' attribute.
+   * @see #getType()
    * @generated
    */
-  void setObject(String value);
+  void setType(String value);
 
   /**
-   * Returns the value of the '<em><b>Transition</b></em>' containment reference.
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Transition</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Name</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Transition</em>' containment reference.
-   * @see #setTransition(TransitionID)
-   * @see org.worklang.work.WorkPackage#getTransitionDefinition_Transition()
-   * @model containment="true"
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.worklang.work.WorkPackage#getTransitionDefinition_Name()
+   * @model
    * @generated
    */
-  TransitionID getTransition();
+  String getName();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.TransitionDefinition#getTransition <em>Transition</em>}' containment reference.
+   * Sets the value of the '{@link org.worklang.work.TransitionDefinition#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Transition</em>' containment reference.
-   * @see #getTransition()
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
    * @generated
    */
-  void setTransition(TransitionID value);
+  void setName(String value);
 
   /**
    * Returns the value of the '<em><b>In</b></em>' containment reference.
@@ -142,31 +141,5 @@ public interface TransitionDefinition extends EObject
    * @generated
    */
   void setOut(OutputDefinition value);
-
-  /**
-   * Returns the value of the '<em><b>Composition</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Composition</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Composition</em>' containment reference.
-   * @see #setComposition(WithTransitionsDefinition)
-   * @see org.worklang.work.WorkPackage#getTransitionDefinition_Composition()
-   * @model containment="true"
-   * @generated
-   */
-  WithTransitionsDefinition getComposition();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.TransitionDefinition#getComposition <em>Composition</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Composition</em>' containment reference.
-   * @see #getComposition()
-   * @generated
-   */
-  void setComposition(WithTransitionsDefinition value);
 
 } // TransitionDefinition

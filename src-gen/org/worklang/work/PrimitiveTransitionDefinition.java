@@ -18,14 +18,14 @@ package org.worklang.work;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Primitive State Definition</b></em>'.
+ * A representation of the model object '<em><b>Primitive Transition Definition</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.worklang.work.WorkPackage#getPrimitiveStateDefinition()
+ * @see org.worklang.work.WorkPackage#getPrimitiveTransitionDefinition()
  * @model
  * @generated
  */
-public interface PrimitiveStateDefinition extends StateDefinition
+public interface PrimitiveTransitionDefinition extends TransitionDefinition
 {
-} // PrimitiveStateDefinition
+} // PrimitiveTransitionDefinition

@@ -23,24 +23,24 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.worklang.work.CompoundStateDefinition;
-import org.worklang.work.WithStatesDefinition;
+import org.worklang.work.CompoundTransitionDefinition;
+import org.worklang.work.WithTransitionsDefinition;
 import org.worklang.work.WorkPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Compound State Definition</b></em>'.
+ * An implementation of the model object '<em><b>Compound Transition Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.CompoundStateDefinitionImpl#getComposition <em>Composition</em>}</li>
+ *   <li>{@link org.worklang.work.impl.CompoundTransitionDefinitionImpl#getComposition <em>Composition</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class CompoundStateDefinitionImpl extends StateDefinitionImpl implements CompoundStateDefinition
+public class CompoundTransitionDefinitionImpl extends TransitionDefinitionImpl implements CompoundTransitionDefinition
 {
   /**
    * The cached value of the '{@link #getComposition() <em>Composition</em>}' containment reference.
@@ -50,14 +50,14 @@ public class CompoundStateDefinitionImpl extends StateDefinitionImpl implements 
    * @generated
    * @ordered
    */
-  protected WithStatesDefinition composition;
+  protected WithTransitionsDefinition composition;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected CompoundStateDefinitionImpl()
+  protected CompoundTransitionDefinitionImpl()
   {
     super();
   }
@@ -70,7 +70,7 @@ public class CompoundStateDefinitionImpl extends StateDefinitionImpl implements 
   @Override
   protected EClass eStaticClass()
   {
-    return WorkPackage.Literals.COMPOUND_STATE_DEFINITION;
+    return WorkPackage.Literals.COMPOUND_TRANSITION_DEFINITION;
   }
 
   /**
@@ -78,7 +78,7 @@ public class CompoundStateDefinitionImpl extends StateDefinitionImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public WithStatesDefinition getComposition()
+  public WithTransitionsDefinition getComposition()
   {
     return composition;
   }
@@ -88,13 +88,13 @@ public class CompoundStateDefinitionImpl extends StateDefinitionImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetComposition(WithStatesDefinition newComposition, NotificationChain msgs)
+  public NotificationChain basicSetComposition(WithTransitionsDefinition newComposition, NotificationChain msgs)
   {
-    WithStatesDefinition oldComposition = composition;
+    WithTransitionsDefinition oldComposition = composition;
     composition = newComposition;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.COMPOUND_STATE_DEFINITION__COMPOSITION, oldComposition, newComposition);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION, oldComposition, newComposition);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -105,20 +105,20 @@ public class CompoundStateDefinitionImpl extends StateDefinitionImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setComposition(WithStatesDefinition newComposition)
+  public void setComposition(WithTransitionsDefinition newComposition)
   {
     if (newComposition != composition)
     {
       NotificationChain msgs = null;
       if (composition != null)
-        msgs = ((InternalEObject)composition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.COMPOUND_STATE_DEFINITION__COMPOSITION, null, msgs);
+        msgs = ((InternalEObject)composition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION, null, msgs);
       if (newComposition != null)
-        msgs = ((InternalEObject)newComposition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.COMPOUND_STATE_DEFINITION__COMPOSITION, null, msgs);
+        msgs = ((InternalEObject)newComposition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION, null, msgs);
       msgs = basicSetComposition(newComposition, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.COMPOUND_STATE_DEFINITION__COMPOSITION, newComposition, newComposition));
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION, newComposition, newComposition));
   }
 
   /**
@@ -131,7 +131,7 @@ public class CompoundStateDefinitionImpl extends StateDefinitionImpl implements 
   {
     switch (featureID)
     {
-      case WorkPackage.COMPOUND_STATE_DEFINITION__COMPOSITION:
+      case WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION:
         return basicSetComposition(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -147,7 +147,7 @@ public class CompoundStateDefinitionImpl extends StateDefinitionImpl implements 
   {
     switch (featureID)
     {
-      case WorkPackage.COMPOUND_STATE_DEFINITION__COMPOSITION:
+      case WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION:
         return getComposition();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -163,8 +163,8 @@ public class CompoundStateDefinitionImpl extends StateDefinitionImpl implements 
   {
     switch (featureID)
     {
-      case WorkPackage.COMPOUND_STATE_DEFINITION__COMPOSITION:
-        setComposition((WithStatesDefinition)newValue);
+      case WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION:
+        setComposition((WithTransitionsDefinition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -180,8 +180,8 @@ public class CompoundStateDefinitionImpl extends StateDefinitionImpl implements 
   {
     switch (featureID)
     {
-      case WorkPackage.COMPOUND_STATE_DEFINITION__COMPOSITION:
-        setComposition((WithStatesDefinition)null);
+      case WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION:
+        setComposition((WithTransitionsDefinition)null);
         return;
     }
     super.eUnset(featureID);
@@ -197,10 +197,10 @@ public class CompoundStateDefinitionImpl extends StateDefinitionImpl implements 
   {
     switch (featureID)
     {
-      case WorkPackage.COMPOUND_STATE_DEFINITION__COMPOSITION:
+      case WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION:
         return composition != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //CompoundStateDefinitionImpl
+} //CompoundTransitionDefinitionImpl

@@ -29,43 +29,33 @@ import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequence
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.worklang.services.WorkGrammarAccess;
 import org.worklang.work.CompoundStateDefinition;
-import org.worklang.work.DomainDefinition;
-import org.worklang.work.ExpertDefinition;
-import org.worklang.work.ExtendsDefinition;
+import org.worklang.work.CompoundTransitionDefinition;
+import org.worklang.work.DefinitionSpace;
 import org.worklang.work.FieldDefinition;
-import org.worklang.work.FromFieldDefinition;
 import org.worklang.work.InputDefinition;
 import org.worklang.work.Instance;
-import org.worklang.work.Instancespace;
-import org.worklang.work.Instruction;
-import org.worklang.work.KnowledgeDefinition;
+import org.worklang.work.InstanceSpace;
+import org.worklang.work.MapSpace;
 import org.worklang.work.Model;
-import org.worklang.work.Namespace;
 import org.worklang.work.Operation;
 import org.worklang.work.OutputDefinition;
-import org.worklang.work.Practitioner;
 import org.worklang.work.Predicate;
 import org.worklang.work.PrimitiveStateDefinition;
-import org.worklang.work.ReferenceField;
+import org.worklang.work.PrimitiveTransitionDefinition;
+import org.worklang.work.ReferenceSpace;
 import org.worklang.work.ReferenceState;
 import org.worklang.work.ReferenceTransition;
-import org.worklang.work.Referencespace;
 import org.worklang.work.SetStatement;
-import org.worklang.work.SkillsDefinition;
-import org.worklang.work.Space;
 import org.worklang.work.StateDeclaration;
 import org.worklang.work.StateDefinition;
-import org.worklang.work.StateID;
 import org.worklang.work.StateInstance;
-import org.worklang.work.StateObjectDefinition;
+import org.worklang.work.StateMapping;
 import org.worklang.work.ToDefinition;
 import org.worklang.work.TransitionDeclaration;
-import org.worklang.work.TransitionDefinition;
 import org.worklang.work.TransitionID;
 import org.worklang.work.TransitionInstance;
-import org.worklang.work.TransitionObjectDefinition;
+import org.worklang.work.TransitionMapping;
 import org.worklang.work.UseDefinition;
-import org.worklang.work.User;
 import org.worklang.work.WithStatesDefinition;
 import org.worklang.work.WithTransitionsDefinition;
 import org.worklang.work.WorkPackage;
@@ -87,20 +77,14 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case WorkPackage.COMPOUND_STATE_DEFINITION:
 				sequence_CompoundStateDefinition(context, (CompoundStateDefinition) semanticObject); 
 				return; 
-			case WorkPackage.DOMAIN_DEFINITION:
-				sequence_DomainDefinition(context, (DomainDefinition) semanticObject); 
+			case WorkPackage.COMPOUND_TRANSITION_DEFINITION:
+				sequence_CompoundTransitionDefinition(context, (CompoundTransitionDefinition) semanticObject); 
 				return; 
-			case WorkPackage.EXPERT_DEFINITION:
-				sequence_ExpertDefinition(context, (ExpertDefinition) semanticObject); 
-				return; 
-			case WorkPackage.EXTENDS_DEFINITION:
-				sequence_ExtendsDefinition(context, (ExtendsDefinition) semanticObject); 
+			case WorkPackage.DEFINITION_SPACE:
+				sequence_DefinitionSpace(context, (DefinitionSpace) semanticObject); 
 				return; 
 			case WorkPackage.FIELD_DEFINITION:
 				sequence_FieldDefinition(context, (FieldDefinition) semanticObject); 
-				return; 
-			case WorkPackage.FROM_FIELD_DEFINITION:
-				sequence_FromFieldDefinition(context, (FromFieldDefinition) semanticObject); 
 				return; 
 			case WorkPackage.INPUT_DEFINITION:
 				sequence_InputDefinition(context, (InputDefinition) semanticObject); 
@@ -108,20 +92,14 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case WorkPackage.INSTANCE:
 				sequence_Instance(context, (Instance) semanticObject); 
 				return; 
-			case WorkPackage.INSTANCESPACE:
-				sequence_Instancespace(context, (Instancespace) semanticObject); 
+			case WorkPackage.INSTANCE_SPACE:
+				sequence_InstanceSpace(context, (InstanceSpace) semanticObject); 
 				return; 
-			case WorkPackage.INSTRUCTION:
-				sequence_Instruction(context, (Instruction) semanticObject); 
-				return; 
-			case WorkPackage.KNOWLEDGE_DEFINITION:
-				sequence_KnowledgeDefinition(context, (KnowledgeDefinition) semanticObject); 
+			case WorkPackage.MAP_SPACE:
+				sequence_MapSpace(context, (MapSpace) semanticObject); 
 				return; 
 			case WorkPackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
-				return; 
-			case WorkPackage.NAMESPACE:
-				sequence_Namespace(context, (Namespace) semanticObject); 
 				return; 
 			case WorkPackage.OPERATION:
 				if (rule == grammarAccess.getBinaryExpressionRule()
@@ -139,17 +117,17 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case WorkPackage.OUTPUT_DEFINITION:
 				sequence_OutputDefinition(context, (OutputDefinition) semanticObject); 
 				return; 
-			case WorkPackage.PRACTITIONER:
-				sequence_Practitioner(context, (Practitioner) semanticObject); 
-				return; 
 			case WorkPackage.PREDICATE:
 				sequence_Predicate(context, (Predicate) semanticObject); 
 				return; 
 			case WorkPackage.PRIMITIVE_STATE_DEFINITION:
 				sequence_PrimitiveStateDefinition(context, (PrimitiveStateDefinition) semanticObject); 
 				return; 
-			case WorkPackage.REFERENCE_FIELD:
-				sequence_ReferenceField(context, (ReferenceField) semanticObject); 
+			case WorkPackage.PRIMITIVE_TRANSITION_DEFINITION:
+				sequence_PrimitiveTransitionDefinition(context, (PrimitiveTransitionDefinition) semanticObject); 
+				return; 
+			case WorkPackage.REFERENCE_SPACE:
+				sequence_ReferenceSpace(context, (ReferenceSpace) semanticObject); 
 				return; 
 			case WorkPackage.REFERENCE_STATE:
 				sequence_ReferenceState(context, (ReferenceState) semanticObject); 
@@ -157,41 +135,20 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case WorkPackage.REFERENCE_TRANSITION:
 				sequence_ReferenceTransition(context, (ReferenceTransition) semanticObject); 
 				return; 
-			case WorkPackage.REFERENCESPACE:
-				sequence_Referencespace(context, (Referencespace) semanticObject); 
-				return; 
 			case WorkPackage.SET_STATEMENT:
 				sequence_SetStatement(context, (SetStatement) semanticObject); 
-				return; 
-			case WorkPackage.SKILLS_DEFINITION:
-				sequence_SkillsDefinition(context, (SkillsDefinition) semanticObject); 
-				return; 
-			case WorkPackage.SPACE:
-				sequence_Space(context, (Space) semanticObject); 
 				return; 
 			case WorkPackage.STATE_DECLARATION:
 				sequence_StateDeclaration(context, (StateDeclaration) semanticObject); 
 				return; 
 			case WorkPackage.STATE_DEFINITION:
-				sequence_StateDefinition(context, (StateDefinition) semanticObject); 
+				sequence_TerminalBinaryExpression(context, (StateDefinition) semanticObject); 
 				return; 
-			case WorkPackage.STATE_ID:
-				if (rule == grammarAccess.getStateIDRule()) {
-					sequence_StateID(context, (StateID) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getBinaryExpressionRule()
-						|| action == grammarAccess.getBinaryExpressionAccess().getOperationLeftAction_1_0()
-						|| rule == grammarAccess.getTerminalBinaryExpressionRule()) {
-					sequence_TerminalBinaryExpression(context, (StateID) semanticObject); 
-					return; 
-				}
-				else break;
 			case WorkPackage.STATE_INSTANCE:
 				sequence_StateInstance(context, (StateInstance) semanticObject); 
 				return; 
-			case WorkPackage.STATE_OBJECT_DEFINITION:
-				sequence_StateObjectDefinition(context, (StateObjectDefinition) semanticObject); 
+			case WorkPackage.STATE_MAPPING:
+				sequence_StateMapping(context, (StateMapping) semanticObject); 
 				return; 
 			case WorkPackage.TO_DEFINITION:
 				sequence_ToDefinition(context, (ToDefinition) semanticObject); 
@@ -199,32 +156,17 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case WorkPackage.TRANSITION_DECLARATION:
 				sequence_TransitionDeclaration(context, (TransitionDeclaration) semanticObject); 
 				return; 
-			case WorkPackage.TRANSITION_DEFINITION:
-				sequence_TransitionDefinition(context, (TransitionDefinition) semanticObject); 
-				return; 
 			case WorkPackage.TRANSITION_ID:
-				if (rule == grammarAccess.getTransitionalExpressionRule()
-						|| action == grammarAccess.getTransitionalExpressionAccess().getOperationLeftAction_1_0()
-						|| rule == grammarAccess.getTerminalTransitionalExpressionRule()) {
-					sequence_TerminalTransitionalExpression(context, (TransitionID) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getTransitionIDRule()) {
-					sequence_TransitionID(context, (TransitionID) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TerminalTransitionalExpression(context, (TransitionID) semanticObject); 
+				return; 
 			case WorkPackage.TRANSITION_INSTANCE:
 				sequence_TransitionInstance(context, (TransitionInstance) semanticObject); 
 				return; 
-			case WorkPackage.TRANSITION_OBJECT_DEFINITION:
-				sequence_TransitionObjectDefinition(context, (TransitionObjectDefinition) semanticObject); 
+			case WorkPackage.TRANSITION_MAPPING:
+				sequence_TransitionMapping(context, (TransitionMapping) semanticObject); 
 				return; 
 			case WorkPackage.USE_DEFINITION:
 				sequence_UseDefinition(context, (UseDefinition) semanticObject); 
-				return; 
-			case WorkPackage.USER:
-				sequence_User(context, (User) semanticObject); 
 				return; 
 			case WorkPackage.WITH_STATES_DEFINITION:
 				sequence_WithStatesDefinition(context, (WithStatesDefinition) semanticObject); 
@@ -243,7 +185,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     BinaryExpression.Operation_1_0 returns Operation
 	 *
 	 * Constraint:
-	 *     (left=BinaryExpression_Operation_1_0 (op=AndOp | op=OrOp) right=TerminalBinaryExpression)
+	 *     (left=BinaryExpression_Operation_1_0 (op='AND' | op='OR') right=TerminalBinaryExpression)
 	 */
 	protected void sequence_BinaryExpression(ISerializationContext context, Operation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -252,55 +194,50 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     StateDefinition returns CompoundStateDefinition
 	 *     CompoundStateDefinition returns CompoundStateDefinition
 	 *
 	 * Constraint:
-	 *     (object=State state=StateID compoundStateDef=WithStatesDefinition?)
+	 *     (type='compound' name=ID composition=WithStatesDefinition)
 	 */
 	protected void sequence_CompoundStateDefinition(ISerializationContext context, CompoundStateDefinition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.STATE_DEFINITION__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.STATE_DEFINITION__TYPE));
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.STATE_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.STATE_DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.COMPOUND_STATE_DEFINITION__COMPOSITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.COMPOUND_STATE_DEFINITION__COMPOSITION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getCompoundStateDefinitionAccess().getTypeCompoundKeyword_0_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getCompoundStateDefinitionAccess().getNameIDTerminalRuleCall_2_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getCompoundStateDefinitionAccess().getCompositionWithStatesDefinitionParserRuleCall_3_0(), semanticObject.getComposition());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     TransitionDefinition returns CompoundTransitionDefinition
+	 *     CompoundTransitionDefinition returns CompoundTransitionDefinition
+	 *
+	 * Constraint:
+	 *     (type='compound' name=ID in=InputDefinition? out=OutputDefinition composition=WithTransitionsDefinition)
+	 */
+	protected void sequence_CompoundTransitionDefinition(ISerializationContext context, CompoundTransitionDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     DomainDefinition returns DomainDefinition
+	 *     DefinitionSpace returns DefinitionSpace
 	 *
 	 * Constraint:
-	 *     (domain='domain' domainAreas+=ReferenceField*)
+	 *     (states+=StateDefinition* transitions+=TransitionDefinition*)
 	 */
-	protected void sequence_DomainDefinition(ISerializationContext context, DomainDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     ExpertDefinition returns ExpertDefinition
-	 *
-	 * Constraint:
-	 *     (
-	 *         expertDef='expert' 
-	 *         user=User 
-	 *         domainDef=DomainDefinition? 
-	 *         knowledgeDef=KnowledgeDefinition? 
-	 *         skillsDef=SkillsDefinition? 
-	 *         rate=INT
-	 *     )
-	 */
-	protected void sequence_ExpertDefinition(ISerializationContext context, ExpertDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     ExtendsDefinition returns ExtendsDefinition
-	 *
-	 * Constraint:
-	 *     (type=Extends namespaces+=[Space|ID]+)
-	 */
-	protected void sequence_ExtendsDefinition(ISerializationContext context, ExtendsDefinition semanticObject) {
+	protected void sequence_DefinitionSpace(ISerializationContext context, DefinitionSpace semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -310,14 +247,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     FieldDefinition returns FieldDefinition
 	 *
 	 * Constraint:
-	 *     (
-	 *         field=Field 
-	 *         space=Space 
-	 *         extends=ExtendsDefinition? 
-	 *         conceptualspace=Namespace? 
-	 *         referencespace=Referencespace? 
-	 *         instancespace=Instancespace?
-	 *     )
+	 *     (name=ID definitionSpace=DefinitionSpace? referenceSpace=ReferenceSpace? mapSpace=MapSpace? instanceSpace=InstanceSpace?)
 	 */
 	protected void sequence_FieldDefinition(ISerializationContext context, FieldDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -326,33 +256,24 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     FromFieldDefinition returns FromFieldDefinition
+	 *     InputDefinition returns InputDefinition
 	 *
 	 * Constraint:
-	 *     (from=From refSpace=[Space|ID])
+	 *     inputState+=[StateDefinition|ID]*
 	 */
-	protected void sequence_FromFieldDefinition(ISerializationContext context, FromFieldDefinition semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.FROM_FIELD_DEFINITION__FROM) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.FROM_FIELD_DEFINITION__FROM));
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.FROM_FIELD_DEFINITION__REF_SPACE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.FROM_FIELD_DEFINITION__REF_SPACE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFromFieldDefinitionAccess().getFromFromParserRuleCall_0_0(), semanticObject.getFrom());
-		feeder.accept(grammarAccess.getFromFieldDefinitionAccess().getRefSpaceSpaceIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.FROM_FIELD_DEFINITION__REF_SPACE, false));
-		feeder.finish();
+	protected void sequence_InputDefinition(ISerializationContext context, InputDefinition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     InputDefinition returns InputDefinition
+	 *     InstanceSpace returns InstanceSpace
 	 *
 	 * Constraint:
-	 *     (input=Input inputState+=[StateID|ID]*)
+	 *     instances+=Instance*
 	 */
-	protected void sequence_InputDefinition(ISerializationContext context, InputDefinition semanticObject) {
+	protected void sequence_InstanceSpace(ISerializationContext context, InstanceSpace semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -363,7 +284,6 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     (
-	 *         instanceDef='instance' 
 	 *         (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) 
 	 *         name=STRING 
 	 *         (state=StateInstance | transition=TransitionInstance)
@@ -376,48 +296,12 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     Instancespace returns Instancespace
+	 *     MapSpace returns MapSpace
 	 *
 	 * Constraint:
-	 *     (spaceType=Instances instances+=Instance*)
+	 *     (mappedStates+=StateMapping* mappedTransitions+=TransitionMapping*)
 	 */
-	protected void sequence_Instancespace(ISerializationContext context, Instancespace semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Instruction returns Instruction
-	 *
-	 * Constraint:
-	 *     (objectType='instruction' space=[Space|ID] transition=[TransitionID|ID])
-	 */
-	protected void sequence_Instruction(ISerializationContext context, Instruction semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.INSTRUCTION__OBJECT_TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.INSTRUCTION__OBJECT_TYPE));
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.INSTRUCTION__SPACE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.INSTRUCTION__SPACE));
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.INSTRUCTION__TRANSITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.INSTRUCTION__TRANSITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getInstructionAccess().getObjectTypeInstructionKeyword_0_0(), semanticObject.getObjectType());
-		feeder.accept(grammarAccess.getInstructionAccess().getSpaceSpaceIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.INSTRUCTION__SPACE, false));
-		feeder.accept(grammarAccess.getInstructionAccess().getTransitionTransitionIDIDTerminalRuleCall_2_0_1(), semanticObject.eGet(WorkPackage.Literals.INSTRUCTION__TRANSITION, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     KnowledgeDefinition returns KnowledgeDefinition
-	 *
-	 * Constraint:
-	 *     (knowledgeDef='knowledge' knowledge+=ReferenceState*)
-	 */
-	protected void sequence_KnowledgeDefinition(ISerializationContext context, KnowledgeDefinition semanticObject) {
+	protected void sequence_MapSpace(ISerializationContext context, MapSpace semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -427,26 +311,9 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Model returns Model
 	 *
 	 * Constraint:
-	 *     (
-	 *         (fields+=FieldDefinition+ ((experts+=ExpertDefinition+ instructions+=Instruction+) | instructions+=Instruction+)) | 
-	 *         (((fields+=FieldDefinition+ experts+=ExpertDefinition+) | experts+=ExpertDefinition+)? practitioners+=Practitioner+ instructions+=Instruction+) | 
-	 *         (experts+=ExpertDefinition+ instructions+=Instruction+) | 
-	 *         instructions+=Instruction+
-	 *     )?
+	 *     fields+=FieldDefinition+
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Namespace returns Namespace
-	 *
-	 * Constraint:
-	 *     (spaceType=Definitions states+=StateObjectDefinition* transitions+=TransitionObjectDefinition*)
-	 */
-	protected void sequence_Namespace(ISerializationContext context, Namespace semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -456,31 +323,16 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     OutputDefinition returns OutputDefinition
 	 *
 	 * Constraint:
-	 *     (output=Output outputState=[StateID|ID])
+	 *     outputState=[StateDefinition|ID]
 	 */
 	protected void sequence_OutputDefinition(ISerializationContext context, OutputDefinition semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.OUTPUT_DEFINITION__OUTPUT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.OUTPUT_DEFINITION__OUTPUT));
 			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.OUTPUT_DEFINITION__OUTPUT_STATE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.OUTPUT_DEFINITION__OUTPUT_STATE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getOutputDefinitionAccess().getOutputOutputParserRuleCall_0_0(), semanticObject.getOutput());
-		feeder.accept(grammarAccess.getOutputDefinitionAccess().getOutputStateStateIDIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.OUTPUT_DEFINITION__OUTPUT_STATE, false));
+		feeder.accept(grammarAccess.getOutputDefinitionAccess().getOutputStateStateDefinitionIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.OUTPUT_DEFINITION__OUTPUT_STATE, false));
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Practitioner returns Practitioner
-	 *
-	 * Constraint:
-	 *     (practitionerDef='practitioner' user=User knowledgeDef=KnowledgeDefinition? skillsDef=SkillsDefinition?)
-	 */
-	protected void sequence_Practitioner(ISerializationContext context, Practitioner semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -492,7 +344,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     TerminalBinaryExpression returns Predicate
 	 *
 	 * Constraint:
-	 *     (negation?=NotOp? expression=BinaryExpression)
+	 *     (negation?='NOT'? expression=BinaryExpression)
 	 */
 	protected void sequence_Predicate(ISerializationContext context, Predicate semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -501,43 +353,48 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     StateDefinition returns PrimitiveStateDefinition
 	 *     PrimitiveStateDefinition returns PrimitiveStateDefinition
 	 *
 	 * Constraint:
-	 *     (object=State id=StateID)
+	 *     (type='primitive' name=ID)
 	 */
 	protected void sequence_PrimitiveStateDefinition(ISerializationContext context, PrimitiveStateDefinition semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.PRIMITIVE_STATE_DEFINITION__OBJECT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.PRIMITIVE_STATE_DEFINITION__OBJECT));
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.PRIMITIVE_STATE_DEFINITION__ID) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.PRIMITIVE_STATE_DEFINITION__ID));
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.STATE_DEFINITION__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.STATE_DEFINITION__TYPE));
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.STATE_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.STATE_DEFINITION__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPrimitiveStateDefinitionAccess().getObjectStateParserRuleCall_0_0(), semanticObject.getObject());
-		feeder.accept(grammarAccess.getPrimitiveStateDefinitionAccess().getIdStateIDParserRuleCall_1_0(), semanticObject.getId());
+		feeder.accept(grammarAccess.getPrimitiveStateDefinitionAccess().getTypePrimitiveKeyword_0_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getPrimitiveStateDefinitionAccess().getNameIDTerminalRuleCall_2_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     ReferenceField returns ReferenceField
+	 *     TransitionDefinition returns PrimitiveTransitionDefinition
+	 *     PrimitiveTransitionDefinition returns PrimitiveTransitionDefinition
 	 *
 	 * Constraint:
-	 *     (ref=Field space=Space)
+	 *     (type='primitive' name=ID in=InputDefinition? out=OutputDefinition)
 	 */
-	protected void sequence_ReferenceField(ISerializationContext context, ReferenceField semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.REFERENCE_FIELD__REF) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.REFERENCE_FIELD__REF));
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.REFERENCE_FIELD__SPACE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.REFERENCE_FIELD__SPACE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getReferenceFieldAccess().getRefFieldParserRuleCall_0_0(), semanticObject.getRef());
-		feeder.accept(grammarAccess.getReferenceFieldAccess().getSpaceSpaceParserRuleCall_1_0(), semanticObject.getSpace());
-		feeder.finish();
+	protected void sequence_PrimitiveTransitionDefinition(ISerializationContext context, PrimitiveTransitionDefinition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ReferenceSpace returns ReferenceSpace
+	 *
+	 * Constraint:
+	 *     (refStates+=ReferenceState* refTransitions+=ReferenceTransition*)
+	 */
+	protected void sequence_ReferenceSpace(ISerializationContext context, ReferenceSpace semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -546,10 +403,19 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ReferenceState returns ReferenceState
 	 *
 	 * Constraint:
-	 *     (object=State refState=[StateID|ID] from=FromFieldDefinition state=StateID? composition=WithStatesDefinition?)
+	 *     (refState=[StateDefinition|ID] foreignField=[FieldDefinition|ID])
 	 */
 	protected void sequence_ReferenceState(ISerializationContext context, ReferenceState semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.REFERENCE_STATE__REF_STATE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.REFERENCE_STATE__REF_STATE));
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.REFERENCE_STATE__FOREIGN_FIELD) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.REFERENCE_STATE__FOREIGN_FIELD));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getReferenceStateAccess().getRefStateStateDefinitionIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.REFERENCE_STATE__REF_STATE, false));
+		feeder.accept(grammarAccess.getReferenceStateAccess().getForeignFieldFieldDefinitionIDTerminalRuleCall_3_0_1(), semanticObject.eGet(WorkPackage.Literals.REFERENCE_STATE__FOREIGN_FIELD, false));
+		feeder.finish();
 	}
 	
 	
@@ -558,22 +424,19 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ReferenceTransition returns ReferenceTransition
 	 *
 	 * Constraint:
-	 *     (object=Transition refTransition=[TransitionID|ID] fromDef=FromFieldDefinition transition=TransitionID? composition=WithTransitionsDefinition?)
+	 *     (refTransition=[TransitionDefinition|ID] foreignField=[FieldDefinition|ID])
 	 */
 	protected void sequence_ReferenceTransition(ISerializationContext context, ReferenceTransition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Referencespace returns Referencespace
-	 *
-	 * Constraint:
-	 *     (spaceType=References refFields+=ReferenceField* refStates+=ReferenceState* refTransition+=ReferenceTransition*)
-	 */
-	protected void sequence_Referencespace(ISerializationContext context, Referencespace semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.REFERENCE_TRANSITION__REF_TRANSITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.REFERENCE_TRANSITION__REF_TRANSITION));
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.REFERENCE_TRANSITION__FOREIGN_FIELD) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.REFERENCE_TRANSITION__FOREIGN_FIELD));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getReferenceTransitionAccess().getRefTransitionTransitionDefinitionIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.REFERENCE_TRANSITION__REF_TRANSITION, false));
+		feeder.accept(grammarAccess.getReferenceTransitionAccess().getForeignFieldFieldDefinitionIDTerminalRuleCall_3_0_1(), semanticObject.eGet(WorkPackage.Literals.REFERENCE_TRANSITION__FOREIGN_FIELD, false));
+		feeder.finish();
 	}
 	
 	
@@ -582,51 +445,18 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     SetStatement returns SetStatement
 	 *
 	 * Constraint:
-	 *     (statement=Set variable=[StateID|ID] toDef=ToDefinition)
+	 *     (variable=[StateDefinition|ID] toDef=ToDefinition)
 	 */
 	protected void sequence_SetStatement(ISerializationContext context, SetStatement semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.SET_STATEMENT__STATEMENT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.SET_STATEMENT__STATEMENT));
 			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.SET_STATEMENT__VARIABLE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.SET_STATEMENT__VARIABLE));
 			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.SET_STATEMENT__TO_DEF) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.SET_STATEMENT__TO_DEF));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSetStatementAccess().getStatementSetParserRuleCall_0_0(), semanticObject.getStatement());
-		feeder.accept(grammarAccess.getSetStatementAccess().getVariableStateIDIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.SET_STATEMENT__VARIABLE, false));
+		feeder.accept(grammarAccess.getSetStatementAccess().getVariableStateDefinitionIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.SET_STATEMENT__VARIABLE, false));
 		feeder.accept(grammarAccess.getSetStatementAccess().getToDefToDefinitionParserRuleCall_2_0(), semanticObject.getToDef());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     SkillsDefinition returns SkillsDefinition
-	 *
-	 * Constraint:
-	 *     (skillsDef='skills' skills+=ReferenceTransition*)
-	 */
-	protected void sequence_SkillsDefinition(ISerializationContext context, SkillsDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Space returns Space
-	 *
-	 * Constraint:
-	 *     name=ID
-	 */
-	protected void sequence_Space(ISerializationContext context, Space semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.SPACE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.SPACE__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSpaceAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
@@ -636,48 +466,15 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     StateDeclaration returns StateDeclaration
 	 *
 	 * Constraint:
-	 *     (objectType=State state=[StateID|ID])
+	 *     state=[StateDefinition|ID]
 	 */
 	protected void sequence_StateDeclaration(ISerializationContext context, StateDeclaration semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.STATE_DECLARATION__OBJECT_TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.STATE_DECLARATION__OBJECT_TYPE));
 			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.STATE_DECLARATION__STATE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.STATE_DECLARATION__STATE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getStateDeclarationAccess().getObjectTypeStateParserRuleCall_0_0(), semanticObject.getObjectType());
-		feeder.accept(grammarAccess.getStateDeclarationAccess().getStateStateIDIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.STATE_DECLARATION__STATE, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     StateDefinition returns StateDefinition
-	 *
-	 * Constraint:
-	 *     (object=State state=StateID withDefinition=WithStatesDefinition?)
-	 */
-	protected void sequence_StateDefinition(ISerializationContext context, StateDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     StateID returns StateID
-	 *
-	 * Constraint:
-	 *     name=ID
-	 */
-	protected void sequence_StateID(ISerializationContext context, StateID semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.STATE_ID__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.STATE_ID__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getStateIDAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getStateDeclarationAccess().getStateStateDefinitionIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.STATE_DECLARATION__STATE, false));
 		feeder.finish();
 	}
 	
@@ -696,26 +493,38 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     StateObjectDefinition returns StateObjectDefinition
+	 *     StateMapping returns StateMapping
 	 *
 	 * Constraint:
-	 *     ((type=Primitive | type=Compound) state=StateDefinition)
+	 *     (foreignState=[StateDefinition|ID] field=[FieldDefinition|ID] localState=[StateDefinition|ID])
 	 */
-	protected void sequence_StateObjectDefinition(ISerializationContext context, StateObjectDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_StateMapping(ISerializationContext context, StateMapping semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.STATE_MAPPING__FOREIGN_STATE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.STATE_MAPPING__FOREIGN_STATE));
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.STATE_MAPPING__FIELD) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.STATE_MAPPING__FIELD));
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.STATE_MAPPING__LOCAL_STATE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.STATE_MAPPING__LOCAL_STATE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getStateMappingAccess().getForeignStateStateDefinitionIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.STATE_MAPPING__FOREIGN_STATE, false));
+		feeder.accept(grammarAccess.getStateMappingAccess().getFieldFieldDefinitionIDTerminalRuleCall_3_0_1(), semanticObject.eGet(WorkPackage.Literals.STATE_MAPPING__FIELD, false));
+		feeder.accept(grammarAccess.getStateMappingAccess().getLocalStateStateDefinitionIDTerminalRuleCall_5_0_1(), semanticObject.eGet(WorkPackage.Literals.STATE_MAPPING__LOCAL_STATE, false));
+		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     BinaryExpression returns StateID
-	 *     BinaryExpression.Operation_1_0 returns StateID
-	 *     TerminalBinaryExpression returns StateID
+	 *     BinaryExpression returns StateDefinition
+	 *     BinaryExpression.Operation_1_0 returns StateDefinition
+	 *     TerminalBinaryExpression returns StateDefinition
 	 *
 	 * Constraint:
-	 *     (instance=[StateID|ID] | (list?='setOf' value=[StateID|ID]))
+	 *     (instance=[StateDefinition|ID] | (list?='setOf' value=[StateDefinition|ID]))
 	 */
-	protected void sequence_TerminalBinaryExpression(ISerializationContext context, StateID semanticObject) {
+	protected void sequence_TerminalBinaryExpression(ISerializationContext context, StateDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -745,17 +554,14 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ToDefinition returns ToDefinition
 	 *
 	 * Constraint:
-	 *     (to=To value=STRING)
+	 *     value=STRING
 	 */
 	protected void sequence_ToDefinition(ISerializationContext context, ToDefinition semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.TO_DEFINITION__TO) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.TO_DEFINITION__TO));
 			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.TO_DEFINITION__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.TO_DEFINITION__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getToDefinitionAccess().getToToParserRuleCall_0_0(), semanticObject.getTo());
 		feeder.accept(grammarAccess.getToDefinitionAccess().getValueSTRINGTerminalRuleCall_1_0(), semanticObject.getValue());
 		feeder.finish();
 	}
@@ -766,48 +572,15 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     TransitionDeclaration returns TransitionDeclaration
 	 *
 	 * Constraint:
-	 *     (objectType=Transition transition=[TransitionID|ID])
+	 *     transition=[TransitionID|ID]
 	 */
 	protected void sequence_TransitionDeclaration(ISerializationContext context, TransitionDeclaration semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.TRANSITION_DECLARATION__OBJECT_TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.TRANSITION_DECLARATION__OBJECT_TYPE));
 			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.TRANSITION_DECLARATION__TRANSITION) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.TRANSITION_DECLARATION__TRANSITION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTransitionDeclarationAccess().getObjectTypeTransitionParserRuleCall_0_0(), semanticObject.getObjectType());
 		feeder.accept(grammarAccess.getTransitionDeclarationAccess().getTransitionTransitionIDIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.TRANSITION_DECLARATION__TRANSITION, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     TransitionDefinition returns TransitionDefinition
-	 *
-	 * Constraint:
-	 *     (object=Transition transition=TransitionID in=InputDefinition? out=OutputDefinition composition=WithTransitionsDefinition?)
-	 */
-	protected void sequence_TransitionDefinition(ISerializationContext context, TransitionDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     TransitionID returns TransitionID
-	 *
-	 * Constraint:
-	 *     name=ID
-	 */
-	protected void sequence_TransitionID(ISerializationContext context, TransitionID semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.TRANSITION_ID__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.TRANSITION_ID__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTransitionIDAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
@@ -826,13 +599,25 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     TransitionObjectDefinition returns TransitionObjectDefinition
+	 *     TransitionMapping returns TransitionMapping
 	 *
 	 * Constraint:
-	 *     ((type=Primitive | type=Compound) transition=TransitionDefinition)
+	 *     (foreignTransition=[TransitionID|ID] field=[FieldDefinition|ID] localTransition=[TransitionID|ID])
 	 */
-	protected void sequence_TransitionObjectDefinition(ISerializationContext context, TransitionObjectDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_TransitionMapping(ISerializationContext context, TransitionMapping semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.TRANSITION_MAPPING__FOREIGN_TRANSITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.TRANSITION_MAPPING__FOREIGN_TRANSITION));
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.TRANSITION_MAPPING__FIELD) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.TRANSITION_MAPPING__FIELD));
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.TRANSITION_MAPPING__LOCAL_TRANSITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.TRANSITION_MAPPING__LOCAL_TRANSITION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTransitionMappingAccess().getForeignTransitionTransitionIDIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.TRANSITION_MAPPING__FOREIGN_TRANSITION, false));
+		feeder.accept(grammarAccess.getTransitionMappingAccess().getFieldFieldDefinitionIDTerminalRuleCall_3_0_1(), semanticObject.eGet(WorkPackage.Literals.TRANSITION_MAPPING__FIELD, false));
+		feeder.accept(grammarAccess.getTransitionMappingAccess().getLocalTransitionTransitionIDIDTerminalRuleCall_5_0_1(), semanticObject.eGet(WorkPackage.Literals.TRANSITION_MAPPING__LOCAL_TRANSITION, false));
+		feeder.finish();
 	}
 	
 	
@@ -867,36 +652,15 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     UseDefinition returns UseDefinition
 	 *
 	 * Constraint:
-	 *     (use=Use predefinedValue=[Instance|ID])
+	 *     predefinedValue=[Instance|ID]
 	 */
 	protected void sequence_UseDefinition(ISerializationContext context, UseDefinition semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.USE_DEFINITION__USE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.USE_DEFINITION__USE));
 			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.USE_DEFINITION__PREDEFINED_VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.USE_DEFINITION__PREDEFINED_VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getUseDefinitionAccess().getUseUseParserRuleCall_0_0(), semanticObject.getUse());
 		feeder.accept(grammarAccess.getUseDefinitionAccess().getPredefinedValueInstanceIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.USE_DEFINITION__PREDEFINED_VALUE, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     User returns User
-	 *
-	 * Constraint:
-	 *     name=ID
-	 */
-	protected void sequence_User(ISerializationContext context, User semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.USER__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.USER__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getUserAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
@@ -906,17 +670,14 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     WithStatesDefinition returns WithStatesDefinition
 	 *
 	 * Constraint:
-	 *     (composition=With predicate=Predicate)
+	 *     predicate=Predicate
 	 */
 	protected void sequence_WithStatesDefinition(ISerializationContext context, WithStatesDefinition semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.WITH_STATES_DEFINITION__COMPOSITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.WITH_STATES_DEFINITION__COMPOSITION));
 			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.WITH_STATES_DEFINITION__PREDICATE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.WITH_STATES_DEFINITION__PREDICATE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getWithStatesDefinitionAccess().getCompositionWithParserRuleCall_0_0(), semanticObject.getComposition());
 		feeder.accept(grammarAccess.getWithStatesDefinitionAccess().getPredicatePredicateParserRuleCall_2_0(), semanticObject.getPredicate());
 		feeder.finish();
 	}
@@ -927,17 +688,14 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     WithTransitionsDefinition returns WithTransitionsDefinition
 	 *
 	 * Constraint:
-	 *     (composition=With transitions=TransitionalExpression)
+	 *     transitions=TransitionalExpression
 	 */
 	protected void sequence_WithTransitionsDefinition(ISerializationContext context, WithTransitionsDefinition semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.WITH_TRANSITIONS_DEFINITION__COMPOSITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.WITH_TRANSITIONS_DEFINITION__COMPOSITION));
 			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.WITH_TRANSITIONS_DEFINITION__TRANSITIONS) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.WITH_TRANSITIONS_DEFINITION__TRANSITIONS));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getWithTransitionsDefinitionAccess().getCompositionWithParserRuleCall_0_0(), semanticObject.getComposition());
 		feeder.accept(grammarAccess.getWithTransitionsDefinitionAccess().getTransitionsTransitionalExpressionParserRuleCall_2_0(), semanticObject.getTransitions());
 		feeder.finish();
 	}

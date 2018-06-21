@@ -93,79 +93,34 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
         return createModelAdapter();
       }
       @Override
-      public Adapter caseInstruction(Instruction object)
-      {
-        return createInstructionAdapter();
-      }
-      @Override
-      public Adapter casePractitioner(Practitioner object)
-      {
-        return createPractitionerAdapter();
-      }
-      @Override
-      public Adapter caseExpertDefinition(ExpertDefinition object)
-      {
-        return createExpertDefinitionAdapter();
-      }
-      @Override
-      public Adapter caseUser(User object)
-      {
-        return createUserAdapter();
-      }
-      @Override
-      public Adapter caseDomainDefinition(DomainDefinition object)
-      {
-        return createDomainDefinitionAdapter();
-      }
-      @Override
-      public Adapter caseKnowledgeDefinition(KnowledgeDefinition object)
-      {
-        return createKnowledgeDefinitionAdapter();
-      }
-      @Override
-      public Adapter caseSkillsDefinition(SkillsDefinition object)
-      {
-        return createSkillsDefinitionAdapter();
-      }
-      @Override
       public Adapter caseFieldDefinition(FieldDefinition object)
       {
         return createFieldDefinitionAdapter();
       }
       @Override
-      public Adapter caseSpace(Space object)
+      public Adapter caseMapSpace(MapSpace object)
       {
-        return createSpaceAdapter();
+        return createMapSpaceAdapter();
       }
       @Override
-      public Adapter caseNamespace(Namespace object)
+      public Adapter caseStateMapping(StateMapping object)
       {
-        return createNamespaceAdapter();
+        return createStateMappingAdapter();
       }
       @Override
-      public Adapter caseReferencespace(Referencespace object)
+      public Adapter caseTransitionMapping(TransitionMapping object)
       {
-        return createReferencespaceAdapter();
+        return createTransitionMappingAdapter();
       }
       @Override
-      public Adapter caseInstancespace(Instancespace object)
+      public Adapter caseDefinitionSpace(DefinitionSpace object)
       {
-        return createInstancespaceAdapter();
+        return createDefinitionSpaceAdapter();
       }
       @Override
-      public Adapter caseReferenceField(ReferenceField object)
+      public Adapter caseStateDefinition(StateDefinition object)
       {
-        return createReferenceFieldAdapter();
-      }
-      @Override
-      public Adapter caseStateObjectDefinition(StateObjectDefinition object)
-      {
-        return createStateObjectDefinitionAdapter();
-      }
-      @Override
-      public Adapter caseTransitionObjectDefinition(TransitionObjectDefinition object)
-      {
-        return createTransitionObjectDefinitionAdapter();
+        return createStateDefinitionAdapter();
       }
       @Override
       public Adapter casePrimitiveStateDefinition(PrimitiveStateDefinition object)
@@ -178,14 +133,39 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
         return createCompoundStateDefinitionAdapter();
       }
       @Override
-      public Adapter caseStateDefinition(StateDefinition object)
+      public Adapter caseTransitionDefinition(TransitionDefinition object)
       {
-        return createStateDefinitionAdapter();
+        return createTransitionDefinitionAdapter();
       }
       @Override
-      public Adapter caseStateID(StateID object)
+      public Adapter casePrimitiveTransitionDefinition(PrimitiveTransitionDefinition object)
       {
-        return createStateIDAdapter();
+        return createPrimitiveTransitionDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseCompoundTransitionDefinition(CompoundTransitionDefinition object)
+      {
+        return createCompoundTransitionDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseReferenceSpace(ReferenceSpace object)
+      {
+        return createReferenceSpaceAdapter();
+      }
+      @Override
+      public Adapter caseReferenceTransition(ReferenceTransition object)
+      {
+        return createReferenceTransitionAdapter();
+      }
+      @Override
+      public Adapter caseReferenceState(ReferenceState object)
+      {
+        return createReferenceStateAdapter();
+      }
+      @Override
+      public Adapter caseInstanceSpace(InstanceSpace object)
+      {
+        return createInstanceSpaceAdapter();
       }
       @Override
       public Adapter caseWithStatesDefinition(WithStatesDefinition object)
@@ -198,31 +178,6 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
         return createWithTransitionsDefinitionAdapter();
       }
       @Override
-      public Adapter caseReferenceState(ReferenceState object)
-      {
-        return createReferenceStateAdapter();
-      }
-      @Override
-      public Adapter caseTransitionDefinition(TransitionDefinition object)
-      {
-        return createTransitionDefinitionAdapter();
-      }
-      @Override
-      public Adapter caseTransitionID(TransitionID object)
-      {
-        return createTransitionIDAdapter();
-      }
-      @Override
-      public Adapter caseReferenceTransition(ReferenceTransition object)
-      {
-        return createReferenceTransitionAdapter();
-      }
-      @Override
-      public Adapter caseFromFieldDefinition(FromFieldDefinition object)
-      {
-        return createFromFieldDefinitionAdapter();
-      }
-      @Override
       public Adapter caseInputDefinition(InputDefinition object)
       {
         return createInputDefinitionAdapter();
@@ -231,11 +186,6 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
       public Adapter caseOutputDefinition(OutputDefinition object)
       {
         return createOutputDefinitionAdapter();
-      }
-      @Override
-      public Adapter caseExtendsDefinition(ExtendsDefinition object)
-      {
-        return createExtendsDefinitionAdapter();
       }
       @Override
       public Adapter caseInstance(Instance object)
@@ -298,6 +248,11 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
         return createOperationAdapter();
       }
       @Override
+      public Adapter caseTransitionID(TransitionID object)
+      {
+        return createTransitionIDAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -335,111 +290,6 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.Instruction <em>Instruction</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.Instruction
-   * @generated
-   */
-  public Adapter createInstructionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.Practitioner <em>Practitioner</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.Practitioner
-   * @generated
-   */
-  public Adapter createPractitionerAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.ExpertDefinition <em>Expert Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.ExpertDefinition
-   * @generated
-   */
-  public Adapter createExpertDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.User <em>User</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.User
-   * @generated
-   */
-  public Adapter createUserAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.DomainDefinition <em>Domain Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.DomainDefinition
-   * @generated
-   */
-  public Adapter createDomainDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.KnowledgeDefinition <em>Knowledge Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.KnowledgeDefinition
-   * @generated
-   */
-  public Adapter createKnowledgeDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.SkillsDefinition <em>Skills Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.SkillsDefinition
-   * @generated
-   */
-  public Adapter createSkillsDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.worklang.work.FieldDefinition <em>Field Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -455,106 +305,76 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.Space <em>Space</em>}'.
+   * Creates a new adapter for an object of class '{@link org.worklang.work.MapSpace <em>Map Space</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.worklang.work.Space
+   * @see org.worklang.work.MapSpace
    * @generated
    */
-  public Adapter createSpaceAdapter()
+  public Adapter createMapSpaceAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.Namespace <em>Namespace</em>}'.
+   * Creates a new adapter for an object of class '{@link org.worklang.work.StateMapping <em>State Mapping</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.worklang.work.Namespace
+   * @see org.worklang.work.StateMapping
    * @generated
    */
-  public Adapter createNamespaceAdapter()
+  public Adapter createStateMappingAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.Referencespace <em>Referencespace</em>}'.
+   * Creates a new adapter for an object of class '{@link org.worklang.work.TransitionMapping <em>Transition Mapping</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.worklang.work.Referencespace
+   * @see org.worklang.work.TransitionMapping
    * @generated
    */
-  public Adapter createReferencespaceAdapter()
+  public Adapter createTransitionMappingAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.Instancespace <em>Instancespace</em>}'.
+   * Creates a new adapter for an object of class '{@link org.worklang.work.DefinitionSpace <em>Definition Space</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.worklang.work.Instancespace
+   * @see org.worklang.work.DefinitionSpace
    * @generated
    */
-  public Adapter createInstancespaceAdapter()
+  public Adapter createDefinitionSpaceAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.ReferenceField <em>Reference Field</em>}'.
+   * Creates a new adapter for an object of class '{@link org.worklang.work.StateDefinition <em>State Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.worklang.work.ReferenceField
+   * @see org.worklang.work.StateDefinition
    * @generated
    */
-  public Adapter createReferenceFieldAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.StateObjectDefinition <em>State Object Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.StateObjectDefinition
-   * @generated
-   */
-  public Adapter createStateObjectDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.TransitionObjectDefinition <em>Transition Object Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.TransitionObjectDefinition
-   * @generated
-   */
-  public Adapter createTransitionObjectDefinitionAdapter()
+  public Adapter createStateDefinitionAdapter()
   {
     return null;
   }
@@ -590,31 +410,106 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.StateDefinition <em>State Definition</em>}'.
+   * Creates a new adapter for an object of class '{@link org.worklang.work.TransitionDefinition <em>Transition Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.worklang.work.StateDefinition
+   * @see org.worklang.work.TransitionDefinition
    * @generated
    */
-  public Adapter createStateDefinitionAdapter()
+  public Adapter createTransitionDefinitionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.StateID <em>State ID</em>}'.
+   * Creates a new adapter for an object of class '{@link org.worklang.work.PrimitiveTransitionDefinition <em>Primitive Transition Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.worklang.work.StateID
+   * @see org.worklang.work.PrimitiveTransitionDefinition
    * @generated
    */
-  public Adapter createStateIDAdapter()
+  public Adapter createPrimitiveTransitionDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.CompoundTransitionDefinition <em>Compound Transition Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.CompoundTransitionDefinition
+   * @generated
+   */
+  public Adapter createCompoundTransitionDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.ReferenceSpace <em>Reference Space</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.ReferenceSpace
+   * @generated
+   */
+  public Adapter createReferenceSpaceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.ReferenceTransition <em>Reference Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.ReferenceTransition
+   * @generated
+   */
+  public Adapter createReferenceTransitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.ReferenceState <em>Reference State</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.ReferenceState
+   * @generated
+   */
+  public Adapter createReferenceStateAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.InstanceSpace <em>Instance Space</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.InstanceSpace
+   * @generated
+   */
+  public Adapter createInstanceSpaceAdapter()
   {
     return null;
   }
@@ -650,81 +545,6 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.ReferenceState <em>Reference State</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.ReferenceState
-   * @generated
-   */
-  public Adapter createReferenceStateAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.TransitionDefinition <em>Transition Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.TransitionDefinition
-   * @generated
-   */
-  public Adapter createTransitionDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.TransitionID <em>Transition ID</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.TransitionID
-   * @generated
-   */
-  public Adapter createTransitionIDAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.ReferenceTransition <em>Reference Transition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.ReferenceTransition
-   * @generated
-   */
-  public Adapter createReferenceTransitionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.FromFieldDefinition <em>From Field Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.FromFieldDefinition
-   * @generated
-   */
-  public Adapter createFromFieldDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.worklang.work.InputDefinition <em>Input Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -750,21 +570,6 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createOutputDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.ExtendsDefinition <em>Extends Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.ExtendsDefinition
-   * @generated
-   */
-  public Adapter createExtendsDefinitionAdapter()
   {
     return null;
   }
@@ -945,6 +750,21 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createOperationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.TransitionID <em>Transition ID</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.TransitionID
+   * @generated
+   */
+  public Adapter createTransitionIDAdapter()
   {
     return null;
   }

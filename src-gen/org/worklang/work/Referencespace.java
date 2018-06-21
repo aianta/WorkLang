@@ -21,67 +21,23 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Referencespace</b></em>'.
+ * A representation of the model object '<em><b>Reference Space</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.Referencespace#getSpaceType <em>Space Type</em>}</li>
- *   <li>{@link org.worklang.work.Referencespace#getRefFields <em>Ref Fields</em>}</li>
- *   <li>{@link org.worklang.work.Referencespace#getRefStates <em>Ref States</em>}</li>
- *   <li>{@link org.worklang.work.Referencespace#getRefTransition <em>Ref Transition</em>}</li>
+ *   <li>{@link org.worklang.work.ReferenceSpace#getRefStates <em>Ref States</em>}</li>
+ *   <li>{@link org.worklang.work.ReferenceSpace#getRefTransitions <em>Ref Transitions</em>}</li>
  * </ul>
  *
- * @see org.worklang.work.WorkPackage#getReferencespace()
+ * @see org.worklang.work.WorkPackage#getReferenceSpace()
  * @model
  * @generated
  */
-public interface Referencespace extends EObject
+public interface ReferenceSpace extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Space Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Space Type</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Space Type</em>' attribute.
-   * @see #setSpaceType(String)
-   * @see org.worklang.work.WorkPackage#getReferencespace_SpaceType()
-   * @model
-   * @generated
-   */
-  String getSpaceType();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.Referencespace#getSpaceType <em>Space Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Space Type</em>' attribute.
-   * @see #getSpaceType()
-   * @generated
-   */
-  void setSpaceType(String value);
-
-  /**
-   * Returns the value of the '<em><b>Ref Fields</b></em>' containment reference list.
-   * The list contents are of type {@link org.worklang.work.ReferenceField}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref Fields</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Ref Fields</em>' containment reference list.
-   * @see org.worklang.work.WorkPackage#getReferencespace_RefFields()
-   * @model containment="true"
-   * @generated
-   */
-  EList<ReferenceField> getRefFields();
-
   /**
    * Returns the value of the '<em><b>Ref States</b></em>' containment reference list.
    * The list contents are of type {@link org.worklang.work.ReferenceState}.
@@ -92,26 +48,26 @@ public interface Referencespace extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ref States</em>' containment reference list.
-   * @see org.worklang.work.WorkPackage#getReferencespace_RefStates()
+   * @see org.worklang.work.WorkPackage#getReferenceSpace_RefStates()
    * @model containment="true"
    * @generated
    */
   EList<ReferenceState> getRefStates();
 
   /**
-   * Returns the value of the '<em><b>Ref Transition</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Ref Transitions</b></em>' containment reference list.
    * The list contents are of type {@link org.worklang.work.ReferenceTransition}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Ref Transition</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Ref Transitions</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Ref Transition</em>' containment reference list.
-   * @see org.worklang.work.WorkPackage#getReferencespace_RefTransition()
+   * @return the value of the '<em>Ref Transitions</em>' containment reference list.
+   * @see org.worklang.work.WorkPackage#getReferenceSpace_RefTransitions()
    * @model containment="true"
    * @generated
    */
-  EList<ReferenceTransition> getRefTransition();
+  EList<ReferenceTransition> getRefTransitions();
 
-} // Referencespace
+} // ReferenceSpace

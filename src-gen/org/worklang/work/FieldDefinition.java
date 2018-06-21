@@ -26,12 +26,11 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.FieldDefinition#getField <em>Field</em>}</li>
- *   <li>{@link org.worklang.work.FieldDefinition#getSpace <em>Space</em>}</li>
- *   <li>{@link org.worklang.work.FieldDefinition#getExtends <em>Extends</em>}</li>
- *   <li>{@link org.worklang.work.FieldDefinition#getConceptualspace <em>Conceptualspace</em>}</li>
- *   <li>{@link org.worklang.work.FieldDefinition#getReferencespace <em>Referencespace</em>}</li>
- *   <li>{@link org.worklang.work.FieldDefinition#getInstancespace <em>Instancespace</em>}</li>
+ *   <li>{@link org.worklang.work.FieldDefinition#getName <em>Name</em>}</li>
+ *   <li>{@link org.worklang.work.FieldDefinition#getDefinitionSpace <em>Definition Space</em>}</li>
+ *   <li>{@link org.worklang.work.FieldDefinition#getReferenceSpace <em>Reference Space</em>}</li>
+ *   <li>{@link org.worklang.work.FieldDefinition#getMapSpace <em>Map Space</em>}</li>
+ *   <li>{@link org.worklang.work.FieldDefinition#getInstanceSpace <em>Instance Space</em>}</li>
  * </ul>
  *
  * @see org.worklang.work.WorkPackage#getFieldDefinition()
@@ -41,159 +40,133 @@ import org.eclipse.emf.ecore.EObject;
 public interface FieldDefinition extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Field</b></em>' attribute.
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Field</em>' attribute isn't clear,
+   * If the meaning of the '<em>Name</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Field</em>' attribute.
-   * @see #setField(String)
-   * @see org.worklang.work.WorkPackage#getFieldDefinition_Field()
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.worklang.work.WorkPackage#getFieldDefinition_Name()
    * @model
    * @generated
    */
-  String getField();
+  String getName();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.FieldDefinition#getField <em>Field</em>}' attribute.
+   * Sets the value of the '{@link org.worklang.work.FieldDefinition#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Field</em>' attribute.
-   * @see #getField()
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
    * @generated
    */
-  void setField(String value);
+  void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Space</b></em>' containment reference.
+   * Returns the value of the '<em><b>Definition Space</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Space</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Definition Space</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Space</em>' containment reference.
-   * @see #setSpace(Space)
-   * @see org.worklang.work.WorkPackage#getFieldDefinition_Space()
+   * @return the value of the '<em>Definition Space</em>' containment reference.
+   * @see #setDefinitionSpace(DefinitionSpace)
+   * @see org.worklang.work.WorkPackage#getFieldDefinition_DefinitionSpace()
    * @model containment="true"
    * @generated
    */
-  Space getSpace();
+  DefinitionSpace getDefinitionSpace();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.FieldDefinition#getSpace <em>Space</em>}' containment reference.
+   * Sets the value of the '{@link org.worklang.work.FieldDefinition#getDefinitionSpace <em>Definition Space</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Space</em>' containment reference.
-   * @see #getSpace()
+   * @param value the new value of the '<em>Definition Space</em>' containment reference.
+   * @see #getDefinitionSpace()
    * @generated
    */
-  void setSpace(Space value);
+  void setDefinitionSpace(DefinitionSpace value);
 
   /**
-   * Returns the value of the '<em><b>Extends</b></em>' containment reference.
+   * Returns the value of the '<em><b>Reference Space</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Extends</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Reference Space</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Extends</em>' containment reference.
-   * @see #setExtends(ExtendsDefinition)
-   * @see org.worklang.work.WorkPackage#getFieldDefinition_Extends()
+   * @return the value of the '<em>Reference Space</em>' containment reference.
+   * @see #setReferenceSpace(ReferenceSpace)
+   * @see org.worklang.work.WorkPackage#getFieldDefinition_ReferenceSpace()
    * @model containment="true"
    * @generated
    */
-  ExtendsDefinition getExtends();
+  ReferenceSpace getReferenceSpace();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.FieldDefinition#getExtends <em>Extends</em>}' containment reference.
+   * Sets the value of the '{@link org.worklang.work.FieldDefinition#getReferenceSpace <em>Reference Space</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Extends</em>' containment reference.
-   * @see #getExtends()
+   * @param value the new value of the '<em>Reference Space</em>' containment reference.
+   * @see #getReferenceSpace()
    * @generated
    */
-  void setExtends(ExtendsDefinition value);
+  void setReferenceSpace(ReferenceSpace value);
 
   /**
-   * Returns the value of the '<em><b>Conceptualspace</b></em>' containment reference.
+   * Returns the value of the '<em><b>Map Space</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Conceptualspace</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Map Space</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Conceptualspace</em>' containment reference.
-   * @see #setConceptualspace(Namespace)
-   * @see org.worklang.work.WorkPackage#getFieldDefinition_Conceptualspace()
+   * @return the value of the '<em>Map Space</em>' containment reference.
+   * @see #setMapSpace(MapSpace)
+   * @see org.worklang.work.WorkPackage#getFieldDefinition_MapSpace()
    * @model containment="true"
    * @generated
    */
-  Namespace getConceptualspace();
+  MapSpace getMapSpace();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.FieldDefinition#getConceptualspace <em>Conceptualspace</em>}' containment reference.
+   * Sets the value of the '{@link org.worklang.work.FieldDefinition#getMapSpace <em>Map Space</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Conceptualspace</em>' containment reference.
-   * @see #getConceptualspace()
+   * @param value the new value of the '<em>Map Space</em>' containment reference.
+   * @see #getMapSpace()
    * @generated
    */
-  void setConceptualspace(Namespace value);
+  void setMapSpace(MapSpace value);
 
   /**
-   * Returns the value of the '<em><b>Referencespace</b></em>' containment reference.
+   * Returns the value of the '<em><b>Instance Space</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Referencespace</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Instance Space</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Referencespace</em>' containment reference.
-   * @see #setReferencespace(Referencespace)
-   * @see org.worklang.work.WorkPackage#getFieldDefinition_Referencespace()
+   * @return the value of the '<em>Instance Space</em>' containment reference.
+   * @see #setInstanceSpace(InstanceSpace)
+   * @see org.worklang.work.WorkPackage#getFieldDefinition_InstanceSpace()
    * @model containment="true"
    * @generated
    */
-  Referencespace getReferencespace();
+  InstanceSpace getInstanceSpace();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.FieldDefinition#getReferencespace <em>Referencespace</em>}' containment reference.
+   * Sets the value of the '{@link org.worklang.work.FieldDefinition#getInstanceSpace <em>Instance Space</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Referencespace</em>' containment reference.
-   * @see #getReferencespace()
+   * @param value the new value of the '<em>Instance Space</em>' containment reference.
+   * @see #getInstanceSpace()
    * @generated
    */
-  void setReferencespace(Referencespace value);
-
-  /**
-   * Returns the value of the '<em><b>Instancespace</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Instancespace</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Instancespace</em>' containment reference.
-   * @see #setInstancespace(Instancespace)
-   * @see org.worklang.work.WorkPackage#getFieldDefinition_Instancespace()
-   * @model containment="true"
-   * @generated
-   */
-  Instancespace getInstancespace();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.FieldDefinition#getInstancespace <em>Instancespace</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Instancespace</em>' containment reference.
-   * @see #getInstancespace()
-   * @generated
-   */
-  void setInstancespace(Instancespace value);
+  void setInstanceSpace(InstanceSpace value);
 
 } // FieldDefinition

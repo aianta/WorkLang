@@ -27,8 +27,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.worklang.work.InputDefinition;
 import org.worklang.work.OutputDefinition;
 import org.worklang.work.TransitionDefinition;
-import org.worklang.work.TransitionID;
-import org.worklang.work.WithTransitionsDefinition;
 import org.worklang.work.WorkPackage;
 
 /**
@@ -39,11 +37,10 @@ import org.worklang.work.WorkPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.TransitionDefinitionImpl#getObject <em>Object</em>}</li>
- *   <li>{@link org.worklang.work.impl.TransitionDefinitionImpl#getTransition <em>Transition</em>}</li>
+ *   <li>{@link org.worklang.work.impl.TransitionDefinitionImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.worklang.work.impl.TransitionDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.worklang.work.impl.TransitionDefinitionImpl#getIn <em>In</em>}</li>
  *   <li>{@link org.worklang.work.impl.TransitionDefinitionImpl#getOut <em>Out</em>}</li>
- *   <li>{@link org.worklang.work.impl.TransitionDefinitionImpl#getComposition <em>Composition</em>}</li>
  * </ul>
  *
  * @generated
@@ -51,34 +48,44 @@ import org.worklang.work.WorkPackage;
 public class TransitionDefinitionImpl extends MinimalEObjectImpl.Container implements TransitionDefinition
 {
   /**
-   * The default value of the '{@link #getObject() <em>Object</em>}' attribute.
+   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getObject()
+   * @see #getType()
    * @generated
    * @ordered
    */
-  protected static final String OBJECT_EDEFAULT = null;
+  protected static final String TYPE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getObject() <em>Object</em>}' attribute.
+   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getObject()
+   * @see #getType()
    * @generated
    * @ordered
    */
-  protected String object = OBJECT_EDEFAULT;
+  protected String type = TYPE_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getTransition() <em>Transition</em>}' containment reference.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTransition()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected TransitionID transition;
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getIn() <em>In</em>}' containment reference.
@@ -99,16 +106,6 @@ public class TransitionDefinitionImpl extends MinimalEObjectImpl.Container imple
    * @ordered
    */
   protected OutputDefinition out;
-
-  /**
-   * The cached value of the '{@link #getComposition() <em>Composition</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getComposition()
-   * @generated
-   * @ordered
-   */
-  protected WithTransitionsDefinition composition;
 
   /**
    * <!-- begin-user-doc -->
@@ -136,9 +133,9 @@ public class TransitionDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getObject()
+  public String getType()
   {
-    return object;
+    return type;
   }
 
   /**
@@ -146,12 +143,12 @@ public class TransitionDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setObject(String newObject)
+  public void setType(String newType)
   {
-    String oldObject = object;
-    object = newObject;
+    String oldType = type;
+    type = newType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_DEFINITION__OBJECT, oldObject, object));
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_DEFINITION__TYPE, oldType, type));
   }
 
   /**
@@ -159,9 +156,9 @@ public class TransitionDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionID getTransition()
+  public String getName()
   {
-    return transition;
+    return name;
   }
 
   /**
@@ -169,37 +166,12 @@ public class TransitionDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTransition(TransitionID newTransition, NotificationChain msgs)
+  public void setName(String newName)
   {
-    TransitionID oldTransition = transition;
-    transition = newTransition;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_DEFINITION__TRANSITION, oldTransition, newTransition);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTransition(TransitionID newTransition)
-  {
-    if (newTransition != transition)
-    {
-      NotificationChain msgs = null;
-      if (transition != null)
-        msgs = ((InternalEObject)transition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.TRANSITION_DEFINITION__TRANSITION, null, msgs);
-      if (newTransition != null)
-        msgs = ((InternalEObject)newTransition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.TRANSITION_DEFINITION__TRANSITION, null, msgs);
-      msgs = basicSetTransition(newTransition, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_DEFINITION__TRANSITION, newTransition, newTransition));
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_DEFINITION__NAME, oldName, name));
   }
 
   /**
@@ -303,67 +275,15 @@ public class TransitionDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public WithTransitionsDefinition getComposition()
-  {
-    return composition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetComposition(WithTransitionsDefinition newComposition, NotificationChain msgs)
-  {
-    WithTransitionsDefinition oldComposition = composition;
-    composition = newComposition;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_DEFINITION__COMPOSITION, oldComposition, newComposition);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setComposition(WithTransitionsDefinition newComposition)
-  {
-    if (newComposition != composition)
-    {
-      NotificationChain msgs = null;
-      if (composition != null)
-        msgs = ((InternalEObject)composition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.TRANSITION_DEFINITION__COMPOSITION, null, msgs);
-      if (newComposition != null)
-        msgs = ((InternalEObject)newComposition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.TRANSITION_DEFINITION__COMPOSITION, null, msgs);
-      msgs = basicSetComposition(newComposition, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_DEFINITION__COMPOSITION, newComposition, newComposition));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
-      case WorkPackage.TRANSITION_DEFINITION__TRANSITION:
-        return basicSetTransition(null, msgs);
       case WorkPackage.TRANSITION_DEFINITION__IN:
         return basicSetIn(null, msgs);
       case WorkPackage.TRANSITION_DEFINITION__OUT:
         return basicSetOut(null, msgs);
-      case WorkPackage.TRANSITION_DEFINITION__COMPOSITION:
-        return basicSetComposition(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -378,16 +298,14 @@ public class TransitionDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case WorkPackage.TRANSITION_DEFINITION__OBJECT:
-        return getObject();
-      case WorkPackage.TRANSITION_DEFINITION__TRANSITION:
-        return getTransition();
+      case WorkPackage.TRANSITION_DEFINITION__TYPE:
+        return getType();
+      case WorkPackage.TRANSITION_DEFINITION__NAME:
+        return getName();
       case WorkPackage.TRANSITION_DEFINITION__IN:
         return getIn();
       case WorkPackage.TRANSITION_DEFINITION__OUT:
         return getOut();
-      case WorkPackage.TRANSITION_DEFINITION__COMPOSITION:
-        return getComposition();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -402,20 +320,17 @@ public class TransitionDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case WorkPackage.TRANSITION_DEFINITION__OBJECT:
-        setObject((String)newValue);
+      case WorkPackage.TRANSITION_DEFINITION__TYPE:
+        setType((String)newValue);
         return;
-      case WorkPackage.TRANSITION_DEFINITION__TRANSITION:
-        setTransition((TransitionID)newValue);
+      case WorkPackage.TRANSITION_DEFINITION__NAME:
+        setName((String)newValue);
         return;
       case WorkPackage.TRANSITION_DEFINITION__IN:
         setIn((InputDefinition)newValue);
         return;
       case WorkPackage.TRANSITION_DEFINITION__OUT:
         setOut((OutputDefinition)newValue);
-        return;
-      case WorkPackage.TRANSITION_DEFINITION__COMPOSITION:
-        setComposition((WithTransitionsDefinition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -431,20 +346,17 @@ public class TransitionDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case WorkPackage.TRANSITION_DEFINITION__OBJECT:
-        setObject(OBJECT_EDEFAULT);
+      case WorkPackage.TRANSITION_DEFINITION__TYPE:
+        setType(TYPE_EDEFAULT);
         return;
-      case WorkPackage.TRANSITION_DEFINITION__TRANSITION:
-        setTransition((TransitionID)null);
+      case WorkPackage.TRANSITION_DEFINITION__NAME:
+        setName(NAME_EDEFAULT);
         return;
       case WorkPackage.TRANSITION_DEFINITION__IN:
         setIn((InputDefinition)null);
         return;
       case WorkPackage.TRANSITION_DEFINITION__OUT:
         setOut((OutputDefinition)null);
-        return;
-      case WorkPackage.TRANSITION_DEFINITION__COMPOSITION:
-        setComposition((WithTransitionsDefinition)null);
         return;
     }
     super.eUnset(featureID);
@@ -460,16 +372,14 @@ public class TransitionDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case WorkPackage.TRANSITION_DEFINITION__OBJECT:
-        return OBJECT_EDEFAULT == null ? object != null : !OBJECT_EDEFAULT.equals(object);
-      case WorkPackage.TRANSITION_DEFINITION__TRANSITION:
-        return transition != null;
+      case WorkPackage.TRANSITION_DEFINITION__TYPE:
+        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+      case WorkPackage.TRANSITION_DEFINITION__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case WorkPackage.TRANSITION_DEFINITION__IN:
         return in != null;
       case WorkPackage.TRANSITION_DEFINITION__OUT:
         return out != null;
-      case WorkPackage.TRANSITION_DEFINITION__COMPOSITION:
-        return composition != null;
     }
     return super.eIsSet(featureID);
   }
@@ -485,8 +395,10 @@ public class TransitionDefinitionImpl extends MinimalEObjectImpl.Container imple
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (object: ");
-    result.append(object);
+    result.append(" (type: ");
+    result.append(type);
+    result.append(", name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }

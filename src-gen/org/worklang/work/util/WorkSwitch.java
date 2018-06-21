@@ -92,55 +92,6 @@ public class WorkSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case WorkPackage.INSTRUCTION:
-      {
-        Instruction instruction = (Instruction)theEObject;
-        T result = caseInstruction(instruction);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.PRACTITIONER:
-      {
-        Practitioner practitioner = (Practitioner)theEObject;
-        T result = casePractitioner(practitioner);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.EXPERT_DEFINITION:
-      {
-        ExpertDefinition expertDefinition = (ExpertDefinition)theEObject;
-        T result = caseExpertDefinition(expertDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.USER:
-      {
-        User user = (User)theEObject;
-        T result = caseUser(user);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.DOMAIN_DEFINITION:
-      {
-        DomainDefinition domainDefinition = (DomainDefinition)theEObject;
-        T result = caseDomainDefinition(domainDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.KNOWLEDGE_DEFINITION:
-      {
-        KnowledgeDefinition knowledgeDefinition = (KnowledgeDefinition)theEObject;
-        T result = caseKnowledgeDefinition(knowledgeDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.SKILLS_DEFINITION:
-      {
-        SkillsDefinition skillsDefinition = (SkillsDefinition)theEObject;
-        T result = caseSkillsDefinition(skillsDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case WorkPackage.FIELD_DEFINITION:
       {
         FieldDefinition fieldDefinition = (FieldDefinition)theEObject;
@@ -148,66 +99,31 @@ public class WorkSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case WorkPackage.SPACE:
+      case WorkPackage.MAP_SPACE:
       {
-        Space space = (Space)theEObject;
-        T result = caseSpace(space);
+        MapSpace mapSpace = (MapSpace)theEObject;
+        T result = caseMapSpace(mapSpace);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case WorkPackage.NAMESPACE:
+      case WorkPackage.STATE_MAPPING:
       {
-        Namespace namespace = (Namespace)theEObject;
-        T result = caseNamespace(namespace);
+        StateMapping stateMapping = (StateMapping)theEObject;
+        T result = caseStateMapping(stateMapping);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case WorkPackage.REFERENCESPACE:
+      case WorkPackage.TRANSITION_MAPPING:
       {
-        Referencespace referencespace = (Referencespace)theEObject;
-        T result = caseReferencespace(referencespace);
+        TransitionMapping transitionMapping = (TransitionMapping)theEObject;
+        T result = caseTransitionMapping(transitionMapping);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case WorkPackage.INSTANCESPACE:
+      case WorkPackage.DEFINITION_SPACE:
       {
-        Instancespace instancespace = (Instancespace)theEObject;
-        T result = caseInstancespace(instancespace);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.REFERENCE_FIELD:
-      {
-        ReferenceField referenceField = (ReferenceField)theEObject;
-        T result = caseReferenceField(referenceField);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.STATE_OBJECT_DEFINITION:
-      {
-        StateObjectDefinition stateObjectDefinition = (StateObjectDefinition)theEObject;
-        T result = caseStateObjectDefinition(stateObjectDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.TRANSITION_OBJECT_DEFINITION:
-      {
-        TransitionObjectDefinition transitionObjectDefinition = (TransitionObjectDefinition)theEObject;
-        T result = caseTransitionObjectDefinition(transitionObjectDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.PRIMITIVE_STATE_DEFINITION:
-      {
-        PrimitiveStateDefinition primitiveStateDefinition = (PrimitiveStateDefinition)theEObject;
-        T result = casePrimitiveStateDefinition(primitiveStateDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.COMPOUND_STATE_DEFINITION:
-      {
-        CompoundStateDefinition compoundStateDefinition = (CompoundStateDefinition)theEObject;
-        T result = caseCompoundStateDefinition(compoundStateDefinition);
+        DefinitionSpace definitionSpace = (DefinitionSpace)theEObject;
+        T result = caseDefinitionSpace(definitionSpace);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -215,14 +131,76 @@ public class WorkSwitch<T> extends Switch<T>
       {
         StateDefinition stateDefinition = (StateDefinition)theEObject;
         T result = caseStateDefinition(stateDefinition);
+        if (result == null) result = caseBinaryExpression(stateDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case WorkPackage.STATE_ID:
+      case WorkPackage.PRIMITIVE_STATE_DEFINITION:
       {
-        StateID stateID = (StateID)theEObject;
-        T result = caseStateID(stateID);
-        if (result == null) result = caseBinaryExpression(stateID);
+        PrimitiveStateDefinition primitiveStateDefinition = (PrimitiveStateDefinition)theEObject;
+        T result = casePrimitiveStateDefinition(primitiveStateDefinition);
+        if (result == null) result = caseStateDefinition(primitiveStateDefinition);
+        if (result == null) result = caseBinaryExpression(primitiveStateDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.COMPOUND_STATE_DEFINITION:
+      {
+        CompoundStateDefinition compoundStateDefinition = (CompoundStateDefinition)theEObject;
+        T result = caseCompoundStateDefinition(compoundStateDefinition);
+        if (result == null) result = caseStateDefinition(compoundStateDefinition);
+        if (result == null) result = caseBinaryExpression(compoundStateDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.TRANSITION_DEFINITION:
+      {
+        TransitionDefinition transitionDefinition = (TransitionDefinition)theEObject;
+        T result = caseTransitionDefinition(transitionDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.PRIMITIVE_TRANSITION_DEFINITION:
+      {
+        PrimitiveTransitionDefinition primitiveTransitionDefinition = (PrimitiveTransitionDefinition)theEObject;
+        T result = casePrimitiveTransitionDefinition(primitiveTransitionDefinition);
+        if (result == null) result = caseTransitionDefinition(primitiveTransitionDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.COMPOUND_TRANSITION_DEFINITION:
+      {
+        CompoundTransitionDefinition compoundTransitionDefinition = (CompoundTransitionDefinition)theEObject;
+        T result = caseCompoundTransitionDefinition(compoundTransitionDefinition);
+        if (result == null) result = caseTransitionDefinition(compoundTransitionDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.REFERENCE_SPACE:
+      {
+        ReferenceSpace referenceSpace = (ReferenceSpace)theEObject;
+        T result = caseReferenceSpace(referenceSpace);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.REFERENCE_TRANSITION:
+      {
+        ReferenceTransition referenceTransition = (ReferenceTransition)theEObject;
+        T result = caseReferenceTransition(referenceTransition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.REFERENCE_STATE:
+      {
+        ReferenceState referenceState = (ReferenceState)theEObject;
+        T result = caseReferenceState(referenceState);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.INSTANCE_SPACE:
+      {
+        InstanceSpace instanceSpace = (InstanceSpace)theEObject;
+        T result = caseInstanceSpace(instanceSpace);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -240,42 +218,6 @@ public class WorkSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case WorkPackage.REFERENCE_STATE:
-      {
-        ReferenceState referenceState = (ReferenceState)theEObject;
-        T result = caseReferenceState(referenceState);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.TRANSITION_DEFINITION:
-      {
-        TransitionDefinition transitionDefinition = (TransitionDefinition)theEObject;
-        T result = caseTransitionDefinition(transitionDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.TRANSITION_ID:
-      {
-        TransitionID transitionID = (TransitionID)theEObject;
-        T result = caseTransitionID(transitionID);
-        if (result == null) result = caseTransitionalExpression(transitionID);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.REFERENCE_TRANSITION:
-      {
-        ReferenceTransition referenceTransition = (ReferenceTransition)theEObject;
-        T result = caseReferenceTransition(referenceTransition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.FROM_FIELD_DEFINITION:
-      {
-        FromFieldDefinition fromFieldDefinition = (FromFieldDefinition)theEObject;
-        T result = caseFromFieldDefinition(fromFieldDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case WorkPackage.INPUT_DEFINITION:
       {
         InputDefinition inputDefinition = (InputDefinition)theEObject;
@@ -287,13 +229,6 @@ public class WorkSwitch<T> extends Switch<T>
       {
         OutputDefinition outputDefinition = (OutputDefinition)theEObject;
         T result = caseOutputDefinition(outputDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.EXTENDS_DEFINITION:
-      {
-        ExtendsDefinition extendsDefinition = (ExtendsDefinition)theEObject;
-        T result = caseExtendsDefinition(extendsDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -384,6 +319,14 @@ public class WorkSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case WorkPackage.TRANSITION_ID:
+      {
+        TransitionID transitionID = (TransitionID)theEObject;
+        T result = caseTransitionID(transitionID);
+        if (result == null) result = caseTransitionalExpression(transitionID);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -405,118 +348,6 @@ public class WorkSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Instruction</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Instruction</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseInstruction(Instruction object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Practitioner</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Practitioner</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T casePractitioner(Practitioner object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Expert Definition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Expert Definition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseExpertDefinition(ExpertDefinition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>User</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>User</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseUser(User object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Domain Definition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Domain Definition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseDomainDefinition(DomainDefinition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Knowledge Definition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Knowledge Definition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseKnowledgeDefinition(KnowledgeDefinition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Skills Definition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Skills Definition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSkillsDefinition(SkillsDefinition object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Field Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -533,113 +364,81 @@ public class WorkSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Space</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Map Space</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Space</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Map Space</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseSpace(Space object)
+  public T caseMapSpace(MapSpace object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Namespace</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>State Mapping</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Namespace</em>'.
+   * @return the result of interpreting the object as an instance of '<em>State Mapping</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseNamespace(Namespace object)
+  public T caseStateMapping(StateMapping object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Referencespace</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Transition Mapping</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Referencespace</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Transition Mapping</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseReferencespace(Referencespace object)
+  public T caseTransitionMapping(TransitionMapping object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Instancespace</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Definition Space</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Instancespace</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Definition Space</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseInstancespace(Instancespace object)
+  public T caseDefinitionSpace(DefinitionSpace object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Reference Field</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>State Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Reference Field</em>'.
+   * @return the result of interpreting the object as an instance of '<em>State Definition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseReferenceField(ReferenceField object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>State Object Definition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>State Object Definition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseStateObjectDefinition(StateObjectDefinition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Transition Object Definition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Transition Object Definition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTransitionObjectDefinition(TransitionObjectDefinition object)
+  public T caseStateDefinition(StateDefinition object)
   {
     return null;
   }
@@ -677,33 +476,113 @@ public class WorkSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>State Definition</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Transition Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>State Definition</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Transition Definition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseStateDefinition(StateDefinition object)
+  public T caseTransitionDefinition(TransitionDefinition object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>State ID</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Primitive Transition Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>State ID</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Primitive Transition Definition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseStateID(StateID object)
+  public T casePrimitiveTransitionDefinition(PrimitiveTransitionDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Compound Transition Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Compound Transition Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCompoundTransitionDefinition(CompoundTransitionDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Reference Space</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Reference Space</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseReferenceSpace(ReferenceSpace object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Reference Transition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Reference Transition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseReferenceTransition(ReferenceTransition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Reference State</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Reference State</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseReferenceState(ReferenceState object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Instance Space</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Instance Space</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInstanceSpace(InstanceSpace object)
   {
     return null;
   }
@@ -741,86 +620,6 @@ public class WorkSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Reference State</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Reference State</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseReferenceState(ReferenceState object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Transition Definition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Transition Definition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTransitionDefinition(TransitionDefinition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Transition ID</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Transition ID</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTransitionID(TransitionID object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Reference Transition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Reference Transition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseReferenceTransition(ReferenceTransition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>From Field Definition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>From Field Definition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseFromFieldDefinition(FromFieldDefinition object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Input Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -848,22 +647,6 @@ public class WorkSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseOutputDefinition(OutputDefinition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Extends Definition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Extends Definition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseExtendsDefinition(ExtendsDefinition object)
   {
     return null;
   }
@@ -1056,6 +839,22 @@ public class WorkSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseOperation(Operation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Transition ID</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Transition ID</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTransitionID(TransitionID object)
   {
     return null;
   }

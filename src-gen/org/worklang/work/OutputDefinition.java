@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.OutputDefinition#getOutput <em>Output</em>}</li>
  *   <li>{@link org.worklang.work.OutputDefinition#getOutputState <em>Output State</em>}</li>
  * </ul>
  *
@@ -37,32 +36,6 @@ import org.eclipse.emf.ecore.EObject;
 public interface OutputDefinition extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Output</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Output</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Output</em>' attribute.
-   * @see #setOutput(String)
-   * @see org.worklang.work.WorkPackage#getOutputDefinition_Output()
-   * @model
-   * @generated
-   */
-  String getOutput();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.OutputDefinition#getOutput <em>Output</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Output</em>' attribute.
-   * @see #getOutput()
-   * @generated
-   */
-  void setOutput(String value);
-
-  /**
    * Returns the value of the '<em><b>Output State</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
@@ -71,12 +44,12 @@ public interface OutputDefinition extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Output State</em>' reference.
-   * @see #setOutputState(StateID)
+   * @see #setOutputState(StateDefinition)
    * @see org.worklang.work.WorkPackage#getOutputDefinition_OutputState()
    * @model
    * @generated
    */
-  StateID getOutputState();
+  StateDefinition getOutputState();
 
   /**
    * Sets the value of the '{@link org.worklang.work.OutputDefinition#getOutputState <em>Output State</em>}' reference.
@@ -86,6 +59,6 @@ public interface OutputDefinition extends EObject
    * @see #getOutputState()
    * @generated
    */
-  void setOutputState(StateID value);
+  void setOutputState(StateDefinition value);
 
 } // OutputDefinition

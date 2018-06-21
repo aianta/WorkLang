@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.WithTransitionsDefinition#getComposition <em>Composition</em>}</li>
  *   <li>{@link org.worklang.work.WithTransitionsDefinition#getTransitions <em>Transitions</em>}</li>
  * </ul>
  *
@@ -36,32 +35,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface WithTransitionsDefinition extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Composition</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Composition</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Composition</em>' attribute.
-   * @see #setComposition(String)
-   * @see org.worklang.work.WorkPackage#getWithTransitionsDefinition_Composition()
-   * @model
-   * @generated
-   */
-  String getComposition();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.WithTransitionsDefinition#getComposition <em>Composition</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Composition</em>' attribute.
-   * @see #getComposition()
-   * @generated
-   */
-  void setComposition(String value);
-
   /**
    * Returns the value of the '<em><b>Transitions</b></em>' containment reference.
    * <!-- begin-user-doc -->

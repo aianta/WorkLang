@@ -29,9 +29,6 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.worklang.work.Model#getFields <em>Fields</em>}</li>
- *   <li>{@link org.worklang.work.Model#getExperts <em>Experts</em>}</li>
- *   <li>{@link org.worklang.work.Model#getPractitioners <em>Practitioners</em>}</li>
- *   <li>{@link org.worklang.work.Model#getInstructions <em>Instructions</em>}</li>
  * </ul>
  *
  * @see org.worklang.work.WorkPackage#getModel()
@@ -55,53 +52,5 @@ public interface Model extends EObject
    * @generated
    */
   EList<FieldDefinition> getFields();
-
-  /**
-   * Returns the value of the '<em><b>Experts</b></em>' containment reference list.
-   * The list contents are of type {@link org.worklang.work.ExpertDefinition}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Experts</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Experts</em>' containment reference list.
-   * @see org.worklang.work.WorkPackage#getModel_Experts()
-   * @model containment="true"
-   * @generated
-   */
-  EList<ExpertDefinition> getExperts();
-
-  /**
-   * Returns the value of the '<em><b>Practitioners</b></em>' containment reference list.
-   * The list contents are of type {@link org.worklang.work.Practitioner}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Practitioners</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Practitioners</em>' containment reference list.
-   * @see org.worklang.work.WorkPackage#getModel_Practitioners()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Practitioner> getPractitioners();
-
-  /**
-   * Returns the value of the '<em><b>Instructions</b></em>' containment reference list.
-   * The list contents are of type {@link org.worklang.work.Instruction}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Instructions</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Instructions</em>' containment reference list.
-   * @see org.worklang.work.WorkPackage#getModel_Instructions()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Instruction> getInstructions();
 
 } // Model

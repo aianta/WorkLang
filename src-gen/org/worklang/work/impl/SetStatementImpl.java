@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.worklang.work.SetStatement;
-import org.worklang.work.StateID;
+import org.worklang.work.StateDefinition;
 import org.worklang.work.ToDefinition;
 import org.worklang.work.WorkPackage;
 
@@ -37,7 +37,6 @@ import org.worklang.work.WorkPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.SetStatementImpl#getStatement <em>Statement</em>}</li>
  *   <li>{@link org.worklang.work.impl.SetStatementImpl#getVariable <em>Variable</em>}</li>
  *   <li>{@link org.worklang.work.impl.SetStatementImpl#getToDef <em>To Def</em>}</li>
  * </ul>
@@ -47,26 +46,6 @@ import org.worklang.work.WorkPackage;
 public class SetStatementImpl extends MinimalEObjectImpl.Container implements SetStatement
 {
   /**
-   * The default value of the '{@link #getStatement() <em>Statement</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getStatement()
-   * @generated
-   * @ordered
-   */
-  protected static final String STATEMENT_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getStatement() <em>Statement</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getStatement()
-   * @generated
-   * @ordered
-   */
-  protected String statement = STATEMENT_EDEFAULT;
-
-  /**
    * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -74,7 +53,7 @@ public class SetStatementImpl extends MinimalEObjectImpl.Container implements Se
    * @generated
    * @ordered
    */
-  protected StateID variable;
+  protected StateDefinition variable;
 
   /**
    * The cached value of the '{@link #getToDef() <em>To Def</em>}' containment reference.
@@ -112,35 +91,12 @@ public class SetStatementImpl extends MinimalEObjectImpl.Container implements Se
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getStatement()
-  {
-    return statement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setStatement(String newStatement)
-  {
-    String oldStatement = statement;
-    statement = newStatement;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.SET_STATEMENT__STATEMENT, oldStatement, statement));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public StateID getVariable()
+  public StateDefinition getVariable()
   {
     if (variable != null && variable.eIsProxy())
     {
       InternalEObject oldVariable = (InternalEObject)variable;
-      variable = (StateID)eResolveProxy(oldVariable);
+      variable = (StateDefinition)eResolveProxy(oldVariable);
       if (variable != oldVariable)
       {
         if (eNotificationRequired())
@@ -155,7 +111,7 @@ public class SetStatementImpl extends MinimalEObjectImpl.Container implements Se
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateID basicGetVariable()
+  public StateDefinition basicGetVariable()
   {
     return variable;
   }
@@ -165,9 +121,9 @@ public class SetStatementImpl extends MinimalEObjectImpl.Container implements Se
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVariable(StateID newVariable)
+  public void setVariable(StateDefinition newVariable)
   {
-    StateID oldVariable = variable;
+    StateDefinition oldVariable = variable;
     variable = newVariable;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.SET_STATEMENT__VARIABLE, oldVariable, variable));
@@ -247,8 +203,6 @@ public class SetStatementImpl extends MinimalEObjectImpl.Container implements Se
   {
     switch (featureID)
     {
-      case WorkPackage.SET_STATEMENT__STATEMENT:
-        return getStatement();
       case WorkPackage.SET_STATEMENT__VARIABLE:
         if (resolve) return getVariable();
         return basicGetVariable();
@@ -268,11 +222,8 @@ public class SetStatementImpl extends MinimalEObjectImpl.Container implements Se
   {
     switch (featureID)
     {
-      case WorkPackage.SET_STATEMENT__STATEMENT:
-        setStatement((String)newValue);
-        return;
       case WorkPackage.SET_STATEMENT__VARIABLE:
-        setVariable((StateID)newValue);
+        setVariable((StateDefinition)newValue);
         return;
       case WorkPackage.SET_STATEMENT__TO_DEF:
         setToDef((ToDefinition)newValue);
@@ -291,11 +242,8 @@ public class SetStatementImpl extends MinimalEObjectImpl.Container implements Se
   {
     switch (featureID)
     {
-      case WorkPackage.SET_STATEMENT__STATEMENT:
-        setStatement(STATEMENT_EDEFAULT);
-        return;
       case WorkPackage.SET_STATEMENT__VARIABLE:
-        setVariable((StateID)null);
+        setVariable((StateDefinition)null);
         return;
       case WorkPackage.SET_STATEMENT__TO_DEF:
         setToDef((ToDefinition)null);
@@ -314,31 +262,12 @@ public class SetStatementImpl extends MinimalEObjectImpl.Container implements Se
   {
     switch (featureID)
     {
-      case WorkPackage.SET_STATEMENT__STATEMENT:
-        return STATEMENT_EDEFAULT == null ? statement != null : !STATEMENT_EDEFAULT.equals(statement);
       case WorkPackage.SET_STATEMENT__VARIABLE:
         return variable != null;
       case WorkPackage.SET_STATEMENT__TO_DEF:
         return toDef != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (statement: ");
-    result.append(statement);
-    result.append(')');
-    return result.toString();
   }
 
 } //SetStatementImpl

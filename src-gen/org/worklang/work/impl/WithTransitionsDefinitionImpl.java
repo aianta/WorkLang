@@ -36,7 +36,6 @@ import org.worklang.work.WorkPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.WithTransitionsDefinitionImpl#getComposition <em>Composition</em>}</li>
  *   <li>{@link org.worklang.work.impl.WithTransitionsDefinitionImpl#getTransitions <em>Transitions</em>}</li>
  * </ul>
  *
@@ -44,26 +43,6 @@ import org.worklang.work.WorkPackage;
  */
 public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container implements WithTransitionsDefinition
 {
-  /**
-   * The default value of the '{@link #getComposition() <em>Composition</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getComposition()
-   * @generated
-   * @ordered
-   */
-  protected static final String COMPOSITION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getComposition() <em>Composition</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getComposition()
-   * @generated
-   * @ordered
-   */
-  protected String composition = COMPOSITION_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getTransitions() <em>Transitions</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -93,29 +72,6 @@ public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container 
   protected EClass eStaticClass()
   {
     return WorkPackage.Literals.WITH_TRANSITIONS_DEFINITION;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getComposition()
-  {
-    return composition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setComposition(String newComposition)
-  {
-    String oldComposition = composition;
-    composition = newComposition;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.WITH_TRANSITIONS_DEFINITION__COMPOSITION, oldComposition, composition));
   }
 
   /**
@@ -192,8 +148,6 @@ public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case WorkPackage.WITH_TRANSITIONS_DEFINITION__COMPOSITION:
-        return getComposition();
       case WorkPackage.WITH_TRANSITIONS_DEFINITION__TRANSITIONS:
         return getTransitions();
     }
@@ -210,9 +164,6 @@ public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case WorkPackage.WITH_TRANSITIONS_DEFINITION__COMPOSITION:
-        setComposition((String)newValue);
-        return;
       case WorkPackage.WITH_TRANSITIONS_DEFINITION__TRANSITIONS:
         setTransitions((TransitionalExpression)newValue);
         return;
@@ -230,9 +181,6 @@ public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case WorkPackage.WITH_TRANSITIONS_DEFINITION__COMPOSITION:
-        setComposition(COMPOSITION_EDEFAULT);
-        return;
       case WorkPackage.WITH_TRANSITIONS_DEFINITION__TRANSITIONS:
         setTransitions((TransitionalExpression)null);
         return;
@@ -250,29 +198,10 @@ public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case WorkPackage.WITH_TRANSITIONS_DEFINITION__COMPOSITION:
-        return COMPOSITION_EDEFAULT == null ? composition != null : !COMPOSITION_EDEFAULT.equals(composition);
       case WorkPackage.WITH_TRANSITIONS_DEFINITION__TRANSITIONS:
         return transitions != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (composition: ");
-    result.append(composition);
-    result.append(')');
-    return result.toString();
   }
 
 } //WithTransitionsDefinitionImpl

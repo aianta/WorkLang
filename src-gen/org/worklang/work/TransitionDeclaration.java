@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.TransitionDeclaration#getObjectType <em>Object Type</em>}</li>
  *   <li>{@link org.worklang.work.TransitionDeclaration#getTransition <em>Transition</em>}</li>
  * </ul>
  *
@@ -36,32 +35,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface TransitionDeclaration extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Object Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Object Type</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Object Type</em>' attribute.
-   * @see #setObjectType(String)
-   * @see org.worklang.work.WorkPackage#getTransitionDeclaration_ObjectType()
-   * @model
-   * @generated
-   */
-  String getObjectType();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.TransitionDeclaration#getObjectType <em>Object Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Object Type</em>' attribute.
-   * @see #getObjectType()
-   * @generated
-   */
-  void setObjectType(String value);
-
   /**
    * Returns the value of the '<em><b>Transition</b></em>' reference.
    * <!-- begin-user-doc -->

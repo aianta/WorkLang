@@ -21,49 +21,22 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Instancespace</b></em>'.
+ * A representation of the model object '<em><b>Instance Space</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.Instancespace#getSpaceType <em>Space Type</em>}</li>
- *   <li>{@link org.worklang.work.Instancespace#getInstances <em>Instances</em>}</li>
+ *   <li>{@link org.worklang.work.InstanceSpace#getInstances <em>Instances</em>}</li>
  * </ul>
  *
- * @see org.worklang.work.WorkPackage#getInstancespace()
+ * @see org.worklang.work.WorkPackage#getInstanceSpace()
  * @model
  * @generated
  */
-public interface Instancespace extends EObject
+public interface InstanceSpace extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Space Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Space Type</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Space Type</em>' attribute.
-   * @see #setSpaceType(String)
-   * @see org.worklang.work.WorkPackage#getInstancespace_SpaceType()
-   * @model
-   * @generated
-   */
-  String getSpaceType();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.Instancespace#getSpaceType <em>Space Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Space Type</em>' attribute.
-   * @see #getSpaceType()
-   * @generated
-   */
-  void setSpaceType(String value);
-
   /**
    * Returns the value of the '<em><b>Instances</b></em>' containment reference list.
    * The list contents are of type {@link org.worklang.work.Instance}.
@@ -74,10 +47,10 @@ public interface Instancespace extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Instances</em>' containment reference list.
-   * @see org.worklang.work.WorkPackage#getInstancespace_Instances()
+   * @see org.worklang.work.WorkPackage#getInstanceSpace_Instances()
    * @model containment="true"
    * @generated
    */
   EList<Instance> getInstances();
 
-} // Instancespace
+} // InstanceSpace

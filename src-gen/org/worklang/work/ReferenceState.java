@@ -26,11 +26,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.ReferenceState#getObject <em>Object</em>}</li>
  *   <li>{@link org.worklang.work.ReferenceState#getRefState <em>Ref State</em>}</li>
- *   <li>{@link org.worklang.work.ReferenceState#getFrom <em>From</em>}</li>
- *   <li>{@link org.worklang.work.ReferenceState#getState <em>State</em>}</li>
- *   <li>{@link org.worklang.work.ReferenceState#getComposition <em>Composition</em>}</li>
+ *   <li>{@link org.worklang.work.ReferenceState#getForeignField <em>Foreign Field</em>}</li>
  * </ul>
  *
  * @see org.worklang.work.WorkPackage#getReferenceState()
@@ -40,32 +37,6 @@ import org.eclipse.emf.ecore.EObject;
 public interface ReferenceState extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Object</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Object</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Object</em>' attribute.
-   * @see #setObject(String)
-   * @see org.worklang.work.WorkPackage#getReferenceState_Object()
-   * @model
-   * @generated
-   */
-  String getObject();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.ReferenceState#getObject <em>Object</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Object</em>' attribute.
-   * @see #getObject()
-   * @generated
-   */
-  void setObject(String value);
-
-  /**
    * Returns the value of the '<em><b>Ref State</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
@@ -74,12 +45,12 @@ public interface ReferenceState extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ref State</em>' reference.
-   * @see #setRefState(StateID)
+   * @see #setRefState(StateDefinition)
    * @see org.worklang.work.WorkPackage#getReferenceState_RefState()
    * @model
    * @generated
    */
-  StateID getRefState();
+  StateDefinition getRefState();
 
   /**
    * Sets the value of the '{@link org.worklang.work.ReferenceState#getRefState <em>Ref State</em>}' reference.
@@ -89,84 +60,32 @@ public interface ReferenceState extends EObject
    * @see #getRefState()
    * @generated
    */
-  void setRefState(StateID value);
+  void setRefState(StateDefinition value);
 
   /**
-   * Returns the value of the '<em><b>From</b></em>' containment reference.
+   * Returns the value of the '<em><b>Foreign Field</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>From</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Foreign Field</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>From</em>' containment reference.
-   * @see #setFrom(FromFieldDefinition)
-   * @see org.worklang.work.WorkPackage#getReferenceState_From()
-   * @model containment="true"
+   * @return the value of the '<em>Foreign Field</em>' reference.
+   * @see #setForeignField(FieldDefinition)
+   * @see org.worklang.work.WorkPackage#getReferenceState_ForeignField()
+   * @model
    * @generated
    */
-  FromFieldDefinition getFrom();
+  FieldDefinition getForeignField();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.ReferenceState#getFrom <em>From</em>}' containment reference.
+   * Sets the value of the '{@link org.worklang.work.ReferenceState#getForeignField <em>Foreign Field</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>From</em>' containment reference.
-   * @see #getFrom()
+   * @param value the new value of the '<em>Foreign Field</em>' reference.
+   * @see #getForeignField()
    * @generated
    */
-  void setFrom(FromFieldDefinition value);
-
-  /**
-   * Returns the value of the '<em><b>State</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>State</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>State</em>' containment reference.
-   * @see #setState(StateID)
-   * @see org.worklang.work.WorkPackage#getReferenceState_State()
-   * @model containment="true"
-   * @generated
-   */
-  StateID getState();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.ReferenceState#getState <em>State</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>State</em>' containment reference.
-   * @see #getState()
-   * @generated
-   */
-  void setState(StateID value);
-
-  /**
-   * Returns the value of the '<em><b>Composition</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Composition</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Composition</em>' containment reference.
-   * @see #setComposition(WithStatesDefinition)
-   * @see org.worklang.work.WorkPackage#getReferenceState_Composition()
-   * @model containment="true"
-   * @generated
-   */
-  WithStatesDefinition getComposition();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.ReferenceState#getComposition <em>Composition</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Composition</em>' containment reference.
-   * @see #getComposition()
-   * @generated
-   */
-  void setComposition(WithStatesDefinition value);
+  void setForeignField(FieldDefinition value);
 
 } // ReferenceState

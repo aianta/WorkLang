@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.StateDeclaration#getObjectType <em>Object Type</em>}</li>
  *   <li>{@link org.worklang.work.StateDeclaration#getState <em>State</em>}</li>
  * </ul>
  *
@@ -37,32 +36,6 @@ import org.eclipse.emf.ecore.EObject;
 public interface StateDeclaration extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Object Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Object Type</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Object Type</em>' attribute.
-   * @see #setObjectType(String)
-   * @see org.worklang.work.WorkPackage#getStateDeclaration_ObjectType()
-   * @model
-   * @generated
-   */
-  String getObjectType();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.StateDeclaration#getObjectType <em>Object Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Object Type</em>' attribute.
-   * @see #getObjectType()
-   * @generated
-   */
-  void setObjectType(String value);
-
-  /**
    * Returns the value of the '<em><b>State</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
@@ -71,12 +44,12 @@ public interface StateDeclaration extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>State</em>' reference.
-   * @see #setState(StateID)
+   * @see #setState(StateDefinition)
    * @see org.worklang.work.WorkPackage#getStateDeclaration_State()
    * @model
    * @generated
    */
-  StateID getState();
+  StateDefinition getState();
 
   /**
    * Sets the value of the '{@link org.worklang.work.StateDeclaration#getState <em>State</em>}' reference.
@@ -86,6 +59,6 @@ public interface StateDeclaration extends EObject
    * @see #getState()
    * @generated
    */
-  void setState(StateID value);
+  void setState(StateDefinition value);
 
 } // StateDeclaration

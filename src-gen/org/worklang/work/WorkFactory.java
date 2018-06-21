@@ -45,69 +45,6 @@ public interface WorkFactory extends EFactory
   Model createModel();
 
   /**
-   * Returns a new object of class '<em>Instruction</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Instruction</em>'.
-   * @generated
-   */
-  Instruction createInstruction();
-
-  /**
-   * Returns a new object of class '<em>Practitioner</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Practitioner</em>'.
-   * @generated
-   */
-  Practitioner createPractitioner();
-
-  /**
-   * Returns a new object of class '<em>Expert Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Expert Definition</em>'.
-   * @generated
-   */
-  ExpertDefinition createExpertDefinition();
-
-  /**
-   * Returns a new object of class '<em>User</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>User</em>'.
-   * @generated
-   */
-  User createUser();
-
-  /**
-   * Returns a new object of class '<em>Domain Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Domain Definition</em>'.
-   * @generated
-   */
-  DomainDefinition createDomainDefinition();
-
-  /**
-   * Returns a new object of class '<em>Knowledge Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Knowledge Definition</em>'.
-   * @generated
-   */
-  KnowledgeDefinition createKnowledgeDefinition();
-
-  /**
-   * Returns a new object of class '<em>Skills Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Skills Definition</em>'.
-   * @generated
-   */
-  SkillsDefinition createSkillsDefinition();
-
-  /**
    * Returns a new object of class '<em>Field Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -117,67 +54,49 @@ public interface WorkFactory extends EFactory
   FieldDefinition createFieldDefinition();
 
   /**
-   * Returns a new object of class '<em>Space</em>'.
+   * Returns a new object of class '<em>Map Space</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Space</em>'.
+   * @return a new object of class '<em>Map Space</em>'.
    * @generated
    */
-  Space createSpace();
+  MapSpace createMapSpace();
 
   /**
-   * Returns a new object of class '<em>Namespace</em>'.
+   * Returns a new object of class '<em>State Mapping</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Namespace</em>'.
+   * @return a new object of class '<em>State Mapping</em>'.
    * @generated
    */
-  Namespace createNamespace();
+  StateMapping createStateMapping();
 
   /**
-   * Returns a new object of class '<em>Referencespace</em>'.
+   * Returns a new object of class '<em>Transition Mapping</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Referencespace</em>'.
+   * @return a new object of class '<em>Transition Mapping</em>'.
    * @generated
    */
-  Referencespace createReferencespace();
+  TransitionMapping createTransitionMapping();
 
   /**
-   * Returns a new object of class '<em>Instancespace</em>'.
+   * Returns a new object of class '<em>Definition Space</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Instancespace</em>'.
+   * @return a new object of class '<em>Definition Space</em>'.
    * @generated
    */
-  Instancespace createInstancespace();
+  DefinitionSpace createDefinitionSpace();
 
   /**
-   * Returns a new object of class '<em>Reference Field</em>'.
+   * Returns a new object of class '<em>State Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Reference Field</em>'.
+   * @return a new object of class '<em>State Definition</em>'.
    * @generated
    */
-  ReferenceField createReferenceField();
-
-  /**
-   * Returns a new object of class '<em>State Object Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>State Object Definition</em>'.
-   * @generated
-   */
-  StateObjectDefinition createStateObjectDefinition();
-
-  /**
-   * Returns a new object of class '<em>Transition Object Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Transition Object Definition</em>'.
-   * @generated
-   */
-  TransitionObjectDefinition createTransitionObjectDefinition();
+  StateDefinition createStateDefinition();
 
   /**
    * Returns a new object of class '<em>Primitive State Definition</em>'.
@@ -198,22 +117,67 @@ public interface WorkFactory extends EFactory
   CompoundStateDefinition createCompoundStateDefinition();
 
   /**
-   * Returns a new object of class '<em>State Definition</em>'.
+   * Returns a new object of class '<em>Transition Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>State Definition</em>'.
+   * @return a new object of class '<em>Transition Definition</em>'.
    * @generated
    */
-  StateDefinition createStateDefinition();
+  TransitionDefinition createTransitionDefinition();
 
   /**
-   * Returns a new object of class '<em>State ID</em>'.
+   * Returns a new object of class '<em>Primitive Transition Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>State ID</em>'.
+   * @return a new object of class '<em>Primitive Transition Definition</em>'.
    * @generated
    */
-  StateID createStateID();
+  PrimitiveTransitionDefinition createPrimitiveTransitionDefinition();
+
+  /**
+   * Returns a new object of class '<em>Compound Transition Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Compound Transition Definition</em>'.
+   * @generated
+   */
+  CompoundTransitionDefinition createCompoundTransitionDefinition();
+
+  /**
+   * Returns a new object of class '<em>Reference Space</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Reference Space</em>'.
+   * @generated
+   */
+  ReferenceSpace createReferenceSpace();
+
+  /**
+   * Returns a new object of class '<em>Reference Transition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Reference Transition</em>'.
+   * @generated
+   */
+  ReferenceTransition createReferenceTransition();
+
+  /**
+   * Returns a new object of class '<em>Reference State</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Reference State</em>'.
+   * @generated
+   */
+  ReferenceState createReferenceState();
+
+  /**
+   * Returns a new object of class '<em>Instance Space</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Instance Space</em>'.
+   * @generated
+   */
+  InstanceSpace createInstanceSpace();
 
   /**
    * Returns a new object of class '<em>With States Definition</em>'.
@@ -234,51 +198,6 @@ public interface WorkFactory extends EFactory
   WithTransitionsDefinition createWithTransitionsDefinition();
 
   /**
-   * Returns a new object of class '<em>Reference State</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Reference State</em>'.
-   * @generated
-   */
-  ReferenceState createReferenceState();
-
-  /**
-   * Returns a new object of class '<em>Transition Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Transition Definition</em>'.
-   * @generated
-   */
-  TransitionDefinition createTransitionDefinition();
-
-  /**
-   * Returns a new object of class '<em>Transition ID</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Transition ID</em>'.
-   * @generated
-   */
-  TransitionID createTransitionID();
-
-  /**
-   * Returns a new object of class '<em>Reference Transition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Reference Transition</em>'.
-   * @generated
-   */
-  ReferenceTransition createReferenceTransition();
-
-  /**
-   * Returns a new object of class '<em>From Field Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>From Field Definition</em>'.
-   * @generated
-   */
-  FromFieldDefinition createFromFieldDefinition();
-
-  /**
    * Returns a new object of class '<em>Input Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -295,15 +214,6 @@ public interface WorkFactory extends EFactory
    * @generated
    */
   OutputDefinition createOutputDefinition();
-
-  /**
-   * Returns a new object of class '<em>Extends Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Extends Definition</em>'.
-   * @generated
-   */
-  ExtendsDefinition createExtendsDefinition();
 
   /**
    * Returns a new object of class '<em>Instance</em>'.
@@ -412,6 +322,15 @@ public interface WorkFactory extends EFactory
    * @generated
    */
   Operation createOperation();
+
+  /**
+   * Returns a new object of class '<em>Transition ID</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Transition ID</em>'.
+   * @generated
+   */
+  TransitionID createTransitionID();
 
   /**
    * Returns the package supported by this factory.

@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.worklang.work.OutputDefinition;
-import org.worklang.work.StateID;
+import org.worklang.work.StateDefinition;
 import org.worklang.work.WorkPackage;
 
 /**
@@ -35,7 +35,6 @@ import org.worklang.work.WorkPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.OutputDefinitionImpl#getOutput <em>Output</em>}</li>
  *   <li>{@link org.worklang.work.impl.OutputDefinitionImpl#getOutputState <em>Output State</em>}</li>
  * </ul>
  *
@@ -44,26 +43,6 @@ import org.worklang.work.WorkPackage;
 public class OutputDefinitionImpl extends MinimalEObjectImpl.Container implements OutputDefinition
 {
   /**
-   * The default value of the '{@link #getOutput() <em>Output</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOutput()
-   * @generated
-   * @ordered
-   */
-  protected static final String OUTPUT_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getOutput() <em>Output</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOutput()
-   * @generated
-   * @ordered
-   */
-  protected String output = OUTPUT_EDEFAULT;
-
-  /**
    * The cached value of the '{@link #getOutputState() <em>Output State</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -71,7 +50,7 @@ public class OutputDefinitionImpl extends MinimalEObjectImpl.Container implement
    * @generated
    * @ordered
    */
-  protected StateID outputState;
+  protected StateDefinition outputState;
 
   /**
    * <!-- begin-user-doc -->
@@ -99,35 +78,12 @@ public class OutputDefinitionImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getOutput()
-  {
-    return output;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setOutput(String newOutput)
-  {
-    String oldOutput = output;
-    output = newOutput;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.OUTPUT_DEFINITION__OUTPUT, oldOutput, output));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public StateID getOutputState()
+  public StateDefinition getOutputState()
   {
     if (outputState != null && outputState.eIsProxy())
     {
       InternalEObject oldOutputState = (InternalEObject)outputState;
-      outputState = (StateID)eResolveProxy(oldOutputState);
+      outputState = (StateDefinition)eResolveProxy(oldOutputState);
       if (outputState != oldOutputState)
       {
         if (eNotificationRequired())
@@ -142,7 +98,7 @@ public class OutputDefinitionImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateID basicGetOutputState()
+  public StateDefinition basicGetOutputState()
   {
     return outputState;
   }
@@ -152,9 +108,9 @@ public class OutputDefinitionImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOutputState(StateID newOutputState)
+  public void setOutputState(StateDefinition newOutputState)
   {
-    StateID oldOutputState = outputState;
+    StateDefinition oldOutputState = outputState;
     outputState = newOutputState;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.OUTPUT_DEFINITION__OUTPUT_STATE, oldOutputState, outputState));
@@ -170,8 +126,6 @@ public class OutputDefinitionImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case WorkPackage.OUTPUT_DEFINITION__OUTPUT:
-        return getOutput();
       case WorkPackage.OUTPUT_DEFINITION__OUTPUT_STATE:
         if (resolve) return getOutputState();
         return basicGetOutputState();
@@ -189,11 +143,8 @@ public class OutputDefinitionImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case WorkPackage.OUTPUT_DEFINITION__OUTPUT:
-        setOutput((String)newValue);
-        return;
       case WorkPackage.OUTPUT_DEFINITION__OUTPUT_STATE:
-        setOutputState((StateID)newValue);
+        setOutputState((StateDefinition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -209,11 +160,8 @@ public class OutputDefinitionImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case WorkPackage.OUTPUT_DEFINITION__OUTPUT:
-        setOutput(OUTPUT_EDEFAULT);
-        return;
       case WorkPackage.OUTPUT_DEFINITION__OUTPUT_STATE:
-        setOutputState((StateID)null);
+        setOutputState((StateDefinition)null);
         return;
     }
     super.eUnset(featureID);
@@ -229,29 +177,10 @@ public class OutputDefinitionImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case WorkPackage.OUTPUT_DEFINITION__OUTPUT:
-        return OUTPUT_EDEFAULT == null ? output != null : !OUTPUT_EDEFAULT.equals(output);
       case WorkPackage.OUTPUT_DEFINITION__OUTPUT_STATE:
         return outputState != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (output: ");
-    result.append(output);
-    result.append(')');
-    return result.toString();
   }
 
 } //OutputDefinitionImpl

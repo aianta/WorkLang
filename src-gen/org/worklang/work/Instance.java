@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.Instance#getInstanceDef <em>Instance Def</em>}</li>
  *   <li>{@link org.worklang.work.Instance#getTransitionDeclaration <em>Transition Declaration</em>}</li>
  *   <li>{@link org.worklang.work.Instance#getStateDeclaration <em>State Declaration</em>}</li>
  *   <li>{@link org.worklang.work.Instance#getName <em>Name</em>}</li>
@@ -40,32 +39,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Instance extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Instance Def</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Instance Def</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Instance Def</em>' attribute.
-   * @see #setInstanceDef(String)
-   * @see org.worklang.work.WorkPackage#getInstance_InstanceDef()
-   * @model
-   * @generated
-   */
-  String getInstanceDef();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.Instance#getInstanceDef <em>Instance Def</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Instance Def</em>' attribute.
-   * @see #getInstanceDef()
-   * @generated
-   */
-  void setInstanceDef(String value);
-
   /**
    * Returns the value of the '<em><b>Transition Declaration</b></em>' containment reference.
    * <!-- begin-user-doc -->

@@ -17,7 +17,6 @@ package org.worklang.work.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -25,52 +24,30 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.worklang.work.Instance;
-import org.worklang.work.Instancespace;
+import org.worklang.work.InstanceSpace;
 import org.worklang.work.WorkPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Instancespace</b></em>'.
+ * An implementation of the model object '<em><b>Instance Space</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.InstancespaceImpl#getSpaceType <em>Space Type</em>}</li>
- *   <li>{@link org.worklang.work.impl.InstancespaceImpl#getInstances <em>Instances</em>}</li>
+ *   <li>{@link org.worklang.work.impl.InstanceSpaceImpl#getInstances <em>Instances</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class InstancespaceImpl extends MinimalEObjectImpl.Container implements Instancespace
+public class InstanceSpaceImpl extends MinimalEObjectImpl.Container implements InstanceSpace
 {
-  /**
-   * The default value of the '{@link #getSpaceType() <em>Space Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSpaceType()
-   * @generated
-   * @ordered
-   */
-  protected static final String SPACE_TYPE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getSpaceType() <em>Space Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSpaceType()
-   * @generated
-   * @ordered
-   */
-  protected String spaceType = SPACE_TYPE_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getInstances() <em>Instances</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -86,7 +63,7 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
    * <!-- end-user-doc -->
    * @generated
    */
-  protected InstancespaceImpl()
+  protected InstanceSpaceImpl()
   {
     super();
   }
@@ -99,30 +76,7 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
   @Override
   protected EClass eStaticClass()
   {
-    return WorkPackage.Literals.INSTANCESPACE;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getSpaceType()
-  {
-    return spaceType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setSpaceType(String newSpaceType)
-  {
-    String oldSpaceType = spaceType;
-    spaceType = newSpaceType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCESPACE__SPACE_TYPE, oldSpaceType, spaceType));
+    return WorkPackage.Literals.INSTANCE_SPACE;
   }
 
   /**
@@ -134,7 +88,7 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
   {
     if (instances == null)
     {
-      instances = new EObjectContainmentEList<Instance>(Instance.class, this, WorkPackage.INSTANCESPACE__INSTANCES);
+      instances = new EObjectContainmentEList<Instance>(Instance.class, this, WorkPackage.INSTANCE_SPACE__INSTANCES);
     }
     return instances;
   }
@@ -149,7 +103,7 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCESPACE__INSTANCES:
+      case WorkPackage.INSTANCE_SPACE__INSTANCES:
         return ((InternalEList<?>)getInstances()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -165,9 +119,7 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCESPACE__SPACE_TYPE:
-        return getSpaceType();
-      case WorkPackage.INSTANCESPACE__INSTANCES:
+      case WorkPackage.INSTANCE_SPACE__INSTANCES:
         return getInstances();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -184,10 +136,7 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCESPACE__SPACE_TYPE:
-        setSpaceType((String)newValue);
-        return;
-      case WorkPackage.INSTANCESPACE__INSTANCES:
+      case WorkPackage.INSTANCE_SPACE__INSTANCES:
         getInstances().clear();
         getInstances().addAll((Collection<? extends Instance>)newValue);
         return;
@@ -205,10 +154,7 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCESPACE__SPACE_TYPE:
-        setSpaceType(SPACE_TYPE_EDEFAULT);
-        return;
-      case WorkPackage.INSTANCESPACE__INSTANCES:
+      case WorkPackage.INSTANCE_SPACE__INSTANCES:
         getInstances().clear();
         return;
     }
@@ -225,29 +171,10 @@ public class InstancespaceImpl extends MinimalEObjectImpl.Container implements I
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCESPACE__SPACE_TYPE:
-        return SPACE_TYPE_EDEFAULT == null ? spaceType != null : !SPACE_TYPE_EDEFAULT.equals(spaceType);
-      case WorkPackage.INSTANCESPACE__INSTANCES:
+      case WorkPackage.INSTANCE_SPACE__INSTANCES:
         return instances != null && !instances.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (spaceType: ");
-    result.append(spaceType);
-    result.append(')');
-    return result.toString();
-  }
-
-} //InstancespaceImpl
+} //InstanceSpaceImpl

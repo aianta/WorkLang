@@ -78,35 +78,25 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
     switch (eClass.getClassifierID())
     {
       case WorkPackage.MODEL: return createModel();
-      case WorkPackage.INSTRUCTION: return createInstruction();
-      case WorkPackage.PRACTITIONER: return createPractitioner();
-      case WorkPackage.EXPERT_DEFINITION: return createExpertDefinition();
-      case WorkPackage.USER: return createUser();
-      case WorkPackage.DOMAIN_DEFINITION: return createDomainDefinition();
-      case WorkPackage.KNOWLEDGE_DEFINITION: return createKnowledgeDefinition();
-      case WorkPackage.SKILLS_DEFINITION: return createSkillsDefinition();
       case WorkPackage.FIELD_DEFINITION: return createFieldDefinition();
-      case WorkPackage.SPACE: return createSpace();
-      case WorkPackage.NAMESPACE: return createNamespace();
-      case WorkPackage.REFERENCESPACE: return createReferencespace();
-      case WorkPackage.INSTANCESPACE: return createInstancespace();
-      case WorkPackage.REFERENCE_FIELD: return createReferenceField();
-      case WorkPackage.STATE_OBJECT_DEFINITION: return createStateObjectDefinition();
-      case WorkPackage.TRANSITION_OBJECT_DEFINITION: return createTransitionObjectDefinition();
+      case WorkPackage.MAP_SPACE: return createMapSpace();
+      case WorkPackage.STATE_MAPPING: return createStateMapping();
+      case WorkPackage.TRANSITION_MAPPING: return createTransitionMapping();
+      case WorkPackage.DEFINITION_SPACE: return createDefinitionSpace();
+      case WorkPackage.STATE_DEFINITION: return createStateDefinition();
       case WorkPackage.PRIMITIVE_STATE_DEFINITION: return createPrimitiveStateDefinition();
       case WorkPackage.COMPOUND_STATE_DEFINITION: return createCompoundStateDefinition();
-      case WorkPackage.STATE_DEFINITION: return createStateDefinition();
-      case WorkPackage.STATE_ID: return createStateID();
+      case WorkPackage.TRANSITION_DEFINITION: return createTransitionDefinition();
+      case WorkPackage.PRIMITIVE_TRANSITION_DEFINITION: return createPrimitiveTransitionDefinition();
+      case WorkPackage.COMPOUND_TRANSITION_DEFINITION: return createCompoundTransitionDefinition();
+      case WorkPackage.REFERENCE_SPACE: return createReferenceSpace();
+      case WorkPackage.REFERENCE_TRANSITION: return createReferenceTransition();
+      case WorkPackage.REFERENCE_STATE: return createReferenceState();
+      case WorkPackage.INSTANCE_SPACE: return createInstanceSpace();
       case WorkPackage.WITH_STATES_DEFINITION: return createWithStatesDefinition();
       case WorkPackage.WITH_TRANSITIONS_DEFINITION: return createWithTransitionsDefinition();
-      case WorkPackage.REFERENCE_STATE: return createReferenceState();
-      case WorkPackage.TRANSITION_DEFINITION: return createTransitionDefinition();
-      case WorkPackage.TRANSITION_ID: return createTransitionID();
-      case WorkPackage.REFERENCE_TRANSITION: return createReferenceTransition();
-      case WorkPackage.FROM_FIELD_DEFINITION: return createFromFieldDefinition();
       case WorkPackage.INPUT_DEFINITION: return createInputDefinition();
       case WorkPackage.OUTPUT_DEFINITION: return createOutputDefinition();
-      case WorkPackage.EXTENDS_DEFINITION: return createExtendsDefinition();
       case WorkPackage.INSTANCE: return createInstance();
       case WorkPackage.TRANSITION_DECLARATION: return createTransitionDeclaration();
       case WorkPackage.STATE_DECLARATION: return createStateDeclaration();
@@ -119,6 +109,7 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
       case WorkPackage.BINARY_EXPRESSION: return createBinaryExpression();
       case WorkPackage.TRANSITIONAL_EXPRESSION: return createTransitionalExpression();
       case WorkPackage.OPERATION: return createOperation();
+      case WorkPackage.TRANSITION_ID: return createTransitionID();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -140,83 +131,6 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Instruction createInstruction()
-  {
-    InstructionImpl instruction = new InstructionImpl();
-    return instruction;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Practitioner createPractitioner()
-  {
-    PractitionerImpl practitioner = new PractitionerImpl();
-    return practitioner;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpertDefinition createExpertDefinition()
-  {
-    ExpertDefinitionImpl expertDefinition = new ExpertDefinitionImpl();
-    return expertDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public User createUser()
-  {
-    UserImpl user = new UserImpl();
-    return user;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DomainDefinition createDomainDefinition()
-  {
-    DomainDefinitionImpl domainDefinition = new DomainDefinitionImpl();
-    return domainDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public KnowledgeDefinition createKnowledgeDefinition()
-  {
-    KnowledgeDefinitionImpl knowledgeDefinition = new KnowledgeDefinitionImpl();
-    return knowledgeDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public SkillsDefinition createSkillsDefinition()
-  {
-    SkillsDefinitionImpl skillsDefinition = new SkillsDefinitionImpl();
-    return skillsDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public FieldDefinition createFieldDefinition()
   {
     FieldDefinitionImpl fieldDefinition = new FieldDefinitionImpl();
@@ -228,10 +142,10 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Space createSpace()
+  public MapSpace createMapSpace()
   {
-    SpaceImpl space = new SpaceImpl();
-    return space;
+    MapSpaceImpl mapSpace = new MapSpaceImpl();
+    return mapSpace;
   }
 
   /**
@@ -239,10 +153,10 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Namespace createNamespace()
+  public StateMapping createStateMapping()
   {
-    NamespaceImpl namespace = new NamespaceImpl();
-    return namespace;
+    StateMappingImpl stateMapping = new StateMappingImpl();
+    return stateMapping;
   }
 
   /**
@@ -250,10 +164,10 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Referencespace createReferencespace()
+  public TransitionMapping createTransitionMapping()
   {
-    ReferencespaceImpl referencespace = new ReferencespaceImpl();
-    return referencespace;
+    TransitionMappingImpl transitionMapping = new TransitionMappingImpl();
+    return transitionMapping;
   }
 
   /**
@@ -261,10 +175,10 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Instancespace createInstancespace()
+  public DefinitionSpace createDefinitionSpace()
   {
-    InstancespaceImpl instancespace = new InstancespaceImpl();
-    return instancespace;
+    DefinitionSpaceImpl definitionSpace = new DefinitionSpaceImpl();
+    return definitionSpace;
   }
 
   /**
@@ -272,32 +186,10 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ReferenceField createReferenceField()
+  public StateDefinition createStateDefinition()
   {
-    ReferenceFieldImpl referenceField = new ReferenceFieldImpl();
-    return referenceField;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public StateObjectDefinition createStateObjectDefinition()
-  {
-    StateObjectDefinitionImpl stateObjectDefinition = new StateObjectDefinitionImpl();
-    return stateObjectDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TransitionObjectDefinition createTransitionObjectDefinition()
-  {
-    TransitionObjectDefinitionImpl transitionObjectDefinition = new TransitionObjectDefinitionImpl();
-    return transitionObjectDefinition;
+    StateDefinitionImpl stateDefinition = new StateDefinitionImpl();
+    return stateDefinition;
   }
 
   /**
@@ -327,10 +219,10 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateDefinition createStateDefinition()
+  public TransitionDefinition createTransitionDefinition()
   {
-    StateDefinitionImpl stateDefinition = new StateDefinitionImpl();
-    return stateDefinition;
+    TransitionDefinitionImpl transitionDefinition = new TransitionDefinitionImpl();
+    return transitionDefinition;
   }
 
   /**
@@ -338,10 +230,65 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateID createStateID()
+  public PrimitiveTransitionDefinition createPrimitiveTransitionDefinition()
   {
-    StateIDImpl stateID = new StateIDImpl();
-    return stateID;
+    PrimitiveTransitionDefinitionImpl primitiveTransitionDefinition = new PrimitiveTransitionDefinitionImpl();
+    return primitiveTransitionDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CompoundTransitionDefinition createCompoundTransitionDefinition()
+  {
+    CompoundTransitionDefinitionImpl compoundTransitionDefinition = new CompoundTransitionDefinitionImpl();
+    return compoundTransitionDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ReferenceSpace createReferenceSpace()
+  {
+    ReferenceSpaceImpl referenceSpace = new ReferenceSpaceImpl();
+    return referenceSpace;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ReferenceTransition createReferenceTransition()
+  {
+    ReferenceTransitionImpl referenceTransition = new ReferenceTransitionImpl();
+    return referenceTransition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ReferenceState createReferenceState()
+  {
+    ReferenceStateImpl referenceState = new ReferenceStateImpl();
+    return referenceState;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InstanceSpace createInstanceSpace()
+  {
+    InstanceSpaceImpl instanceSpace = new InstanceSpaceImpl();
+    return instanceSpace;
   }
 
   /**
@@ -371,61 +318,6 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ReferenceState createReferenceState()
-  {
-    ReferenceStateImpl referenceState = new ReferenceStateImpl();
-    return referenceState;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TransitionDefinition createTransitionDefinition()
-  {
-    TransitionDefinitionImpl transitionDefinition = new TransitionDefinitionImpl();
-    return transitionDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TransitionID createTransitionID()
-  {
-    TransitionIDImpl transitionID = new TransitionIDImpl();
-    return transitionID;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ReferenceTransition createReferenceTransition()
-  {
-    ReferenceTransitionImpl referenceTransition = new ReferenceTransitionImpl();
-    return referenceTransition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public FromFieldDefinition createFromFieldDefinition()
-  {
-    FromFieldDefinitionImpl fromFieldDefinition = new FromFieldDefinitionImpl();
-    return fromFieldDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public InputDefinition createInputDefinition()
   {
     InputDefinitionImpl inputDefinition = new InputDefinitionImpl();
@@ -441,17 +333,6 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
   {
     OutputDefinitionImpl outputDefinition = new OutputDefinitionImpl();
     return outputDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExtendsDefinition createExtendsDefinition()
-  {
-    ExtendsDefinitionImpl extendsDefinition = new ExtendsDefinitionImpl();
-    return extendsDefinition;
   }
 
   /**
@@ -584,6 +465,17 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
   {
     OperationImpl operation = new OperationImpl();
     return operation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TransitionID createTransitionID()
+  {
+    TransitionIDImpl transitionID = new TransitionIDImpl();
+    return transitionID;
   }
 
   /**

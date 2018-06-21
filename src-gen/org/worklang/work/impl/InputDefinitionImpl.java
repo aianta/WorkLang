@@ -17,19 +17,16 @@ package org.worklang.work.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.worklang.work.InputDefinition;
-import org.worklang.work.StateID;
+import org.worklang.work.StateDefinition;
 import org.worklang.work.WorkPackage;
 
 /**
@@ -40,7 +37,6 @@ import org.worklang.work.WorkPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.InputDefinitionImpl#getInput <em>Input</em>}</li>
  *   <li>{@link org.worklang.work.impl.InputDefinitionImpl#getInputState <em>Input State</em>}</li>
  * </ul>
  *
@@ -49,26 +45,6 @@ import org.worklang.work.WorkPackage;
 public class InputDefinitionImpl extends MinimalEObjectImpl.Container implements InputDefinition
 {
   /**
-   * The default value of the '{@link #getInput() <em>Input</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getInput()
-   * @generated
-   * @ordered
-   */
-  protected static final String INPUT_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getInput() <em>Input</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getInput()
-   * @generated
-   * @ordered
-   */
-  protected String input = INPUT_EDEFAULT;
-
-  /**
    * The cached value of the '{@link #getInputState() <em>Input State</em>}' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -76,7 +52,7 @@ public class InputDefinitionImpl extends MinimalEObjectImpl.Container implements
    * @generated
    * @ordered
    */
-  protected EList<StateID> inputState;
+  protected EList<StateDefinition> inputState;
 
   /**
    * <!-- begin-user-doc -->
@@ -104,34 +80,11 @@ public class InputDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getInput()
-  {
-    return input;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setInput(String newInput)
-  {
-    String oldInput = input;
-    input = newInput;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.INPUT_DEFINITION__INPUT, oldInput, input));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<StateID> getInputState()
+  public EList<StateDefinition> getInputState()
   {
     if (inputState == null)
     {
-      inputState = new EObjectResolvingEList<StateID>(StateID.class, this, WorkPackage.INPUT_DEFINITION__INPUT_STATE);
+      inputState = new EObjectResolvingEList<StateDefinition>(StateDefinition.class, this, WorkPackage.INPUT_DEFINITION__INPUT_STATE);
     }
     return inputState;
   }
@@ -146,8 +99,6 @@ public class InputDefinitionImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case WorkPackage.INPUT_DEFINITION__INPUT:
-        return getInput();
       case WorkPackage.INPUT_DEFINITION__INPUT_STATE:
         return getInputState();
     }
@@ -165,12 +116,9 @@ public class InputDefinitionImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case WorkPackage.INPUT_DEFINITION__INPUT:
-        setInput((String)newValue);
-        return;
       case WorkPackage.INPUT_DEFINITION__INPUT_STATE:
         getInputState().clear();
-        getInputState().addAll((Collection<? extends StateID>)newValue);
+        getInputState().addAll((Collection<? extends StateDefinition>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -186,9 +134,6 @@ public class InputDefinitionImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case WorkPackage.INPUT_DEFINITION__INPUT:
-        setInput(INPUT_EDEFAULT);
-        return;
       case WorkPackage.INPUT_DEFINITION__INPUT_STATE:
         getInputState().clear();
         return;
@@ -206,29 +151,10 @@ public class InputDefinitionImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case WorkPackage.INPUT_DEFINITION__INPUT:
-        return INPUT_EDEFAULT == null ? input != null : !INPUT_EDEFAULT.equals(input);
       case WorkPackage.INPUT_DEFINITION__INPUT_STATE:
         return inputState != null && !inputState.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (input: ");
-    result.append(input);
-    result.append(')');
-    return result.toString();
   }
 
 } //InputDefinitionImpl

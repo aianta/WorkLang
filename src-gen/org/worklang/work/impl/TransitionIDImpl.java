@@ -33,7 +33,6 @@ import org.worklang.work.WorkPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.TransitionIDImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.worklang.work.impl.TransitionIDImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
@@ -41,26 +40,6 @@ import org.worklang.work.WorkPackage;
  */
 public class TransitionIDImpl extends TransitionalExpressionImpl implements TransitionID
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
    * <!-- begin-user-doc -->
@@ -90,29 +69,6 @@ public class TransitionIDImpl extends TransitionalExpressionImpl implements Tran
   protected EClass eStaticClass()
   {
     return WorkPackage.Literals.TRANSITION_ID;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_ID__NAME, oldName, name));
   }
 
   /**
@@ -168,8 +124,6 @@ public class TransitionIDImpl extends TransitionalExpressionImpl implements Tran
   {
     switch (featureID)
     {
-      case WorkPackage.TRANSITION_ID__NAME:
-        return getName();
       case WorkPackage.TRANSITION_ID__VALUE:
         if (resolve) return getValue();
         return basicGetValue();
@@ -187,9 +141,6 @@ public class TransitionIDImpl extends TransitionalExpressionImpl implements Tran
   {
     switch (featureID)
     {
-      case WorkPackage.TRANSITION_ID__NAME:
-        setName((String)newValue);
-        return;
       case WorkPackage.TRANSITION_ID__VALUE:
         setValue((TransitionID)newValue);
         return;
@@ -207,9 +158,6 @@ public class TransitionIDImpl extends TransitionalExpressionImpl implements Tran
   {
     switch (featureID)
     {
-      case WorkPackage.TRANSITION_ID__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case WorkPackage.TRANSITION_ID__VALUE:
         setValue((TransitionID)null);
         return;
@@ -227,29 +175,10 @@ public class TransitionIDImpl extends TransitionalExpressionImpl implements Tran
   {
     switch (featureID)
     {
-      case WorkPackage.TRANSITION_ID__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case WorkPackage.TRANSITION_ID__VALUE:
         return value != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //TransitionIDImpl

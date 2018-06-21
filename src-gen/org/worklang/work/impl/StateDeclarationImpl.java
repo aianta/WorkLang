@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.worklang.work.StateDeclaration;
-import org.worklang.work.StateID;
+import org.worklang.work.StateDefinition;
 import org.worklang.work.WorkPackage;
 
 /**
@@ -35,7 +35,6 @@ import org.worklang.work.WorkPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.StateDeclarationImpl#getObjectType <em>Object Type</em>}</li>
  *   <li>{@link org.worklang.work.impl.StateDeclarationImpl#getState <em>State</em>}</li>
  * </ul>
  *
@@ -44,26 +43,6 @@ import org.worklang.work.WorkPackage;
 public class StateDeclarationImpl extends MinimalEObjectImpl.Container implements StateDeclaration
 {
   /**
-   * The default value of the '{@link #getObjectType() <em>Object Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getObjectType()
-   * @generated
-   * @ordered
-   */
-  protected static final String OBJECT_TYPE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getObjectType() <em>Object Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getObjectType()
-   * @generated
-   * @ordered
-   */
-  protected String objectType = OBJECT_TYPE_EDEFAULT;
-
-  /**
    * The cached value of the '{@link #getState() <em>State</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -71,7 +50,7 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
    * @generated
    * @ordered
    */
-  protected StateID state;
+  protected StateDefinition state;
 
   /**
    * <!-- begin-user-doc -->
@@ -99,35 +78,12 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getObjectType()
-  {
-    return objectType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setObjectType(String newObjectType)
-  {
-    String oldObjectType = objectType;
-    objectType = newObjectType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DECLARATION__OBJECT_TYPE, oldObjectType, objectType));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public StateID getState()
+  public StateDefinition getState()
   {
     if (state != null && state.eIsProxy())
     {
       InternalEObject oldState = (InternalEObject)state;
-      state = (StateID)eResolveProxy(oldState);
+      state = (StateDefinition)eResolveProxy(oldState);
       if (state != oldState)
       {
         if (eNotificationRequired())
@@ -142,7 +98,7 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateID basicGetState()
+  public StateDefinition basicGetState()
   {
     return state;
   }
@@ -152,9 +108,9 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setState(StateID newState)
+  public void setState(StateDefinition newState)
   {
-    StateID oldState = state;
+    StateDefinition oldState = state;
     state = newState;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DECLARATION__STATE, oldState, state));
@@ -170,8 +126,6 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case WorkPackage.STATE_DECLARATION__OBJECT_TYPE:
-        return getObjectType();
       case WorkPackage.STATE_DECLARATION__STATE:
         if (resolve) return getState();
         return basicGetState();
@@ -189,11 +143,8 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case WorkPackage.STATE_DECLARATION__OBJECT_TYPE:
-        setObjectType((String)newValue);
-        return;
       case WorkPackage.STATE_DECLARATION__STATE:
-        setState((StateID)newValue);
+        setState((StateDefinition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -209,11 +160,8 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case WorkPackage.STATE_DECLARATION__OBJECT_TYPE:
-        setObjectType(OBJECT_TYPE_EDEFAULT);
-        return;
       case WorkPackage.STATE_DECLARATION__STATE:
-        setState((StateID)null);
+        setState((StateDefinition)null);
         return;
     }
     super.eUnset(featureID);
@@ -229,29 +177,10 @@ public class StateDeclarationImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case WorkPackage.STATE_DECLARATION__OBJECT_TYPE:
-        return OBJECT_TYPE_EDEFAULT == null ? objectType != null : !OBJECT_TYPE_EDEFAULT.equals(objectType);
       case WorkPackage.STATE_DECLARATION__STATE:
         return state != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (objectType: ");
-    result.append(objectType);
-    result.append(')');
-    return result.toString();
   }
 
 } //StateDeclarationImpl

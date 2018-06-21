@@ -24,12 +24,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.worklang.work.ExtendsDefinition;
+import org.worklang.work.DefinitionSpace;
 import org.worklang.work.FieldDefinition;
-import org.worklang.work.Instancespace;
-import org.worklang.work.Namespace;
-import org.worklang.work.Referencespace;
-import org.worklang.work.Space;
+import org.worklang.work.InstanceSpace;
+import org.worklang.work.MapSpace;
+import org.worklang.work.ReferenceSpace;
 import org.worklang.work.WorkPackage;
 
 /**
@@ -40,12 +39,11 @@ import org.worklang.work.WorkPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.FieldDefinitionImpl#getField <em>Field</em>}</li>
- *   <li>{@link org.worklang.work.impl.FieldDefinitionImpl#getSpace <em>Space</em>}</li>
- *   <li>{@link org.worklang.work.impl.FieldDefinitionImpl#getExtends <em>Extends</em>}</li>
- *   <li>{@link org.worklang.work.impl.FieldDefinitionImpl#getConceptualspace <em>Conceptualspace</em>}</li>
- *   <li>{@link org.worklang.work.impl.FieldDefinitionImpl#getReferencespace <em>Referencespace</em>}</li>
- *   <li>{@link org.worklang.work.impl.FieldDefinitionImpl#getInstancespace <em>Instancespace</em>}</li>
+ *   <li>{@link org.worklang.work.impl.FieldDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.worklang.work.impl.FieldDefinitionImpl#getDefinitionSpace <em>Definition Space</em>}</li>
+ *   <li>{@link org.worklang.work.impl.FieldDefinitionImpl#getReferenceSpace <em>Reference Space</em>}</li>
+ *   <li>{@link org.worklang.work.impl.FieldDefinitionImpl#getMapSpace <em>Map Space</em>}</li>
+ *   <li>{@link org.worklang.work.impl.FieldDefinitionImpl#getInstanceSpace <em>Instance Space</em>}</li>
  * </ul>
  *
  * @generated
@@ -53,74 +51,64 @@ import org.worklang.work.WorkPackage;
 public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements FieldDefinition
 {
   /**
-   * The default value of the '{@link #getField() <em>Field</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getField()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String FIELD_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getField() <em>Field</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getField()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected String field = FIELD_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getSpace() <em>Space</em>}' containment reference.
+   * The cached value of the '{@link #getDefinitionSpace() <em>Definition Space</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSpace()
+   * @see #getDefinitionSpace()
    * @generated
    * @ordered
    */
-  protected Space space;
+  protected DefinitionSpace definitionSpace;
 
   /**
-   * The cached value of the '{@link #getExtends() <em>Extends</em>}' containment reference.
+   * The cached value of the '{@link #getReferenceSpace() <em>Reference Space</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getExtends()
+   * @see #getReferenceSpace()
    * @generated
    * @ordered
    */
-  protected ExtendsDefinition extends_;
+  protected ReferenceSpace referenceSpace;
 
   /**
-   * The cached value of the '{@link #getConceptualspace() <em>Conceptualspace</em>}' containment reference.
+   * The cached value of the '{@link #getMapSpace() <em>Map Space</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getConceptualspace()
+   * @see #getMapSpace()
    * @generated
    * @ordered
    */
-  protected Namespace conceptualspace;
+  protected MapSpace mapSpace;
 
   /**
-   * The cached value of the '{@link #getReferencespace() <em>Referencespace</em>}' containment reference.
+   * The cached value of the '{@link #getInstanceSpace() <em>Instance Space</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getReferencespace()
+   * @see #getInstanceSpace()
    * @generated
    * @ordered
    */
-  protected Referencespace referencespace;
-
-  /**
-   * The cached value of the '{@link #getInstancespace() <em>Instancespace</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getInstancespace()
-   * @generated
-   * @ordered
-   */
-  protected Instancespace instancespace;
+  protected InstanceSpace instanceSpace;
 
   /**
    * <!-- begin-user-doc -->
@@ -148,9 +136,9 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getField()
+  public String getName()
   {
-    return field;
+    return name;
   }
 
   /**
@@ -158,12 +146,12 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setField(String newField)
+  public void setName(String newName)
   {
-    String oldField = field;
-    field = newField;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__FIELD, oldField, field));
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__NAME, oldName, name));
   }
 
   /**
@@ -171,9 +159,9 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public Space getSpace()
+  public DefinitionSpace getDefinitionSpace()
   {
-    return space;
+    return definitionSpace;
   }
 
   /**
@@ -181,13 +169,13 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetSpace(Space newSpace, NotificationChain msgs)
+  public NotificationChain basicSetDefinitionSpace(DefinitionSpace newDefinitionSpace, NotificationChain msgs)
   {
-    Space oldSpace = space;
-    space = newSpace;
+    DefinitionSpace oldDefinitionSpace = definitionSpace;
+    definitionSpace = newDefinitionSpace;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__SPACE, oldSpace, newSpace);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__DEFINITION_SPACE, oldDefinitionSpace, newDefinitionSpace);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -198,20 +186,20 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSpace(Space newSpace)
+  public void setDefinitionSpace(DefinitionSpace newDefinitionSpace)
   {
-    if (newSpace != space)
+    if (newDefinitionSpace != definitionSpace)
     {
       NotificationChain msgs = null;
-      if (space != null)
-        msgs = ((InternalEObject)space).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__SPACE, null, msgs);
-      if (newSpace != null)
-        msgs = ((InternalEObject)newSpace).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__SPACE, null, msgs);
-      msgs = basicSetSpace(newSpace, msgs);
+      if (definitionSpace != null)
+        msgs = ((InternalEObject)definitionSpace).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__DEFINITION_SPACE, null, msgs);
+      if (newDefinitionSpace != null)
+        msgs = ((InternalEObject)newDefinitionSpace).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__DEFINITION_SPACE, null, msgs);
+      msgs = basicSetDefinitionSpace(newDefinitionSpace, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__SPACE, newSpace, newSpace));
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__DEFINITION_SPACE, newDefinitionSpace, newDefinitionSpace));
   }
 
   /**
@@ -219,9 +207,9 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public ExtendsDefinition getExtends()
+  public ReferenceSpace getReferenceSpace()
   {
-    return extends_;
+    return referenceSpace;
   }
 
   /**
@@ -229,13 +217,13 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetExtends(ExtendsDefinition newExtends, NotificationChain msgs)
+  public NotificationChain basicSetReferenceSpace(ReferenceSpace newReferenceSpace, NotificationChain msgs)
   {
-    ExtendsDefinition oldExtends = extends_;
-    extends_ = newExtends;
+    ReferenceSpace oldReferenceSpace = referenceSpace;
+    referenceSpace = newReferenceSpace;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__EXTENDS, oldExtends, newExtends);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__REFERENCE_SPACE, oldReferenceSpace, newReferenceSpace);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -246,20 +234,20 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExtends(ExtendsDefinition newExtends)
+  public void setReferenceSpace(ReferenceSpace newReferenceSpace)
   {
-    if (newExtends != extends_)
+    if (newReferenceSpace != referenceSpace)
     {
       NotificationChain msgs = null;
-      if (extends_ != null)
-        msgs = ((InternalEObject)extends_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__EXTENDS, null, msgs);
-      if (newExtends != null)
-        msgs = ((InternalEObject)newExtends).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__EXTENDS, null, msgs);
-      msgs = basicSetExtends(newExtends, msgs);
+      if (referenceSpace != null)
+        msgs = ((InternalEObject)referenceSpace).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__REFERENCE_SPACE, null, msgs);
+      if (newReferenceSpace != null)
+        msgs = ((InternalEObject)newReferenceSpace).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__REFERENCE_SPACE, null, msgs);
+      msgs = basicSetReferenceSpace(newReferenceSpace, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__EXTENDS, newExtends, newExtends));
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__REFERENCE_SPACE, newReferenceSpace, newReferenceSpace));
   }
 
   /**
@@ -267,9 +255,9 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public Namespace getConceptualspace()
+  public MapSpace getMapSpace()
   {
-    return conceptualspace;
+    return mapSpace;
   }
 
   /**
@@ -277,13 +265,13 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetConceptualspace(Namespace newConceptualspace, NotificationChain msgs)
+  public NotificationChain basicSetMapSpace(MapSpace newMapSpace, NotificationChain msgs)
   {
-    Namespace oldConceptualspace = conceptualspace;
-    conceptualspace = newConceptualspace;
+    MapSpace oldMapSpace = mapSpace;
+    mapSpace = newMapSpace;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__CONCEPTUALSPACE, oldConceptualspace, newConceptualspace);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__MAP_SPACE, oldMapSpace, newMapSpace);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -294,20 +282,20 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setConceptualspace(Namespace newConceptualspace)
+  public void setMapSpace(MapSpace newMapSpace)
   {
-    if (newConceptualspace != conceptualspace)
+    if (newMapSpace != mapSpace)
     {
       NotificationChain msgs = null;
-      if (conceptualspace != null)
-        msgs = ((InternalEObject)conceptualspace).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__CONCEPTUALSPACE, null, msgs);
-      if (newConceptualspace != null)
-        msgs = ((InternalEObject)newConceptualspace).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__CONCEPTUALSPACE, null, msgs);
-      msgs = basicSetConceptualspace(newConceptualspace, msgs);
+      if (mapSpace != null)
+        msgs = ((InternalEObject)mapSpace).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__MAP_SPACE, null, msgs);
+      if (newMapSpace != null)
+        msgs = ((InternalEObject)newMapSpace).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__MAP_SPACE, null, msgs);
+      msgs = basicSetMapSpace(newMapSpace, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__CONCEPTUALSPACE, newConceptualspace, newConceptualspace));
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__MAP_SPACE, newMapSpace, newMapSpace));
   }
 
   /**
@@ -315,9 +303,9 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public Referencespace getReferencespace()
+  public InstanceSpace getInstanceSpace()
   {
-    return referencespace;
+    return instanceSpace;
   }
 
   /**
@@ -325,13 +313,13 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetReferencespace(Referencespace newReferencespace, NotificationChain msgs)
+  public NotificationChain basicSetInstanceSpace(InstanceSpace newInstanceSpace, NotificationChain msgs)
   {
-    Referencespace oldReferencespace = referencespace;
-    referencespace = newReferencespace;
+    InstanceSpace oldInstanceSpace = instanceSpace;
+    instanceSpace = newInstanceSpace;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__REFERENCESPACE, oldReferencespace, newReferencespace);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__INSTANCE_SPACE, oldInstanceSpace, newInstanceSpace);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -342,68 +330,20 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setReferencespace(Referencespace newReferencespace)
+  public void setInstanceSpace(InstanceSpace newInstanceSpace)
   {
-    if (newReferencespace != referencespace)
+    if (newInstanceSpace != instanceSpace)
     {
       NotificationChain msgs = null;
-      if (referencespace != null)
-        msgs = ((InternalEObject)referencespace).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__REFERENCESPACE, null, msgs);
-      if (newReferencespace != null)
-        msgs = ((InternalEObject)newReferencespace).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__REFERENCESPACE, null, msgs);
-      msgs = basicSetReferencespace(newReferencespace, msgs);
+      if (instanceSpace != null)
+        msgs = ((InternalEObject)instanceSpace).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__INSTANCE_SPACE, null, msgs);
+      if (newInstanceSpace != null)
+        msgs = ((InternalEObject)newInstanceSpace).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__INSTANCE_SPACE, null, msgs);
+      msgs = basicSetInstanceSpace(newInstanceSpace, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__REFERENCESPACE, newReferencespace, newReferencespace));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Instancespace getInstancespace()
-  {
-    return instancespace;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetInstancespace(Instancespace newInstancespace, NotificationChain msgs)
-  {
-    Instancespace oldInstancespace = instancespace;
-    instancespace = newInstancespace;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__INSTANCESPACE, oldInstancespace, newInstancespace);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setInstancespace(Instancespace newInstancespace)
-  {
-    if (newInstancespace != instancespace)
-    {
-      NotificationChain msgs = null;
-      if (instancespace != null)
-        msgs = ((InternalEObject)instancespace).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__INSTANCESPACE, null, msgs);
-      if (newInstancespace != null)
-        msgs = ((InternalEObject)newInstancespace).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.FIELD_DEFINITION__INSTANCESPACE, null, msgs);
-      msgs = basicSetInstancespace(newInstancespace, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__INSTANCESPACE, newInstancespace, newInstancespace));
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.FIELD_DEFINITION__INSTANCE_SPACE, newInstanceSpace, newInstanceSpace));
   }
 
   /**
@@ -416,16 +356,14 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case WorkPackage.FIELD_DEFINITION__SPACE:
-        return basicSetSpace(null, msgs);
-      case WorkPackage.FIELD_DEFINITION__EXTENDS:
-        return basicSetExtends(null, msgs);
-      case WorkPackage.FIELD_DEFINITION__CONCEPTUALSPACE:
-        return basicSetConceptualspace(null, msgs);
-      case WorkPackage.FIELD_DEFINITION__REFERENCESPACE:
-        return basicSetReferencespace(null, msgs);
-      case WorkPackage.FIELD_DEFINITION__INSTANCESPACE:
-        return basicSetInstancespace(null, msgs);
+      case WorkPackage.FIELD_DEFINITION__DEFINITION_SPACE:
+        return basicSetDefinitionSpace(null, msgs);
+      case WorkPackage.FIELD_DEFINITION__REFERENCE_SPACE:
+        return basicSetReferenceSpace(null, msgs);
+      case WorkPackage.FIELD_DEFINITION__MAP_SPACE:
+        return basicSetMapSpace(null, msgs);
+      case WorkPackage.FIELD_DEFINITION__INSTANCE_SPACE:
+        return basicSetInstanceSpace(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -440,18 +378,16 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case WorkPackage.FIELD_DEFINITION__FIELD:
-        return getField();
-      case WorkPackage.FIELD_DEFINITION__SPACE:
-        return getSpace();
-      case WorkPackage.FIELD_DEFINITION__EXTENDS:
-        return getExtends();
-      case WorkPackage.FIELD_DEFINITION__CONCEPTUALSPACE:
-        return getConceptualspace();
-      case WorkPackage.FIELD_DEFINITION__REFERENCESPACE:
-        return getReferencespace();
-      case WorkPackage.FIELD_DEFINITION__INSTANCESPACE:
-        return getInstancespace();
+      case WorkPackage.FIELD_DEFINITION__NAME:
+        return getName();
+      case WorkPackage.FIELD_DEFINITION__DEFINITION_SPACE:
+        return getDefinitionSpace();
+      case WorkPackage.FIELD_DEFINITION__REFERENCE_SPACE:
+        return getReferenceSpace();
+      case WorkPackage.FIELD_DEFINITION__MAP_SPACE:
+        return getMapSpace();
+      case WorkPackage.FIELD_DEFINITION__INSTANCE_SPACE:
+        return getInstanceSpace();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -466,23 +402,20 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case WorkPackage.FIELD_DEFINITION__FIELD:
-        setField((String)newValue);
+      case WorkPackage.FIELD_DEFINITION__NAME:
+        setName((String)newValue);
         return;
-      case WorkPackage.FIELD_DEFINITION__SPACE:
-        setSpace((Space)newValue);
+      case WorkPackage.FIELD_DEFINITION__DEFINITION_SPACE:
+        setDefinitionSpace((DefinitionSpace)newValue);
         return;
-      case WorkPackage.FIELD_DEFINITION__EXTENDS:
-        setExtends((ExtendsDefinition)newValue);
+      case WorkPackage.FIELD_DEFINITION__REFERENCE_SPACE:
+        setReferenceSpace((ReferenceSpace)newValue);
         return;
-      case WorkPackage.FIELD_DEFINITION__CONCEPTUALSPACE:
-        setConceptualspace((Namespace)newValue);
+      case WorkPackage.FIELD_DEFINITION__MAP_SPACE:
+        setMapSpace((MapSpace)newValue);
         return;
-      case WorkPackage.FIELD_DEFINITION__REFERENCESPACE:
-        setReferencespace((Referencespace)newValue);
-        return;
-      case WorkPackage.FIELD_DEFINITION__INSTANCESPACE:
-        setInstancespace((Instancespace)newValue);
+      case WorkPackage.FIELD_DEFINITION__INSTANCE_SPACE:
+        setInstanceSpace((InstanceSpace)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -498,23 +431,20 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case WorkPackage.FIELD_DEFINITION__FIELD:
-        setField(FIELD_EDEFAULT);
+      case WorkPackage.FIELD_DEFINITION__NAME:
+        setName(NAME_EDEFAULT);
         return;
-      case WorkPackage.FIELD_DEFINITION__SPACE:
-        setSpace((Space)null);
+      case WorkPackage.FIELD_DEFINITION__DEFINITION_SPACE:
+        setDefinitionSpace((DefinitionSpace)null);
         return;
-      case WorkPackage.FIELD_DEFINITION__EXTENDS:
-        setExtends((ExtendsDefinition)null);
+      case WorkPackage.FIELD_DEFINITION__REFERENCE_SPACE:
+        setReferenceSpace((ReferenceSpace)null);
         return;
-      case WorkPackage.FIELD_DEFINITION__CONCEPTUALSPACE:
-        setConceptualspace((Namespace)null);
+      case WorkPackage.FIELD_DEFINITION__MAP_SPACE:
+        setMapSpace((MapSpace)null);
         return;
-      case WorkPackage.FIELD_DEFINITION__REFERENCESPACE:
-        setReferencespace((Referencespace)null);
-        return;
-      case WorkPackage.FIELD_DEFINITION__INSTANCESPACE:
-        setInstancespace((Instancespace)null);
+      case WorkPackage.FIELD_DEFINITION__INSTANCE_SPACE:
+        setInstanceSpace((InstanceSpace)null);
         return;
     }
     super.eUnset(featureID);
@@ -530,18 +460,16 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case WorkPackage.FIELD_DEFINITION__FIELD:
-        return FIELD_EDEFAULT == null ? field != null : !FIELD_EDEFAULT.equals(field);
-      case WorkPackage.FIELD_DEFINITION__SPACE:
-        return space != null;
-      case WorkPackage.FIELD_DEFINITION__EXTENDS:
-        return extends_ != null;
-      case WorkPackage.FIELD_DEFINITION__CONCEPTUALSPACE:
-        return conceptualspace != null;
-      case WorkPackage.FIELD_DEFINITION__REFERENCESPACE:
-        return referencespace != null;
-      case WorkPackage.FIELD_DEFINITION__INSTANCESPACE:
-        return instancespace != null;
+      case WorkPackage.FIELD_DEFINITION__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case WorkPackage.FIELD_DEFINITION__DEFINITION_SPACE:
+        return definitionSpace != null;
+      case WorkPackage.FIELD_DEFINITION__REFERENCE_SPACE:
+        return referenceSpace != null;
+      case WorkPackage.FIELD_DEFINITION__MAP_SPACE:
+        return mapSpace != null;
+      case WorkPackage.FIELD_DEFINITION__INSTANCE_SPACE:
+        return instanceSpace != null;
     }
     return super.eIsSet(featureID);
   }
@@ -557,8 +485,8 @@ public class FieldDefinitionImpl extends MinimalEObjectImpl.Container implements
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (field: ");
-    result.append(field);
+    result.append(" (name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }

@@ -17,24 +17,24 @@ package org.worklang.work.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.worklang.work.PrimitiveStateDefinition;
+import org.worklang.work.PrimitiveTransitionDefinition;
 import org.worklang.work.WorkPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Primitive State Definition</b></em>'.
+ * An implementation of the model object '<em><b>Primitive Transition Definition</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class PrimitiveStateDefinitionImpl extends StateDefinitionImpl implements PrimitiveStateDefinition
+public class PrimitiveTransitionDefinitionImpl extends TransitionDefinitionImpl implements PrimitiveTransitionDefinition
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected PrimitiveStateDefinitionImpl()
+  protected PrimitiveTransitionDefinitionImpl()
   {
     super();
   }
@@ -47,7 +47,7 @@ public class PrimitiveStateDefinitionImpl extends StateDefinitionImpl implements
   @Override
   protected EClass eStaticClass()
   {
-    return WorkPackage.Literals.PRIMITIVE_STATE_DEFINITION;
+    return WorkPackage.Literals.PRIMITIVE_TRANSITION_DEFINITION;
   }
 
-} //PrimitiveStateDefinitionImpl
+} //PrimitiveTransitionDefinitionImpl

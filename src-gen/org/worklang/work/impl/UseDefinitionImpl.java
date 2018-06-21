@@ -35,7 +35,6 @@ import org.worklang.work.WorkPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.UseDefinitionImpl#getUse <em>Use</em>}</li>
  *   <li>{@link org.worklang.work.impl.UseDefinitionImpl#getPredefinedValue <em>Predefined Value</em>}</li>
  * </ul>
  *
@@ -43,26 +42,6 @@ import org.worklang.work.WorkPackage;
  */
 public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements UseDefinition
 {
-  /**
-   * The default value of the '{@link #getUse() <em>Use</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getUse()
-   * @generated
-   * @ordered
-   */
-  protected static final String USE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getUse() <em>Use</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getUse()
-   * @generated
-   * @ordered
-   */
-  protected String use = USE_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getPredefinedValue() <em>Predefined Value</em>}' reference.
    * <!-- begin-user-doc -->
@@ -92,29 +71,6 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
   protected EClass eStaticClass()
   {
     return WorkPackage.Literals.USE_DEFINITION;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getUse()
-  {
-    return use;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setUse(String newUse)
-  {
-    String oldUse = use;
-    use = newUse;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.USE_DEFINITION__USE, oldUse, use));
   }
 
   /**
@@ -170,8 +126,6 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
   {
     switch (featureID)
     {
-      case WorkPackage.USE_DEFINITION__USE:
-        return getUse();
       case WorkPackage.USE_DEFINITION__PREDEFINED_VALUE:
         if (resolve) return getPredefinedValue();
         return basicGetPredefinedValue();
@@ -189,9 +143,6 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
   {
     switch (featureID)
     {
-      case WorkPackage.USE_DEFINITION__USE:
-        setUse((String)newValue);
-        return;
       case WorkPackage.USE_DEFINITION__PREDEFINED_VALUE:
         setPredefinedValue((Instance)newValue);
         return;
@@ -209,9 +160,6 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
   {
     switch (featureID)
     {
-      case WorkPackage.USE_DEFINITION__USE:
-        setUse(USE_EDEFAULT);
-        return;
       case WorkPackage.USE_DEFINITION__PREDEFINED_VALUE:
         setPredefinedValue((Instance)null);
         return;
@@ -229,29 +177,10 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
   {
     switch (featureID)
     {
-      case WorkPackage.USE_DEFINITION__USE:
-        return USE_EDEFAULT == null ? use != null : !USE_EDEFAULT.equals(use);
       case WorkPackage.USE_DEFINITION__PREDEFINED_VALUE:
         return predefinedValue != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (use: ");
-    result.append(use);
-    result.append(')');
-    return result.toString();
   }
 
 } //UseDefinitionImpl

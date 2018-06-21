@@ -18,21 +18,21 @@ package org.worklang.work;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Compound State Definition</b></em>'.
+ * A representation of the model object '<em><b>Compound Transition Definition</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.CompoundStateDefinition#getComposition <em>Composition</em>}</li>
+ *   <li>{@link org.worklang.work.CompoundTransitionDefinition#getComposition <em>Composition</em>}</li>
  * </ul>
  *
- * @see org.worklang.work.WorkPackage#getCompoundStateDefinition()
+ * @see org.worklang.work.WorkPackage#getCompoundTransitionDefinition()
  * @model
  * @generated
  */
-public interface CompoundStateDefinition extends StateDefinition
+public interface CompoundTransitionDefinition extends TransitionDefinition
 {
   /**
    * Returns the value of the '<em><b>Composition</b></em>' containment reference.
@@ -43,21 +43,21 @@ public interface CompoundStateDefinition extends StateDefinition
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Composition</em>' containment reference.
-   * @see #setComposition(WithStatesDefinition)
-   * @see org.worklang.work.WorkPackage#getCompoundStateDefinition_Composition()
+   * @see #setComposition(WithTransitionsDefinition)
+   * @see org.worklang.work.WorkPackage#getCompoundTransitionDefinition_Composition()
    * @model containment="true"
    * @generated
    */
-  WithStatesDefinition getComposition();
+  WithTransitionsDefinition getComposition();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.CompoundStateDefinition#getComposition <em>Composition</em>}' containment reference.
+   * Sets the value of the '{@link org.worklang.work.CompoundTransitionDefinition#getComposition <em>Composition</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Composition</em>' containment reference.
    * @see #getComposition()
    * @generated
    */
-  void setComposition(WithStatesDefinition value);
+  void setComposition(WithTransitionsDefinition value);
 
-} // CompoundStateDefinition
+} // CompoundTransitionDefinition
