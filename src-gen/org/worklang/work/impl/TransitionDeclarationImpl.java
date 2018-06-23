@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.worklang.work.TransitionDeclaration;
-import org.worklang.work.TransitionID;
+import org.worklang.work.TransitionDefinition;
 import org.worklang.work.WorkPackage;
 
 /**
@@ -50,7 +50,7 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
    * @generated
    * @ordered
    */
-  protected TransitionID transition;
+  protected TransitionDefinition transition;
 
   /**
    * <!-- begin-user-doc -->
@@ -78,12 +78,12 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionID getTransition()
+  public TransitionDefinition getTransition()
   {
     if (transition != null && transition.eIsProxy())
     {
       InternalEObject oldTransition = (InternalEObject)transition;
-      transition = (TransitionID)eResolveProxy(oldTransition);
+      transition = (TransitionDefinition)eResolveProxy(oldTransition);
       if (transition != oldTransition)
       {
         if (eNotificationRequired())
@@ -98,7 +98,7 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionID basicGetTransition()
+  public TransitionDefinition basicGetTransition()
   {
     return transition;
   }
@@ -108,9 +108,9 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTransition(TransitionID newTransition)
+  public void setTransition(TransitionDefinition newTransition)
   {
-    TransitionID oldTransition = transition;
+    TransitionDefinition oldTransition = transition;
     transition = newTransition;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_DECLARATION__TRANSITION, oldTransition, transition));
@@ -144,7 +144,7 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
     switch (featureID)
     {
       case WorkPackage.TRANSITION_DECLARATION__TRANSITION:
-        setTransition((TransitionID)newValue);
+        setTransition((TransitionDefinition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -161,7 +161,7 @@ public class TransitionDeclarationImpl extends MinimalEObjectImpl.Container impl
     switch (featureID)
     {
       case WorkPackage.TRANSITION_DECLARATION__TRANSITION:
-        setTransition((TransitionID)null);
+        setTransition((TransitionDefinition)null);
         return;
     }
     super.eUnset(featureID);

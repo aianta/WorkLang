@@ -44,12 +44,12 @@ public interface TransitionDeclaration extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Transition</em>' reference.
-   * @see #setTransition(TransitionID)
+   * @see #setTransition(TransitionDefinition)
    * @see org.worklang.work.WorkPackage#getTransitionDeclaration_Transition()
    * @model
    * @generated
    */
-  TransitionID getTransition();
+  TransitionDefinition getTransition();
 
   /**
    * Sets the value of the '{@link org.worklang.work.TransitionDeclaration#getTransition <em>Transition</em>}' reference.
@@ -59,6 +59,6 @@ public interface TransitionDeclaration extends EObject
    * @see #getTransition()
    * @generated
    */
-  void setTransition(TransitionID value);
+  void setTransition(TransitionDefinition value);
 
 } // TransitionDeclaration

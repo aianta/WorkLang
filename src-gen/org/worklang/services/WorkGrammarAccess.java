@@ -931,27 +931,27 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTransitionKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cTransitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cTransitionTransitionIDCrossReference_1_0 = (CrossReference)cTransitionAssignment_1.eContents().get(0);
-		private final RuleCall cTransitionTransitionIDIDTerminalRuleCall_1_0_1 = (RuleCall)cTransitionTransitionIDCrossReference_1_0.eContents().get(1);
+		private final CrossReference cTransitionTransitionDefinitionCrossReference_1_0 = (CrossReference)cTransitionAssignment_1.eContents().get(0);
+		private final RuleCall cTransitionTransitionDefinitionIDTerminalRuleCall_1_0_1 = (RuleCall)cTransitionTransitionDefinitionCrossReference_1_0.eContents().get(1);
 		
 		//TransitionDeclaration:
-		//	'transition' transition=[TransitionID];
+		//	'transition' transition=[TransitionDefinition];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'transition' transition=[TransitionID]
+		//'transition' transition=[TransitionDefinition]
 		public Group getGroup() { return cGroup; }
 		
 		//'transition'
 		public Keyword getTransitionKeyword_0() { return cTransitionKeyword_0; }
 		
-		//transition=[TransitionID]
+		//transition=[TransitionDefinition]
 		public Assignment getTransitionAssignment_1() { return cTransitionAssignment_1; }
 		
-		//[TransitionID]
-		public CrossReference getTransitionTransitionIDCrossReference_1_0() { return cTransitionTransitionIDCrossReference_1_0; }
+		//[TransitionDefinition]
+		public CrossReference getTransitionTransitionDefinitionCrossReference_1_0() { return cTransitionTransitionDefinitionCrossReference_1_0; }
 		
 		//ID
-		public RuleCall getTransitionTransitionIDIDTerminalRuleCall_1_0_1() { return cTransitionTransitionIDIDTerminalRuleCall_1_0_1; }
+		public RuleCall getTransitionTransitionDefinitionIDTerminalRuleCall_1_0_1() { return cTransitionTransitionDefinitionIDTerminalRuleCall_1_0_1; }
 	}
 	public class StateDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.StateDeclaration");
@@ -1752,7 +1752,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//TransitionDeclaration:
-	//	'transition' transition=[TransitionID];
+	//	'transition' transition=[TransitionDefinition];
 	public TransitionDeclarationElements getTransitionDeclarationAccess() {
 		return pTransitionDeclaration;
 	}

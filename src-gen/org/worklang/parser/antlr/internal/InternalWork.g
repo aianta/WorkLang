@@ -1502,7 +1502,7 @@ ruleTransitionDeclaration returns [EObject current=null]
 				}
 				otherlv_1=RULE_ID
 				{
-					newLeafNode(otherlv_1, grammarAccess.getTransitionDeclarationAccess().getTransitionTransitionIDCrossReference_1_0());
+					newLeafNode(otherlv_1, grammarAccess.getTransitionDeclarationAccess().getTransitionTransitionDefinitionCrossReference_1_0());
 				}
 			)
 		)

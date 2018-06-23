@@ -159,7 +159,7 @@ Instance:
 ;
 
 TransitionDeclaration:
-	'transition' transition = [TransitionID]
+	'transition' transition = [TransitionDefinition]
 ;
 
 StateDeclaration:

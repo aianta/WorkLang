@@ -3686,7 +3686,7 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
             				
             otherlv_1=(Token)match(input,RULE_ID,FOLLOW_2); 
 
-            					newLeafNode(otherlv_1, grammarAccess.getTransitionDeclarationAccess().getTransitionTransitionIDCrossReference_1_0());
+            					newLeafNode(otherlv_1, grammarAccess.getTransitionDeclarationAccess().getTransitionTransitionDefinitionCrossReference_1_0());
             				
 
             }

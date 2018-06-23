@@ -572,7 +572,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     TransitionDeclaration returns TransitionDeclaration
 	 *
 	 * Constraint:
-	 *     transition=[TransitionID|ID]
+	 *     transition=[TransitionDefinition|ID]
 	 */
 	protected void sequence_TransitionDeclaration(ISerializationContext context, TransitionDeclaration semanticObject) {
 		if (errorAcceptor != null) {
@@ -580,7 +580,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.TRANSITION_DECLARATION__TRANSITION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTransitionDeclarationAccess().getTransitionTransitionIDIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.TRANSITION_DECLARATION__TRANSITION, false));
+		feeder.accept(grammarAccess.getTransitionDeclarationAccess().getTransitionTransitionDefinitionIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.TRANSITION_DECLARATION__TRANSITION, false));
 		feeder.finish();
 	}
 	

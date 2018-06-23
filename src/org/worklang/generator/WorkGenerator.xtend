@@ -47,8 +47,15 @@ class WorkGenerator extends AbstractGenerator {
 		val Map<String,String> globalWorkspaceSaveOptions = new HashMap<String,String>
 		globalWorkspaceSaveOptions.put("WorkPersistenceType", "globalWorkspace")
 		
-		xResource.save(null)
 		xResource.save(globalWorkspaceSaveOptions)
+		
+		//Create Execution API for transition instances
+		xResource.allContents.filter[ele|
+			ele.eClass.instanceClass.equals(org.worklang.work.FieldDefinition)
+		].forEach[fieldEObject|
+			var field = fieldEObject as FieldDefinition
+			
+		]
 		
 		
 		
