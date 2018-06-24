@@ -30,6 +30,18 @@ import com.steelbridgelabs.oss.neo4j.structure.Neo4JElementIdProvider
 import com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdProvider
 import com.steelbridgelabs.oss.neo4j.structure.Neo4JGraph
 import org.apache.tinkerpop.gremlin.structure.Transaction
+import org.worklang.work.FieldDefinition
+import org.worklang.work.Instance
+import org.slf4j.LoggerFactory
+import java.io.File
+import java.io.FileWriter
+import java.io.BufferedWriter
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
+import java.lang.ProcessBuilder.Redirect
+import java.util.ArrayList
+import org.worklang.interpreter.RESTVerticle
 
 /**
  * Generates code from your model files on save.
@@ -37,6 +49,9 @@ import org.apache.tinkerpop.gremlin.structure.Transaction
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 class WorkGenerator extends AbstractGenerator {
+	
+	val static logger = LoggerFactory.getLogger(WorkGenerator)
+	val GEN_PATH = "R:/transitions-gen"
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		
@@ -47,23 +62,24 @@ class WorkGenerator extends AbstractGenerator {
 		val Map<String,String> globalWorkspaceSaveOptions = new HashMap<String,String>
 		globalWorkspaceSaveOptions.put("WorkPersistenceType", "globalWorkspace")
 		
-		xResource.save(globalWorkspaceSaveOptions)
+		//xResource.save(globalWorkspaceSaveOptions)
+		
+		val paths = new ArrayList<String>
 		
 		//Create Execution API for transition instances
 		xResource.allContents.filter[ele|
 			ele.eClass.instanceClass.equals(org.worklang.work.FieldDefinition)
 		].forEach[fieldEObject|
-			var field = fieldEObject as FieldDefinition
+			val field = fieldEObject as FieldDefinition
 			
+			field.instanceSpace.instances.filter[instance|
+				instance.transitionDeclaration !== null //Filter out state instances
+			].forEach[transitionInstance|
+				
+				RESTVerticle.executionManager.addTransition(field.name, transitionInstance)
+						
+			]
 		]
-		
-		
-		
-		
-//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
-//			resource.allContents
-//				.filter(Greeting)
-//				.map[name]
-//				.join(', '))
+
 	}
 }

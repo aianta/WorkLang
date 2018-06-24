@@ -26,8 +26,12 @@ import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.core.http.HttpMethod
 import org.worklang.WorkStandaloneSetup
+import org.slf4j.LoggerFactory
+import org.worklang.execution.ExecutionManager
 
 class RESTVerticle extends AbstractVerticle {
+	
+	val static logger = LoggerFactory.getLogger(RESTVerticle)
 	
 	var Interpreter interpreter
 	val HttpServerOptions options = new HttpServerOptions
@@ -37,17 +41,28 @@ class RESTVerticle extends AbstractVerticle {
 	
 	var Route processWorklangDataRoute
 	
+	var static ExecutionManager exec
+	
 	override start () throws Exception {
 		
-		println("REST Verticle starting")
+		logger.info("REST Verticle starting")
 		
-		println("Initializing Worklang Interpreter")
+		//Start Execution Manager
+		logger.info("Initializing Execution Manager")
+		exec = new ExecutionManager()
+		
+		logger.info("Attempting to deploy Execution Manager")
+		vertx.deployVerticle(exec)
+		
+		logger.info("Initializing Worklang Interpreter")
 		val injector = new WorkStandaloneSetup().createInjectorAndDoEMFRegistration
 		interpreter = injector.getInstance(Interpreter)
 		
 		options.port = 9000
 		
 		server = vertx.createHttpServer(options)
+	
+		router.mountSubRouter("/exec", exec.router)
 	
 		
 		router.route(HttpMethod.POST, "/").handler(BodyHandler.create)
@@ -80,5 +95,10 @@ class RESTVerticle extends AbstractVerticle {
 				
 		response.end("Done!")
 	}
+	
+	def static getExecutionManager(){
+		exec
+	}
+	
 	
 }

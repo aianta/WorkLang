@@ -41,7 +41,7 @@ Workflow {
 				createEclipseMetaData = true
 			}
 			code = {
-				encoding = "windows-1252"
+				encoding = "utf-8"
 				lineDelimiter = "\r\n"
 				fileHeader = "/*
 	Copyright 2018 Alexandru Ianta
