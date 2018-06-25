@@ -548,6 +548,25 @@ public interface WorkPackage extends EPackage
   int COMPOUND_STATE_DEFINITION_FEATURE_COUNT = STATE_DEFINITION_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.worklang.work.impl.TransitionalExpressionImpl <em>Transitional Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.TransitionalExpressionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getTransitionalExpression()
+   * @generated
+   */
+  int TRANSITIONAL_EXPRESSION = 30;
+
+  /**
+   * The number of structural features of the '<em>Transitional Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITIONAL_EXPRESSION_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link org.worklang.work.impl.TransitionDefinitionImpl <em>Transition Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -558,13 +577,22 @@ public interface WorkPackage extends EPackage
   int TRANSITION_DEFINITION = 9;
 
   /**
+   * The feature id for the '<em><b>Value</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_DEFINITION__VALUE = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TRANSITION_DEFINITION__TYPE = 0;
+  int TRANSITION_DEFINITION__TYPE = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -573,7 +601,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_DEFINITION__NAME = 1;
+  int TRANSITION_DEFINITION__NAME = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>In</b></em>' containment reference.
@@ -582,7 +610,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_DEFINITION__IN = 2;
+  int TRANSITION_DEFINITION__IN = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Out</b></em>' containment reference.
@@ -591,7 +619,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_DEFINITION__OUT = 3;
+  int TRANSITION_DEFINITION__OUT = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>Transition Definition</em>' class.
@@ -600,7 +628,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_DEFINITION_FEATURE_COUNT = 4;
+  int TRANSITION_DEFINITION_FEATURE_COUNT = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.PrimitiveTransitionDefinitionImpl <em>Primitive Transition Definition</em>}' class.
@@ -611,6 +639,15 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   int PRIMITIVE_TRANSITION_DEFINITION = 10;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PRIMITIVE_TRANSITION_DEFINITION__VALUE = TRANSITION_DEFINITION__VALUE;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -666,6 +703,15 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   int COMPOUND_TRANSITION_DEFINITION = 11;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_TRANSITION_DEFINITION__VALUE = TRANSITION_DEFINITION__VALUE;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1297,25 +1343,6 @@ public interface WorkPackage extends EPackage
   int PREDICATE_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link org.worklang.work.impl.TransitionalExpressionImpl <em>Transitional Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.TransitionalExpressionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getTransitionalExpression()
-   * @generated
-   */
-  int TRANSITIONAL_EXPRESSION = 30;
-
-  /**
-   * The number of structural features of the '<em>Transitional Expression</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITIONAL_EXPRESSION_FEATURE_COUNT = 0;
-
-  /**
    * The meta object id for the '{@link org.worklang.work.impl.OperationImpl <em>Operation</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1360,34 +1387,6 @@ public interface WorkPackage extends EPackage
    * @ordered
    */
   int OPERATION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 3;
-
-  /**
-   * The meta object id for the '{@link org.worklang.work.impl.TransitionIDImpl <em>Transition ID</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.TransitionIDImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getTransitionID()
-   * @generated
-   */
-  int TRANSITION_ID = 32;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_ID__VALUE = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Transition ID</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_ID_FEATURE_COUNT = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 1;
 
 
   /**
@@ -1731,6 +1730,17 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   EClass getTransitionDefinition();
+
+  /**
+   * Returns the meta object for the reference '{@link org.worklang.work.TransitionDefinition#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Value</em>'.
+   * @see org.worklang.work.TransitionDefinition#getValue()
+   * @see #getTransitionDefinition()
+   * @generated
+   */
+  EReference getTransitionDefinition_Value();
 
   /**
    * Returns the meta object for the attribute '{@link org.worklang.work.TransitionDefinition#getType <em>Type</em>}'.
@@ -2349,27 +2359,6 @@ public interface WorkPackage extends EPackage
   EReference getOperation_Right();
 
   /**
-   * Returns the meta object for class '{@link org.worklang.work.TransitionID <em>Transition ID</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Transition ID</em>'.
-   * @see org.worklang.work.TransitionID
-   * @generated
-   */
-  EClass getTransitionID();
-
-  /**
-   * Returns the meta object for the reference '{@link org.worklang.work.TransitionID#getValue <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Value</em>'.
-   * @see org.worklang.work.TransitionID#getValue()
-   * @see #getTransitionID()
-   * @generated
-   */
-  EReference getTransitionID_Value();
-
-  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2667,6 +2656,14 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EClass TRANSITION_DEFINITION = eINSTANCE.getTransitionDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_DEFINITION__VALUE = eINSTANCE.getTransitionDefinition_Value();
 
     /**
      * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
@@ -3175,24 +3172,6 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EReference OPERATION__RIGHT = eINSTANCE.getOperation_Right();
-
-    /**
-     * The meta object literal for the '{@link org.worklang.work.impl.TransitionIDImpl <em>Transition ID</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.TransitionIDImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getTransitionID()
-     * @generated
-     */
-    EClass TRANSITION_ID = eINSTANCE.getTransitionID();
-
-    /**
-     * The meta object literal for the '<em><b>Value</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION_ID__VALUE = eINSTANCE.getTransitionID_Value();
 
   }
 

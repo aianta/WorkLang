@@ -157,6 +157,7 @@ public class WorkSwitch<T> extends Switch<T>
       {
         TransitionDefinition transitionDefinition = (TransitionDefinition)theEObject;
         T result = caseTransitionDefinition(transitionDefinition);
+        if (result == null) result = caseTransitionalExpression(transitionDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -165,6 +166,7 @@ public class WorkSwitch<T> extends Switch<T>
         PrimitiveTransitionDefinition primitiveTransitionDefinition = (PrimitiveTransitionDefinition)theEObject;
         T result = casePrimitiveTransitionDefinition(primitiveTransitionDefinition);
         if (result == null) result = caseTransitionDefinition(primitiveTransitionDefinition);
+        if (result == null) result = caseTransitionalExpression(primitiveTransitionDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -173,6 +175,7 @@ public class WorkSwitch<T> extends Switch<T>
         CompoundTransitionDefinition compoundTransitionDefinition = (CompoundTransitionDefinition)theEObject;
         T result = caseCompoundTransitionDefinition(compoundTransitionDefinition);
         if (result == null) result = caseTransitionDefinition(compoundTransitionDefinition);
+        if (result == null) result = caseTransitionalExpression(compoundTransitionDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -316,14 +319,6 @@ public class WorkSwitch<T> extends Switch<T>
         T result = caseOperation(operation);
         if (result == null) result = caseBinaryExpression(operation);
         if (result == null) result = caseTransitionalExpression(operation);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.TRANSITION_ID:
-      {
-        TransitionID transitionID = (TransitionID)theEObject;
-        T result = caseTransitionID(transitionID);
-        if (result == null) result = caseTransitionalExpression(transitionID);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -839,22 +834,6 @@ public class WorkSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseOperation(Operation object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Transition ID</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Transition ID</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTransitionID(TransitionID object)
   {
     return null;
   }

@@ -27,21 +27,46 @@ import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.core.http.HttpMethod
 import org.worklang.WorkStandaloneSetup
 import org.slf4j.LoggerFactory
-import org.worklang.execution.ExecutionManager
+import org.worklang.execution.ExecutionApi
+import org.neo4j.driver.v1.Driver
+import org.neo4j.driver.v1.GraphDatabase
+import com.steelbridgelabs.oss.neo4j.structure.Neo4JElementIdProvider
+import com.steelbridgelabs.oss.neo4j.structure.Neo4JGraph
+import com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdProvider
+import org.neo4j.driver.v1.AuthTokens
+import org.eclipse.xtext.resource.XtextResource
 
-class RESTVerticle extends AbstractVerticle {
+class WorkApi extends AbstractVerticle {
 	
-	val static logger = LoggerFactory.getLogger(RESTVerticle)
+	val static logger = LoggerFactory.getLogger(WorkApi)
 	
+
+	//Neo4j DB 
+	private Driver graphDbDriver = GraphDatabase.driver("bolt://localhost", AuthTokens.basic("neo4j", "admin"));
+	
+	private Neo4JElementIdProvider vertexIdProvider = new Neo4JNativeElementIdProvider();
+	private Neo4JElementIdProvider edgeIdProvider = new Neo4JNativeElementIdProvider();
+	
+	var static Neo4JGraph graph;
+	var static XtextResource activeResource;
+	 
 	var Interpreter interpreter
 	val HttpServerOptions options = new HttpServerOptions
-	
 	var HttpServer server
 	val Router router = Router.router(vertx)
-	
 	var Route processWorklangDataRoute
 	
-	var static ExecutionManager exec
+	var static ExecutionApi exec
+	
+	new (){
+		try {
+			//Setup connection to meta model 
+			graph = new Neo4JGraph(graphDbDriver, vertexIdProvider, edgeIdProvider);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	override start () throws Exception {
 		
@@ -49,7 +74,7 @@ class RESTVerticle extends AbstractVerticle {
 		
 		//Start Execution Manager
 		logger.info("Initializing Execution Manager")
-		exec = new ExecutionManager()
+		exec = new ExecutionApi(graph)
 		
 		logger.info("Attempting to deploy Execution Manager")
 		vertx.deployVerticle(exec)
@@ -62,7 +87,7 @@ class RESTVerticle extends AbstractVerticle {
 		
 		server = vertx.createHttpServer(options)
 	
-		router.mountSubRouter("/exec", exec.router)
+		router.mountSubRouter("/exec", exec.getRouter)
 	
 		
 		router.route(HttpMethod.POST, "/").handler(BodyHandler.create)
@@ -100,5 +125,16 @@ class RESTVerticle extends AbstractVerticle {
 		exec
 	}
 	
+	def static getGraph(){
+		graph
+	}
+	
+	def static getActiveResource(){
+		activeResource
+	}
+	
+	def static setActiveResource(XtextResource resource){
+		activeResource = resource
+	}
 	
 }

@@ -409,7 +409,7 @@ ruleTransitionMapping returns [EObject current=null]
 				}
 				otherlv_1=RULE_ID
 				{
-					newLeafNode(otherlv_1, grammarAccess.getTransitionMappingAccess().getForeignTransitionTransitionIDCrossReference_1_0());
+					newLeafNode(otherlv_1, grammarAccess.getTransitionMappingAccess().getForeignTransitionTransitionDefinitionCrossReference_1_0());
 				}
 			)
 		)
@@ -443,7 +443,7 @@ ruleTransitionMapping returns [EObject current=null]
 				}
 				otherlv_5=RULE_ID
 				{
-					newLeafNode(otherlv_5, grammarAccess.getTransitionMappingAccess().getLocalTransitionTransitionIDCrossReference_5_0());
+					newLeafNode(otherlv_5, grammarAccess.getTransitionMappingAccess().getLocalTransitionTransitionDefinitionCrossReference_5_0());
 				}
 			)
 		)
@@ -2171,7 +2171,7 @@ ruleTerminalTransitionalExpression returns [EObject current=null]
 			(
 				{
 					$current = forceCreateModelElement(
-						grammarAccess.getTerminalTransitionalExpressionAccess().getTransitionIDAction_1_0(),
+						grammarAccess.getTerminalTransitionalExpressionAccess().getTransitionDefinitionAction_1_0(),
 						$current);
 				}
 			)
@@ -2184,7 +2184,7 @@ ruleTerminalTransitionalExpression returns [EObject current=null]
 					}
 					otherlv_4=RULE_ID
 					{
-						newLeafNode(otherlv_4, grammarAccess.getTerminalTransitionalExpressionAccess().getValueTransitionIDCrossReference_1_1_0());
+						newLeafNode(otherlv_4, grammarAccess.getTerminalTransitionalExpressionAccess().getValueTransitionDefinitionCrossReference_1_1_0());
 					}
 				)
 			)

@@ -41,7 +41,7 @@ import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.lang.ProcessBuilder.Redirect
 import java.util.ArrayList
-import org.worklang.interpreter.RESTVerticle
+import org.worklang.interpreter.WorkApi
 
 /**
  * Generates code from your model files on save.
@@ -62,7 +62,8 @@ class WorkGenerator extends AbstractGenerator {
 		val Map<String,String> globalWorkspaceSaveOptions = new HashMap<String,String>
 		globalWorkspaceSaveOptions.put("WorkPersistenceType", "globalWorkspace")
 		
-		//xResource.save(globalWorkspaceSaveOptions)
+		xResource.save(globalWorkspaceSaveOptions)
+		WorkApi.activeResource = xResource
 		
 		val paths = new ArrayList<String>
 		
@@ -76,7 +77,7 @@ class WorkGenerator extends AbstractGenerator {
 				instance.transitionDeclaration !== null //Filter out state instances
 			].forEach[transitionInstance|
 				
-				RESTVerticle.executionManager.addTransition(field.name, transitionInstance)
+				WorkApi.executionManager.addTransition(field.name, transitionInstance)
 						
 			]
 		]

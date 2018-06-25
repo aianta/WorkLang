@@ -940,7 +940,7 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
             				
             otherlv_1=(Token)match(input,RULE_ID,FOLLOW_13); 
 
-            					newLeafNode(otherlv_1, grammarAccess.getTransitionMappingAccess().getForeignTransitionTransitionIDCrossReference_1_0());
+            					newLeafNode(otherlv_1, grammarAccess.getTransitionMappingAccess().getForeignTransitionTransitionDefinitionCrossReference_1_0());
             				
 
             }
@@ -990,7 +990,7 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
             				
             otherlv_5=(Token)match(input,RULE_ID,FOLLOW_2); 
 
-            					newLeafNode(otherlv_5, grammarAccess.getTransitionMappingAccess().getLocalTransitionTransitionIDCrossReference_5_0());
+            					newLeafNode(otherlv_5, grammarAccess.getTransitionMappingAccess().getLocalTransitionTransitionDefinitionCrossReference_5_0());
             				
 
             }
@@ -5461,7 +5461,7 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
                     {
 
                     					current = forceCreateModelElement(
-                    						grammarAccess.getTerminalTransitionalExpressionAccess().getTransitionIDAction_1_0(),
+                    						grammarAccess.getTerminalTransitionalExpressionAccess().getTransitionDefinitionAction_1_0(),
                     						current);
                     				
 
@@ -5480,7 +5480,7 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
                     					
                     otherlv_4=(Token)match(input,RULE_ID,FOLLOW_2); 
 
-                    						newLeafNode(otherlv_4, grammarAccess.getTerminalTransitionalExpressionAccess().getValueTransitionIDCrossReference_1_1_0());
+                    						newLeafNode(otherlv_4, grammarAccess.getTerminalTransitionalExpressionAccess().getValueTransitionDefinitionCrossReference_1_1_0());
                     					
 
                     }

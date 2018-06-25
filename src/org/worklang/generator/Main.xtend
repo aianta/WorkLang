@@ -19,9 +19,9 @@ package org.worklang.generator
 
 
 import io.vertx.core.Vertx
-import org.worklang.interpreter.RESTVerticle
 import org.slf4j.LoggerFactory
-import org.worklang.execution.ExecutionManager
+import org.worklang.interpreter.WorkApi
+import org.worklang.execution.ExecutionApi
 
 class Main {
 	
@@ -33,7 +33,7 @@ class Main {
 	def static main(String[] args) {
 		
 		logger.info("Initializing REST API")
-		var RESTVerticle restapi = new RESTVerticle()
+		var WorkApi restapi = new WorkApi()
 		 
 		logger.info("Attempting to deploy REST API")
 		vertx.deployVerticle(restapi)

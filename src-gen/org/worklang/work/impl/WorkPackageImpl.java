@@ -48,7 +48,6 @@ import org.worklang.work.StateMapping;
 import org.worklang.work.ToDefinition;
 import org.worklang.work.TransitionDeclaration;
 import org.worklang.work.TransitionDefinition;
-import org.worklang.work.TransitionID;
 import org.worklang.work.TransitionInstance;
 import org.worklang.work.TransitionMapping;
 import org.worklang.work.TransitionalExpression;
@@ -289,13 +288,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * @generated
    */
   private EClass operationEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass transitionIDEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -685,9 +677,9 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTransitionDefinition_Type()
+  public EReference getTransitionDefinition_Value()
   {
-    return (EAttribute)transitionDefinitionEClass.getEStructuralFeatures().get(0);
+    return (EReference)transitionDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -695,7 +687,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTransitionDefinition_Name()
+  public EAttribute getTransitionDefinition_Type()
   {
     return (EAttribute)transitionDefinitionEClass.getEStructuralFeatures().get(1);
   }
@@ -705,9 +697,19 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getTransitionDefinition_Name()
+  {
+    return (EAttribute)transitionDefinitionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getTransitionDefinition_In()
   {
-    return (EReference)transitionDefinitionEClass.getEStructuralFeatures().get(2);
+    return (EReference)transitionDefinitionEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -717,7 +719,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    */
   public EReference getTransitionDefinition_Out()
   {
-    return (EReference)transitionDefinitionEClass.getEStructuralFeatures().get(3);
+    return (EReference)transitionDefinitionEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -1265,26 +1267,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTransitionID()
-  {
-    return transitionIDEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTransitionID_Value()
-  {
-    return (EReference)transitionIDEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public WorkFactory getWorkFactory()
   {
     return (WorkFactory)getEFactoryInstance();
@@ -1351,6 +1333,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     createEReference(compoundStateDefinitionEClass, COMPOUND_STATE_DEFINITION__COMPOSITION);
 
     transitionDefinitionEClass = createEClass(TRANSITION_DEFINITION);
+    createEReference(transitionDefinitionEClass, TRANSITION_DEFINITION__VALUE);
     createEAttribute(transitionDefinitionEClass, TRANSITION_DEFINITION__TYPE);
     createEAttribute(transitionDefinitionEClass, TRANSITION_DEFINITION__NAME);
     createEReference(transitionDefinitionEClass, TRANSITION_DEFINITION__IN);
@@ -1431,9 +1414,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     createEReference(operationEClass, OPERATION__LEFT);
     createEAttribute(operationEClass, OPERATION__OP);
     createEReference(operationEClass, OPERATION__RIGHT);
-
-    transitionIDEClass = createEClass(TRANSITION_ID);
-    createEReference(transitionIDEClass, TRANSITION_ID__VALUE);
   }
 
   /**
@@ -1468,12 +1448,12 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     stateDefinitionEClass.getESuperTypes().add(this.getBinaryExpression());
     primitiveStateDefinitionEClass.getESuperTypes().add(this.getStateDefinition());
     compoundStateDefinitionEClass.getESuperTypes().add(this.getStateDefinition());
+    transitionDefinitionEClass.getESuperTypes().add(this.getTransitionalExpression());
     primitiveTransitionDefinitionEClass.getESuperTypes().add(this.getTransitionDefinition());
     compoundTransitionDefinitionEClass.getESuperTypes().add(this.getTransitionDefinition());
     predicateEClass.getESuperTypes().add(this.getBinaryExpression());
     operationEClass.getESuperTypes().add(this.getBinaryExpression());
     operationEClass.getESuperTypes().add(this.getTransitionalExpression());
-    transitionIDEClass.getESuperTypes().add(this.getTransitionalExpression());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1496,9 +1476,9 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     initEReference(getStateMapping_LocalState(), this.getStateDefinition(), null, "localState", null, 0, 1, StateMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(transitionMappingEClass, TransitionMapping.class, "TransitionMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTransitionMapping_ForeignTransition(), this.getTransitionID(), null, "foreignTransition", null, 0, 1, TransitionMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransitionMapping_ForeignTransition(), this.getTransitionDefinition(), null, "foreignTransition", null, 0, 1, TransitionMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTransitionMapping_Field(), this.getFieldDefinition(), null, "field", null, 0, 1, TransitionMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTransitionMapping_LocalTransition(), this.getTransitionID(), null, "localTransition", null, 0, 1, TransitionMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransitionMapping_LocalTransition(), this.getTransitionDefinition(), null, "localTransition", null, 0, 1, TransitionMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(definitionSpaceEClass, DefinitionSpace.class, "DefinitionSpace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getDefinitionSpace_States(), this.getStateDefinition(), null, "states", null, 0, -1, DefinitionSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1517,6 +1497,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     initEReference(getCompoundStateDefinition_Composition(), this.getWithStatesDefinition(), null, "composition", null, 0, 1, CompoundStateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(transitionDefinitionEClass, TransitionDefinition.class, "TransitionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTransitionDefinition_Value(), this.getTransitionDefinition(), null, "value", null, 0, 1, TransitionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTransitionDefinition_Type(), ecorePackage.getEString(), "type", null, 0, 1, TransitionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTransitionDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, TransitionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTransitionDefinition_In(), this.getInputDefinition(), null, "in", null, 0, 1, TransitionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1597,9 +1578,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     initEReference(getOperation_Left(), ecorePackage.getEObject(), null, "left", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getOperation_Op(), ecorePackage.getEString(), "op", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getOperation_Right(), ecorePackage.getEObject(), null, "right", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(transitionIDEClass, TransitionID.class, "TransitionID", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTransitionID_Value(), this.getTransitionID(), null, "value", null, 0, 1, TransitionID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

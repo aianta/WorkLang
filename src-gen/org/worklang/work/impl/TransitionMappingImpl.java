@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.worklang.work.FieldDefinition;
-import org.worklang.work.TransitionID;
+import org.worklang.work.TransitionDefinition;
 import org.worklang.work.TransitionMapping;
 import org.worklang.work.WorkPackage;
 
@@ -53,7 +53,7 @@ public class TransitionMappingImpl extends MinimalEObjectImpl.Container implemen
    * @generated
    * @ordered
    */
-  protected TransitionID foreignTransition;
+  protected TransitionDefinition foreignTransition;
 
   /**
    * The cached value of the '{@link #getField() <em>Field</em>}' reference.
@@ -73,7 +73,7 @@ public class TransitionMappingImpl extends MinimalEObjectImpl.Container implemen
    * @generated
    * @ordered
    */
-  protected TransitionID localTransition;
+  protected TransitionDefinition localTransition;
 
   /**
    * <!-- begin-user-doc -->
@@ -101,12 +101,12 @@ public class TransitionMappingImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionID getForeignTransition()
+  public TransitionDefinition getForeignTransition()
   {
     if (foreignTransition != null && foreignTransition.eIsProxy())
     {
       InternalEObject oldForeignTransition = (InternalEObject)foreignTransition;
-      foreignTransition = (TransitionID)eResolveProxy(oldForeignTransition);
+      foreignTransition = (TransitionDefinition)eResolveProxy(oldForeignTransition);
       if (foreignTransition != oldForeignTransition)
       {
         if (eNotificationRequired())
@@ -121,7 +121,7 @@ public class TransitionMappingImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionID basicGetForeignTransition()
+  public TransitionDefinition basicGetForeignTransition()
   {
     return foreignTransition;
   }
@@ -131,9 +131,9 @@ public class TransitionMappingImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setForeignTransition(TransitionID newForeignTransition)
+  public void setForeignTransition(TransitionDefinition newForeignTransition)
   {
-    TransitionID oldForeignTransition = foreignTransition;
+    TransitionDefinition oldForeignTransition = foreignTransition;
     foreignTransition = newForeignTransition;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_MAPPING__FOREIGN_TRANSITION, oldForeignTransition, foreignTransition));
@@ -187,12 +187,12 @@ public class TransitionMappingImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionID getLocalTransition()
+  public TransitionDefinition getLocalTransition()
   {
     if (localTransition != null && localTransition.eIsProxy())
     {
       InternalEObject oldLocalTransition = (InternalEObject)localTransition;
-      localTransition = (TransitionID)eResolveProxy(oldLocalTransition);
+      localTransition = (TransitionDefinition)eResolveProxy(oldLocalTransition);
       if (localTransition != oldLocalTransition)
       {
         if (eNotificationRequired())
@@ -207,7 +207,7 @@ public class TransitionMappingImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionID basicGetLocalTransition()
+  public TransitionDefinition basicGetLocalTransition()
   {
     return localTransition;
   }
@@ -217,9 +217,9 @@ public class TransitionMappingImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setLocalTransition(TransitionID newLocalTransition)
+  public void setLocalTransition(TransitionDefinition newLocalTransition)
   {
-    TransitionID oldLocalTransition = localTransition;
+    TransitionDefinition oldLocalTransition = localTransition;
     localTransition = newLocalTransition;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_MAPPING__LOCAL_TRANSITION, oldLocalTransition, localTransition));
@@ -259,13 +259,13 @@ public class TransitionMappingImpl extends MinimalEObjectImpl.Container implemen
     switch (featureID)
     {
       case WorkPackage.TRANSITION_MAPPING__FOREIGN_TRANSITION:
-        setForeignTransition((TransitionID)newValue);
+        setForeignTransition((TransitionDefinition)newValue);
         return;
       case WorkPackage.TRANSITION_MAPPING__FIELD:
         setField((FieldDefinition)newValue);
         return;
       case WorkPackage.TRANSITION_MAPPING__LOCAL_TRANSITION:
-        setLocalTransition((TransitionID)newValue);
+        setLocalTransition((TransitionDefinition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -282,13 +282,13 @@ public class TransitionMappingImpl extends MinimalEObjectImpl.Container implemen
     switch (featureID)
     {
       case WorkPackage.TRANSITION_MAPPING__FOREIGN_TRANSITION:
-        setForeignTransition((TransitionID)null);
+        setForeignTransition((TransitionDefinition)null);
         return;
       case WorkPackage.TRANSITION_MAPPING__FIELD:
         setField((FieldDefinition)null);
         return;
       case WorkPackage.TRANSITION_MAPPING__LOCAL_TRANSITION:
-        setLocalTransition((TransitionID)null);
+        setLocalTransition((TransitionDefinition)null);
         return;
     }
     super.eUnset(featureID);

@@ -324,15 +324,6 @@ public interface WorkFactory extends EFactory
   Operation createOperation();
 
   /**
-   * Returns a new object of class '<em>Transition ID</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Transition ID</em>'.
-   * @generated
-   */
-  TransitionID createTransitionID();
-
-  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

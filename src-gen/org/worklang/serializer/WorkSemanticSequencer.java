@@ -52,7 +52,7 @@ import org.worklang.work.StateInstance;
 import org.worklang.work.StateMapping;
 import org.worklang.work.ToDefinition;
 import org.worklang.work.TransitionDeclaration;
-import org.worklang.work.TransitionID;
+import org.worklang.work.TransitionDefinition;
 import org.worklang.work.TransitionInstance;
 import org.worklang.work.TransitionMapping;
 import org.worklang.work.UseDefinition;
@@ -156,8 +156,8 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case WorkPackage.TRANSITION_DECLARATION:
 				sequence_TransitionDeclaration(context, (TransitionDeclaration) semanticObject); 
 				return; 
-			case WorkPackage.TRANSITION_ID:
-				sequence_TerminalTransitionalExpression(context, (TransitionID) semanticObject); 
+			case WorkPackage.TRANSITION_DEFINITION:
+				sequence_TerminalTransitionalExpression(context, (TransitionDefinition) semanticObject); 
 				return; 
 			case WorkPackage.TRANSITION_INSTANCE:
 				sequence_TransitionInstance(context, (TransitionInstance) semanticObject); 
@@ -531,20 +531,20 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     TransitionalExpression returns TransitionID
-	 *     TransitionalExpression.Operation_1_0 returns TransitionID
-	 *     TerminalTransitionalExpression returns TransitionID
+	 *     TransitionalExpression returns TransitionDefinition
+	 *     TransitionalExpression.Operation_1_0 returns TransitionDefinition
+	 *     TerminalTransitionalExpression returns TransitionDefinition
 	 *
 	 * Constraint:
-	 *     value=[TransitionID|ID]
+	 *     value=[TransitionDefinition|ID]
 	 */
-	protected void sequence_TerminalTransitionalExpression(ISerializationContext context, TransitionID semanticObject) {
+	protected void sequence_TerminalTransitionalExpression(ISerializationContext context, TransitionDefinition semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.TRANSITION_ID__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.TRANSITION_ID__VALUE));
+			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.TRANSITION_DEFINITION__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.TRANSITION_DEFINITION__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTerminalTransitionalExpressionAccess().getValueTransitionIDIDTerminalRuleCall_1_1_0_1(), semanticObject.eGet(WorkPackage.Literals.TRANSITION_ID__VALUE, false));
+		feeder.accept(grammarAccess.getTerminalTransitionalExpressionAccess().getValueTransitionDefinitionIDTerminalRuleCall_1_1_0_1(), semanticObject.eGet(WorkPackage.Literals.TRANSITION_DEFINITION__VALUE, false));
 		feeder.finish();
 	}
 	
@@ -602,7 +602,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     TransitionMapping returns TransitionMapping
 	 *
 	 * Constraint:
-	 *     (foreignTransition=[TransitionID|ID] field=[FieldDefinition|ID] localTransition=[TransitionID|ID])
+	 *     (foreignTransition=[TransitionDefinition|ID] field=[FieldDefinition|ID] localTransition=[TransitionDefinition|ID])
 	 */
 	protected void sequence_TransitionMapping(ISerializationContext context, TransitionMapping semanticObject) {
 		if (errorAcceptor != null) {
@@ -614,9 +614,9 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.TRANSITION_MAPPING__LOCAL_TRANSITION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTransitionMappingAccess().getForeignTransitionTransitionIDIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.TRANSITION_MAPPING__FOREIGN_TRANSITION, false));
+		feeder.accept(grammarAccess.getTransitionMappingAccess().getForeignTransitionTransitionDefinitionIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.TRANSITION_MAPPING__FOREIGN_TRANSITION, false));
 		feeder.accept(grammarAccess.getTransitionMappingAccess().getFieldFieldDefinitionIDTerminalRuleCall_3_0_1(), semanticObject.eGet(WorkPackage.Literals.TRANSITION_MAPPING__FIELD, false));
-		feeder.accept(grammarAccess.getTransitionMappingAccess().getLocalTransitionTransitionIDIDTerminalRuleCall_5_0_1(), semanticObject.eGet(WorkPackage.Literals.TRANSITION_MAPPING__LOCAL_TRANSITION, false));
+		feeder.accept(grammarAccess.getTransitionMappingAccess().getLocalTransitionTransitionDefinitionIDTerminalRuleCall_5_0_1(), semanticObject.eGet(WorkPackage.Literals.TRANSITION_MAPPING__LOCAL_TRANSITION, false));
 		feeder.finish();
 	}
 	

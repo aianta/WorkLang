@@ -307,6 +307,8 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		
 		definitionSpace.transitions.forEach[transition|
 			var transitionVertex = generateTransitionGraphStructure(transition, transitionMeta)
+			
+			createEdge(definitionSpaceVertex, transitionVertex, "transition")
 		]
 		
 	}
@@ -440,7 +442,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 	
 	def private generateInstanceTransitionGraphStructure(Instance instance, String label){
 		
-		var instanceVertex = graph.addVertex(label)
+		var instanceVertex = createVertex(instance,label)
 		instanceVertex.property(VertexProperty.Cardinality.single, "type", "transition")
 		instanceVertex.property(VertexProperty.Cardinality.single, "name", instance.name)
 		instanceVertex.property(VertexProperty.Cardinality.single, "host", instance.transition.host)

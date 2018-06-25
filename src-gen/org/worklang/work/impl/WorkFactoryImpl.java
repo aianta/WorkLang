@@ -109,7 +109,6 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
       case WorkPackage.BINARY_EXPRESSION: return createBinaryExpression();
       case WorkPackage.TRANSITIONAL_EXPRESSION: return createTransitionalExpression();
       case WorkPackage.OPERATION: return createOperation();
-      case WorkPackage.TRANSITION_ID: return createTransitionID();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -465,17 +464,6 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
   {
     OperationImpl operation = new OperationImpl();
     return operation;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TransitionID createTransitionID()
-  {
-    TransitionIDImpl transitionID = new TransitionIDImpl();
-    return transitionID;
   }
 
   /**

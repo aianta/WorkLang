@@ -68,7 +68,7 @@ public class WorkSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) value=[TransitionID|ID]
+	 *     (rule start) (ambiguity) value=[TransitionDefinition|ID]
 	 *     (rule start) (ambiguity) {Operation.left=}
 	 */
 	protected void emit_TerminalTransitionalExpression_LeftParenthesisKeyword_0_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {

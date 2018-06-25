@@ -47,7 +47,7 @@ StateMapping:
 ;
 
 TransitionMapping:
-	'transition' foreignTransition=[TransitionID] 'from' field = [FieldDefinition] 'to' localTransition=[TransitionID]
+	'transition' foreignTransition=[TransitionDefinition] 'from' field = [FieldDefinition] 'to' localTransition=[TransitionDefinition]
 ;
 
 
@@ -217,7 +217,7 @@ TransitionalExpression:
 
 TerminalTransitionalExpression returns TransitionalExpression:
 	'(' TransitionalExpression ')'|
-	{TransitionID} value = [TransitionID]
+	{TransitionDefinition} value = [TransitionDefinition]
 ;
 
 

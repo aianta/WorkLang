@@ -248,11 +248,6 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
         return createOperationAdapter();
       }
       @Override
-      public Adapter caseTransitionID(TransitionID object)
-      {
-        return createTransitionIDAdapter();
-      }
-      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -750,21 +745,6 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createOperationAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.TransitionID <em>Transition ID</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.TransitionID
-   * @generated
-   */
-  public Adapter createTransitionIDAdapter()
   {
     return null;
   }

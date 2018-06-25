@@ -46,12 +46,12 @@ public interface TransitionMapping extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Foreign Transition</em>' reference.
-   * @see #setForeignTransition(TransitionID)
+   * @see #setForeignTransition(TransitionDefinition)
    * @see org.worklang.work.WorkPackage#getTransitionMapping_ForeignTransition()
    * @model
    * @generated
    */
-  TransitionID getForeignTransition();
+  TransitionDefinition getForeignTransition();
 
   /**
    * Sets the value of the '{@link org.worklang.work.TransitionMapping#getForeignTransition <em>Foreign Transition</em>}' reference.
@@ -61,7 +61,7 @@ public interface TransitionMapping extends EObject
    * @see #getForeignTransition()
    * @generated
    */
-  void setForeignTransition(TransitionID value);
+  void setForeignTransition(TransitionDefinition value);
 
   /**
    * Returns the value of the '<em><b>Field</b></em>' reference.
@@ -98,12 +98,12 @@ public interface TransitionMapping extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Local Transition</em>' reference.
-   * @see #setLocalTransition(TransitionID)
+   * @see #setLocalTransition(TransitionDefinition)
    * @see org.worklang.work.WorkPackage#getTransitionMapping_LocalTransition()
    * @model
    * @generated
    */
-  TransitionID getLocalTransition();
+  TransitionDefinition getLocalTransition();
 
   /**
    * Sets the value of the '{@link org.worklang.work.TransitionMapping#getLocalTransition <em>Local Transition</em>}' reference.
@@ -113,6 +113,6 @@ public interface TransitionMapping extends EObject
    * @see #getLocalTransition()
    * @generated
    */
-  void setLocalTransition(TransitionID value);
+  void setLocalTransition(TransitionDefinition value);
 
 } // TransitionMapping
