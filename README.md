@@ -1,5 +1,6 @@
-#Worklang Motivation
-##Software Ecosystems
+# Worklang Motivation
+
+## Software Ecosystems
 Software ecosystems are the future of computing. Any sufficiently large group with IT systems (enterprises, startups, open source communities, etc.) eventually ends up building multiple software components. 
 
 At some point, there is a desire to interweave, reuse, or at least collectively expose various subsets of these components (a la API Gateways).
