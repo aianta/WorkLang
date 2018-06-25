@@ -139,102 +139,244 @@ public class ExecutionApi extends AbstractVerticle{
 		
 		logger.info("Registering transition at {}", routePath);
 		
-		Route route = router.route(routePath).handler(rc->{
+		//If this transition has inputs
+		if (transition.getTransitionDeclaration().getTransition().getIn() != null) {
 			
-			String outputInstanceName = rc.request().getParam("produce");
-			
-			client.get(
-					transition.getTransition().getPort(),
-					transition.getTransition().getHost(),
-					transition.getTransition().getPath())
-			.send(ar->{
-		    	if(ar.succeeded()){
-		    				    		
-		        	HttpResponse response = ar.result();
-						
-					System.out.println(response.body().toString());
+			Route route = router.route(HttpMethod.POST,routePath).handler(rc->{
+				
+				//Compute inputs
+				JsonArray inputs = rc.getBodyAsJsonArray();
+				
+				ArrayList<String> inputInstancesToFetch = new ArrayList<String>();
+				
+				inputs.forEach(inputInstanceName->{
+					inputInstancesToFetch.add(inputInstanceName.toString());
+				});
+				
+				JsonObject input = new JsonObject();
+				
+				
+				JsonArray inputsToSend = new JsonArray();
 					
-					JsonObject data = response.bodyAsJsonObject();
-					
-					WorkFactory factory = WorkFactory.eINSTANCE;
-					
-					/* We need to create a new instance to persist the result of this transition.
-					 * Instances have a State Declaration and a State Instance
-					 */
-					logger.info("Building new instance!");
-					Instance i = factory.createInstance();
-					
-					StateInstance si = factory.createStateInstance();
-					StateDeclaration sd = factory.createStateDeclaration();
-					
-					
-					//Build State Declaration
-					logger.info("Building State Declaration");
-					logger.info("Finding output state: ");
-					logger.info("match (this:`transition instance` {field:'{}', name:'{}' })-[:instanceOf]->(parent:transition)-[:produces]->(:transition)-[:hasParameter]->(outputElement:state) return outputElement",fieldName, transition.getName());
-					
-					Vertex outputStateVertex = graph.vertices("match (this:`transition instance` {field:'"+fieldName+"', name:'"+transition.getName()+"' })-[:instanceOf]->(parent:transition)-[:produces]->(:transition)-[:hasParameter]->(outputElement:state) return outputElement").next();
-					logger.info("outputStateVertex => {}", outputStateVertex);
-		
-					sd.setState(
-							WorklangResourceUtils.
-							resolveStateDefinition(
-									fieldName,
-									outputStateVertex.property("name").value().toString()
-								)
-							);
-					
-					logger.info("Built State Declaration");
-					
-					//Build State Instance
-					logger.info("Building State Instance");
-					data.forEach(entry->{
-						if (entry.getValue() instanceof String) {
-							SetStatement set = factory.createSetStatement();
-							
-							//Use json key as name of state being set
-							set.setVariable(WorklangResourceUtils.resolveStateDefinition(fieldName, 
-									entry.getKey()
-									));
-							
-							ToDefinition to = factory.createToDefinition();
-							to.setValue(entry.getValue().toString());
-							
-							set.setToDef(to);
-							si.getMembers().add(set);
-						}
-					});
-					
-					//Assemble State Declaration and State Instance into Instance
-					logger.info("Assembling instance");
-					i.setStateDeclaration(sd);
-					i.setState(si);
-					
-					if (outputInstanceName != null) {
-						i.setName(outputInstanceName);
-					}else{
-						i.setName(transition.getName() + " output - " + Date.from(Instant.now()).toString());
-					}
-					
-					//Add new instance to active resource
-					WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
-					
-					//Update meta model
-					try {
-						Map<String,String> globalWorkspaceSaveOptions = new HashMap<String,String>();
-						globalWorkspaceSaveOptions.put("WorkPersistenceType", "globalWorkspace");
-						WorkApi.getActiveResource().save(globalWorkspaceSaveOptions);
-					}catch(Exception e) {
-						logger.info("Failed to update meta model");
-						e.printStackTrace();
-					}
-
-					
-					rc.response().end(data.encode());
+				for (String s: inputInstancesToFetch) {
+					inputsToSend.add(
+						ExecutionUtils.StateInstanceToJson(
+								WorklangResourceUtils.resolveInstance(fieldName, s)
+							));
 				}
+				
+				/* If this transition has only 1 input, simply pass the input instance
+				 * as the body of the request.
+				 * 
+				 * Otherwise send the inputs in a JsonArray
+				 */
+				
+				if (inputsToSend.size() == 1) {
+					input = inputsToSend.getJsonObject(0);
+				}else {
+					input.put("inputs", inputsToSend);
+				}
+				
+				
+				//Send POST request
+				String outputInstanceName = rc.request().getParam("produce");
+				
+				client.post(
+						transition.getTransition().getPort(),
+						transition.getTransition().getHost(),
+						transition.getTransition().getPath())
+				.sendJsonObject(input, ar->{
+			    	if(ar.succeeded()){
+			    				    		
+			        	HttpResponse response = ar.result();
+							
+						System.out.println(response.body().toString());
+						
+						JsonObject data = response.bodyAsJsonObject();
+						
+						WorkFactory factory = WorkFactory.eINSTANCE;
+						
+						/* We need to create a new instance to persist the result of this transition.
+						 * Instances have a State Declaration and a State Instance
+						 */
+						logger.info("Building new instance!");
+						Instance i = factory.createInstance();
+						
+						StateInstance si = factory.createStateInstance();
+						StateDeclaration sd = factory.createStateDeclaration();
+						
+						
+						//Build State Declaration
+						logger.info("Building State Declaration");
+						logger.info("Finding output state: ");
+						logger.info("match (this:`transition instance` {field:'{}', name:'{}' })-[:instanceOf]->(parent:transition)-[:produces]->(:transition)-[:hasParameter]->(outputElement:state) return outputElement",fieldName, transition.getName());
+						
+						Vertex outputStateVertex = graph.vertices("match (this:`transition instance` {field:'"+fieldName+"', name:'"+transition.getName()+"' })-[:instanceOf]->(parent:transition)-[:produces]->(:transition)-[:hasParameter]->(outputElement:state) return outputElement").next();
+						logger.info("outputStateVertex => {}", outputStateVertex);
+			
+						sd.setState(
+								WorklangResourceUtils.
+								resolveStateDefinition(
+										fieldName,
+										outputStateVertex.property("name").value().toString()
+									)
+								);
+						
+						logger.info("Built State Declaration");
+						
+						//Build State Instance
+						logger.info("Building State Instance");
+						data.forEach(entry->{
+							if (entry.getValue() instanceof String) {
+								SetStatement set = factory.createSetStatement();
+								
+								//Use json key as name of state being set
+								set.setVariable(WorklangResourceUtils.resolveStateDefinition(fieldName, 
+										entry.getKey()
+										));
+								
+								ToDefinition to = factory.createToDefinition();
+								to.setValue(entry.getValue().toString());
+								
+								set.setToDef(to);
+								si.getMembers().add(set);
+							}
+						});
+						
+						//Assemble State Declaration and State Instance into Instance
+						logger.info("Assembling instance");
+						i.setStateDeclaration(sd);
+						i.setState(si);
+						
+						if (outputInstanceName != null) {
+							i.setName(outputInstanceName);
+						}else{
+							i.setName(transition.getName() + " output - " + Date.from(Instant.now()).toString());
+						}
+						
+						//Add new instance to active resource
+						WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
+						
+						//Update meta model
+						try {
+							Map<String,String> globalWorkspaceSaveOptions = new HashMap<String,String>();
+							globalWorkspaceSaveOptions.put("WorkPersistenceType", "globalWorkspace");
+							WorkApi.getActiveResource().save(globalWorkspaceSaveOptions);
+						}catch(Exception e) {
+							logger.info("Failed to update meta model");
+							e.printStackTrace();
+						}
+
+						
+						rc.response().end(data.encode());
+					}
+				});
 			});
 			
-		});
+		}
+		
+		//If this transition has no inputs
+		if (transition.getTransitionDeclaration().getTransition().getIn() == null) {
+			
+			Route route = router.route(HttpMethod.GET, routePath).handler(rc->{
+				
+				
+				String outputInstanceName = rc.request().getParam("produce");
+				
+				client.get(
+						transition.getTransition().getPort(),
+						transition.getTransition().getHost(),
+						transition.getTransition().getPath())
+				.send(ar->{
+			    	if(ar.succeeded()){
+			    				    		
+			        	HttpResponse response = ar.result();
+							
+						System.out.println(response.body().toString());
+						
+						JsonObject data = response.bodyAsJsonObject();
+						
+						WorkFactory factory = WorkFactory.eINSTANCE;
+						
+						/* We need to create a new instance to persist the result of this transition.
+						 * Instances have a State Declaration and a State Instance
+						 */
+						logger.info("Building new instance!");
+						Instance i = factory.createInstance();
+						
+						StateInstance si = factory.createStateInstance();
+						StateDeclaration sd = factory.createStateDeclaration();
+						
+						
+						//Build State Declaration
+						logger.info("Building State Declaration");
+						logger.info("Finding output state: ");
+						logger.info("match (this:`transition instance` {field:'{}', name:'{}' })-[:instanceOf]->(parent:transition)-[:produces]->(:transition)-[:hasParameter]->(outputElement:state) return outputElement",fieldName, transition.getName());
+						
+						Vertex outputStateVertex = graph.vertices("match (this:`transition instance` {field:'"+fieldName+"', name:'"+transition.getName()+"' })-[:instanceOf]->(parent:transition)-[:produces]->(:transition)-[:hasParameter]->(outputElement:state) return outputElement").next();
+						logger.info("outputStateVertex => {}", outputStateVertex);
+			
+						sd.setState(
+								WorklangResourceUtils.
+								resolveStateDefinition(
+										fieldName,
+										outputStateVertex.property("name").value().toString()
+									)
+								);
+						
+						logger.info("Built State Declaration");
+						
+						//Build State Instance
+						logger.info("Building State Instance");
+						data.forEach(entry->{
+							if (entry.getValue() instanceof String) {
+								SetStatement set = factory.createSetStatement();
+								
+								//Use json key as name of state being set
+								set.setVariable(WorklangResourceUtils.resolveStateDefinition(fieldName, 
+										entry.getKey()
+										));
+								
+								ToDefinition to = factory.createToDefinition();
+								to.setValue(entry.getValue().toString());
+								
+								set.setToDef(to);
+								si.getMembers().add(set);
+							}
+						});
+						
+						//Assemble State Declaration and State Instance into Instance
+						logger.info("Assembling instance");
+						i.setStateDeclaration(sd);
+						i.setState(si);
+						
+						if (outputInstanceName != null) {
+							i.setName(outputInstanceName);
+						}else{
+							i.setName(transition.getName() + " output - " + Date.from(Instant.now()).toString());
+						}
+						
+						//Add new instance to active resource
+						WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
+						
+						//Update meta model
+						try {
+							Map<String,String> globalWorkspaceSaveOptions = new HashMap<String,String>();
+							globalWorkspaceSaveOptions.put("WorkPersistenceType", "globalWorkspace");
+							WorkApi.getActiveResource().save(globalWorkspaceSaveOptions);
+						}catch(Exception e) {
+							logger.info("Failed to update meta model");
+							e.printStackTrace();
+						}
+
+						
+						rc.response().end(data.encode());
+					}
+				});
+				
+			});
+		}
+		
 		
 		transitions.add(routePath);
 		

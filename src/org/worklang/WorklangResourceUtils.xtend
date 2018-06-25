@@ -6,6 +6,7 @@ import org.worklang.work.StateDefinition
 import org.worklang.work.FieldDefinition
 import org.slf4j.LoggerFactory
 import org.worklang.work.InstanceSpace
+import org.worklang.work.Instance
 
 class WorklangResourceUtils {
 	
@@ -46,5 +47,15 @@ class WorklangResourceUtils {
 		] as FieldDefinition
 		
 		return targetField.instanceSpace
+	}
+	
+	def static Instance resolveInstance(String fieldName, String instanceName){
+		
+		var InstanceSpace space = resolveInstanceSpace(fieldName)
+		
+		return space.instances.findFirst[instance|
+			instance.name.equals(instanceName)
+		]
+		
 	}
 }
