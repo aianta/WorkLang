@@ -35,6 +35,10 @@ import com.steelbridgelabs.oss.neo4j.structure.Neo4JGraph
 import com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdProvider
 import org.neo4j.driver.v1.AuthTokens
 import org.eclipse.xtext.resource.XtextResource
+import org.worklang.read.ReadApi
+import java.util.Map
+import java.util.HashMap
+import org.worklang.generator.WorkGenerator
 
 class WorkApi extends AbstractVerticle {
 	
@@ -57,6 +61,7 @@ class WorkApi extends AbstractVerticle {
 	var Route processWorklangDataRoute
 	
 	var static ExecutionApi exec
+	var static ReadApi read
 	
 	new (){
 		try {
@@ -72,12 +77,31 @@ class WorkApi extends AbstractVerticle {
 		
 		logger.info("REST Verticle starting")
 		
-		//Start Execution Manager
-		logger.info("Initializing Execution Manager")
+		//Start Read Api
+		logger.info("Initializing Read Api")
+		read = new ReadApi(graph)
+		
+		//Start Execution Api
+		logger.info("Initializing Execution Api")
 		exec = new ExecutionApi(graph)
 		
-		logger.info("Attempting to deploy Execution Manager")
-		vertx.deployVerticle(exec)
+		logger.info("Attempting to deploy Read Api")
+		vertx.deployVerticle(read, [result|
+			if (result.succeeded){
+				logger.info("Read Api deployed, registering router")
+				router.mountSubRouter("/read", read.getRouter)
+			}
+		])
+		
+		logger.info("Attempting to deploy Execution Api")
+		
+		vertx.deployVerticle(exec, [result|
+			if (result.succeeded){
+				logger.info("Execution Api deployed, registering router")
+				router.mountSubRouter("/exec", exec.getRouter)
+			}
+		])
+		
 		
 		logger.info("Initializing Worklang Interpreter")
 		val injector = new WorkStandaloneSetup().createInjectorAndDoEMFRegistration
@@ -86,9 +110,6 @@ class WorkApi extends AbstractVerticle {
 		options.port = 9000
 		
 		server = vertx.createHttpServer(options)
-	
-		router.mountSubRouter("/exec", exec.getRouter)
-	
 		
 		router.route(HttpMethod.POST, "/").handler(BodyHandler.create)
 		
@@ -121,8 +142,12 @@ class WorkApi extends AbstractVerticle {
 		response.end("Done!")
 	}
 	
-	def static getExecutionManager(){
+	def static getExecutionApi(){
 		exec
+	}
+	
+	def static getReadApi(){
+		read
 	}
 	
 	def static getGraph(){
@@ -135,6 +160,27 @@ class WorkApi extends AbstractVerticle {
 	
 	def static setActiveResource(XtextResource resource){
 		activeResource = resource
+	}
+	
+	def static reprocessActiveResource(){
+		
+		if (activeResource !== null){
+			val Map<String,String> globalWorkspaceSaveOptions = new HashMap<String,String>
+			globalWorkspaceSaveOptions.put("WorkPersistenceType", "globalWorkspace")
+			
+			activeResource.save(globalWorkspaceSaveOptions)
+			
+			exec.clear
+			read.clear
+			
+			WorkGenerator.generateAPIs(activeResource)
+		}else{
+
+			logger.error("No active resource, cannot reprocess.")
+			throw new Exception ("No active resource, cannot reprocess.")
+			
+		}
+		
 	}
 	
 }

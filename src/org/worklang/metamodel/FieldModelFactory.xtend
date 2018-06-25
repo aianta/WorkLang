@@ -51,7 +51,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 	
 	//Meta Info
 	val creationStamp = Date.from(Instant.now)
-	var fieldMeta = "field - "
+	//var fieldMeta = "field - "
 	var stateMeta = "state"
 	var transitionMeta = "transition"
 	var stateCompositionMeta = "state composition logic"
@@ -85,7 +85,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		super(g)
 		this.field = f
 		fieldName = f.name
-		fieldMeta += f.name
+		//fieldMeta += f.name
 		workspaceVertex = workspace
 		
 		logger.info("Generating meta model for {}", fieldName)
@@ -244,7 +244,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 	
 	def private generateField(){
 		logger.info("Generating field vertex for {}", fieldName)
-		fieldVertex = createVertex(field, fieldMeta)
+		fieldVertex = createVertex(field, field.name)
 		fieldVertex.property(VertexProperty.Cardinality.single,"name", field.name)
 		createEdge(workspaceVertex, fieldVertex, "containsField")
 	}
@@ -254,25 +254,25 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		logger.info("Generating spaces for {}", fieldName)
 		
 		if (definitionSpace !== null){
-			definitionSpaceVertex = createVertex(definitionSpace, fieldMeta)
+			definitionSpaceVertex = createVertex(definitionSpace, field.name)
 			definitionSpaceVertex.property(VertexProperty.Cardinality.single, "name", "definition space")
 			createEdge(fieldVertex, definitionSpaceVertex, "definitionSpace")
 		}
 		
 		if (instanceSpace !== null){
-			instanceSpaceVertex = createVertex(instanceSpace, fieldMeta)
+			instanceSpaceVertex = createVertex(instanceSpace, field.name)
 			instanceSpaceVertex.property(VertexProperty.Cardinality.single, "name", "instance space")
 			createEdge(fieldVertex, instanceSpaceVertex, "instanceSpace")
 		}
 		
 		if (mapSpace !== null){
-			mapSpaceVertex = createVertex(mapSpace, fieldMeta)
+			mapSpaceVertex = createVertex(mapSpace, field.name)
 			mapSpaceVertex.property(VertexProperty.Cardinality.single, "name",  "map space")
 			createEdge(fieldVertex, mapSpaceVertex, "mapSpace")
 		}
 		
 		if (referenceSpace !== null){
-			referenceSpaceVertex = createVertex(referenceSpace, fieldMeta)
+			referenceSpaceVertex = createVertex(referenceSpace, field.name)
 			referenceSpaceVertex.property(VertexProperty.Cardinality.single, "name",  "reference space")
 			createEdge(fieldVertex, referenceSpaceVertex, "referenceSpace")
 		}
@@ -332,6 +332,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 			
 			var vertex = createVertex(state, stateInstanceMeta)
 			vertex.property(VertexProperty.Cardinality.single,"name", instance.name)
+			vertex.property(VertexProperty.Cardinality.single, "type", "state")
 			createEdge(instanceSpaceVertex, vertex, "definesInstance")
 			
 			//Find vertex of state this is an instance of
@@ -663,6 +664,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		
 		transitionVertex.property(VertexProperty.Cardinality.single, "hasInput", hasInput)
 		transitionVertex.property(VertexProperty.Cardinality.single, "hasOutput", true) //All transitions must have an output
+		transitionVertex.property(VertexProperty.Cardinality.single, "type", transition.type)
 		
 		//If the transition requires an input
 		if (hasInput){

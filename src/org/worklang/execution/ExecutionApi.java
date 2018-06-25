@@ -115,7 +115,7 @@ public class ExecutionApi extends AbstractVerticle{
 		HttpServerResponse response = rc.response();
 		
 		JsonObject data = new JsonObject()
-				.put("Service", "Work Execution Manager")
+				.put("Service", "Work Execution Api")
 				.put("Version", "0.1")
 				.put("live-transitions", transitions.size());
 				
@@ -360,14 +360,7 @@ public class ExecutionApi extends AbstractVerticle{
 						WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
 						
 						//Update meta model
-						try {
-							Map<String,String> globalWorkspaceSaveOptions = new HashMap<String,String>();
-							globalWorkspaceSaveOptions.put("WorkPersistenceType", "globalWorkspace");
-							WorkApi.getActiveResource().save(globalWorkspaceSaveOptions);
-						}catch(Exception e) {
-							logger.info("Failed to update meta model");
-							e.printStackTrace();
-						}
+						WorkApi.reprocessActiveResource();
 
 						
 						rc.response().end(data.encode());
@@ -382,5 +375,8 @@ public class ExecutionApi extends AbstractVerticle{
 		
 	}
 	
-
+	//Clears Execution Api Info
+	public void clear() {
+		transitions.clear();
+	}
 }

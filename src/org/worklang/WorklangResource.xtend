@@ -60,7 +60,7 @@ class WorklangResource extends LazyLinkingResource{
 		 	&& options.get("WorkPersistenceType").equals("globalWorkspace")
 		 ){
 		 	
-		 	//Clear previous meta model
+		 	//Clear previous meta model from db and APIs
 		 	graph.execute("match (n) detach delete n")
 		 	initMetaModel
 		 	

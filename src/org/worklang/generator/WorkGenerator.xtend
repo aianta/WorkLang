@@ -51,7 +51,6 @@ import org.worklang.interpreter.WorkApi
 class WorkGenerator extends AbstractGenerator {
 	
 	val static logger = LoggerFactory.getLogger(WorkGenerator)
-	val GEN_PATH = "R:/transitions-gen"
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		
@@ -65,8 +64,12 @@ class WorkGenerator extends AbstractGenerator {
 		xResource.save(globalWorkspaceSaveOptions)
 		WorkApi.activeResource = xResource
 		
-		val paths = new ArrayList<String>
 		
+		generateAPIs(xResource)
+
+	}
+	
+	def static generateAPIs(XtextResource xResource){
 		//Create Execution API for transition instances
 		xResource.allContents.filter[ele|
 			ele.eClass.instanceClass.equals(org.worklang.work.FieldDefinition)
@@ -77,10 +80,34 @@ class WorkGenerator extends AbstractGenerator {
 				instance.transitionDeclaration !== null //Filter out state instances
 			].forEach[transitionInstance|
 				
-				WorkApi.executionManager.addTransition(field.name, transitionInstance)
+				WorkApi.executionApi.addTransition(field.name, transitionInstance)
 						
 			]
 		]
-
+		
+		//Create Read API
+		xResource.allContents.filter[ele|
+			ele.eClass.instanceClass.equals(org.worklang.work.FieldDefinition)
+		].forEach[fieldEObject|
+			val field = fieldEObject as FieldDefinition
+			
+			//For the field
+			WorkApi.readApi.addField(field.name)
+			
+			//For its states
+			field.definitionSpace.states.forEach[state|
+				WorkApi.readApi.addState(field.name, state)
+			]
+			
+			//For its state instances
+			field.instanceSpace.instances.filter[instance|
+				instance.stateDeclaration !== null //Filter out transition instances
+			].forEach[stateInstance|
+				
+				WorkApi.readApi.addStateInstance(field.name, stateInstance);
+			]
+			
+			
+		]
 	}
 }
