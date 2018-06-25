@@ -30,7 +30,7 @@ Worknets work, by abstracting away the details of software interaction, from the
 
 This allows applications to discover and interact with each other through the worknet, even if they cannot do so directly.
 
-For example, the resource that renders an in-game leaderboard, maybe unable to process the games community forum accounts as players with a score, but it can engage the worknet to transform forum accounts into player objects on demand, or when new forum accounts are created or edited.
+For example, the resource that renders an in-game leaderboard, may be unable to process the games community forum accounts as players with a score, but it can engage the worknet to transform forum accounts into player objects on demand, or when new forum accounts are created or edited.
 
 ### What makes worknets...work?
 Worknets create a sort of *living standard* in the form of a **meta model** which describes what resources are available, how to interact with them, and how they interact with each other to satisfy business requirements or user stories.
