@@ -910,7 +910,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		
 		var compositionBody = composition.body
 		
-		val bodyVertex = createVertex(compositionBody, transitionCompositionBodyMeta)
+		val bodyVertex = createVertex(compositionBody, transitionInstanceMeta)
 		bodyVertex.property(VertexProperty.Cardinality.single,"name", instance.name)
 		
 		//Find and connect all starting inputs
@@ -919,7 +919,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 			createEdge(bodyVertex, inputVertex, "starting input")
 		]
 		
-		var executionResultVertex = generateExecutionResultGraphStructures(compositionBody.expression as ExecutionResult, label)
+		var executionResultVertex = generateExecutionResultGraphStructures(compositionBody.expression as ExecutionResult, executionResultMeta)
 		createEdge(bodyVertex, executionResultVertex, "expression")
 		
 		return bodyVertex
@@ -931,7 +931,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		
 		//If this actually is an execution result
 		
-		var executionResultVertex = createVertex(executionResult, label)
+		var executionResultVertex = createVertex(executionResult, executionResultMeta)
 		executionResultVertex.property(VertexProperty.Cardinality.single, "name", "execution result")
 		
 		/* 7 Cases to handle for computeFirst AND computeNext
