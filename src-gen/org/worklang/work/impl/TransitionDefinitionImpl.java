@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.worklang.work.InputDefinition;
 import org.worklang.work.OutputDefinition;
@@ -36,7 +37,6 @@ import org.worklang.work.WorkPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.TransitionDefinitionImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.worklang.work.impl.TransitionDefinitionImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.worklang.work.impl.TransitionDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.worklang.work.impl.TransitionDefinitionImpl#getIn <em>In</em>}</li>
@@ -45,18 +45,8 @@ import org.worklang.work.WorkPackage;
  *
  * @generated
  */
-public class TransitionDefinitionImpl extends TransitionalExpressionImpl implements TransitionDefinition
+public class TransitionDefinitionImpl extends MinimalEObjectImpl.Container implements TransitionDefinition
 {
-  /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue()
-   * @generated
-   * @ordered
-   */
-  protected TransitionDefinition value;
-
   /**
    * The default value of the '{@link #getType() <em>Type</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -136,49 +126,6 @@ public class TransitionDefinitionImpl extends TransitionalExpressionImpl impleme
   protected EClass eStaticClass()
   {
     return WorkPackage.Literals.TRANSITION_DEFINITION;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TransitionDefinition getValue()
-  {
-    if (value != null && value.eIsProxy())
-    {
-      InternalEObject oldValue = (InternalEObject)value;
-      value = (TransitionDefinition)eResolveProxy(oldValue);
-      if (value != oldValue)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkPackage.TRANSITION_DEFINITION__VALUE, oldValue, value));
-      }
-    }
-    return value;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TransitionDefinition basicGetValue()
-  {
-    return value;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setValue(TransitionDefinition newValue)
-  {
-    TransitionDefinition oldValue = value;
-    value = newValue;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_DEFINITION__VALUE, oldValue, value));
   }
 
   /**
@@ -351,9 +298,6 @@ public class TransitionDefinitionImpl extends TransitionalExpressionImpl impleme
   {
     switch (featureID)
     {
-      case WorkPackage.TRANSITION_DEFINITION__VALUE:
-        if (resolve) return getValue();
-        return basicGetValue();
       case WorkPackage.TRANSITION_DEFINITION__TYPE:
         return getType();
       case WorkPackage.TRANSITION_DEFINITION__NAME:
@@ -376,9 +320,6 @@ public class TransitionDefinitionImpl extends TransitionalExpressionImpl impleme
   {
     switch (featureID)
     {
-      case WorkPackage.TRANSITION_DEFINITION__VALUE:
-        setValue((TransitionDefinition)newValue);
-        return;
       case WorkPackage.TRANSITION_DEFINITION__TYPE:
         setType((String)newValue);
         return;
@@ -405,9 +346,6 @@ public class TransitionDefinitionImpl extends TransitionalExpressionImpl impleme
   {
     switch (featureID)
     {
-      case WorkPackage.TRANSITION_DEFINITION__VALUE:
-        setValue((TransitionDefinition)null);
-        return;
       case WorkPackage.TRANSITION_DEFINITION__TYPE:
         setType(TYPE_EDEFAULT);
         return;
@@ -434,8 +372,6 @@ public class TransitionDefinitionImpl extends TransitionalExpressionImpl impleme
   {
     switch (featureID)
     {
-      case WorkPackage.TRANSITION_DEFINITION__VALUE:
-        return value != null;
       case WorkPackage.TRANSITION_DEFINITION__TYPE:
         return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
       case WorkPackage.TRANSITION_DEFINITION__NAME:

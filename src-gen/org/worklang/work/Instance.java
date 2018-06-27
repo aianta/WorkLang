@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.worklang.work.Instance#getName <em>Name</em>}</li>
  *   <li>{@link org.worklang.work.Instance#getState <em>State</em>}</li>
  *   <li>{@link org.worklang.work.Instance#getTransition <em>Transition</em>}</li>
+ *   <li>{@link org.worklang.work.Instance#getCompoundTransition <em>Compound Transition</em>}</li>
  * </ul>
  *
  * @see org.worklang.work.WorkPackage#getInstance()
@@ -168,5 +169,31 @@ public interface Instance extends EObject
    * @generated
    */
   void setTransition(TransitionInstance value);
+
+  /**
+   * Returns the value of the '<em><b>Compound Transition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Compound Transition</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Compound Transition</em>' containment reference.
+   * @see #setCompoundTransition(CompoundTransitionInstance)
+   * @see org.worklang.work.WorkPackage#getInstance_CompoundTransition()
+   * @model containment="true"
+   * @generated
+   */
+  CompoundTransitionInstance getCompoundTransition();
+
+  /**
+   * Sets the value of the '{@link org.worklang.work.Instance#getCompoundTransition <em>Compound Transition</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Compound Transition</em>' containment reference.
+   * @see #getCompoundTransition()
+   * @generated
+   */
+  void setCompoundTransition(CompoundTransitionInstance value);
 
 } // Instance

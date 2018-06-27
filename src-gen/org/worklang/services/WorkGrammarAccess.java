@@ -513,7 +513,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOutAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cOutOutputDefinitionParserRuleCall_4_0 = (RuleCall)cOutAssignment_4.eContents().get(0);
 		private final Assignment cCompositionAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cCompositionWithTransitionsDefinitionParserRuleCall_5_0 = (RuleCall)cCompositionAssignment_5.eContents().get(0);
+		private final RuleCall cCompositionTransitionCompositionParserRuleCall_5_0 = (RuleCall)cCompositionAssignment_5.eContents().get(0);
 		
 		//CompoundTransitionDefinition:
 		//	type='compound'
@@ -521,10 +521,10 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//	name=ID
 		//	in=InputDefinition?
 		//	out=OutputDefinition
-		//	composition=WithTransitionsDefinition;
+		//	composition=TransitionComposition;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//type='compound' 'transition' name=ID in=InputDefinition? out=OutputDefinition composition=WithTransitionsDefinition
+		//type='compound' 'transition' name=ID in=InputDefinition? out=OutputDefinition composition=TransitionComposition
 		public Group getGroup() { return cGroup; }
 		
 		//type='compound'
@@ -554,11 +554,11 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//OutputDefinition
 		public RuleCall getOutOutputDefinitionParserRuleCall_4_0() { return cOutOutputDefinitionParserRuleCall_4_0; }
 		
-		//composition=WithTransitionsDefinition
+		//composition=TransitionComposition
 		public Assignment getCompositionAssignment_5() { return cCompositionAssignment_5; }
 		
-		//WithTransitionsDefinition
-		public RuleCall getCompositionWithTransitionsDefinitionParserRuleCall_5_0() { return cCompositionWithTransitionsDefinitionParserRuleCall_5_0; }
+		//TransitionComposition
+		public RuleCall getCompositionTransitionCompositionParserRuleCall_5_0() { return cCompositionTransitionCompositionParserRuleCall_5_0; }
 	}
 	public class ReferenceSpaceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.ReferenceSpace");
@@ -771,40 +771,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
-	public class WithTransitionsDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.WithTransitionsDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cWithKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cTransitionsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cTransitionsTransitionalExpressionParserRuleCall_2_0 = (RuleCall)cTransitionsAssignment_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		
-		//WithTransitionsDefinition:
-		//	'with'
-		//	'{'
-		//	transitions=TransitionalExpression
-		//	'}';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'with' '{' transitions=TransitionalExpression '}'
-		public Group getGroup() { return cGroup; }
-		
-		//'with'
-		public Keyword getWithKeyword_0() { return cWithKeyword_0; }
-		
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
-		
-		//transitions=TransitionalExpression
-		public Assignment getTransitionsAssignment_2() { return cTransitionsAssignment_2; }
-		
-		//TransitionalExpression
-		public RuleCall getTransitionsTransitionalExpressionParserRuleCall_2_0() { return cTransitionsTransitionalExpressionParserRuleCall_2_0; }
-		
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
-	}
 	public class InputDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.InputDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -879,14 +845,16 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cStateStateInstanceParserRuleCall_3_0_0 = (RuleCall)cStateAssignment_3_0.eContents().get(0);
 		private final Assignment cTransitionAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
 		private final RuleCall cTransitionTransitionInstanceParserRuleCall_3_1_0 = (RuleCall)cTransitionAssignment_3_1.eContents().get(0);
+		private final Assignment cCompoundTransitionAssignment_3_2 = (Assignment)cAlternatives_3.eContents().get(2);
+		private final RuleCall cCompoundTransitionCompoundTransitionInstanceParserRuleCall_3_2_0 = (RuleCall)cCompoundTransitionAssignment_3_2.eContents().get(0);
 		
 		//Instance:
 		//	'instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) name=STRING
-		//	(state=StateInstance | transition=TransitionInstance);
+		//	(state=StateInstance | transition=TransitionInstance | compoundTransition=CompoundTransitionInstance);
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) name=STRING
-		//(state=StateInstance | transition=TransitionInstance)
+		//(state=StateInstance | transition=TransitionInstance | compoundTransition=CompoundTransitionInstance)
 		public Group getGroup() { return cGroup; }
 		
 		//'instance'
@@ -913,7 +881,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_2_0() { return cNameSTRINGTerminalRuleCall_2_0; }
 		
-		//(state=StateInstance | transition=TransitionInstance)
+		//(state=StateInstance | transition=TransitionInstance | compoundTransition=CompoundTransitionInstance)
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 		
 		//state=StateInstance
@@ -927,6 +895,12 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//TransitionInstance
 		public RuleCall getTransitionTransitionInstanceParserRuleCall_3_1_0() { return cTransitionTransitionInstanceParserRuleCall_3_1_0; }
+		
+		//compoundTransition=CompoundTransitionInstance
+		public Assignment getCompoundTransitionAssignment_3_2() { return cCompoundTransitionAssignment_3_2; }
+		
+		//CompoundTransitionInstance
+		public RuleCall getCompoundTransitionCompoundTransitionInstanceParserRuleCall_3_2_0() { return cCompoundTransitionCompoundTransitionInstanceParserRuleCall_3_2_0; }
 	}
 	public class TransitionDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TransitionDeclaration");
@@ -1301,92 +1275,798 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getValueStateDefinitionIDTerminalRuleCall_2_1_1_0_1() { return cValueStateDefinitionIDTerminalRuleCall_2_1_1_0_1; }
 	}
-	public class TransitionalExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TransitionalExpression");
+	public class TransitionCompositionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TransitionComposition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cTerminalTransitionalExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cOperationLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Assignment cOpAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final Keyword cOpTHENKeyword_1_1_0 = (Keyword)cOpAssignment_1_1.eContents().get(0);
-		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cRightTerminalTransitionalExpressionParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cBodyAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cBodyTransitionCompositionBodyParserRuleCall_1_0 = (RuleCall)cBodyAssignment_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		////Transition Composition Expression Rules
-		//TransitionalExpression:
-		//	TerminalTransitionalExpression ({Operation.left=current} op='THEN' right=TerminalTransitionalExpression)*;
+		//TransitionComposition:
+		//	'{'
+		//	body=TransitionCompositionBody
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//TerminalTransitionalExpression ({Operation.left=current} op='THEN' right=TerminalTransitionalExpression)*
+		//'{' body=TransitionCompositionBody '}'
 		public Group getGroup() { return cGroup; }
 		
-		//TerminalTransitionalExpression
-		public RuleCall getTerminalTransitionalExpressionParserRuleCall_0() { return cTerminalTransitionalExpressionParserRuleCall_0; }
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
 		
-		//({Operation.left=current} op='THEN' right=TerminalTransitionalExpression)*
-		public Group getGroup_1() { return cGroup_1; }
+		//body=TransitionCompositionBody
+		public Assignment getBodyAssignment_1() { return cBodyAssignment_1; }
 		
-		//{Operation.left=current}
-		public Action getOperationLeftAction_1_0() { return cOperationLeftAction_1_0; }
+		//TransitionCompositionBody
+		public RuleCall getBodyTransitionCompositionBodyParserRuleCall_1_0() { return cBodyTransitionCompositionBodyParserRuleCall_1_0; }
 		
-		//op='THEN'
-		public Assignment getOpAssignment_1_1() { return cOpAssignment_1_1; }
-		
-		//'THEN'
-		public Keyword getOpTHENKeyword_1_1_0() { return cOpTHENKeyword_1_1_0; }
-		
-		//right=TerminalTransitionalExpression
-		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
-		
-		//TerminalTransitionalExpression
-		public RuleCall getRightTerminalTransitionalExpressionParserRuleCall_1_2_0() { return cRightTerminalTransitionalExpressionParserRuleCall_1_2_0; }
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
 	}
-	public class TerminalTransitionalExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TerminalTransitionalExpression");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final RuleCall cTransitionalExpressionParserRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
-		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Action cTransitionDefinitionAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Assignment cValueAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final CrossReference cValueTransitionDefinitionCrossReference_1_1_0 = (CrossReference)cValueAssignment_1_1.eContents().get(0);
-		private final RuleCall cValueTransitionDefinitionIDTerminalRuleCall_1_1_0_1 = (RuleCall)cValueTransitionDefinitionCrossReference_1_1_0.eContents().get(1);
+	public class TransitionCompositionBodyElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TransitionCompositionBody");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cSTARTKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cWITHKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cStartingInputsAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final CrossReference cStartingInputsStateDefinitionCrossReference_1_2_0 = (CrossReference)cStartingInputsAssignment_1_2.eContents().get(0);
+		private final RuleCall cStartingInputsStateDefinitionIDTerminalRuleCall_1_2_0_1 = (RuleCall)cStartingInputsStateDefinitionCrossReference_1_2_0.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cExpressionAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cExpressionInstructionExpressionParserRuleCall_3_0 = (RuleCall)cExpressionAssignment_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//TerminalTransitionalExpression TransitionalExpression:
-		//	'(' TransitionalExpression ')' | {TransitionDefinition} value=[TransitionDefinition];
+		//TransitionCompositionBody:
+		//	'START' ('WITH' '(' startingInputs+=[StateDefinition]+ ')')?
+		//	'{'
+		//	expression=InstructionExpression
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'(' TransitionalExpression ')' | {TransitionDefinition} value=[TransitionDefinition]
-		public Alternatives getAlternatives() { return cAlternatives; }
+		//'START' ('WITH' '(' startingInputs+=[StateDefinition]+ ')')? '{' expression=InstructionExpression '}'
+		public Group getGroup() { return cGroup; }
 		
-		//'(' TransitionalExpression ')'
-		public Group getGroup_0() { return cGroup_0; }
+		//'START'
+		public Keyword getSTARTKeyword_0() { return cSTARTKeyword_0; }
 		
-		//'('
-		public Keyword getLeftParenthesisKeyword_0_0() { return cLeftParenthesisKeyword_0_0; }
-		
-		//TransitionalExpression
-		public RuleCall getTransitionalExpressionParserRuleCall_0_1() { return cTransitionalExpressionParserRuleCall_0_1; }
-		
-		//')'
-		public Keyword getRightParenthesisKeyword_0_2() { return cRightParenthesisKeyword_0_2; }
-		
-		//{TransitionDefinition} value=[TransitionDefinition]
+		//('WITH' '(' startingInputs+=[StateDefinition]+ ')')?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{TransitionDefinition}
-		public Action getTransitionDefinitionAction_1_0() { return cTransitionDefinitionAction_1_0; }
+		//'WITH'
+		public Keyword getWITHKeyword_1_0() { return cWITHKeyword_1_0; }
 		
-		//value=[TransitionDefinition]
-		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
+		//'('
+		public Keyword getLeftParenthesisKeyword_1_1() { return cLeftParenthesisKeyword_1_1; }
 		
-		//[TransitionDefinition]
-		public CrossReference getValueTransitionDefinitionCrossReference_1_1_0() { return cValueTransitionDefinitionCrossReference_1_1_0; }
+		//startingInputs+=[StateDefinition]+
+		public Assignment getStartingInputsAssignment_1_2() { return cStartingInputsAssignment_1_2; }
+		
+		//[StateDefinition]
+		public CrossReference getStartingInputsStateDefinitionCrossReference_1_2_0() { return cStartingInputsStateDefinitionCrossReference_1_2_0; }
 		
 		//ID
-		public RuleCall getValueTransitionDefinitionIDTerminalRuleCall_1_1_0_1() { return cValueTransitionDefinitionIDTerminalRuleCall_1_1_0_1; }
+		public RuleCall getStartingInputsStateDefinitionIDTerminalRuleCall_1_2_0_1() { return cStartingInputsStateDefinitionIDTerminalRuleCall_1_2_0_1; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_1_3() { return cRightParenthesisKeyword_1_3; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//expression=InstructionExpression
+		public Assignment getExpressionAssignment_3() { return cExpressionAssignment_3; }
+		
+		//InstructionExpression
+		public RuleCall getExpressionInstructionExpressionParserRuleCall_3_0() { return cExpressionInstructionExpressionParserRuleCall_3_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+	}
+	public class InstructionExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.InstructionExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cTerminalInstructionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cExecutionResultComputeFirstAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cComputeNextAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cComputeNextTerminalInstructionParserRuleCall_1_1_0 = (RuleCall)cComputeNextAssignment_1_1.eContents().get(0);
+		
+		//InstructionExpression:
+		//	TerminalInstruction ({ExecutionResult.computeFirst=current} computeNext=TerminalInstruction)*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//TerminalInstruction ({ExecutionResult.computeFirst=current} computeNext=TerminalInstruction)*
+		public Group getGroup() { return cGroup; }
+		
+		//TerminalInstruction
+		public RuleCall getTerminalInstructionParserRuleCall_0() { return cTerminalInstructionParserRuleCall_0; }
+		
+		//({ExecutionResult.computeFirst=current} computeNext=TerminalInstruction)*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//{ExecutionResult.computeFirst=current}
+		public Action getExecutionResultComputeFirstAction_1_0() { return cExecutionResultComputeFirstAction_1_0; }
+		
+		//computeNext=TerminalInstruction
+		public Assignment getComputeNextAssignment_1_1() { return cComputeNextAssignment_1_1; }
+		
+		//TerminalInstruction
+		public RuleCall getComputeNextTerminalInstructionParserRuleCall_1_1_0() { return cComputeNextTerminalInstructionParserRuleCall_1_1_0; }
+	}
+	public class TerminalInstructionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TerminalInstruction");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cIfInstructionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cWhileInstructionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cSimpleInstructionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final Keyword cSemicolonKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		
+		//TerminalInstruction InstructionExpression:
+		//	IfInstruction | WhileInstruction | SimpleInstruction |
+		//	';';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//IfInstruction | WhileInstruction | SimpleInstruction | ';'
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//IfInstruction
+		public RuleCall getIfInstructionParserRuleCall_0() { return cIfInstructionParserRuleCall_0; }
+		
+		//WhileInstruction
+		public RuleCall getWhileInstructionParserRuleCall_1() { return cWhileInstructionParserRuleCall_1; }
+		
+		//SimpleInstruction
+		public RuleCall getSimpleInstructionParserRuleCall_2() { return cSimpleInstructionParserRuleCall_2; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
+	}
+	public class IfInstructionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.IfInstruction");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cIFKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTestKeyAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cTestKeyResolvableValueParserRuleCall_2_0 = (RuleCall)cTestKeyAssignment_2.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cTestValueAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTestValueTestValueParserRuleCall_4_0 = (RuleCall)cTestValueAssignment_4.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Keyword cLeftCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cToComputeIfTrueAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cToComputeIfTrueInstructionExpressionParserRuleCall_7_0 = (RuleCall)cToComputeIfTrueAssignment_7.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
+		private final Keyword cELSEKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_9_1 = (Keyword)cGroup_9.eContents().get(1);
+		private final Assignment cToComputeIfFalseAssignment_9_2 = (Assignment)cGroup_9.eContents().get(2);
+		private final RuleCall cToComputeIfFalseInstructionExpressionParserRuleCall_9_2_0 = (RuleCall)cToComputeIfFalseAssignment_9_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_9_3 = (Keyword)cGroup_9.eContents().get(3);
+		
+		//IfInstruction:
+		//	'IF' '(' testKey=ResolvableValue '=' testValue=TestValue ')'
+		//	'{'
+		//	toComputeIfTrue=InstructionExpression
+		//	'}' ('ELSE' '{'
+		//	toComputeIfFalse=InstructionExpression
+		//	'}')?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'IF' '(' testKey=ResolvableValue '=' testValue=TestValue ')' '{' toComputeIfTrue=InstructionExpression '}' ('ELSE' '{'
+		//toComputeIfFalse=InstructionExpression '}')?
+		public Group getGroup() { return cGroup; }
+		
+		//'IF'
+		public Keyword getIFKeyword_0() { return cIFKeyword_0; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		
+		//testKey=ResolvableValue
+		public Assignment getTestKeyAssignment_2() { return cTestKeyAssignment_2; }
+		
+		//ResolvableValue
+		public RuleCall getTestKeyResolvableValueParserRuleCall_2_0() { return cTestKeyResolvableValueParserRuleCall_2_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3() { return cEqualsSignKeyword_3; }
+		
+		//testValue=TestValue
+		public Assignment getTestValueAssignment_4() { return cTestValueAssignment_4; }
+		
+		//TestValue
+		public RuleCall getTestValueTestValueParserRuleCall_4_0() { return cTestValueTestValueParserRuleCall_4_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_6() { return cLeftCurlyBracketKeyword_6; }
+		
+		//toComputeIfTrue=InstructionExpression
+		public Assignment getToComputeIfTrueAssignment_7() { return cToComputeIfTrueAssignment_7; }
+		
+		//InstructionExpression
+		public RuleCall getToComputeIfTrueInstructionExpressionParserRuleCall_7_0() { return cToComputeIfTrueInstructionExpressionParserRuleCall_7_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
+		
+		//('ELSE' '{' toComputeIfFalse=InstructionExpression '}')?
+		public Group getGroup_9() { return cGroup_9; }
+		
+		//'ELSE'
+		public Keyword getELSEKeyword_9_0() { return cELSEKeyword_9_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_9_1() { return cLeftCurlyBracketKeyword_9_1; }
+		
+		//toComputeIfFalse=InstructionExpression
+		public Assignment getToComputeIfFalseAssignment_9_2() { return cToComputeIfFalseAssignment_9_2; }
+		
+		//InstructionExpression
+		public RuleCall getToComputeIfFalseInstructionExpressionParserRuleCall_9_2_0() { return cToComputeIfFalseInstructionExpressionParserRuleCall_9_2_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_9_3() { return cRightCurlyBracketKeyword_9_3; }
+	}
+	public class WhileInstructionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.WhileInstruction");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cWHILEKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTestKeyAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cTestKeyResolvableValueParserRuleCall_2_0 = (RuleCall)cTestKeyAssignment_2.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cTestValueAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTestValueTestValueParserRuleCall_4_0 = (RuleCall)cTestValueAssignment_4.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Keyword cLeftCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cToComputeAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cToComputeInstructionExpressionParserRuleCall_7_0 = (RuleCall)cToComputeAssignment_7.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		
+		//WhileInstruction:
+		//	'WHILE' '(' testKey=ResolvableValue '=' testValue=TestValue ')'
+		//	'{'
+		//	toCompute=InstructionExpression
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'WHILE' '(' testKey=ResolvableValue '=' testValue=TestValue ')' '{' toCompute=InstructionExpression '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'WHILE'
+		public Keyword getWHILEKeyword_0() { return cWHILEKeyword_0; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		
+		//testKey=ResolvableValue
+		public Assignment getTestKeyAssignment_2() { return cTestKeyAssignment_2; }
+		
+		//ResolvableValue
+		public RuleCall getTestKeyResolvableValueParserRuleCall_2_0() { return cTestKeyResolvableValueParserRuleCall_2_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3() { return cEqualsSignKeyword_3; }
+		
+		//testValue=TestValue
+		public Assignment getTestValueAssignment_4() { return cTestValueAssignment_4; }
+		
+		//TestValue
+		public RuleCall getTestValueTestValueParserRuleCall_4_0() { return cTestValueTestValueParserRuleCall_4_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_6() { return cLeftCurlyBracketKeyword_6; }
+		
+		//toCompute=InstructionExpression
+		public Assignment getToComputeAssignment_7() { return cToComputeAssignment_7; }
+		
+		//InstructionExpression
+		public RuleCall getToComputeInstructionExpressionParserRuleCall_7_0() { return cToComputeInstructionExpressionParserRuleCall_7_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
+	}
+	public class SimpleInstructionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.SimpleInstruction");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cTHENKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cToExecuteAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cToExecuteTransitionDefinitionCrossReference_1_0 = (CrossReference)cToExecuteAssignment_1.eContents().get(0);
+		private final RuleCall cToExecuteTransitionDefinitionIDTerminalRuleCall_1_0_1 = (RuleCall)cToExecuteTransitionDefinitionCrossReference_1_0.eContents().get(1);
+		
+		//SimpleInstruction:
+		//	'THEN' toExecute=[TransitionDefinition];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'THEN' toExecute=[TransitionDefinition]
+		public Group getGroup() { return cGroup; }
+		
+		//'THEN'
+		public Keyword getTHENKeyword_0() { return cTHENKeyword_0; }
+		
+		//toExecute=[TransitionDefinition]
+		public Assignment getToExecuteAssignment_1() { return cToExecuteAssignment_1; }
+		
+		//[TransitionDefinition]
+		public CrossReference getToExecuteTransitionDefinitionCrossReference_1_0() { return cToExecuteTransitionDefinitionCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getToExecuteTransitionDefinitionIDTerminalRuleCall_1_0_1() { return cToExecuteTransitionDefinitionIDTerminalRuleCall_1_0_1; }
+	}
+	public class CompoundTransitionInstanceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.CompoundTransitionInstance");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cBodyAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cBodyCompoundTransitionInstanceBodyParserRuleCall_1_0 = (RuleCall)cBodyAssignment_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//CompoundTransitionInstance:
+		//	'{'
+		//	body=CompoundTransitionInstanceBody
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'{' body=CompoundTransitionInstanceBody '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
+		
+		//body=CompoundTransitionInstanceBody
+		public Assignment getBodyAssignment_1() { return cBodyAssignment_1; }
+		
+		//CompoundTransitionInstanceBody
+		public RuleCall getBodyCompoundTransitionInstanceBodyParserRuleCall_1_0() { return cBodyCompoundTransitionInstanceBodyParserRuleCall_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
+	}
+	public class CompoundTransitionInstanceBodyElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.CompoundTransitionInstanceBody");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cSTARTKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cWITHKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cStartingInputsAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final CrossReference cStartingInputsInstanceCrossReference_1_2_0 = (CrossReference)cStartingInputsAssignment_1_2.eContents().get(0);
+		private final RuleCall cStartingInputsInstanceIDTerminalRuleCall_1_2_0_1 = (RuleCall)cStartingInputsInstanceCrossReference_1_2_0.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cExpressionAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cExpressionInstanceInstructionExpressionParserRuleCall_3_0 = (RuleCall)cExpressionAssignment_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//CompoundTransitionInstanceBody:
+		//	'START' ('WITH' '(' startingInputs+=[Instance]+ ')')?
+		//	'{'
+		//	expression=InstanceInstructionExpression
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'START' ('WITH' '(' startingInputs+=[Instance]+ ')')? '{' expression=InstanceInstructionExpression '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'START'
+		public Keyword getSTARTKeyword_0() { return cSTARTKeyword_0; }
+		
+		//('WITH' '(' startingInputs+=[Instance]+ ')')?
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'WITH'
+		public Keyword getWITHKeyword_1_0() { return cWITHKeyword_1_0; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_1_1() { return cLeftParenthesisKeyword_1_1; }
+		
+		//startingInputs+=[Instance]+
+		public Assignment getStartingInputsAssignment_1_2() { return cStartingInputsAssignment_1_2; }
+		
+		//[Instance]
+		public CrossReference getStartingInputsInstanceCrossReference_1_2_0() { return cStartingInputsInstanceCrossReference_1_2_0; }
+		
+		//ID
+		public RuleCall getStartingInputsInstanceIDTerminalRuleCall_1_2_0_1() { return cStartingInputsInstanceIDTerminalRuleCall_1_2_0_1; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_1_3() { return cRightParenthesisKeyword_1_3; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//expression=InstanceInstructionExpression
+		public Assignment getExpressionAssignment_3() { return cExpressionAssignment_3; }
+		
+		//InstanceInstructionExpression
+		public RuleCall getExpressionInstanceInstructionExpressionParserRuleCall_3_0() { return cExpressionInstanceInstructionExpressionParserRuleCall_3_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+	}
+	public class InstanceInstructionExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.InstanceInstructionExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cTerminalInstanceInstructionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cExecutionResultComputeFirstAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cComputeNextAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cComputeNextTerminalInstanceInstructionParserRuleCall_1_1_0 = (RuleCall)cComputeNextAssignment_1_1.eContents().get(0);
+		
+		//InstanceInstructionExpression:
+		//	TerminalInstanceInstruction ({ExecutionResult.computeFirst=current} computeNext=TerminalInstanceInstruction)*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//TerminalInstanceInstruction ({ExecutionResult.computeFirst=current} computeNext=TerminalInstanceInstruction)*
+		public Group getGroup() { return cGroup; }
+		
+		//TerminalInstanceInstruction
+		public RuleCall getTerminalInstanceInstructionParserRuleCall_0() { return cTerminalInstanceInstructionParserRuleCall_0; }
+		
+		//({ExecutionResult.computeFirst=current} computeNext=TerminalInstanceInstruction)*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//{ExecutionResult.computeFirst=current}
+		public Action getExecutionResultComputeFirstAction_1_0() { return cExecutionResultComputeFirstAction_1_0; }
+		
+		//computeNext=TerminalInstanceInstruction
+		public Assignment getComputeNextAssignment_1_1() { return cComputeNextAssignment_1_1; }
+		
+		//TerminalInstanceInstruction
+		public RuleCall getComputeNextTerminalInstanceInstructionParserRuleCall_1_1_0() { return cComputeNextTerminalInstanceInstructionParserRuleCall_1_1_0; }
+	}
+	public class TerminalInstanceInstructionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TerminalInstanceInstruction");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cIfInstanceInstructionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cWhileInstanceInstructionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cSimpleInstanceInstructionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final Keyword cSemicolonKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		
+		//TerminalInstanceInstruction InstanceInstructionExpression:
+		//	IfInstanceInstruction | WhileInstanceInstruction | SimpleInstanceInstruction |
+		//	';';
+		@Override public ParserRule getRule() { return rule; }
+		
+		////'('InstructionExpression')' |
+		//IfInstanceInstruction | WhileInstanceInstruction | SimpleInstanceInstruction | ';'
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		////'('InstructionExpression')' |
+		//IfInstanceInstruction
+		public RuleCall getIfInstanceInstructionParserRuleCall_0() { return cIfInstanceInstructionParserRuleCall_0; }
+		
+		//WhileInstanceInstruction
+		public RuleCall getWhileInstanceInstructionParserRuleCall_1() { return cWhileInstanceInstructionParserRuleCall_1; }
+		
+		//SimpleInstanceInstruction
+		public RuleCall getSimpleInstanceInstructionParserRuleCall_2() { return cSimpleInstanceInstructionParserRuleCall_2; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
+	}
+	public class SimpleInstanceInstructionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.SimpleInstanceInstruction");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cTHENKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cToExecuteAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cToExecuteInstanceCrossReference_1_0 = (CrossReference)cToExecuteAssignment_1.eContents().get(0);
+		private final RuleCall cToExecuteInstanceSTRINGTerminalRuleCall_1_0_1 = (RuleCall)cToExecuteInstanceCrossReference_1_0.eContents().get(1);
+		
+		//SimpleInstanceInstruction:
+		//	'THEN' toExecute=[Instance|STRING];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'THEN' toExecute=[Instance|STRING]
+		public Group getGroup() { return cGroup; }
+		
+		//'THEN'
+		public Keyword getTHENKeyword_0() { return cTHENKeyword_0; }
+		
+		//toExecute=[Instance|STRING]
+		public Assignment getToExecuteAssignment_1() { return cToExecuteAssignment_1; }
+		
+		//[Instance|STRING]
+		public CrossReference getToExecuteInstanceCrossReference_1_0() { return cToExecuteInstanceCrossReference_1_0; }
+		
+		//STRING
+		public RuleCall getToExecuteInstanceSTRINGTerminalRuleCall_1_0_1() { return cToExecuteInstanceSTRINGTerminalRuleCall_1_0_1; }
+	}
+	public class IfInstanceInstructionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.IfInstanceInstruction");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cIFKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTestKeyAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cTestKeyResolvableValueParserRuleCall_2_0 = (RuleCall)cTestKeyAssignment_2.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cTestValueAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTestValueTestValueParserRuleCall_4_0 = (RuleCall)cTestValueAssignment_4.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Keyword cLeftCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cToComputeIfTrueAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cToComputeIfTrueInstanceInstructionExpressionParserRuleCall_7_0 = (RuleCall)cToComputeIfTrueAssignment_7.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
+		private final Keyword cELSEKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_9_1 = (Keyword)cGroup_9.eContents().get(1);
+		private final Assignment cToComputeIfFalseAssignment_9_2 = (Assignment)cGroup_9.eContents().get(2);
+		private final RuleCall cToComputeIfFalseInstanceInstructionExpressionParserRuleCall_9_2_0 = (RuleCall)cToComputeIfFalseAssignment_9_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_9_3 = (Keyword)cGroup_9.eContents().get(3);
+		
+		//IfInstanceInstruction:
+		//	'IF' '(' testKey=ResolvableValue '=' testValue=TestValue ')'
+		//	'{'
+		//	toComputeIfTrue=InstanceInstructionExpression
+		//	'}' ('ELSE' '{'
+		//	toComputeIfFalse=InstanceInstructionExpression
+		//	'}')?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'IF' '(' testKey=ResolvableValue '=' testValue=TestValue ')' '{' toComputeIfTrue=InstanceInstructionExpression '}'
+		//('ELSE' '{' toComputeIfFalse=InstanceInstructionExpression '}')?
+		public Group getGroup() { return cGroup; }
+		
+		//'IF'
+		public Keyword getIFKeyword_0() { return cIFKeyword_0; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		
+		//testKey=ResolvableValue
+		public Assignment getTestKeyAssignment_2() { return cTestKeyAssignment_2; }
+		
+		//ResolvableValue
+		public RuleCall getTestKeyResolvableValueParserRuleCall_2_0() { return cTestKeyResolvableValueParserRuleCall_2_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3() { return cEqualsSignKeyword_3; }
+		
+		//testValue=TestValue
+		public Assignment getTestValueAssignment_4() { return cTestValueAssignment_4; }
+		
+		//TestValue
+		public RuleCall getTestValueTestValueParserRuleCall_4_0() { return cTestValueTestValueParserRuleCall_4_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_6() { return cLeftCurlyBracketKeyword_6; }
+		
+		//toComputeIfTrue=InstanceInstructionExpression
+		public Assignment getToComputeIfTrueAssignment_7() { return cToComputeIfTrueAssignment_7; }
+		
+		//InstanceInstructionExpression
+		public RuleCall getToComputeIfTrueInstanceInstructionExpressionParserRuleCall_7_0() { return cToComputeIfTrueInstanceInstructionExpressionParserRuleCall_7_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
+		
+		//('ELSE' '{' toComputeIfFalse=InstanceInstructionExpression '}')?
+		public Group getGroup_9() { return cGroup_9; }
+		
+		//'ELSE'
+		public Keyword getELSEKeyword_9_0() { return cELSEKeyword_9_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_9_1() { return cLeftCurlyBracketKeyword_9_1; }
+		
+		//toComputeIfFalse=InstanceInstructionExpression
+		public Assignment getToComputeIfFalseAssignment_9_2() { return cToComputeIfFalseAssignment_9_2; }
+		
+		//InstanceInstructionExpression
+		public RuleCall getToComputeIfFalseInstanceInstructionExpressionParserRuleCall_9_2_0() { return cToComputeIfFalseInstanceInstructionExpressionParserRuleCall_9_2_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_9_3() { return cRightCurlyBracketKeyword_9_3; }
+	}
+	public class WhileInstanceInstructionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.WhileInstanceInstruction");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cWHILEKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTestKeyAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cTestKeyResolvableValueParserRuleCall_2_0 = (RuleCall)cTestKeyAssignment_2.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cTestValueAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTestValueTestValueParserRuleCall_4_0 = (RuleCall)cTestValueAssignment_4.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Keyword cLeftCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cToComputeAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cToComputeInstanceInstructionExpressionParserRuleCall_7_0 = (RuleCall)cToComputeAssignment_7.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		
+		//WhileInstanceInstruction:
+		//	'WHILE' '(' testKey=ResolvableValue '=' testValue=TestValue ')'
+		//	'{'
+		//	toCompute=InstanceInstructionExpression
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'WHILE' '(' testKey=ResolvableValue '=' testValue=TestValue ')' '{' toCompute=InstanceInstructionExpression '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'WHILE'
+		public Keyword getWHILEKeyword_0() { return cWHILEKeyword_0; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		
+		//testKey=ResolvableValue
+		public Assignment getTestKeyAssignment_2() { return cTestKeyAssignment_2; }
+		
+		//ResolvableValue
+		public RuleCall getTestKeyResolvableValueParserRuleCall_2_0() { return cTestKeyResolvableValueParserRuleCall_2_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3() { return cEqualsSignKeyword_3; }
+		
+		//testValue=TestValue
+		public Assignment getTestValueAssignment_4() { return cTestValueAssignment_4; }
+		
+		//TestValue
+		public RuleCall getTestValueTestValueParserRuleCall_4_0() { return cTestValueTestValueParserRuleCall_4_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_6() { return cLeftCurlyBracketKeyword_6; }
+		
+		//toCompute=InstanceInstructionExpression
+		public Assignment getToComputeAssignment_7() { return cToComputeAssignment_7; }
+		
+		//InstanceInstructionExpression
+		public RuleCall getToComputeInstanceInstructionExpressionParserRuleCall_7_0() { return cToComputeInstanceInstructionExpressionParserRuleCall_7_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
+	}
+	public class TestValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TestValue");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cLiteralValueParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cResolvableValueParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//TestValue:
+		//	LiteralValue | ResolvableValue;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//LiteralValue | ResolvableValue
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//LiteralValue
+		public RuleCall getLiteralValueParserRuleCall_0() { return cLiteralValueParserRuleCall_0; }
+		
+		//ResolvableValue
+		public RuleCall getResolvableValueParserRuleCall_1() { return cResolvableValueParserRuleCall_1; }
+	}
+	public class LiteralValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.LiteralValue");
+		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cValueSTRINGTerminalRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
+		
+		//LiteralValue:
+		//	value=STRING;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//value=STRING
+		public Assignment getValueAssignment() { return cValueAssignment; }
+		
+		//STRING
+		public RuleCall getValueSTRINGTerminalRuleCall_0() { return cValueSTRINGTerminalRuleCall_0; }
+	}
+	public class ResolvableValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.ResolvableValue");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cResolvableInstanceValueParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cResolvableTransitionOutputValueParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//ResolvableValue:
+		//	ResolvableInstanceValue | ResolvableTransitionOutputValue;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ResolvableInstanceValue | ResolvableTransitionOutputValue
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ResolvableInstanceValue
+		public RuleCall getResolvableInstanceValueParserRuleCall_0() { return cResolvableInstanceValueParserRuleCall_0; }
+		
+		//ResolvableTransitionOutputValue
+		public RuleCall getResolvableTransitionOutputValueParserRuleCall_1() { return cResolvableTransitionOutputValueParserRuleCall_1; }
+	}
+	public class ResolvableInstanceValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.ResolvableInstanceValue");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cInstanceAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cInstanceInstanceCrossReference_0_0 = (CrossReference)cInstanceAssignment_0.eContents().get(0);
+		private final RuleCall cInstanceInstanceIDTerminalRuleCall_0_0_1 = (RuleCall)cInstanceInstanceCrossReference_0_0.eContents().get(1);
+		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cKeyAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cKeyStateDefinitionCrossReference_2_0 = (CrossReference)cKeyAssignment_2.eContents().get(0);
+		private final RuleCall cKeyStateDefinitionIDTerminalRuleCall_2_0_1 = (RuleCall)cKeyStateDefinitionCrossReference_2_0.eContents().get(1);
+		
+		//ResolvableInstanceValue:
+		//	instance=[Instance] '.' key=[StateDefinition];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//instance=[Instance] '.' key=[StateDefinition]
+		public Group getGroup() { return cGroup; }
+		
+		//instance=[Instance]
+		public Assignment getInstanceAssignment_0() { return cInstanceAssignment_0; }
+		
+		//[Instance]
+		public CrossReference getInstanceInstanceCrossReference_0_0() { return cInstanceInstanceCrossReference_0_0; }
+		
+		//ID
+		public RuleCall getInstanceInstanceIDTerminalRuleCall_0_0_1() { return cInstanceInstanceIDTerminalRuleCall_0_0_1; }
+		
+		//'.'
+		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
+		
+		//key=[StateDefinition]
+		public Assignment getKeyAssignment_2() { return cKeyAssignment_2; }
+		
+		//[StateDefinition]
+		public CrossReference getKeyStateDefinitionCrossReference_2_0() { return cKeyStateDefinitionCrossReference_2_0; }
+		
+		//ID
+		public RuleCall getKeyStateDefinitionIDTerminalRuleCall_2_0_1() { return cKeyStateDefinitionIDTerminalRuleCall_2_0_1; }
+	}
+	public class ResolvableTransitionOutputValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.ResolvableTransitionOutputValue");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cOUTPUTKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cStateAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cStateStateDefinitionCrossReference_1_0 = (CrossReference)cStateAssignment_1.eContents().get(0);
+		private final RuleCall cStateStateDefinitionIDTerminalRuleCall_1_0_1 = (RuleCall)cStateStateDefinitionCrossReference_1_0.eContents().get(1);
+		private final Keyword cFullStopKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cKeyAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cKeyStateDefinitionCrossReference_3_0 = (CrossReference)cKeyAssignment_3.eContents().get(0);
+		private final RuleCall cKeyStateDefinitionIDTerminalRuleCall_3_0_1 = (RuleCall)cKeyStateDefinitionCrossReference_3_0.eContents().get(1);
+		
+		//ResolvableTransitionOutputValue:
+		//	'OUTPUT' state=[StateDefinition] '.' key=[StateDefinition];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'OUTPUT' state=[StateDefinition] '.' key=[StateDefinition]
+		public Group getGroup() { return cGroup; }
+		
+		//'OUTPUT'
+		public Keyword getOUTPUTKeyword_0() { return cOUTPUTKeyword_0; }
+		
+		//state=[StateDefinition]
+		public Assignment getStateAssignment_1() { return cStateAssignment_1; }
+		
+		//[StateDefinition]
+		public CrossReference getStateStateDefinitionCrossReference_1_0() { return cStateStateDefinitionCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getStateStateDefinitionIDTerminalRuleCall_1_0_1() { return cStateStateDefinitionIDTerminalRuleCall_1_0_1; }
+		
+		//'.'
+		public Keyword getFullStopKeyword_2() { return cFullStopKeyword_2; }
+		
+		//key=[StateDefinition]
+		public Assignment getKeyAssignment_3() { return cKeyAssignment_3; }
+		
+		//[StateDefinition]
+		public CrossReference getKeyStateDefinitionCrossReference_3_0() { return cKeyStateDefinitionCrossReference_3_0; }
+		
+		//ID
+		public RuleCall getKeyStateDefinitionIDTerminalRuleCall_3_0_1() { return cKeyStateDefinitionIDTerminalRuleCall_3_0_1; }
 	}
 	
 	
@@ -1407,7 +2087,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	private final ReferenceStateElements pReferenceState;
 	private final InstanceSpaceElements pInstanceSpace;
 	private final WithStatesDefinitionElements pWithStatesDefinition;
-	private final WithTransitionsDefinitionElements pWithTransitionsDefinition;
 	private final InputDefinitionElements pInputDefinition;
 	private final OutputDefinitionElements pOutputDefinition;
 	private final InstanceElements pInstance;
@@ -1421,8 +2100,25 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	private final PredicateElements pPredicate;
 	private final BinaryExpressionElements pBinaryExpression;
 	private final TerminalBinaryExpressionElements pTerminalBinaryExpression;
-	private final TransitionalExpressionElements pTransitionalExpression;
-	private final TerminalTransitionalExpressionElements pTerminalTransitionalExpression;
+	private final TransitionCompositionElements pTransitionComposition;
+	private final TransitionCompositionBodyElements pTransitionCompositionBody;
+	private final InstructionExpressionElements pInstructionExpression;
+	private final TerminalInstructionElements pTerminalInstruction;
+	private final IfInstructionElements pIfInstruction;
+	private final WhileInstructionElements pWhileInstruction;
+	private final SimpleInstructionElements pSimpleInstruction;
+	private final CompoundTransitionInstanceElements pCompoundTransitionInstance;
+	private final CompoundTransitionInstanceBodyElements pCompoundTransitionInstanceBody;
+	private final InstanceInstructionExpressionElements pInstanceInstructionExpression;
+	private final TerminalInstanceInstructionElements pTerminalInstanceInstruction;
+	private final SimpleInstanceInstructionElements pSimpleInstanceInstruction;
+	private final IfInstanceInstructionElements pIfInstanceInstruction;
+	private final WhileInstanceInstructionElements pWhileInstanceInstruction;
+	private final TestValueElements pTestValue;
+	private final LiteralValueElements pLiteralValue;
+	private final ResolvableValueElements pResolvableValue;
+	private final ResolvableInstanceValueElements pResolvableInstanceValue;
+	private final ResolvableTransitionOutputValueElements pResolvableTransitionOutputValue;
 	
 	private final Grammar grammar;
 	
@@ -1450,7 +2146,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		this.pReferenceState = new ReferenceStateElements();
 		this.pInstanceSpace = new InstanceSpaceElements();
 		this.pWithStatesDefinition = new WithStatesDefinitionElements();
-		this.pWithTransitionsDefinition = new WithTransitionsDefinitionElements();
 		this.pInputDefinition = new InputDefinitionElements();
 		this.pOutputDefinition = new OutputDefinitionElements();
 		this.pInstance = new InstanceElements();
@@ -1464,8 +2159,25 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		this.pPredicate = new PredicateElements();
 		this.pBinaryExpression = new BinaryExpressionElements();
 		this.pTerminalBinaryExpression = new TerminalBinaryExpressionElements();
-		this.pTransitionalExpression = new TransitionalExpressionElements();
-		this.pTerminalTransitionalExpression = new TerminalTransitionalExpressionElements();
+		this.pTransitionComposition = new TransitionCompositionElements();
+		this.pTransitionCompositionBody = new TransitionCompositionBodyElements();
+		this.pInstructionExpression = new InstructionExpressionElements();
+		this.pTerminalInstruction = new TerminalInstructionElements();
+		this.pIfInstruction = new IfInstructionElements();
+		this.pWhileInstruction = new WhileInstructionElements();
+		this.pSimpleInstruction = new SimpleInstructionElements();
+		this.pCompoundTransitionInstance = new CompoundTransitionInstanceElements();
+		this.pCompoundTransitionInstanceBody = new CompoundTransitionInstanceBodyElements();
+		this.pInstanceInstructionExpression = new InstanceInstructionExpressionElements();
+		this.pTerminalInstanceInstruction = new TerminalInstanceInstructionElements();
+		this.pSimpleInstanceInstruction = new SimpleInstanceInstructionElements();
+		this.pIfInstanceInstruction = new IfInstanceInstructionElements();
+		this.pWhileInstanceInstruction = new WhileInstanceInstructionElements();
+		this.pTestValue = new TestValueElements();
+		this.pLiteralValue = new LiteralValueElements();
+		this.pResolvableValue = new ResolvableValueElements();
+		this.pResolvableInstanceValue = new ResolvableInstanceValueElements();
+		this.pResolvableTransitionOutputValue = new ResolvableTransitionOutputValueElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1635,7 +2347,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	//	name=ID
 	//	in=InputDefinition?
 	//	out=OutputDefinition
-	//	composition=WithTransitionsDefinition;
+	//	composition=TransitionComposition;
 	public CompoundTransitionDefinitionElements getCompoundTransitionDefinitionAccess() {
 		return pCompoundTransitionDefinition;
 	}
@@ -1710,19 +2422,6 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getWithStatesDefinitionAccess().getRule();
 	}
 	
-	//WithTransitionsDefinition:
-	//	'with'
-	//	'{'
-	//	transitions=TransitionalExpression
-	//	'}';
-	public WithTransitionsDefinitionElements getWithTransitionsDefinitionAccess() {
-		return pWithTransitionsDefinition;
-	}
-	
-	public ParserRule getWithTransitionsDefinitionRule() {
-		return getWithTransitionsDefinitionAccess().getRule();
-	}
-	
 	//InputDefinition:
 	//	{InputDefinition} 'input' inputState+=[StateDefinition]*;
 	public InputDefinitionElements getInputDefinitionAccess() {
@@ -1745,7 +2444,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//Instance:
 	//	'instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) name=STRING
-	//	(state=StateInstance | transition=TransitionInstance);
+	//	(state=StateInstance | transition=TransitionInstance | compoundTransition=CompoundTransitionInstance);
 	public InstanceElements getInstanceAccess() {
 		return pInstance;
 	}
@@ -1860,25 +2559,222 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getTerminalBinaryExpressionAccess().getRule();
 	}
 	
-	////Transition Composition Expression Rules
-	//TransitionalExpression:
-	//	TerminalTransitionalExpression ({Operation.left=current} op='THEN' right=TerminalTransitionalExpression)*;
-	public TransitionalExpressionElements getTransitionalExpressionAccess() {
-		return pTransitionalExpression;
+	//TransitionComposition:
+	//	'{'
+	//	body=TransitionCompositionBody
+	//	'}';
+	public TransitionCompositionElements getTransitionCompositionAccess() {
+		return pTransitionComposition;
 	}
 	
-	public ParserRule getTransitionalExpressionRule() {
-		return getTransitionalExpressionAccess().getRule();
+	public ParserRule getTransitionCompositionRule() {
+		return getTransitionCompositionAccess().getRule();
 	}
 	
-	//TerminalTransitionalExpression TransitionalExpression:
-	//	'(' TransitionalExpression ')' | {TransitionDefinition} value=[TransitionDefinition];
-	public TerminalTransitionalExpressionElements getTerminalTransitionalExpressionAccess() {
-		return pTerminalTransitionalExpression;
+	//TransitionCompositionBody:
+	//	'START' ('WITH' '(' startingInputs+=[StateDefinition]+ ')')?
+	//	'{'
+	//	expression=InstructionExpression
+	//	'}';
+	public TransitionCompositionBodyElements getTransitionCompositionBodyAccess() {
+		return pTransitionCompositionBody;
 	}
 	
-	public ParserRule getTerminalTransitionalExpressionRule() {
-		return getTerminalTransitionalExpressionAccess().getRule();
+	public ParserRule getTransitionCompositionBodyRule() {
+		return getTransitionCompositionBodyAccess().getRule();
+	}
+	
+	//InstructionExpression:
+	//	TerminalInstruction ({ExecutionResult.computeFirst=current} computeNext=TerminalInstruction)*;
+	public InstructionExpressionElements getInstructionExpressionAccess() {
+		return pInstructionExpression;
+	}
+	
+	public ParserRule getInstructionExpressionRule() {
+		return getInstructionExpressionAccess().getRule();
+	}
+	
+	//TerminalInstruction InstructionExpression:
+	//	IfInstruction | WhileInstruction | SimpleInstruction |
+	//	';';
+	public TerminalInstructionElements getTerminalInstructionAccess() {
+		return pTerminalInstruction;
+	}
+	
+	public ParserRule getTerminalInstructionRule() {
+		return getTerminalInstructionAccess().getRule();
+	}
+	
+	//IfInstruction:
+	//	'IF' '(' testKey=ResolvableValue '=' testValue=TestValue ')'
+	//	'{'
+	//	toComputeIfTrue=InstructionExpression
+	//	'}' ('ELSE' '{'
+	//	toComputeIfFalse=InstructionExpression
+	//	'}')?;
+	public IfInstructionElements getIfInstructionAccess() {
+		return pIfInstruction;
+	}
+	
+	public ParserRule getIfInstructionRule() {
+		return getIfInstructionAccess().getRule();
+	}
+	
+	//WhileInstruction:
+	//	'WHILE' '(' testKey=ResolvableValue '=' testValue=TestValue ')'
+	//	'{'
+	//	toCompute=InstructionExpression
+	//	'}';
+	public WhileInstructionElements getWhileInstructionAccess() {
+		return pWhileInstruction;
+	}
+	
+	public ParserRule getWhileInstructionRule() {
+		return getWhileInstructionAccess().getRule();
+	}
+	
+	//SimpleInstruction:
+	//	'THEN' toExecute=[TransitionDefinition];
+	public SimpleInstructionElements getSimpleInstructionAccess() {
+		return pSimpleInstruction;
+	}
+	
+	public ParserRule getSimpleInstructionRule() {
+		return getSimpleInstructionAccess().getRule();
+	}
+	
+	//CompoundTransitionInstance:
+	//	'{'
+	//	body=CompoundTransitionInstanceBody
+	//	'}';
+	public CompoundTransitionInstanceElements getCompoundTransitionInstanceAccess() {
+		return pCompoundTransitionInstance;
+	}
+	
+	public ParserRule getCompoundTransitionInstanceRule() {
+		return getCompoundTransitionInstanceAccess().getRule();
+	}
+	
+	//CompoundTransitionInstanceBody:
+	//	'START' ('WITH' '(' startingInputs+=[Instance]+ ')')?
+	//	'{'
+	//	expression=InstanceInstructionExpression
+	//	'}';
+	public CompoundTransitionInstanceBodyElements getCompoundTransitionInstanceBodyAccess() {
+		return pCompoundTransitionInstanceBody;
+	}
+	
+	public ParserRule getCompoundTransitionInstanceBodyRule() {
+		return getCompoundTransitionInstanceBodyAccess().getRule();
+	}
+	
+	//InstanceInstructionExpression:
+	//	TerminalInstanceInstruction ({ExecutionResult.computeFirst=current} computeNext=TerminalInstanceInstruction)*;
+	public InstanceInstructionExpressionElements getInstanceInstructionExpressionAccess() {
+		return pInstanceInstructionExpression;
+	}
+	
+	public ParserRule getInstanceInstructionExpressionRule() {
+		return getInstanceInstructionExpressionAccess().getRule();
+	}
+	
+	//TerminalInstanceInstruction InstanceInstructionExpression:
+	//	IfInstanceInstruction | WhileInstanceInstruction | SimpleInstanceInstruction |
+	//	';';
+	public TerminalInstanceInstructionElements getTerminalInstanceInstructionAccess() {
+		return pTerminalInstanceInstruction;
+	}
+	
+	public ParserRule getTerminalInstanceInstructionRule() {
+		return getTerminalInstanceInstructionAccess().getRule();
+	}
+	
+	//SimpleInstanceInstruction:
+	//	'THEN' toExecute=[Instance|STRING];
+	public SimpleInstanceInstructionElements getSimpleInstanceInstructionAccess() {
+		return pSimpleInstanceInstruction;
+	}
+	
+	public ParserRule getSimpleInstanceInstructionRule() {
+		return getSimpleInstanceInstructionAccess().getRule();
+	}
+	
+	//IfInstanceInstruction:
+	//	'IF' '(' testKey=ResolvableValue '=' testValue=TestValue ')'
+	//	'{'
+	//	toComputeIfTrue=InstanceInstructionExpression
+	//	'}' ('ELSE' '{'
+	//	toComputeIfFalse=InstanceInstructionExpression
+	//	'}')?;
+	public IfInstanceInstructionElements getIfInstanceInstructionAccess() {
+		return pIfInstanceInstruction;
+	}
+	
+	public ParserRule getIfInstanceInstructionRule() {
+		return getIfInstanceInstructionAccess().getRule();
+	}
+	
+	//WhileInstanceInstruction:
+	//	'WHILE' '(' testKey=ResolvableValue '=' testValue=TestValue ')'
+	//	'{'
+	//	toCompute=InstanceInstructionExpression
+	//	'}';
+	public WhileInstanceInstructionElements getWhileInstanceInstructionAccess() {
+		return pWhileInstanceInstruction;
+	}
+	
+	public ParserRule getWhileInstanceInstructionRule() {
+		return getWhileInstanceInstructionAccess().getRule();
+	}
+	
+	//TestValue:
+	//	LiteralValue | ResolvableValue;
+	public TestValueElements getTestValueAccess() {
+		return pTestValue;
+	}
+	
+	public ParserRule getTestValueRule() {
+		return getTestValueAccess().getRule();
+	}
+	
+	//LiteralValue:
+	//	value=STRING;
+	public LiteralValueElements getLiteralValueAccess() {
+		return pLiteralValue;
+	}
+	
+	public ParserRule getLiteralValueRule() {
+		return getLiteralValueAccess().getRule();
+	}
+	
+	//ResolvableValue:
+	//	ResolvableInstanceValue | ResolvableTransitionOutputValue;
+	public ResolvableValueElements getResolvableValueAccess() {
+		return pResolvableValue;
+	}
+	
+	public ParserRule getResolvableValueRule() {
+		return getResolvableValueAccess().getRule();
+	}
+	
+	//ResolvableInstanceValue:
+	//	instance=[Instance] '.' key=[StateDefinition];
+	public ResolvableInstanceValueElements getResolvableInstanceValueAccess() {
+		return pResolvableInstanceValue;
+	}
+	
+	public ParserRule getResolvableInstanceValueRule() {
+		return getResolvableInstanceValueAccess().getRule();
+	}
+	
+	//ResolvableTransitionOutputValue:
+	//	'OUTPUT' state=[StateDefinition] '.' key=[StateDefinition];
+	public ResolvableTransitionOutputValueElements getResolvableTransitionOutputValueAccess() {
+		return pResolvableTransitionOutputValue;
+	}
+	
+	public ParserRule getResolvableTransitionOutputValueRule() {
+		return getResolvableTransitionOutputValueAccess().getRule();
 	}
 	
 	//terminal ID:

@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.worklang.work.CompoundTransitionInstance;
 import org.worklang.work.Instance;
 import org.worklang.work.StateDeclaration;
 import org.worklang.work.StateInstance;
@@ -44,6 +45,7 @@ import org.worklang.work.WorkPackage;
  *   <li>{@link org.worklang.work.impl.InstanceImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.worklang.work.impl.InstanceImpl#getState <em>State</em>}</li>
  *   <li>{@link org.worklang.work.impl.InstanceImpl#getTransition <em>Transition</em>}</li>
+ *   <li>{@link org.worklang.work.impl.InstanceImpl#getCompoundTransition <em>Compound Transition</em>}</li>
  * </ul>
  *
  * @generated
@@ -109,6 +111,16 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
    * @ordered
    */
   protected TransitionInstance transition;
+
+  /**
+   * The cached value of the '{@link #getCompoundTransition() <em>Compound Transition</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getCompoundTransition()
+   * @generated
+   * @ordered
+   */
+  protected CompoundTransitionInstance compoundTransition;
 
   /**
    * <!-- begin-user-doc -->
@@ -351,6 +363,54 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
    * <!-- end-user-doc -->
    * @generated
    */
+  public CompoundTransitionInstance getCompoundTransition()
+  {
+    return compoundTransition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetCompoundTransition(CompoundTransitionInstance newCompoundTransition, NotificationChain msgs)
+  {
+    CompoundTransitionInstance oldCompoundTransition = compoundTransition;
+    compoundTransition = newCompoundTransition;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__COMPOUND_TRANSITION, oldCompoundTransition, newCompoundTransition);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setCompoundTransition(CompoundTransitionInstance newCompoundTransition)
+  {
+    if (newCompoundTransition != compoundTransition)
+    {
+      NotificationChain msgs = null;
+      if (compoundTransition != null)
+        msgs = ((InternalEObject)compoundTransition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.INSTANCE__COMPOUND_TRANSITION, null, msgs);
+      if (newCompoundTransition != null)
+        msgs = ((InternalEObject)newCompoundTransition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.INSTANCE__COMPOUND_TRANSITION, null, msgs);
+      msgs = basicSetCompoundTransition(newCompoundTransition, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__COMPOUND_TRANSITION, newCompoundTransition, newCompoundTransition));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -364,6 +424,8 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
         return basicSetState(null, msgs);
       case WorkPackage.INSTANCE__TRANSITION:
         return basicSetTransition(null, msgs);
+      case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
+        return basicSetCompoundTransition(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -388,6 +450,8 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
         return getState();
       case WorkPackage.INSTANCE__TRANSITION:
         return getTransition();
+      case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
+        return getCompoundTransition();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -416,6 +480,9 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
         return;
       case WorkPackage.INSTANCE__TRANSITION:
         setTransition((TransitionInstance)newValue);
+        return;
+      case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
+        setCompoundTransition((CompoundTransitionInstance)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -446,6 +513,9 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
       case WorkPackage.INSTANCE__TRANSITION:
         setTransition((TransitionInstance)null);
         return;
+      case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
+        setCompoundTransition((CompoundTransitionInstance)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -470,6 +540,8 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
         return state != null;
       case WorkPackage.INSTANCE__TRANSITION:
         return transition != null;
+      case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
+        return compoundTransition != null;
     }
     return super.eIsSet(featureID);
   }

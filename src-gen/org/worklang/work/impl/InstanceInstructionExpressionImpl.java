@@ -19,24 +19,24 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.worklang.work.TransitionalExpression;
+import org.worklang.work.InstanceInstructionExpression;
 import org.worklang.work.WorkPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Transitional Expression</b></em>'.
+ * An implementation of the model object '<em><b>Instance Instruction Expression</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class TransitionalExpressionImpl extends MinimalEObjectImpl.Container implements TransitionalExpression
+public class InstanceInstructionExpressionImpl extends MinimalEObjectImpl.Container implements InstanceInstructionExpression
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TransitionalExpressionImpl()
+  protected InstanceInstructionExpressionImpl()
   {
     super();
   }
@@ -49,7 +49,7 @@ public class TransitionalExpressionImpl extends MinimalEObjectImpl.Container imp
   @Override
   protected EClass eStaticClass()
   {
-    return WorkPackage.Literals.TRANSITIONAL_EXPRESSION;
+    return WorkPackage.Literals.INSTANCE_INSTRUCTION_EXPRESSION;
   }
 
-} //TransitionalExpressionImpl
+} //InstanceInstructionExpressionImpl

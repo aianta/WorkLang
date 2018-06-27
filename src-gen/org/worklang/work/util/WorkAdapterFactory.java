@@ -173,11 +173,6 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
         return createWithStatesDefinitionAdapter();
       }
       @Override
-      public Adapter caseWithTransitionsDefinition(WithTransitionsDefinition object)
-      {
-        return createWithTransitionsDefinitionAdapter();
-      }
-      @Override
       public Adapter caseInputDefinition(InputDefinition object)
       {
         return createInputDefinitionAdapter();
@@ -238,14 +233,99 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
         return createBinaryExpressionAdapter();
       }
       @Override
-      public Adapter caseTransitionalExpression(TransitionalExpression object)
+      public Adapter caseTransitionComposition(TransitionComposition object)
       {
-        return createTransitionalExpressionAdapter();
+        return createTransitionCompositionAdapter();
+      }
+      @Override
+      public Adapter caseTransitionCompositionBody(TransitionCompositionBody object)
+      {
+        return createTransitionCompositionBodyAdapter();
+      }
+      @Override
+      public Adapter caseInstructionExpression(InstructionExpression object)
+      {
+        return createInstructionExpressionAdapter();
+      }
+      @Override
+      public Adapter caseIfInstruction(IfInstruction object)
+      {
+        return createIfInstructionAdapter();
+      }
+      @Override
+      public Adapter caseWhileInstruction(WhileInstruction object)
+      {
+        return createWhileInstructionAdapter();
+      }
+      @Override
+      public Adapter caseSimpleInstruction(SimpleInstruction object)
+      {
+        return createSimpleInstructionAdapter();
+      }
+      @Override
+      public Adapter caseCompoundTransitionInstance(CompoundTransitionInstance object)
+      {
+        return createCompoundTransitionInstanceAdapter();
+      }
+      @Override
+      public Adapter caseCompoundTransitionInstanceBody(CompoundTransitionInstanceBody object)
+      {
+        return createCompoundTransitionInstanceBodyAdapter();
+      }
+      @Override
+      public Adapter caseInstanceInstructionExpression(InstanceInstructionExpression object)
+      {
+        return createInstanceInstructionExpressionAdapter();
+      }
+      @Override
+      public Adapter caseSimpleInstanceInstruction(SimpleInstanceInstruction object)
+      {
+        return createSimpleInstanceInstructionAdapter();
+      }
+      @Override
+      public Adapter caseIfInstanceInstruction(IfInstanceInstruction object)
+      {
+        return createIfInstanceInstructionAdapter();
+      }
+      @Override
+      public Adapter caseWhileInstanceInstruction(WhileInstanceInstruction object)
+      {
+        return createWhileInstanceInstructionAdapter();
+      }
+      @Override
+      public Adapter caseTestValue(TestValue object)
+      {
+        return createTestValueAdapter();
+      }
+      @Override
+      public Adapter caseLiteralValue(LiteralValue object)
+      {
+        return createLiteralValueAdapter();
+      }
+      @Override
+      public Adapter caseResolvableValue(ResolvableValue object)
+      {
+        return createResolvableValueAdapter();
+      }
+      @Override
+      public Adapter caseResolvableInstanceValue(ResolvableInstanceValue object)
+      {
+        return createResolvableInstanceValueAdapter();
+      }
+      @Override
+      public Adapter caseResolvableTransitionOutputValue(ResolvableTransitionOutputValue object)
+      {
+        return createResolvableTransitionOutputValueAdapter();
       }
       @Override
       public Adapter caseOperation(Operation object)
       {
         return createOperationAdapter();
+      }
+      @Override
+      public Adapter caseExecutionResult(ExecutionResult object)
+      {
+        return createExecutionResultAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -525,21 +605,6 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.WithTransitionsDefinition <em>With Transitions Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.worklang.work.WithTransitionsDefinition
-   * @generated
-   */
-  public Adapter createWithTransitionsDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.worklang.work.InputDefinition <em>Input Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -720,16 +785,256 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.worklang.work.TransitionalExpression <em>Transitional Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.worklang.work.TransitionComposition <em>Transition Composition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.worklang.work.TransitionalExpression
+   * @see org.worklang.work.TransitionComposition
    * @generated
    */
-  public Adapter createTransitionalExpressionAdapter()
+  public Adapter createTransitionCompositionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.TransitionCompositionBody <em>Transition Composition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.TransitionCompositionBody
+   * @generated
+   */
+  public Adapter createTransitionCompositionBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.InstructionExpression <em>Instruction Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.InstructionExpression
+   * @generated
+   */
+  public Adapter createInstructionExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.IfInstruction <em>If Instruction</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.IfInstruction
+   * @generated
+   */
+  public Adapter createIfInstructionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.WhileInstruction <em>While Instruction</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.WhileInstruction
+   * @generated
+   */
+  public Adapter createWhileInstructionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.SimpleInstruction <em>Simple Instruction</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.SimpleInstruction
+   * @generated
+   */
+  public Adapter createSimpleInstructionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.CompoundTransitionInstance <em>Compound Transition Instance</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.CompoundTransitionInstance
+   * @generated
+   */
+  public Adapter createCompoundTransitionInstanceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.CompoundTransitionInstanceBody <em>Compound Transition Instance Body</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.CompoundTransitionInstanceBody
+   * @generated
+   */
+  public Adapter createCompoundTransitionInstanceBodyAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.InstanceInstructionExpression <em>Instance Instruction Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.InstanceInstructionExpression
+   * @generated
+   */
+  public Adapter createInstanceInstructionExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.SimpleInstanceInstruction <em>Simple Instance Instruction</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.SimpleInstanceInstruction
+   * @generated
+   */
+  public Adapter createSimpleInstanceInstructionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.IfInstanceInstruction <em>If Instance Instruction</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.IfInstanceInstruction
+   * @generated
+   */
+  public Adapter createIfInstanceInstructionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.WhileInstanceInstruction <em>While Instance Instruction</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.WhileInstanceInstruction
+   * @generated
+   */
+  public Adapter createWhileInstanceInstructionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.TestValue <em>Test Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.TestValue
+   * @generated
+   */
+  public Adapter createTestValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.LiteralValue <em>Literal Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.LiteralValue
+   * @generated
+   */
+  public Adapter createLiteralValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.ResolvableValue <em>Resolvable Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.ResolvableValue
+   * @generated
+   */
+  public Adapter createResolvableValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.ResolvableInstanceValue <em>Resolvable Instance Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.ResolvableInstanceValue
+   * @generated
+   */
+  public Adapter createResolvableInstanceValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.ResolvableTransitionOutputValue <em>Resolvable Transition Output Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.ResolvableTransitionOutputValue
+   * @generated
+   */
+  public Adapter createResolvableTransitionOutputValueAdapter()
   {
     return null;
   }
@@ -745,6 +1050,21 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createOperationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.ExecutionResult <em>Execution Result</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.ExecutionResult
+   * @generated
+   */
+  public Adapter createExecutionResultAdapter()
   {
     return null;
   }

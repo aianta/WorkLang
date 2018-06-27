@@ -25,11 +25,19 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.worklang.work.BinaryExpression;
 import org.worklang.work.CompoundStateDefinition;
 import org.worklang.work.CompoundTransitionDefinition;
+import org.worklang.work.CompoundTransitionInstance;
+import org.worklang.work.CompoundTransitionInstanceBody;
 import org.worklang.work.DefinitionSpace;
+import org.worklang.work.ExecutionResult;
 import org.worklang.work.FieldDefinition;
+import org.worklang.work.IfInstanceInstruction;
+import org.worklang.work.IfInstruction;
 import org.worklang.work.InputDefinition;
 import org.worklang.work.Instance;
+import org.worklang.work.InstanceInstructionExpression;
 import org.worklang.work.InstanceSpace;
+import org.worklang.work.InstructionExpression;
+import org.worklang.work.LiteralValue;
 import org.worklang.work.MapSpace;
 import org.worklang.work.Model;
 import org.worklang.work.Operation;
@@ -40,20 +48,28 @@ import org.worklang.work.PrimitiveTransitionDefinition;
 import org.worklang.work.ReferenceSpace;
 import org.worklang.work.ReferenceState;
 import org.worklang.work.ReferenceTransition;
+import org.worklang.work.ResolvableInstanceValue;
+import org.worklang.work.ResolvableTransitionOutputValue;
+import org.worklang.work.ResolvableValue;
 import org.worklang.work.SetStatement;
+import org.worklang.work.SimpleInstanceInstruction;
+import org.worklang.work.SimpleInstruction;
 import org.worklang.work.StateDeclaration;
 import org.worklang.work.StateDefinition;
 import org.worklang.work.StateInstance;
 import org.worklang.work.StateMapping;
+import org.worklang.work.TestValue;
 import org.worklang.work.ToDefinition;
+import org.worklang.work.TransitionComposition;
+import org.worklang.work.TransitionCompositionBody;
 import org.worklang.work.TransitionDeclaration;
 import org.worklang.work.TransitionDefinition;
 import org.worklang.work.TransitionInstance;
 import org.worklang.work.TransitionMapping;
-import org.worklang.work.TransitionalExpression;
 import org.worklang.work.UseDefinition;
+import org.worklang.work.WhileInstanceInstruction;
+import org.worklang.work.WhileInstruction;
 import org.worklang.work.WithStatesDefinition;
-import org.worklang.work.WithTransitionsDefinition;
 import org.worklang.work.WorkFactory;
 import org.worklang.work.WorkPackage;
 
@@ -189,13 +205,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass withTransitionsDefinitionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass inputDefinitionEClass = null;
 
   /**
@@ -280,7 +289,119 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass transitionalExpressionEClass = null;
+  private EClass transitionCompositionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass transitionCompositionBodyEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass instructionExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ifInstructionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass whileInstructionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass simpleInstructionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass compoundTransitionInstanceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass compoundTransitionInstanceBodyEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass instanceInstructionExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass simpleInstanceInstructionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ifInstanceInstructionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass whileInstanceInstructionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass testValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass literalValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass resolvableValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass resolvableInstanceValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass resolvableTransitionOutputValueEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -288,6 +409,13 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * @generated
    */
   private EClass operationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass executionResultEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -677,19 +805,9 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTransitionDefinition_Value()
-  {
-    return (EReference)transitionDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EAttribute getTransitionDefinition_Type()
   {
-    return (EAttribute)transitionDefinitionEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)transitionDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -699,7 +817,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    */
   public EAttribute getTransitionDefinition_Name()
   {
-    return (EAttribute)transitionDefinitionEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)transitionDefinitionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -709,7 +827,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    */
   public EReference getTransitionDefinition_In()
   {
-    return (EReference)transitionDefinitionEClass.getEStructuralFeatures().get(3);
+    return (EReference)transitionDefinitionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -719,7 +837,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    */
   public EReference getTransitionDefinition_Out()
   {
-    return (EReference)transitionDefinitionEClass.getEStructuralFeatures().get(4);
+    return (EReference)transitionDefinitionEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -887,26 +1005,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getWithTransitionsDefinition()
-  {
-    return withTransitionsDefinitionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getWithTransitionsDefinition_Transitions()
-  {
-    return (EReference)withTransitionsDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getInputDefinition()
   {
     return inputDefinitionEClass;
@@ -1000,6 +1098,16 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
   public EReference getInstance_Transition()
   {
     return (EReference)instanceEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getInstance_CompoundTransition()
+  {
+    return (EReference)instanceEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -1217,9 +1325,429 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTransitionalExpression()
+  public EClass getTransitionComposition()
   {
-    return transitionalExpressionEClass;
+    return transitionCompositionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransitionComposition_Body()
+  {
+    return (EReference)transitionCompositionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTransitionCompositionBody()
+  {
+    return transitionCompositionBodyEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransitionCompositionBody_StartingInputs()
+  {
+    return (EReference)transitionCompositionBodyEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransitionCompositionBody_Expression()
+  {
+    return (EReference)transitionCompositionBodyEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getInstructionExpression()
+  {
+    return instructionExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIfInstruction()
+  {
+    return ifInstructionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIfInstruction_TestKey()
+  {
+    return (EReference)ifInstructionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIfInstruction_TestValue()
+  {
+    return (EReference)ifInstructionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIfInstruction_ToComputeIfTrue()
+  {
+    return (EReference)ifInstructionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIfInstruction_ToComputeIfFalse()
+  {
+    return (EReference)ifInstructionEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getWhileInstruction()
+  {
+    return whileInstructionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getWhileInstruction_TestKey()
+  {
+    return (EReference)whileInstructionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getWhileInstruction_TestValue()
+  {
+    return (EReference)whileInstructionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getWhileInstruction_ToCompute()
+  {
+    return (EReference)whileInstructionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSimpleInstruction()
+  {
+    return simpleInstructionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSimpleInstruction_ToExecute()
+  {
+    return (EReference)simpleInstructionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getCompoundTransitionInstance()
+  {
+    return compoundTransitionInstanceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCompoundTransitionInstance_Body()
+  {
+    return (EReference)compoundTransitionInstanceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getCompoundTransitionInstanceBody()
+  {
+    return compoundTransitionInstanceBodyEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCompoundTransitionInstanceBody_StartingInputs()
+  {
+    return (EReference)compoundTransitionInstanceBodyEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCompoundTransitionInstanceBody_Expression()
+  {
+    return (EReference)compoundTransitionInstanceBodyEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getInstanceInstructionExpression()
+  {
+    return instanceInstructionExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSimpleInstanceInstruction()
+  {
+    return simpleInstanceInstructionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSimpleInstanceInstruction_ToExecute()
+  {
+    return (EReference)simpleInstanceInstructionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIfInstanceInstruction()
+  {
+    return ifInstanceInstructionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIfInstanceInstruction_TestKey()
+  {
+    return (EReference)ifInstanceInstructionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIfInstanceInstruction_TestValue()
+  {
+    return (EReference)ifInstanceInstructionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIfInstanceInstruction_ToComputeIfTrue()
+  {
+    return (EReference)ifInstanceInstructionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIfInstanceInstruction_ToComputeIfFalse()
+  {
+    return (EReference)ifInstanceInstructionEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getWhileInstanceInstruction()
+  {
+    return whileInstanceInstructionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getWhileInstanceInstruction_TestKey()
+  {
+    return (EReference)whileInstanceInstructionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getWhileInstanceInstruction_TestValue()
+  {
+    return (EReference)whileInstanceInstructionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getWhileInstanceInstruction_ToCompute()
+  {
+    return (EReference)whileInstanceInstructionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTestValue()
+  {
+    return testValueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getLiteralValue()
+  {
+    return literalValueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLiteralValue_Value()
+  {
+    return (EAttribute)literalValueEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getResolvableValue()
+  {
+    return resolvableValueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getResolvableValue_Key()
+  {
+    return (EReference)resolvableValueEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getResolvableInstanceValue()
+  {
+    return resolvableInstanceValueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getResolvableInstanceValue_Instance()
+  {
+    return (EReference)resolvableInstanceValueEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getResolvableTransitionOutputValue()
+  {
+    return resolvableTransitionOutputValueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getResolvableTransitionOutputValue_State()
+  {
+    return (EReference)resolvableTransitionOutputValueEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1260,6 +1788,36 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
   public EReference getOperation_Right()
   {
     return (EReference)operationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getExecutionResult()
+  {
+    return executionResultEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getExecutionResult_ComputeFirst()
+  {
+    return (EReference)executionResultEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getExecutionResult_ComputeNext()
+  {
+    return (EReference)executionResultEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1333,7 +1891,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     createEReference(compoundStateDefinitionEClass, COMPOUND_STATE_DEFINITION__COMPOSITION);
 
     transitionDefinitionEClass = createEClass(TRANSITION_DEFINITION);
-    createEReference(transitionDefinitionEClass, TRANSITION_DEFINITION__VALUE);
     createEAttribute(transitionDefinitionEClass, TRANSITION_DEFINITION__TYPE);
     createEAttribute(transitionDefinitionEClass, TRANSITION_DEFINITION__NAME);
     createEReference(transitionDefinitionEClass, TRANSITION_DEFINITION__IN);
@@ -1362,9 +1919,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     withStatesDefinitionEClass = createEClass(WITH_STATES_DEFINITION);
     createEReference(withStatesDefinitionEClass, WITH_STATES_DEFINITION__PREDICATE);
 
-    withTransitionsDefinitionEClass = createEClass(WITH_TRANSITIONS_DEFINITION);
-    createEReference(withTransitionsDefinitionEClass, WITH_TRANSITIONS_DEFINITION__TRANSITIONS);
-
     inputDefinitionEClass = createEClass(INPUT_DEFINITION);
     createEReference(inputDefinitionEClass, INPUT_DEFINITION__INPUT_STATE);
 
@@ -1377,6 +1931,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     createEAttribute(instanceEClass, INSTANCE__NAME);
     createEReference(instanceEClass, INSTANCE__STATE);
     createEReference(instanceEClass, INSTANCE__TRANSITION);
+    createEReference(instanceEClass, INSTANCE__COMPOUND_TRANSITION);
 
     transitionDeclarationEClass = createEClass(TRANSITION_DECLARATION);
     createEReference(transitionDeclarationEClass, TRANSITION_DECLARATION__TRANSITION);
@@ -1408,12 +1963,74 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
 
     binaryExpressionEClass = createEClass(BINARY_EXPRESSION);
 
-    transitionalExpressionEClass = createEClass(TRANSITIONAL_EXPRESSION);
+    transitionCompositionEClass = createEClass(TRANSITION_COMPOSITION);
+    createEReference(transitionCompositionEClass, TRANSITION_COMPOSITION__BODY);
+
+    transitionCompositionBodyEClass = createEClass(TRANSITION_COMPOSITION_BODY);
+    createEReference(transitionCompositionBodyEClass, TRANSITION_COMPOSITION_BODY__STARTING_INPUTS);
+    createEReference(transitionCompositionBodyEClass, TRANSITION_COMPOSITION_BODY__EXPRESSION);
+
+    instructionExpressionEClass = createEClass(INSTRUCTION_EXPRESSION);
+
+    ifInstructionEClass = createEClass(IF_INSTRUCTION);
+    createEReference(ifInstructionEClass, IF_INSTRUCTION__TEST_KEY);
+    createEReference(ifInstructionEClass, IF_INSTRUCTION__TEST_VALUE);
+    createEReference(ifInstructionEClass, IF_INSTRUCTION__TO_COMPUTE_IF_TRUE);
+    createEReference(ifInstructionEClass, IF_INSTRUCTION__TO_COMPUTE_IF_FALSE);
+
+    whileInstructionEClass = createEClass(WHILE_INSTRUCTION);
+    createEReference(whileInstructionEClass, WHILE_INSTRUCTION__TEST_KEY);
+    createEReference(whileInstructionEClass, WHILE_INSTRUCTION__TEST_VALUE);
+    createEReference(whileInstructionEClass, WHILE_INSTRUCTION__TO_COMPUTE);
+
+    simpleInstructionEClass = createEClass(SIMPLE_INSTRUCTION);
+    createEReference(simpleInstructionEClass, SIMPLE_INSTRUCTION__TO_EXECUTE);
+
+    compoundTransitionInstanceEClass = createEClass(COMPOUND_TRANSITION_INSTANCE);
+    createEReference(compoundTransitionInstanceEClass, COMPOUND_TRANSITION_INSTANCE__BODY);
+
+    compoundTransitionInstanceBodyEClass = createEClass(COMPOUND_TRANSITION_INSTANCE_BODY);
+    createEReference(compoundTransitionInstanceBodyEClass, COMPOUND_TRANSITION_INSTANCE_BODY__STARTING_INPUTS);
+    createEReference(compoundTransitionInstanceBodyEClass, COMPOUND_TRANSITION_INSTANCE_BODY__EXPRESSION);
+
+    instanceInstructionExpressionEClass = createEClass(INSTANCE_INSTRUCTION_EXPRESSION);
+
+    simpleInstanceInstructionEClass = createEClass(SIMPLE_INSTANCE_INSTRUCTION);
+    createEReference(simpleInstanceInstructionEClass, SIMPLE_INSTANCE_INSTRUCTION__TO_EXECUTE);
+
+    ifInstanceInstructionEClass = createEClass(IF_INSTANCE_INSTRUCTION);
+    createEReference(ifInstanceInstructionEClass, IF_INSTANCE_INSTRUCTION__TEST_KEY);
+    createEReference(ifInstanceInstructionEClass, IF_INSTANCE_INSTRUCTION__TEST_VALUE);
+    createEReference(ifInstanceInstructionEClass, IF_INSTANCE_INSTRUCTION__TO_COMPUTE_IF_TRUE);
+    createEReference(ifInstanceInstructionEClass, IF_INSTANCE_INSTRUCTION__TO_COMPUTE_IF_FALSE);
+
+    whileInstanceInstructionEClass = createEClass(WHILE_INSTANCE_INSTRUCTION);
+    createEReference(whileInstanceInstructionEClass, WHILE_INSTANCE_INSTRUCTION__TEST_KEY);
+    createEReference(whileInstanceInstructionEClass, WHILE_INSTANCE_INSTRUCTION__TEST_VALUE);
+    createEReference(whileInstanceInstructionEClass, WHILE_INSTANCE_INSTRUCTION__TO_COMPUTE);
+
+    testValueEClass = createEClass(TEST_VALUE);
+
+    literalValueEClass = createEClass(LITERAL_VALUE);
+    createEAttribute(literalValueEClass, LITERAL_VALUE__VALUE);
+
+    resolvableValueEClass = createEClass(RESOLVABLE_VALUE);
+    createEReference(resolvableValueEClass, RESOLVABLE_VALUE__KEY);
+
+    resolvableInstanceValueEClass = createEClass(RESOLVABLE_INSTANCE_VALUE);
+    createEReference(resolvableInstanceValueEClass, RESOLVABLE_INSTANCE_VALUE__INSTANCE);
+
+    resolvableTransitionOutputValueEClass = createEClass(RESOLVABLE_TRANSITION_OUTPUT_VALUE);
+    createEReference(resolvableTransitionOutputValueEClass, RESOLVABLE_TRANSITION_OUTPUT_VALUE__STATE);
 
     operationEClass = createEClass(OPERATION);
     createEReference(operationEClass, OPERATION__LEFT);
     createEAttribute(operationEClass, OPERATION__OP);
     createEReference(operationEClass, OPERATION__RIGHT);
+
+    executionResultEClass = createEClass(EXECUTION_RESULT);
+    createEReference(executionResultEClass, EXECUTION_RESULT__COMPUTE_FIRST);
+    createEReference(executionResultEClass, EXECUTION_RESULT__COMPUTE_NEXT);
   }
 
   /**
@@ -1448,12 +2065,22 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     stateDefinitionEClass.getESuperTypes().add(this.getBinaryExpression());
     primitiveStateDefinitionEClass.getESuperTypes().add(this.getStateDefinition());
     compoundStateDefinitionEClass.getESuperTypes().add(this.getStateDefinition());
-    transitionDefinitionEClass.getESuperTypes().add(this.getTransitionalExpression());
     primitiveTransitionDefinitionEClass.getESuperTypes().add(this.getTransitionDefinition());
     compoundTransitionDefinitionEClass.getESuperTypes().add(this.getTransitionDefinition());
     predicateEClass.getESuperTypes().add(this.getBinaryExpression());
+    ifInstructionEClass.getESuperTypes().add(this.getInstructionExpression());
+    whileInstructionEClass.getESuperTypes().add(this.getInstructionExpression());
+    simpleInstructionEClass.getESuperTypes().add(this.getInstructionExpression());
+    simpleInstanceInstructionEClass.getESuperTypes().add(this.getInstanceInstructionExpression());
+    ifInstanceInstructionEClass.getESuperTypes().add(this.getInstanceInstructionExpression());
+    whileInstanceInstructionEClass.getESuperTypes().add(this.getInstanceInstructionExpression());
+    literalValueEClass.getESuperTypes().add(this.getTestValue());
+    resolvableValueEClass.getESuperTypes().add(this.getTestValue());
+    resolvableInstanceValueEClass.getESuperTypes().add(this.getResolvableValue());
+    resolvableTransitionOutputValueEClass.getESuperTypes().add(this.getResolvableValue());
     operationEClass.getESuperTypes().add(this.getBinaryExpression());
-    operationEClass.getESuperTypes().add(this.getTransitionalExpression());
+    executionResultEClass.getESuperTypes().add(this.getInstructionExpression());
+    executionResultEClass.getESuperTypes().add(this.getInstanceInstructionExpression());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1497,7 +2124,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     initEReference(getCompoundStateDefinition_Composition(), this.getWithStatesDefinition(), null, "composition", null, 0, 1, CompoundStateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(transitionDefinitionEClass, TransitionDefinition.class, "TransitionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTransitionDefinition_Value(), this.getTransitionDefinition(), null, "value", null, 0, 1, TransitionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTransitionDefinition_Type(), ecorePackage.getEString(), "type", null, 0, 1, TransitionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTransitionDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, TransitionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTransitionDefinition_In(), this.getInputDefinition(), null, "in", null, 0, 1, TransitionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1506,7 +2132,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     initEClass(primitiveTransitionDefinitionEClass, PrimitiveTransitionDefinition.class, "PrimitiveTransitionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(compoundTransitionDefinitionEClass, CompoundTransitionDefinition.class, "CompoundTransitionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getCompoundTransitionDefinition_Composition(), this.getWithTransitionsDefinition(), null, "composition", null, 0, 1, CompoundTransitionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCompoundTransitionDefinition_Composition(), this.getTransitionComposition(), null, "composition", null, 0, 1, CompoundTransitionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(referenceSpaceEClass, ReferenceSpace.class, "ReferenceSpace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReferenceSpace_RefStates(), this.getReferenceState(), null, "refStates", null, 0, -1, ReferenceSpace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1526,9 +2152,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     initEClass(withStatesDefinitionEClass, WithStatesDefinition.class, "WithStatesDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getWithStatesDefinition_Predicate(), this.getPredicate(), null, "predicate", null, 0, 1, WithStatesDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(withTransitionsDefinitionEClass, WithTransitionsDefinition.class, "WithTransitionsDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getWithTransitionsDefinition_Transitions(), this.getTransitionalExpression(), null, "transitions", null, 0, 1, WithTransitionsDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(inputDefinitionEClass, InputDefinition.class, "InputDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getInputDefinition_InputState(), this.getStateDefinition(), null, "inputState", null, 0, -1, InputDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1541,6 +2164,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     initEAttribute(getInstance_Name(), ecorePackage.getEString(), "name", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getInstance_State(), this.getStateInstance(), null, "state", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getInstance_Transition(), this.getTransitionInstance(), null, "transition", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getInstance_CompoundTransition(), this.getCompoundTransitionInstance(), null, "compoundTransition", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(transitionDeclarationEClass, TransitionDeclaration.class, "TransitionDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTransitionDeclaration_Transition(), this.getTransitionDefinition(), null, "transition", null, 0, 1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1572,12 +2196,74 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
 
     initEClass(binaryExpressionEClass, BinaryExpression.class, "BinaryExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(transitionalExpressionEClass, TransitionalExpression.class, "TransitionalExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(transitionCompositionEClass, TransitionComposition.class, "TransitionComposition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTransitionComposition_Body(), this.getTransitionCompositionBody(), null, "body", null, 0, 1, TransitionComposition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(transitionCompositionBodyEClass, TransitionCompositionBody.class, "TransitionCompositionBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTransitionCompositionBody_StartingInputs(), this.getStateDefinition(), null, "startingInputs", null, 0, -1, TransitionCompositionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransitionCompositionBody_Expression(), this.getInstructionExpression(), null, "expression", null, 0, 1, TransitionCompositionBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(instructionExpressionEClass, InstructionExpression.class, "InstructionExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(ifInstructionEClass, IfInstruction.class, "IfInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getIfInstruction_TestKey(), this.getResolvableValue(), null, "testKey", null, 0, 1, IfInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIfInstruction_TestValue(), this.getTestValue(), null, "testValue", null, 0, 1, IfInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIfInstruction_ToComputeIfTrue(), this.getInstructionExpression(), null, "toComputeIfTrue", null, 0, 1, IfInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIfInstruction_ToComputeIfFalse(), this.getInstructionExpression(), null, "toComputeIfFalse", null, 0, 1, IfInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(whileInstructionEClass, WhileInstruction.class, "WhileInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getWhileInstruction_TestKey(), this.getResolvableValue(), null, "testKey", null, 0, 1, WhileInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getWhileInstruction_TestValue(), this.getTestValue(), null, "testValue", null, 0, 1, WhileInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getWhileInstruction_ToCompute(), this.getInstructionExpression(), null, "toCompute", null, 0, 1, WhileInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(simpleInstructionEClass, SimpleInstruction.class, "SimpleInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSimpleInstruction_ToExecute(), this.getTransitionDefinition(), null, "toExecute", null, 0, 1, SimpleInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(compoundTransitionInstanceEClass, CompoundTransitionInstance.class, "CompoundTransitionInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getCompoundTransitionInstance_Body(), this.getCompoundTransitionInstanceBody(), null, "body", null, 0, 1, CompoundTransitionInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(compoundTransitionInstanceBodyEClass, CompoundTransitionInstanceBody.class, "CompoundTransitionInstanceBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getCompoundTransitionInstanceBody_StartingInputs(), this.getInstance(), null, "startingInputs", null, 0, -1, CompoundTransitionInstanceBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCompoundTransitionInstanceBody_Expression(), this.getInstanceInstructionExpression(), null, "expression", null, 0, 1, CompoundTransitionInstanceBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(instanceInstructionExpressionEClass, InstanceInstructionExpression.class, "InstanceInstructionExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(simpleInstanceInstructionEClass, SimpleInstanceInstruction.class, "SimpleInstanceInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSimpleInstanceInstruction_ToExecute(), this.getInstance(), null, "toExecute", null, 0, 1, SimpleInstanceInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(ifInstanceInstructionEClass, IfInstanceInstruction.class, "IfInstanceInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getIfInstanceInstruction_TestKey(), this.getResolvableValue(), null, "testKey", null, 0, 1, IfInstanceInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIfInstanceInstruction_TestValue(), this.getTestValue(), null, "testValue", null, 0, 1, IfInstanceInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIfInstanceInstruction_ToComputeIfTrue(), this.getInstanceInstructionExpression(), null, "toComputeIfTrue", null, 0, 1, IfInstanceInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIfInstanceInstruction_ToComputeIfFalse(), this.getInstanceInstructionExpression(), null, "toComputeIfFalse", null, 0, 1, IfInstanceInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(whileInstanceInstructionEClass, WhileInstanceInstruction.class, "WhileInstanceInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getWhileInstanceInstruction_TestKey(), this.getResolvableValue(), null, "testKey", null, 0, 1, WhileInstanceInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getWhileInstanceInstruction_TestValue(), this.getTestValue(), null, "testValue", null, 0, 1, WhileInstanceInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getWhileInstanceInstruction_ToCompute(), this.getInstanceInstructionExpression(), null, "toCompute", null, 0, 1, WhileInstanceInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(testValueEClass, TestValue.class, "TestValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(literalValueEClass, LiteralValue.class, "LiteralValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLiteralValue_Value(), ecorePackage.getEString(), "value", null, 0, 1, LiteralValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(resolvableValueEClass, ResolvableValue.class, "ResolvableValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getResolvableValue_Key(), this.getStateDefinition(), null, "key", null, 0, 1, ResolvableValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(resolvableInstanceValueEClass, ResolvableInstanceValue.class, "ResolvableInstanceValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getResolvableInstanceValue_Instance(), this.getInstance(), null, "instance", null, 0, 1, ResolvableInstanceValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(resolvableTransitionOutputValueEClass, ResolvableTransitionOutputValue.class, "ResolvableTransitionOutputValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getResolvableTransitionOutputValue_State(), this.getStateDefinition(), null, "state", null, 0, 1, ResolvableTransitionOutputValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getOperation_Left(), ecorePackage.getEObject(), null, "left", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getOperation_Left(), this.getBinaryExpression(), null, "left", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getOperation_Op(), ecorePackage.getEString(), "op", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getOperation_Right(), ecorePackage.getEObject(), null, "right", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getOperation_Right(), this.getBinaryExpression(), null, "right", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(executionResultEClass, ExecutionResult.class, "ExecutionResult", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getExecutionResult_ComputeFirst(), ecorePackage.getEObject(), null, "computeFirst", null, 0, 1, ExecutionResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getExecutionResult_ComputeNext(), ecorePackage.getEObject(), null, "computeNext", null, 0, 1, ExecutionResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

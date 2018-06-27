@@ -22,42 +22,43 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.worklang.work.CompoundTransitionDefinition;
-import org.worklang.work.TransitionComposition;
+import org.worklang.work.CompoundTransitionInstance;
+import org.worklang.work.CompoundTransitionInstanceBody;
 import org.worklang.work.WorkPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Compound Transition Definition</b></em>'.
+ * An implementation of the model object '<em><b>Compound Transition Instance</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.CompoundTransitionDefinitionImpl#getComposition <em>Composition</em>}</li>
+ *   <li>{@link org.worklang.work.impl.CompoundTransitionInstanceImpl#getBody <em>Body</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class CompoundTransitionDefinitionImpl extends TransitionDefinitionImpl implements CompoundTransitionDefinition
+public class CompoundTransitionInstanceImpl extends MinimalEObjectImpl.Container implements CompoundTransitionInstance
 {
   /**
-   * The cached value of the '{@link #getComposition() <em>Composition</em>}' containment reference.
+   * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getComposition()
+   * @see #getBody()
    * @generated
    * @ordered
    */
-  protected TransitionComposition composition;
+  protected CompoundTransitionInstanceBody body;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected CompoundTransitionDefinitionImpl()
+  protected CompoundTransitionInstanceImpl()
   {
     super();
   }
@@ -70,7 +71,7 @@ public class CompoundTransitionDefinitionImpl extends TransitionDefinitionImpl i
   @Override
   protected EClass eStaticClass()
   {
-    return WorkPackage.Literals.COMPOUND_TRANSITION_DEFINITION;
+    return WorkPackage.Literals.COMPOUND_TRANSITION_INSTANCE;
   }
 
   /**
@@ -78,9 +79,9 @@ public class CompoundTransitionDefinitionImpl extends TransitionDefinitionImpl i
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionComposition getComposition()
+  public CompoundTransitionInstanceBody getBody()
   {
-    return composition;
+    return body;
   }
 
   /**
@@ -88,13 +89,13 @@ public class CompoundTransitionDefinitionImpl extends TransitionDefinitionImpl i
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetComposition(TransitionComposition newComposition, NotificationChain msgs)
+  public NotificationChain basicSetBody(CompoundTransitionInstanceBody newBody, NotificationChain msgs)
   {
-    TransitionComposition oldComposition = composition;
-    composition = newComposition;
+    CompoundTransitionInstanceBody oldBody = body;
+    body = newBody;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION, oldComposition, newComposition);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.COMPOUND_TRANSITION_INSTANCE__BODY, oldBody, newBody);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -105,20 +106,20 @@ public class CompoundTransitionDefinitionImpl extends TransitionDefinitionImpl i
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setComposition(TransitionComposition newComposition)
+  public void setBody(CompoundTransitionInstanceBody newBody)
   {
-    if (newComposition != composition)
+    if (newBody != body)
     {
       NotificationChain msgs = null;
-      if (composition != null)
-        msgs = ((InternalEObject)composition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION, null, msgs);
-      if (newComposition != null)
-        msgs = ((InternalEObject)newComposition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION, null, msgs);
-      msgs = basicSetComposition(newComposition, msgs);
+      if (body != null)
+        msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.COMPOUND_TRANSITION_INSTANCE__BODY, null, msgs);
+      if (newBody != null)
+        msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.COMPOUND_TRANSITION_INSTANCE__BODY, null, msgs);
+      msgs = basicSetBody(newBody, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION, newComposition, newComposition));
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.COMPOUND_TRANSITION_INSTANCE__BODY, newBody, newBody));
   }
 
   /**
@@ -131,8 +132,8 @@ public class CompoundTransitionDefinitionImpl extends TransitionDefinitionImpl i
   {
     switch (featureID)
     {
-      case WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION:
-        return basicSetComposition(null, msgs);
+      case WorkPackage.COMPOUND_TRANSITION_INSTANCE__BODY:
+        return basicSetBody(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -147,8 +148,8 @@ public class CompoundTransitionDefinitionImpl extends TransitionDefinitionImpl i
   {
     switch (featureID)
     {
-      case WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION:
-        return getComposition();
+      case WorkPackage.COMPOUND_TRANSITION_INSTANCE__BODY:
+        return getBody();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -163,8 +164,8 @@ public class CompoundTransitionDefinitionImpl extends TransitionDefinitionImpl i
   {
     switch (featureID)
     {
-      case WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION:
-        setComposition((TransitionComposition)newValue);
+      case WorkPackage.COMPOUND_TRANSITION_INSTANCE__BODY:
+        setBody((CompoundTransitionInstanceBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -180,8 +181,8 @@ public class CompoundTransitionDefinitionImpl extends TransitionDefinitionImpl i
   {
     switch (featureID)
     {
-      case WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION:
-        setComposition((TransitionComposition)null);
+      case WorkPackage.COMPOUND_TRANSITION_INSTANCE__BODY:
+        setBody((CompoundTransitionInstanceBody)null);
         return;
     }
     super.eUnset(featureID);
@@ -197,10 +198,10 @@ public class CompoundTransitionDefinitionImpl extends TransitionDefinitionImpl i
   {
     switch (featureID)
     {
-      case WorkPackage.COMPOUND_TRANSITION_DEFINITION__COMPOSITION:
-        return composition != null;
+      case WorkPackage.COMPOUND_TRANSITION_INSTANCE__BODY:
+        return body != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //CompoundTransitionDefinitionImpl
+} //CompoundTransitionInstanceImpl

@@ -94,7 +94,7 @@ CompoundTransitionDefinition:
 	name = ID
 	(in = InputDefinition)?
 	out = OutputDefinition
-	composition = WithTransitionsDefinition
+	composition = TransitionComposition
 ;
 
 ReferenceSpace:
@@ -135,13 +135,6 @@ WithStatesDefinition:
 	'}'
 ;
 
-WithTransitionsDefinition:
-	'with'
-	'{'
-	transitions = TransitionalExpression
-	'}'
-;
-
 
 InputDefinition:
 	{InputDefinition} 'input' inputState += [StateDefinition]*
@@ -155,7 +148,7 @@ Instance:
 	'instance' 
 	(transitionDeclaration = TransitionDeclaration| stateDeclaration = StateDeclaration) 
 	name = STRING 
-	(state = StateInstance | transition = TransitionInstance)
+	(state = StateInstance | transition = TransitionInstance| compoundTransition = CompoundTransitionInstance)
 ;
 
 TransitionDeclaration:
@@ -209,17 +202,117 @@ TerminalBinaryExpression returns BinaryExpression:
 ;
 
 
-//Transition Composition Expression Rules
-TransitionalExpression:
-	TerminalTransitionalExpression ({Operation.left=current}
-		op= 'THEN' right = TerminalTransitionalExpression)*	
+TransitionComposition:
+	'{'
+		body = TransitionCompositionBody
+	'}'
 ;
 
-TerminalTransitionalExpression returns TransitionalExpression:
-	'(' TransitionalExpression ')'|
-	{TransitionDefinition} value = [TransitionDefinition]
+TransitionCompositionBody:
+	'START' ('WITH' '(' startingInputs += [StateDefinition]+')')?
+	'{'
+		expression = InstructionExpression
+	'}'
 ;
 
+InstructionExpression:
+	TerminalInstruction ({ExecutionResult.computeFirst = current} computeNext = TerminalInstruction)*
+;
+
+TerminalInstruction returns InstructionExpression:
+	IfInstruction|
+	WhileInstruction|
+	SimpleInstruction|
+	';'
+;
+
+IfInstruction:
+	'IF' '(' testKey = ResolvableValue '=' testValue = TestValue ')' 
+	'{'
+		toComputeIfTrue = InstructionExpression
+	'}' ('ELSE' '{'
+		toComputeIfFalse = InstructionExpression
+	'}')?
+;
+
+WhileInstruction:
+	'WHILE''(' testKey = ResolvableValue '=' testValue = TestValue ')'
+	'{'
+		toCompute = InstructionExpression
+	'}'
+;
+
+SimpleInstruction:
+	'THEN' toExecute = [TransitionDefinition]
+;
+
+CompoundTransitionInstance:
+	'{'
+		body = CompoundTransitionInstanceBody
+	'}'
+;
+
+CompoundTransitionInstanceBody:
+	'START' ('WITH''('startingInputs += [Instance]+')')?
+	'{'
+		expression = InstanceInstructionExpression
+	'}'
+;
+
+InstanceInstructionExpression:
+	TerminalInstanceInstruction ({ExecutionResult.computeFirst = current} computeNext = TerminalInstanceInstruction)*
+;
+
+
+TerminalInstanceInstruction returns InstanceInstructionExpression:
+	//'('InstructionExpression')' |
+	IfInstanceInstruction |
+	WhileInstanceInstruction|
+	SimpleInstanceInstruction |
+	';'
+;
+
+SimpleInstanceInstruction:
+	 'THEN' toExecute = [Instance|STRING]
+;
+
+IfInstanceInstruction:
+	'IF' '(' testKey = ResolvableValue '=' testValue = TestValue ')' 
+	'{'
+		toComputeIfTrue = InstanceInstructionExpression
+	'}' ('ELSE' '{'
+		toComputeIfFalse = InstanceInstructionExpression
+	'}')?
+;
+
+
+
+WhileInstanceInstruction:
+	'WHILE''(' testKey = ResolvableValue '=' testValue = TestValue ')'
+	'{'
+		toCompute = InstanceInstructionExpression
+	'}'
+;
+
+TestValue:
+	 LiteralValue| ResolvableValue
+;
+
+LiteralValue:
+	value = STRING
+;
+
+ResolvableValue:
+	(ResolvableInstanceValue|ResolvableTransitionOutputValue)
+;
+
+ResolvableInstanceValue:
+	instance = [Instance] '.' key = [StateDefinition]
+;
+
+ResolvableTransitionOutputValue:
+	'OUTPUT' state = [StateDefinition] '.' key = [StateDefinition]
+;
 
 
 

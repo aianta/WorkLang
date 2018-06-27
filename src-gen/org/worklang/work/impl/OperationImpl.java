@@ -19,11 +19,11 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.worklang.work.BinaryExpression;
 import org.worklang.work.Operation;
 import org.worklang.work.WorkPackage;
 
@@ -52,7 +52,7 @@ public class OperationImpl extends BinaryExpressionImpl implements Operation
    * @generated
    * @ordered
    */
-  protected EObject left;
+  protected BinaryExpression left;
 
   /**
    * The default value of the '{@link #getOp() <em>Op</em>}' attribute.
@@ -82,7 +82,7 @@ public class OperationImpl extends BinaryExpressionImpl implements Operation
    * @generated
    * @ordered
    */
-  protected EObject right;
+  protected BinaryExpression right;
 
   /**
    * <!-- begin-user-doc -->
@@ -110,7 +110,7 @@ public class OperationImpl extends BinaryExpressionImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
-  public EObject getLeft()
+  public BinaryExpression getLeft()
   {
     return left;
   }
@@ -120,9 +120,9 @@ public class OperationImpl extends BinaryExpressionImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetLeft(EObject newLeft, NotificationChain msgs)
+  public NotificationChain basicSetLeft(BinaryExpression newLeft, NotificationChain msgs)
   {
-    EObject oldLeft = left;
+    BinaryExpression oldLeft = left;
     left = newLeft;
     if (eNotificationRequired())
     {
@@ -137,7 +137,7 @@ public class OperationImpl extends BinaryExpressionImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setLeft(EObject newLeft)
+  public void setLeft(BinaryExpression newLeft)
   {
     if (newLeft != left)
     {
@@ -181,7 +181,7 @@ public class OperationImpl extends BinaryExpressionImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
-  public EObject getRight()
+  public BinaryExpression getRight()
   {
     return right;
   }
@@ -191,9 +191,9 @@ public class OperationImpl extends BinaryExpressionImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetRight(EObject newRight, NotificationChain msgs)
+  public NotificationChain basicSetRight(BinaryExpression newRight, NotificationChain msgs)
   {
-    EObject oldRight = right;
+    BinaryExpression oldRight = right;
     right = newRight;
     if (eNotificationRequired())
     {
@@ -208,7 +208,7 @@ public class OperationImpl extends BinaryExpressionImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRight(EObject newRight)
+  public void setRight(BinaryExpression newRight)
   {
     if (newRight != right)
     {
@@ -273,13 +273,13 @@ public class OperationImpl extends BinaryExpressionImpl implements Operation
     switch (featureID)
     {
       case WorkPackage.OPERATION__LEFT:
-        setLeft((EObject)newValue);
+        setLeft((BinaryExpression)newValue);
         return;
       case WorkPackage.OPERATION__OP:
         setOp((String)newValue);
         return;
       case WorkPackage.OPERATION__RIGHT:
-        setRight((EObject)newValue);
+        setRight((BinaryExpression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -296,13 +296,13 @@ public class OperationImpl extends BinaryExpressionImpl implements Operation
     switch (featureID)
     {
       case WorkPackage.OPERATION__LEFT:
-        setLeft((EObject)null);
+        setLeft((BinaryExpression)null);
         return;
       case WorkPackage.OPERATION__OP:
         setOp(OP_EDEFAULT);
         return;
       case WorkPackage.OPERATION__RIGHT:
-        setRight((EObject)null);
+        setRight((BinaryExpression)null);
         return;
     }
     super.eUnset(featureID);

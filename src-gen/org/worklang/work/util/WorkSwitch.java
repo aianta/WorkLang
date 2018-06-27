@@ -157,7 +157,6 @@ public class WorkSwitch<T> extends Switch<T>
       {
         TransitionDefinition transitionDefinition = (TransitionDefinition)theEObject;
         T result = caseTransitionDefinition(transitionDefinition);
-        if (result == null) result = caseTransitionalExpression(transitionDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -166,7 +165,6 @@ public class WorkSwitch<T> extends Switch<T>
         PrimitiveTransitionDefinition primitiveTransitionDefinition = (PrimitiveTransitionDefinition)theEObject;
         T result = casePrimitiveTransitionDefinition(primitiveTransitionDefinition);
         if (result == null) result = caseTransitionDefinition(primitiveTransitionDefinition);
-        if (result == null) result = caseTransitionalExpression(primitiveTransitionDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -175,7 +173,6 @@ public class WorkSwitch<T> extends Switch<T>
         CompoundTransitionDefinition compoundTransitionDefinition = (CompoundTransitionDefinition)theEObject;
         T result = caseCompoundTransitionDefinition(compoundTransitionDefinition);
         if (result == null) result = caseTransitionDefinition(compoundTransitionDefinition);
-        if (result == null) result = caseTransitionalExpression(compoundTransitionDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -211,13 +208,6 @@ public class WorkSwitch<T> extends Switch<T>
       {
         WithStatesDefinition withStatesDefinition = (WithStatesDefinition)theEObject;
         T result = caseWithStatesDefinition(withStatesDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case WorkPackage.WITH_TRANSITIONS_DEFINITION:
-      {
-        WithTransitionsDefinition withTransitionsDefinition = (WithTransitionsDefinition)theEObject;
-        T result = caseWithTransitionsDefinition(withTransitionsDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -306,10 +296,134 @@ public class WorkSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case WorkPackage.TRANSITIONAL_EXPRESSION:
+      case WorkPackage.TRANSITION_COMPOSITION:
       {
-        TransitionalExpression transitionalExpression = (TransitionalExpression)theEObject;
-        T result = caseTransitionalExpression(transitionalExpression);
+        TransitionComposition transitionComposition = (TransitionComposition)theEObject;
+        T result = caseTransitionComposition(transitionComposition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.TRANSITION_COMPOSITION_BODY:
+      {
+        TransitionCompositionBody transitionCompositionBody = (TransitionCompositionBody)theEObject;
+        T result = caseTransitionCompositionBody(transitionCompositionBody);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.INSTRUCTION_EXPRESSION:
+      {
+        InstructionExpression instructionExpression = (InstructionExpression)theEObject;
+        T result = caseInstructionExpression(instructionExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.IF_INSTRUCTION:
+      {
+        IfInstruction ifInstruction = (IfInstruction)theEObject;
+        T result = caseIfInstruction(ifInstruction);
+        if (result == null) result = caseInstructionExpression(ifInstruction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.WHILE_INSTRUCTION:
+      {
+        WhileInstruction whileInstruction = (WhileInstruction)theEObject;
+        T result = caseWhileInstruction(whileInstruction);
+        if (result == null) result = caseInstructionExpression(whileInstruction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.SIMPLE_INSTRUCTION:
+      {
+        SimpleInstruction simpleInstruction = (SimpleInstruction)theEObject;
+        T result = caseSimpleInstruction(simpleInstruction);
+        if (result == null) result = caseInstructionExpression(simpleInstruction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.COMPOUND_TRANSITION_INSTANCE:
+      {
+        CompoundTransitionInstance compoundTransitionInstance = (CompoundTransitionInstance)theEObject;
+        T result = caseCompoundTransitionInstance(compoundTransitionInstance);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.COMPOUND_TRANSITION_INSTANCE_BODY:
+      {
+        CompoundTransitionInstanceBody compoundTransitionInstanceBody = (CompoundTransitionInstanceBody)theEObject;
+        T result = caseCompoundTransitionInstanceBody(compoundTransitionInstanceBody);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.INSTANCE_INSTRUCTION_EXPRESSION:
+      {
+        InstanceInstructionExpression instanceInstructionExpression = (InstanceInstructionExpression)theEObject;
+        T result = caseInstanceInstructionExpression(instanceInstructionExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.SIMPLE_INSTANCE_INSTRUCTION:
+      {
+        SimpleInstanceInstruction simpleInstanceInstruction = (SimpleInstanceInstruction)theEObject;
+        T result = caseSimpleInstanceInstruction(simpleInstanceInstruction);
+        if (result == null) result = caseInstanceInstructionExpression(simpleInstanceInstruction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.IF_INSTANCE_INSTRUCTION:
+      {
+        IfInstanceInstruction ifInstanceInstruction = (IfInstanceInstruction)theEObject;
+        T result = caseIfInstanceInstruction(ifInstanceInstruction);
+        if (result == null) result = caseInstanceInstructionExpression(ifInstanceInstruction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.WHILE_INSTANCE_INSTRUCTION:
+      {
+        WhileInstanceInstruction whileInstanceInstruction = (WhileInstanceInstruction)theEObject;
+        T result = caseWhileInstanceInstruction(whileInstanceInstruction);
+        if (result == null) result = caseInstanceInstructionExpression(whileInstanceInstruction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.TEST_VALUE:
+      {
+        TestValue testValue = (TestValue)theEObject;
+        T result = caseTestValue(testValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.LITERAL_VALUE:
+      {
+        LiteralValue literalValue = (LiteralValue)theEObject;
+        T result = caseLiteralValue(literalValue);
+        if (result == null) result = caseTestValue(literalValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.RESOLVABLE_VALUE:
+      {
+        ResolvableValue resolvableValue = (ResolvableValue)theEObject;
+        T result = caseResolvableValue(resolvableValue);
+        if (result == null) result = caseTestValue(resolvableValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.RESOLVABLE_INSTANCE_VALUE:
+      {
+        ResolvableInstanceValue resolvableInstanceValue = (ResolvableInstanceValue)theEObject;
+        T result = caseResolvableInstanceValue(resolvableInstanceValue);
+        if (result == null) result = caseResolvableValue(resolvableInstanceValue);
+        if (result == null) result = caseTestValue(resolvableInstanceValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.RESOLVABLE_TRANSITION_OUTPUT_VALUE:
+      {
+        ResolvableTransitionOutputValue resolvableTransitionOutputValue = (ResolvableTransitionOutputValue)theEObject;
+        T result = caseResolvableTransitionOutputValue(resolvableTransitionOutputValue);
+        if (result == null) result = caseResolvableValue(resolvableTransitionOutputValue);
+        if (result == null) result = caseTestValue(resolvableTransitionOutputValue);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -318,7 +432,15 @@ public class WorkSwitch<T> extends Switch<T>
         Operation operation = (Operation)theEObject;
         T result = caseOperation(operation);
         if (result == null) result = caseBinaryExpression(operation);
-        if (result == null) result = caseTransitionalExpression(operation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case WorkPackage.EXECUTION_RESULT:
+      {
+        ExecutionResult executionResult = (ExecutionResult)theEObject;
+        T result = caseExecutionResult(executionResult);
+        if (result == null) result = caseInstructionExpression(executionResult);
+        if (result == null) result = caseInstanceInstructionExpression(executionResult);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -599,22 +721,6 @@ public class WorkSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>With Transitions Definition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>With Transitions Definition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseWithTransitionsDefinition(WithTransitionsDefinition object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Input Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -807,17 +913,273 @@ public class WorkSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Transitional Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Transition Composition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Transitional Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Transition Composition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseTransitionalExpression(TransitionalExpression object)
+  public T caseTransitionComposition(TransitionComposition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Transition Composition Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Transition Composition Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTransitionCompositionBody(TransitionCompositionBody object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Instruction Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Instruction Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInstructionExpression(InstructionExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>If Instruction</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>If Instruction</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIfInstruction(IfInstruction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>While Instruction</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>While Instruction</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseWhileInstruction(WhileInstruction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Simple Instruction</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Simple Instruction</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSimpleInstruction(SimpleInstruction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Compound Transition Instance</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Compound Transition Instance</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCompoundTransitionInstance(CompoundTransitionInstance object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Compound Transition Instance Body</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Compound Transition Instance Body</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCompoundTransitionInstanceBody(CompoundTransitionInstanceBody object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Instance Instruction Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Instance Instruction Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInstanceInstructionExpression(InstanceInstructionExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Simple Instance Instruction</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Simple Instance Instruction</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSimpleInstanceInstruction(SimpleInstanceInstruction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>If Instance Instruction</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>If Instance Instruction</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIfInstanceInstruction(IfInstanceInstruction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>While Instance Instruction</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>While Instance Instruction</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseWhileInstanceInstruction(WhileInstanceInstruction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Test Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Test Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTestValue(TestValue object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Literal Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Literal Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLiteralValue(LiteralValue object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Resolvable Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Resolvable Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseResolvableValue(ResolvableValue object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Resolvable Instance Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Resolvable Instance Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseResolvableInstanceValue(ResolvableInstanceValue object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Resolvable Transition Output Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Resolvable Transition Output Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseResolvableTransitionOutputValue(ResolvableTransitionOutputValue object)
   {
     return null;
   }
@@ -834,6 +1196,22 @@ public class WorkSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseOperation(Operation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Execution Result</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Execution Result</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExecutionResult(ExecutionResult object)
   {
     return null;
   }

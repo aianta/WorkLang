@@ -19,14 +19,14 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Transitional Expression</b></em>'.
+ * A representation of the model object '<em><b>Instance Instruction Expression</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.worklang.work.WorkPackage#getTransitionalExpression()
+ * @see org.worklang.work.WorkPackage#getInstanceInstructionExpression()
  * @model
  * @generated
  */
-public interface TransitionalExpression extends EObject
+public interface InstanceInstructionExpression extends EObject
 {
-} // TransitionalExpression
+} // InstanceInstructionExpression

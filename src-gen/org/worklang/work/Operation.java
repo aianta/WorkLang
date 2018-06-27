@@ -15,7 +15,6 @@
  */
 package org.worklang.work;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +34,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Operation extends BinaryExpression, TransitionalExpression
+public interface Operation extends BinaryExpression
 {
   /**
    * Returns the value of the '<em><b>Left</b></em>' containment reference.
@@ -46,12 +45,12 @@ public interface Operation extends BinaryExpression, TransitionalExpression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Left</em>' containment reference.
-   * @see #setLeft(EObject)
+   * @see #setLeft(BinaryExpression)
    * @see org.worklang.work.WorkPackage#getOperation_Left()
    * @model containment="true"
    * @generated
    */
-  EObject getLeft();
+  BinaryExpression getLeft();
 
   /**
    * Sets the value of the '{@link org.worklang.work.Operation#getLeft <em>Left</em>}' containment reference.
@@ -61,7 +60,7 @@ public interface Operation extends BinaryExpression, TransitionalExpression
    * @see #getLeft()
    * @generated
    */
-  void setLeft(EObject value);
+  void setLeft(BinaryExpression value);
 
   /**
    * Returns the value of the '<em><b>Op</b></em>' attribute.
@@ -98,12 +97,12 @@ public interface Operation extends BinaryExpression, TransitionalExpression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Right</em>' containment reference.
-   * @see #setRight(EObject)
+   * @see #setRight(BinaryExpression)
    * @see org.worklang.work.WorkPackage#getOperation_Right()
    * @model containment="true"
    * @generated
    */
-  EObject getRight();
+  BinaryExpression getRight();
 
   /**
    * Sets the value of the '{@link org.worklang.work.Operation#getRight <em>Right</em>}' containment reference.
@@ -113,6 +112,6 @@ public interface Operation extends BinaryExpression, TransitionalExpression
    * @see #getRight()
    * @generated
    */
-  void setRight(EObject value);
+  void setRight(BinaryExpression value);
 
 } // Operation

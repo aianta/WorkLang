@@ -43,12 +43,12 @@ public interface CompoundTransitionDefinition extends TransitionDefinition
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Composition</em>' containment reference.
-   * @see #setComposition(WithTransitionsDefinition)
+   * @see #setComposition(TransitionComposition)
    * @see org.worklang.work.WorkPackage#getCompoundTransitionDefinition_Composition()
    * @model containment="true"
    * @generated
    */
-  WithTransitionsDefinition getComposition();
+  TransitionComposition getComposition();
 
   /**
    * Sets the value of the '{@link org.worklang.work.CompoundTransitionDefinition#getComposition <em>Composition</em>}' containment reference.
@@ -58,6 +58,6 @@ public interface CompoundTransitionDefinition extends TransitionDefinition
    * @see #getComposition()
    * @generated
    */
-  void setComposition(WithTransitionsDefinition value);
+  void setComposition(TransitionComposition value);
 
 } // CompoundTransitionDefinition

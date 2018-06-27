@@ -24,41 +24,41 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.worklang.work.TransitionalExpression;
-import org.worklang.work.WithTransitionsDefinition;
+import org.worklang.work.TransitionComposition;
+import org.worklang.work.TransitionCompositionBody;
 import org.worklang.work.WorkPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>With Transitions Definition</b></em>'.
+ * An implementation of the model object '<em><b>Transition Composition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.WithTransitionsDefinitionImpl#getTransitions <em>Transitions</em>}</li>
+ *   <li>{@link org.worklang.work.impl.TransitionCompositionImpl#getBody <em>Body</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container implements WithTransitionsDefinition
+public class TransitionCompositionImpl extends MinimalEObjectImpl.Container implements TransitionComposition
 {
   /**
-   * The cached value of the '{@link #getTransitions() <em>Transitions</em>}' containment reference.
+   * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTransitions()
+   * @see #getBody()
    * @generated
    * @ordered
    */
-  protected TransitionalExpression transitions;
+  protected TransitionCompositionBody body;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected WithTransitionsDefinitionImpl()
+  protected TransitionCompositionImpl()
   {
     super();
   }
@@ -71,7 +71,7 @@ public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container 
   @Override
   protected EClass eStaticClass()
   {
-    return WorkPackage.Literals.WITH_TRANSITIONS_DEFINITION;
+    return WorkPackage.Literals.TRANSITION_COMPOSITION;
   }
 
   /**
@@ -79,9 +79,9 @@ public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionalExpression getTransitions()
+  public TransitionCompositionBody getBody()
   {
-    return transitions;
+    return body;
   }
 
   /**
@@ -89,13 +89,13 @@ public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTransitions(TransitionalExpression newTransitions, NotificationChain msgs)
+  public NotificationChain basicSetBody(TransitionCompositionBody newBody, NotificationChain msgs)
   {
-    TransitionalExpression oldTransitions = transitions;
-    transitions = newTransitions;
+    TransitionCompositionBody oldBody = body;
+    body = newBody;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.WITH_TRANSITIONS_DEFINITION__TRANSITIONS, oldTransitions, newTransitions);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_COMPOSITION__BODY, oldBody, newBody);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -106,20 +106,20 @@ public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTransitions(TransitionalExpression newTransitions)
+  public void setBody(TransitionCompositionBody newBody)
   {
-    if (newTransitions != transitions)
+    if (newBody != body)
     {
       NotificationChain msgs = null;
-      if (transitions != null)
-        msgs = ((InternalEObject)transitions).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.WITH_TRANSITIONS_DEFINITION__TRANSITIONS, null, msgs);
-      if (newTransitions != null)
-        msgs = ((InternalEObject)newTransitions).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.WITH_TRANSITIONS_DEFINITION__TRANSITIONS, null, msgs);
-      msgs = basicSetTransitions(newTransitions, msgs);
+      if (body != null)
+        msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.TRANSITION_COMPOSITION__BODY, null, msgs);
+      if (newBody != null)
+        msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.TRANSITION_COMPOSITION__BODY, null, msgs);
+      msgs = basicSetBody(newBody, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.WITH_TRANSITIONS_DEFINITION__TRANSITIONS, newTransitions, newTransitions));
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_COMPOSITION__BODY, newBody, newBody));
   }
 
   /**
@@ -132,8 +132,8 @@ public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case WorkPackage.WITH_TRANSITIONS_DEFINITION__TRANSITIONS:
-        return basicSetTransitions(null, msgs);
+      case WorkPackage.TRANSITION_COMPOSITION__BODY:
+        return basicSetBody(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -148,8 +148,8 @@ public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case WorkPackage.WITH_TRANSITIONS_DEFINITION__TRANSITIONS:
-        return getTransitions();
+      case WorkPackage.TRANSITION_COMPOSITION__BODY:
+        return getBody();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -164,8 +164,8 @@ public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case WorkPackage.WITH_TRANSITIONS_DEFINITION__TRANSITIONS:
-        setTransitions((TransitionalExpression)newValue);
+      case WorkPackage.TRANSITION_COMPOSITION__BODY:
+        setBody((TransitionCompositionBody)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -181,8 +181,8 @@ public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case WorkPackage.WITH_TRANSITIONS_DEFINITION__TRANSITIONS:
-        setTransitions((TransitionalExpression)null);
+      case WorkPackage.TRANSITION_COMPOSITION__BODY:
+        setBody((TransitionCompositionBody)null);
         return;
     }
     super.eUnset(featureID);
@@ -198,10 +198,10 @@ public class WithTransitionsDefinitionImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case WorkPackage.WITH_TRANSITIONS_DEFINITION__TRANSITIONS:
-        return transitions != null;
+      case WorkPackage.TRANSITION_COMPOSITION__BODY:
+        return body != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //WithTransitionsDefinitionImpl
+} //TransitionCompositionImpl

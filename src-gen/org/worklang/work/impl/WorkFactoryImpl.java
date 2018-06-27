@@ -94,7 +94,6 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
       case WorkPackage.REFERENCE_STATE: return createReferenceState();
       case WorkPackage.INSTANCE_SPACE: return createInstanceSpace();
       case WorkPackage.WITH_STATES_DEFINITION: return createWithStatesDefinition();
-      case WorkPackage.WITH_TRANSITIONS_DEFINITION: return createWithTransitionsDefinition();
       case WorkPackage.INPUT_DEFINITION: return createInputDefinition();
       case WorkPackage.OUTPUT_DEFINITION: return createOutputDefinition();
       case WorkPackage.INSTANCE: return createInstance();
@@ -107,8 +106,25 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
       case WorkPackage.TO_DEFINITION: return createToDefinition();
       case WorkPackage.PREDICATE: return createPredicate();
       case WorkPackage.BINARY_EXPRESSION: return createBinaryExpression();
-      case WorkPackage.TRANSITIONAL_EXPRESSION: return createTransitionalExpression();
+      case WorkPackage.TRANSITION_COMPOSITION: return createTransitionComposition();
+      case WorkPackage.TRANSITION_COMPOSITION_BODY: return createTransitionCompositionBody();
+      case WorkPackage.INSTRUCTION_EXPRESSION: return createInstructionExpression();
+      case WorkPackage.IF_INSTRUCTION: return createIfInstruction();
+      case WorkPackage.WHILE_INSTRUCTION: return createWhileInstruction();
+      case WorkPackage.SIMPLE_INSTRUCTION: return createSimpleInstruction();
+      case WorkPackage.COMPOUND_TRANSITION_INSTANCE: return createCompoundTransitionInstance();
+      case WorkPackage.COMPOUND_TRANSITION_INSTANCE_BODY: return createCompoundTransitionInstanceBody();
+      case WorkPackage.INSTANCE_INSTRUCTION_EXPRESSION: return createInstanceInstructionExpression();
+      case WorkPackage.SIMPLE_INSTANCE_INSTRUCTION: return createSimpleInstanceInstruction();
+      case WorkPackage.IF_INSTANCE_INSTRUCTION: return createIfInstanceInstruction();
+      case WorkPackage.WHILE_INSTANCE_INSTRUCTION: return createWhileInstanceInstruction();
+      case WorkPackage.TEST_VALUE: return createTestValue();
+      case WorkPackage.LITERAL_VALUE: return createLiteralValue();
+      case WorkPackage.RESOLVABLE_VALUE: return createResolvableValue();
+      case WorkPackage.RESOLVABLE_INSTANCE_VALUE: return createResolvableInstanceValue();
+      case WorkPackage.RESOLVABLE_TRANSITION_OUTPUT_VALUE: return createResolvableTransitionOutputValue();
       case WorkPackage.OPERATION: return createOperation();
+      case WorkPackage.EXECUTION_RESULT: return createExecutionResult();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -306,17 +322,6 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public WithTransitionsDefinition createWithTransitionsDefinition()
-  {
-    WithTransitionsDefinitionImpl withTransitionsDefinition = new WithTransitionsDefinitionImpl();
-    return withTransitionsDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public InputDefinition createInputDefinition()
   {
     InputDefinitionImpl inputDefinition = new InputDefinitionImpl();
@@ -449,10 +454,186 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionalExpression createTransitionalExpression()
+  public TransitionComposition createTransitionComposition()
   {
-    TransitionalExpressionImpl transitionalExpression = new TransitionalExpressionImpl();
-    return transitionalExpression;
+    TransitionCompositionImpl transitionComposition = new TransitionCompositionImpl();
+    return transitionComposition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TransitionCompositionBody createTransitionCompositionBody()
+  {
+    TransitionCompositionBodyImpl transitionCompositionBody = new TransitionCompositionBodyImpl();
+    return transitionCompositionBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InstructionExpression createInstructionExpression()
+  {
+    InstructionExpressionImpl instructionExpression = new InstructionExpressionImpl();
+    return instructionExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IfInstruction createIfInstruction()
+  {
+    IfInstructionImpl ifInstruction = new IfInstructionImpl();
+    return ifInstruction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public WhileInstruction createWhileInstruction()
+  {
+    WhileInstructionImpl whileInstruction = new WhileInstructionImpl();
+    return whileInstruction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SimpleInstruction createSimpleInstruction()
+  {
+    SimpleInstructionImpl simpleInstruction = new SimpleInstructionImpl();
+    return simpleInstruction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CompoundTransitionInstance createCompoundTransitionInstance()
+  {
+    CompoundTransitionInstanceImpl compoundTransitionInstance = new CompoundTransitionInstanceImpl();
+    return compoundTransitionInstance;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CompoundTransitionInstanceBody createCompoundTransitionInstanceBody()
+  {
+    CompoundTransitionInstanceBodyImpl compoundTransitionInstanceBody = new CompoundTransitionInstanceBodyImpl();
+    return compoundTransitionInstanceBody;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InstanceInstructionExpression createInstanceInstructionExpression()
+  {
+    InstanceInstructionExpressionImpl instanceInstructionExpression = new InstanceInstructionExpressionImpl();
+    return instanceInstructionExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SimpleInstanceInstruction createSimpleInstanceInstruction()
+  {
+    SimpleInstanceInstructionImpl simpleInstanceInstruction = new SimpleInstanceInstructionImpl();
+    return simpleInstanceInstruction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IfInstanceInstruction createIfInstanceInstruction()
+  {
+    IfInstanceInstructionImpl ifInstanceInstruction = new IfInstanceInstructionImpl();
+    return ifInstanceInstruction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public WhileInstanceInstruction createWhileInstanceInstruction()
+  {
+    WhileInstanceInstructionImpl whileInstanceInstruction = new WhileInstanceInstructionImpl();
+    return whileInstanceInstruction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TestValue createTestValue()
+  {
+    TestValueImpl testValue = new TestValueImpl();
+    return testValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public LiteralValue createLiteralValue()
+  {
+    LiteralValueImpl literalValue = new LiteralValueImpl();
+    return literalValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ResolvableValue createResolvableValue()
+  {
+    ResolvableValueImpl resolvableValue = new ResolvableValueImpl();
+    return resolvableValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ResolvableInstanceValue createResolvableInstanceValue()
+  {
+    ResolvableInstanceValueImpl resolvableInstanceValue = new ResolvableInstanceValueImpl();
+    return resolvableInstanceValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ResolvableTransitionOutputValue createResolvableTransitionOutputValue()
+  {
+    ResolvableTransitionOutputValueImpl resolvableTransitionOutputValue = new ResolvableTransitionOutputValueImpl();
+    return resolvableTransitionOutputValue;
   }
 
   /**
@@ -464,6 +645,17 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
   {
     OperationImpl operation = new OperationImpl();
     return operation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ExecutionResult createExecutionResult()
+  {
+    ExecutionResultImpl executionResult = new ExecutionResultImpl();
+    return executionResult;
   }
 
   /**

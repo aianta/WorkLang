@@ -15,6 +15,7 @@
  */
 package org.worklang.work;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +26,6 @@ package org.worklang.work;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.TransitionDefinition#getValue <em>Value</em>}</li>
  *   <li>{@link org.worklang.work.TransitionDefinition#getType <em>Type</em>}</li>
  *   <li>{@link org.worklang.work.TransitionDefinition#getName <em>Name</em>}</li>
  *   <li>{@link org.worklang.work.TransitionDefinition#getIn <em>In</em>}</li>
@@ -36,34 +36,8 @@ package org.worklang.work;
  * @model
  * @generated
  */
-public interface TransitionDefinition extends TransitionalExpression
+public interface TransitionDefinition extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Value</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Value</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Value</em>' reference.
-   * @see #setValue(TransitionDefinition)
-   * @see org.worklang.work.WorkPackage#getTransitionDefinition_Value()
-   * @model
-   * @generated
-   */
-  TransitionDefinition getValue();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.TransitionDefinition#getValue <em>Value</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value</em>' reference.
-   * @see #getValue()
-   * @generated
-   */
-  void setValue(TransitionDefinition value);
-
   /**
    * Returns the value of the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->

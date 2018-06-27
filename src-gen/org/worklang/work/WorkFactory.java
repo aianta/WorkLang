@@ -189,15 +189,6 @@ public interface WorkFactory extends EFactory
   WithStatesDefinition createWithStatesDefinition();
 
   /**
-   * Returns a new object of class '<em>With Transitions Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>With Transitions Definition</em>'.
-   * @generated
-   */
-  WithTransitionsDefinition createWithTransitionsDefinition();
-
-  /**
    * Returns a new object of class '<em>Input Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -306,13 +297,157 @@ public interface WorkFactory extends EFactory
   BinaryExpression createBinaryExpression();
 
   /**
-   * Returns a new object of class '<em>Transitional Expression</em>'.
+   * Returns a new object of class '<em>Transition Composition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Transitional Expression</em>'.
+   * @return a new object of class '<em>Transition Composition</em>'.
    * @generated
    */
-  TransitionalExpression createTransitionalExpression();
+  TransitionComposition createTransitionComposition();
+
+  /**
+   * Returns a new object of class '<em>Transition Composition Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Transition Composition Body</em>'.
+   * @generated
+   */
+  TransitionCompositionBody createTransitionCompositionBody();
+
+  /**
+   * Returns a new object of class '<em>Instruction Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Instruction Expression</em>'.
+   * @generated
+   */
+  InstructionExpression createInstructionExpression();
+
+  /**
+   * Returns a new object of class '<em>If Instruction</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>If Instruction</em>'.
+   * @generated
+   */
+  IfInstruction createIfInstruction();
+
+  /**
+   * Returns a new object of class '<em>While Instruction</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>While Instruction</em>'.
+   * @generated
+   */
+  WhileInstruction createWhileInstruction();
+
+  /**
+   * Returns a new object of class '<em>Simple Instruction</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Simple Instruction</em>'.
+   * @generated
+   */
+  SimpleInstruction createSimpleInstruction();
+
+  /**
+   * Returns a new object of class '<em>Compound Transition Instance</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Compound Transition Instance</em>'.
+   * @generated
+   */
+  CompoundTransitionInstance createCompoundTransitionInstance();
+
+  /**
+   * Returns a new object of class '<em>Compound Transition Instance Body</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Compound Transition Instance Body</em>'.
+   * @generated
+   */
+  CompoundTransitionInstanceBody createCompoundTransitionInstanceBody();
+
+  /**
+   * Returns a new object of class '<em>Instance Instruction Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Instance Instruction Expression</em>'.
+   * @generated
+   */
+  InstanceInstructionExpression createInstanceInstructionExpression();
+
+  /**
+   * Returns a new object of class '<em>Simple Instance Instruction</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Simple Instance Instruction</em>'.
+   * @generated
+   */
+  SimpleInstanceInstruction createSimpleInstanceInstruction();
+
+  /**
+   * Returns a new object of class '<em>If Instance Instruction</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>If Instance Instruction</em>'.
+   * @generated
+   */
+  IfInstanceInstruction createIfInstanceInstruction();
+
+  /**
+   * Returns a new object of class '<em>While Instance Instruction</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>While Instance Instruction</em>'.
+   * @generated
+   */
+  WhileInstanceInstruction createWhileInstanceInstruction();
+
+  /**
+   * Returns a new object of class '<em>Test Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Test Value</em>'.
+   * @generated
+   */
+  TestValue createTestValue();
+
+  /**
+   * Returns a new object of class '<em>Literal Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Literal Value</em>'.
+   * @generated
+   */
+  LiteralValue createLiteralValue();
+
+  /**
+   * Returns a new object of class '<em>Resolvable Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Resolvable Value</em>'.
+   * @generated
+   */
+  ResolvableValue createResolvableValue();
+
+  /**
+   * Returns a new object of class '<em>Resolvable Instance Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Resolvable Instance Value</em>'.
+   * @generated
+   */
+  ResolvableInstanceValue createResolvableInstanceValue();
+
+  /**
+   * Returns a new object of class '<em>Resolvable Transition Output Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Resolvable Transition Output Value</em>'.
+   * @generated
+   */
+  ResolvableTransitionOutputValue createResolvableTransitionOutputValue();
 
   /**
    * Returns a new object of class '<em>Operation</em>'.
@@ -322,6 +457,15 @@ public interface WorkFactory extends EFactory
    * @generated
    */
   Operation createOperation();
+
+  /**
+   * Returns a new object of class '<em>Execution Result</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Execution Result</em>'.
+   * @generated
+   */
+  ExecutionResult createExecutionResult();
 
   /**
    * Returns the package supported by this factory.

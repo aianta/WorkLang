@@ -335,7 +335,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getBinaryExpression()
    * @generated
    */
-  int BINARY_EXPRESSION = 29;
+  int BINARY_EXPRESSION = 28;
 
   /**
    * The number of structural features of the '<em>Binary Expression</em>' class.
@@ -548,25 +548,6 @@ public interface WorkPackage extends EPackage
   int COMPOUND_STATE_DEFINITION_FEATURE_COUNT = STATE_DEFINITION_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.worklang.work.impl.TransitionalExpressionImpl <em>Transitional Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.TransitionalExpressionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getTransitionalExpression()
-   * @generated
-   */
-  int TRANSITIONAL_EXPRESSION = 30;
-
-  /**
-   * The number of structural features of the '<em>Transitional Expression</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITIONAL_EXPRESSION_FEATURE_COUNT = 0;
-
-  /**
    * The meta object id for the '{@link org.worklang.work.impl.TransitionDefinitionImpl <em>Transition Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -577,22 +558,13 @@ public interface WorkPackage extends EPackage
   int TRANSITION_DEFINITION = 9;
 
   /**
-   * The feature id for the '<em><b>Value</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_DEFINITION__VALUE = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TRANSITION_DEFINITION__TYPE = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 1;
+  int TRANSITION_DEFINITION__TYPE = 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -601,7 +573,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_DEFINITION__NAME = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 2;
+  int TRANSITION_DEFINITION__NAME = 1;
 
   /**
    * The feature id for the '<em><b>In</b></em>' containment reference.
@@ -610,7 +582,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_DEFINITION__IN = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 3;
+  int TRANSITION_DEFINITION__IN = 2;
 
   /**
    * The feature id for the '<em><b>Out</b></em>' containment reference.
@@ -619,7 +591,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_DEFINITION__OUT = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 4;
+  int TRANSITION_DEFINITION__OUT = 3;
 
   /**
    * The number of structural features of the '<em>Transition Definition</em>' class.
@@ -628,7 +600,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_DEFINITION_FEATURE_COUNT = TRANSITIONAL_EXPRESSION_FEATURE_COUNT + 5;
+  int TRANSITION_DEFINITION_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.PrimitiveTransitionDefinitionImpl <em>Primitive Transition Definition</em>}' class.
@@ -639,15 +611,6 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   int PRIMITIVE_TRANSITION_DEFINITION = 10;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PRIMITIVE_TRANSITION_DEFINITION__VALUE = TRANSITION_DEFINITION__VALUE;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -703,15 +666,6 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   int COMPOUND_TRANSITION_DEFINITION = 11;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPOUND_TRANSITION_DEFINITION__VALUE = TRANSITION_DEFINITION__VALUE;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -935,34 +889,6 @@ public interface WorkPackage extends EPackage
   int WITH_STATES_DEFINITION_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.worklang.work.impl.WithTransitionsDefinitionImpl <em>With Transitions Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.worklang.work.impl.WithTransitionsDefinitionImpl
-   * @see org.worklang.work.impl.WorkPackageImpl#getWithTransitionsDefinition()
-   * @generated
-   */
-  int WITH_TRANSITIONS_DEFINITION = 17;
-
-  /**
-   * The feature id for the '<em><b>Transitions</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int WITH_TRANSITIONS_DEFINITION__TRANSITIONS = 0;
-
-  /**
-   * The number of structural features of the '<em>With Transitions Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int WITH_TRANSITIONS_DEFINITION_FEATURE_COUNT = 1;
-
-  /**
    * The meta object id for the '{@link org.worklang.work.impl.InputDefinitionImpl <em>Input Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -970,7 +896,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getInputDefinition()
    * @generated
    */
-  int INPUT_DEFINITION = 18;
+  int INPUT_DEFINITION = 17;
 
   /**
    * The feature id for the '<em><b>Input State</b></em>' reference list.
@@ -998,7 +924,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getOutputDefinition()
    * @generated
    */
-  int OUTPUT_DEFINITION = 19;
+  int OUTPUT_DEFINITION = 18;
 
   /**
    * The feature id for the '<em><b>Output State</b></em>' reference.
@@ -1026,7 +952,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getInstance()
    * @generated
    */
-  int INSTANCE = 20;
+  int INSTANCE = 19;
 
   /**
    * The feature id for the '<em><b>Transition Declaration</b></em>' containment reference.
@@ -1074,13 +1000,22 @@ public interface WorkPackage extends EPackage
   int INSTANCE__TRANSITION = 4;
 
   /**
+   * The feature id for the '<em><b>Compound Transition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INSTANCE__COMPOUND_TRANSITION = 5;
+
+  /**
    * The number of structural features of the '<em>Instance</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int INSTANCE_FEATURE_COUNT = 5;
+  int INSTANCE_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.TransitionDeclarationImpl <em>Transition Declaration</em>}' class.
@@ -1090,7 +1025,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getTransitionDeclaration()
    * @generated
    */
-  int TRANSITION_DECLARATION = 21;
+  int TRANSITION_DECLARATION = 20;
 
   /**
    * The feature id for the '<em><b>Transition</b></em>' reference.
@@ -1118,7 +1053,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getStateDeclaration()
    * @generated
    */
-  int STATE_DECLARATION = 22;
+  int STATE_DECLARATION = 21;
 
   /**
    * The feature id for the '<em><b>State</b></em>' reference.
@@ -1146,7 +1081,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getTransitionInstance()
    * @generated
    */
-  int TRANSITION_INSTANCE = 23;
+  int TRANSITION_INSTANCE = 22;
 
   /**
    * The feature id for the '<em><b>Host</b></em>' attribute.
@@ -1192,7 +1127,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getStateInstance()
    * @generated
    */
-  int STATE_INSTANCE = 24;
+  int STATE_INSTANCE = 23;
 
   /**
    * The feature id for the '<em><b>Members</b></em>' containment reference list.
@@ -1220,7 +1155,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getUseDefinition()
    * @generated
    */
-  int USE_DEFINITION = 25;
+  int USE_DEFINITION = 24;
 
   /**
    * The feature id for the '<em><b>Predefined Value</b></em>' reference.
@@ -1248,7 +1183,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getSetStatement()
    * @generated
    */
-  int SET_STATEMENT = 26;
+  int SET_STATEMENT = 25;
 
   /**
    * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -1285,7 +1220,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getToDefinition()
    * @generated
    */
-  int TO_DEFINITION = 27;
+  int TO_DEFINITION = 26;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1313,7 +1248,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getPredicate()
    * @generated
    */
-  int PREDICATE = 28;
+  int PREDICATE = 27;
 
   /**
    * The feature id for the '<em><b>Negation</b></em>' attribute.
@@ -1343,6 +1278,581 @@ public interface WorkPackage extends EPackage
   int PREDICATE_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link org.worklang.work.impl.TransitionCompositionImpl <em>Transition Composition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.TransitionCompositionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getTransitionComposition()
+   * @generated
+   */
+  int TRANSITION_COMPOSITION = 29;
+
+  /**
+   * The feature id for the '<em><b>Body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_COMPOSITION__BODY = 0;
+
+  /**
+   * The number of structural features of the '<em>Transition Composition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_COMPOSITION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.TransitionCompositionBodyImpl <em>Transition Composition Body</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.TransitionCompositionBodyImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getTransitionCompositionBody()
+   * @generated
+   */
+  int TRANSITION_COMPOSITION_BODY = 30;
+
+  /**
+   * The feature id for the '<em><b>Starting Inputs</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_COMPOSITION_BODY__STARTING_INPUTS = 0;
+
+  /**
+   * The feature id for the '<em><b>Expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_COMPOSITION_BODY__EXPRESSION = 1;
+
+  /**
+   * The number of structural features of the '<em>Transition Composition Body</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_COMPOSITION_BODY_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.InstructionExpressionImpl <em>Instruction Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.InstructionExpressionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getInstructionExpression()
+   * @generated
+   */
+  int INSTRUCTION_EXPRESSION = 31;
+
+  /**
+   * The number of structural features of the '<em>Instruction Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INSTRUCTION_EXPRESSION_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.IfInstructionImpl <em>If Instruction</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.IfInstructionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getIfInstruction()
+   * @generated
+   */
+  int IF_INSTRUCTION = 32;
+
+  /**
+   * The feature id for the '<em><b>Test Key</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_INSTRUCTION__TEST_KEY = INSTRUCTION_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Test Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_INSTRUCTION__TEST_VALUE = INSTRUCTION_EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>To Compute If True</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_INSTRUCTION__TO_COMPUTE_IF_TRUE = INSTRUCTION_EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>To Compute If False</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_INSTRUCTION__TO_COMPUTE_IF_FALSE = INSTRUCTION_EXPRESSION_FEATURE_COUNT + 3;
+
+  /**
+   * The number of structural features of the '<em>If Instruction</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_INSTRUCTION_FEATURE_COUNT = INSTRUCTION_EXPRESSION_FEATURE_COUNT + 4;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.WhileInstructionImpl <em>While Instruction</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.WhileInstructionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getWhileInstruction()
+   * @generated
+   */
+  int WHILE_INSTRUCTION = 33;
+
+  /**
+   * The feature id for the '<em><b>Test Key</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WHILE_INSTRUCTION__TEST_KEY = INSTRUCTION_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Test Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WHILE_INSTRUCTION__TEST_VALUE = INSTRUCTION_EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>To Compute</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WHILE_INSTRUCTION__TO_COMPUTE = INSTRUCTION_EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>While Instruction</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WHILE_INSTRUCTION_FEATURE_COUNT = INSTRUCTION_EXPRESSION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.SimpleInstructionImpl <em>Simple Instruction</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.SimpleInstructionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getSimpleInstruction()
+   * @generated
+   */
+  int SIMPLE_INSTRUCTION = 34;
+
+  /**
+   * The feature id for the '<em><b>To Execute</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_INSTRUCTION__TO_EXECUTE = INSTRUCTION_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Simple Instruction</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_INSTRUCTION_FEATURE_COUNT = INSTRUCTION_EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.CompoundTransitionInstanceImpl <em>Compound Transition Instance</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.CompoundTransitionInstanceImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getCompoundTransitionInstance()
+   * @generated
+   */
+  int COMPOUND_TRANSITION_INSTANCE = 35;
+
+  /**
+   * The feature id for the '<em><b>Body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_TRANSITION_INSTANCE__BODY = 0;
+
+  /**
+   * The number of structural features of the '<em>Compound Transition Instance</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_TRANSITION_INSTANCE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.CompoundTransitionInstanceBodyImpl <em>Compound Transition Instance Body</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.CompoundTransitionInstanceBodyImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getCompoundTransitionInstanceBody()
+   * @generated
+   */
+  int COMPOUND_TRANSITION_INSTANCE_BODY = 36;
+
+  /**
+   * The feature id for the '<em><b>Starting Inputs</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_TRANSITION_INSTANCE_BODY__STARTING_INPUTS = 0;
+
+  /**
+   * The feature id for the '<em><b>Expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_TRANSITION_INSTANCE_BODY__EXPRESSION = 1;
+
+  /**
+   * The number of structural features of the '<em>Compound Transition Instance Body</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_TRANSITION_INSTANCE_BODY_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.InstanceInstructionExpressionImpl <em>Instance Instruction Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.InstanceInstructionExpressionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getInstanceInstructionExpression()
+   * @generated
+   */
+  int INSTANCE_INSTRUCTION_EXPRESSION = 37;
+
+  /**
+   * The number of structural features of the '<em>Instance Instruction Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INSTANCE_INSTRUCTION_EXPRESSION_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.SimpleInstanceInstructionImpl <em>Simple Instance Instruction</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.SimpleInstanceInstructionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getSimpleInstanceInstruction()
+   * @generated
+   */
+  int SIMPLE_INSTANCE_INSTRUCTION = 38;
+
+  /**
+   * The feature id for the '<em><b>To Execute</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_INSTANCE_INSTRUCTION__TO_EXECUTE = INSTANCE_INSTRUCTION_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Simple Instance Instruction</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_INSTANCE_INSTRUCTION_FEATURE_COUNT = INSTANCE_INSTRUCTION_EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.IfInstanceInstructionImpl <em>If Instance Instruction</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.IfInstanceInstructionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getIfInstanceInstruction()
+   * @generated
+   */
+  int IF_INSTANCE_INSTRUCTION = 39;
+
+  /**
+   * The feature id for the '<em><b>Test Key</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_INSTANCE_INSTRUCTION__TEST_KEY = INSTANCE_INSTRUCTION_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Test Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_INSTANCE_INSTRUCTION__TEST_VALUE = INSTANCE_INSTRUCTION_EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>To Compute If True</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_INSTANCE_INSTRUCTION__TO_COMPUTE_IF_TRUE = INSTANCE_INSTRUCTION_EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>To Compute If False</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_INSTANCE_INSTRUCTION__TO_COMPUTE_IF_FALSE = INSTANCE_INSTRUCTION_EXPRESSION_FEATURE_COUNT + 3;
+
+  /**
+   * The number of structural features of the '<em>If Instance Instruction</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_INSTANCE_INSTRUCTION_FEATURE_COUNT = INSTANCE_INSTRUCTION_EXPRESSION_FEATURE_COUNT + 4;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.WhileInstanceInstructionImpl <em>While Instance Instruction</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.WhileInstanceInstructionImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getWhileInstanceInstruction()
+   * @generated
+   */
+  int WHILE_INSTANCE_INSTRUCTION = 40;
+
+  /**
+   * The feature id for the '<em><b>Test Key</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WHILE_INSTANCE_INSTRUCTION__TEST_KEY = INSTANCE_INSTRUCTION_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Test Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WHILE_INSTANCE_INSTRUCTION__TEST_VALUE = INSTANCE_INSTRUCTION_EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>To Compute</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WHILE_INSTANCE_INSTRUCTION__TO_COMPUTE = INSTANCE_INSTRUCTION_EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>While Instance Instruction</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WHILE_INSTANCE_INSTRUCTION_FEATURE_COUNT = INSTANCE_INSTRUCTION_EXPRESSION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.TestValueImpl <em>Test Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.TestValueImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getTestValue()
+   * @generated
+   */
+  int TEST_VALUE = 41;
+
+  /**
+   * The number of structural features of the '<em>Test Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEST_VALUE_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.LiteralValueImpl <em>Literal Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.LiteralValueImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getLiteralValue()
+   * @generated
+   */
+  int LITERAL_VALUE = 42;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LITERAL_VALUE__VALUE = TEST_VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Literal Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LITERAL_VALUE_FEATURE_COUNT = TEST_VALUE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.ResolvableValueImpl <em>Resolvable Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.ResolvableValueImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getResolvableValue()
+   * @generated
+   */
+  int RESOLVABLE_VALUE = 43;
+
+  /**
+   * The feature id for the '<em><b>Key</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RESOLVABLE_VALUE__KEY = TEST_VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Resolvable Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RESOLVABLE_VALUE_FEATURE_COUNT = TEST_VALUE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.ResolvableInstanceValueImpl <em>Resolvable Instance Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.ResolvableInstanceValueImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getResolvableInstanceValue()
+   * @generated
+   */
+  int RESOLVABLE_INSTANCE_VALUE = 44;
+
+  /**
+   * The feature id for the '<em><b>Key</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RESOLVABLE_INSTANCE_VALUE__KEY = RESOLVABLE_VALUE__KEY;
+
+  /**
+   * The feature id for the '<em><b>Instance</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RESOLVABLE_INSTANCE_VALUE__INSTANCE = RESOLVABLE_VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Resolvable Instance Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RESOLVABLE_INSTANCE_VALUE_FEATURE_COUNT = RESOLVABLE_VALUE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.ResolvableTransitionOutputValueImpl <em>Resolvable Transition Output Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.ResolvableTransitionOutputValueImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getResolvableTransitionOutputValue()
+   * @generated
+   */
+  int RESOLVABLE_TRANSITION_OUTPUT_VALUE = 45;
+
+  /**
+   * The feature id for the '<em><b>Key</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RESOLVABLE_TRANSITION_OUTPUT_VALUE__KEY = RESOLVABLE_VALUE__KEY;
+
+  /**
+   * The feature id for the '<em><b>State</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RESOLVABLE_TRANSITION_OUTPUT_VALUE__STATE = RESOLVABLE_VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Resolvable Transition Output Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RESOLVABLE_TRANSITION_OUTPUT_VALUE_FEATURE_COUNT = RESOLVABLE_VALUE_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.worklang.work.impl.OperationImpl <em>Operation</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1350,7 +1860,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getOperation()
    * @generated
    */
-  int OPERATION = 31;
+  int OPERATION = 46;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1387,6 +1897,43 @@ public interface WorkPackage extends EPackage
    * @ordered
    */
   int OPERATION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.worklang.work.impl.ExecutionResultImpl <em>Execution Result</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.ExecutionResultImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getExecutionResult()
+   * @generated
+   */
+  int EXECUTION_RESULT = 47;
+
+  /**
+   * The feature id for the '<em><b>Compute First</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXECUTION_RESULT__COMPUTE_FIRST = INSTRUCTION_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Compute Next</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXECUTION_RESULT__COMPUTE_NEXT = INSTRUCTION_EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Execution Result</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXECUTION_RESULT_FEATURE_COUNT = INSTRUCTION_EXPRESSION_FEATURE_COUNT + 2;
 
 
   /**
@@ -1732,17 +2279,6 @@ public interface WorkPackage extends EPackage
   EClass getTransitionDefinition();
 
   /**
-   * Returns the meta object for the reference '{@link org.worklang.work.TransitionDefinition#getValue <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Value</em>'.
-   * @see org.worklang.work.TransitionDefinition#getValue()
-   * @see #getTransitionDefinition()
-   * @generated
-   */
-  EReference getTransitionDefinition_Value();
-
-  /**
    * Returns the meta object for the attribute '{@link org.worklang.work.TransitionDefinition#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1956,27 +2492,6 @@ public interface WorkPackage extends EPackage
   EReference getWithStatesDefinition_Predicate();
 
   /**
-   * Returns the meta object for class '{@link org.worklang.work.WithTransitionsDefinition <em>With Transitions Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>With Transitions Definition</em>'.
-   * @see org.worklang.work.WithTransitionsDefinition
-   * @generated
-   */
-  EClass getWithTransitionsDefinition();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.worklang.work.WithTransitionsDefinition#getTransitions <em>Transitions</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Transitions</em>'.
-   * @see org.worklang.work.WithTransitionsDefinition#getTransitions()
-   * @see #getWithTransitionsDefinition()
-   * @generated
-   */
-  EReference getWithTransitionsDefinition_Transitions();
-
-  /**
    * Returns the meta object for class '{@link org.worklang.work.InputDefinition <em>Input Definition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2082,6 +2597,17 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   EReference getInstance_Transition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.Instance#getCompoundTransition <em>Compound Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Compound Transition</em>'.
+   * @see org.worklang.work.Instance#getCompoundTransition()
+   * @see #getInstance()
+   * @generated
+   */
+  EReference getInstance_CompoundTransition();
 
   /**
    * Returns the meta object for class '{@link org.worklang.work.TransitionDeclaration <em>Transition Declaration</em>}'.
@@ -2306,14 +2832,460 @@ public interface WorkPackage extends EPackage
   EClass getBinaryExpression();
 
   /**
-   * Returns the meta object for class '{@link org.worklang.work.TransitionalExpression <em>Transitional Expression</em>}'.
+   * Returns the meta object for class '{@link org.worklang.work.TransitionComposition <em>Transition Composition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Transitional Expression</em>'.
-   * @see org.worklang.work.TransitionalExpression
+   * @return the meta object for class '<em>Transition Composition</em>'.
+   * @see org.worklang.work.TransitionComposition
    * @generated
    */
-  EClass getTransitionalExpression();
+  EClass getTransitionComposition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.TransitionComposition#getBody <em>Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Body</em>'.
+   * @see org.worklang.work.TransitionComposition#getBody()
+   * @see #getTransitionComposition()
+   * @generated
+   */
+  EReference getTransitionComposition_Body();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.TransitionCompositionBody <em>Transition Composition Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Transition Composition Body</em>'.
+   * @see org.worklang.work.TransitionCompositionBody
+   * @generated
+   */
+  EClass getTransitionCompositionBody();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.worklang.work.TransitionCompositionBody#getStartingInputs <em>Starting Inputs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Starting Inputs</em>'.
+   * @see org.worklang.work.TransitionCompositionBody#getStartingInputs()
+   * @see #getTransitionCompositionBody()
+   * @generated
+   */
+  EReference getTransitionCompositionBody_StartingInputs();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.TransitionCompositionBody#getExpression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Expression</em>'.
+   * @see org.worklang.work.TransitionCompositionBody#getExpression()
+   * @see #getTransitionCompositionBody()
+   * @generated
+   */
+  EReference getTransitionCompositionBody_Expression();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.InstructionExpression <em>Instruction Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Instruction Expression</em>'.
+   * @see org.worklang.work.InstructionExpression
+   * @generated
+   */
+  EClass getInstructionExpression();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.IfInstruction <em>If Instruction</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>If Instruction</em>'.
+   * @see org.worklang.work.IfInstruction
+   * @generated
+   */
+  EClass getIfInstruction();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.IfInstruction#getTestKey <em>Test Key</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Test Key</em>'.
+   * @see org.worklang.work.IfInstruction#getTestKey()
+   * @see #getIfInstruction()
+   * @generated
+   */
+  EReference getIfInstruction_TestKey();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.IfInstruction#getTestValue <em>Test Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Test Value</em>'.
+   * @see org.worklang.work.IfInstruction#getTestValue()
+   * @see #getIfInstruction()
+   * @generated
+   */
+  EReference getIfInstruction_TestValue();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.IfInstruction#getToComputeIfTrue <em>To Compute If True</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>To Compute If True</em>'.
+   * @see org.worklang.work.IfInstruction#getToComputeIfTrue()
+   * @see #getIfInstruction()
+   * @generated
+   */
+  EReference getIfInstruction_ToComputeIfTrue();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.IfInstruction#getToComputeIfFalse <em>To Compute If False</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>To Compute If False</em>'.
+   * @see org.worklang.work.IfInstruction#getToComputeIfFalse()
+   * @see #getIfInstruction()
+   * @generated
+   */
+  EReference getIfInstruction_ToComputeIfFalse();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.WhileInstruction <em>While Instruction</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>While Instruction</em>'.
+   * @see org.worklang.work.WhileInstruction
+   * @generated
+   */
+  EClass getWhileInstruction();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.WhileInstruction#getTestKey <em>Test Key</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Test Key</em>'.
+   * @see org.worklang.work.WhileInstruction#getTestKey()
+   * @see #getWhileInstruction()
+   * @generated
+   */
+  EReference getWhileInstruction_TestKey();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.WhileInstruction#getTestValue <em>Test Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Test Value</em>'.
+   * @see org.worklang.work.WhileInstruction#getTestValue()
+   * @see #getWhileInstruction()
+   * @generated
+   */
+  EReference getWhileInstruction_TestValue();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.WhileInstruction#getToCompute <em>To Compute</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>To Compute</em>'.
+   * @see org.worklang.work.WhileInstruction#getToCompute()
+   * @see #getWhileInstruction()
+   * @generated
+   */
+  EReference getWhileInstruction_ToCompute();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.SimpleInstruction <em>Simple Instruction</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Simple Instruction</em>'.
+   * @see org.worklang.work.SimpleInstruction
+   * @generated
+   */
+  EClass getSimpleInstruction();
+
+  /**
+   * Returns the meta object for the reference '{@link org.worklang.work.SimpleInstruction#getToExecute <em>To Execute</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>To Execute</em>'.
+   * @see org.worklang.work.SimpleInstruction#getToExecute()
+   * @see #getSimpleInstruction()
+   * @generated
+   */
+  EReference getSimpleInstruction_ToExecute();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.CompoundTransitionInstance <em>Compound Transition Instance</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Compound Transition Instance</em>'.
+   * @see org.worklang.work.CompoundTransitionInstance
+   * @generated
+   */
+  EClass getCompoundTransitionInstance();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.CompoundTransitionInstance#getBody <em>Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Body</em>'.
+   * @see org.worklang.work.CompoundTransitionInstance#getBody()
+   * @see #getCompoundTransitionInstance()
+   * @generated
+   */
+  EReference getCompoundTransitionInstance_Body();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.CompoundTransitionInstanceBody <em>Compound Transition Instance Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Compound Transition Instance Body</em>'.
+   * @see org.worklang.work.CompoundTransitionInstanceBody
+   * @generated
+   */
+  EClass getCompoundTransitionInstanceBody();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.worklang.work.CompoundTransitionInstanceBody#getStartingInputs <em>Starting Inputs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Starting Inputs</em>'.
+   * @see org.worklang.work.CompoundTransitionInstanceBody#getStartingInputs()
+   * @see #getCompoundTransitionInstanceBody()
+   * @generated
+   */
+  EReference getCompoundTransitionInstanceBody_StartingInputs();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.CompoundTransitionInstanceBody#getExpression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Expression</em>'.
+   * @see org.worklang.work.CompoundTransitionInstanceBody#getExpression()
+   * @see #getCompoundTransitionInstanceBody()
+   * @generated
+   */
+  EReference getCompoundTransitionInstanceBody_Expression();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.InstanceInstructionExpression <em>Instance Instruction Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Instance Instruction Expression</em>'.
+   * @see org.worklang.work.InstanceInstructionExpression
+   * @generated
+   */
+  EClass getInstanceInstructionExpression();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.SimpleInstanceInstruction <em>Simple Instance Instruction</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Simple Instance Instruction</em>'.
+   * @see org.worklang.work.SimpleInstanceInstruction
+   * @generated
+   */
+  EClass getSimpleInstanceInstruction();
+
+  /**
+   * Returns the meta object for the reference '{@link org.worklang.work.SimpleInstanceInstruction#getToExecute <em>To Execute</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>To Execute</em>'.
+   * @see org.worklang.work.SimpleInstanceInstruction#getToExecute()
+   * @see #getSimpleInstanceInstruction()
+   * @generated
+   */
+  EReference getSimpleInstanceInstruction_ToExecute();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.IfInstanceInstruction <em>If Instance Instruction</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>If Instance Instruction</em>'.
+   * @see org.worklang.work.IfInstanceInstruction
+   * @generated
+   */
+  EClass getIfInstanceInstruction();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.IfInstanceInstruction#getTestKey <em>Test Key</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Test Key</em>'.
+   * @see org.worklang.work.IfInstanceInstruction#getTestKey()
+   * @see #getIfInstanceInstruction()
+   * @generated
+   */
+  EReference getIfInstanceInstruction_TestKey();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.IfInstanceInstruction#getTestValue <em>Test Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Test Value</em>'.
+   * @see org.worklang.work.IfInstanceInstruction#getTestValue()
+   * @see #getIfInstanceInstruction()
+   * @generated
+   */
+  EReference getIfInstanceInstruction_TestValue();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.IfInstanceInstruction#getToComputeIfTrue <em>To Compute If True</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>To Compute If True</em>'.
+   * @see org.worklang.work.IfInstanceInstruction#getToComputeIfTrue()
+   * @see #getIfInstanceInstruction()
+   * @generated
+   */
+  EReference getIfInstanceInstruction_ToComputeIfTrue();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.IfInstanceInstruction#getToComputeIfFalse <em>To Compute If False</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>To Compute If False</em>'.
+   * @see org.worklang.work.IfInstanceInstruction#getToComputeIfFalse()
+   * @see #getIfInstanceInstruction()
+   * @generated
+   */
+  EReference getIfInstanceInstruction_ToComputeIfFalse();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.WhileInstanceInstruction <em>While Instance Instruction</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>While Instance Instruction</em>'.
+   * @see org.worklang.work.WhileInstanceInstruction
+   * @generated
+   */
+  EClass getWhileInstanceInstruction();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.WhileInstanceInstruction#getTestKey <em>Test Key</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Test Key</em>'.
+   * @see org.worklang.work.WhileInstanceInstruction#getTestKey()
+   * @see #getWhileInstanceInstruction()
+   * @generated
+   */
+  EReference getWhileInstanceInstruction_TestKey();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.WhileInstanceInstruction#getTestValue <em>Test Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Test Value</em>'.
+   * @see org.worklang.work.WhileInstanceInstruction#getTestValue()
+   * @see #getWhileInstanceInstruction()
+   * @generated
+   */
+  EReference getWhileInstanceInstruction_TestValue();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.WhileInstanceInstruction#getToCompute <em>To Compute</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>To Compute</em>'.
+   * @see org.worklang.work.WhileInstanceInstruction#getToCompute()
+   * @see #getWhileInstanceInstruction()
+   * @generated
+   */
+  EReference getWhileInstanceInstruction_ToCompute();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.TestValue <em>Test Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Test Value</em>'.
+   * @see org.worklang.work.TestValue
+   * @generated
+   */
+  EClass getTestValue();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.LiteralValue <em>Literal Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Literal Value</em>'.
+   * @see org.worklang.work.LiteralValue
+   * @generated
+   */
+  EClass getLiteralValue();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.worklang.work.LiteralValue#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.worklang.work.LiteralValue#getValue()
+   * @see #getLiteralValue()
+   * @generated
+   */
+  EAttribute getLiteralValue_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.ResolvableValue <em>Resolvable Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Resolvable Value</em>'.
+   * @see org.worklang.work.ResolvableValue
+   * @generated
+   */
+  EClass getResolvableValue();
+
+  /**
+   * Returns the meta object for the reference '{@link org.worklang.work.ResolvableValue#getKey <em>Key</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Key</em>'.
+   * @see org.worklang.work.ResolvableValue#getKey()
+   * @see #getResolvableValue()
+   * @generated
+   */
+  EReference getResolvableValue_Key();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.ResolvableInstanceValue <em>Resolvable Instance Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Resolvable Instance Value</em>'.
+   * @see org.worklang.work.ResolvableInstanceValue
+   * @generated
+   */
+  EClass getResolvableInstanceValue();
+
+  /**
+   * Returns the meta object for the reference '{@link org.worklang.work.ResolvableInstanceValue#getInstance <em>Instance</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Instance</em>'.
+   * @see org.worklang.work.ResolvableInstanceValue#getInstance()
+   * @see #getResolvableInstanceValue()
+   * @generated
+   */
+  EReference getResolvableInstanceValue_Instance();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.ResolvableTransitionOutputValue <em>Resolvable Transition Output Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Resolvable Transition Output Value</em>'.
+   * @see org.worklang.work.ResolvableTransitionOutputValue
+   * @generated
+   */
+  EClass getResolvableTransitionOutputValue();
+
+  /**
+   * Returns the meta object for the reference '{@link org.worklang.work.ResolvableTransitionOutputValue#getState <em>State</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>State</em>'.
+   * @see org.worklang.work.ResolvableTransitionOutputValue#getState()
+   * @see #getResolvableTransitionOutputValue()
+   * @generated
+   */
+  EReference getResolvableTransitionOutputValue_State();
 
   /**
    * Returns the meta object for class '{@link org.worklang.work.Operation <em>Operation</em>}'.
@@ -2357,6 +3329,38 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   EReference getOperation_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.ExecutionResult <em>Execution Result</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Execution Result</em>'.
+   * @see org.worklang.work.ExecutionResult
+   * @generated
+   */
+  EClass getExecutionResult();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.ExecutionResult#getComputeFirst <em>Compute First</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Compute First</em>'.
+   * @see org.worklang.work.ExecutionResult#getComputeFirst()
+   * @see #getExecutionResult()
+   * @generated
+   */
+  EReference getExecutionResult_ComputeFirst();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.ExecutionResult#getComputeNext <em>Compute Next</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Compute Next</em>'.
+   * @see org.worklang.work.ExecutionResult#getComputeNext()
+   * @see #getExecutionResult()
+   * @generated
+   */
+  EReference getExecutionResult_ComputeNext();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -2658,14 +3662,6 @@ public interface WorkPackage extends EPackage
     EClass TRANSITION_DEFINITION = eINSTANCE.getTransitionDefinition();
 
     /**
-     * The meta object literal for the '<em><b>Value</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION_DEFINITION__VALUE = eINSTANCE.getTransitionDefinition_Value();
-
-    /**
      * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2840,24 +3836,6 @@ public interface WorkPackage extends EPackage
     EReference WITH_STATES_DEFINITION__PREDICATE = eINSTANCE.getWithStatesDefinition_Predicate();
 
     /**
-     * The meta object literal for the '{@link org.worklang.work.impl.WithTransitionsDefinitionImpl <em>With Transitions Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.WithTransitionsDefinitionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getWithTransitionsDefinition()
-     * @generated
-     */
-    EClass WITH_TRANSITIONS_DEFINITION = eINSTANCE.getWithTransitionsDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Transitions</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference WITH_TRANSITIONS_DEFINITION__TRANSITIONS = eINSTANCE.getWithTransitionsDefinition_Transitions();
-
-    /**
      * The meta object literal for the '{@link org.worklang.work.impl.InputDefinitionImpl <em>Input Definition</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2942,6 +3920,14 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EReference INSTANCE__TRANSITION = eINSTANCE.getInstance_Transition();
+
+    /**
+     * The meta object literal for the '<em><b>Compound Transition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference INSTANCE__COMPOUND_TRANSITION = eINSTANCE.getInstance_CompoundTransition();
 
     /**
      * The meta object literal for the '{@link org.worklang.work.impl.TransitionDeclarationImpl <em>Transition Declaration</em>}' class.
@@ -3130,14 +4116,382 @@ public interface WorkPackage extends EPackage
     EClass BINARY_EXPRESSION = eINSTANCE.getBinaryExpression();
 
     /**
-     * The meta object literal for the '{@link org.worklang.work.impl.TransitionalExpressionImpl <em>Transitional Expression</em>}' class.
+     * The meta object literal for the '{@link org.worklang.work.impl.TransitionCompositionImpl <em>Transition Composition</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.worklang.work.impl.TransitionalExpressionImpl
-     * @see org.worklang.work.impl.WorkPackageImpl#getTransitionalExpression()
+     * @see org.worklang.work.impl.TransitionCompositionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getTransitionComposition()
      * @generated
      */
-    EClass TRANSITIONAL_EXPRESSION = eINSTANCE.getTransitionalExpression();
+    EClass TRANSITION_COMPOSITION = eINSTANCE.getTransitionComposition();
+
+    /**
+     * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_COMPOSITION__BODY = eINSTANCE.getTransitionComposition_Body();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.TransitionCompositionBodyImpl <em>Transition Composition Body</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.TransitionCompositionBodyImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getTransitionCompositionBody()
+     * @generated
+     */
+    EClass TRANSITION_COMPOSITION_BODY = eINSTANCE.getTransitionCompositionBody();
+
+    /**
+     * The meta object literal for the '<em><b>Starting Inputs</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_COMPOSITION_BODY__STARTING_INPUTS = eINSTANCE.getTransitionCompositionBody_StartingInputs();
+
+    /**
+     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_COMPOSITION_BODY__EXPRESSION = eINSTANCE.getTransitionCompositionBody_Expression();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.InstructionExpressionImpl <em>Instruction Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.InstructionExpressionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getInstructionExpression()
+     * @generated
+     */
+    EClass INSTRUCTION_EXPRESSION = eINSTANCE.getInstructionExpression();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.IfInstructionImpl <em>If Instruction</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.IfInstructionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getIfInstruction()
+     * @generated
+     */
+    EClass IF_INSTRUCTION = eINSTANCE.getIfInstruction();
+
+    /**
+     * The meta object literal for the '<em><b>Test Key</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IF_INSTRUCTION__TEST_KEY = eINSTANCE.getIfInstruction_TestKey();
+
+    /**
+     * The meta object literal for the '<em><b>Test Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IF_INSTRUCTION__TEST_VALUE = eINSTANCE.getIfInstruction_TestValue();
+
+    /**
+     * The meta object literal for the '<em><b>To Compute If True</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IF_INSTRUCTION__TO_COMPUTE_IF_TRUE = eINSTANCE.getIfInstruction_ToComputeIfTrue();
+
+    /**
+     * The meta object literal for the '<em><b>To Compute If False</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IF_INSTRUCTION__TO_COMPUTE_IF_FALSE = eINSTANCE.getIfInstruction_ToComputeIfFalse();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.WhileInstructionImpl <em>While Instruction</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.WhileInstructionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getWhileInstruction()
+     * @generated
+     */
+    EClass WHILE_INSTRUCTION = eINSTANCE.getWhileInstruction();
+
+    /**
+     * The meta object literal for the '<em><b>Test Key</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WHILE_INSTRUCTION__TEST_KEY = eINSTANCE.getWhileInstruction_TestKey();
+
+    /**
+     * The meta object literal for the '<em><b>Test Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WHILE_INSTRUCTION__TEST_VALUE = eINSTANCE.getWhileInstruction_TestValue();
+
+    /**
+     * The meta object literal for the '<em><b>To Compute</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WHILE_INSTRUCTION__TO_COMPUTE = eINSTANCE.getWhileInstruction_ToCompute();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.SimpleInstructionImpl <em>Simple Instruction</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.SimpleInstructionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getSimpleInstruction()
+     * @generated
+     */
+    EClass SIMPLE_INSTRUCTION = eINSTANCE.getSimpleInstruction();
+
+    /**
+     * The meta object literal for the '<em><b>To Execute</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SIMPLE_INSTRUCTION__TO_EXECUTE = eINSTANCE.getSimpleInstruction_ToExecute();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.CompoundTransitionInstanceImpl <em>Compound Transition Instance</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.CompoundTransitionInstanceImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getCompoundTransitionInstance()
+     * @generated
+     */
+    EClass COMPOUND_TRANSITION_INSTANCE = eINSTANCE.getCompoundTransitionInstance();
+
+    /**
+     * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COMPOUND_TRANSITION_INSTANCE__BODY = eINSTANCE.getCompoundTransitionInstance_Body();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.CompoundTransitionInstanceBodyImpl <em>Compound Transition Instance Body</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.CompoundTransitionInstanceBodyImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getCompoundTransitionInstanceBody()
+     * @generated
+     */
+    EClass COMPOUND_TRANSITION_INSTANCE_BODY = eINSTANCE.getCompoundTransitionInstanceBody();
+
+    /**
+     * The meta object literal for the '<em><b>Starting Inputs</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COMPOUND_TRANSITION_INSTANCE_BODY__STARTING_INPUTS = eINSTANCE.getCompoundTransitionInstanceBody_StartingInputs();
+
+    /**
+     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COMPOUND_TRANSITION_INSTANCE_BODY__EXPRESSION = eINSTANCE.getCompoundTransitionInstanceBody_Expression();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.InstanceInstructionExpressionImpl <em>Instance Instruction Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.InstanceInstructionExpressionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getInstanceInstructionExpression()
+     * @generated
+     */
+    EClass INSTANCE_INSTRUCTION_EXPRESSION = eINSTANCE.getInstanceInstructionExpression();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.SimpleInstanceInstructionImpl <em>Simple Instance Instruction</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.SimpleInstanceInstructionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getSimpleInstanceInstruction()
+     * @generated
+     */
+    EClass SIMPLE_INSTANCE_INSTRUCTION = eINSTANCE.getSimpleInstanceInstruction();
+
+    /**
+     * The meta object literal for the '<em><b>To Execute</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SIMPLE_INSTANCE_INSTRUCTION__TO_EXECUTE = eINSTANCE.getSimpleInstanceInstruction_ToExecute();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.IfInstanceInstructionImpl <em>If Instance Instruction</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.IfInstanceInstructionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getIfInstanceInstruction()
+     * @generated
+     */
+    EClass IF_INSTANCE_INSTRUCTION = eINSTANCE.getIfInstanceInstruction();
+
+    /**
+     * The meta object literal for the '<em><b>Test Key</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IF_INSTANCE_INSTRUCTION__TEST_KEY = eINSTANCE.getIfInstanceInstruction_TestKey();
+
+    /**
+     * The meta object literal for the '<em><b>Test Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IF_INSTANCE_INSTRUCTION__TEST_VALUE = eINSTANCE.getIfInstanceInstruction_TestValue();
+
+    /**
+     * The meta object literal for the '<em><b>To Compute If True</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IF_INSTANCE_INSTRUCTION__TO_COMPUTE_IF_TRUE = eINSTANCE.getIfInstanceInstruction_ToComputeIfTrue();
+
+    /**
+     * The meta object literal for the '<em><b>To Compute If False</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IF_INSTANCE_INSTRUCTION__TO_COMPUTE_IF_FALSE = eINSTANCE.getIfInstanceInstruction_ToComputeIfFalse();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.WhileInstanceInstructionImpl <em>While Instance Instruction</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.WhileInstanceInstructionImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getWhileInstanceInstruction()
+     * @generated
+     */
+    EClass WHILE_INSTANCE_INSTRUCTION = eINSTANCE.getWhileInstanceInstruction();
+
+    /**
+     * The meta object literal for the '<em><b>Test Key</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WHILE_INSTANCE_INSTRUCTION__TEST_KEY = eINSTANCE.getWhileInstanceInstruction_TestKey();
+
+    /**
+     * The meta object literal for the '<em><b>Test Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WHILE_INSTANCE_INSTRUCTION__TEST_VALUE = eINSTANCE.getWhileInstanceInstruction_TestValue();
+
+    /**
+     * The meta object literal for the '<em><b>To Compute</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WHILE_INSTANCE_INSTRUCTION__TO_COMPUTE = eINSTANCE.getWhileInstanceInstruction_ToCompute();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.TestValueImpl <em>Test Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.TestValueImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getTestValue()
+     * @generated
+     */
+    EClass TEST_VALUE = eINSTANCE.getTestValue();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.LiteralValueImpl <em>Literal Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.LiteralValueImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getLiteralValue()
+     * @generated
+     */
+    EClass LITERAL_VALUE = eINSTANCE.getLiteralValue();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LITERAL_VALUE__VALUE = eINSTANCE.getLiteralValue_Value();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.ResolvableValueImpl <em>Resolvable Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.ResolvableValueImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getResolvableValue()
+     * @generated
+     */
+    EClass RESOLVABLE_VALUE = eINSTANCE.getResolvableValue();
+
+    /**
+     * The meta object literal for the '<em><b>Key</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RESOLVABLE_VALUE__KEY = eINSTANCE.getResolvableValue_Key();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.ResolvableInstanceValueImpl <em>Resolvable Instance Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.ResolvableInstanceValueImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getResolvableInstanceValue()
+     * @generated
+     */
+    EClass RESOLVABLE_INSTANCE_VALUE = eINSTANCE.getResolvableInstanceValue();
+
+    /**
+     * The meta object literal for the '<em><b>Instance</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RESOLVABLE_INSTANCE_VALUE__INSTANCE = eINSTANCE.getResolvableInstanceValue_Instance();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.ResolvableTransitionOutputValueImpl <em>Resolvable Transition Output Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.ResolvableTransitionOutputValueImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getResolvableTransitionOutputValue()
+     * @generated
+     */
+    EClass RESOLVABLE_TRANSITION_OUTPUT_VALUE = eINSTANCE.getResolvableTransitionOutputValue();
+
+    /**
+     * The meta object literal for the '<em><b>State</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RESOLVABLE_TRANSITION_OUTPUT_VALUE__STATE = eINSTANCE.getResolvableTransitionOutputValue_State();
 
     /**
      * The meta object literal for the '{@link org.worklang.work.impl.OperationImpl <em>Operation</em>}' class.
@@ -3172,6 +4526,32 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EReference OPERATION__RIGHT = eINSTANCE.getOperation_Right();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.ExecutionResultImpl <em>Execution Result</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.ExecutionResultImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getExecutionResult()
+     * @generated
+     */
+    EClass EXECUTION_RESULT = eINSTANCE.getExecutionResult();
+
+    /**
+     * The meta object literal for the '<em><b>Compute First</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EXECUTION_RESULT__COMPUTE_FIRST = eINSTANCE.getExecutionResult_ComputeFirst();
+
+    /**
+     * The meta object literal for the '<em><b>Compute Next</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EXECUTION_RESULT__COMPUTE_NEXT = eINSTANCE.getExecutionResult_ComputeNext();
 
   }
 

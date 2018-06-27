@@ -19,46 +19,46 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>With Transitions Definition</b></em>'.
+ * A representation of the model object '<em><b>Compound Transition Instance</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.WithTransitionsDefinition#getTransitions <em>Transitions</em>}</li>
+ *   <li>{@link org.worklang.work.CompoundTransitionInstance#getBody <em>Body</em>}</li>
  * </ul>
  *
- * @see org.worklang.work.WorkPackage#getWithTransitionsDefinition()
+ * @see org.worklang.work.WorkPackage#getCompoundTransitionInstance()
  * @model
  * @generated
  */
-public interface WithTransitionsDefinition extends EObject
+public interface CompoundTransitionInstance extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Transitions</b></em>' containment reference.
+   * Returns the value of the '<em><b>Body</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Transitions</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Body</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Transitions</em>' containment reference.
-   * @see #setTransitions(TransitionalExpression)
-   * @see org.worklang.work.WorkPackage#getWithTransitionsDefinition_Transitions()
+   * @return the value of the '<em>Body</em>' containment reference.
+   * @see #setBody(CompoundTransitionInstanceBody)
+   * @see org.worklang.work.WorkPackage#getCompoundTransitionInstance_Body()
    * @model containment="true"
    * @generated
    */
-  TransitionalExpression getTransitions();
+  CompoundTransitionInstanceBody getBody();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.WithTransitionsDefinition#getTransitions <em>Transitions</em>}' containment reference.
+   * Sets the value of the '{@link org.worklang.work.CompoundTransitionInstance#getBody <em>Body</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Transitions</em>' containment reference.
-   * @see #getTransitions()
+   * @param value the new value of the '<em>Body</em>' containment reference.
+   * @see #getBody()
    * @generated
    */
-  void setTransitions(TransitionalExpression value);
+  void setBody(CompoundTransitionInstanceBody value);
 
-} // WithTransitionsDefinition
+} // CompoundTransitionInstance

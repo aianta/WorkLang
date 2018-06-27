@@ -38,6 +38,24 @@ import org.worklang.work.UseDefinition
 import org.worklang.work.MapSpace
 import org.worklang.work.ReferenceSpace
 import org.apache.tinkerpop.gremlin.structure.Transaction
+import org.worklang.work.PrimitiveTransitionDefinition
+import org.worklang.work.CompoundTransitionDefinition
+import org.worklang.work.TransitionComposition
+import org.worklang.work.ExecutionResult
+import org.worklang.work.SimpleInstruction
+import org.worklang.work.IfInstruction
+import org.worklang.work.WhileInstruction
+import org.worklang.work.SimpleInstanceInstruction
+import org.worklang.work.IfInstanceInstruction
+import org.worklang.work.WhileInstanceInstruction
+import org.worklang.work.ResolvableTransitionOutputValue
+import org.worklang.work.ResolvableInstanceValue
+import org.worklang.work.ResolvableValue
+import org.worklang.work.TestValue
+import org.worklang.work.LiteralValue
+import org.worklang.work.CompoundTransitionInstance
+import org.worklang.work.InstructionExpression
+import org.worklang.work.InstanceInstructionExpression
 
 /* Create static meta-model for a field.
  * - Definition Space
@@ -59,8 +77,24 @@ class FieldModelFactory extends MetaModelVertexFactory {
 	var transitionInstanceMeta = "transition instance"
 	var stateMappingMeta = "mapped state"
 	var referenceMeta = "reference"
-	
-	
+	var executionResultMeta = "execution result"
+	var simpleInstructionMeta = "simple instruction"
+	var ifInstructionMeta = "if instruction"
+	var whileInstructionMeta = "while instruction"
+	var simpleInstanceInstructionMeta = "simple instance instruction"
+	var ifInstanceInstructionMeta = "if instance instruction"
+	var whileInstanceInstructionMeta = "while instance instruction"	
+	var resolvableTransitionOutputMeta = "resolvable output value"
+	var resolvableInstanceMeta = "resolvable instance value"
+	var testKeyMeta = "test key"
+	var testValueMeta = "test value"
+	var testObjectMeta = "test object"
+	var testObjectKeyMeta = "test object key"
+	var literalValueMeta = "literal value"
+	var toComputeIfTrueMeta = "compute true"
+	var toComputeIfFalseMeta = "compute false"
+	var toComputeMeta = "compute"
+	var transitionCompositionBodyMeta = "transition composition body" 
 	
 	var String fieldName
 	
@@ -172,6 +206,11 @@ class FieldModelFactory extends MetaModelVertexFactory {
 				tx = graph.tx
 				generateTransitions
 				tx.commit
+				
+				//Resolve Simple Instructions
+				tx = graph.tx
+				resolveSimpleInstructions
+				tx.commit
 			}
 			
 			if (instanceSpace !== null){
@@ -188,6 +227,11 @@ class FieldModelFactory extends MetaModelVertexFactory {
 				//Instance space transitions
 				tx = graph.tx
 				generateInstanceTransitions
+				tx.commit
+				
+				//Resolve Simple Instance Instructions
+				tx = graph.tx
+				resolveSimpleInstanceInstructions
 				tx.commit
 			}
 			
@@ -413,7 +457,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 	}
 	
 	def private generateInstanceTransitions(){
-		//Create graph structures for transition instances
+		//Create graph structures for primitive transition instances
 		instanceSpace.instances.filter[instance| 
 			instance.eContents.exists[instanceElement| 
 				instanceElement.eClass.instanceClass.equals(org.worklang.work.TransitionInstance)
@@ -421,10 +465,24 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		].forEach[transitionInstance|
 							
 			//Generate transition instance vertex
-			var transitionInstanceVertex = generateInstanceTransitionGraphStructure(transitionInstance, transitionInstanceMeta)
-						
+			var transitionInstanceVertex = generatePrimitiveInstanceTransitionGraphStructures(transitionInstance, transitionInstanceMeta)
+			logger.info("primitive transition !!")
 			//Connect field instancespace vertex to transition instance vertex
 			createEdge(instanceSpaceVertex,transitionInstanceVertex, "definesInstance")
+		]
+		
+		//Create graph structures for compound transition instances
+		instanceSpace.instances.filter[instance| 
+			instance.eContents.exists[instanceElement| 
+				instanceElement.eClass.instanceClass.equals(org.worklang.work.CompoundTransitionInstance)
+			]
+		].forEach[transitionInstance|
+							
+			//Generate transition instance vertex
+			var compoundTransitionInstanceVertex = generateCompoundTransitionInstanceGraphStructures(transitionInstance, transitionInstanceMeta)
+						
+			//Connect field instancespace vertex to transition instance vertex
+			createEdge(instanceSpaceVertex,compoundTransitionInstanceVertex, "definesInstance")
 		]
 	}
 	
@@ -441,8 +499,43 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		return vertex
 	}
 	
-	def private generateInstanceTransitionGraphStructure(Instance instance, String label){
+	def private resolveInstructionExpression(InstructionExpression expression, String label){
+				 
+		var myVertex = switch (expression){
+			case expression instanceof SimpleInstruction:
+				generateSimpleInstructionGraphStructures(expression as SimpleInstruction, label)
+			case expression instanceof IfInstruction:
+				generateIfInstructionGraphStructures(expression as IfInstruction, label)
+			case expression instanceof WhileInstruction:
+				generateWhileInstructionGraphStructures(expression as WhileInstruction, label)
+			case expression instanceof ExecutionResult:
+				generateExecutionResultGraphStructures(expression as ExecutionResult, label)
+		}
 		
+		
+		return myVertex
+		
+	}
+	
+	def private resolveInstanceInstructionExpression (InstanceInstructionExpression expression, String label){
+			
+		var myVertex = switch (expression){
+			case expression instanceof SimpleInstanceInstruction:
+				generateSimpleInstanceInstructionGraphStructures(expression as SimpleInstanceInstruction, label)
+			case expression instanceof IfInstanceInstruction:
+				generateIfInstanceInstructionGraphStructures(expression as IfInstanceInstruction, label)
+			case expression instanceof WhileInstanceInstruction:
+				generateWhileInstanceInstructionGraphStructures(expression as WhileInstanceInstruction, label)
+			case expression instanceof ExecutionResult:
+				generateExecutionResultGraphStructures(expression as ExecutionResult, label)
+		}
+		
+		
+		return myVertex
+	}
+	
+	
+	def private Vertex generatePrimitiveInstanceTransitionGraphStructures(Instance instance, String label){
 		var instanceVertex = createVertex(instance,label)
 		instanceVertex.property(VertexProperty.Cardinality.single, "type", "transition")
 		instanceVertex.property(VertexProperty.Cardinality.single, "name", instance.name)
@@ -463,8 +556,11 @@ class FieldModelFactory extends MetaModelVertexFactory {
 	
 		createEdge(instanceVertex,instanceOfVertex, "instanceOf")
 		
+		logger.info ("Created instance transition vertex")
+		
 		return instanceVertex
 	}
+	
 	
 	def private Vertex generateSubStateInstanceGraphStructure(Instance instance, String label){
 		
@@ -657,6 +753,63 @@ class FieldModelFactory extends MetaModelVertexFactory {
 	//Utility method for generating transition meta model structures
 	def private generateTransitionGraphStructure(TransitionDefinition transition, String label){
 		
+		if (transition instanceof PrimitiveTransitionDefinition){
+			return generatePrimitiveTransitionGraphStructure(transition, label)
+		}
+		
+		if (transition instanceof CompoundTransitionDefinition){
+			return generateCompoundTransitionGraphStructure(transition, label)
+		}
+
+	}
+	
+	def private generateCompoundTransitionGraphStructure (CompoundTransitionDefinition transition, String label){
+		
+		var transitionComposition = transition.composition
+		
+		var transitionVertex = createVertex(transition, label)
+		transitionVertex.property(VertexProperty.Cardinality.single, "name", transition.name)
+		
+		
+		var compositionVertex = generateTransitionCompositionGraphStructures(transitionComposition, label);
+		createEdge(transitionVertex, compositionVertex, "composition")
+		
+		//Create graph structures for output parameters
+		val outputVertex = createVertex(transition.out,label)
+		outputVertex.property(VertexProperty.Cardinality.single, "name", "output")
+		
+		
+		println("After create outputVertex=" + outputVertex)
+		
+		transition.out.eCrossReferences.forEach[output|
+			
+			var outputStateName = (output as StateDefinition).name
+			
+			println("transition output looking for " + outputStateName)
+			
+			//Add a parameter property to output vertex with the state name
+			outputVertex.property(VertexProperty.Cardinality.list, "parameter", outputStateName)
+			
+			println("Query to run:\n" + "match (n:`state` {field:'"+fieldName+"',name:'"+ outputStateName +"'}) return n")
+			
+			//Find output state vertex in graph and connect it to output vertex
+			var outputStateVertex = graph.vertices("match (n:`state` {field:'"+fieldName+"',name:'"+ outputStateName +"'}) return n").head
+			println("outputStateVertex=" + outputStateVertex)
+			println("outputVertex=" + outputVertex)
+			
+			outputVertex.addEdge("hasParameter", outputStateVertex)
+				.property("resolves", outputStateName)
+		
+		]
+		
+		//Attach output vertex to transition vertex
+		transitionVertex.addEdge("produces", outputVertex)
+		
+		return transitionVertex
+	}
+	
+	def private generatePrimitiveTransitionGraphStructure (PrimitiveTransitionDefinition transition, String label){
+		
 		var transitionVertex = createVertex(transition, label)
 		transitionVertex.property(VertexProperty.Cardinality.single, "name", transition.name)
 
@@ -730,6 +883,315 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		transitionVertex.addEdge("produces", outputVertex)
 		
 		return transitionVertex
+		
 	}
 	
+	def private Vertex generateTransitionCompositionGraphStructures (TransitionComposition composition, String label){
+		var compositionBody = composition.body
+		
+		val bodyVertex = createVertex(compositionBody, transitionCompositionBodyMeta)
+		bodyVertex.property(VertexProperty.Cardinality.single,"name", "transition composition body")
+		
+		//Find and connect all starting inputs
+		compositionBody.startingInputs.forEach[ input|
+			var inputVertex = graph.vertices("match (n:`"+stateMeta+"` {field:'"+field.name+"', name:'"+input.name+"'}) return n").head
+			createEdge(bodyVertex, inputVertex, "starting input")
+		]
+		
+		var executionResultVertex = generateExecutionResultGraphStructures(compositionBody.expression as ExecutionResult, label)
+		createEdge(bodyVertex, executionResultVertex, "expression")
+		
+		return bodyVertex
+	}
+	
+	def private Vertex generateCompoundTransitionInstanceGraphStructures(Instance instance, String label){
+		
+		var composition = instance.compoundTransition
+		
+		var compositionBody = composition.body
+		
+		val bodyVertex = createVertex(compositionBody, transitionCompositionBodyMeta)
+		bodyVertex.property(VertexProperty.Cardinality.single,"name", instance.name)
+		
+		//Find and connect all starting inputs
+		compositionBody.startingInputs.forEach[input|
+			var inputVertex = graph.vertices("match (n:`"+stateInstanceMeta+"` {field:'"+field.name+"', name:'"+input.name+"'}) return n").head
+			createEdge(bodyVertex, inputVertex, "starting input")
+		]
+		
+		var executionResultVertex = generateExecutionResultGraphStructures(compositionBody.expression as ExecutionResult, label)
+		createEdge(bodyVertex, executionResultVertex, "expression")
+		
+		return bodyVertex
+		
+	}
+	
+	def private Vertex generateExecutionResultGraphStructures(ExecutionResult executionResult, String label){
+		 
+		
+		//If this actually is an execution result
+		
+		var executionResultVertex = createVertex(executionResult, label)
+		executionResultVertex.property(VertexProperty.Cardinality.single, "name", "execution result")
+		
+		/* 7 Cases to handle for computeFirst AND computeNext
+		 *  - ExecutionResult
+		 *  - SimpleInstruction
+		 *  - IfInstruction
+		 *  - WhileInstruction
+		 *  - SimpleInstanceInstruction
+		 *  - IfInstanceInstruction
+		 *  - WhileInstanceInstruction
+		 */
+		
+		//Handle computeFirst
+		var it = executionResult.computeFirst
+		var Vertex computeFirstVertex = 
+			switch (it){
+				case it instanceof ExecutionResult:
+					generateExecutionResultGraphStructures((it as ExecutionResult), executionResultMeta)
+				case it instanceof SimpleInstruction:
+					generateSimpleInstructionGraphStructures((it as SimpleInstruction), simpleInstructionMeta)
+				case it instanceof IfInstruction:
+					generateIfInstructionGraphStructures(it as IfInstruction, ifInstructionMeta)
+				case it instanceof WhileInstruction:
+					generateWhileInstructionGraphStructures(it as WhileInstruction, whileInstructionMeta)
+				case it instanceof SimpleInstanceInstruction:
+					generateSimpleInstanceInstructionGraphStructures(it as SimpleInstanceInstruction, simpleInstanceInstructionMeta)
+				case it instanceof IfInstanceInstruction:
+					generateIfInstanceInstructionGraphStructures(it as IfInstanceInstruction, ifInstanceInstructionMeta)
+				case it instanceof WhileInstanceInstruction:
+					generateWhileInstanceInstructionGraphStructures(it as WhileInstanceInstruction, whileInstanceInstructionMeta)
+			}
+		
+		createEdge(executionResultVertex, computeFirstVertex, "computeFirst")	
+		
+		//If computeNext exists handle computeNext
+		if (executionResult.computeNext !== null){
+			it = executionResult.computeNext
+			var Vertex computeNextVertex = 
+				switch (it){
+					case it instanceof ExecutionResult:
+						generateExecutionResultGraphStructures((it as ExecutionResult), executionResultMeta)
+					case it instanceof SimpleInstruction:
+						generateSimpleInstructionGraphStructures((it as SimpleInstruction), simpleInstructionMeta)
+					case it instanceof IfInstruction:
+						generateIfInstructionGraphStructures(it as IfInstruction, ifInstructionMeta)
+					case it instanceof WhileInstruction:
+						generateWhileInstructionGraphStructures(it as WhileInstruction, whileInstructionMeta)
+					case it instanceof SimpleInstanceInstruction:
+						generateSimpleInstanceInstructionGraphStructures(it as SimpleInstanceInstruction, simpleInstanceInstructionMeta)
+					case it instanceof IfInstanceInstruction:
+						generateIfInstanceInstructionGraphStructures(it as IfInstanceInstruction, ifInstanceInstructionMeta)
+					case it instanceof WhileInstanceInstruction:
+						generateWhileInstanceInstructionGraphStructures(it as WhileInstanceInstruction, whileInstanceInstructionMeta)
+				}
+				
+				createEdge(executionResultVertex, computeNextVertex, "computeNext")
+		}
+		
+		
+		
+		return executionResultVertex
+		
+	}
+	
+	
+	def private Vertex generateSimpleInstructionGraphStructures(SimpleInstruction simpleInstruction, String label){
+		
+		var simpleInstructionVertex = createVertex(simpleInstruction, simpleInstructionMeta);
+		simpleInstructionVertex.property(VertexProperty.Cardinality.single, "name", simpleInstructionMeta)
+		simpleInstructionVertex.property(VertexProperty.Cardinality.single, "toExecute", simpleInstruction.toExecute.name)
+		
+		//Find the transition to execute for this instruction 
+		var transition = graph.vertices("match (n:`transition` {field:'"+field.name+"', name:'"+simpleInstruction.toExecute+"'}) return n").head
+		
+		//TODO come back to this
+		//createEdge(simpleInstructionVertex, transition, "toExecute")
+		
+		return simpleInstructionVertex
+	}
+	
+	def private Vertex generateIfInstructionGraphStructures(IfInstruction ifInstruction, String label){
+		
+		var Vertex ifInstructionVertex = createVertex(ifInstruction, ifInstructionMeta)
+		ifInstructionVertex.property(VertexProperty.Cardinality.single, "name", ifInstructionMeta)
+		
+		
+		//Create Vertex for testKey
+		var resolvableValue = ifInstruction.testKey
+		var testKeyVertex = generateResolvableValueGraphStructures(resolvableValue, label);		
+		
+		//Create Vertex for testValue
+		var testValue = ifInstruction.testValue
+		var testValueVertex = generateTestValueGraphStructures(testValue, label);
+		
+		//Connect both to ifStatement vertex
+		createEdge(ifInstructionVertex, testKeyVertex, testKeyMeta);
+		createEdge(ifInstructionVertex, testValueVertex, testValueMeta)
+		
+		//Create branch verticies
+		var ifTrueVertex = resolveInstructionExpression(ifInstruction.toComputeIfTrue, toComputeIfTrueMeta)
+		createEdge(ifInstructionVertex, ifTrueVertex, toComputeIfTrueMeta)
+		
+		//If there is an else
+		if (ifInstruction.toComputeIfFalse !== null){
+			var ifFalseVertex = resolveInstructionExpression(ifInstruction.toComputeIfFalse, toComputeIfFalseMeta)
+			createEdge(ifInstructionVertex, ifFalseVertex, toComputeIfFalseMeta)
+		}
+		
+		return ifInstructionVertex
+	}
+	
+	def private Vertex generateTestValueGraphStructures(TestValue testValue, String label){
+		
+		var Vertex result
+		
+		if (testValue instanceof LiteralValue){
+			result = createVertex((testValue as LiteralValue), testValueMeta)
+			result.property(VertexProperty.Cardinality.single, "name", literalValueMeta)
+			result.property(VertexProperty.Cardinality.single, "value", (testValue as LiteralValue).value)
+		}
+		
+		if (testValue instanceof ResolvableValue){
+			result = generateResolvableValueGraphStructures(testValue as ResolvableValue, testValueMeta)
+		}
+		
+		return result
+	}
+	
+	def private Vertex generateResolvableValueGraphStructures(ResolvableValue resolvableValue, String label){
+		
+		var Vertex objectVertex
+		
+		if (resolvableValue instanceof ResolvableTransitionOutputValue){
+			 objectVertex = createVertex(resolvableValue as ResolvableTransitionOutputValue, resolvableTransitionOutputMeta )
+			
+			//Find and connect State(test object) and ObjectKey vertices
+			var stateVertex = graph.vertices("match (n:`"+stateMeta+"` {field:'"+field.name+"', name:'"+(resolvableValue as ResolvableTransitionOutputValue).state.name+"'}) return n").head
+			createEdge(objectVertex, stateVertex, testObjectMeta)
+			
+			var keyVertex = graph.vertices("match (n:`"+stateMeta+"` {field:'"+field.name+"', name:'"+(resolvableValue as ResolvableTransitionOutputValue).key.name+"'}) return n").head
+			createEdge(objectVertex, keyVertex, testObjectKeyMeta)
+			
+		}
+		
+		if (resolvableValue instanceof ResolvableInstanceValue){
+			objectVertex = createVertex(resolvableValue as ResolvableInstanceValue, resolvableInstanceMeta)
+		
+			//Find and connect Key and Instance (test object) verticies
+			var instanceVertex = graph.vertices("match (n: `"+stateInstanceMeta+"` {field:'"+field.name+"', name:'"+(resolvableValue as ResolvableInstanceValue).instance.name+"'}) return n").head
+			createEdge(objectVertex, instanceVertex, testObjectMeta)
+		
+			var keyVertex = graph.vertices("match (n: `"+stateMeta+"` {field:'"+field.name+"', name:'"+(resolvableValue as ResolvableInstanceValue).key.name+"'}) return n").head
+			createEdge(objectVertex, keyVertex, testObjectKeyMeta)
+		}
+		
+		objectVertex.property(VertexProperty.Cardinality.single, "name", testKeyMeta)
+		
+		return objectVertex
+		
+	}
+	
+	def private Vertex generateWhileInstructionGraphStructures(WhileInstruction whileInstruction, String label){
+		
+		var whileVertex = createVertex(whileInstruction, whileInstructionMeta)
+		whileVertex.property(VertexProperty.Cardinality.single, "name", whileInstructionMeta)
+		
+		var testKeyVertex = generateResolvableValueGraphStructures(whileInstruction.testKey, label)
+		createEdge(whileVertex, testKeyVertex, testKeyMeta)
+		
+		var testValueVertex = generateTestValueGraphStructures(whileInstruction.testValue, label)
+		createEdge(whileVertex, testValueVertex, testValueMeta)
+		
+		var toComputeVertex = resolveInstructionExpression(whileInstruction.toCompute, toComputeMeta)
+		createEdge(whileVertex, toComputeVertex, toComputeMeta)
+		
+		return whileVertex
+	}
+	
+	def private Vertex generateSimpleInstanceInstructionGraphStructures(SimpleInstanceInstruction simpleInstanceInstruction, String label){
+		var simpleInstructionVertex = createVertex(simpleInstanceInstruction, simpleInstanceInstructionMeta);
+		simpleInstructionVertex.property(VertexProperty.Cardinality.single, "name", simpleInstanceInstructionMeta)
+		simpleInstructionVertex.property(VertexProperty.Cardinality.single, "toExecute", simpleInstanceInstruction.toExecute.name)
+		
+		return simpleInstructionVertex
+	}
+	
+	def private Vertex generateIfInstanceInstructionGraphStructures(IfInstanceInstruction ifInstanceInstruction, String label){
+		
+		var Vertex ifInstructionVertex = createVertex(ifInstanceInstruction, ifInstanceInstructionMeta)
+		ifInstructionVertex.property(VertexProperty.Cardinality.single, "name", ifInstanceInstructionMeta)
+		
+		
+		//Create Vertex for testKey
+		var resolvableValue = ifInstanceInstruction.testKey
+		var testKeyVertex = generateResolvableValueGraphStructures(resolvableValue, label);		
+		
+		//Create Vertex for testValue
+		var testValue = ifInstanceInstruction.testValue
+		var testValueVertex = generateTestValueGraphStructures(testValue, label);
+		
+		//Connect both to ifStatement vertex
+		createEdge(ifInstructionVertex, testKeyVertex, testKeyMeta);
+		createEdge(ifInstructionVertex, testValueVertex, testValueMeta)
+		
+		//Create branch verticies
+		var ifTrueVertex = resolveInstanceInstructionExpression(ifInstanceInstruction.toComputeIfTrue, toComputeIfTrueMeta)
+		createEdge(ifInstructionVertex, ifTrueVertex, toComputeIfTrueMeta)
+		
+		//If there is an else
+		if (ifInstanceInstruction.toComputeIfFalse !== null){
+			var ifFalseVertex = resolveInstanceInstructionExpression(ifInstanceInstruction.toComputeIfFalse, toComputeIfFalseMeta)
+			createEdge(ifInstructionVertex, ifFalseVertex, toComputeIfFalseMeta)
+		}
+		
+		return ifInstructionVertex
+	}
+	
+	def private Vertex generateWhileInstanceInstructionGraphStructures(WhileInstanceInstruction whileInstanceInstruction, String label){
+		var whileVertex = createVertex(whileInstanceInstruction, whileInstanceInstructionMeta)
+		whileVertex.property(VertexProperty.Cardinality.single, "name", whileInstructionMeta)
+		
+		var testKeyVertex = generateResolvableValueGraphStructures(whileInstanceInstruction.testKey, label)
+		createEdge(whileVertex, testKeyVertex, testKeyMeta)
+		
+		var testValueVertex = generateTestValueGraphStructures(whileInstanceInstruction.testValue, label)
+		createEdge(whileVertex, testValueVertex, testValueMeta)
+		
+		var toComputeVertex = resolveInstanceInstructionExpression(whileInstanceInstruction.toCompute, label)
+		createEdge(whileVertex, toComputeVertex, toComputeMeta)
+		
+		return whileVertex
+	}
+	
+	def private resolveSimpleInstructions(){
+		
+		graph.vertices("match (n:`"+simpleInstructionMeta+"`) return n").forEach[
+			instructionVertex|
+			
+			//Find the transition to execute for this instruction 
+			var transition = graph.vertices("match (n:`"+transitionMeta+"` {field:'"+field.name+"', name:'"+instructionVertex.property("toExecute").value.toString+"'}) return n").head
+		
+			createEdge(instructionVertex, transition, "toExecute")
+			
+		]
+		
+	}
+	
+	def private resolveSimpleInstanceInstructions(){
+		
+		graph.vertices("match (n:`"+simpleInstanceInstructionMeta+"`) return n").forEach[
+			instructionVertex|
+			
+			//Find the transition to execute for this instruction 
+			var transition = graph.vertices("match (n:`"+transitionInstanceMeta+"` {field:'"+field.name+"', name:'"+instructionVertex.property("toExecute").value.toString+"'}) return n").head
+		
+			createEdge(instructionVertex, transition, "toExecute")
+			
+		]
+		
+		
+		
+	}
 }
