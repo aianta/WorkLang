@@ -541,6 +541,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		instanceVertex.property(VertexProperty.Cardinality.single, "name", instance.name)
 		instanceVertex.property(VertexProperty.Cardinality.single, "host", instance.transition.host)
 		instanceVertex.property(VertexProperty.Cardinality.single, "port", Integer.toString(instance.transition.port))
+		instanceVertex.property(VertexProperty.Cardinality.single, "transitionType", "primitive")
 		instanceVertex.property(VertexProperty.Cardinality.single, 
 			"path", 
 			if (instance.transition.path !== null) 
@@ -769,7 +770,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		
 		var transitionVertex = createVertex(transition, label)
 		transitionVertex.property(VertexProperty.Cardinality.single, "name", transition.name)
-		
+		transitionVertex.property(VertexProperty.Cardinality.single, "transitionType", transition.type)
 		
 		var compositionVertex = generateTransitionCompositionGraphStructures(transitionComposition, label);
 		createEdge(transitionVertex, compositionVertex, "composition")
@@ -812,12 +813,12 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		
 		var transitionVertex = createVertex(transition, label)
 		transitionVertex.property(VertexProperty.Cardinality.single, "name", transition.name)
-
+	
 		var hasInput = if (transition.in !== null) true else false
 		
 		transitionVertex.property(VertexProperty.Cardinality.single, "hasInput", hasInput)
 		transitionVertex.property(VertexProperty.Cardinality.single, "hasOutput", true) //All transitions must have an output
-		transitionVertex.property(VertexProperty.Cardinality.single, "type", transition.type)
+		transitionVertex.property(VertexProperty.Cardinality.single, "transitionType", transition.type)
 		
 		//If the transition requires an input
 		if (hasInput){
@@ -912,6 +913,8 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		
 		val bodyVertex = createVertex(compositionBody, transitionInstanceMeta)
 		bodyVertex.property(VertexProperty.Cardinality.single,"name", instance.name)
+		bodyVertex.property(VertexProperty.Cardinality.single, "type", "transition")
+		bodyVertex.property(VertexProperty.Cardinality.single, "transitionType","compound")
 		
 		//Find and connect all starting inputs
 		compositionBody.startingInputs.forEach[input|
@@ -921,6 +924,10 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		
 		var executionResultVertex = generateExecutionResultGraphStructures(compositionBody.expression as ExecutionResult, executionResultMeta)
 		createEdge(bodyVertex, executionResultVertex, "expression")
+		
+		//Find the transition that this is an instance of
+		var transitionVertex = graph.vertices("match (n:`"+transitionMeta+"` {field:'"+field.name+"', name: '"+instance.transitionDeclaration.transition.name+"'}) return n").head
+		createEdge(bodyVertex, transitionVertex, "instanceOf")
 		
 		return bodyVertex
 		
