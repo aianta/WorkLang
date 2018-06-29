@@ -7,6 +7,9 @@ import org.worklang.work.FieldDefinition
 import org.slf4j.LoggerFactory
 import org.worklang.work.InstanceSpace
 import org.worklang.work.Instance
+import org.worklang.work.TransitionInstance
+import org.worklang.work.DefinitionSpace
+import org.worklang.work.TransitionDefinition
 
 class WorklangResourceUtils {
 	
@@ -34,6 +37,42 @@ class WorklangResourceUtils {
 			throw new Exception()
 		}
 		
+	}
+	
+	def static Instance resolveTransitionInstance(String fieldName, String transitionName){
+		resolveInstanceSpace(fieldName).instances.filter[instance|
+			instance.transition !== null
+		].findFirst[instance|
+			instance.name.equals(transitionName)
+		]
+	}
+	
+	def static FieldDefinition resolveField(String fieldName){
+		
+		var XtextResource model = WorkApi.activeResource
+		
+		var targetField = model.allContents.filter[ele|
+			ele.eClass.instanceClass.equals(org.worklang.work.FieldDefinition)
+		].findFirst[fieldEObject|
+			(fieldEObject as FieldDefinition).name.equals(fieldName)
+		] as FieldDefinition
+		
+		return targetField
+	}
+	
+	def static TransitionDefinition resolveTransition(String fieldName, String transitionName){
+		
+		resolveDefinitionSpace(fieldName).transitions.findFirst[transition|
+			transition.name.equals(transitionName)
+		]
+		
+	}
+	
+	def static DefinitionSpace resolveDefinitionSpace(String fieldName){
+		
+		var XtextResource model = WorkApi.activeResource
+		
+		resolveField(fieldName).definitionSpace
 	}
 	
 	def static InstanceSpace resolveInstanceSpace(String fieldName){

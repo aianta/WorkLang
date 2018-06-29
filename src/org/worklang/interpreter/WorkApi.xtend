@@ -56,7 +56,7 @@ class WorkApi extends AbstractVerticle {
 	 
 	var Interpreter interpreter
 	val HttpServerOptions options = new HttpServerOptions
-	var HttpServer server
+	var static HttpServer server
 	val Router router = Router.router(vertx)
 	var Route processWorklangDataRoute
 	
@@ -181,6 +181,10 @@ class WorkApi extends AbstractVerticle {
 			
 		}
 		
+	}
+	
+	def static getServer(){
+		return server;
 	}
 	
 }

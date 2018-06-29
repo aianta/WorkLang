@@ -23,6 +23,11 @@ import io.vertx.core.json.JsonObject
 import org.apache.tinkerpop.gremlin.structure.Direction
 import org.slf4j.LoggerFactory
 import io.vertx.core.json.JsonArray
+import org.worklang.work.WorkFactory
+import org.worklang.work.Instance
+import org.worklang.work.StateDeclaration
+import org.worklang.work.StateInstance
+import org.worklang.WorklangResourceUtils
 
 class MetaModelUtils {
 	
@@ -377,6 +382,12 @@ class MetaModelUtils {
 		
 	}
 	
+	def static Vertex getTransitionVertex(String fieldName, String transitionName){
+		var target = WorkApi.graph.vertices("match (n:`transition` {field:'" + fieldName + "', name:'" + transitionName + "'}) return n").head;
+	
+		return target
+	}
+	
 	def static Vertex getStateInstanceVertex(String fieldName, String stateName){
 		
 		var graph = WorkApi.graph
@@ -436,5 +447,61 @@ class MetaModelUtils {
 		
 		return result
 	}
-	
+
+	def static jsonToStateInstance(JsonObject json, String fieldName, Instance transition, String resultName){
+		
+		val WorkFactory factory = WorkFactory.eINSTANCE;
+		
+		logger.info("Building new instance!");
+		var i = factory.createInstance();
+						
+		val si = factory.createStateInstance();
+		val sd = factory.createStateDeclaration();
+		
+		//Build State Declaration
+		logger.info("Building State Declaration");
+		logger.info("Finding output state: ");
+		logger.info("match (this:`transition instance` {field:'{}', name:'{}' })-[:instanceOf]->(parent:transition)-[:produces]->(:transition)-[:hasParameter]->(outputElement:state) return outputElement",fieldName, transition.getName());
+						
+		var Vertex outputStateVertex = WorkApi.graph.vertices("match (this:`transition instance` {field:'"+fieldName+"', name:'"+transition.getName()+"' })-[:instanceOf]->(parent:transition)-[:produces]->(:transition)-[:hasParameter]->(outputElement:state) return outputElement").head;
+		logger.info("outputStateVertex => {}", outputStateVertex);
+		
+		sd.state = WorklangResourceUtils.resolveStateDefinition(
+			fieldName,
+			outputStateVertex.property("name").value.toString
+		)
+		
+		logger.info("Built State Declaration");
+		
+		//Build State Instance
+		logger.info("Building State Instance");
+		
+		json.forEach[entry|
+			//Handle Set Statements
+			if (entry.value instanceof String){
+				var set = factory.createSetStatement
+				
+				//Use json key as name of state being set
+				set.variable = 
+					WorklangResourceUtils.resolveStateDefinition(
+						fieldName,
+						entry.key
+					)
+				
+				var to = factory.createToDefinition
+				to.value = entry.value.toString
+				
+				set.toDef = to
+				si.members.add(set)
+			}
+		]
+		
+		//Assemble State Declaration and State Instance into Instance
+		logger.info("Assembling instance");
+		i.stateDeclaration = sd
+		i.state = si;
+		i.name = resultName
+		
+		return i
+	}	
 }
