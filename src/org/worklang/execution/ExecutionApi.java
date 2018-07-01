@@ -132,8 +132,21 @@ public class ExecutionApi extends AbstractVerticle{
 	}
 	
 	//Utility method for adding a route for a primitive transition definition
-	public void addProxyRoute(String route) {
+	public void addCompoundTransitionProcessor(String fieldName, Instance transition) {
 		
+		String routePath = "/" + fieldName.toLowerCase() + "/" +
+		transition.getTransitionDeclaration().getTransition().getName().toLowerCase() + "/" +
+		transition.getName().replaceAll("\\s", "").toLowerCase();
+		
+		Vertex transitionVertex = graph.vertices("match (n:`transition instance` {field:'"+fieldName+"', name:'"+transition.getName()+"'}) return n").next();
+		
+		CompoundTransitionProcessor processor = new CompoundTransitionProcessor(vertx, client, transitionVertex, fieldName);
+		
+		logger.info("Registering compound instance transition at {}", routePath);
+		
+		Route route = router.route(routePath).handler(processor::process);
+		
+		transitions.add(routePath);
 	}
 	
 	public void addProxyRoute(String fieldName, Instance transition) {

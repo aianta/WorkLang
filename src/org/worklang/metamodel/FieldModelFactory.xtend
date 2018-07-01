@@ -56,6 +56,7 @@ import org.worklang.work.LiteralValue
 import org.worklang.work.CompoundTransitionInstance
 import org.worklang.work.InstructionExpression
 import org.worklang.work.InstanceInstructionExpression
+import java.util.Iterator
 
 /* Create static meta-model for a field.
  * - Definition Space
@@ -1006,12 +1007,20 @@ class FieldModelFactory extends MetaModelVertexFactory {
 	
 	def private Vertex generateSimpleInstructionGraphStructures(SimpleInstruction simpleInstruction, String label){
 		
-		var simpleInstructionVertex = createVertex(simpleInstruction, simpleInstructionMeta);
+		val simpleInstructionVertex = createVertex(simpleInstruction, simpleInstructionMeta);
 		simpleInstructionVertex.property(VertexProperty.Cardinality.single, "name", simpleInstructionMeta)
-		simpleInstructionVertex.property(VertexProperty.Cardinality.single, "toExecute", simpleInstruction.toExecute.name)
 		
-		//Find the transition to execute for this instruction 
-		var transition = graph.vertices("match (n:`transition` {field:'"+field.name+"', name:'"+simpleInstruction.toExecute+"'}) return n").head
+		var transitions = simpleInstruction.toExecute
+		
+		var iter =  transitions.iterator
+		var counter = 0;
+		
+		while (iter.hasNext){
+			var curr = iter.next
+			simpleInstructionVertex.property(VertexProperty.Cardinality.single, "toExecute"+counter, curr.name)
+			counter++;
+		}
+		
 		
 		//TODO come back to this
 		//createEdge(simpleInstructionVertex, transition, "toExecute")
@@ -1118,9 +1127,21 @@ class FieldModelFactory extends MetaModelVertexFactory {
 	}
 	
 	def private Vertex generateSimpleInstanceInstructionGraphStructures(SimpleInstanceInstruction simpleInstanceInstruction, String label){
-		var simpleInstructionVertex = createVertex(simpleInstanceInstruction, simpleInstanceInstructionMeta);
+		val simpleInstructionVertex = createVertex(simpleInstanceInstruction, simpleInstanceInstructionMeta);
 		simpleInstructionVertex.property(VertexProperty.Cardinality.single, "name", simpleInstanceInstructionMeta)
-		simpleInstructionVertex.property(VertexProperty.Cardinality.single, "toExecute", simpleInstanceInstruction.toExecute.name)
+		
+		var transitions = simpleInstanceInstruction.toExecute
+		
+		var iter =  transitions.iterator
+		var counter = 0;
+		
+		while (iter.hasNext){
+			var curr = iter.next
+			simpleInstructionVertex.property(VertexProperty.Cardinality.single, "toExecute"+counter, curr.name)
+			counter++;
+		}
+		
+		
 		
 		return simpleInstructionVertex
 	}
@@ -1177,10 +1198,18 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		graph.vertices("match (n:`"+simpleInstructionMeta+"`) return n").forEach[
 			instructionVertex|
 			
-			//Find the transition to execute for this instruction 
-			var transition = graph.vertices("match (n:`"+transitionMeta+"` {field:'"+field.name+"', name:'"+instructionVertex.property("toExecute").value.toString+"'}) return n").head
-		
-			createEdge(instructionVertex, transition, "toExecute")
+			try{
+				var counter = 0
+			while(instructionVertex.property("toExecute"+counter).value !== null){
+				
+				var transition = graph.vertices("match (n:`"+transitionMeta+"` {field:'"+field.name+"', name:'"+instructionVertex.property("toExecute"+counter).value.toString+"'}) return n").head
+				createEdge(instructionVertex, transition, "toExecute")
+				counter++
+			}
+			}catch(Exception e){
+				logger.info("no property exists with that name")
+			}
+			
 			
 		]
 		
@@ -1191,11 +1220,27 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		graph.vertices("match (n:`"+simpleInstanceInstructionMeta+"`) return n").forEach[
 			instructionVertex|
 			
-			//Find the transition to execute for this instruction 
-			var transition = graph.vertices("match (n:`"+transitionInstanceMeta+"` {field:'"+field.name+"', name:'"+instructionVertex.property("toExecute").value.toString+"'}) return n").head
-		
-			createEdge(instructionVertex, transition, "toExecute")
 			
+			
+			try{
+				var counter = 0;
+				
+				while(instructionVertex.property("toExecute"+counter).value !== null){
+				//Find the transition
+				logger.info("looking for {}", "match (n:`"+transitionInstanceMeta+"` {field:'"+field.name+"', name:'"+instructionVertex.property("toExecute"+counter).value.toString+"'}) return n")
+				var transition = graph.vertices("match (n:`"+transitionInstanceMeta+"` {field:'"+field.name+"', name:'"+instructionVertex.property("toExecute"+counter).value.toString+"'}) return n").head
+				
+				createEdge(instructionVertex, transition, "toExecute")
+				counter++
+				
+				}
+			}catch(Exception e){
+				logger.info("no property exists with that name")
+			}
+			
+			
+			
+
 		]
 		
 		

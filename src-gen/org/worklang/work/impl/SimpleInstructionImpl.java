@@ -15,12 +15,13 @@
  */
 package org.worklang.work.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.worklang.work.SimpleInstruction;
 import org.worklang.work.TransitionDefinition;
@@ -42,14 +43,14 @@ import org.worklang.work.WorkPackage;
 public class SimpleInstructionImpl extends InstructionExpressionImpl implements SimpleInstruction
 {
   /**
-   * The cached value of the '{@link #getToExecute() <em>To Execute</em>}' reference.
+   * The cached value of the '{@link #getToExecute() <em>To Execute</em>}' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getToExecute()
    * @generated
    * @ordered
    */
-  protected TransitionDefinition toExecute;
+  protected EList<TransitionDefinition> toExecute;
 
   /**
    * <!-- begin-user-doc -->
@@ -77,42 +78,13 @@ public class SimpleInstructionImpl extends InstructionExpressionImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionDefinition getToExecute()
+  public EList<TransitionDefinition> getToExecute()
   {
-    if (toExecute != null && toExecute.eIsProxy())
+    if (toExecute == null)
     {
-      InternalEObject oldToExecute = (InternalEObject)toExecute;
-      toExecute = (TransitionDefinition)eResolveProxy(oldToExecute);
-      if (toExecute != oldToExecute)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkPackage.SIMPLE_INSTRUCTION__TO_EXECUTE, oldToExecute, toExecute));
-      }
+      toExecute = new EObjectResolvingEList<TransitionDefinition>(TransitionDefinition.class, this, WorkPackage.SIMPLE_INSTRUCTION__TO_EXECUTE);
     }
     return toExecute;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TransitionDefinition basicGetToExecute()
-  {
-    return toExecute;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setToExecute(TransitionDefinition newToExecute)
-  {
-    TransitionDefinition oldToExecute = toExecute;
-    toExecute = newToExecute;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.SIMPLE_INSTRUCTION__TO_EXECUTE, oldToExecute, toExecute));
   }
 
   /**
@@ -126,8 +98,7 @@ public class SimpleInstructionImpl extends InstructionExpressionImpl implements 
     switch (featureID)
     {
       case WorkPackage.SIMPLE_INSTRUCTION__TO_EXECUTE:
-        if (resolve) return getToExecute();
-        return basicGetToExecute();
+        return getToExecute();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -137,13 +108,15 @@ public class SimpleInstructionImpl extends InstructionExpressionImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
       case WorkPackage.SIMPLE_INSTRUCTION__TO_EXECUTE:
-        setToExecute((TransitionDefinition)newValue);
+        getToExecute().clear();
+        getToExecute().addAll((Collection<? extends TransitionDefinition>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -160,7 +133,7 @@ public class SimpleInstructionImpl extends InstructionExpressionImpl implements 
     switch (featureID)
     {
       case WorkPackage.SIMPLE_INSTRUCTION__TO_EXECUTE:
-        setToExecute((TransitionDefinition)null);
+        getToExecute().clear();
         return;
     }
     super.eUnset(featureID);
@@ -177,7 +150,7 @@ public class SimpleInstructionImpl extends InstructionExpressionImpl implements 
     switch (featureID)
     {
       case WorkPackage.SIMPLE_INSTRUCTION__TO_EXECUTE:
-        return toExecute != null;
+        return toExecute != null && !toExecute.isEmpty();
     }
     return super.eIsSet(featureID);
   }

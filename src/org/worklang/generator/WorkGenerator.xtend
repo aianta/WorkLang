@@ -42,6 +42,7 @@ import java.io.OutputStreamWriter
 import java.lang.ProcessBuilder.Redirect
 import java.util.ArrayList
 import org.worklang.interpreter.WorkApi
+import org.worklang.execution.ExecutionApiWorkFileProcessor
 
 /**
  * Generates code from your model files on save.
@@ -71,19 +72,9 @@ class WorkGenerator extends AbstractGenerator {
 	
 	def static generateAPIs(XtextResource xResource){
 		//Create Execution API for transition instances
-		xResource.allContents.filter[ele|
-			ele.eClass.instanceClass.equals(org.worklang.work.FieldDefinition)
-		].forEach[fieldEObject|
-			val field = fieldEObject as FieldDefinition
-			
-			field.instanceSpace.instances.filter[instance|
-				instance.transitionDeclaration !== null //Filter out state instances
-			].forEach[transitionInstance|
-				
-				WorkApi.executionApi.addTransition(field.name, transitionInstance)
-						
-			]
-		]
+		var executionApiSetup = new ExecutionApiWorkFileProcessor(WorkApi.executionApi);
+		
+		executionApiSetup.processWorkFile(xResource);
 		
 		//Create Read API
 		xResource.allContents.filter[ele|

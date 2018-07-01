@@ -2526,7 +2526,7 @@ ruleSimpleInstruction returns [EObject current=null]
 					newLeafNode(otherlv_1, grammarAccess.getSimpleInstructionAccess().getToExecuteTransitionDefinitionCrossReference_1_0());
 				}
 			)
-		)
+		)+
 	)
 ;
 
@@ -2790,7 +2790,7 @@ ruleSimpleInstanceInstruction returns [EObject current=null]
 					newLeafNode(otherlv_1, grammarAccess.getSimpleInstanceInstructionAccess().getToExecuteInstanceCrossReference_1_0());
 				}
 			)
-		)
+		)+
 	)
 ;
 

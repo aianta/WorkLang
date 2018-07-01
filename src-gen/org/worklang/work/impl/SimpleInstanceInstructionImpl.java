@@ -15,12 +15,13 @@
  */
 package org.worklang.work.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.worklang.work.Instance;
 import org.worklang.work.SimpleInstanceInstruction;
@@ -42,14 +43,14 @@ import org.worklang.work.WorkPackage;
 public class SimpleInstanceInstructionImpl extends InstanceInstructionExpressionImpl implements SimpleInstanceInstruction
 {
   /**
-   * The cached value of the '{@link #getToExecute() <em>To Execute</em>}' reference.
+   * The cached value of the '{@link #getToExecute() <em>To Execute</em>}' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getToExecute()
    * @generated
    * @ordered
    */
-  protected Instance toExecute;
+  protected EList<Instance> toExecute;
 
   /**
    * <!-- begin-user-doc -->
@@ -77,42 +78,13 @@ public class SimpleInstanceInstructionImpl extends InstanceInstructionExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public Instance getToExecute()
+  public EList<Instance> getToExecute()
   {
-    if (toExecute != null && toExecute.eIsProxy())
+    if (toExecute == null)
     {
-      InternalEObject oldToExecute = (InternalEObject)toExecute;
-      toExecute = (Instance)eResolveProxy(oldToExecute);
-      if (toExecute != oldToExecute)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkPackage.SIMPLE_INSTANCE_INSTRUCTION__TO_EXECUTE, oldToExecute, toExecute));
-      }
+      toExecute = new EObjectResolvingEList<Instance>(Instance.class, this, WorkPackage.SIMPLE_INSTANCE_INSTRUCTION__TO_EXECUTE);
     }
     return toExecute;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Instance basicGetToExecute()
-  {
-    return toExecute;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setToExecute(Instance newToExecute)
-  {
-    Instance oldToExecute = toExecute;
-    toExecute = newToExecute;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.SIMPLE_INSTANCE_INSTRUCTION__TO_EXECUTE, oldToExecute, toExecute));
   }
 
   /**
@@ -126,8 +98,7 @@ public class SimpleInstanceInstructionImpl extends InstanceInstructionExpression
     switch (featureID)
     {
       case WorkPackage.SIMPLE_INSTANCE_INSTRUCTION__TO_EXECUTE:
-        if (resolve) return getToExecute();
-        return basicGetToExecute();
+        return getToExecute();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -137,13 +108,15 @@ public class SimpleInstanceInstructionImpl extends InstanceInstructionExpression
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
       case WorkPackage.SIMPLE_INSTANCE_INSTRUCTION__TO_EXECUTE:
-        setToExecute((Instance)newValue);
+        getToExecute().clear();
+        getToExecute().addAll((Collection<? extends Instance>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -160,7 +133,7 @@ public class SimpleInstanceInstructionImpl extends InstanceInstructionExpression
     switch (featureID)
     {
       case WorkPackage.SIMPLE_INSTANCE_INSTRUCTION__TO_EXECUTE:
-        setToExecute((Instance)null);
+        getToExecute().clear();
         return;
     }
     super.eUnset(featureID);
@@ -177,7 +150,7 @@ public class SimpleInstanceInstructionImpl extends InstanceInstructionExpression
     switch (featureID)
     {
       case WorkPackage.SIMPLE_INSTANCE_INSTRUCTION__TO_EXECUTE:
-        return toExecute != null;
+        return toExecute != null && !toExecute.isEmpty();
     }
     return super.eIsSet(featureID);
   }

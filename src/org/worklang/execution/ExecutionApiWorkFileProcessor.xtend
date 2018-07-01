@@ -68,7 +68,7 @@ class ExecutionApiWorkFileProcessor {
 					instanceComponent instanceof CompoundTransitionInstance
 				]
 			].forEach[compoundTransition|
-				processCompoundTransitionInstance(compoundTransition)
+				api.addCompoundTransitionProcessor(field.name, compoundTransition);
 			]
 			
 			//Process primitive transitions
@@ -94,6 +94,8 @@ class ExecutionApiWorkFileProcessor {
 
 	
 	def private processCompoundTransitionInstance(Instance compoundTransition) {
+		
+		
 		
 	}
 	

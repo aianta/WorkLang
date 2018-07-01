@@ -2217,7 +2217,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     initEReference(getWhileInstruction_ToCompute(), this.getInstructionExpression(), null, "toCompute", null, 0, 1, WhileInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleInstructionEClass, SimpleInstruction.class, "SimpleInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSimpleInstruction_ToExecute(), this.getTransitionDefinition(), null, "toExecute", null, 0, 1, SimpleInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSimpleInstruction_ToExecute(), this.getTransitionDefinition(), null, "toExecute", null, 0, -1, SimpleInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(compoundTransitionInstanceEClass, CompoundTransitionInstance.class, "CompoundTransitionInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCompoundTransitionInstance_Body(), this.getCompoundTransitionInstanceBody(), null, "body", null, 0, 1, CompoundTransitionInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2229,7 +2229,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     initEClass(instanceInstructionExpressionEClass, InstanceInstructionExpression.class, "InstanceInstructionExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(simpleInstanceInstructionEClass, SimpleInstanceInstruction.class, "SimpleInstanceInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSimpleInstanceInstruction_ToExecute(), this.getInstance(), null, "toExecute", null, 0, 1, SimpleInstanceInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSimpleInstanceInstruction_ToExecute(), this.getInstance(), null, "toExecute", null, 0, -1, SimpleInstanceInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ifInstanceInstructionEClass, IfInstanceInstruction.class, "IfInstanceInstruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getIfInstanceInstruction_TestKey(), this.getResolvableValue(), null, "testKey", null, 0, 1, IfInstanceInstruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
