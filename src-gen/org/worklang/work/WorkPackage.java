@@ -1473,7 +1473,7 @@ public interface WorkPackage extends EPackage
   int SIMPLE_INSTRUCTION = 34;
 
   /**
-   * The feature id for the '<em><b>To Execute</b></em>' reference.
+   * The feature id for the '<em><b>To Execute</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -1585,7 +1585,7 @@ public interface WorkPackage extends EPackage
   int SIMPLE_INSTANCE_INSTRUCTION = 38;
 
   /**
-   * The feature id for the '<em><b>To Execute</b></em>' reference.
+   * The feature id for the '<em><b>To Execute</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -3002,10 +3002,10 @@ public interface WorkPackage extends EPackage
   EClass getSimpleInstruction();
 
   /**
-   * Returns the meta object for the reference '{@link org.worklang.work.SimpleInstruction#getToExecute <em>To Execute</em>}'.
+   * Returns the meta object for the reference list '{@link org.worklang.work.SimpleInstruction#getToExecute <em>To Execute</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>To Execute</em>'.
+   * @return the meta object for the reference list '<em>To Execute</em>'.
    * @see org.worklang.work.SimpleInstruction#getToExecute()
    * @see #getSimpleInstruction()
    * @generated
@@ -3086,10 +3086,10 @@ public interface WorkPackage extends EPackage
   EClass getSimpleInstanceInstruction();
 
   /**
-   * Returns the meta object for the reference '{@link org.worklang.work.SimpleInstanceInstruction#getToExecute <em>To Execute</em>}'.
+   * Returns the meta object for the reference list '{@link org.worklang.work.SimpleInstanceInstruction#getToExecute <em>To Execute</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>To Execute</em>'.
+   * @return the meta object for the reference list '<em>To Execute</em>'.
    * @see org.worklang.work.SimpleInstanceInstruction#getToExecute()
    * @see #getSimpleInstanceInstruction()
    * @generated
@@ -4256,7 +4256,7 @@ public interface WorkPackage extends EPackage
     EClass SIMPLE_INSTRUCTION = eINSTANCE.getSimpleInstruction();
 
     /**
-     * The meta object literal for the '<em><b>To Execute</b></em>' reference feature.
+     * The meta object literal for the '<em><b>To Execute</b></em>' reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -4328,7 +4328,7 @@ public interface WorkPackage extends EPackage
     EClass SIMPLE_INSTANCE_INSTRUCTION = eINSTANCE.getSimpleInstanceInstruction();
 
     /**
-     * The meta object literal for the '<em><b>To Execute</b></em>' reference feature.
+     * The meta object literal for the '<em><b>To Execute</b></em>' reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated

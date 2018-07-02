@@ -6260,7 +6260,7 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSimpleInstruction"
-    // InternalWork.g:2505:1: ruleSimpleInstruction returns [EObject current=null] : (otherlv_0= 'THEN' ( (otherlv_1= RULE_ID ) ) ) ;
+    // InternalWork.g:2505:1: ruleSimpleInstruction returns [EObject current=null] : (otherlv_0= 'THEN' ( (otherlv_1= RULE_ID ) )+ ) ;
     public final EObject ruleSimpleInstruction() throws RecognitionException {
         EObject current = null;
 
@@ -6271,36 +6271,59 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalWork.g:2511:2: ( (otherlv_0= 'THEN' ( (otherlv_1= RULE_ID ) ) ) )
-            // InternalWork.g:2512:2: (otherlv_0= 'THEN' ( (otherlv_1= RULE_ID ) ) )
+            // InternalWork.g:2511:2: ( (otherlv_0= 'THEN' ( (otherlv_1= RULE_ID ) )+ ) )
+            // InternalWork.g:2512:2: (otherlv_0= 'THEN' ( (otherlv_1= RULE_ID ) )+ )
             {
-            // InternalWork.g:2512:2: (otherlv_0= 'THEN' ( (otherlv_1= RULE_ID ) ) )
-            // InternalWork.g:2513:3: otherlv_0= 'THEN' ( (otherlv_1= RULE_ID ) )
+            // InternalWork.g:2512:2: (otherlv_0= 'THEN' ( (otherlv_1= RULE_ID ) )+ )
+            // InternalWork.g:2513:3: otherlv_0= 'THEN' ( (otherlv_1= RULE_ID ) )+
             {
             otherlv_0=(Token)match(input,43,FOLLOW_4); 
 
             			newLeafNode(otherlv_0, grammarAccess.getSimpleInstructionAccess().getTHENKeyword_0());
             		
-            // InternalWork.g:2517:3: ( (otherlv_1= RULE_ID ) )
-            // InternalWork.g:2518:4: (otherlv_1= RULE_ID )
-            {
-            // InternalWork.g:2518:4: (otherlv_1= RULE_ID )
-            // InternalWork.g:2519:5: otherlv_1= RULE_ID
-            {
+            // InternalWork.g:2517:3: ( (otherlv_1= RULE_ID ) )+
+            int cnt32=0;
+            loop32:
+            do {
+                int alt32=2;
+                int LA32_0 = input.LA(1);
 
-            					if (current==null) {
-            						current = createModelElement(grammarAccess.getSimpleInstructionRule());
-            					}
-            				
-            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_2); 
-
-            					newLeafNode(otherlv_1, grammarAccess.getSimpleInstructionAccess().getToExecuteTransitionDefinitionCrossReference_1_0());
-            				
-
-            }
+                if ( (LA32_0==RULE_ID) ) {
+                    alt32=1;
+                }
 
 
-            }
+                switch (alt32) {
+            	case 1 :
+            	    // InternalWork.g:2518:4: (otherlv_1= RULE_ID )
+            	    {
+            	    // InternalWork.g:2518:4: (otherlv_1= RULE_ID )
+            	    // InternalWork.g:2519:5: otherlv_1= RULE_ID
+            	    {
+
+            	    					if (current==null) {
+            	    						current = createModelElement(grammarAccess.getSimpleInstructionRule());
+            	    					}
+            	    				
+            	    otherlv_1=(Token)match(input,RULE_ID,FOLLOW_22); 
+
+            	    					newLeafNode(otherlv_1, grammarAccess.getSimpleInstructionAccess().getToExecuteTransitionDefinitionCrossReference_1_0());
+            	    				
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt32 >= 1 ) break loop32;
+                        EarlyExitException eee =
+                            new EarlyExitException(32, input);
+                        throw eee;
+                }
+                cnt32++;
+            } while (true);
 
 
             }
@@ -6507,13 +6530,13 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
             			newLeafNode(otherlv_0, grammarAccess.getCompoundTransitionInstanceBodyAccess().getSTARTKeyword_0());
             		
             // InternalWork.g:2599:3: (otherlv_1= 'WITH' otherlv_2= '(' ( (otherlv_3= RULE_ID ) )+ otherlv_4= ')' )?
-            int alt33=2;
-            int LA33_0 = input.LA(1);
+            int alt34=2;
+            int LA34_0 = input.LA(1);
 
-            if ( (LA33_0==37) ) {
-                alt33=1;
+            if ( (LA34_0==37) ) {
+                alt34=1;
             }
-            switch (alt33) {
+            switch (alt34) {
                 case 1 :
                     // InternalWork.g:2600:4: otherlv_1= 'WITH' otherlv_2= '(' ( (otherlv_3= RULE_ID ) )+ otherlv_4= ')'
                     {
@@ -6526,18 +6549,18 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
                     				newLeafNode(otherlv_2, grammarAccess.getCompoundTransitionInstanceBodyAccess().getLeftParenthesisKeyword_1_1());
                     			
                     // InternalWork.g:2608:4: ( (otherlv_3= RULE_ID ) )+
-                    int cnt32=0;
-                    loop32:
+                    int cnt33=0;
+                    loop33:
                     do {
-                        int alt32=2;
-                        int LA32_0 = input.LA(1);
+                        int alt33=2;
+                        int LA33_0 = input.LA(1);
 
-                        if ( (LA32_0==RULE_ID) ) {
-                            alt32=1;
+                        if ( (LA33_0==RULE_ID) ) {
+                            alt33=1;
                         }
 
 
-                        switch (alt32) {
+                        switch (alt33) {
                     	case 1 :
                     	    // InternalWork.g:2609:5: (otherlv_3= RULE_ID )
                     	    {
@@ -6561,12 +6584,12 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    if ( cnt32 >= 1 ) break loop32;
+                    	    if ( cnt33 >= 1 ) break loop33;
                                 EarlyExitException eee =
-                                    new EarlyExitException(32, input);
+                                    new EarlyExitException(33, input);
                                 throw eee;
                         }
-                        cnt32++;
+                        cnt33++;
                     } while (true);
 
                     otherlv_4=(Token)match(input,34,FOLLOW_5); 
@@ -6709,17 +6732,17 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
             			afterParserOrEnumRuleCall();
             		
             // InternalWork.g:2680:3: ( () ( (lv_computeNext_2_0= ruleTerminalInstanceInstruction ) ) )*
-            loop34:
+            loop35:
             do {
-                int alt34=2;
-                int LA34_0 = input.LA(1);
+                int alt35=2;
+                int LA35_0 = input.LA(1);
 
-                if ( ((LA34_0>=38 && LA34_0<=39)||(LA34_0>=42 && LA34_0<=43)) ) {
-                    alt34=1;
+                if ( ((LA35_0>=38 && LA35_0<=39)||(LA35_0>=42 && LA35_0<=43)) ) {
+                    alt35=1;
                 }
 
 
-                switch (alt34) {
+                switch (alt35) {
             	case 1 :
             	    // InternalWork.g:2681:4: () ( (lv_computeNext_2_0= ruleTerminalInstanceInstruction ) )
             	    {
@@ -6770,7 +6793,7 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop34;
+            	    break loop35;
                 }
             } while (true);
 
@@ -6853,36 +6876,36 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
             // InternalWork.g:2726:2: (this_IfInstanceInstruction_0= ruleIfInstanceInstruction | this_WhileInstanceInstruction_1= ruleWhileInstanceInstruction | this_SimpleInstanceInstruction_2= ruleSimpleInstanceInstruction | otherlv_3= ';' )
             {
             // InternalWork.g:2726:2: (this_IfInstanceInstruction_0= ruleIfInstanceInstruction | this_WhileInstanceInstruction_1= ruleWhileInstanceInstruction | this_SimpleInstanceInstruction_2= ruleSimpleInstanceInstruction | otherlv_3= ';' )
-            int alt35=4;
+            int alt36=4;
             switch ( input.LA(1) ) {
             case 39:
                 {
-                alt35=1;
+                alt36=1;
                 }
                 break;
             case 42:
                 {
-                alt35=2;
+                alt36=2;
                 }
                 break;
             case 43:
                 {
-                alt35=3;
+                alt36=3;
                 }
                 break;
             case 38:
                 {
-                alt35=4;
+                alt36=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 35, 0, input);
+                    new NoViableAltException("", 36, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt35) {
+            switch (alt36) {
                 case 1 :
                     // InternalWork.g:2727:3: this_IfInstanceInstruction_0= ruleIfInstanceInstruction
                     {
@@ -7006,7 +7029,7 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSimpleInstanceInstruction"
-    // InternalWork.g:2769:1: ruleSimpleInstanceInstruction returns [EObject current=null] : (otherlv_0= 'THEN' ( (otherlv_1= RULE_STRING ) ) ) ;
+    // InternalWork.g:2769:1: ruleSimpleInstanceInstruction returns [EObject current=null] : (otherlv_0= 'THEN' ( (otherlv_1= RULE_STRING ) )+ ) ;
     public final EObject ruleSimpleInstanceInstruction() throws RecognitionException {
         EObject current = null;
 
@@ -7017,36 +7040,59 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalWork.g:2775:2: ( (otherlv_0= 'THEN' ( (otherlv_1= RULE_STRING ) ) ) )
-            // InternalWork.g:2776:2: (otherlv_0= 'THEN' ( (otherlv_1= RULE_STRING ) ) )
+            // InternalWork.g:2775:2: ( (otherlv_0= 'THEN' ( (otherlv_1= RULE_STRING ) )+ ) )
+            // InternalWork.g:2776:2: (otherlv_0= 'THEN' ( (otherlv_1= RULE_STRING ) )+ )
             {
-            // InternalWork.g:2776:2: (otherlv_0= 'THEN' ( (otherlv_1= RULE_STRING ) ) )
-            // InternalWork.g:2777:3: otherlv_0= 'THEN' ( (otherlv_1= RULE_STRING ) )
+            // InternalWork.g:2776:2: (otherlv_0= 'THEN' ( (otherlv_1= RULE_STRING ) )+ )
+            // InternalWork.g:2777:3: otherlv_0= 'THEN' ( (otherlv_1= RULE_STRING ) )+
             {
             otherlv_0=(Token)match(input,43,FOLLOW_24); 
 
             			newLeafNode(otherlv_0, grammarAccess.getSimpleInstanceInstructionAccess().getTHENKeyword_0());
             		
-            // InternalWork.g:2781:3: ( (otherlv_1= RULE_STRING ) )
-            // InternalWork.g:2782:4: (otherlv_1= RULE_STRING )
-            {
-            // InternalWork.g:2782:4: (otherlv_1= RULE_STRING )
-            // InternalWork.g:2783:5: otherlv_1= RULE_STRING
-            {
+            // InternalWork.g:2781:3: ( (otherlv_1= RULE_STRING ) )+
+            int cnt37=0;
+            loop37:
+            do {
+                int alt37=2;
+                int LA37_0 = input.LA(1);
 
-            					if (current==null) {
-            						current = createModelElement(grammarAccess.getSimpleInstanceInstructionRule());
-            					}
-            				
-            otherlv_1=(Token)match(input,RULE_STRING,FOLLOW_2); 
-
-            					newLeafNode(otherlv_1, grammarAccess.getSimpleInstanceInstructionAccess().getToExecuteInstanceCrossReference_1_0());
-            				
-
-            }
+                if ( (LA37_0==RULE_STRING) ) {
+                    alt37=1;
+                }
 
 
-            }
+                switch (alt37) {
+            	case 1 :
+            	    // InternalWork.g:2782:4: (otherlv_1= RULE_STRING )
+            	    {
+            	    // InternalWork.g:2782:4: (otherlv_1= RULE_STRING )
+            	    // InternalWork.g:2783:5: otherlv_1= RULE_STRING
+            	    {
+
+            	    					if (current==null) {
+            	    						current = createModelElement(grammarAccess.getSimpleInstanceInstructionRule());
+            	    					}
+            	    				
+            	    otherlv_1=(Token)match(input,RULE_STRING,FOLLOW_27); 
+
+            	    					newLeafNode(otherlv_1, grammarAccess.getSimpleInstanceInstructionAccess().getToExecuteInstanceCrossReference_1_0());
+            	    				
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt37 >= 1 ) break loop37;
+                        EarlyExitException eee =
+                            new EarlyExitException(37, input);
+                        throw eee;
+                }
+                cnt37++;
+            } while (true);
 
 
             }
@@ -7257,13 +7303,13 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
             			newLeafNode(otherlv_8, grammarAccess.getIfInstanceInstructionAccess().getRightCurlyBracketKeyword_8());
             		
             // InternalWork.g:2894:3: (otherlv_9= 'ELSE' otherlv_10= '{' ( (lv_toComputeIfFalse_11_0= ruleInstanceInstructionExpression ) ) otherlv_12= '}' )?
-            int alt36=2;
-            int LA36_0 = input.LA(1);
+            int alt38=2;
+            int LA38_0 = input.LA(1);
 
-            if ( (LA36_0==41) ) {
-                alt36=1;
+            if ( (LA38_0==41) ) {
+                alt38=1;
             }
-            switch (alt36) {
+            switch (alt38) {
                 case 1 :
                     // InternalWork.g:2895:4: otherlv_9= 'ELSE' otherlv_10= '{' ( (lv_toComputeIfFalse_11_0= ruleInstanceInstructionExpression ) ) otherlv_12= '}'
                     {
@@ -7595,22 +7641,22 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
             // InternalWork.g:3045:2: (this_LiteralValue_0= ruleLiteralValue | this_ResolvableValue_1= ruleResolvableValue )
             {
             // InternalWork.g:3045:2: (this_LiteralValue_0= ruleLiteralValue | this_ResolvableValue_1= ruleResolvableValue )
-            int alt37=2;
-            int LA37_0 = input.LA(1);
+            int alt39=2;
+            int LA39_0 = input.LA(1);
 
-            if ( (LA37_0==RULE_STRING) ) {
-                alt37=1;
+            if ( (LA39_0==RULE_STRING) ) {
+                alt39=1;
             }
-            else if ( (LA37_0==RULE_ID||LA37_0==45) ) {
-                alt37=2;
+            else if ( (LA39_0==RULE_ID||LA39_0==45) ) {
+                alt39=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 37, 0, input);
+                    new NoViableAltException("", 39, 0, input);
 
                 throw nvae;
             }
-            switch (alt37) {
+            switch (alt39) {
                 case 1 :
                     // InternalWork.g:3046:3: this_LiteralValue_0= ruleLiteralValue
                     {
@@ -7818,22 +7864,22 @@ public class InternalWorkParser extends AbstractInternalAntlrParser {
             // InternalWork.g:3116:2: (this_ResolvableInstanceValue_0= ruleResolvableInstanceValue | this_ResolvableTransitionOutputValue_1= ruleResolvableTransitionOutputValue )
             {
             // InternalWork.g:3116:2: (this_ResolvableInstanceValue_0= ruleResolvableInstanceValue | this_ResolvableTransitionOutputValue_1= ruleResolvableTransitionOutputValue )
-            int alt38=2;
-            int LA38_0 = input.LA(1);
+            int alt40=2;
+            int LA40_0 = input.LA(1);
 
-            if ( (LA38_0==RULE_ID) ) {
-                alt38=1;
+            if ( (LA40_0==RULE_ID) ) {
+                alt40=1;
             }
-            else if ( (LA38_0==45) ) {
-                alt38=2;
+            else if ( (LA40_0==45) ) {
+                alt40=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 38, 0, input);
+                    new NoViableAltException("", 40, 0, input);
 
                 throw nvae;
             }
-            switch (alt38) {
+            switch (alt40) {
                 case 1 :
                     // InternalWork.g:3117:3: this_ResolvableInstanceValue_0= ruleResolvableInstanceValue
                     {

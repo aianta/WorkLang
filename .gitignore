@@ -10,3 +10,4 @@ model
 .antlr*
 .externalToolBuilders
 build
+data.work

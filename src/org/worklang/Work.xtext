@@ -243,7 +243,7 @@ WhileInstruction:
 ;
 
 SimpleInstruction:
-	'THEN' toExecute = [TransitionDefinition]
+	'THEN' toExecute += [TransitionDefinition]+
 ;
 
 CompoundTransitionInstance:
@@ -273,7 +273,7 @@ TerminalInstanceInstruction returns InstanceInstructionExpression:
 ;
 
 SimpleInstanceInstruction:
-	 'THEN' toExecute = [Instance|STRING]
+	 'THEN' toExecute += [Instance|STRING]+
 ;
 
 IfInstanceInstruction:

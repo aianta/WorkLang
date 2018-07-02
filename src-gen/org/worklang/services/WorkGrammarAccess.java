@@ -1585,16 +1585,16 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cToExecuteTransitionDefinitionIDTerminalRuleCall_1_0_1 = (RuleCall)cToExecuteTransitionDefinitionCrossReference_1_0.eContents().get(1);
 		
 		//SimpleInstruction:
-		//	'THEN' toExecute=[TransitionDefinition];
+		//	'THEN' toExecute+=[TransitionDefinition]+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'THEN' toExecute=[TransitionDefinition]
+		//'THEN' toExecute+=[TransitionDefinition]+
 		public Group getGroup() { return cGroup; }
 		
 		//'THEN'
 		public Keyword getTHENKeyword_0() { return cTHENKeyword_0; }
 		
-		//toExecute=[TransitionDefinition]
+		//toExecute+=[TransitionDefinition]+
 		public Assignment getToExecuteAssignment_1() { return cToExecuteAssignment_1; }
 		
 		//[TransitionDefinition]
@@ -1764,16 +1764,16 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cToExecuteInstanceSTRINGTerminalRuleCall_1_0_1 = (RuleCall)cToExecuteInstanceCrossReference_1_0.eContents().get(1);
 		
 		//SimpleInstanceInstruction:
-		//	'THEN' toExecute=[Instance|STRING];
+		//	'THEN' toExecute+=[Instance|STRING]+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'THEN' toExecute=[Instance|STRING]
+		//'THEN' toExecute+=[Instance|STRING]+
 		public Group getGroup() { return cGroup; }
 		
 		//'THEN'
 		public Keyword getTHENKeyword_0() { return cTHENKeyword_0; }
 		
-		//toExecute=[Instance|STRING]
+		//toExecute+=[Instance|STRING]+
 		public Assignment getToExecuteAssignment_1() { return cToExecuteAssignment_1; }
 		
 		//[Instance|STRING]
@@ -2634,7 +2634,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//SimpleInstruction:
-	//	'THEN' toExecute=[TransitionDefinition];
+	//	'THEN' toExecute+=[TransitionDefinition]+;
 	public SimpleInstructionElements getSimpleInstructionAccess() {
 		return pSimpleInstruction;
 	}
@@ -2690,7 +2690,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//SimpleInstanceInstruction:
-	//	'THEN' toExecute=[Instance|STRING];
+	//	'THEN' toExecute+=[Instance|STRING]+;
 	public SimpleInstanceInstructionElements getSimpleInstanceInstructionAccess() {
 		return pSimpleInstanceInstruction;
 	}

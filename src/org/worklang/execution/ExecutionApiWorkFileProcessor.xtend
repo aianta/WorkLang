@@ -68,7 +68,22 @@ class ExecutionApiWorkFileProcessor {
 					instanceComponent instanceof CompoundTransitionInstance
 				]
 			].forEach[compoundTransition|
-				processCompoundTransitionInstance(compoundTransition)
+				
+				/* If a processor doesn't exist for this compound instance transition, 
+				 * create one. 
+				 * 
+				 * IMPORTANT: DO NOT REPLACE EXISTING PROCESSOR
+				 */
+				 
+				 if (!api.routeExists(
+				 "/" + field.name.toLowerCase + "/" +
+				 compoundTransition.transitionDeclaration.transition.name.toLowerCase + "/" + 
+				 compoundTransition.name.replaceAll("\\s", "").toLowerCase
+				 )){
+				 	api.addCompoundTransitionProcessor(field.name, compoundTransition);
+				 }
+				
+				
 			]
 			
 			//Process primitive transitions
@@ -94,6 +109,8 @@ class ExecutionApiWorkFileProcessor {
 
 	
 	def private processCompoundTransitionInstance(Instance compoundTransition) {
+		
+		
 		
 	}
 	

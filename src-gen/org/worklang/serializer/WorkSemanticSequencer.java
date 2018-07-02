@@ -685,16 +685,10 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     SimpleInstanceInstruction returns SimpleInstanceInstruction
 	 *
 	 * Constraint:
-	 *     toExecute=[Instance|STRING]
+	 *     toExecute+=[Instance|STRING]+
 	 */
 	protected void sequence_SimpleInstanceInstruction(ISerializationContext context, SimpleInstanceInstruction semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.SIMPLE_INSTANCE_INSTRUCTION__TO_EXECUTE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.SIMPLE_INSTANCE_INSTRUCTION__TO_EXECUTE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSimpleInstanceInstructionAccess().getToExecuteInstanceSTRINGTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.SIMPLE_INSTANCE_INSTRUCTION__TO_EXECUTE, false));
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -706,16 +700,10 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     SimpleInstruction returns SimpleInstruction
 	 *
 	 * Constraint:
-	 *     toExecute=[TransitionDefinition|ID]
+	 *     toExecute+=[TransitionDefinition|ID]+
 	 */
 	protected void sequence_SimpleInstruction(ISerializationContext context, SimpleInstruction semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.SIMPLE_INSTRUCTION__TO_EXECUTE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.SIMPLE_INSTRUCTION__TO_EXECUTE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSimpleInstructionAccess().getToExecuteTransitionDefinitionIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.SIMPLE_INSTRUCTION__TO_EXECUTE, false));
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

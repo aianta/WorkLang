@@ -15,6 +15,7 @@
  */
 package org.worklang.work;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,29 +36,19 @@ package org.worklang.work;
 public interface SimpleInstruction extends InstructionExpression
 {
   /**
-   * Returns the value of the '<em><b>To Execute</b></em>' reference.
+   * Returns the value of the '<em><b>To Execute</b></em>' reference list.
+   * The list contents are of type {@link org.worklang.work.TransitionDefinition}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>To Execute</em>' reference isn't clear,
+   * If the meaning of the '<em>To Execute</em>' reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>To Execute</em>' reference.
-   * @see #setToExecute(TransitionDefinition)
+   * @return the value of the '<em>To Execute</em>' reference list.
    * @see org.worklang.work.WorkPackage#getSimpleInstruction_ToExecute()
    * @model
    * @generated
    */
-  TransitionDefinition getToExecute();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.SimpleInstruction#getToExecute <em>To Execute</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>To Execute</em>' reference.
-   * @see #getToExecute()
-   * @generated
-   */
-  void setToExecute(TransitionDefinition value);
+  EList<TransitionDefinition> getToExecute();
 
 } // SimpleInstruction

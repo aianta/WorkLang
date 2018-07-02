@@ -17,10 +17,16 @@
 
 package org.worklang.execution;
 
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import org.worklang.work.Instance;
 import org.worklang.work.StateDefinition;
 import org.worklang.work.TransitionDefinition;
+
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 
 public class ExecutionInstructionState {
 
@@ -28,11 +34,11 @@ public class ExecutionInstructionState {
 	
 	boolean isInputResolved;
 	boolean isOutputResolved;
-	boolean isTransitionResolved;
+	boolean areTransitionsResolved;
 	
-	ArrayList<StateDefinition> unresolvedInputs = new ArrayList<StateDefinition>();
-	ArrayList<StateDefinition> unresolvedOutputs = new ArrayList<StateDefinition>();
-	TransitionDefinition unresolvedTransition;
+	ArrayList<SimpleEntry<UUID, Instance>> unresolvedInputs = new ArrayList<>();
+	ArrayList<SimpleEntry<UUID, Instance>> unresolvedOutputs = new ArrayList<>();
+	ArrayList<SimpleEntry<UUID, Instance>> unresolvedTransitions = new ArrayList<>();
 	
 	public ExecutionInstructionState(ExecutionInstruction instruction) {
 		this.instruction = instruction;
@@ -44,37 +50,54 @@ public class ExecutionInstructionState {
 	
 	public void update() {
 		
-		//Inspect inputs
-		instruction.getInputs().forEach((state,instance)->{
-			//Add missing input instances to unresolved inputs list
-			if (instance == null) {
-				unresolvedInputs.add(state);
+		clear();
+		
+		//Inspect inputs and update flag
+		instruction.getInputs().forEach((state,entry)->{
+			if (entry.getValue() == null) {
+				unresolvedInputs.add(entry);
 			}
 		});
 		
-		//Update flag
 		if (unresolvedInputs.size() > 0) {
 			isInputResolved = false;
+		}else {
+			isInputResolved = true;
 		}
 		
 		//Inspect outputs
-		instruction.getOutputs().forEach((state, instance)->{
-			//Add missing output instances to unresolved outpts list
-			if (instance == null) {
-				unresolvedOutputs.add(state);
+		instruction.getOutputs().forEach((state,entry)->{
+			if(entry.getValue() == null) {
+				unresolvedOutputs.add(entry);
+			}
+			
+		});
+		
+		if (unresolvedOutputs.size() > 0) {
+			isOutputResolved = false;
+		}else {
+			isOutputResolved = true;
+		}
+		
+		//Inspect transitions
+		instruction.getTransitions().forEach((transition, entry)->{
+			if (entry.getValue() ==  null) {
+				unresolvedTransitions.add(entry);
 			}
 		});
 		
-		//Update flag
-		if (unresolvedOutputs.size() > 0) {
-			isOutputResolved = false;
+		if (unresolvedTransitions.size() > 0) {
+			areTransitionsResolved = false;
+		}else {
+			areTransitionsResolved = true;
 		}
 		
-		//Inspect transition
-		if(instruction.getTransition().getValue() == null) {
-			unresolvedTransition = instruction.getTransition().getKey();
-			isTransitionResolved = false;
-		}
+	}
+	
+	public void clear() {
+		unresolvedInputs.clear();
+		unresolvedOutputs.clear();
+		unresolvedTransitions.clear();
 	}
 
 	//Getters and Setters
@@ -82,49 +105,60 @@ public class ExecutionInstructionState {
 		return isInputResolved;
 	}
 
-	public void setInputResolved(boolean isInputResolved) {
-		this.isInputResolved = isInputResolved;
-	}
-
 	public boolean isOutputResolved() {
 		return isOutputResolved;
 	}
 
-	public void setOutputResolved(boolean isOutputResolved) {
-		this.isOutputResolved = isOutputResolved;
+	public boolean areTransitionsResolved() {
+		return areTransitionsResolved;
 	}
 
-	public boolean isTransitionResolved() {
-		return isTransitionResolved;
-	}
-
-	public void setTransitionResolved(boolean isTransitionResolved) {
-		this.isTransitionResolved = isTransitionResolved;
-	}
-
-	public ArrayList<StateDefinition> getUnresolvedInputs() {
+	public ArrayList<SimpleEntry<UUID, Instance>> getUnresolvedInputs() {
 		return unresolvedInputs;
 	}
 
-	public void setUnresolvedInputs(ArrayList<StateDefinition> unresolvedInputs) {
-		this.unresolvedInputs = unresolvedInputs;
-	}
-
-	public ArrayList<StateDefinition> getUnresolvedOutputs() {
+	public ArrayList<SimpleEntry<UUID, Instance>> getUnresolvedOutputs() {
 		return unresolvedOutputs;
 	}
 
-	public void setUnresolvedOutputs(ArrayList<StateDefinition> unresolvedOutputs) {
-		this.unresolvedOutputs = unresolvedOutputs;
-	}
-
-	public TransitionDefinition getUnresolvedTransition() {
-		return unresolvedTransition;
-	}
-
-	public void setUnresolvedTransition(TransitionDefinition unresolvedTransition) {
-		this.unresolvedTransition = unresolvedTransition;
+	public ArrayList<SimpleEntry<UUID, Instance>> getUnresolvedTransition() {
+		return unresolvedTransitions;
 	}
 	
+	public String toString() {
+		
+		return toJson().encodePrettily();
+	}
 	
+	public JsonObject toJson() {
+		
+		JsonObject data = new JsonObject()
+				.put("isInputResolved", isInputResolved)
+				.put("isOutputResolved", isOutputResolved)
+				.put("areTransitionsResolved", areTransitionsResolved);
+			
+			JsonArray missingInputs = new JsonArray();
+			JsonArray missingOutputs = new JsonArray();
+			JsonArray missingTransitions = new JsonArray();
+			
+			unresolvedInputs.forEach(entry->{
+				missingInputs.add(entry.getKey().toString());
+			});
+			
+			unresolvedOutputs.forEach(entry->{
+				missingOutputs.add(entry.getKey().toString());
+			});
+			
+			unresolvedTransitions.forEach(entry->{
+				missingTransitions.add(entry.getKey().toString());
+			});
+			
+			data
+			.put("missing inputs", missingInputs)
+			.put("missing outputs", missingOutputs)
+			.put("missingTransitions", missingTransitions);
+			
+			return data;
+	}
+		
 }

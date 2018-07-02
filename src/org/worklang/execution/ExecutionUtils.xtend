@@ -24,7 +24,7 @@ import org.worklang.work.UseDefinition
 
 class ExecutionUtils {
 	
-	def static StateInstanceToJson(Instance instance){
+	def static JsonObject StateInstanceToJson(Instance instance){
 		
 		val JsonObject jsonInstance = new JsonObject
 		
