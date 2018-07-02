@@ -191,6 +191,13 @@ public class ExecutionInstruction {
 					inputArray.add(instance.getName());
 				});
 				
+				String routePath = "/" + fieldName + "/" +
+						transition.getKey().getName().toLowerCase() + "/" +
+						transition.getValue().getName().replace("\\s", "").toLowerCase();
+				
+				logger.info("Execution Instruction: routePath -> {}", routePath);
+				
+				
 				client.post(
 						WorkApi.getServer().actualPort(),
 						"localhost",
@@ -231,6 +238,13 @@ public class ExecutionInstruction {
 							
 						});
 			}else {
+				
+				String routePath = "/" + fieldName + "/" +
+						transition.getKey().getName().toLowerCase() + "/" +
+						transition.getValue().getName().replace("\\s", "").toLowerCase();
+				
+				logger.info("Execution Instruction: routePath -> {}", routePath);
+				
 				//If there are no inputs fire a GET request
 				client.get(
 						WorkApi.getServer().actualPort(),
