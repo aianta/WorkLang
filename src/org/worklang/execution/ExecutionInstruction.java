@@ -169,6 +169,14 @@ public class ExecutionInstruction {
 		return status;
 	}
 	
+	public void setInputInstance(UUID id, Instance i) {
+		if (inputs.get(i.getStateDeclaration().getState()).getKey().equals(id)) {
+			logger.info("Setting input instance!");
+			inputs.get(i.getStateDeclaration().getState()).setValue(i);
+		}
+		
+	}
+	
 	public Map<StateDefinition, SimpleEntry<UUID, Instance>> getInputs() {
 		return inputs;
 	}
@@ -434,6 +442,49 @@ public class ExecutionInstruction {
 			logger.error("Cannot execute instruction. Instruction is not executable.");
 			throw new UnsupportedOperationException();
 		}	
+		
+	}
+	
+	public String toString() {
+
+		return toJson().encodePrettily();
+	}
+	
+	public JsonObject toJson() {
+		JsonObject data = new JsonObject()
+				.put("id", id.toString())
+				.put("executed", executed)
+				.put("fieldName", fieldName)
+				.put("status", status.toJson());
+		
+		JsonObject inputs = new JsonObject();
+		JsonObject outputs = new JsonObject();
+		JsonObject transitions = new JsonObject();
+		
+		this.inputs.forEach((state, entry)->{
+			inputs.put(state.getName(), new JsonObject()
+					.put("UUID", entry.getKey().toString())
+					.put("Instance", entry.getValue()));
+		});
+		
+		this.outputs.forEach((state, entry)->{
+			outputs.put(state.getName(), new JsonObject()
+					.put("UUID", entry.getKey().toString())
+					.put("Instance", entry.getValue()));
+		});
+		
+		this.transitions.forEach((transition, entry)->{
+			transitions.put(transition.getName(), new JsonObject()
+					.put("UUID", entry.getKey().toString())
+					.put("Instance", entry.getValue().toString()));
+		});
+		
+		data.put("inputs", inputs)
+			.put("outputs", outputs)
+			.put("transitions", transitions);
+		
+		
+		return data;
 		
 	}
 }

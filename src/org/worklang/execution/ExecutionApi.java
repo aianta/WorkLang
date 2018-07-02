@@ -114,6 +114,13 @@ public class ExecutionApi extends AbstractVerticle{
 	public void info (RoutingContext rc) {
 		HttpServerResponse response = rc.response();
 		
+		JsonObject data = infoJson();
+				
+		response.end(data.encode());
+	}
+	
+	public JsonObject infoJson() {
+		
 		JsonObject data = new JsonObject()
 				.put("Service", "Work Execution Api")
 				.put("Version", "0.1")
@@ -127,8 +134,13 @@ public class ExecutionApi extends AbstractVerticle{
 		}
 		
 		data.put("transitions", transitionManifest);
-				
-		response.end(data.encode());
+		
+		return data;
+		
+	}
+	
+	public boolean routeExists (String routePath) {
+		return transitions.contains(routePath);
 	}
 	
 	//Utility method for adding a route for a primitive transition definition
@@ -138,6 +150,7 @@ public class ExecutionApi extends AbstractVerticle{
 		transition.getTransitionDeclaration().getTransition().getName().toLowerCase() + "/" +
 		transition.getName().replaceAll("\\s", "").toLowerCase();
 		
+		logger.info("match (n:`transition instance` {field:'"+fieldName+"', name:'"+transition.getName()+"'}) return n");
 		Vertex transitionVertex = graph.vertices("match (n:`transition instance` {field:'"+fieldName+"', name:'"+transition.getName()+"'}) return n").next();
 		
 		CompoundTransitionProcessor processor = new CompoundTransitionProcessor(vertx, client, transitionVertex, fieldName);

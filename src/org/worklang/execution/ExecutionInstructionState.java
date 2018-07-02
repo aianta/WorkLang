@@ -50,6 +50,8 @@ public class ExecutionInstructionState {
 	
 	public void update() {
 		
+		clear();
+		
 		//Inspect inputs and update flag
 		instruction.getInputs().forEach((state,entry)->{
 			if (entry.getValue() == null) {
@@ -91,6 +93,12 @@ public class ExecutionInstructionState {
 		}
 		
 	}
+	
+	public void clear() {
+		unresolvedInputs.clear();
+		unresolvedOutputs.clear();
+		unresolvedTransitions.clear();
+	}
 
 	//Getters and Setters
 	public boolean isInputResolved() {
@@ -119,33 +127,38 @@ public class ExecutionInstructionState {
 	
 	public String toString() {
 		
+		return toJson().encodePrettily();
+	}
+	
+	public JsonObject toJson() {
+		
 		JsonObject data = new JsonObject()
-			.put("isInputResolved", isInputResolved)
-			.put("isOutputResolved", isOutputResolved)
-			.put("areTransitionsResolved", areTransitionsResolved);
-		
-		JsonArray missingInputs = new JsonArray();
-		JsonArray missingOutputs = new JsonArray();
-		JsonArray missingTransitions = new JsonArray();
-		
-		unresolvedInputs.forEach(entry->{
-			missingInputs.add(entry.getKey());
-		});
-		
-		unresolvedOutputs.forEach(entry->{
-			missingOutputs.add(entry.getKey());
-		});
-		
-		unresolvedTransitions.forEach(entry->{
-			missingTransitions.add(entry.getKey());
-		});
-		
-		data
-		.put("missing inputs", missingInputs)
-		.put("missing outputs", missingOutputs)
-		.put("missingTransitions", missingTransitions);
-		
-		return data.encodePrettily();
+				.put("isInputResolved", isInputResolved)
+				.put("isOutputResolved", isOutputResolved)
+				.put("areTransitionsResolved", areTransitionsResolved);
+			
+			JsonArray missingInputs = new JsonArray();
+			JsonArray missingOutputs = new JsonArray();
+			JsonArray missingTransitions = new JsonArray();
+			
+			unresolvedInputs.forEach(entry->{
+				missingInputs.add(entry.getKey().toString());
+			});
+			
+			unresolvedOutputs.forEach(entry->{
+				missingOutputs.add(entry.getKey().toString());
+			});
+			
+			unresolvedTransitions.forEach(entry->{
+				missingTransitions.add(entry.getKey().toString());
+			});
+			
+			data
+			.put("missing inputs", missingInputs)
+			.put("missing outputs", missingOutputs)
+			.put("missingTransitions", missingTransitions);
+			
+			return data;
 	}
 		
 }

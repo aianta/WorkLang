@@ -30,7 +30,9 @@ import org.worklang.interpreter.WorkApi;
 import org.worklang.work.Instance;
 
 import io.vertx.core.AsyncResult;
+import io.vertx.core.Future;
 import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.client.WebClient;
 
 public class Computation {
@@ -72,37 +74,50 @@ public class Computation {
 		SimpleEntry<UUID, ExecutionInstruction> entry = 
 				new SimpleEntry<>(UUID.randomUUID(), instruction);
 		
-		executionStack.add(entry);
+		executionStack.push(entry);
 		
 		return entry.getKey();
 	}
 	
-	public ExecutionInstruction run() throws Exception{
-		while (!executionStack.empty()) {
-			computeNext();
-		}
+	public void run(Future<ExecutionInstruction> resultFuture) throws Exception{
 		
-		return executionHistory.get(executionHistory.size()-1).getValue();
+		Future<Void> done = Future.future();
+		
+		done.setHandler(result->{
+			
+			resultFuture.complete(executionHistory.get(executionHistory.size()-1).getValue());
+			
+		});
+		
+		computeNext(done);
+		
+		
+		
 	}
 	
 	public SimpleEntry<UUID, ExecutionInstruction> toComputeNext(){
 		return executionStack.peek();
 	}
 	
-	public void computeNext() throws Exception{
+	public void computeNext(Future<Void> done) throws Exception{
 		SimpleEntry<UUID,ExecutionInstruction> toCompute = executionStack.pop();
+		logger.info("computing next -> {}", toCompute.getValue());
 		
 		if (lastInstruction != null ) {
-			
+			logger.info("last instruction is not null");
+			logger.info("instruction -> {}", toCompute.getValue().toString());
 			//Go through any unresolved inputs in toCompute and populate them with output instances from the last instruction
 			toCompute.getValue().status().getUnresolvedInputs().forEach(entry->{
 				Instance i = lastInstruction.getValue().getOutput(entry.getKey()).getValue().getValue();
-				entry.setValue(i);
+				
+				toCompute.getValue().setInputInstance(id, i);
 			});
 			
+			logger.info("resolved instruction -> {}", toCompute.getValue().toString());
 			
 			if (toCompute.getValue().isExecutable()) {
-				compute(toCompute);
+				compute(toCompute,done);
+				
 			}else {
 				logger.error("Instruction isn't executable!");
 				logger.error(toCompute.getValue().status().toString());
@@ -110,8 +125,10 @@ public class Computation {
 			}
 			
 		}else {
+			logger.info("last instruction is null");
 			if (toCompute.getValue().isExecutable()) {
-				compute(toCompute);
+				compute(toCompute,done);
+				
 			}else {
 				logger.error("Instruction isn't executable!");
 				logger.error(toCompute.getValue().status().toString());
@@ -122,7 +139,8 @@ public class Computation {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void compute(SimpleEntry<UUID, ExecutionInstruction> toCompute) {
+	private void compute(SimpleEntry<UUID, ExecutionInstruction> toCompute, Future<Void> done) {
+		
 		//Execute instruction
 		toCompute.getValue().execute().setHandler(result->{
 			if (((AsyncResult)result).succeeded()) {
@@ -140,6 +158,20 @@ public class Computation {
 						toCompute.getValue().executed();
 						executionHistory.add(toCompute);
 						lastInstruction = toCompute;
+						
+						try {
+							
+							if (!executionStack.empty()) {
+								computeNext(done);
+							}else {
+								done.complete();
+							}
+							
+							
+						} catch (Exception e) {
+							logger.error("Error computing next");
+							e.printStackTrace();
+						}
 						
 					}else {
 						logger.error("Failed to update meta model after instruction execution!");
@@ -167,21 +199,27 @@ public class Computation {
 	 */
 	public SimpleEntry<UUID, ExecutionInstruction> executionContext(ExecutionInstruction instruction){
 		
+		logger.info("looking for {}", instruction.getId());
+		
 		Iterator<SimpleEntry<UUID,ExecutionInstruction>> it = executionStack.iterator();
 		
+		logger.info("Iterating through the stack");
+		//SimpleEntry<UUID,ExecutionInstruction> last = null;
 		while (it.hasNext()) {
 			SimpleEntry<UUID,ExecutionInstruction> curr = it.next();
-			
+			logger.info("Instruction -> {}", curr);
 			//If we found the instruction
 			if (curr.getKey().equals(instruction.getId())) {
-				
 				//Return the instruction to be executed before it
+				
+				//return last;
 				if (it.hasNext()) {
 					return it.next();
 				}else {
-					logger.info("Execution context is empty");
+					logger.error("Stack is empty, context not found!");
 				}
 			}
+			//last = curr;
 		}
 		
 		logger.error("Could not find insturction in execution stack!");
@@ -191,6 +229,34 @@ public class Computation {
 
 	public Vertx getVertx() {
 		return vertx;
+	}
+	
+	public String toString() {
+		JsonObject data = new JsonObject()
+				.put("id", id.toString())
+				.put("execution stack - size", executionStack.size())
+				.put("execution stack - head [next instruction]", new  JsonObject()
+						.put("UUID", executionStack.peek().getKey().toString())
+						.put("Execution Instruction", executionStack.peek().getValue().toJson()));
+		
+			if (lastInstruction != null) {
+				data.put("last instruction", new JsonObject()
+						.put("UUID", lastInstruction.getKey())
+						.put("Execution Instruction", lastInstruction.getValue().toJson()));
+			}else {
+				data.put("last instruction", "null");
+			}
+				
+				
+		JsonObject executionHistory = new JsonObject();
+		
+		this.executionHistory.forEach(entry->{
+			executionHistory.put(entry.getKey().toString(), entry.getValue().toString());
+		});
+		
+		data.put("execution history", executionHistory);
+		
+		return data.encodePrettily();
 	}
 
 }
