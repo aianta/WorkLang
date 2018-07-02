@@ -55,6 +55,8 @@ public class CompoundTransitionProcessor {
 	private Vertex transition;
 	private String fieldName;
 	private StateDefinition outputDefinition;
+	private Vertex expressionVertex;
+	private WebClient client;
 	
 	private Vertx vertx;
 	
@@ -63,7 +65,7 @@ public class CompoundTransitionProcessor {
 		this.vertx = vertx;
 		this.transition = transition;
 		this.fieldName = fieldName;
-		computation = new Computation(vertx, client);
+		this.client = client;
 		
 		//Find and save the definition of this compound transitions' output
 		logger.info("instanceOf -> {}", transition.vertices(Direction.OUT, "instanceOf").next());
@@ -83,7 +85,7 @@ public class CompoundTransitionProcessor {
 		logger.info("outputDefinition name -> {}", outputDefinition.getName());
 		
 		
-		Vertex expressionVertex = transition.vertices(Direction.OUT, "expression").next();
+		expressionVertex = transition.vertices(Direction.OUT, "expression").next();
 		logger.info("expression vertex: name-> {}", expressionVertex.property("name").value().toString());
 		
 		logger.info("Processing compound transition code");
@@ -103,9 +105,14 @@ public class CompoundTransitionProcessor {
 				
 				if (result.succeeded()){
 					ExecutionInstruction lastInstruction = result.result();
-					JsonObject resultData =  ExecutionUtils.StateInstanceToJson(lastInstruction.getOutput(outputDefinition));
+					JsonObject resultData =  ExecutionUtils.StateInstanceToJson(lastInstruction.getOutputInstance(outputDefinition));
 					
 					rc.response().end(resultData.encode());
+					
+					/**Re-process the computation so it's ready to execute next time
+					 * This will probably have to be refactored at some point.
+					 */
+					processExecutionResult(expressionVertex);
 				}
 				
 				
@@ -124,9 +131,12 @@ public class CompoundTransitionProcessor {
 	
 	public void processExecutionResult(Vertex expressionVertex) {
 		
+		logger.info("creating a new computation");
+		computation = new Computation(vertx, client);
+		
 		logger.info("processing execution result");
 		
-		/**MUST CREATE compute last execute instruction fisrt if it exists so that it  
+		/**MUST CREATE compute last execute instruction first if it exists so that it  
 		 * is in the correct order on the execution stack.
 		 * 
 		 * BUT MUST PROCESS compute last AFTER compute first for dependency resolution to work.
@@ -236,15 +246,15 @@ public class CompoundTransitionProcessor {
 					
 					logger.info("Iterate through previous instruction's output and this transition's inpunt");
 					//Iterate through previous execution instruction's output and this transitions input
-					context.getValue().getOutputs().forEach((state,entry)->{
-						logger.info("LAST OUTPUT: State -> {} UUID-> {} Instance -> {}", state.getName(), entry.getKey().toString(), entry.getValue());
+					context.getValue().getOutputs().forEach(state->{
+						logger.info("LAST OUTPUT: State -> {} UUID-> {} Instance -> {}", state.getDefinition().getName(), state.getId().toString(), state.getInstance());
 						
 						transitionInputs.forEach(input->{
 							logger.info("CURRENT INPUT: State -> {}", input.getName());;
 							//If an output matches the input add it to this instruction's input 
-							if (input.getName().equals(state.getName())) {
+							if (input.getName().equals(state.getDefinition().getName())) {
 								logger.info("match!");
-								instruction.addInput(state, entry.getKey()); //Here we passed the output's UUID, so we can resolve it later
+								instruction.addInput(state.getDefinition(), state.getId()); //Here we passed the output's UUID, so we can resolve it later
 								logger.info("Added output UUID as input for execution Instruction");
 							}
 						});

@@ -106,11 +106,17 @@ public class Computation {
 		if (lastInstruction != null ) {
 			logger.info("last instruction is not null");
 			logger.info("instruction -> {}", toCompute.getValue().toString());
+			
 			//Go through any unresolved inputs in toCompute and populate them with output instances from the last instruction
 			toCompute.getValue().status().getUnresolvedInputs().forEach(entry->{
-				Instance i = lastInstruction.getValue().getOutput(entry.getKey()).getValue().getValue();
+				logger.info("Unresolved input entry: UUID->{} Instance ->{} ", entry.getId().toString(), entry.getInstance());
 				
-				toCompute.getValue().setInputInstance(id, i);
+				Instance i = lastInstruction.getValue().getOutput(entry.getId()).getInstance();
+				logger.info("Resolved instance -> {}", i.toString());
+				
+				ExecutionInstruction inst = toCompute.getValue();
+				inst.setInputInstance(entry.getId(), i);
+				toCompute.setValue(inst);
 			});
 			
 			logger.info("resolved instruction -> {}", toCompute.getValue().toString());

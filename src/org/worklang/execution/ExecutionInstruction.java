@@ -34,6 +34,8 @@ import org.eclipse.emf.common.util.EList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.worklang.WorklangResourceUtils;
+import org.worklang.execution.structures.StateInfo;
+import org.worklang.execution.structures.TransitionInfo;
 import org.worklang.interpreter.WorkApi;
 import org.worklang.metamodel.MetaModelUtils;
 import org.worklang.work.Instance;
@@ -69,10 +71,10 @@ public class ExecutionInstruction {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ExecutionInstruction.class);
 	
-	private Map <StateDefinition, SimpleEntry<UUID, Instance>> inputs = new HashMap<>();
-	private Map <StateDefinition, SimpleEntry<UUID, Instance>> outputs = new HashMap<>();
+	private ArrayList<StateInfo> inputs = new ArrayList<>();
+	private ArrayList<StateInfo> outputs = new ArrayList<>();
 	
-	private Map<TransitionDefinition, SimpleEntry<UUID, Instance>> transitions = new HashMap<>();
+	private ArrayList<TransitionInfo> transitions = new ArrayList<>();
 	
 	//Flag indicated if this instruction has been executed
 	private boolean executed = false;
@@ -87,6 +89,8 @@ public class ExecutionInstruction {
 	
 	private Computation computation;
 	
+	
+	
 	//Create an Execution Instruction stub from a transition definition
 	public ExecutionInstruction(Computation computation, String fieldName) {
 		this.fieldName = fieldName;
@@ -100,68 +104,82 @@ public class ExecutionInstruction {
 	//Add new input for this execution instruction
 	public void addInput (StateDefinition definition, Instance instance) {
 		
-		//Verify that instance is a state
-		if (instance.getStateDeclaration() == null) {
-			logger.error("Cannot create execution instruction input from instance: {} Instance is not a state", instance.getName());
-			throw new IllegalArgumentException("Cannot create execution instruction input from instance: " + 
-					instance.getName() + ". "+
-					"Instance is not a state."
-			);
-		}
+		StateInfo info = new StateInfo();
+		info.setDefinition(definition);
+		info.setId(UUID.randomUUID());
+		info.setInstance(instance);
 		
-		inputs.put(definition, new SimpleEntry<>(UUID.randomUUID(), instance));
+		inputs.add(info);
 	}
 	
 	//Add new input stub for this execution instruction
 	public void addInput(StateDefinition definition) {
-		inputs.put(definition, new SimpleEntry<>(UUID.randomUUID(),null));
+		
+		StateInfo info = new StateInfo();
+		info.setDefinition(definition);
+		info.setId(UUID.randomUUID());
+		
+		inputs.add(info);
 	}
 	
 	//Add a new input to be resolved with a specified UUID from the previous executionContext
 	public void addInput (StateDefinition definition, UUID id) {
-		inputs.put(definition, new SimpleEntry<>(id,null));
+		
+		StateInfo info = new StateInfo();
+		info.setDefinition(definition);
+		info.setId(id);
+		
+		inputs.add(info);
 	}
 	
 	//Add new output for this execution instruction
 	public void addOutput(StateDefinition definition, Instance instance) {
 		
-		//Verify that instance is a state
-		if (instance.getStateDeclaration() == null) {
-			logger.error("Cannot create execution instruction input from instance: {} Instance is not a state.", instance.getName());
-			throw new IllegalArgumentException("Cannot create execution instruction input from instance: " + 
-					instance.getName() + ". "+
-					"Instance is not a state."
-			);
-		}
-		outputs.put(definition, new SimpleEntry<>(UUID.randomUUID(), instance));
+		StateInfo info = new StateInfo();
+		info.setDefinition(definition);
+		info.setId(UUID.randomUUID());
+		info.setInstance(instance);
+		
+		outputs.add(info);
 	}
 	
 	//Add an output stub for this execution instance
 	public void addOutput(StateDefinition definition) {
 		
-		outputs.put(definition, new SimpleEntry<>(UUID.randomUUID(), null));
+		StateInfo info = new StateInfo();
+		info.setDefinition(definition);
+		info.setId(UUID.randomUUID());
+		
+		outputs.add(info);
 	}
 	
 	//Set a transition definition stub
 	public void addTransition(TransitionDefinition transition) {
-		transitions.put(transition, new SimpleEntry<>(UUID.randomUUID(), null));
+		
+		TransitionInfo info = new TransitionInfo();
+		info.setDefinition(transition);
+		info.setId(UUID.randomUUID());
+		
+		transitions.add(info);
 	}
 	
 	public void addTransition(TransitionDefinition transition, UUID id) {
-		transitions.put(transition, new SimpleEntry<>(id,null));
+		
+		TransitionInfo info = new TransitionInfo();
+		info.setDefinition(transition);
+		info.setId(id);
+		
+		transitions.add(info);
 	}
 	
 	public void addTransition (TransitionDefinition definition, Instance instance) {
-		//Verify that instance is a transition
-		if (instance.getTransitionDeclaration() == null) {
-			logger.error("Cannot create execution instruction input from instance: {} Instance is not a transition.", instance.getName());
-			throw new IllegalArgumentException("Cannot create execution instruction input from instance: " + 
-					instance.getName() + ". "+
-					"Instance is not a transition."
-			);
-		}
+
+		TransitionInfo info = new TransitionInfo();
+		info.setDefinition(definition);
+		info.setId(UUID.randomUUID());
+		info.setInstance(instance);
 		
-		transitions.put(definition, new SimpleEntry<>(UUID.randomUUID(), instance));
+		transitions.add(info);
 	}
 	
 	public ExecutionInstructionState status() {
@@ -170,22 +188,36 @@ public class ExecutionInstruction {
 	}
 	
 	public void setInputInstance(UUID id, Instance i) {
-		if (inputs.get(i.getStateDeclaration().getState()).getKey().equals(id)) {
-			logger.info("Setting input instance!");
-			inputs.get(i.getStateDeclaration().getState()).setValue(i);
-		}
 		
+		StateInfo input = getInput(id);
+		
+		input.setInstance(i);
 	}
 	
-	public Map<StateDefinition, SimpleEntry<UUID, Instance>> getInputs() {
+	private StateInfo getInput(UUID id) {
+		Iterator<StateInfo> it = inputs.iterator();
+		
+		while (it.hasNext()) {
+			StateInfo curr = it.next();
+			
+			if (curr.getId().equals(id)) {
+				return curr;
+			}
+		}
+		
+		logger.error("Could not find input with id -> {}", id.toString());
+		return null;
+	}
+	
+	public ArrayList<StateInfo> getInputs() {
 		return inputs;
 	}
 	
-	public Map<StateDefinition, SimpleEntry<UUID, Instance>> getOutputs(){
+	public ArrayList<StateInfo> getOutputs(){
 		return outputs;
 	}
 	
-	public Map<TransitionDefinition, SimpleEntry<UUID,Instance>> getTransitions(){
+	public ArrayList<TransitionInfo> getTransitions(){
 		return transitions;
 	}
 	
@@ -193,13 +225,13 @@ public class ExecutionInstruction {
 		return id;
 	}
 	
-	public Entry<StateDefinition, SimpleEntry<UUID, Instance>>getOutput(UUID id) {
-		Iterator<Entry<StateDefinition, SimpleEntry<UUID,Instance>>> it =  outputs.entrySet().iterator();
+	public StateInfo getOutput(UUID id) {
+		Iterator<StateInfo> it =  outputs.iterator();
 		
 		while(it.hasNext()) {
-			Entry<StateDefinition, SimpleEntry<UUID,Instance>> curr = it.next();
+			StateInfo curr = it.next();
 			
-			if (curr.getValue().getKey().equals(id)) {
+			if (curr.getId().equals(id)) {
 				return curr;
 			}
 			
@@ -210,20 +242,35 @@ public class ExecutionInstruction {
 		
 	}
 	
-	public Instance getOutput (StateDefinition state){
+	public Instance getOutputInstance (StateDefinition state){
 		
-		Iterator<Entry<StateDefinition, SimpleEntry<UUID,Instance>>> it =  outputs.entrySet().iterator();
+		Iterator<StateInfo> it =  outputs.iterator();
 		
 		while(it.hasNext()) {
-			Entry<StateDefinition, SimpleEntry<UUID,Instance>> curr = it.next();
+			StateInfo curr = it.next();
 			
-			if (curr.getKey().getName().equals(state.getName())) {
-				return curr.getValue().getValue();
+			if (curr.getDefinition().getName().equals(state.getName())) {
+				return curr.getInstance();
 			}
 			
 		}
 		
 		logger.error("Cannot find output with id {}", id);
+		return null;
+	}
+	
+	public UUID getOutputId (StateDefinition state) {
+		Iterator<StateInfo> it = outputs.iterator();
+		
+		while(it.hasNext()) {
+			StateInfo curr = it.next();
+			
+			if (curr.getDefinition() == state) {
+				return curr.getId();
+			}
+		}
+		
+		logger.error("Could not find output id for state -> {}", state);
 		return null;
 	}
 	
@@ -263,20 +310,20 @@ public class ExecutionInstruction {
 			List<Future> transitionExecutions = new ArrayList<>();
 			
 			//Execute all transitions in this instruction
-			transitions.forEach((transition, entry)->{
+			transitions.forEach(transition->{
 				
 				//If the transition has inputs
-				if (transition.getIn() != null) {
+				if (transition.getDefinition().getIn() != null) {
 					
 					JsonArray inputArray = new JsonArray();
 					
 					//Resolve inputs for this transition from instruction inputs
-					EList<StateDefinition> transitionInputs = transition.getIn().getInputState();
+					EList<StateDefinition> transitionInputs = transition.getDefinition().getIn().getInputState();
 					
 					transitionInputs.forEach(input->{
-						inputs.forEach((state,stateEntry)->{
-							if (state.getName().equals(input.getName())) {
-								inputArray.add(stateEntry.getValue().getName());
+						inputs.forEach(state->{
+							if (state.getDefinition().getName().equals(input.getName())) {
+								inputArray.add(state.getInstance().getName());
 							}
 						});
 					});
@@ -289,26 +336,33 @@ public class ExecutionInstruction {
 					//Call transition instance asynchronously
 					computation.getVertx().<Instance>executeBlocking(fut->{
 						
+						//Resolve Output Instance ID
+						UUID transitionOutputId = getOutputId(transition.getDefinition().getOut().getOutputState());
+						
+						String routePath = "/exec/" + fieldName.toLowerCase() + "/" +
+								transition.getDefinition().getName().toLowerCase() + "/" +
+								transition.getInstance().getName().replaceAll("\\s", "").toLowerCase();
+						
+						routePath += "?produce=" + transitionOutputId.toString();
+						
+						logger.info("Execution Instruction POST: routePath -> {}", routePath);
+						
 						client.post(
 								WorkApi.getServer().actualPort(),
 								"localhost",
-								"/" + fieldName + "/" +
-								transition.getName().toLowerCase() + "/" +
-								entry.getValue().getName().replace("\\s", "").toLowerCase() 
+								routePath 
 								).sendJson(inputArray, result->{
 									
 									HttpResponse response = result.result();
 									
+									logger.info("Execution Instruction POST: body ->{}", response.bodyAsString());
+									
 									JsonObject data = response.bodyAsJsonObject();
 									
 									
+									
 									//Create output instance
-									Instance outputInstance = MetaModelUtils.jsonToStateInstance(
-											data,
-											fieldName,
-											entry.getValue(),
-											computation.getId().toString()+"@"+id.toString() + "@" + entry.getKey()
-											);
+									Instance outputInstance = WorklangResourceUtils.resolveInstance(fieldName, transitionOutputId.toString());
 									
 									fut.complete(outputInstance);
 										
@@ -332,24 +386,17 @@ public class ExecutionInstruction {
 							
 							
 							//Map to output for this execution instruction
-							outputs.forEach((outputState,outputStateEntry)->{
-								if(outputState.getName().equals(resolvedOutputDefinition.getName())) {
-									outputStateEntry.setValue(instance);
+							outputs.forEach(outputState->{
+								if(outputState.getDefinition().getName().equals(resolvedOutputDefinition.getName())) {
+									outputState.setInstance(instance);
 								}
 							});
-							
-							//Add new instance to active resource
-							WorklangResourceUtils
-								.resolveInstanceSpace(fieldName)
-								.getInstances()
-								.add(instance);
-							
-
+						
 							transitionResult.complete();
 
 							
 						}else {
-							logger.error("Failed execution at computation {} -> instruction {} -> transition {} ", computation.getId(), id, entry.getKey() );
+							logger.error("Failed execution at computation {} -> instruction {} -> transition {} ", computation.getId(), id, transition.getId().toString() );
 							transitionResult.fail("Failed to execute transition!");
 						
 						}
@@ -367,25 +414,29 @@ public class ExecutionInstruction {
 					
 					//Call transition instance asynchronously
 					computation.getVertx().<Instance>executeBlocking(fut->{
+						
+						//Resolve transition output id
+						UUID transitionOutputId = getOutputId(transition.getDefinition().getOut().getOutputState());
+						
+						String routePath = "/exec/" + fieldName.toLowerCase() + "/" +
+								transition.getDefinition().getName().toLowerCase() + "/" +
+								transition.getInstance().getName().replaceAll("\\s","").toLowerCase();
+						
+						routePath += "?produce=" + transitionOutputId.toString();
+						
+						logger.info("Execution Instruction GET: routePath -> {}", routePath);
+						
 						client.get(
 								WorkApi.getServer().actualPort(),
 								"localhost",
-								"/" + fieldName + "/" +
-								transition.getName().toLowerCase() + "/" +
-								entry.getValue().getName().replaceAll("\\s","").toLowerCase()
+								routePath
 								).send(result->{
 									
 									HttpResponse response = result.result();
 									
 									JsonObject data = response.bodyAsJsonObject();
 									
-									Instance outputInstance = 
-											MetaModelUtils.jsonToStateInstance(
-													data,
-													fieldName,
-													entry.getValue(),
-													computation.getId().toString() + "@" + id.toString() + "@" + entry.getKey()
-													);
+									Instance outputInstance = WorklangResourceUtils.resolveInstance(fieldName, transitionOutputId.toString());
 									
 									fut.complete(outputInstance);
 								});
@@ -407,23 +458,18 @@ public class ExecutionInstruction {
 							
 							
 							//Map to output for this execution instruction
-							outputs.forEach((outputState,outputStateEntry)->{
-								if(outputState.getName().equals(resolvedOutputDefinition.getName())) {
-									outputStateEntry.setValue(instance);
+							outputs.forEach(outputState->{
+								if(outputState.getDefinition().getName().equals(resolvedOutputDefinition.getName())) {
+									outputState.setInstance(instance);
 								}
 							});
 							
-							//Add new instance to active resource
-							WorklangResourceUtils
-								.resolveInstanceSpace(fieldName)
-								.getInstances()
-								.add(instance);
 							
 							//Complete this transitions future
 							transitionResult.complete();
 							
 						}else {
-							logger.error("Failed execution at computation {} -> instruction {} -> transition {} ", computation.getId(), id, entry.getKey() );
+							logger.error("Failed execution at computation {} -> instruction {} -> transition {} ", computation.getId(), id, transition.getId() );
 							transitionResult.fail("Failed to execute transition");
 							
 						}
@@ -463,22 +509,41 @@ public class ExecutionInstruction {
 		JsonObject outputs = new JsonObject();
 		JsonObject transitions = new JsonObject();
 		
-		this.inputs.forEach((state, entry)->{
-			inputs.put(state.getName(), new JsonObject()
-					.put("UUID", entry.getKey().toString())
-					.put("Instance", entry.getValue()));
+		this.inputs.forEach(state->{
+			inputs.put(state.getDefinition().getName(), new JsonObject()
+					.put("UUID", state.getId().toString()));
+			
+			if (state.getInstance() != null) {
+				inputs.put("Instance", state.getInstance().toString());
+			}else {
+				inputs.put("Instance", state.getInstance());
+			}
+					
 		});
 		
-		this.outputs.forEach((state, entry)->{
-			outputs.put(state.getName(), new JsonObject()
-					.put("UUID", entry.getKey().toString())
-					.put("Instance", entry.getValue()));
+		this.outputs.forEach(state->{
+			outputs.put(state.getDefinition().getName(), new JsonObject()
+					.put("UUID", state.getId().toString()));
+			
+			if (state.getInstance() != null) {
+				outputs.put("Instance", state.getInstance().toString());
+			}else {
+				outputs.put("Instance", state.getInstance());
+			}
+			
+					
 		});
 		
-		this.transitions.forEach((transition, entry)->{
-			transitions.put(transition.getName(), new JsonObject()
-					.put("UUID", entry.getKey().toString())
-					.put("Instance", entry.getValue().toString()));
+		this.transitions.forEach(transition->{
+			transitions.put(transition.getDefinition().getName(), new JsonObject()
+					.put("UUID", transition.getId().toString()));
+			
+			if (transition.getInstance() != null) {
+				transitions.put("Instance", transition.getInstance().toString());
+			}else {
+				transitions.put("Instance", transition.getInstance());
+			}
+					
 		});
 		
 		data.put("inputs", inputs)

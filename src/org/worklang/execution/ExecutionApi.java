@@ -42,6 +42,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.worklang.WorklangResourceUtils;
 import org.worklang.interpreter.WorkApi;
+import org.worklang.metamodel.MetaModelUtils;
 import org.worklang.work.Instance;
 import org.worklang.work.SetStatement;
 import org.worklang.work.StateDeclaration;
@@ -184,7 +185,7 @@ public class ExecutionApi extends AbstractVerticle{
 					inputInstancesToFetch.add(inputInstanceName.toString());
 				});
 				
-				JsonObject input = new JsonObject();
+				final JsonObject input = new JsonObject();
 				
 				
 				JsonArray inputsToSend = new JsonArray();
@@ -203,7 +204,7 @@ public class ExecutionApi extends AbstractVerticle{
 				 */
 				
 				if (inputsToSend.size() == 1) {
-					input = inputsToSend.getJsonObject(0);
+					input.mergeIn(inputsToSend.getJsonObject(0));
 				}else {
 					input.put("inputs", inputsToSend);
 				}
@@ -212,22 +213,63 @@ public class ExecutionApi extends AbstractVerticle{
 				//Send POST request
 				String outputInstanceName = rc.request().getParam("produce");
 				
-				client.post(
-						transition.getTransition().getPort(),
-						transition.getTransition().getHost(),
-						transition.getTransition().getPath())
-				.sendJsonObject(input, ar->{
-			    	if(ar.succeeded()){
-			    				    		
-			        	HttpResponse response = ar.result();
+				
+				vertx.<JsonObject>executeBlocking(fut->{
+					
+					client.post(
+							transition.getTransition().getPort(),
+							transition.getTransition().getHost(),
+							transition.getTransition().getPath())
+					.sendJsonObject(input, ar->{
+				    	if(ar.succeeded()){
+				    				    		
+				        	HttpResponse response = ar.result();
+								
+							System.out.println(response.body().toString());
 							
-						System.out.println(response.body().toString());
-						
-						JsonObject data = response.bodyAsJsonObject();
+							JsonObject data = response.bodyAsJsonObject();
 
-						rc.response().end(data.encode());
+							fut.complete(data);
+						}
+					});
+					
+				}, result->{
+					
+					if (result.succeeded()) {
+						
+						JsonObject data = result.result();
+						
+						logger.info("Adding output to work resource!");
+						
+						//Create Instance from json result
+						Instance i = MetaModelUtils.jsonToStateInstance(data, fieldName, transition, outputInstanceName == null? "UntitledInstance":outputInstanceName);
+						
+						//Add it to the Active resource
+						WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
+						
+						logger.info("Output added to work resource!");
+						
+						vertx.executeBlocking(updateMetaModel->{
+							
+							logger.info("Reprocessing active resource!");
+							
+							WorkApi.reprocessActiveResource();
+							updateMetaModel.complete();
+							
+						}, done->{
+							rc.response().end(data.encode());
+						});
+						
+						
+						
+					}else {
+						logger.error("Error invoking transition -> {} through GET REST request.",
+								transition.getName());
 					}
+					
 				});
+				
+
 			});
 			
 		}
@@ -240,22 +282,59 @@ public class ExecutionApi extends AbstractVerticle{
 				
 				String outputInstanceName = rc.request().getParam("produce");
 				
-				client.get(
-						transition.getTransition().getPort(),
-						transition.getTransition().getHost(),
-						transition.getTransition().getPath())
-				.send(ar->{
-			    	if(ar.succeeded()){
-			    				    		
-			        	HttpResponse response = ar.result();
+				vertx.<JsonObject>executeBlocking(fut->{
+					
+					client.get(
+							transition.getTransition().getPort(),
+							transition.getTransition().getHost(),
+							transition.getTransition().getPath())
+					.send(ar->{
+				    	if(ar.succeeded()){
+				    				    		
+				        	HttpResponse response = ar.result();
+								
+							System.out.println(response.body().toString());
 							
-						System.out.println(response.body().toString());
+							JsonObject data = response.bodyAsJsonObject();
+							
+							fut.complete(data);
+							
+						}
+					});
+					
+				}, result->{
+					if (result.succeeded()) {
 						
-						JsonObject data = response.bodyAsJsonObject();
+						JsonObject data = result.result();
 						
-						rc.response().end(data.encode());
+						logger.info("Adding output to work resource!");
+						
+						//Create Instance from json result
+						Instance i = MetaModelUtils.jsonToStateInstance(data, fieldName, transition, outputInstanceName == null?"UntitledInstance":outputInstanceName);
+						
+						//Add it to the Active resource
+						WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
+						
+						logger.info("Output added to work resource!");
+						
+						vertx.executeBlocking(updateMetaModel->{
+							
+							logger.info("Reprocessing active resource!");
+							WorkApi.reprocessActiveResource();
+							
+							updateMetaModel.complete();
+							
+						}, done->{
+							rc.response().end(data.encode());
+						});
+						
+					}else {
+						logger.error("Error invoking transition -> {} through GET REST request.",
+								transition.getName());
 					}
 				});
+				
+
 				
 			});
 		}

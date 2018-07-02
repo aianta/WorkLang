@@ -10,6 +10,8 @@ import org.worklang.work.Instance
 import org.worklang.work.TransitionInstance
 import org.worklang.work.DefinitionSpace
 import org.worklang.work.TransitionDefinition
+import io.vertx.core.json.JsonObject
+import org.worklang.work.WorkFactory
 
 class WorklangResourceUtils {
 	
@@ -92,9 +94,15 @@ class WorklangResourceUtils {
 		
 		var InstanceSpace space = resolveInstanceSpace(fieldName)
 		
-		return space.instances.findFirst[instance|
+		var Instance result =  space.instances.findFirst[instance|
 			instance.name.equals(instanceName)
 		]
 		
+		if (result === null){
+			logger.error("Could not resolve instance ->{} in field ->{}", instanceName, fieldName);
+		}
+		
+		return result;
 	}
+	
 }

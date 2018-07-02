@@ -21,6 +21,8 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import org.worklang.execution.structures.StateInfo;
+import org.worklang.execution.structures.TransitionInfo;
 import org.worklang.work.Instance;
 import org.worklang.work.StateDefinition;
 import org.worklang.work.TransitionDefinition;
@@ -36,9 +38,9 @@ public class ExecutionInstructionState {
 	boolean isOutputResolved;
 	boolean areTransitionsResolved;
 	
-	ArrayList<SimpleEntry<UUID, Instance>> unresolvedInputs = new ArrayList<>();
-	ArrayList<SimpleEntry<UUID, Instance>> unresolvedOutputs = new ArrayList<>();
-	ArrayList<SimpleEntry<UUID, Instance>> unresolvedTransitions = new ArrayList<>();
+	ArrayList<StateInfo> unresolvedInputs = new ArrayList<>();
+	ArrayList<StateInfo> unresolvedOutputs = new ArrayList<>();
+	ArrayList<TransitionInfo> unresolvedTransitions = new ArrayList<>();
 	
 	public ExecutionInstructionState(ExecutionInstruction instruction) {
 		this.instruction = instruction;
@@ -53,9 +55,9 @@ public class ExecutionInstructionState {
 		clear();
 		
 		//Inspect inputs and update flag
-		instruction.getInputs().forEach((state,entry)->{
-			if (entry.getValue() == null) {
-				unresolvedInputs.add(entry);
+		instruction.getInputs().forEach(state->{
+			if (state.getInstance() == null) {
+				unresolvedInputs.add(state);
 			}
 		});
 		
@@ -66,9 +68,9 @@ public class ExecutionInstructionState {
 		}
 		
 		//Inspect outputs
-		instruction.getOutputs().forEach((state,entry)->{
-			if(entry.getValue() == null) {
-				unresolvedOutputs.add(entry);
+		instruction.getOutputs().forEach(state->{
+			if(state.getInstance() == null) {
+				unresolvedOutputs.add(state);
 			}
 			
 		});
@@ -80,9 +82,9 @@ public class ExecutionInstructionState {
 		}
 		
 		//Inspect transitions
-		instruction.getTransitions().forEach((transition, entry)->{
-			if (entry.getValue() ==  null) {
-				unresolvedTransitions.add(entry);
+		instruction.getTransitions().forEach(transition->{
+			if (transition.getInstance() ==  null) {
+				unresolvedTransitions.add(transition);
 			}
 		});
 		
@@ -113,15 +115,15 @@ public class ExecutionInstructionState {
 		return areTransitionsResolved;
 	}
 
-	public ArrayList<SimpleEntry<UUID, Instance>> getUnresolvedInputs() {
+	public ArrayList<StateInfo> getUnresolvedInputs() {
 		return unresolvedInputs;
 	}
 
-	public ArrayList<SimpleEntry<UUID, Instance>> getUnresolvedOutputs() {
+	public ArrayList<StateInfo> getUnresolvedOutputs() {
 		return unresolvedOutputs;
 	}
 
-	public ArrayList<SimpleEntry<UUID, Instance>> getUnresolvedTransition() {
+	public ArrayList<TransitionInfo> getUnresolvedTransition() {
 		return unresolvedTransitions;
 	}
 	
@@ -142,15 +144,15 @@ public class ExecutionInstructionState {
 			JsonArray missingTransitions = new JsonArray();
 			
 			unresolvedInputs.forEach(entry->{
-				missingInputs.add(entry.getKey().toString());
+				missingInputs.add(entry.getId().toString());
 			});
 			
 			unresolvedOutputs.forEach(entry->{
-				missingOutputs.add(entry.getKey().toString());
+				missingOutputs.add(entry.getId().toString());
 			});
 			
 			unresolvedTransitions.forEach(entry->{
-				missingTransitions.add(entry.getKey().toString());
+				missingTransitions.add(entry.getId().toString());
 			});
 			
 			data
