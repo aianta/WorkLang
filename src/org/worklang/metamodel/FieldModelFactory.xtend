@@ -466,7 +466,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 	}
 	
 	def generateStateInstance(Instance instance){
-		
+			var tx = graph.tx;
 			var state = instance.state
 			
 			logger.info("Creating {} stub ", instance.name)
@@ -538,6 +538,8 @@ class FieldModelFactory extends MetaModelVertexFactory {
 					instanceVertex.addEdge("use", useStateVertex)
 				}
 			}
+			
+			tx.commit
 			
 	}
 	
