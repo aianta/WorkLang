@@ -378,7 +378,6 @@ public class ExecutionInstruction {
 									JsonObject data = response.bodyAsJsonObject();
 									
 									
-									
 									//find output instance					
 									Instance outputInstance = 
 											WorklangResourceUtils.resolveInstance(fieldName, transitionOutputId.toString());

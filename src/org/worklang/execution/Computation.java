@@ -159,7 +159,7 @@ public class Computation {
 				//Update meta model asynchronously 
 				vertx.executeBlocking(blocking->{
 					
-					WorkApi.reprocessActiveResource();
+					//WorkApi.reprocessActiveResource();
 					
 					blocking.complete();
 					

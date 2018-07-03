@@ -43,6 +43,7 @@ import java.lang.ProcessBuilder.Redirect
 import java.util.ArrayList
 import org.worklang.interpreter.WorkApi
 import org.worklang.execution.ExecutionApiWorkFileProcessor
+import org.worklang.metamodel.adapters.InstanceSpaceAdapter
 
 /**
  * Generates code from your model files on save.
@@ -65,6 +66,9 @@ class WorkGenerator extends AbstractGenerator {
 		xResource.save(globalWorkspaceSaveOptions)
 		WorkApi.activeResource = xResource
 		
+		//Attach Content Adapter
+		//var adapter = new InstanceSpaceAdapter();
+		//xResource.eAdapters.add(adapter);
 		
 		generateAPIs(xResource)
 

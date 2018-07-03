@@ -249,16 +249,18 @@ public class ExecutionApi extends AbstractVerticle{
 						
 						logger.info("Output added to work resource!");
 						
-						vertx.executeBlocking(updateMetaModel->{
-							
-							logger.info("Reprocessing active resource!");
-							
-							WorkApi.reprocessActiveResource();
-							updateMetaModel.complete();
-							
-						}, done->{
-							rc.response().end(data.encode());
-						});
+						rc.response().end(data.encode());
+						
+//						vertx.executeBlocking(updateMetaModel->{
+//							
+//							logger.info("Reprocessing active resource!");
+//							
+//							WorkApi.reprocessActiveResource();
+//							updateMetaModel.complete();
+//							
+//						}, done->{
+//							rc.response().end(data.encode());
+//						});
 						
 						
 						
@@ -317,16 +319,18 @@ public class ExecutionApi extends AbstractVerticle{
 						
 						logger.info("Output added to work resource!");
 						
-						vertx.executeBlocking(updateMetaModel->{
-							
-							logger.info("Reprocessing active resource!");
-							WorkApi.reprocessActiveResource();
-							
-							updateMetaModel.complete();
-							
-						}, done->{
-							rc.response().end(data.encode());
-						});
+						rc.response().end(data.encode());
+						
+//						vertx.executeBlocking(updateMetaModel->{
+//							
+//							logger.info("Reprocessing active resource!");
+//							WorkApi.reprocessActiveResource();
+//							
+//							updateMetaModel.complete();
+//							
+//						}, done->{
+//							rc.response().end(data.encode());
+//						});
 						
 					}else {
 						logger.error("Error invoking transition -> {} through GET REST request.",

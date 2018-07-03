@@ -136,8 +136,12 @@ public class CompoundTransitionProcessor {
 								(CompoundStateDefinition)outputDefinition,
 								lastInstruction.getOutputInstances());
 						
+						//Set assembled instances' name
+						i.setName(produceParam != null?produceParam:UUID.randomUUID().toString());
+						
 						WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
 						resultData = ExecutionUtils.StateInstanceToJson(i);
+						
 					}
 					
 					rc.response().end(resultData.encode());

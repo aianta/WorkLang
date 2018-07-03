@@ -108,9 +108,15 @@ class ExecutionApiWorkFileProcessor {
 	}
 
 	
-	def private processCompoundTransitionInstance(Instance compoundTransition) {
+	def private processCompoundTransitionInstance(String fieldName, Instance compoundTransition) {
 		
-		
+		if (!api.routeExists(
+		 "/" + fieldName.toLowerCase + "/" +
+		 compoundTransition.transitionDeclaration.transition.name.toLowerCase + "/" + 
+		 compoundTransition.name.replaceAll("\\s", "").toLowerCase
+		 )){
+		 	api.addCompoundTransitionProcessor(fieldName, compoundTransition);
+		 }
 		
 	}
 	
