@@ -27,9 +27,11 @@ import org.eclipse.emf.common.util.EList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.worklang.WorklangResourceUtils;
+import org.worklang.work.CompoundStateDefinition;
 import org.worklang.work.CompoundTransitionInstance;
 import org.worklang.work.InputDefinition;
 import org.worklang.work.Instance;
+import org.worklang.work.PrimitiveStateDefinition;
 import org.worklang.work.SimpleInstanceInstruction;
 import org.worklang.work.StateDefinition;
 import org.worklang.work.TransitionDefinition;
@@ -89,12 +91,28 @@ public class CompoundTransitionProcessor {
 		logger.info("expression vertex: name-> {}", expressionVertex.property("name").value().toString());
 		
 		logger.info("Processing compound transition code");
-		processExecutionResult(expressionVertex);
+		
+		String expressionName = expressionVertex.property("name").value().toString();
+		
+		if (expressionName.equals("execution result")) {
+			processExecutionResult(expressionVertex);
+		}
+		
+		if (expressionName.equals("simple instance instruction")) {
+			processSimpleInstanceInstruction(expressionVertex);
+		}
+		
+		
 		
 	}
 	
 	public void process(RoutingContext rc) {
 	
+		String produceParam = rc.request().getParam("produce");
+		if (produceParam != null) {
+			computation.customizeFinalInstructionOutputId(produceParam);
+		}
+		
 		try {
 			
 			Future<ExecutionInstruction> runResult = Future.future();
@@ -105,14 +123,37 @@ public class CompoundTransitionProcessor {
 				
 				if (result.succeeded()){
 					ExecutionInstruction lastInstruction = result.result();
-					JsonObject resultData =  ExecutionUtils.StateInstanceToJson(lastInstruction.getOutputInstance(outputDefinition));
+					
+					JsonObject resultData = null;
+					
+					//Assemble compound transition result
+					if (outputDefinition instanceof PrimitiveStateDefinition) {
+						resultData =  ExecutionUtils.StateInstanceToJson(lastInstruction.getOutputInstance(outputDefinition));
+					}
+					
+					if (outputDefinition instanceof CompoundStateDefinition) {
+						Instance i = WorklangResourceUtils.mapInstancesToCompoundInstance(
+								(CompoundStateDefinition)outputDefinition,
+								lastInstruction.getOutputInstances());
+						
+						WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
+						resultData = ExecutionUtils.StateInstanceToJson(i);
+					}
 					
 					rc.response().end(resultData.encode());
 					
 					/**Re-process the computation so it's ready to execute next time
 					 * This will probably have to be refactored at some point.
 					 */
-					processExecutionResult(expressionVertex);
+					String expressionName = expressionVertex.property("name").value().toString();
+					
+					if (expressionName.equals("execution result")) {
+						processExecutionResult(expressionVertex);
+					}
+					
+					if (expressionName.equals("simple instance instruction")) {
+						processSimpleInstanceInstruction(expressionVertex);
+					}
 				}
 				
 				
@@ -199,6 +240,15 @@ public class CompoundTransitionProcessor {
 		
 	}
 	
+	public void processSimpleInstanceInstruction(Vertex simpleInstanceInstruction) {
+		logger.info("creating a new computation");
+		computation = new Computation(vertx, client);
+		
+		ExecutionInstruction instruction = new ExecutionInstruction(computation, fieldName);
+		
+		processSimpleInstanceInstruction(simpleInstanceInstruction, instruction);
+	}
+	
 	public void processSimpleInstanceInstruction(Vertex simpleInstanceInstruction, ExecutionInstruction instruction ) {
 		
 		logger.info("Finding transitions to execute from simple instruction vertex");
@@ -213,6 +263,7 @@ public class CompoundTransitionProcessor {
 					WorklangResourceUtils.resolveTransitionInstance(
 						curr.property("field").value().toString(),
 						curr.property("name").value().toString());
+			logger.info("resolved transition instance -> {}", transitionInstance);
 			
 			logger.info("created transition instance from vertex: Instance ->{} -> name ->{}", transitionInstance, transitionInstance.getName());
 				
@@ -240,13 +291,13 @@ public class CompoundTransitionProcessor {
 					EList<StateDefinition> transitionInputs = transitionDefinition.getIn().getInputState();
 						
 					logger.info("Getting execution context");
-					SimpleEntry<UUID,ExecutionInstruction> context = instruction.executionContext();
+					ExecutionInstruction context = instruction.executionContext();
 					
 					logger.info("Context -> {}", context);
 					
 					logger.info("Iterate through previous instruction's output and this transition's inpunt");
 					//Iterate through previous execution instruction's output and this transitions input
-					context.getValue().getOutputs().forEach(state->{
+					context.getOutputs().forEach(state->{
 						logger.info("LAST OUTPUT: State -> {} UUID-> {} Instance -> {}", state.getDefinition().getName(), state.getId().toString(), state.getInstance());
 						
 						transitionInputs.forEach(input->{

@@ -26,6 +26,7 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.worklang.execution.structures.StateInfo;
 import org.worklang.interpreter.WorkApi;
 import org.worklang.work.Instance;
 
@@ -41,11 +42,11 @@ public class Computation {
 
 	private UUID id = UUID.randomUUID();
 	private WebClient client;
-	private Stack<SimpleEntry<UUID,ExecutionInstruction>> executionStack = new Stack<>();
-	private List<SimpleEntry<UUID,ExecutionInstruction>> executionHistory = new ArrayList<>();
+	private Stack<ExecutionInstruction> executionStack = new Stack<>();
+	private List<ExecutionInstruction> executionHistory = new ArrayList<>();
 	
-	private SimpleEntry<UUID, ExecutionInstruction> lastInstruction;
-	
+	private ExecutionInstruction lastInstruction; //As in previously executed instruction
+		
 	private Vertx vertx;
 	
 	//TODO implement START WITH data structure for initializing computation with existing meta model instances
@@ -67,16 +68,15 @@ public class Computation {
 		return client;
 	}
 	
+	//Adds a new instruction to the computation and assigns it a UUID
 	public UUID addInstruction(ExecutionInstruction instruction) {
 		
 		logger.info("Adding instruction to execution stack");
 		
-		SimpleEntry<UUID, ExecutionInstruction> entry = 
-				new SimpleEntry<>(UUID.randomUUID(), instruction);
+		executionStack.push(instruction);
 		
-		executionStack.push(entry);
 		
-		return entry.getKey();
+		return UUID.randomUUID();
 	}
 	
 	public void run(Future<ExecutionInstruction> resultFuture) throws Exception{
@@ -85,7 +85,7 @@ public class Computation {
 		
 		done.setHandler(result->{
 			
-			resultFuture.complete(executionHistory.get(executionHistory.size()-1).getValue());
+			resultFuture.complete(executionHistory.get(executionHistory.size()-1));
 			
 		});
 		
@@ -95,49 +95,54 @@ public class Computation {
 		
 	}
 	
-	public SimpleEntry<UUID, ExecutionInstruction> toComputeNext(){
+	public ExecutionInstruction toComputeNext(){
 		return executionStack.peek();
 	}
 	
 	public void computeNext(Future<Void> done) throws Exception{
-		SimpleEntry<UUID,ExecutionInstruction> toCompute = executionStack.pop();
-		logger.info("computing next -> {}", toCompute.getValue());
+		ExecutionInstruction toCompute = executionStack.pop();
+		
+		logger.info("computing next -> {}", toCompute.toString());
 		
 		if (lastInstruction != null ) {
 			logger.info("last instruction is not null");
-			logger.info("instruction -> {}", toCompute.getValue().toString());
+			logger.info("instruction -> {}", toCompute.toString());
 			
 			//Go through any unresolved inputs in toCompute and populate them with output instances from the last instruction
-			toCompute.getValue().status().getUnresolvedInputs().forEach(entry->{
-				logger.info("Unresolved input entry: UUID->{} Instance ->{} ", entry.getId().toString(), entry.getInstance());
+			Iterator<StateInfo> unresolvedInputIterator = toCompute.status().getUnresolvedInputs().iterator();
+			
+			while (unresolvedInputIterator.hasNext()){
+				StateInfo curr = unresolvedInputIterator.next();
+				logger.info("Unresolved input entry: UUID->{} Instance ->{} ", curr.getId().toString(), curr.getInstance());
 				
-				Instance i = lastInstruction.getValue().getOutput(entry.getId()).getInstance();
+				Instance i = lastInstruction.getOutput(curr.getId()).getInstance();
 				logger.info("Resolved instance -> {}", i.toString());
 				
-				ExecutionInstruction inst = toCompute.getValue();
-				inst.setInputInstance(entry.getId(), i);
-				toCompute.setValue(inst);
-			});
+				ExecutionInstruction inst = toCompute;
+				inst.setInputInstance(curr.getId(), i);
+				toCompute = inst;
+			}
+
 			
-			logger.info("resolved instruction -> {}", toCompute.getValue().toString());
+			logger.info("resolved instruction -> {}", toCompute.toString());
 			
-			if (toCompute.getValue().isExecutable()) {
+			if (toCompute.isExecutable()) {
 				compute(toCompute,done);
 				
 			}else {
 				logger.error("Instruction isn't executable!");
-				logger.error(toCompute.getValue().status().toString());
+				logger.error(toCompute.status().toString());
 				throw new Exception("Attempted to execute unexecutable instruction");
 			}
 			
 		}else {
 			logger.info("last instruction is null");
-			if (toCompute.getValue().isExecutable()) {
+			if (toCompute.isExecutable()) {
 				compute(toCompute,done);
 				
 			}else {
 				logger.error("Instruction isn't executable!");
-				logger.error(toCompute.getValue().status().toString());
+				logger.error(toCompute.status().toString());
 				throw new Exception("Attempted to execute unexecutable instruction");
 			}
 			
@@ -145,10 +150,10 @@ public class Computation {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void compute(SimpleEntry<UUID, ExecutionInstruction> toCompute, Future<Void> done) {
+	private void compute(ExecutionInstruction toCompute, Future<Void> done) {
 		
 		//Execute instruction
-		toCompute.getValue().execute().setHandler(result->{
+		toCompute.execute().setHandler(result->{
 			if (((AsyncResult)result).succeeded()) {
 				
 				//Update meta model asynchronously 
@@ -161,7 +166,7 @@ public class Computation {
 				}, modelUpdateResult->{
 					
 					if (modelUpdateResult.succeeded()) {
-						toCompute.getValue().executed();
+						toCompute.executed();
 						executionHistory.add(toCompute);
 						lastInstruction = toCompute;
 						
@@ -191,11 +196,11 @@ public class Computation {
 		});
 	}
 	
-	public Stack<SimpleEntry<UUID, ExecutionInstruction>> getExecutionStack() {
+	public Stack<ExecutionInstruction> getExecutionStack() {
 		return executionStack;
 	}
 
-	public List<SimpleEntry<UUID, ExecutionInstruction>> getExecutionHistory() {
+	public List<ExecutionInstruction> getExecutionHistory() {
 		return executionHistory;
 	}
 	
@@ -203,19 +208,19 @@ public class Computation {
 	 * Use this to determine if outputs of the previous instructions match inputs 
 	 * for the next instruction.
 	 */
-	public SimpleEntry<UUID, ExecutionInstruction> executionContext(ExecutionInstruction instruction){
+	public ExecutionInstruction executionContext(ExecutionInstruction instruction){
 		
 		logger.info("looking for {}", instruction.getId());
 		
-		Iterator<SimpleEntry<UUID,ExecutionInstruction>> it = executionStack.iterator();
+		Iterator<ExecutionInstruction> it = executionStack.iterator();
 		
 		logger.info("Iterating through the stack");
 		//SimpleEntry<UUID,ExecutionInstruction> last = null;
 		while (it.hasNext()) {
-			SimpleEntry<UUID,ExecutionInstruction> curr = it.next();
+			ExecutionInstruction curr = it.next();
 			logger.info("Instruction -> {}", curr);
 			//If we found the instruction
-			if (curr.getKey().equals(instruction.getId())) {
+			if (curr.getId().equals(instruction.getId())) {
 				//Return the instruction to be executed before it
 				
 				//return last;
@@ -242,13 +247,13 @@ public class Computation {
 				.put("id", id.toString())
 				.put("execution stack - size", executionStack.size())
 				.put("execution stack - head [next instruction]", new  JsonObject()
-						.put("UUID", executionStack.peek().getKey().toString())
-						.put("Execution Instruction", executionStack.peek().getValue().toJson()));
+						.put("UUID", executionStack.peek().getId().toString())
+						.put("Execution Instruction", executionStack.peek().toJson()));
 		
 			if (lastInstruction != null) {
 				data.put("last instruction", new JsonObject()
-						.put("UUID", lastInstruction.getKey())
-						.put("Execution Instruction", lastInstruction.getValue().toJson()));
+						.put("UUID", lastInstruction.getId().toString())
+						.put("Execution Instruction", lastInstruction.toJson()));
 			}else {
 				data.put("last instruction", "null");
 			}
@@ -257,12 +262,17 @@ public class Computation {
 		JsonObject executionHistory = new JsonObject();
 		
 		this.executionHistory.forEach(entry->{
-			executionHistory.put(entry.getKey().toString(), entry.getValue().toString());
+			executionHistory.put(entry.getId().toString(), entry.toString());
 		});
 		
 		data.put("execution history", executionHistory);
 		
 		return data.encodePrettily();
+	}
+	
+	public void customizeFinalInstructionOutputId (String id) {
+		executionStack.get(0).setLastOutputInstanceId(id);
+		executionStack.get(0).setLastInstruction(true);
 	}
 
 }

@@ -900,8 +900,21 @@ class FieldModelFactory extends MetaModelVertexFactory {
 			createEdge(bodyVertex, inputVertex, "starting input")
 		]
 		
-		var executionResultVertex = generateExecutionResultGraphStructures(compositionBody.expression as ExecutionResult, label)
-		createEdge(bodyVertex, executionResultVertex, "expression")
+		var compositionType = compositionBody.expression
+		switch(compositionType){
+			case compositionType instanceof ExecutionResult:
+			{
+				var executionResultVertex = generateExecutionResultGraphStructures(compositionBody.expression as ExecutionResult, label)
+				createEdge(bodyVertex, executionResultVertex, "expression")
+			}
+			case compositionType instanceof SimpleInstruction:
+			{
+				var simpleInstructionVertex = generateSimpleInstructionGraphStructures(compositionType as SimpleInstruction, label );
+				createEdge(bodyVertex, simpleInstructionVertex, "expression");
+			}
+		}
+		
+		
 		
 		return bodyVertex
 	}
@@ -923,8 +936,20 @@ class FieldModelFactory extends MetaModelVertexFactory {
 			createEdge(bodyVertex, inputVertex, "starting input")
 		]
 		
-		var executionResultVertex = generateExecutionResultGraphStructures(compositionBody.expression as ExecutionResult, executionResultMeta)
-		createEdge(bodyVertex, executionResultVertex, "expression")
+		var compositionType = compositionBody.expression
+		
+		switch(compositionType){
+			case compositionType instanceof ExecutionResult:
+			{
+				var executionResultVertex = generateExecutionResultGraphStructures(compositionBody.expression as ExecutionResult, executionResultMeta)
+				createEdge(bodyVertex, executionResultVertex, "expression")
+			}
+			case compositionType instanceof SimpleInstanceInstruction:
+			{
+				var simpleInstanceInstructionVertex = generateSimpleInstanceInstructionGraphStructures(compositionType as SimpleInstanceInstruction, label);
+				createEdge(bodyVertex, simpleInstanceInstructionVertex, "expression")
+			}
+		}
 		
 		//Find the transition that this is an instance of
 		var transitionVertex = graph.vertices("match (n:`"+transitionMeta+"` {field:'"+field.name+"', name: '"+instance.transitionDeclaration.transition.name+"'}) return n").head

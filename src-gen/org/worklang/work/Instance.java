@@ -16,6 +16,7 @@
 package org.worklang.work;
 
 import org.eclipse.emf.ecore.EObject;
+import org.worklang.work.StateInstance;
 
 /**
  * <!-- begin-user-doc -->
@@ -195,5 +196,7 @@ public interface Instance extends EObject
    * @generated
    */
   void setCompoundTransition(CompoundTransitionInstance value);
+
+
 
 } // Instance

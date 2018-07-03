@@ -89,7 +89,8 @@ public class ExecutionInstruction {
 	
 	private Computation computation;
 	
-	
+	private boolean isLastInstruction = false;
+	private String lastOutputInstanceId;
 	
 	//Create an Execution Instruction stub from a transition definition
 	public ExecutionInstruction(Computation computation, String fieldName) {
@@ -259,6 +260,19 @@ public class ExecutionInstruction {
 		return null;
 	}
 	
+	public List<Instance> getOutputInstances(){
+		List<Instance> result = new ArrayList<>();
+		
+		Iterator<StateInfo> it = outputs.iterator();
+		
+		while (it.hasNext()) {
+			StateInfo curr = it.next();
+			result.add(curr.getInstance());
+		}
+		
+		return result;
+	}
+	
 	public UUID getOutputId (StateDefinition state) {
 		Iterator<StateInfo> it = outputs.iterator();
 		
@@ -274,7 +288,7 @@ public class ExecutionInstruction {
 		return null;
 	}
 	
-	public SimpleEntry<UUID, ExecutionInstruction> executionContext(){
+	public ExecutionInstruction executionContext(){
 		return computation.executionContext(this);
 	}
 	
@@ -343,7 +357,11 @@ public class ExecutionInstruction {
 								transition.getDefinition().getName().toLowerCase() + "/" +
 								transition.getInstance().getName().replaceAll("\\s", "").toLowerCase();
 						
-						routePath += "?produce=" + transitionOutputId.toString();
+
+							routePath += "?produce=" + transitionOutputId.toString();
+						
+						
+						
 						
 						logger.info("Execution Instruction POST: routePath -> {}", routePath);
 						
@@ -361,8 +379,9 @@ public class ExecutionInstruction {
 									
 									
 									
-									//Create output instance
-									Instance outputInstance = WorklangResourceUtils.resolveInstance(fieldName, transitionOutputId.toString());
+									//find output instance					
+									Instance outputInstance = 
+											WorklangResourceUtils.resolveInstance(fieldName, transitionOutputId.toString());
 									
 									fut.complete(outputInstance);
 										
@@ -503,6 +522,8 @@ public class ExecutionInstruction {
 				.put("id", id.toString())
 				.put("executed", executed)
 				.put("fieldName", fieldName)
+				.put("isLastInstruction", isLastInstruction)
+				.put("lastOutputInstanceId", lastOutputInstanceId)
 				.put("status", status.toJson());
 		
 		JsonObject inputs = new JsonObject();
@@ -553,5 +574,22 @@ public class ExecutionInstruction {
 		
 		return data;
 		
+	}
+
+	public boolean isLastInstruction() {
+		return isLastInstruction;
+	}
+
+	public void setLastInstruction(boolean isLastInstruction) {
+		this.isLastInstruction = isLastInstruction;
+	}
+
+	public String getLastOutputInstanceId() {
+		return lastOutputInstanceId;
+	}
+
+	public void setLastOutputInstanceId(String lastOutputInstanceId) {
+		this.lastOutputInstanceId = lastOutputInstanceId;
+		outputs.get(0).setId(UUID.fromString(lastOutputInstanceId));
 	}
 }
