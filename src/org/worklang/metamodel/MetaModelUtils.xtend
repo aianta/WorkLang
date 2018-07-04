@@ -492,8 +492,10 @@ class MetaModelUtils {
 			while(useStateInstanceParams.hasNext){
 				var useStateInstanceVertex = useStateInstanceParams.next
 				
+				var useStateDefinitionVertex = useStateInstanceVertex.vertices(Direction.OUT, "instanceOf").next
+				
 				result.put(
-					useStateInstanceVertex.property("name").value.toString,
+					useStateDefinitionVertex.property("name").value.toString,
 					stateInstanceVertexToJson(useStateInstanceVertex)
 				)
 			}
@@ -505,8 +507,10 @@ class MetaModelUtils {
 			while(useCollectionInstanceParams.hasNext){
 				var useCollectionInstanceVertex = useCollectionInstanceParams.next
 				
+				var useCollectionDefinitionVertex = useCollectionInstanceVertex.vertices(Direction.OUT, "instanceOf").next
+				
 				result.put(
-					useCollectionInstanceVertex.property("name").value.toString,
+					useCollectionDefinitionVertex.property("name").value.toString,
 					collectionInstanceVertexToJson(useCollectionInstanceVertex)
 				)
 			}
