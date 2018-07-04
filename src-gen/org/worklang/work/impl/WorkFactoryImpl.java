@@ -101,6 +101,7 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
       case WorkPackage.STATE_DECLARATION: return createStateDeclaration();
       case WorkPackage.TRANSITION_INSTANCE: return createTransitionInstance();
       case WorkPackage.STATE_INSTANCE: return createStateInstance();
+      case WorkPackage.COLLECTION_INSTANCE: return createCollectionInstance();
       case WorkPackage.USE_DEFINITION: return createUseDefinition();
       case WorkPackage.SET_STATEMENT: return createSetStatement();
       case WorkPackage.TO_DEFINITION: return createToDefinition();
@@ -392,6 +393,17 @@ public class WorkFactoryImpl extends EFactoryImpl implements WorkFactory
   {
     StateInstanceImpl stateInstance = new StateInstanceImpl();
     return stateInstance;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CollectionInstance createCollectionInstance()
+  {
+    CollectionInstanceImpl collectionInstance = new CollectionInstanceImpl();
+    return collectionInstance;
   }
 
   /**

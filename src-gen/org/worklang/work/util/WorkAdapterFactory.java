@@ -208,6 +208,11 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
         return createStateInstanceAdapter();
       }
       @Override
+      public Adapter caseCollectionInstance(CollectionInstance object)
+      {
+        return createCollectionInstanceAdapter();
+      }
+      @Override
       public Adapter caseUseDefinition(UseDefinition object)
       {
         return createUseDefinitionAdapter();
@@ -705,6 +710,21 @@ public class WorkAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStateInstanceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.worklang.work.CollectionInstance <em>Collection Instance</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.worklang.work.CollectionInstance
+   * @generated
+   */
+  public Adapter createCollectionInstanceAdapter()
   {
     return null;
   }

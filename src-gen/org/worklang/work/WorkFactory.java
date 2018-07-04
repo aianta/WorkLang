@@ -252,6 +252,15 @@ public interface WorkFactory extends EFactory
   StateInstance createStateInstance();
 
   /**
+   * Returns a new object of class '<em>Collection Instance</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Collection Instance</em>'.
+   * @generated
+   */
+  CollectionInstance createCollectionInstance();
+
+  /**
    * Returns a new object of class '<em>Use Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

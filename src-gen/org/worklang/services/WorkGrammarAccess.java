@@ -838,23 +838,32 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTransitionDeclarationTransitionDeclarationParserRuleCall_1_0_0 = (RuleCall)cTransitionDeclarationAssignment_1_0.eContents().get(0);
 		private final Assignment cStateDeclarationAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
 		private final RuleCall cStateDeclarationStateDeclarationParserRuleCall_1_1_0 = (RuleCall)cStateDeclarationAssignment_1_1.eContents().get(0);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameSTRINGTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Assignment cIsCollectionElementAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Keyword cIsCollectionElementCollectionElementKeyword_2_0 = (Keyword)cIsCollectionElementAssignment_2.eContents().get(0);
 		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
-		private final Assignment cStateAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
-		private final RuleCall cStateStateInstanceParserRuleCall_3_0_0 = (RuleCall)cStateAssignment_3_0.eContents().get(0);
-		private final Assignment cTransitionAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
-		private final RuleCall cTransitionTransitionInstanceParserRuleCall_3_1_0 = (RuleCall)cTransitionAssignment_3_1.eContents().get(0);
-		private final Assignment cCompoundTransitionAssignment_3_2 = (Assignment)cAlternatives_3.eContents().get(2);
-		private final RuleCall cCompoundTransitionCompoundTransitionInstanceParserRuleCall_3_2_0 = (RuleCall)cCompoundTransitionAssignment_3_2.eContents().get(0);
+		private final Assignment cNameAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
+		private final RuleCall cNameSTRINGTerminalRuleCall_3_0_0 = (RuleCall)cNameAssignment_3_0.eContents().get(0);
+		private final Assignment cNameAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
+		private final RuleCall cNameCOLLECTION_ELEMENT_NAMETerminalRuleCall_3_1_0 = (RuleCall)cNameAssignment_3_1.eContents().get(0);
+		private final Alternatives cAlternatives_4 = (Alternatives)cGroup.eContents().get(4);
+		private final Assignment cStateAssignment_4_0 = (Assignment)cAlternatives_4.eContents().get(0);
+		private final RuleCall cStateStateInstanceParserRuleCall_4_0_0 = (RuleCall)cStateAssignment_4_0.eContents().get(0);
+		private final Assignment cTransitionAssignment_4_1 = (Assignment)cAlternatives_4.eContents().get(1);
+		private final RuleCall cTransitionTransitionInstanceParserRuleCall_4_1_0 = (RuleCall)cTransitionAssignment_4_1.eContents().get(0);
+		private final Assignment cCompoundTransitionAssignment_4_2 = (Assignment)cAlternatives_4.eContents().get(2);
+		private final RuleCall cCompoundTransitionCompoundTransitionInstanceParserRuleCall_4_2_0 = (RuleCall)cCompoundTransitionAssignment_4_2.eContents().get(0);
+		private final Assignment cCollectionAssignment_4_3 = (Assignment)cAlternatives_4.eContents().get(3);
+		private final RuleCall cCollectionCollectionInstanceParserRuleCall_4_3_0 = (RuleCall)cCollectionAssignment_4_3.eContents().get(0);
 		
 		//Instance:
-		//	'instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) name=STRING
-		//	(state=StateInstance | transition=TransitionInstance | compoundTransition=CompoundTransitionInstance);
+		//	'instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration)
+		//	isCollectionElement?='collectionElement'? (name=STRING | name=COLLECTION_ELEMENT_NAME) (state=StateInstance |
+		//	transition=TransitionInstance | compoundTransition=CompoundTransitionInstance | collection=CollectionInstance);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) name=STRING
-		//(state=StateInstance | transition=TransitionInstance | compoundTransition=CompoundTransitionInstance)
+		//'instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration)
+		//isCollectionElement?='collectionElement'? (name=STRING | name=COLLECTION_ELEMENT_NAME) (state=StateInstance |
+		//transition=TransitionInstance | compoundTransition=CompoundTransitionInstance | collection=CollectionInstance)
 		public Group getGroup() { return cGroup; }
 		
 		//'instance'
@@ -875,32 +884,54 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//StateDeclaration
 		public RuleCall getStateDeclarationStateDeclarationParserRuleCall_1_1_0() { return cStateDeclarationStateDeclarationParserRuleCall_1_1_0; }
 		
-		//name=STRING
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		//isCollectionElement?='collectionElement'?
+		public Assignment getIsCollectionElementAssignment_2() { return cIsCollectionElementAssignment_2; }
 		
-		//STRING
-		public RuleCall getNameSTRINGTerminalRuleCall_2_0() { return cNameSTRINGTerminalRuleCall_2_0; }
+		//'collectionElement'
+		public Keyword getIsCollectionElementCollectionElementKeyword_2_0() { return cIsCollectionElementCollectionElementKeyword_2_0; }
 		
-		//(state=StateInstance | transition=TransitionInstance | compoundTransition=CompoundTransitionInstance)
+		//(name=STRING | name=COLLECTION_ELEMENT_NAME)
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 		
+		//name=STRING
+		public Assignment getNameAssignment_3_0() { return cNameAssignment_3_0; }
+		
+		//STRING
+		public RuleCall getNameSTRINGTerminalRuleCall_3_0_0() { return cNameSTRINGTerminalRuleCall_3_0_0; }
+		
+		//name=COLLECTION_ELEMENT_NAME
+		public Assignment getNameAssignment_3_1() { return cNameAssignment_3_1; }
+		
+		//COLLECTION_ELEMENT_NAME
+		public RuleCall getNameCOLLECTION_ELEMENT_NAMETerminalRuleCall_3_1_0() { return cNameCOLLECTION_ELEMENT_NAMETerminalRuleCall_3_1_0; }
+		
+		//(state=StateInstance | transition=TransitionInstance | compoundTransition=CompoundTransitionInstance |
+		//collection=CollectionInstance)
+		public Alternatives getAlternatives_4() { return cAlternatives_4; }
+		
 		//state=StateInstance
-		public Assignment getStateAssignment_3_0() { return cStateAssignment_3_0; }
+		public Assignment getStateAssignment_4_0() { return cStateAssignment_4_0; }
 		
 		//StateInstance
-		public RuleCall getStateStateInstanceParserRuleCall_3_0_0() { return cStateStateInstanceParserRuleCall_3_0_0; }
+		public RuleCall getStateStateInstanceParserRuleCall_4_0_0() { return cStateStateInstanceParserRuleCall_4_0_0; }
 		
 		//transition=TransitionInstance
-		public Assignment getTransitionAssignment_3_1() { return cTransitionAssignment_3_1; }
+		public Assignment getTransitionAssignment_4_1() { return cTransitionAssignment_4_1; }
 		
 		//TransitionInstance
-		public RuleCall getTransitionTransitionInstanceParserRuleCall_3_1_0() { return cTransitionTransitionInstanceParserRuleCall_3_1_0; }
+		public RuleCall getTransitionTransitionInstanceParserRuleCall_4_1_0() { return cTransitionTransitionInstanceParserRuleCall_4_1_0; }
 		
 		//compoundTransition=CompoundTransitionInstance
-		public Assignment getCompoundTransitionAssignment_3_2() { return cCompoundTransitionAssignment_3_2; }
+		public Assignment getCompoundTransitionAssignment_4_2() { return cCompoundTransitionAssignment_4_2; }
 		
 		//CompoundTransitionInstance
-		public RuleCall getCompoundTransitionCompoundTransitionInstanceParserRuleCall_3_2_0() { return cCompoundTransitionCompoundTransitionInstanceParserRuleCall_3_2_0; }
+		public RuleCall getCompoundTransitionCompoundTransitionInstanceParserRuleCall_4_2_0() { return cCompoundTransitionCompoundTransitionInstanceParserRuleCall_4_2_0; }
+		
+		//collection=CollectionInstance
+		public Assignment getCollectionAssignment_4_3() { return cCollectionAssignment_4_3; }
+		
+		//CollectionInstance
+		public RuleCall getCollectionCollectionInstanceParserRuleCall_4_3_0() { return cCollectionCollectionInstanceParserRuleCall_4_3_0; }
 	}
 	public class TransitionDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TransitionDeclaration");
@@ -1034,32 +1065,65 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
 	}
+	public class CollectionInstanceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.CollectionInstance");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cElementsInstanceCrossReference_1_0 = (CrossReference)cElementsAssignment_1.eContents().get(0);
+		private final RuleCall cElementsInstanceCOLLECTION_ELEMENT_NAMETerminalRuleCall_1_0_1 = (RuleCall)cElementsInstanceCrossReference_1_0.eContents().get(1);
+		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//CollectionInstance:
+		//	'['
+		//	elements+=[Instance|COLLECTION_ELEMENT_NAME]+
+		//	']';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'[' elements+=[Instance|COLLECTION_ELEMENT_NAME]+ ']'
+		public Group getGroup() { return cGroup; }
+		
+		//'['
+		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
+		
+		//elements+=[Instance|COLLECTION_ELEMENT_NAME]+
+		public Assignment getElementsAssignment_1() { return cElementsAssignment_1; }
+		
+		//[Instance|COLLECTION_ELEMENT_NAME]
+		public CrossReference getElementsInstanceCrossReference_1_0() { return cElementsInstanceCrossReference_1_0; }
+		
+		//COLLECTION_ELEMENT_NAME
+		public RuleCall getElementsInstanceCOLLECTION_ELEMENT_NAMETerminalRuleCall_1_0_1() { return cElementsInstanceCOLLECTION_ELEMENT_NAMETerminalRuleCall_1_0_1; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
+	}
 	public class UseDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.UseDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cUseKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cPredefinedValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cPredefinedValueInstanceCrossReference_1_0 = (CrossReference)cPredefinedValueAssignment_1.eContents().get(0);
-		private final RuleCall cPredefinedValueInstanceIDTerminalRuleCall_1_0_1 = (RuleCall)cPredefinedValueInstanceCrossReference_1_0.eContents().get(1);
+		private final RuleCall cPredefinedValueInstanceSTRINGTerminalRuleCall_1_0_1 = (RuleCall)cPredefinedValueInstanceCrossReference_1_0.eContents().get(1);
 		
 		//UseDefinition:
-		//	'use' predefinedValue=[Instance];
+		//	'use' predefinedValue=[Instance|STRING];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'use' predefinedValue=[Instance]
+		//'use' predefinedValue=[Instance|STRING]
 		public Group getGroup() { return cGroup; }
 		
 		//'use'
 		public Keyword getUseKeyword_0() { return cUseKeyword_0; }
 		
-		//predefinedValue=[Instance]
+		//predefinedValue=[Instance|STRING]
 		public Assignment getPredefinedValueAssignment_1() { return cPredefinedValueAssignment_1; }
 		
-		//[Instance]
+		//[Instance|STRING]
 		public CrossReference getPredefinedValueInstanceCrossReference_1_0() { return cPredefinedValueInstanceCrossReference_1_0; }
 		
-		//ID
-		public RuleCall getPredefinedValueInstanceIDTerminalRuleCall_1_0_1() { return cPredefinedValueInstanceIDTerminalRuleCall_1_0_1; }
+		//STRING
+		public RuleCall getPredefinedValueInstanceSTRINGTerminalRuleCall_1_0_1() { return cPredefinedValueInstanceSTRINGTerminalRuleCall_1_0_1; }
 	}
 	public class SetStatementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.SetStatement");
@@ -1210,18 +1274,18 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cStateDefinitionAction_2_0 = (Action)cGroup_2.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
 		private final Assignment cListAssignment_2_1_0 = (Assignment)cGroup_2_1.eContents().get(0);
-		private final Keyword cListSetOfKeyword_2_1_0_0 = (Keyword)cListAssignment_2_1_0.eContents().get(0);
-		private final Assignment cValueAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final CrossReference cValueStateDefinitionCrossReference_2_1_1_0 = (CrossReference)cValueAssignment_2_1_1.eContents().get(0);
-		private final RuleCall cValueStateDefinitionIDTerminalRuleCall_2_1_1_0_1 = (RuleCall)cValueStateDefinitionCrossReference_2_1_1_0.eContents().get(1);
+		private final Keyword cListCollectionOfKeyword_2_1_0_0 = (Keyword)cListAssignment_2_1_0.eContents().get(0);
+		private final Assignment cInstanceAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final CrossReference cInstanceStateDefinitionCrossReference_2_1_1_0 = (CrossReference)cInstanceAssignment_2_1_1.eContents().get(0);
+		private final RuleCall cInstanceStateDefinitionIDTerminalRuleCall_2_1_1_0_1 = (RuleCall)cInstanceStateDefinitionCrossReference_2_1_1_0.eContents().get(1);
 		
 		//TerminalBinaryExpression BinaryExpression:
-		//	'(' Predicate ')' | {StateDefinition} instance=[StateDefinition] | {StateDefinition} (list?='setOf'
-		//	value=[StateDefinition]);
+		//	'(' Predicate ')' | {StateDefinition} instance=[StateDefinition] | {StateDefinition} (list?='collectionOf'
+		//	instance=[StateDefinition]);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'(' Predicate ')' | {StateDefinition} instance=[StateDefinition] | {StateDefinition} (list?='setOf'
-		//value=[StateDefinition])
+		//'(' Predicate ')' | {StateDefinition} instance=[StateDefinition] | {StateDefinition} (list?='collectionOf'
+		//instance=[StateDefinition])
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'(' Predicate ')'
@@ -1251,29 +1315,29 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getInstanceStateDefinitionIDTerminalRuleCall_1_1_0_1() { return cInstanceStateDefinitionIDTerminalRuleCall_1_1_0_1; }
 		
-		//{StateDefinition} (list?='setOf' value=[StateDefinition])
+		//{StateDefinition} (list?='collectionOf' instance=[StateDefinition])
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//{StateDefinition}
 		public Action getStateDefinitionAction_2_0() { return cStateDefinitionAction_2_0; }
 		
-		//(list?='setOf' value=[StateDefinition])
+		//(list?='collectionOf' instance=[StateDefinition])
 		public Group getGroup_2_1() { return cGroup_2_1; }
 		
-		//list?='setOf'
+		//list?='collectionOf'
 		public Assignment getListAssignment_2_1_0() { return cListAssignment_2_1_0; }
 		
-		//'setOf'
-		public Keyword getListSetOfKeyword_2_1_0_0() { return cListSetOfKeyword_2_1_0_0; }
+		//'collectionOf'
+		public Keyword getListCollectionOfKeyword_2_1_0_0() { return cListCollectionOfKeyword_2_1_0_0; }
 		
-		//value=[StateDefinition]
-		public Assignment getValueAssignment_2_1_1() { return cValueAssignment_2_1_1; }
+		//instance=[StateDefinition]
+		public Assignment getInstanceAssignment_2_1_1() { return cInstanceAssignment_2_1_1; }
 		
 		//[StateDefinition]
-		public CrossReference getValueStateDefinitionCrossReference_2_1_1_0() { return cValueStateDefinitionCrossReference_2_1_1_0; }
+		public CrossReference getInstanceStateDefinitionCrossReference_2_1_1_0() { return cInstanceStateDefinitionCrossReference_2_1_1_0; }
 		
 		//ID
-		public RuleCall getValueStateDefinitionIDTerminalRuleCall_2_1_1_0_1() { return cValueStateDefinitionIDTerminalRuleCall_2_1_1_0_1; }
+		public RuleCall getInstanceStateDefinitionIDTerminalRuleCall_2_1_1_0_1() { return cInstanceStateDefinitionIDTerminalRuleCall_2_1_1_0_1; }
 	}
 	public class TransitionCompositionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.TransitionComposition");
@@ -2094,6 +2158,8 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	private final StateDeclarationElements pStateDeclaration;
 	private final TransitionInstanceElements pTransitionInstance;
 	private final StateInstanceElements pStateInstance;
+	private final CollectionInstanceElements pCollectionInstance;
+	private final TerminalRule tCOLLECTION_ELEMENT_NAME;
 	private final UseDefinitionElements pUseDefinition;
 	private final SetStatementElements pSetStatement;
 	private final ToDefinitionElements pToDefinition;
@@ -2153,6 +2219,8 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		this.pStateDeclaration = new StateDeclarationElements();
 		this.pTransitionInstance = new TransitionInstanceElements();
 		this.pStateInstance = new StateInstanceElements();
+		this.pCollectionInstance = new CollectionInstanceElements();
+		this.tCOLLECTION_ELEMENT_NAME = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.COLLECTION_ELEMENT_NAME");
 		this.pUseDefinition = new UseDefinitionElements();
 		this.pSetStatement = new SetStatementElements();
 		this.pToDefinition = new ToDefinitionElements();
@@ -2443,8 +2511,9 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Instance:
-	//	'instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) name=STRING
-	//	(state=StateInstance | transition=TransitionInstance | compoundTransition=CompoundTransitionInstance);
+	//	'instance' (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration)
+	//	isCollectionElement?='collectionElement'? (name=STRING | name=COLLECTION_ELEMENT_NAME) (state=StateInstance |
+	//	transition=TransitionInstance | compoundTransition=CompoundTransitionInstance | collection=CollectionInstance);
 	public InstanceElements getInstanceAccess() {
 		return pInstance;
 	}
@@ -2497,8 +2566,26 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		return getStateInstanceAccess().getRule();
 	}
 	
+	//CollectionInstance:
+	//	'['
+	//	elements+=[Instance|COLLECTION_ELEMENT_NAME]+
+	//	']';
+	public CollectionInstanceElements getCollectionInstanceAccess() {
+		return pCollectionInstance;
+	}
+	
+	public ParserRule getCollectionInstanceRule() {
+		return getCollectionInstanceAccess().getRule();
+	}
+	
+	//terminal COLLECTION_ELEMENT_NAME:
+	//	'#' ID '#' INT '#' ID?;
+	public TerminalRule getCOLLECTION_ELEMENT_NAMERule() {
+		return tCOLLECTION_ELEMENT_NAME;
+	}
+	
 	//UseDefinition:
-	//	'use' predefinedValue=[Instance];
+	//	'use' predefinedValue=[Instance|STRING];
 	public UseDefinitionElements getUseDefinitionAccess() {
 		return pUseDefinition;
 	}
@@ -2549,8 +2636,8 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//TerminalBinaryExpression BinaryExpression:
-	//	'(' Predicate ')' | {StateDefinition} instance=[StateDefinition] | {StateDefinition} (list?='setOf'
-	//	value=[StateDefinition]);
+	//	'(' Predicate ')' | {StateDefinition} instance=[StateDefinition] | {StateDefinition} (list?='collectionOf'
+	//	instance=[StateDefinition]);
 	public TerminalBinaryExpressionElements getTerminalBinaryExpressionAccess() {
 		return pTerminalBinaryExpression;
 	}

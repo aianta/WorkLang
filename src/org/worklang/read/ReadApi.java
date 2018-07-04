@@ -17,6 +17,10 @@
 
 package org.worklang.read;
 
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 
@@ -98,11 +102,47 @@ public class ReadApi extends AbstractVerticle{
 		return router;
 	}
 	
+	public void addCollectionInstance (String fieldName, Instance collection) {
+		String routePath = "/" + fieldName.toLowerCase() + "/" +
+				collection.getStateDeclaration().getState().getName().toLowerCase() + "/" +
+				collection.getName().replaceAll("\\s", "").toLowerCase();
+				
+				Route route = router.route(HttpMethod.GET, routePath).handler(rc->{
+					
+					logger.info("Getting collection instance!");
+					
+					Vertex stateInstanceVertex = MetaModelUtils.getCollectionInstanceVertex(fieldName, collection.getName());
+					
+					JsonArray data = MetaModelUtils.collectionInstanceVertexToJson(stateInstanceVertex);
+					
+					rc.response().end(data.encode());
+					
+				});
+		
+
+				
+				logger.info("Registering collection instance at {}", routePath);
+				
+				
+		stateInstances.add(routePath);
+	}
+	
 	public void addStateInstance (String fieldName, Instance state) {
+		
+		String instanceName = state.getName().replaceAll("\\s", "").toLowerCase();
+		
+		String encodedInstanceName = null;
+		try {
+			encodedInstanceName = URLEncoder.encode(instanceName, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("could not encode instance name -> {}", instanceName);
+			e.printStackTrace();
+		}
+		
 		
 		String routePath = "/" + fieldName.toLowerCase() + "/" +
 		state.getStateDeclaration().getState().getName().toLowerCase() + "/" +
-		state.getName().replaceAll("\\s", "").toLowerCase();
+		encodedInstanceName;
 		
 		logger.info("Registering state instance at {}", routePath);
 		

@@ -388,6 +388,15 @@ class MetaModelUtils {
 		return target
 	}
 	
+	def static Vertex getCollectionInstanceVertex(String fieldName, String collectionName){
+		
+		var graph = WorkApi.graph
+		
+		var target = graph.vertices("match (n:`collection instance` {field:'"+fieldName+"', name:'"+collectionName+"'}) return n").head
+		
+		return target
+	}
+	
 	def static Vertex getStateInstanceVertex(String fieldName, String stateName){
 		
 		var graph = WorkApi.graph
@@ -412,7 +421,45 @@ class MetaModelUtils {
 		return result
 	}
 	
+	def static JsonArray collectionInstanceVertexToJson(Vertex collectionInstance){
+		
+		val result =  new JsonArray
+		
+		logger.info("Converting collection instance vertex to JsonArray")
+		
+		collectionInstance.vertices(Direction.OUT, "index").forEach[element|
+			
+			logger.info("Processing collection instance element")
+			
+			var elementInstance = element.vertices(Direction.OUT, "is").head
+			
+			logger.info("elementInstance -> {} stateType->{}", elementInstance, elementInstance.property("stateType").value.toString )
+			
+			if (elementInstance.property("stateType").value.equals("primitive")){
+				result.add(collectionPrimitiveStateInstanceVertexToJson(elementInstance))
+			}
+			
+			if (elementInstance.property("stateType").value.equals("compound")){
+				result.add(stateInstanceVertexToJson(elementInstance))
+			}
+			
+		]
+		
+		return result
+		
+	}
+	
+	def static String collectionPrimitiveStateInstanceVertexToJson(Vertex primitiveStateInstance){
+		
+		var setVertex = primitiveStateInstance.vertices(Direction.OUT, "set").head
+		
+		return setVertex.property("value").value.toString
+		
+	}
+	
 	def static JsonObject stateInstanceVertexToJson(Vertex stateInstance){
+		
+		logger.info("converting state instance vertex to json")
 		
 		var result = new JsonObject
 		
@@ -420,30 +467,56 @@ class MetaModelUtils {
 		
 		var fieldName = stateInstance.property("field").value.toString
 		var stateName = stateInstance.property("name").value.toString
+		var type = stateInstance.property("type").value.toString
 		
-		//Get all set parameters
-		var setParams = graph.vertices("match (n:`state instance` {field:'"+fieldName+"', name: '"+stateName+"'})-[:set]->(param:value) return param")
+		logger.info("fieldName ->{} state instance name -> {} type ->{}", fieldName, stateName, type);
 		
-		//Iterate through them, adding them to the json 
-		while(setParams.hasNext){
-			var valueVertex = setParams.next
-			result.put(
-				valueVertex.property("name").value.toString,
-				valueVertex.property("value").value.toString
-			)
+		//If this instance is a state instance
+		if (type.equals("state")){
+			//Get all set parameters
+			var setParams = graph.vertices("match (n:`state instance` {field:'"+fieldName+"', name: '"+stateName+"'})-[:set]->(param:value) return param")
+			
+			//Iterate through them, adding them to the json 
+			while(setParams.hasNext){
+				var valueVertex = setParams.next
+				result.put(
+					valueVertex.property("name").value.toString,
+					valueVertex.property("value").value.toString
+				)
+			}
+			
+			//Get all use state instance parameters
+			var useStateInstanceParams = graph.vertices("match (n:`state instance` {field:'"+fieldName+"', name: '"+stateName+"'})-[:use]->(param:`state instance`) return param");
+			
+			//Iterate through them, adding them to json
+			while(useStateInstanceParams.hasNext){
+				var useStateInstanceVertex = useStateInstanceParams.next
+				
+				result.put(
+					useStateInstanceVertex.property("name").value.toString,
+					stateInstanceVertexToJson(useStateInstanceVertex)
+				)
+			}
+			
+			//Get all use collection instance parameters
+			var useCollectionInstanceParams = graph.vertices("match (n:`state instance` {field:'"+fieldName+"', name: '"+stateName+"'})-[:use]->(param:`collection instance`) return param")
+			
+			//Iterate through them, adding them to the json
+			while(useCollectionInstanceParams.hasNext){
+				var useCollectionInstanceVertex = useCollectionInstanceParams.next
+				
+				result.put(
+					useCollectionInstanceVertex.property("name").value.toString,
+					collectionInstanceVertexToJson(useCollectionInstanceVertex)
+				)
+			}
 		}
 		
-		//Get all use parameters
-		var useParams = graph.vertices("match (n:`state instance` {field:'"+fieldName+"', name: '"+stateName+"'})-[:use]->(param:`state instance`) return param");
-		
-		//Iterate through them, adding them to json
-		while(useParams.hasNext){
-			var useStateInstanceVertex = useParams.next
-			result.put(
-				useStateInstanceVertex.property("name").value.toString,
-				stateInstanceVertexToJson(useStateInstanceVertex)
-			)
+		//If this instance is a collection instance
+		if (type.equals("collection")){
+			result.put(stateName, collectionInstanceVertexToJson(stateInstance))
 		}
+
 		
 		return result
 	}

@@ -28,6 +28,7 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.worklang.services.WorkGrammarAccess;
+import org.worklang.work.CollectionInstance;
 import org.worklang.work.CompoundStateDefinition;
 import org.worklang.work.CompoundTransitionDefinition;
 import org.worklang.work.CompoundTransitionInstance;
@@ -86,6 +87,9 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == WorkPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case WorkPackage.COLLECTION_INSTANCE:
+				sequence_CollectionInstance(context, (CollectionInstance) semanticObject); 
+				return; 
 			case WorkPackage.COMPOUND_STATE_DEFINITION:
 				sequence_CompoundStateDefinition(context, (CompoundStateDefinition) semanticObject); 
 				return; 
@@ -235,6 +239,18 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     (left=BinaryExpression_Operation_1_0 (op='AND' | op='OR') right=TerminalBinaryExpression)
 	 */
 	protected void sequence_BinaryExpression(ISerializationContext context, Operation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     CollectionInstance returns CollectionInstance
+	 *
+	 * Constraint:
+	 *     elements+=[Instance|COLLECTION_ELEMENT_NAME]+
+	 */
+	protected void sequence_CollectionInstance(ISerializationContext context, CollectionInstance semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -414,8 +430,9 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     (
 	 *         (transitionDeclaration=TransitionDeclaration | stateDeclaration=StateDeclaration) 
-	 *         name=STRING 
-	 *         (state=StateInstance | transition=TransitionInstance | compoundTransition=CompoundTransitionInstance)
+	 *         isCollectionElement?='collectionElement'? 
+	 *         (name=STRING | name=COLLECTION_ELEMENT_NAME) 
+	 *         (state=StateInstance | transition=TransitionInstance | compoundTransition=CompoundTransitionInstance | collection=CollectionInstance)
 	 *     )
 	 */
 	protected void sequence_Instance(ISerializationContext context, Instance semanticObject) {
@@ -768,7 +785,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     TerminalBinaryExpression returns StateDefinition
 	 *
 	 * Constraint:
-	 *     (instance=[StateDefinition|ID] | (list?='setOf' value=[StateDefinition|ID]))
+	 *     (instance=[StateDefinition|ID] | (list?='collectionOf' instance=[StateDefinition|ID]))
 	 */
 	protected void sequence_TerminalBinaryExpression(ISerializationContext context, StateDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -882,7 +899,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     UseDefinition returns UseDefinition
 	 *
 	 * Constraint:
-	 *     predefinedValue=[Instance|ID]
+	 *     predefinedValue=[Instance|STRING]
 	 */
 	protected void sequence_UseDefinition(ISerializationContext context, UseDefinition semanticObject) {
 		if (errorAcceptor != null) {
@@ -890,7 +907,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.USE_DEFINITION__PREDEFINED_VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getUseDefinitionAccess().getPredefinedValueInstanceIDTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.USE_DEFINITION__PREDEFINED_VALUE, false));
+		feeder.accept(grammarAccess.getUseDefinitionAccess().getPredefinedValueInstanceSTRINGTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.USE_DEFINITION__PREDEFINED_VALUE, false));
 		feeder.finish();
 	}
 	

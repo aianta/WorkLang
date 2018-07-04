@@ -97,10 +97,17 @@ class WorkGenerator extends AbstractGenerator {
 			
 			//For its state instances
 			field.instanceSpace.instances.filter[instance|
-				instance.stateDeclaration !== null //Filter out transition instances
+				instance.state !== null //Filter out transition instances and collection instances
 			].forEach[stateInstance|
 				
 				WorkApi.readApi.addStateInstance(field.name, stateInstance);
+			]
+			
+			//For its collecton instances
+			field.instanceSpace.instances.filter[instance|
+				instance.collection !== null //Filter out state instances and transition instances
+			].forEach[collectionInstance|
+				WorkApi.readApi.addCollectionInstance(field.name, collectionInstance)
 			]
 			
 			

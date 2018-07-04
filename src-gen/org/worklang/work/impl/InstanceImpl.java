@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.worklang.work.CollectionInstance;
 import org.worklang.work.CompoundTransitionInstance;
 import org.worklang.work.Instance;
 import org.worklang.work.StateDeclaration;
@@ -42,10 +43,12 @@ import org.worklang.work.WorkPackage;
  * <ul>
  *   <li>{@link org.worklang.work.impl.InstanceImpl#getTransitionDeclaration <em>Transition Declaration</em>}</li>
  *   <li>{@link org.worklang.work.impl.InstanceImpl#getStateDeclaration <em>State Declaration</em>}</li>
+ *   <li>{@link org.worklang.work.impl.InstanceImpl#isIsCollectionElement <em>Is Collection Element</em>}</li>
  *   <li>{@link org.worklang.work.impl.InstanceImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.worklang.work.impl.InstanceImpl#getState <em>State</em>}</li>
  *   <li>{@link org.worklang.work.impl.InstanceImpl#getTransition <em>Transition</em>}</li>
  *   <li>{@link org.worklang.work.impl.InstanceImpl#getCompoundTransition <em>Compound Transition</em>}</li>
+ *   <li>{@link org.worklang.work.impl.InstanceImpl#getCollection <em>Collection</em>}</li>
  * </ul>
  *
  * @generated
@@ -71,6 +74,26 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
    * @ordered
    */
   protected StateDeclaration stateDeclaration;
+
+  /**
+   * The default value of the '{@link #isIsCollectionElement() <em>Is Collection Element</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isIsCollectionElement()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean IS_COLLECTION_ELEMENT_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isIsCollectionElement() <em>Is Collection Element</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isIsCollectionElement()
+   * @generated
+   * @ordered
+   */
+  protected boolean isCollectionElement = IS_COLLECTION_ELEMENT_EDEFAULT;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -121,6 +144,16 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
    * @ordered
    */
   protected CompoundTransitionInstance compoundTransition;
+
+  /**
+   * The cached value of the '{@link #getCollection() <em>Collection</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getCollection()
+   * @generated
+   * @ordered
+   */
+  protected CollectionInstance collection;
 
   /**
    * <!-- begin-user-doc -->
@@ -237,6 +270,29 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__STATE_DECLARATION, newStateDeclaration, newStateDeclaration));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isIsCollectionElement()
+  {
+    return isCollectionElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setIsCollectionElement(boolean newIsCollectionElement)
+  {
+    boolean oldIsCollectionElement = isCollectionElement;
+    isCollectionElement = newIsCollectionElement;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__IS_COLLECTION_ELEMENT, oldIsCollectionElement, isCollectionElement));
   }
 
   /**
@@ -411,6 +467,54 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
    * <!-- end-user-doc -->
    * @generated
    */
+  public CollectionInstance getCollection()
+  {
+    return collection;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetCollection(CollectionInstance newCollection, NotificationChain msgs)
+  {
+    CollectionInstance oldCollection = collection;
+    collection = newCollection;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__COLLECTION, oldCollection, newCollection);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setCollection(CollectionInstance newCollection)
+  {
+    if (newCollection != collection)
+    {
+      NotificationChain msgs = null;
+      if (collection != null)
+        msgs = ((InternalEObject)collection).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.INSTANCE__COLLECTION, null, msgs);
+      if (newCollection != null)
+        msgs = ((InternalEObject)newCollection).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.INSTANCE__COLLECTION, null, msgs);
+      msgs = basicSetCollection(newCollection, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__COLLECTION, newCollection, newCollection));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -426,6 +530,8 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
         return basicSetTransition(null, msgs);
       case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
         return basicSetCompoundTransition(null, msgs);
+      case WorkPackage.INSTANCE__COLLECTION:
+        return basicSetCollection(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -444,6 +550,8 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
         return getTransitionDeclaration();
       case WorkPackage.INSTANCE__STATE_DECLARATION:
         return getStateDeclaration();
+      case WorkPackage.INSTANCE__IS_COLLECTION_ELEMENT:
+        return isIsCollectionElement();
       case WorkPackage.INSTANCE__NAME:
         return getName();
       case WorkPackage.INSTANCE__STATE:
@@ -452,6 +560,8 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
         return getTransition();
       case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
         return getCompoundTransition();
+      case WorkPackage.INSTANCE__COLLECTION:
+        return getCollection();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -472,6 +582,9 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
       case WorkPackage.INSTANCE__STATE_DECLARATION:
         setStateDeclaration((StateDeclaration)newValue);
         return;
+      case WorkPackage.INSTANCE__IS_COLLECTION_ELEMENT:
+        setIsCollectionElement((Boolean)newValue);
+        return;
       case WorkPackage.INSTANCE__NAME:
         setName((String)newValue);
         return;
@@ -483,6 +596,9 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
         return;
       case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
         setCompoundTransition((CompoundTransitionInstance)newValue);
+        return;
+      case WorkPackage.INSTANCE__COLLECTION:
+        setCollection((CollectionInstance)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -504,6 +620,9 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
       case WorkPackage.INSTANCE__STATE_DECLARATION:
         setStateDeclaration((StateDeclaration)null);
         return;
+      case WorkPackage.INSTANCE__IS_COLLECTION_ELEMENT:
+        setIsCollectionElement(IS_COLLECTION_ELEMENT_EDEFAULT);
+        return;
       case WorkPackage.INSTANCE__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -515,6 +634,9 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
         return;
       case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
         setCompoundTransition((CompoundTransitionInstance)null);
+        return;
+      case WorkPackage.INSTANCE__COLLECTION:
+        setCollection((CollectionInstance)null);
         return;
     }
     super.eUnset(featureID);
@@ -534,6 +656,8 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
         return transitionDeclaration != null;
       case WorkPackage.INSTANCE__STATE_DECLARATION:
         return stateDeclaration != null;
+      case WorkPackage.INSTANCE__IS_COLLECTION_ELEMENT:
+        return isCollectionElement != IS_COLLECTION_ELEMENT_EDEFAULT;
       case WorkPackage.INSTANCE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case WorkPackage.INSTANCE__STATE:
@@ -542,6 +666,8 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
         return transition != null;
       case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
         return compoundTransition != null;
+      case WorkPackage.INSTANCE__COLLECTION:
+        return collection != null;
     }
     return super.eIsSet(featureID);
   }
@@ -557,7 +683,9 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
+    result.append(" (isCollectionElement: ");
+    result.append(isCollectionElement);
+    result.append(", name: ");
     result.append(name);
     result.append(')');
     return result.toString();

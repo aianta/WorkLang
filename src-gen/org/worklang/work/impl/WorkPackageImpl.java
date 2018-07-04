@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.worklang.work.BinaryExpression;
+import org.worklang.work.CollectionInstance;
 import org.worklang.work.CompoundStateDefinition;
 import org.worklang.work.CompoundTransitionDefinition;
 import org.worklang.work.CompoundTransitionInstance;
@@ -248,6 +249,13 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * @generated
    */
   private EClass stateInstanceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass collectionInstanceEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -735,19 +743,9 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getStateDefinition_Value()
-  {
-    return (EReference)stateDefinitionEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EAttribute getStateDefinition_Type()
   {
-    return (EAttribute)stateDefinitionEClass.getEStructuralFeatures().get(3);
+    return (EAttribute)stateDefinitionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -757,7 +755,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    */
   public EAttribute getStateDefinition_Name()
   {
-    return (EAttribute)stateDefinitionEClass.getEStructuralFeatures().get(4);
+    return (EAttribute)stateDefinitionEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1075,7 +1073,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getInstance_Name()
+  public EAttribute getInstance_IsCollectionElement()
   {
     return (EAttribute)instanceEClass.getEStructuralFeatures().get(2);
   }
@@ -1085,9 +1083,9 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getInstance_State()
+  public EAttribute getInstance_Name()
   {
-    return (EReference)instanceEClass.getEStructuralFeatures().get(3);
+    return (EAttribute)instanceEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1095,7 +1093,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getInstance_Transition()
+  public EReference getInstance_State()
   {
     return (EReference)instanceEClass.getEStructuralFeatures().get(4);
   }
@@ -1105,9 +1103,29 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getInstance_CompoundTransition()
+  public EReference getInstance_Transition()
   {
     return (EReference)instanceEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getInstance_CompoundTransition()
+  {
+    return (EReference)instanceEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getInstance_Collection()
+  {
+    return (EReference)instanceEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -1208,6 +1226,26 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
   public EReference getStateInstance_Members()
   {
     return (EReference)stateInstanceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getCollectionInstance()
+  {
+    return collectionInstanceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCollectionInstance_Elements()
+  {
+    return (EReference)collectionInstanceEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1881,7 +1919,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     stateDefinitionEClass = createEClass(STATE_DEFINITION);
     createEReference(stateDefinitionEClass, STATE_DEFINITION__INSTANCE);
     createEAttribute(stateDefinitionEClass, STATE_DEFINITION__LIST);
-    createEReference(stateDefinitionEClass, STATE_DEFINITION__VALUE);
     createEAttribute(stateDefinitionEClass, STATE_DEFINITION__TYPE);
     createEAttribute(stateDefinitionEClass, STATE_DEFINITION__NAME);
 
@@ -1928,10 +1965,12 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     instanceEClass = createEClass(INSTANCE);
     createEReference(instanceEClass, INSTANCE__TRANSITION_DECLARATION);
     createEReference(instanceEClass, INSTANCE__STATE_DECLARATION);
+    createEAttribute(instanceEClass, INSTANCE__IS_COLLECTION_ELEMENT);
     createEAttribute(instanceEClass, INSTANCE__NAME);
     createEReference(instanceEClass, INSTANCE__STATE);
     createEReference(instanceEClass, INSTANCE__TRANSITION);
     createEReference(instanceEClass, INSTANCE__COMPOUND_TRANSITION);
+    createEReference(instanceEClass, INSTANCE__COLLECTION);
 
     transitionDeclarationEClass = createEClass(TRANSITION_DECLARATION);
     createEReference(transitionDeclarationEClass, TRANSITION_DECLARATION__TRANSITION);
@@ -1946,6 +1985,9 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
 
     stateInstanceEClass = createEClass(STATE_INSTANCE);
     createEReference(stateInstanceEClass, STATE_INSTANCE__MEMBERS);
+
+    collectionInstanceEClass = createEClass(COLLECTION_INSTANCE);
+    createEReference(collectionInstanceEClass, COLLECTION_INSTANCE__ELEMENTS);
 
     useDefinitionEClass = createEClass(USE_DEFINITION);
     createEReference(useDefinitionEClass, USE_DEFINITION__PREDEFINED_VALUE);
@@ -2114,7 +2156,6 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     initEClass(stateDefinitionEClass, StateDefinition.class, "StateDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getStateDefinition_Instance(), this.getStateDefinition(), null, "instance", null, 0, 1, StateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getStateDefinition_List(), ecorePackage.getEBoolean(), "list", null, 0, 1, StateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStateDefinition_Value(), this.getStateDefinition(), null, "value", null, 0, 1, StateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getStateDefinition_Type(), ecorePackage.getEString(), "type", null, 0, 1, StateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getStateDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, StateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2161,10 +2202,12 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     initEClass(instanceEClass, Instance.class, "Instance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getInstance_TransitionDeclaration(), this.getTransitionDeclaration(), null, "transitionDeclaration", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getInstance_StateDeclaration(), this.getStateDeclaration(), null, "stateDeclaration", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getInstance_IsCollectionElement(), ecorePackage.getEBoolean(), "isCollectionElement", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getInstance_Name(), ecorePackage.getEString(), "name", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getInstance_State(), this.getStateInstance(), null, "state", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getInstance_Transition(), this.getTransitionInstance(), null, "transition", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getInstance_CompoundTransition(), this.getCompoundTransitionInstance(), null, "compoundTransition", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getInstance_Collection(), this.getCollectionInstance(), null, "collection", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(transitionDeclarationEClass, TransitionDeclaration.class, "TransitionDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTransitionDeclaration_Transition(), this.getTransitionDefinition(), null, "transition", null, 0, 1, TransitionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2179,6 +2222,9 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
 
     initEClass(stateInstanceEClass, StateInstance.class, "StateInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getStateInstance_Members(), ecorePackage.getEObject(), null, "members", null, 0, -1, StateInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(collectionInstanceEClass, CollectionInstance.class, "CollectionInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getCollectionInstance_Elements(), this.getInstance(), null, "elements", null, 0, -1, CollectionInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(useDefinitionEClass, UseDefinition.class, "UseDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getUseDefinition_PredefinedValue(), this.getInstance(), null, "predefinedValue", null, 0, 1, UseDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

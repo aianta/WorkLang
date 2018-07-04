@@ -260,6 +260,13 @@ public class WorkSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case WorkPackage.COLLECTION_INSTANCE:
+      {
+        CollectionInstance collectionInstance = (CollectionInstance)theEObject;
+        T result = caseCollectionInstance(collectionInstance);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case WorkPackage.USE_DEFINITION:
       {
         UseDefinition useDefinition = (UseDefinition)theEObject;
@@ -828,6 +835,22 @@ public class WorkSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseStateInstance(StateInstance object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Collection Instance</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Collection Instance</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCollectionInstance(CollectionInstance object)
   {
     return null;
   }

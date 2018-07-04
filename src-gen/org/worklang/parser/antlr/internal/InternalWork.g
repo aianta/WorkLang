@@ -1363,29 +1363,64 @@ ruleInstance returns [EObject current=null]
 		)
 		(
 			(
-				lv_name_3_0=RULE_STRING
+				lv_isCollectionElement_3_0='collectionElement'
 				{
-					newLeafNode(lv_name_3_0, grammarAccess.getInstanceAccess().getNameSTRINGTerminalRuleCall_2_0());
+					newLeafNode(lv_isCollectionElement_3_0, grammarAccess.getInstanceAccess().getIsCollectionElementCollectionElementKeyword_2_0());
 				}
 				{
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getInstanceRule());
 					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_3_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+					setWithLastConsumed($current, "isCollectionElement", true, "collectionElement");
 				}
+			)
+		)?
+		(
+			(
+				(
+					lv_name_4_0=RULE_STRING
+					{
+						newLeafNode(lv_name_4_0, grammarAccess.getInstanceAccess().getNameSTRINGTerminalRuleCall_3_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getInstanceRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"name",
+							lv_name_4_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
+			)
+			    |
+			(
+				(
+					lv_name_5_0=RULE_COLLECTION_ELEMENT_NAME
+					{
+						newLeafNode(lv_name_5_0, grammarAccess.getInstanceAccess().getNameCOLLECTION_ELEMENT_NAMETerminalRuleCall_3_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getInstanceRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"name",
+							lv_name_5_0,
+							"org.worklang.Work.COLLECTION_ELEMENT_NAME");
+					}
+				)
 			)
 		)
 		(
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getInstanceAccess().getStateStateInstanceParserRuleCall_3_0_0());
+						newCompositeNode(grammarAccess.getInstanceAccess().getStateStateInstanceParserRuleCall_4_0_0());
 					}
-					lv_state_4_0=ruleStateInstance
+					lv_state_6_0=ruleStateInstance
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getInstanceRule());
@@ -1393,7 +1428,7 @@ ruleInstance returns [EObject current=null]
 						set(
 							$current,
 							"state",
-							lv_state_4_0,
+							lv_state_6_0,
 							"org.worklang.Work.StateInstance");
 						afterParserOrEnumRuleCall();
 					}
@@ -1403,9 +1438,9 @@ ruleInstance returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getInstanceAccess().getTransitionTransitionInstanceParserRuleCall_3_1_0());
+						newCompositeNode(grammarAccess.getInstanceAccess().getTransitionTransitionInstanceParserRuleCall_4_1_0());
 					}
-					lv_transition_5_0=ruleTransitionInstance
+					lv_transition_7_0=ruleTransitionInstance
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getInstanceRule());
@@ -1413,7 +1448,7 @@ ruleInstance returns [EObject current=null]
 						set(
 							$current,
 							"transition",
-							lv_transition_5_0,
+							lv_transition_7_0,
 							"org.worklang.Work.TransitionInstance");
 						afterParserOrEnumRuleCall();
 					}
@@ -1423,9 +1458,9 @@ ruleInstance returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getInstanceAccess().getCompoundTransitionCompoundTransitionInstanceParserRuleCall_3_2_0());
+						newCompositeNode(grammarAccess.getInstanceAccess().getCompoundTransitionCompoundTransitionInstanceParserRuleCall_4_2_0());
 					}
-					lv_compoundTransition_6_0=ruleCompoundTransitionInstance
+					lv_compoundTransition_8_0=ruleCompoundTransitionInstance
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getInstanceRule());
@@ -1433,8 +1468,28 @@ ruleInstance returns [EObject current=null]
 						set(
 							$current,
 							"compoundTransition",
-							lv_compoundTransition_6_0,
+							lv_compoundTransition_8_0,
 							"org.worklang.Work.CompoundTransitionInstance");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getInstanceAccess().getCollectionCollectionInstanceParserRuleCall_4_3_0());
+					}
+					lv_collection_9_0=ruleCollectionInstance
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getInstanceRule());
+						}
+						set(
+							$current,
+							"collection",
+							lv_collection_9_0,
+							"org.worklang.Work.CollectionInstance");
 						afterParserOrEnumRuleCall();
 					}
 				)
@@ -1668,6 +1723,46 @@ ruleStateInstance returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleCollectionInstance
+entryRuleCollectionInstance returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getCollectionInstanceRule()); }
+	iv_ruleCollectionInstance=ruleCollectionInstance
+	{ $current=$iv_ruleCollectionInstance.current; }
+	EOF;
+
+// Rule CollectionInstance
+ruleCollectionInstance returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='['
+		{
+			newLeafNode(otherlv_0, grammarAccess.getCollectionInstanceAccess().getLeftSquareBracketKeyword_0());
+		}
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getCollectionInstanceRule());
+					}
+				}
+				otherlv_1=RULE_COLLECTION_ELEMENT_NAME
+				{
+					newLeafNode(otherlv_1, grammarAccess.getCollectionInstanceAccess().getElementsInstanceCrossReference_1_0());
+				}
+			)
+		)+
+		otherlv_2=']'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getCollectionInstanceAccess().getRightSquareBracketKeyword_2());
+		}
+	)
+;
+
 // Entry rule entryRuleUseDefinition
 entryRuleUseDefinition returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getUseDefinitionRule()); }
@@ -1695,7 +1790,7 @@ ruleUseDefinition returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getUseDefinitionRule());
 					}
 				}
-				otherlv_1=RULE_ID
+				otherlv_1=RULE_STRING
 				{
 					newLeafNode(otherlv_1, grammarAccess.getUseDefinitionAccess().getPredefinedValueInstanceCrossReference_1_0());
 				}
@@ -2003,15 +2098,15 @@ ruleTerminalBinaryExpression returns [EObject current=null]
 			(
 				(
 					(
-						lv_list_6_0='setOf'
+						lv_list_6_0='collectionOf'
 						{
-							newLeafNode(lv_list_6_0, grammarAccess.getTerminalBinaryExpressionAccess().getListSetOfKeyword_2_1_0_0());
+							newLeafNode(lv_list_6_0, grammarAccess.getTerminalBinaryExpressionAccess().getListCollectionOfKeyword_2_1_0_0());
 						}
 						{
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getTerminalBinaryExpressionRule());
 							}
-							setWithLastConsumed($current, "list", true, "setOf");
+							setWithLastConsumed($current, "list", true, "collectionOf");
 						}
 					)
 				)
@@ -2024,7 +2119,7 @@ ruleTerminalBinaryExpression returns [EObject current=null]
 						}
 						otherlv_7=RULE_ID
 						{
-							newLeafNode(otherlv_7, grammarAccess.getTerminalBinaryExpressionAccess().getValueStateDefinitionCrossReference_2_1_1_0());
+							newLeafNode(otherlv_7, grammarAccess.getTerminalBinaryExpressionAccess().getInstanceStateDefinitionCrossReference_2_1_1_0());
 						}
 					)
 				)
@@ -3235,6 +3330,8 @@ ruleResolvableTransitionOutputValue returns [EObject current=null]
 		)
 	)
 ;
+
+RULE_COLLECTION_ELEMENT_NAME : '#' RULE_ID '#' RULE_INT '#' RULE_ID?;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

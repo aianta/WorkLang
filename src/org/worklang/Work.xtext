@@ -17,6 +17,8 @@
 
 grammar org.worklang.Work with org.eclipse.xtext.common.Terminals
 
+import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
+
 generate work "http://www.worklang.org/Work"
 
 
@@ -146,9 +148,10 @@ OutputDefinition:
 
 Instance:
 	'instance' 
-	(transitionDeclaration = TransitionDeclaration| stateDeclaration = StateDeclaration) 
-	name = STRING 
-	(state = StateInstance | transition = TransitionInstance| compoundTransition = CompoundTransitionInstance)
+	(transitionDeclaration = TransitionDeclaration| stateDeclaration = StateDeclaration)
+	isCollectionElement ?= ('collectionElement')? 
+	(name = STRING| name = COLLECTION_ELEMENT_NAME) 
+	(state = StateInstance | transition = TransitionInstance| compoundTransition = CompoundTransitionInstance| collection = CollectionInstance)
 ;
 
 TransitionDeclaration:
@@ -166,15 +169,24 @@ TransitionInstance:
 ;
 
 StateInstance:
-	 
 	'{'
 		members += (SetStatement| UseDefinition| Instance)+
 	'}'
 			
 ;
 
+CollectionInstance:
+	'['
+		elements += [Instance|COLLECTION_ELEMENT_NAME]+
+	']'
+;
+
+terminal COLLECTION_ELEMENT_NAME:
+	('#' ID '#' INT '#' ID?)
+;
+
 UseDefinition:
-	'use' predefinedValue = [Instance] 
+	'use' predefinedValue = [Instance|STRING] 
 ;
 
 SetStatement:
@@ -198,7 +210,7 @@ BinaryExpression:
 TerminalBinaryExpression returns BinaryExpression:
 	'(' Predicate ')'|
 	 {StateDefinition} instance = [StateDefinition]|
-	 {StateDefinition}(list ?= 'setOf' value = [StateDefinition])
+	 {StateDefinition}(list ?= 'collectionOf' instance = [StateDefinition])
 ;
 
 

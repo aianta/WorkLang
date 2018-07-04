@@ -97,6 +97,8 @@ class FieldModelFactory extends MetaModelVertexFactory {
 	var toComputeIfFalseMeta = "compute false"
 	var toComputeMeta = "compute"
 	var transitionCompositionBodyMeta = "transition composition body" 
+	var collectionInstanceMeta = "collection instance"
+	var collectionInstanceElementMeta = "collection instance element"
 	
 	var String fieldName
 	
@@ -217,13 +219,24 @@ class FieldModelFactory extends MetaModelVertexFactory {
 			
 			if (instanceSpace !== null){
 				logger.info("Generating instance space for {}", fieldName)
-				//Instance space states
+				//Instance space states first pass
 				tx = graph.tx
 				firstPassStateInstances
 				tx.commit
 				
+				//Instance space collections first pass
+				tx = graph.tx
+				firstPassCollectionInstances
+				tx.commit
+				
+				//Instance space states second pass
 				tx = graph.tx
 				secondPassStateInstances
+				tx.commit
+				
+				//Instance space collections second pass
+				tx = graph.tx
+				secondPassCollectionInstances
 				tx.commit
 				
 				//Instance space transitions
@@ -366,6 +379,113 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		
 	}
 	
+	def private firstPassCollectionInstances(){
+		logger.info("Generating collection instance stubs for {}", fieldName)
+		
+		//Create graph structures for collection instances
+		instanceSpace.instances.filter[instance|
+			instance.collection !== null
+		].forEach[collectionInstance|
+			
+			var collection = collectionInstance.collection
+			var vertex = createVertex(collection, collectionInstanceMeta)
+			vertex.property(VertexProperty.Cardinality.single, "name", collectionInstance.name);
+			vertex.property(VertexProperty.Cardinality.single, "type", "collection");
+			vertex.property(VertexProperty.Cardinality.single, "size", Integer.toString(collection.elements.size))
+			
+			createEdge(instanceSpaceVertex, vertex, "definesInstance");
+			
+			//Find vertex of state this collection is an instance of
+			var instancedState = collectionInstance.stateDeclaration.state
+			
+			var instancedStateVertex = graph.vertices("match (n:`"+stateMeta+"` {field:'"+fieldName+"',name:'"+instancedState.name+"'}) return n").head
+			createEdge(vertex,instancedStateVertex, "instanceOf")
+		]
+		
+	}
+	
+	def private secondPassCollectionInstances(){
+		
+		instanceSpace.instances.filter[instance|
+			instance.collection !== null
+		].forEach[collectionInstance|
+			
+			//Get the created vertex stub for this collection instance	
+			var collectionInstanceVertex = graph.vertices("match (n:`"+collectionInstanceMeta+"` {field:'"+fieldName+"',name:'"+collectionInstance.name+"'}) return n").head
+			
+			var collection = collectionInstance.collection
+			/* Iterate through the elements in this collection
+			 * Creating element verticies
+			 */
+			var elementIterator = collection.elements.iterator
+			
+			var count = 0
+			while (elementIterator.hasNext){
+				var Instance curr = elementIterator.next
+				
+				//Create Vertex for this element
+				var elementVertex = createVertex(curr, collectionInstanceElementMeta)
+				elementVertex.property(VertexProperty.Cardinality.single, "name",  "element")
+				elementVertex.property(VertexProperty.Cardinality.single, "index", Integer.toString(count))
+				
+				createEdge(collectionInstanceVertex, elementVertex, "index")
+				
+				//Find the instance that this element represents
+				var elementInstanceVertex = graph.vertices("match (n:`"+stateInstanceMeta+"` {field:'"+fieldName+"', name:'"+curr.name+"'}) return n").head
+				createEdge(elementVertex, elementInstanceVertex, "is");
+				
+				count++
+			
+			}
+		
+		]
+	}
+	
+	def generateCollectionInstance(Instance collectionInstance){
+		
+		var collection = collectionInstance.collection
+			var vertex = createVertex(collection, collectionInstanceMeta)
+			vertex.property(VertexProperty.Cardinality.single, "name", collectionInstance.name);
+			vertex.property(VertexProperty.Cardinality.single, "type", "collection");
+			vertex.property(VertexProperty.Cardinality.single, "size", Integer.toString(collection.elements.size))
+			
+			createEdge(instanceSpaceVertex, vertex, "definesInstance");
+			
+			//Find vertex of state this collection is an instance of
+			var instancedState = collectionInstance.stateDeclaration.state
+			
+			var instancedStateVertex = graph.vertices("match (n:`"+stateMeta+"` {field:'"+fieldName+"',name:'"+instancedState.name+"'}) return n").head
+			createEdge(vertex,instancedStateVertex, "instanceOf")
+			
+			//Get the created vertex stub for this collection instance	
+			var collectionInstanceVertex = vertex
+			
+			/* Iterate through the elements in this collection
+			 * Creating element verticies
+			 */
+			var elementIterator = collection.elements.iterator
+			
+			var count = 0
+			while (elementIterator.hasNext){
+				var Instance curr = elementIterator.next
+				
+				//Create Vertex for this element
+				var elementVertex = createVertex(curr, collectionInstanceElementMeta)
+				elementVertex.property(VertexProperty.Cardinality.single, "name",  "element")
+				elementVertex.property(VertexProperty.Cardinality.single, "index", Integer.toString(count))
+				
+				createEdge(collectionInstanceVertex, elementVertex, "index")
+				
+				//Find the instance that this element represents
+				var elementInstanceVertex = graph.vertices("match (n:`"+stateInstanceMeta+"{field:'"+fieldName+"', name:'"+curr.name+"'}) return n").head
+				createEdge(elementVertex, elementInstanceVertex, "is");
+				
+				count++
+			
+			}
+		
+	}
+	
 	def private firstPassStateInstances(){
 		
 		logger.info ("Generating instance stubs for {}", fieldName)
@@ -390,9 +510,12 @@ class FieldModelFactory extends MetaModelVertexFactory {
 			
 			//Find vertex of state this is an instance of
 			var instancedState = instance.stateDeclaration.eCrossReferences.get(0) as StateDefinition 
-						
+			
 			var Vertex instancedStateVertex = graph.vertices("match (n:`"+stateMeta+"` {field:'"+fieldName+"',name:'"+ instancedState.name +"'}) return n").head
-						
+			
+			//Add stateType to instance vertex
+			vertex.property(VertexProperty.Cardinality.single, "stateType", instancedState.type);
+			
 			//Hookup instance vertex to state it is an instance of
 			createEdge(vertex, instancedStateVertex, "instanceOf")
 		]
@@ -455,8 +578,22 @@ class FieldModelFactory extends MetaModelVertexFactory {
 				if (obj.eClass.instanceClass.equals(org.worklang.work.UseDefinition)){
 								
 					var useState = obj as UseDefinition
-								
-					var useStateVertex = graph.vertices("match (n:`"+stateInstanceMeta+"` {field:'"+fieldName+"',name:'"+ (useState.eCrossReferences.get(0) as Instance).name +"'}) return n").head
+					
+					var predefinedValue = useState.predefinedValue
+					
+					var Vertex useStateVertex
+					
+					//If the predefined value is a collection instance query with collectionInstanceMeta
+					if (predefinedValue.collection !== null){
+						logger.info("match (n:`"+collectionInstanceMeta+"` {field:'"+fieldName+"',name:'"+ (useState.eCrossReferences.get(0) as Instance).name +"'}) return n")
+						useStateVertex = graph.vertices("match (n:`"+collectionInstanceMeta+"` {field:'"+fieldName+"',name:'"+ (useState.eCrossReferences.get(0) as Instance).name +"'}) return n").head
+					}
+					
+					//If the predefined value is a state instance query with stateInstanceMeta
+					if (predefinedValue.state !== null){
+						useStateVertex = graph.vertices("match (n:`"+stateInstanceMeta+"` {field:'"+fieldName+"',name:'"+ (useState.eCrossReferences.get(0) as Instance).name +"'}) return n").head
+					}
+					 
 								
 					instanceVertex.addEdge("use", useStateVertex)
 				}
@@ -533,7 +670,21 @@ class FieldModelFactory extends MetaModelVertexFactory {
 								
 					var useState = obj as UseDefinition
 								
-					var useStateVertex = graph.vertices("match (n:`"+stateInstanceMeta+"` {field:'"+fieldName+"',name:'"+ (useState.eCrossReferences.get(0) as Instance).name +"'}) return n").head
+					var predefinedValue = useState.predefinedValue
+					
+					var Vertex useStateVertex
+					
+					//If the predefined value is a collection instance query with collectionInstanceMeta
+					if (predefinedValue.collection !== null){
+						logger.info("match (n:`"+collectionInstanceMeta+"` {field:'"+fieldName+"',name:'"+ (useState.eCrossReferences.get(0) as Instance).name +"'}) return n")
+						useStateVertex = graph.vertices("match (n:`"+collectionInstanceMeta+"` {field:'"+fieldName+"',name:'"+ (useState.eCrossReferences.get(0) as Instance).name +"'}) return n").head
+					}
+					
+					//If the predefined value is a state instance query with stateInstanceMeta
+					if (predefinedValue.state !== null){
+						useStateVertex = graph.vertices("match (n:`"+stateInstanceMeta+"` {field:'"+fieldName+"',name:'"+ (useState.eCrossReferences.get(0) as Instance).name +"'}) return n").head
+					}
+					 
 								
 					instanceVertex.addEdge("use", useStateVertex)
 				}
@@ -830,8 +981,10 @@ class FieldModelFactory extends MetaModelVertexFactory {
 		 * meta model to reflect this.
 		 */
 		if (state.list){
-			composedStateVertex.addEdge("setOf", refStateVertex)
+			composedStateVertex.property(VertexProperty.Cardinality.single, "isCollection", "true")
+			composedStateVertex.addEdge("collectionOf", refStateVertex)
 		}else{
+			composedStateVertex.property(VertexProperty.Cardinality.single, "isCollection", "false")
 			composedStateVertex.addEdge("is", refStateVertex)
 		}
 		

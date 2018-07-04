@@ -35,7 +35,6 @@ import org.worklang.work.WorkPackage;
  * <ul>
  *   <li>{@link org.worklang.work.impl.StateDefinitionImpl#getInstance <em>Instance</em>}</li>
  *   <li>{@link org.worklang.work.impl.StateDefinitionImpl#isList <em>List</em>}</li>
- *   <li>{@link org.worklang.work.impl.StateDefinitionImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.worklang.work.impl.StateDefinitionImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.worklang.work.impl.StateDefinitionImpl#getName <em>Name</em>}</li>
  * </ul>
@@ -73,16 +72,6 @@ public class StateDefinitionImpl extends BinaryExpressionImpl implements StateDe
    * @ordered
    */
   protected boolean list = LIST_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue()
-   * @generated
-   * @ordered
-   */
-  protected StateDefinition value;
 
   /**
    * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -216,49 +205,6 @@ public class StateDefinitionImpl extends BinaryExpressionImpl implements StateDe
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateDefinition getValue()
-  {
-    if (value != null && value.eIsProxy())
-    {
-      InternalEObject oldValue = (InternalEObject)value;
-      value = (StateDefinition)eResolveProxy(oldValue);
-      if (value != oldValue)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkPackage.STATE_DEFINITION__VALUE, oldValue, value));
-      }
-    }
-    return value;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public StateDefinition basicGetValue()
-  {
-    return value;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setValue(StateDefinition newValue)
-  {
-    StateDefinition oldValue = value;
-    value = newValue;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.STATE_DEFINITION__VALUE, oldValue, value));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public String getType()
   {
     return type;
@@ -315,9 +261,6 @@ public class StateDefinitionImpl extends BinaryExpressionImpl implements StateDe
         return basicGetInstance();
       case WorkPackage.STATE_DEFINITION__LIST:
         return isList();
-      case WorkPackage.STATE_DEFINITION__VALUE:
-        if (resolve) return getValue();
-        return basicGetValue();
       case WorkPackage.STATE_DEFINITION__TYPE:
         return getType();
       case WorkPackage.STATE_DEFINITION__NAME:
@@ -341,9 +284,6 @@ public class StateDefinitionImpl extends BinaryExpressionImpl implements StateDe
         return;
       case WorkPackage.STATE_DEFINITION__LIST:
         setList((Boolean)newValue);
-        return;
-      case WorkPackage.STATE_DEFINITION__VALUE:
-        setValue((StateDefinition)newValue);
         return;
       case WorkPackage.STATE_DEFINITION__TYPE:
         setType((String)newValue);
@@ -371,9 +311,6 @@ public class StateDefinitionImpl extends BinaryExpressionImpl implements StateDe
       case WorkPackage.STATE_DEFINITION__LIST:
         setList(LIST_EDEFAULT);
         return;
-      case WorkPackage.STATE_DEFINITION__VALUE:
-        setValue((StateDefinition)null);
-        return;
       case WorkPackage.STATE_DEFINITION__TYPE:
         setType(TYPE_EDEFAULT);
         return;
@@ -398,8 +335,6 @@ public class StateDefinitionImpl extends BinaryExpressionImpl implements StateDe
         return instance != null;
       case WorkPackage.STATE_DEFINITION__LIST:
         return list != LIST_EDEFAULT;
-      case WorkPackage.STATE_DEFINITION__VALUE:
-        return value != null;
       case WorkPackage.STATE_DEFINITION__TYPE:
         return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
       case WorkPackage.STATE_DEFINITION__NAME:

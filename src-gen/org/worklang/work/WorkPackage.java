@@ -335,7 +335,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getBinaryExpression()
    * @generated
    */
-  int BINARY_EXPRESSION = 28;
+  int BINARY_EXPRESSION = 29;
 
   /**
    * The number of structural features of the '<em>Binary Expression</em>' class.
@@ -375,22 +375,13 @@ public interface WorkPackage extends EPackage
   int STATE_DEFINITION__LIST = BINARY_EXPRESSION_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Value</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_DEFINITION__VALUE = BINARY_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATE_DEFINITION__TYPE = BINARY_EXPRESSION_FEATURE_COUNT + 3;
+  int STATE_DEFINITION__TYPE = BINARY_EXPRESSION_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -399,7 +390,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE_DEFINITION__NAME = BINARY_EXPRESSION_FEATURE_COUNT + 4;
+  int STATE_DEFINITION__NAME = BINARY_EXPRESSION_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>State Definition</em>' class.
@@ -408,7 +399,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE_DEFINITION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 5;
+  int STATE_DEFINITION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.PrimitiveStateDefinitionImpl <em>Primitive State Definition</em>}' class.
@@ -437,15 +428,6 @@ public interface WorkPackage extends EPackage
    * @ordered
    */
   int PRIMITIVE_STATE_DEFINITION__LIST = STATE_DEFINITION__LIST;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PRIMITIVE_STATE_DEFINITION__VALUE = STATE_DEFINITION__VALUE;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -501,15 +483,6 @@ public interface WorkPackage extends EPackage
    * @ordered
    */
   int COMPOUND_STATE_DEFINITION__LIST = STATE_DEFINITION__LIST;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPOUND_STATE_DEFINITION__VALUE = STATE_DEFINITION__VALUE;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -973,13 +946,22 @@ public interface WorkPackage extends EPackage
   int INSTANCE__STATE_DECLARATION = 1;
 
   /**
+   * The feature id for the '<em><b>Is Collection Element</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INSTANCE__IS_COLLECTION_ELEMENT = 2;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int INSTANCE__NAME = 2;
+  int INSTANCE__NAME = 3;
 
   /**
    * The feature id for the '<em><b>State</b></em>' containment reference.
@@ -988,7 +970,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INSTANCE__STATE = 3;
+  int INSTANCE__STATE = 4;
 
   /**
    * The feature id for the '<em><b>Transition</b></em>' containment reference.
@@ -997,7 +979,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INSTANCE__TRANSITION = 4;
+  int INSTANCE__TRANSITION = 5;
 
   /**
    * The feature id for the '<em><b>Compound Transition</b></em>' containment reference.
@@ -1006,7 +988,16 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INSTANCE__COMPOUND_TRANSITION = 5;
+  int INSTANCE__COMPOUND_TRANSITION = 6;
+
+  /**
+   * The feature id for the '<em><b>Collection</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INSTANCE__COLLECTION = 7;
 
   /**
    * The number of structural features of the '<em>Instance</em>' class.
@@ -1015,7 +1006,7 @@ public interface WorkPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INSTANCE_FEATURE_COUNT = 6;
+  int INSTANCE_FEATURE_COUNT = 8;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.TransitionDeclarationImpl <em>Transition Declaration</em>}' class.
@@ -1148,6 +1139,34 @@ public interface WorkPackage extends EPackage
   int STATE_INSTANCE_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.worklang.work.impl.CollectionInstanceImpl <em>Collection Instance</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.worklang.work.impl.CollectionInstanceImpl
+   * @see org.worklang.work.impl.WorkPackageImpl#getCollectionInstance()
+   * @generated
+   */
+  int COLLECTION_INSTANCE = 24;
+
+  /**
+   * The feature id for the '<em><b>Elements</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COLLECTION_INSTANCE__ELEMENTS = 0;
+
+  /**
+   * The number of structural features of the '<em>Collection Instance</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COLLECTION_INSTANCE_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.worklang.work.impl.UseDefinitionImpl <em>Use Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1155,7 +1174,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getUseDefinition()
    * @generated
    */
-  int USE_DEFINITION = 24;
+  int USE_DEFINITION = 25;
 
   /**
    * The feature id for the '<em><b>Predefined Value</b></em>' reference.
@@ -1183,7 +1202,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getSetStatement()
    * @generated
    */
-  int SET_STATEMENT = 25;
+  int SET_STATEMENT = 26;
 
   /**
    * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -1220,7 +1239,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getToDefinition()
    * @generated
    */
-  int TO_DEFINITION = 26;
+  int TO_DEFINITION = 27;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1248,7 +1267,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getPredicate()
    * @generated
    */
-  int PREDICATE = 27;
+  int PREDICATE = 28;
 
   /**
    * The feature id for the '<em><b>Negation</b></em>' attribute.
@@ -1285,7 +1304,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getTransitionComposition()
    * @generated
    */
-  int TRANSITION_COMPOSITION = 29;
+  int TRANSITION_COMPOSITION = 30;
 
   /**
    * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -1313,7 +1332,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getTransitionCompositionBody()
    * @generated
    */
-  int TRANSITION_COMPOSITION_BODY = 30;
+  int TRANSITION_COMPOSITION_BODY = 31;
 
   /**
    * The feature id for the '<em><b>Starting Inputs</b></em>' reference list.
@@ -1350,7 +1369,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getInstructionExpression()
    * @generated
    */
-  int INSTRUCTION_EXPRESSION = 31;
+  int INSTRUCTION_EXPRESSION = 32;
 
   /**
    * The number of structural features of the '<em>Instruction Expression</em>' class.
@@ -1369,7 +1388,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getIfInstruction()
    * @generated
    */
-  int IF_INSTRUCTION = 32;
+  int IF_INSTRUCTION = 33;
 
   /**
    * The feature id for the '<em><b>Test Key</b></em>' containment reference.
@@ -1424,7 +1443,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getWhileInstruction()
    * @generated
    */
-  int WHILE_INSTRUCTION = 33;
+  int WHILE_INSTRUCTION = 34;
 
   /**
    * The feature id for the '<em><b>Test Key</b></em>' containment reference.
@@ -1470,7 +1489,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getSimpleInstruction()
    * @generated
    */
-  int SIMPLE_INSTRUCTION = 34;
+  int SIMPLE_INSTRUCTION = 35;
 
   /**
    * The feature id for the '<em><b>To Execute</b></em>' reference list.
@@ -1498,7 +1517,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getCompoundTransitionInstance()
    * @generated
    */
-  int COMPOUND_TRANSITION_INSTANCE = 35;
+  int COMPOUND_TRANSITION_INSTANCE = 36;
 
   /**
    * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -1526,7 +1545,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getCompoundTransitionInstanceBody()
    * @generated
    */
-  int COMPOUND_TRANSITION_INSTANCE_BODY = 36;
+  int COMPOUND_TRANSITION_INSTANCE_BODY = 37;
 
   /**
    * The feature id for the '<em><b>Starting Inputs</b></em>' reference list.
@@ -1563,7 +1582,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getInstanceInstructionExpression()
    * @generated
    */
-  int INSTANCE_INSTRUCTION_EXPRESSION = 37;
+  int INSTANCE_INSTRUCTION_EXPRESSION = 38;
 
   /**
    * The number of structural features of the '<em>Instance Instruction Expression</em>' class.
@@ -1582,7 +1601,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getSimpleInstanceInstruction()
    * @generated
    */
-  int SIMPLE_INSTANCE_INSTRUCTION = 38;
+  int SIMPLE_INSTANCE_INSTRUCTION = 39;
 
   /**
    * The feature id for the '<em><b>To Execute</b></em>' reference list.
@@ -1610,7 +1629,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getIfInstanceInstruction()
    * @generated
    */
-  int IF_INSTANCE_INSTRUCTION = 39;
+  int IF_INSTANCE_INSTRUCTION = 40;
 
   /**
    * The feature id for the '<em><b>Test Key</b></em>' containment reference.
@@ -1665,7 +1684,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getWhileInstanceInstruction()
    * @generated
    */
-  int WHILE_INSTANCE_INSTRUCTION = 40;
+  int WHILE_INSTANCE_INSTRUCTION = 41;
 
   /**
    * The feature id for the '<em><b>Test Key</b></em>' containment reference.
@@ -1711,7 +1730,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getTestValue()
    * @generated
    */
-  int TEST_VALUE = 41;
+  int TEST_VALUE = 42;
 
   /**
    * The number of structural features of the '<em>Test Value</em>' class.
@@ -1730,7 +1749,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getLiteralValue()
    * @generated
    */
-  int LITERAL_VALUE = 42;
+  int LITERAL_VALUE = 43;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1758,7 +1777,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getResolvableValue()
    * @generated
    */
-  int RESOLVABLE_VALUE = 43;
+  int RESOLVABLE_VALUE = 44;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' reference.
@@ -1786,7 +1805,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getResolvableInstanceValue()
    * @generated
    */
-  int RESOLVABLE_INSTANCE_VALUE = 44;
+  int RESOLVABLE_INSTANCE_VALUE = 45;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' reference.
@@ -1823,7 +1842,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getResolvableTransitionOutputValue()
    * @generated
    */
-  int RESOLVABLE_TRANSITION_OUTPUT_VALUE = 45;
+  int RESOLVABLE_TRANSITION_OUTPUT_VALUE = 46;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' reference.
@@ -1860,7 +1879,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getOperation()
    * @generated
    */
-  int OPERATION = 46;
+  int OPERATION = 47;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1906,7 +1925,7 @@ public interface WorkPackage extends EPackage
    * @see org.worklang.work.impl.WorkPackageImpl#getExecutionResult()
    * @generated
    */
-  int EXECUTION_RESULT = 47;
+  int EXECUTION_RESULT = 48;
 
   /**
    * The feature id for the '<em><b>Compute First</b></em>' containment reference.
@@ -2203,17 +2222,6 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   EAttribute getStateDefinition_List();
-
-  /**
-   * Returns the meta object for the reference '{@link org.worklang.work.StateDefinition#getValue <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Value</em>'.
-   * @see org.worklang.work.StateDefinition#getValue()
-   * @see #getStateDefinition()
-   * @generated
-   */
-  EReference getStateDefinition_Value();
 
   /**
    * Returns the meta object for the attribute '{@link org.worklang.work.StateDefinition#getType <em>Type</em>}'.
@@ -2566,6 +2574,17 @@ public interface WorkPackage extends EPackage
   EReference getInstance_StateDeclaration();
 
   /**
+   * Returns the meta object for the attribute '{@link org.worklang.work.Instance#isIsCollectionElement <em>Is Collection Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Is Collection Element</em>'.
+   * @see org.worklang.work.Instance#isIsCollectionElement()
+   * @see #getInstance()
+   * @generated
+   */
+  EAttribute getInstance_IsCollectionElement();
+
+  /**
    * Returns the meta object for the attribute '{@link org.worklang.work.Instance#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2608,6 +2627,17 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   EReference getInstance_CompoundTransition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.worklang.work.Instance#getCollection <em>Collection</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Collection</em>'.
+   * @see org.worklang.work.Instance#getCollection()
+   * @see #getInstance()
+   * @generated
+   */
+  EReference getInstance_Collection();
 
   /**
    * Returns the meta object for class '{@link org.worklang.work.TransitionDeclaration <em>Transition Declaration</em>}'.
@@ -2714,6 +2744,27 @@ public interface WorkPackage extends EPackage
    * @generated
    */
   EReference getStateInstance_Members();
+
+  /**
+   * Returns the meta object for class '{@link org.worklang.work.CollectionInstance <em>Collection Instance</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Collection Instance</em>'.
+   * @see org.worklang.work.CollectionInstance
+   * @generated
+   */
+  EClass getCollectionInstance();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.worklang.work.CollectionInstance#getElements <em>Elements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Elements</em>'.
+   * @see org.worklang.work.CollectionInstance#getElements()
+   * @see #getCollectionInstance()
+   * @generated
+   */
+  EReference getCollectionInstance_Elements();
 
   /**
    * Returns the meta object for class '{@link org.worklang.work.UseDefinition <em>Use Definition</em>}'.
@@ -3600,14 +3651,6 @@ public interface WorkPackage extends EPackage
     EAttribute STATE_DEFINITION__LIST = eINSTANCE.getStateDefinition_List();
 
     /**
-     * The meta object literal for the '<em><b>Value</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE_DEFINITION__VALUE = eINSTANCE.getStateDefinition_Value();
-
-    /**
      * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3898,6 +3941,14 @@ public interface WorkPackage extends EPackage
     EReference INSTANCE__STATE_DECLARATION = eINSTANCE.getInstance_StateDeclaration();
 
     /**
+     * The meta object literal for the '<em><b>Is Collection Element</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INSTANCE__IS_COLLECTION_ELEMENT = eINSTANCE.getInstance_IsCollectionElement();
+
+    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3928,6 +3979,14 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EReference INSTANCE__COMPOUND_TRANSITION = eINSTANCE.getInstance_CompoundTransition();
+
+    /**
+     * The meta object literal for the '<em><b>Collection</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference INSTANCE__COLLECTION = eINSTANCE.getInstance_Collection();
 
     /**
      * The meta object literal for the '{@link org.worklang.work.impl.TransitionDeclarationImpl <em>Transition Declaration</em>}' class.
@@ -4016,6 +4075,24 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EReference STATE_INSTANCE__MEMBERS = eINSTANCE.getStateInstance_Members();
+
+    /**
+     * The meta object literal for the '{@link org.worklang.work.impl.CollectionInstanceImpl <em>Collection Instance</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.worklang.work.impl.CollectionInstanceImpl
+     * @see org.worklang.work.impl.WorkPackageImpl#getCollectionInstance()
+     * @generated
+     */
+    EClass COLLECTION_INSTANCE = eINSTANCE.getCollectionInstance();
+
+    /**
+     * The meta object literal for the '<em><b>Elements</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COLLECTION_INSTANCE__ELEMENTS = eINSTANCE.getCollectionInstance_Elements();
 
     /**
      * The meta object literal for the '{@link org.worklang.work.impl.UseDefinitionImpl <em>Use Definition</em>}' class.

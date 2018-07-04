@@ -27,7 +27,6 @@ package org.worklang.work;
  * <ul>
  *   <li>{@link org.worklang.work.StateDefinition#getInstance <em>Instance</em>}</li>
  *   <li>{@link org.worklang.work.StateDefinition#isList <em>List</em>}</li>
- *   <li>{@link org.worklang.work.StateDefinition#getValue <em>Value</em>}</li>
  *   <li>{@link org.worklang.work.StateDefinition#getType <em>Type</em>}</li>
  *   <li>{@link org.worklang.work.StateDefinition#getName <em>Name</em>}</li>
  * </ul>
@@ -89,32 +88,6 @@ public interface StateDefinition extends BinaryExpression
    * @generated
    */
   void setList(boolean value);
-
-  /**
-   * Returns the value of the '<em><b>Value</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Value</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Value</em>' reference.
-   * @see #setValue(StateDefinition)
-   * @see org.worklang.work.WorkPackage#getStateDefinition_Value()
-   * @model
-   * @generated
-   */
-  StateDefinition getValue();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.StateDefinition#getValue <em>Value</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value</em>' reference.
-   * @see #getValue()
-   * @generated
-   */
-  void setValue(StateDefinition value);
 
   /**
    * Returns the value of the '<em><b>Type</b></em>' attribute.

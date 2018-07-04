@@ -16,7 +16,6 @@
 package org.worklang.work;
 
 import org.eclipse.emf.ecore.EObject;
-import org.worklang.work.StateInstance;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,10 +28,12 @@ import org.worklang.work.StateInstance;
  * <ul>
  *   <li>{@link org.worklang.work.Instance#getTransitionDeclaration <em>Transition Declaration</em>}</li>
  *   <li>{@link org.worklang.work.Instance#getStateDeclaration <em>State Declaration</em>}</li>
+ *   <li>{@link org.worklang.work.Instance#isIsCollectionElement <em>Is Collection Element</em>}</li>
  *   <li>{@link org.worklang.work.Instance#getName <em>Name</em>}</li>
  *   <li>{@link org.worklang.work.Instance#getState <em>State</em>}</li>
  *   <li>{@link org.worklang.work.Instance#getTransition <em>Transition</em>}</li>
  *   <li>{@link org.worklang.work.Instance#getCompoundTransition <em>Compound Transition</em>}</li>
+ *   <li>{@link org.worklang.work.Instance#getCollection <em>Collection</em>}</li>
  * </ul>
  *
  * @see org.worklang.work.WorkPackage#getInstance()
@@ -92,6 +93,32 @@ public interface Instance extends EObject
    * @generated
    */
   void setStateDeclaration(StateDeclaration value);
+
+  /**
+   * Returns the value of the '<em><b>Is Collection Element</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Is Collection Element</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Is Collection Element</em>' attribute.
+   * @see #setIsCollectionElement(boolean)
+   * @see org.worklang.work.WorkPackage#getInstance_IsCollectionElement()
+   * @model
+   * @generated
+   */
+  boolean isIsCollectionElement();
+
+  /**
+   * Sets the value of the '{@link org.worklang.work.Instance#isIsCollectionElement <em>Is Collection Element</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Is Collection Element</em>' attribute.
+   * @see #isIsCollectionElement()
+   * @generated
+   */
+  void setIsCollectionElement(boolean value);
 
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -197,6 +224,30 @@ public interface Instance extends EObject
    */
   void setCompoundTransition(CompoundTransitionInstance value);
 
+  /**
+   * Returns the value of the '<em><b>Collection</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Collection</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Collection</em>' containment reference.
+   * @see #setCollection(CollectionInstance)
+   * @see org.worklang.work.WorkPackage#getInstance_Collection()
+   * @model containment="true"
+   * @generated
+   */
+  CollectionInstance getCollection();
 
+  /**
+   * Sets the value of the '{@link org.worklang.work.Instance#getCollection <em>Collection</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Collection</em>' containment reference.
+   * @see #getCollection()
+   * @generated
+   */
+  void setCollection(CollectionInstance value);
 
 } // Instance
