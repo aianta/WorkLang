@@ -66,10 +66,6 @@ class WorkGenerator extends AbstractGenerator {
 		xResource.save(globalWorkspaceSaveOptions)
 		WorkApi.activeResource = xResource
 		
-		//Attach Content Adapter
-		//var adapter = new InstanceSpaceAdapter();
-		//xResource.eAdapters.add(adapter);
-		
 		generateAPIs(xResource)
 
 	}
@@ -90,26 +86,29 @@ class WorkGenerator extends AbstractGenerator {
 			//For the field
 			WorkApi.readApi.addField(field.name)
 			
-			//For its states
-			field.definitionSpace.states.forEach[state|
-				WorkApi.readApi.addState(field.name, state)
-			]
+			if (field.definitionSpace !== null){
+				//For its states
+				field.definitionSpace.states.forEach[state|
+					WorkApi.readApi.addState(field.name, state)
+				]
+			}
 			
-			//For its state instances
-			field.instanceSpace.instances.filter[instance|
-				instance.state !== null //Filter out transition instances and collection instances
-			].forEach[stateInstance|
+			if (field.instanceSpace !== null){
+				//For its state instances
+				field.instanceSpace.instances.filter[instance|
+					instance.state !== null //Filter out transition instances and collection instances
+				].forEach[stateInstance|
+					
+					WorkApi.readApi.addStateInstance(field.name, stateInstance);
+				]
 				
-				WorkApi.readApi.addStateInstance(field.name, stateInstance);
-			]
-			
-			//For its collecton instances
-			field.instanceSpace.instances.filter[instance|
-				instance.collection !== null //Filter out state instances and transition instances
-			].forEach[collectionInstance|
-				WorkApi.readApi.addCollectionInstance(field.name, collectionInstance)
-			]
-			
+				//For its collecton instances
+				field.instanceSpace.instances.filter[instance|
+					instance.collection !== null //Filter out state instances and transition instances
+				].forEach[collectionInstance|
+					WorkApi.readApi.addCollectionInstance(field.name, collectionInstance)
+				]
+			}
 			
 		]
 	}

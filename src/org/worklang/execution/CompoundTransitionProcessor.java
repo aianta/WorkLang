@@ -39,6 +39,7 @@ import org.worklang.work.TransitionInstance;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.client.WebClient;
@@ -59,6 +60,7 @@ public class CompoundTransitionProcessor {
 	private StateDefinition outputDefinition;
 	private Vertex expressionVertex;
 	private WebClient client;
+	private String transitionName;
 	
 	private Vertx vertx;
 	
@@ -68,6 +70,7 @@ public class CompoundTransitionProcessor {
 		this.transition = transition;
 		this.fieldName = fieldName;
 		this.client = client;
+		this.transitionName = transition.property("name").value().toString();
 		
 		//Find and save the definition of this compound transitions' output
 		logger.info("instanceOf -> {}", transition.vertices(Direction.OUT, "instanceOf").next());
@@ -107,8 +110,12 @@ public class CompoundTransitionProcessor {
 	}
 	
 	public void process(RoutingContext rc) {
+		
+		logger.info("BEGIN Compound Transition execution for -> {}", transitionName);
 	
 		String produceParam = rc.request().getParam("produce");
+		String collectionParam = rc.request().getParam("collection");
+		String collectionIndexParam = rc.request().getParam("collectionIndex");
 		if (produceParam != null) {
 			computation.customizeFinalInstructionOutputId(produceParam);
 		}
@@ -125,26 +132,89 @@ public class CompoundTransitionProcessor {
 					ExecutionInstruction lastInstruction = result.result();
 					
 					JsonObject resultData = null;
+					JsonArray resultArray = null;
+					
+					logger.info("END Compound Transition execution for -> {}", transitionName);
+					logger.info("BEGIN PROCESSING Compound transition execution results for ->{}", transitionName);
 					
 					//Assemble compound transition result
+					/* Here I have to find some way of assembling an instance from the last execution instruction's result
+					 * The following cases are possible:
+					 *  - The output is a primitive state
+					 *  	If this is the case, then there should be exactly one instance in the last exececution instruction's result, and it should have
+					 *  	the same definition as the output definition. 
+					 *  
+					 *  	We can therefore simple retrieve the resulting instance and and attach the output definition to it's state declaration.
+					 *  
+					 *  - The output is a compound state
+					 *  	If this is the case then there will be numerous instances in the execution instruction's result. Each instance's definition
+					 *  	should correspond with the definition of a child in the output state's composition logic.
+					 *  	
+					 *  	Create a new instance for the assembled result. Iterate through the output definition's composition logic and match each instance
+					 *  	from the execution instruction's output. 
+					 *  
+					 *  	For every collection defined by the output definition, create a collection state instance to store elements associated with the 
+					 *  	collection.
+					 *  
+					 *  	For every collection created, go through the instances in the execution instruction's output and add them to the collection if 
+					 *  	the definition type of the collection and the definition type of the collection element match. 
+					 *  
+					 *  	For every primitive state definition matched, create a set statement in the assembled instance from the execution instructions's
+					 *  	corresponding state instance.
+					 *  
+					 *   	For every compound state definition matched, create a use definition in the assembled instance, set the use definition's 
+					 *   	predefined value to the corresponding compound state instance in the execution instruction's output.	 
+					 *  	
+					 *  - The output is a collection state
+					 *  
+					 *  	If this is the case there will be only collection elements in the last execution instruction's output list. Create a new
+					 *  	collection state instance with the output definition as the state declaration and add all collection elements from the
+					 *  	execution instruction's output list to the collection state instance. 
+					 *  
+					 * 
+					 */
 					if (outputDefinition instanceof PrimitiveStateDefinition) {
-						resultData =  ExecutionUtils.StateInstanceToJson(lastInstruction.getOutputInstance(outputDefinition));
+						resultData =  ExecutionUtils.stateInstanceToJson(lastInstruction.getOutputInstance(outputDefinition));
 					}
+					
 					
 					if (outputDefinition instanceof CompoundStateDefinition) {
 						Instance i = WorklangResourceUtils.mapInstancesToCompoundInstance(
 								(CompoundStateDefinition)outputDefinition,
 								lastInstruction.getOutputInstances());
 						
-						//Set assembled instances' name
+						//Set assembled state instance name
 						i.setName(produceParam != null?produceParam:UUID.randomUUID().toString());
 						
 						WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
-						resultData = ExecutionUtils.StateInstanceToJson(i);
+						resultData = ExecutionUtils.stateInstanceToJson(i);
 						
 					}
 					
-					rc.response().end(resultData.encode());
+					if (outputDefinition instanceof CompoundStateDefinition) {
+						Instance i = WorklangResourceUtils.mapInstancesToCollectionInstance(
+								(CompoundStateDefinition)outputDefinition,
+								lastInstruction.getOutputInstances());
+						
+						//Set assembled collection instance name
+						i.setName(produceParam != null?produceParam:UUID.randomUUID().toString());
+						
+						WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
+						resultArray = ExecutionUtils.collectionInstanceToJsonArray(i);
+					}
+					
+					logger.info("END PROCESSING Compound transition execution results for -> {}", transitionName);
+					
+					//Send back either result data or result array depending on which one isn't null
+					
+					if (resultData != null && resultArray == null) {
+						rc.response().end(resultData.encode());
+					}
+					
+					if (resultData == null && resultArray != null) {
+						rc.response().end(resultArray.encode());
+					}
+					
 					
 					/**Re-process the computation so it's ready to execute next time
 					 * This will probably have to be refactored at some point.
@@ -269,7 +339,7 @@ public class CompoundTransitionProcessor {
 						curr.property("name").value().toString());
 			logger.info("resolved transition instance -> {}", transitionInstance);
 			
-			logger.info("created transition instance from vertex: Instance ->{} -> name ->{}", transitionInstance, transitionInstance.getName());
+			logger.info("resolved transition instance from vertex: Instance ->{} -> name ->{}", transitionInstance, transitionInstance.getName());
 				
 				TransitionDefinition transitionDefinition = 
 						WorklangResourceUtils.resolveTransition(

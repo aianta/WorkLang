@@ -1640,6 +1640,20 @@ ruleTransitionInstance returns [EObject current=null]
 				}
 			)
 		)?
+		(
+			(
+				lv_supportCollections_3_0='hasCollectionSupport'
+				{
+					newLeafNode(lv_supportCollections_3_0, grammarAccess.getTransitionInstanceAccess().getSupportCollectionsHasCollectionSupportKeyword_3_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getTransitionInstanceRule());
+					}
+					setWithLastConsumed($current, "supportCollections", true, "hasCollectionSupport");
+				}
+			)
+		)?
 	)
 ;
 
@@ -1779,21 +1793,43 @@ ruleUseDefinition returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='use'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getUseDefinitionAccess().getUseKeyword_0());
-		}
 		(
+			otherlv_0='use'
+			{
+				newLeafNode(otherlv_0, grammarAccess.getUseDefinitionAccess().getUseKeyword_0_0());
+			}
 			(
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getUseDefinitionRule());
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getUseDefinitionRule());
+						}
 					}
-				}
-				otherlv_1=RULE_STRING
-				{
-					newLeafNode(otherlv_1, grammarAccess.getUseDefinitionAccess().getPredefinedValueInstanceCrossReference_1_0());
-				}
+					otherlv_1=RULE_STRING
+					{
+						newLeafNode(otherlv_1, grammarAccess.getUseDefinitionAccess().getPredefinedValueInstanceCrossReference_0_1_0());
+					}
+				)
+			)
+		)
+		    |
+		(
+			otherlv_2='use'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getUseDefinitionAccess().getUseKeyword_1_0());
+			}
+			(
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getUseDefinitionRule());
+						}
+					}
+					otherlv_3=RULE_COLLECTION_ELEMENT_NAME
+					{
+						newLeafNode(otherlv_3, grammarAccess.getUseDefinitionAccess().getPredefinedValueInstanceCrossReference_1_1_0());
+					}
+				)
 			)
 		)
 	)

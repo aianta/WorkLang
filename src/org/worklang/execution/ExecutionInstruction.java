@@ -256,7 +256,7 @@ public class ExecutionInstruction {
 			
 		}
 		
-		logger.error("Cannot find output with id {}", id);
+		logger.error("Cannot find output instance defined by {}", state.getName());
 		return null;
 	}
 	
@@ -534,9 +534,11 @@ public class ExecutionInstruction {
 					.put("UUID", state.getId().toString()));
 			
 			if (state.getInstance() != null) {
-				inputs.put("Instance", state.getInstance().toString());
+				inputs.getJsonObject(state.getDefinition().getName())
+				.put("Instance", state.getInstance().toString());
 			}else {
-				inputs.put("Instance", state.getInstance());
+				inputs.getJsonObject(state.getDefinition().getName())
+				.put("Instance", state.getInstance());
 			}
 					
 		});
@@ -546,9 +548,11 @@ public class ExecutionInstruction {
 					.put("UUID", state.getId().toString()));
 			
 			if (state.getInstance() != null) {
-				outputs.put("Instance", state.getInstance().toString());
+				outputs.getJsonObject(state.getDefinition().getName())
+					.put("Instance", state.getInstance().toString());
 			}else {
-				outputs.put("Instance", state.getInstance());
+				outputs.getJsonObject(state.getDefinition().getName())
+				.put("Instance", state.getInstance());
 			}
 			
 					
@@ -559,9 +563,12 @@ public class ExecutionInstruction {
 					.put("UUID", transition.getId().toString()));
 			
 			if (transition.getInstance() != null) {
-				transitions.put("Instance", transition.getInstance().toString());
+				transitions.getJsonObject(transition.getDefinition().getName())
+				.put("Instance", transition.getInstance().toString());
 			}else {
-				transitions.put("Instance", transition.getInstance());
+				
+				transitions.getJsonObject(transition.getDefinition().getName())
+				.put("Instance", transition.getInstance());
 			}
 					
 		});
@@ -588,6 +595,7 @@ public class ExecutionInstruction {
 	}
 
 	public void setLastOutputInstanceId(String lastOutputInstanceId) {
+		logger.info("OVERWRITING generated output id ->{} with ->{}", outputs.get(0).getId(), lastOutputInstanceId);
 		this.lastOutputInstanceId = lastOutputInstanceId;
 		outputs.get(0).setId(UUID.fromString(lastOutputInstanceId));
 	}

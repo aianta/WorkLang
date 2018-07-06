@@ -28,10 +28,14 @@ import org.worklang.work.Instance
 import org.worklang.work.StateDeclaration
 import org.worklang.work.StateInstance
 import org.worklang.WorklangResourceUtils
+import org.worklang.work.StateDefinition
+import java.util.Map.Entry
+import java.util.UUID
 
 class MetaModelUtils {
 	
 	var static logger = LoggerFactory.getLogger(MetaModelUtils)
+	val static WorkFactory factory = WorkFactory.eINSTANCE;
 	
 	//Utility method for retrieving a field vertex given its name
 	def static Vertex getFieldVertex(String fieldName){
@@ -440,7 +444,8 @@ class MetaModelUtils {
 			}
 			
 			if (elementInstance.property("stateType").value.equals("compound")){
-				result.add(stateInstanceVertexToJson(elementInstance))
+				var myDefinitionVertex = collectionInstance.vertices(Direction.OUT, "instanceOf").next;
+				result.add(stateInstanceVertexToJson(elementInstance).getJsonObject(myDefinitionVertex.property("name").value.toString))
 			}
 			
 		]
@@ -457,6 +462,19 @@ class MetaModelUtils {
 		
 	}
 	
+	def static JsonArray collectionElementStateInstanceVertexToJsonArray(Vertex stateInstance){
+		logger.info("converting collection element state instance vertex to json array")
+		
+		var resultArray = new JsonArray
+		
+		var myDefinitionVertex = stateInstance.vertices(Direction.OUT, "instanceOf").next
+		
+		resultArray.add(stateInstanceVertexToJson(stateInstance).getJsonObject(myDefinitionVertex.property("name").value.toString))
+		
+		return resultArray
+		
+	}
+	
 	def static JsonObject stateInstanceVertexToJson(Vertex stateInstance){
 		
 		logger.info("converting state instance vertex to json")
@@ -468,18 +486,22 @@ class MetaModelUtils {
 		var fieldName = stateInstance.property("field").value.toString
 		var stateName = stateInstance.property("name").value.toString
 		var type = stateInstance.property("type").value.toString
+		var stateType = stateInstance.property("stateType").value.toString
 		
 		logger.info("fieldName ->{} state instance name -> {} type ->{}", fieldName, stateName, type);
 		
 		//If this instance is a state instance
-		if (type.equals("state")){
+		if (type.equals("state") && stateType !== null && stateType.equals("compound")){
+			
+			var myJson = new JsonObject
+			
 			//Get all set parameters
 			var setParams = graph.vertices("match (n:`state instance` {field:'"+fieldName+"', name: '"+stateName+"'})-[:set]->(param:value) return param")
 			
 			//Iterate through them, adding them to the json 
 			while(setParams.hasNext){
 				var valueVertex = setParams.next
-				result.put(
+				myJson.put(
 					valueVertex.property("name").value.toString,
 					valueVertex.property("value").value.toString
 				)
@@ -494,10 +516,24 @@ class MetaModelUtils {
 				
 				var useStateDefinitionVertex = useStateInstanceVertex.vertices(Direction.OUT, "instanceOf").next
 				
-				result.put(
-					useStateDefinitionVertex.property("name").value.toString,
-					stateInstanceVertexToJson(useStateInstanceVertex)
-				)
+				//If the use statement points to an instance of a primitive state, just add the primitive state name as the key 
+				//and the primitive state instance's value as the value. No need to wrap it in it's own JSON
+				if (useStateDefinitionVertex.property("type").value.toString.equals("primitive")){
+					var primitiveSetVertex = useStateInstanceVertex.vertices(Direction.OUT,"set").next
+					myJson.put(
+						useStateDefinitionVertex.property("name").value.toString,
+						primitiveSetVertex.property("value").value.toString
+					)
+				}
+				
+				if (useStateDefinitionVertex.property("type").value.toString.equals("compound")){
+					myJson.put(
+						useStateDefinitionVertex.property("name").value.toString,
+						stateInstanceVertexToJson(useStateInstanceVertex).getJsonObject(useStateDefinitionVertex.property("name").value.toString)
+					)
+				}
+				
+				
 			}
 			
 			//Get all use collection instance parameters
@@ -509,11 +545,33 @@ class MetaModelUtils {
 				
 				var useCollectionDefinitionVertex = useCollectionInstanceVertex.vertices(Direction.OUT, "instanceOf").next
 				
-				result.put(
+				myJson.put(
 					useCollectionDefinitionVertex.property("name").value.toString,
 					collectionInstanceVertexToJson(useCollectionInstanceVertex)
 				)
 			}
+			
+			
+			//Finally add myJson to result
+			var myDefinitionVertex = stateInstance.vertices(Direction.OUT,"instanceOf").next
+			result.put(myDefinitionVertex.property("name").value.toString,
+				myJson
+			)
+		}
+		
+		if (type.equals("state") && stateType !== null && stateType.equals("primitive")){
+			//Get all set parameters
+			var setParams = graph.vertices("match (n:`state instance` {field:'"+fieldName+"', name: '"+stateName+"'})-[:set]->(param:value) return param")
+			
+			//Iterate through them, adding them to the json 
+			while(setParams.hasNext){
+				var valueVertex = setParams.next
+				result.put(
+					valueVertex.property("name").value.toString,
+					valueVertex.property("value").value.toString
+				)
+			}
+			
 		}
 		
 		//If this instance is a collection instance
@@ -524,10 +582,261 @@ class MetaModelUtils {
 		
 		return result
 	}
+	
+	def static Instance jsonArrayToCollectionInstance(JsonArray array, String fieldName, Instance transition, String collectionName){
+		logger.info("Building new collection element instance")
+		var i = factory.createInstance();
+		
+		val ci = factory.createCollectionInstance;
+		val sd = factory.createStateDeclaration;
+		
+		var Vertex outputStateVertex = WorkApi.graph.vertices("match (this:`transition instance` {field:'"+fieldName+"', name:'"+transition.getName()+"' })-[:instanceOf]->(parent:transition)-[:produces]->(:transition)-[:hasParameter]->(outputElement:state) return outputElement").head;
+		logger.info("outputStateVertex => {}", outputStateVertex);
+		
+		sd.state = WorklangResourceUtils.resolveStateDefinition(
+			fieldName,
+			outputStateVertex.property("name").value.toString
+		)
+		
+		var arrayIterator = array.iterator
+		var index = 0
+		
+		while (arrayIterator.hasNext){
+			var curr = arrayIterator.next
+			/* If the entry is a string, assume it's a 
+			 * primitive with the same state definition as the collection that contains it
+			 */
+			 if (curr instanceof String){
+			 	var Instance collectionElement = stringToCollectionElementStateInstance(curr as String, fieldName, sd.state, collectionName, Integer.toString(index))
+			 	ci.elements.add(collectionElement)
+			 	index++
+			 }
+			 
+			 /* If the entry is a json Object use the collections state definition as definition */
+			 
+			 if (curr instanceof JsonObject){
+			 	var Instance collectionElement = jsonToCollectionElementStateInstance(curr as JsonObject, fieldName, sd.state, collectionName, Integer.toString(index))
+			 	ci.elements.add(collectionElement)
+			 	index++
+			 }
+			
+			//TODO Support n-dimensional arrays by handling the case where curr is an instanceof JsonArray
+		}
+		//Assemble State Declaration and State Instance into Instance
+		logger.info("Assembling instance");
+		i.stateDeclaration = sd
+		i.collection = ci;
+		i.isCollectionElement = false
+		i.name = collectionName
+		
+		return i
+	}
+	
+	def static Instance jsonArrayToCollectionInstance(JsonArray array, String fieldName, StateDefinition definition, String collectionName){
+		
+		logger.info("Building new collection element instance")
+		var i = factory.createInstance();
+		
+		val ci = factory.createCollectionInstance;
+		val sd = factory.createStateDeclaration;
+		
+		sd.state = definition
+		
+		var arrayIterator = array.iterator
+		var index = 0
+		
+		while (arrayIterator.hasNext){
+			var curr = arrayIterator.next
+			/* If the entry is a string, assume it's a 
+			 * primitive with the same state definition as the collection that contains it
+			 */
+			 if (curr instanceof String){
+			 	var Instance collectionElement = stringToCollectionElementStateInstance(curr as String, fieldName, definition, collectionName, Integer.toString(index))
+			 	ci.elements.add(collectionElement)
+			 	index++
+			 }
+			 
+			 /* If the entry is a json Object use the collections state definition as definition */
+			 
+			 if (curr instanceof JsonObject){
+			 	var Instance collectionElement = jsonToCollectionElementStateInstance(curr as JsonObject, fieldName, definition, collectionName, Integer.toString(index))
+			 	ci.elements.add(collectionElement)
+			 	index++
+			 }
+			
+			//TODO Support n-dimensional arrays by handling the case where curr is an instanceof JsonArray
+		}
+		//Assemble State Declaration and State Instance into Instance
+		logger.info("Assembling instance");
+		i.stateDeclaration = sd
+		i.collection = ci;
+		i.isCollectionElement = false
+		i.name = collectionName
+		
+		
+		return i
+		
+	}
+	
+	def static Instance stringToCollectionElementStateInstance(String string, String fieldName, StateDefinition definition, String collectionName, String collectionIndex){
+		logger.info("Building new collection element instance")
+		var i = factory.createInstance();
+		
+		val si = factory.createStateInstance;
+		val sd = factory.createStateDeclaration;
+		
+		sd.state = definition
+		
+		var set  = factory.createSetStatement
+		set.variable = definition
+		var toDef = factory.createToDefinition
+		toDef.value = string
+		
+		si.members.add(set)
+		//Assemble State Declaration and State Instance into Instance
+		logger.info("Assembling instance");
+		i.stateDeclaration = sd
+		i.state = si;
+		i.isCollectionElement = true
+		i.name = "#"+collectionName+"#"+collectionIndex+"#"
+		
+		return i
+	}
+	
+	def static Instance jsonToCollectionElementStateInstance(JsonObject json, String fieldName, StateDefinition definition, String collectionName, String collectionIndex){
+		logger.info("Building new collection element instance")
+		var i = factory.createInstance();
+		
+		val si = factory.createStateInstance;
+		val sd = factory.createStateDeclaration;
+		
+		sd.state = definition
+		
+		json.forEach[entry|
+			
+			if (entry.value instanceof String){
+				var set = factory.createSetStatement
+				//Use json key as name of state being set
+				set.variable = 
+					WorklangResourceUtils.resolveStateDefinition(
+						fieldName,
+						entry.key
+					)
+				
+				var to = factory.createToDefinition
+				to.value = entry.value.toString
+				
+				set.toDef = to
+				si.members.add(set)
+			}
+			
+			if (entry.value instanceof JsonObject){
+				
+				var use  = factory.createUseDefinition
+				//Use entry key to resolve state definition of child
+				var childDefinition = WorklangResourceUtils.resolveStateDefinition(fieldName, entry.key)
+				var Instance useValue = jsonToStateInstance(entry.value as JsonObject, fieldName, childDefinition, collectionName+"collectionInstanceElement"+UUID.randomUUID.toString);
+				
+				use.predefinedValue = useValue
+				si.members.add(use)
+			}
+			
+			if (entry.value instanceof JsonArray){
+				var use = factory.createUseDefinition
+				
+				var StateDefinition childDefinition = WorklangResourceUtils.resolveStateDefinition(fieldName, entry.key)
+				
+				var Instance useValue = jsonArrayToCollectionInstance(entry.value as JsonArray, fieldName, childDefinition, collectionName+"collectionStateInstance"+UUID.randomUUID.toString )
+				
+				use.predefinedValue = useValue
+				si.members.add(use)
+			}
+			
+		]
+		
+		//Assemble State Declaration and State Instance into Instance
+		logger.info("Assembling instance");
+		i.stateDeclaration = sd
+		i.state = si;
+		i.isCollectionElement = true
+		i.name = "#"+collectionName+"#"+collectionIndex+"#"
+		
+		return i
+	}
+	
+	def static jsonToCollectionElementStateInstance(JsonObject json, String fieldName, Instance transition, String collectionName, String collectionIndex, String resultName){
+		
+		logger.info("Building new collection element instance")
+		var i = factory.createInstance();
+		
+		val si = factory.createStateInstance;
+		val sd = factory.createStateDeclaration;
+		
+		logger.info("Building State Declaration");
+		
+		var Vertex outputStateVertex = WorkApi.graph.vertices("match (this:`transition instance` {field:'"+fieldName+"', name:'"+transition.getName()+"' })-[:instanceOf]->(parent:transition)-[:produces]->(:transition)-[:hasParameter]->(outputElement:state) return outputElement").head;
+
+		sd.state = WorklangResourceUtils.resolveStateDefinition(
+			fieldName,
+			outputStateVertex.property("name").value.toString
+		)
+		
+		json.forEach[entry|
+			//Handle Set Statements
+			if (entry.value instanceof String){
+				var set = factory.createSetStatement
+				
+				//Use json key as name of state being set
+				set.variable = 
+					WorklangResourceUtils.resolveStateDefinition(
+						fieldName,
+						entry.key
+					)
+				
+				var to = factory.createToDefinition
+				to.value = entry.value.toString
+				
+				set.toDef = to
+				si.members.add(set)
+			}
+			
+			if (entry.value instanceof JsonObject){
+				var use  = factory.createUseDefinition
+				
+				//Resolve state definition for use using entry key
+				var StateDefinition definition = WorklangResourceUtils.resolveStateDefinition(fieldName, entry.key);
+				
+				var Instance useValue = jsonToStateInstance(entry.value as JsonObject, fieldName, definition, resultName+"childStateInstance"+UUID.randomUUID.toString);
+				
+				use.predefinedValue = useValue
+				si.members.add(use)
+			}
+			
+			if (entry.value instanceof JsonArray){
+				var use = factory.createUseDefinition
+				
+				var StateDefinition definition = WorklangResourceUtils.resolveStateDefinition(fieldName, entry.key)
+				
+				var Instance useValue = jsonArrayToCollectionInstance(entry.value as JsonArray, fieldName, definition, resultName+"collectionStateInstance"+UUID.randomUUID.toString )
+				
+				use.predefinedValue = useValue
+				si.members.add(use)
+
+			}
+		]
+		
+		//Assemble State Declaration and State Instance into Instance
+		logger.info("Assembling instance");
+		i.stateDeclaration = sd
+		i.state = si;
+		i.isCollectionElement = true
+		i.name = "#"+collectionName+"#"+collectionIndex+"#"+resultName
+		
+		return i
+		
+	}
 
 	def static jsonToStateInstance(JsonObject json, String fieldName, Instance transition, String resultName){
-		
-		val WorkFactory factory = WorkFactory.eINSTANCE;
 		
 		logger.info("Building new instance!");
 		var i = factory.createInstance();
@@ -553,30 +862,145 @@ class MetaModelUtils {
 		//Build State Instance
 		logger.info("Building State Instance");
 		
-		json.forEach[entry|
-			//Handle Set Statements
-			if (entry.value instanceof String){
+		var jsonIterator = json.iterator
+		var useStateInstanceCount = 0
+		var useCollectionInstanceCount = 0
+		
+		while (jsonIterator.hasNext){
+			var Entry<String,Object> curr = jsonIterator.next
+			
+						//Handle Set Statements
+			if (curr.value instanceof String){
 				var set = factory.createSetStatement
 				
 				//Use json key as name of state being set
 				set.variable = 
 					WorklangResourceUtils.resolveStateDefinition(
 						fieldName,
-						entry.key
+						curr.key
 					)
 				
 				var to = factory.createToDefinition
-				to.value = entry.value.toString
+				to.value = curr.value.toString
 				
 				set.toDef = to
 				si.members.add(set)
 			}
-		]
+			
+			if (curr.value instanceof JsonObject){
+				var use  = factory.createUseDefinition
+				
+				//Resolve state definition for use
+				var StateDefinition definition = WorklangResourceUtils.resolveStateDefinition(fieldName, curr.key);
+				
+				var Instance useValue = jsonToStateInstance(curr.value as JsonObject, fieldName, definition, resultName+"childStateInstance"+UUID.randomUUID.toString);
+				
+				use.predefinedValue = useValue
+				
+				useStateInstanceCount++;
+				
+				si.members.add(use)
+			}
+			
+			if (curr.value instanceof JsonArray){
+				var use = factory.createUseDefinition
+				
+				var StateDefinition definition = WorklangResourceUtils.resolveStateDefinition(fieldName, curr.key)
+				
+				var Instance useValue = jsonArrayToCollectionInstance(curr.value as JsonArray, fieldName, definition, resultName+"collectionStateInstance"+UUID.randomUUID.toString )
+				
+				use.predefinedValue = useValue
+				useCollectionInstanceCount++
+				si.members.add(use)
+			}
+			
+		}
+		
 		
 		//Assemble State Declaration and State Instance into Instance
 		logger.info("Assembling instance");
 		i.stateDeclaration = sd
 		i.state = si;
+		i.isCollectionElement = false
+		i.name = resultName
+		
+		return i
+	}
+	
+	def static Instance jsonToStateInstance(JsonObject json, String fieldName, StateDefinition definition, String resultName ){
+		
+		logger.info("Building new instance!");
+		var i = factory.createInstance();
+						
+		val si = factory.createStateInstance();
+		val sd = factory.createStateDeclaration();
+		
+		sd.state = definition
+		
+		logger.info("Built State Declaration");
+		
+		//Build State Instance
+		logger.info("Building State Instance");
+		
+		var jsonIterator = json.iterator
+		var useStateInstanceCount = 0
+		var useCollectionInstanceCount = 0
+		
+		while (jsonIterator.hasNext){
+			var Entry<String,Object> curr = jsonIterator.next
+			
+						//Handle Set Statements
+			if (curr.value instanceof String){
+				var set = factory.createSetStatement
+				
+				//Use json key as name of state being set
+				set.variable = 
+					WorklangResourceUtils.resolveStateDefinition(
+						fieldName,
+						curr.key
+					)
+				
+				var to = factory.createToDefinition
+				to.value = curr.value.toString
+				
+				set.toDef = to
+				si.members.add(set)
+			}
+			
+			if (curr.value instanceof JsonObject){
+				var use  = factory.createUseDefinition
+				
+				//Resolve state definition for use
+				var StateDefinition childDefinition = WorklangResourceUtils.resolveStateDefinition(fieldName, curr.key);
+				
+				var Instance useValue = jsonToStateInstance(curr.value as JsonObject, fieldName, childDefinition, resultName+"childStateInstance"+UUID.randomUUID.toString);
+				
+				use.predefinedValue = useValue
+				
+				useStateInstanceCount++;
+				si.members.add(use)
+			}
+			
+			if (curr.value instanceof JsonArray){
+				var use = factory.createUseDefinition
+				
+				var StateDefinition childDefinition = WorklangResourceUtils.resolveStateDefinition(fieldName, curr.key)
+				
+				var Instance useValue = jsonArrayToCollectionInstance(curr.value as JsonArray, fieldName, childDefinition, resultName+"collectionStateInstance"+UUID.randomUUID.toString )
+				
+				use.predefinedValue = useValue
+				useCollectionInstanceCount++
+				si.members.add(use)
+			}
+			
+		}
+		
+		
+		//Assemble State Declaration and State Instance into Instance
+		logger.info("Assembling instance");
+		i.stateDeclaration = sd
+		i.state = si;
+		i.isCollectionElement = false
 		i.name = resultName
 		
 		return i

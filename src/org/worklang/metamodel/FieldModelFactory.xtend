@@ -58,6 +58,7 @@ import org.worklang.work.InstructionExpression
 import org.worklang.work.InstanceInstructionExpression
 import java.util.Iterator
 import org.worklang.metamodel.adapters.InstanceSpaceAdapter
+import org.apache.tinkerpop.gremlin.structure.Direction
 
 /* Create static meta-model for a field.
  * - Definition Space
@@ -298,10 +299,98 @@ class FieldModelFactory extends MetaModelVertexFactory {
 			createEdge(foreignStateVertex, localStateVertex, "mapsTo")
 							
 			//connect local field's mapping vertex to local state vertex
-			createEdge(mapSpaceVertex, localStateVertex, "mappedState")
+			var mappedStateIterator = mapSpaceVertex.vertices(Direction.OUT, "mappedState")
+			var mappedStateExists = false
+			
+			//Look through all mapped state connections from this map space
+			while (mappedStateIterator.hasNext){
+				var curr = mappedStateIterator.next
+				//If a 'mapped state' edge already exists to that field, flip the flag
+				if (curr.property("name").value.toString.equals(localStateVertex.property("name").value.toString)){
+					mappedStateExists = true
+				}
+			}
+			
+			//Only create a mapped state connection if one doesn't already exist with the local state being mapped
+			if (!mappedStateExists){
+				createEdge(mapSpaceVertex, localStateVertex, "mappedState")
+			}
 							
 			//connect foreign field vertex to local field's mapping vertex
-			createEdge(mapSpaceVertex, foreignFieldVertex, "requires")
+			
+			//Look through all requires connections from this map space
+			var requiresIterator = mapSpaceVertex.vertices(Direction.OUT, "requires")
+			var requiresExists = false
+			while(requiresIterator.hasNext){
+				var curr = requiresIterator.next
+				//If a 'requires' edge already exists to that field, flip the flag
+				if (curr.property("name").value.toString.equals(foreignFieldVertex.property("name").value.toString)){
+					requiresExists = true
+				}
+			}
+			
+			//Only create a requires connection if one doesn't already exist with the field being mapped
+			if (!requiresExists){
+				createEdge(mapSpaceVertex, foreignFieldVertex, "requires")
+			}
+			
+		]
+		
+		mapSpace.mappedTransitions.forEach[transition|
+			
+			var foreignField = transition.field
+			var foreignTransition = transition.foreignTransition
+			var localTransition = transition.localTransition
+							
+			//Find related vertices in graph
+			logger.info("match (n {field:'"+foreignField.name+"',name:'"+foreignField.name+"'}) return n")
+			var foreignFieldVertex = graph.vertices("match (n {field:'"+foreignField.name+"',name:'"+foreignField.name+"'}) return n").head
+			var foreignTransitionVertex = graph.vertices("match (n:`"+transitionMeta+"` {name:'"+foreignTransition.name+"'}) return n").head
+			var localTransitionVertex = graph.vertices("match (n:`"+transitionMeta+"` {name:'"+localTransition.name+"'}) return n").head
+			
+			logger.info("foreignStateVertex = {}", foreignTransitionVertex)
+			logger.info("mapSpaceVertex = {}", mapSpaceVertex)
+			logger.info("localStateVertex = {}", localTransitionVertex)
+			
+			//connect foreign state vertex to local state vertex
+			createEdge(foreignTransitionVertex, localTransitionVertex, "mapsTo")
+							
+			//connect local field's mapping vertex to local state vertex
+			var mappedStateIterator = mapSpaceVertex.vertices(Direction.OUT, "mappedTransition")
+			var mappedStateExists = false
+			
+			//Look through all mapped state connections from this map space
+			while (mappedStateIterator.hasNext){
+				var curr = mappedStateIterator.next
+				//If a 'mapped state' edge already exists to that field, flip the flag
+				if (curr.property("name").value.toString.equals(localTransitionVertex.property("name").value.toString)){
+					mappedStateExists = true
+				}
+			}
+			
+			//Only create a mapped state connection if one doesn't already exist with the local state being mapped
+			if (!mappedStateExists){
+				createEdge(mapSpaceVertex, localTransitionVertex, "mappedState")
+			}
+							
+			//connect foreign field vertex to local field's mapping vertex
+			
+			//Look through all requires connections from this map space
+			var requiresIterator = mapSpaceVertex.vertices(Direction.OUT, "requires")
+			var requiresExists = false
+			while(requiresIterator.hasNext){
+				var curr = requiresIterator.next
+				//If a 'requires' edge already exists to that field, flip the flag
+				if (curr.property("name").value.toString.equals(foreignFieldVertex.property("name").value.toString)){
+					requiresExists = true
+				}
+			}
+			
+			//Only create a requires connection if one doesn't already exist with the field being mapped
+			if (!requiresExists){
+				createEdge(mapSpaceVertex, foreignFieldVertex, "requires")
+			}
+			
 		]
 	}
 	
@@ -506,6 +595,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 			var vertex = createVertex(state, stateInstanceMeta)
 			vertex.property(VertexProperty.Cardinality.single,"name", instance.name)
 			vertex.property(VertexProperty.Cardinality.single, "type", "state")
+			vertex.property(VertexProperty.Cardinality.single, "isCollectionElement", instance.isIsCollectionElement.toString)
 			createEdge(instanceSpaceVertex, vertex, "definesInstance")
 			
 			//Find vertex of state this is an instance of
@@ -611,6 +701,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 			var vertex = createVertex(state, stateInstanceMeta)
 			vertex.property(VertexProperty.Cardinality.single,"name", instance.name)
 			vertex.property(VertexProperty.Cardinality.single, "type", "state")
+			vertex.property(VertexProperty.Cardinality.single, "isCollectionElement", instance.isIsCollectionElement.toString)
 			createEdge(instanceSpaceVertex, vertex, "definesInstance")
 			
 			//Find vertex of state this is an instance of
@@ -726,7 +817,8 @@ class FieldModelFactory extends MetaModelVertexFactory {
 	
 	//Utility method for generating edges with meta data for this field
 	def private createEdge(Vertex from, Vertex to, String label){
-		var edge = from.addEdge(label, to).property("creationStamp", creationStamp.toString)
+		var edge = from.addEdge(label, to)
+		edge.property("creationStamp", creationStamp.toString)
 		return edge
 	}
 

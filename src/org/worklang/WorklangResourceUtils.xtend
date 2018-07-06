@@ -119,6 +119,29 @@ class WorklangResourceUtils {
 		return result;
 	}
 	
+	def static Instance mapInstancesToCollectionInstance(CompoundStateDefinition compoundDefinition, List<Instance> instances){
+		
+		val i = factory.createInstance
+		
+		i.stateDeclaration = factory.createStateDeclaration
+		i.stateDeclaration.state = compoundDefinition as StateDefinition
+		i.collection = factory.createCollectionInstance
+		
+		//Populate collection instance elements
+		instances.forEach[instance|
+			
+			if (!instance.isIsCollectionElement){
+				logger.error("Execution instruction resulting in collection instance produced instance that wasn't collection element! ")
+				throw new Exception("Cannot create collection instance if all instances aren't collection elements!")
+			}
+			
+			i.collection.elements.add(i)
+		]
+		
+		return i
+		
+	}
+	
 	def static Instance mapInstancesToCompoundInstance(CompoundStateDefinition compoundDefinition, List<Instance> instances){
 		
 		if (validateInstances(compileComponents(compoundDefinition), instances)){

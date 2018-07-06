@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.structure.Graph;
@@ -191,10 +192,17 @@ public class ExecutionApi extends AbstractVerticle{
 				JsonArray inputsToSend = new JsonArray();
 					
 				for (String s: inputInstancesToFetch) {
-					inputsToSend.add(
-						ExecutionUtils.StateInstanceToJson(
-								WorklangResourceUtils.resolveInstance(fieldName, s)
-							));
+					
+					Instance i =  WorklangResourceUtils.resolveInstance(fieldName, s);
+					
+					if (i.getCollection() != null) {
+						inputsToSend.add(ExecutionUtils.collectionInstanceToJsonArray(i));
+					}
+					
+					if (i.getState() != null) {
+						inputsToSend.add(ExecutionUtils.stateInstanceToJson(i));
+					}
+					
 				}
 				
 				/* If this transition has only 1 input, simply pass the input instance
@@ -204,7 +212,13 @@ public class ExecutionApi extends AbstractVerticle{
 				 */
 				
 				if (inputsToSend.size() == 1) {
-					input.mergeIn(inputsToSend.getJsonObject(0));
+					try {
+						input.mergeIn(inputsToSend.getJsonObject(0));
+					}catch(ClassCastException e) {
+						logger.info("inputsToSend size was 1 but element was not JsonObject, sending array instead");
+						input.put("inputs", inputsToSend.getJsonArray(0));
+					}
+					
 				}else {
 					input.put("inputs", inputsToSend);
 				}
@@ -212,9 +226,11 @@ public class ExecutionApi extends AbstractVerticle{
 				
 				//Send POST request
 				String outputInstanceName = rc.request().getParam("produce");
+				String outputCollection = rc.request().getParam("collection");
+				String outputCollectionIndex = rc.request().getParam("collectionIndex");
 				
 				
-				vertx.<JsonObject>executeBlocking(fut->{
+				vertx.<Object>executeBlocking(fut->{
 					
 					client.post(
 							transition.getTransition().getPort(),
@@ -228,7 +244,14 @@ public class ExecutionApi extends AbstractVerticle{
 							System.out.println(response.body().toString());
 							
 							JsonObject data = response.bodyAsJsonObject();
-
+							
+							if (data == null) {
+								JsonArray dataArray = response.bodyAsJsonArray();
+								logger.info("response is a json array!");
+								fut.complete(dataArray);
+							}
+							
+							logger.info("response is a json object!");
 							fut.complete(data);
 						}
 					});
@@ -237,30 +260,51 @@ public class ExecutionApi extends AbstractVerticle{
 					
 					if (result.succeeded()) {
 						
-						JsonObject data = result.result();
+						Object data = result.result();
 						
-						logger.info("Adding output to work resource!");
+						//Process the result as JsonObject
+						if (data instanceof JsonObject) {
+							
+							JsonObject jsonObjectData = (JsonObject)data;
+							
+							logger.info("Adding output json object to work resource!");
+							
+							//Create Instance from json result
+							//If we were invoked to create a collection element do that
+							Instance i = null;
+							
+							if (outputCollection != null && outputCollectionIndex != null){
+								i = MetaModelUtils.jsonToCollectionElementStateInstance(jsonObjectData, fieldName, transition, outputCollection, outputCollectionIndex, outputInstanceName == null?"":outputInstanceName); 
+							}else {
+								//Otherwise create a normal state instance
+								i = MetaModelUtils.jsonToStateInstance(jsonObjectData, fieldName, transition, outputInstanceName == null? "UntitledInstance":outputInstanceName);
+							}
+							
+							//Add it to the Active resource
+							WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
+							
+							logger.info("Output json object added to work resource!");
+							
+							rc.response().end(jsonObjectData.encode());
+						}
 						
-						//Create Instance from json result
-						Instance i = MetaModelUtils.jsonToStateInstance(data, fieldName, transition, outputInstanceName == null? "UntitledInstance":outputInstanceName);
-						
-						//Add it to the Active resource
-						WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
-						
-						logger.info("Output added to work resource!");
-						
-						rc.response().end(data.encode());
-						
-//						vertx.executeBlocking(updateMetaModel->{
-//							
-//							logger.info("Reprocessing active resource!");
-//							
-//							WorkApi.reprocessActiveResource();
-//							updateMetaModel.complete();
-//							
-//						}, done->{
-//							rc.response().end(data.encode());
-//						});
+						if (data instanceof JsonArray) {
+							
+							JsonArray jsonArrayData = (JsonArray)data;
+							
+							logger.info("Adding output json array to work resource");
+							
+							Instance i = null;
+							i = MetaModelUtils.jsonArrayToCollectionInstance(jsonArrayData, fieldName, transition, outputCollection == null?"UntitledCollection":outputCollection);
+							
+							//Add it to the active resource
+							WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
+							
+							logger.info("Output json array added to work resource!");
+							
+							rc.response().end(jsonArrayData.encode());
+							
+						}
 						
 						
 						
@@ -283,8 +327,10 @@ public class ExecutionApi extends AbstractVerticle{
 				
 				
 				String outputInstanceName = rc.request().getParam("produce");
+				String outputCollection = rc.request().getParam("collection");
+				String outputCollectionIndex = rc.request().getParam("collectionIndex");
 				
-				vertx.<JsonObject>executeBlocking(fut->{
+				vertx.<Object>executeBlocking(fut->{
 					
 					client.get(
 							transition.getTransition().getPort(),
@@ -299,6 +345,13 @@ public class ExecutionApi extends AbstractVerticle{
 							
 							JsonObject data = response.bodyAsJsonObject();
 							
+							//If the result couldn't be retrieved as a JsonObject try getting it as a JsonArray
+							if (data == null) {
+								JsonArray dataArray = response.bodyAsJsonArray();
+								logger.info("response is a json array!");
+								fut.complete(dataArray);
+							}
+							logger.info("response is a json object!");
 							fut.complete(data);
 							
 						}
@@ -307,30 +360,53 @@ public class ExecutionApi extends AbstractVerticle{
 				}, result->{
 					if (result.succeeded()) {
 						
-						JsonObject data = result.result();
+						Object data = result.result();
 						
-						logger.info("Adding output to work resource!");
+						//Process the result as JsonObject
+						if (data instanceof JsonObject) {
+							
+							JsonObject jsonObjectData = (JsonObject)data;
+							
+							logger.info("Adding output json object to work resource!");
+							
+							//Create Instance from json result
+							//If we were invoked to create a collection element do that
+							Instance i = null;
+							
+							if (outputCollection != null && outputCollectionIndex != null){
+								i = MetaModelUtils.jsonToCollectionElementStateInstance(jsonObjectData, fieldName, transition, outputCollection, outputCollectionIndex, outputInstanceName == null?"":outputInstanceName); 
+							}else {
+								//Otherwise create a normal state instance
+								i = MetaModelUtils.jsonToStateInstance(jsonObjectData, fieldName, transition, outputInstanceName == null? "UntitledInstance":outputInstanceName);
+							}
+							
+							//Add it to the Active resource
+							WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
+							
+							logger.info("Output json object added to work resource!");
+							
+							rc.response().end(jsonObjectData.encode());
+						}
 						
-						//Create Instance from json result
-						Instance i = MetaModelUtils.jsonToStateInstance(data, fieldName, transition, outputInstanceName == null?"UntitledInstance":outputInstanceName);
+						if (data instanceof JsonArray) {
+							
+							JsonArray jsonArrayData = (JsonArray)data;
+							
+							logger.info("Adding output json array to work resource");
+							
+							Instance i = null;
+							i = MetaModelUtils.jsonArrayToCollectionInstance(jsonArrayData, fieldName, transition, outputCollection == null?"UntitledCollection":outputCollection);
+							
+							//Add it to the active resource
+							WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
+							
+							logger.info("Output json array added to work resource!");
+							
+							rc.response().end(jsonArrayData.encode());
+							
+						}
 						
-						//Add it to the Active resource
-						WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
 						
-						logger.info("Output added to work resource!");
-						
-						rc.response().end(data.encode());
-						
-//						vertx.executeBlocking(updateMetaModel->{
-//							
-//							logger.info("Reprocessing active resource!");
-//							WorkApi.reprocessActiveResource();
-//							
-//							updateMetaModel.complete();
-//							
-//						}, done->{
-//							rc.response().end(data.encode());
-//						});
 						
 					}else {
 						logger.error("Error invoking transition -> {} through GET REST request.",

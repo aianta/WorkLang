@@ -52,57 +52,67 @@ class ExecutionApiWorkFileProcessor {
 		].forEach[fieldEObject|
 			val field = fieldEObject as FieldDefinition
 			
-			//Process primitive instance transitions
-			field.instanceSpace.instances.filter[instance|
-				instance.eContents.exists[instanceComponent|
-					instanceComponent instanceof TransitionInstance
+			//If a field has an instance space
+			if (field.instanceSpace !== null){
+				
+				//Process primitive instance transitions
+				field.instanceSpace.instances.filter[instance|
+					instance.eContents.exists[instanceComponent|
+						instanceComponent instanceof TransitionInstance
+					]
+				].forEach[primitiveTransition|
+					
+					api.addProxyRoute(field.name, primitiveTransition);
 				]
-			].forEach[primitiveTransition|
 				
-				api.addProxyRoute(field.name, primitiveTransition);
-			]
-			
-			//Process compound instance transitions
-			field.instanceSpace.instances.filter[instance|
-				instance.eContents.exists[instanceComponent|
-					instanceComponent instanceof CompoundTransitionInstance
+				//Process compound instance transitions
+				field.instanceSpace.instances.filter[instance|
+					instance.eContents.exists[instanceComponent|
+						instanceComponent instanceof CompoundTransitionInstance
+					]
+				].forEach[compoundTransition|
+					
+					/* If a processor doesn't exist for this compound instance transition, 
+					 * create one. 
+					 * 
+					 * IMPORTANT: DO NOT REPLACE EXISTING PROCESSOR
+					 */
+					 
+					 if (!api.routeExists(
+					 "/" + field.name.toLowerCase + "/" +
+					 compoundTransition.transitionDeclaration.transition.name.toLowerCase + "/" + 
+					 compoundTransition.name.replaceAll("\\s", "").toLowerCase
+					 )){
+					 	api.addCompoundTransitionProcessor(field.name, compoundTransition);
+					 }
+					
+					
 				]
-			].forEach[compoundTransition|
 				
-				/* If a processor doesn't exist for this compound instance transition, 
-				 * create one. 
-				 * 
-				 * IMPORTANT: DO NOT REPLACE EXISTING PROCESSOR
-				 */
-				 
-				 if (!api.routeExists(
-				 "/" + field.name.toLowerCase + "/" +
-				 compoundTransition.transitionDeclaration.transition.name.toLowerCase + "/" + 
-				 compoundTransition.name.replaceAll("\\s", "").toLowerCase
-				 )){
-				 	api.addCompoundTransitionProcessor(field.name, compoundTransition);
-				 }
-				
-				
-			]
+			}
 			
-			//Process primitive transitions
-			field.definitionSpace.transitions.filter[transition|
-				transition.type.equals("primitive")
-			].forEach[primitiveTransition|
+			if (field.definitionSpace !== null){
+							
+				//Process primitive transitions
+				field.definitionSpace.transitions.filter[transition|
+					transition.type.equals("primitive")
+				].forEach[primitiveTransition|
+					
+					
+					//TODO 
+					
+				]
 				
-				
-				//TODO 
-				
-			]
+				//Process compound transitions
+				field.definitionSpace.transitions.filter[transition|
+					transition.type.equals("compound")
+				].forEach[compoundTransition|
+					
+					//TODO
+				]
+			}
 			
-			//Process compound transitions
-			field.definitionSpace.transitions.filter[transition|
-				transition.type.equals("compound")
-			].forEach[compoundTransition|
-				
-				//TODO
-			]
+
 		]
 		
 	}

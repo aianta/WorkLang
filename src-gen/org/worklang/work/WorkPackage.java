@@ -1102,13 +1102,22 @@ public interface WorkPackage extends EPackage
   int TRANSITION_INSTANCE__PATH = 2;
 
   /**
+   * The feature id for the '<em><b>Support Collections</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_INSTANCE__SUPPORT_COLLECTIONS = 3;
+
+  /**
    * The number of structural features of the '<em>Transition Instance</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TRANSITION_INSTANCE_FEATURE_COUNT = 3;
+  int TRANSITION_INSTANCE_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.worklang.work.impl.StateInstanceImpl <em>State Instance</em>}' class.
@@ -2725,6 +2734,17 @@ public interface WorkPackage extends EPackage
   EAttribute getTransitionInstance_Path();
 
   /**
+   * Returns the meta object for the attribute '{@link org.worklang.work.TransitionInstance#isSupportCollections <em>Support Collections</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Support Collections</em>'.
+   * @see org.worklang.work.TransitionInstance#isSupportCollections()
+   * @see #getTransitionInstance()
+   * @generated
+   */
+  EAttribute getTransitionInstance_SupportCollections();
+
+  /**
    * Returns the meta object for class '{@link org.worklang.work.StateInstance <em>State Instance</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4057,6 +4077,14 @@ public interface WorkPackage extends EPackage
      * @generated
      */
     EAttribute TRANSITION_INSTANCE__PATH = eINSTANCE.getTransitionInstance_Path();
+
+    /**
+     * The meta object literal for the '<em><b>Support Collections</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TRANSITION_INSTANCE__SUPPORT_COLLECTIONS = eINSTANCE.getTransitionInstance_SupportCollections();
 
     /**
      * The meta object literal for the '{@link org.worklang.work.impl.StateInstanceImpl <em>State Instance</em>}' class.

@@ -41,7 +41,16 @@ public class InstanceSpaceAdapter extends EContentAdapter {
 					FieldDefinition field = (FieldDefinition)i.eContainer().eContainer();
 					
 					//Update meta model
-					modelFactories.get(field.getName()).generateStateInstance(i);
+					
+					//If instance is a collection instance
+					if (i.getCollection() != null) {
+						modelFactories.get(field.getName()).generateCollectionInstance(i);
+					}
+					
+					//If instance is a state instance
+					if (i.getState() != null) {
+						modelFactories.get(field.getName()).generateStateInstance(i);
+					}
 					
 					
 					logger.info("Updating Read Api");

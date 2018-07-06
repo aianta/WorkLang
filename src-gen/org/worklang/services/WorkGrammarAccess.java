@@ -996,14 +996,17 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cPortINTTerminalRuleCall_1_0 = (RuleCall)cPortAssignment_1.eContents().get(0);
 		private final Assignment cPathAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cPathSTRINGTerminalRuleCall_2_0 = (RuleCall)cPathAssignment_2.eContents().get(0);
+		private final Assignment cSupportCollectionsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final Keyword cSupportCollectionsHasCollectionSupportKeyword_3_0 = (Keyword)cSupportCollectionsAssignment_3.eContents().get(0);
 		
 		//TransitionInstance:
 		//	host=STRING
 		//	port=INT
-		//	path=STRING?;
+		//	path=STRING?
+		//	supportCollections?='hasCollectionSupport'?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//host=STRING port=INT path=STRING?
+		//host=STRING port=INT path=STRING? supportCollections?='hasCollectionSupport'?
 		public Group getGroup() { return cGroup; }
 		
 		//host=STRING
@@ -1023,6 +1026,12 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//STRING
 		public RuleCall getPathSTRINGTerminalRuleCall_2_0() { return cPathSTRINGTerminalRuleCall_2_0; }
+		
+		//supportCollections?='hasCollectionSupport'?
+		public Assignment getSupportCollectionsAssignment_3() { return cSupportCollectionsAssignment_3; }
+		
+		//'hasCollectionSupport'
+		public Keyword getSupportCollectionsHasCollectionSupportKeyword_3_0() { return cSupportCollectionsHasCollectionSupportKeyword_3_0; }
 	}
 	public class StateInstanceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.StateInstance");
@@ -1100,30 +1109,54 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class UseDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.UseDefinition");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cUseKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cPredefinedValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cPredefinedValueInstanceCrossReference_1_0 = (CrossReference)cPredefinedValueAssignment_1.eContents().get(0);
-		private final RuleCall cPredefinedValueInstanceSTRINGTerminalRuleCall_1_0_1 = (RuleCall)cPredefinedValueInstanceCrossReference_1_0.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Keyword cUseKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cPredefinedValueAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final CrossReference cPredefinedValueInstanceCrossReference_0_1_0 = (CrossReference)cPredefinedValueAssignment_0_1.eContents().get(0);
+		private final RuleCall cPredefinedValueInstanceSTRINGTerminalRuleCall_0_1_0_1 = (RuleCall)cPredefinedValueInstanceCrossReference_0_1_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Keyword cUseKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cPredefinedValueAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final CrossReference cPredefinedValueInstanceCrossReference_1_1_0 = (CrossReference)cPredefinedValueAssignment_1_1.eContents().get(0);
+		private final RuleCall cPredefinedValueInstanceCOLLECTION_ELEMENT_NAMETerminalRuleCall_1_1_0_1 = (RuleCall)cPredefinedValueInstanceCrossReference_1_1_0.eContents().get(1);
 		
 		//UseDefinition:
-		//	'use' predefinedValue=[Instance|STRING];
+		//	'use' predefinedValue=[Instance|STRING] | 'use' predefinedValue=[Instance|COLLECTION_ELEMENT_NAME];
 		@Override public ParserRule getRule() { return rule; }
 		
+		//'use' predefinedValue=[Instance|STRING] | 'use' predefinedValue=[Instance|COLLECTION_ELEMENT_NAME]
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
 		//'use' predefinedValue=[Instance|STRING]
-		public Group getGroup() { return cGroup; }
+		public Group getGroup_0() { return cGroup_0; }
 		
 		//'use'
-		public Keyword getUseKeyword_0() { return cUseKeyword_0; }
+		public Keyword getUseKeyword_0_0() { return cUseKeyword_0_0; }
 		
 		//predefinedValue=[Instance|STRING]
-		public Assignment getPredefinedValueAssignment_1() { return cPredefinedValueAssignment_1; }
+		public Assignment getPredefinedValueAssignment_0_1() { return cPredefinedValueAssignment_0_1; }
 		
 		//[Instance|STRING]
-		public CrossReference getPredefinedValueInstanceCrossReference_1_0() { return cPredefinedValueInstanceCrossReference_1_0; }
+		public CrossReference getPredefinedValueInstanceCrossReference_0_1_0() { return cPredefinedValueInstanceCrossReference_0_1_0; }
 		
 		//STRING
-		public RuleCall getPredefinedValueInstanceSTRINGTerminalRuleCall_1_0_1() { return cPredefinedValueInstanceSTRINGTerminalRuleCall_1_0_1; }
+		public RuleCall getPredefinedValueInstanceSTRINGTerminalRuleCall_0_1_0_1() { return cPredefinedValueInstanceSTRINGTerminalRuleCall_0_1_0_1; }
+		
+		//'use' predefinedValue=[Instance|COLLECTION_ELEMENT_NAME]
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'use'
+		public Keyword getUseKeyword_1_0() { return cUseKeyword_1_0; }
+		
+		//predefinedValue=[Instance|COLLECTION_ELEMENT_NAME]
+		public Assignment getPredefinedValueAssignment_1_1() { return cPredefinedValueAssignment_1_1; }
+		
+		//[Instance|COLLECTION_ELEMENT_NAME]
+		public CrossReference getPredefinedValueInstanceCrossReference_1_1_0() { return cPredefinedValueInstanceCrossReference_1_1_0; }
+		
+		//COLLECTION_ELEMENT_NAME
+		public RuleCall getPredefinedValueInstanceCOLLECTION_ELEMENT_NAMETerminalRuleCall_1_1_0_1() { return cPredefinedValueInstanceCOLLECTION_ELEMENT_NAMETerminalRuleCall_1_1_0_1; }
 	}
 	public class SetStatementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.SetStatement");
@@ -2545,7 +2578,8 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	//TransitionInstance:
 	//	host=STRING
 	//	port=INT
-	//	path=STRING?;
+	//	path=STRING?
+	//	supportCollections?='hasCollectionSupport'?;
 	public TransitionInstanceElements getTransitionInstanceAccess() {
 		return pTransitionInstance;
 	}
@@ -2585,7 +2619,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//UseDefinition:
-	//	'use' predefinedValue=[Instance|STRING];
+	//	'use' predefinedValue=[Instance|STRING] | 'use' predefinedValue=[Instance|COLLECTION_ELEMENT_NAME];
 	public UseDefinitionElements getUseDefinitionAccess() {
 		return pUseDefinition;
 	}

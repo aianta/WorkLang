@@ -863,7 +863,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     TransitionInstance returns TransitionInstance
 	 *
 	 * Constraint:
-	 *     (host=STRING port=INT path=STRING?)
+	 *     (host=STRING port=INT path=STRING? supportCollections?='hasCollectionSupport'?)
 	 */
 	protected void sequence_TransitionInstance(ISerializationContext context, TransitionInstance semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -899,16 +899,10 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     UseDefinition returns UseDefinition
 	 *
 	 * Constraint:
-	 *     predefinedValue=[Instance|STRING]
+	 *     (predefinedValue=[Instance|STRING] | predefinedValue=[Instance|COLLECTION_ELEMENT_NAME])
 	 */
 	protected void sequence_UseDefinition(ISerializationContext context, UseDefinition semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, WorkPackage.Literals.USE_DEFINITION__PREDEFINED_VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WorkPackage.Literals.USE_DEFINITION__PREDEFINED_VALUE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getUseDefinitionAccess().getPredefinedValueInstanceSTRINGTerminalRuleCall_1_0_1(), semanticObject.eGet(WorkPackage.Literals.USE_DEFINITION__PREDEFINED_VALUE, false));
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

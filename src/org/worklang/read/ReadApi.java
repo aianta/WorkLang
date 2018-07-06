@@ -150,9 +150,19 @@ public class ReadApi extends AbstractVerticle{
 			
 			Vertex stateInstanceVertex = MetaModelUtils.getStateInstanceVertex(fieldName, state.getName());
 			
-			JsonObject data = MetaModelUtils.stateInstanceVertexToJson(stateInstanceVertex);
+			//If the state instance is a collection element, return it as an array 
+			if (Boolean.getBoolean(stateInstanceVertex.property("isCollectionElement").value().toString())) {
+				JsonArray data = MetaModelUtils.collectionElementStateInstanceVertexToJsonArray(stateInstanceVertex);
+				rc.response().end(data.encode());
+			}
 			
-			rc.response().end(data.encode());
+			//If the state instance is not a collection element, return it as a json object
+			if (!Boolean.getBoolean(stateInstanceVertex.property("isCollectionElement").value().toString())) {
+				JsonObject data = MetaModelUtils.stateInstanceVertexToJson(stateInstanceVertex);	
+				rc.response().end(data.encode());
+			}
+			
+			
 			
 		});
 		

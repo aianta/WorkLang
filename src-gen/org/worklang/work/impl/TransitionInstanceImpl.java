@@ -36,6 +36,7 @@ import org.worklang.work.WorkPackage;
  *   <li>{@link org.worklang.work.impl.TransitionInstanceImpl#getHost <em>Host</em>}</li>
  *   <li>{@link org.worklang.work.impl.TransitionInstanceImpl#getPort <em>Port</em>}</li>
  *   <li>{@link org.worklang.work.impl.TransitionInstanceImpl#getPath <em>Path</em>}</li>
+ *   <li>{@link org.worklang.work.impl.TransitionInstanceImpl#isSupportCollections <em>Support Collections</em>}</li>
  * </ul>
  *
  * @generated
@@ -101,6 +102,26 @@ public class TransitionInstanceImpl extends MinimalEObjectImpl.Container impleme
    * @ordered
    */
   protected String path = PATH_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #isSupportCollections() <em>Support Collections</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isSupportCollections()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean SUPPORT_COLLECTIONS_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isSupportCollections() <em>Support Collections</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isSupportCollections()
+   * @generated
+   * @ordered
+   */
+  protected boolean supportCollections = SUPPORT_COLLECTIONS_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -197,6 +218,29 @@ public class TransitionInstanceImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isSupportCollections()
+  {
+    return supportCollections;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setSupportCollections(boolean newSupportCollections)
+  {
+    boolean oldSupportCollections = supportCollections;
+    supportCollections = newSupportCollections;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_INSTANCE__SUPPORT_COLLECTIONS, oldSupportCollections, supportCollections));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -208,6 +252,8 @@ public class TransitionInstanceImpl extends MinimalEObjectImpl.Container impleme
         return getPort();
       case WorkPackage.TRANSITION_INSTANCE__PATH:
         return getPath();
+      case WorkPackage.TRANSITION_INSTANCE__SUPPORT_COLLECTIONS:
+        return isSupportCollections();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -230,6 +276,9 @@ public class TransitionInstanceImpl extends MinimalEObjectImpl.Container impleme
         return;
       case WorkPackage.TRANSITION_INSTANCE__PATH:
         setPath((String)newValue);
+        return;
+      case WorkPackage.TRANSITION_INSTANCE__SUPPORT_COLLECTIONS:
+        setSupportCollections((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -254,6 +303,9 @@ public class TransitionInstanceImpl extends MinimalEObjectImpl.Container impleme
       case WorkPackage.TRANSITION_INSTANCE__PATH:
         setPath(PATH_EDEFAULT);
         return;
+      case WorkPackage.TRANSITION_INSTANCE__SUPPORT_COLLECTIONS:
+        setSupportCollections(SUPPORT_COLLECTIONS_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -274,6 +326,8 @@ public class TransitionInstanceImpl extends MinimalEObjectImpl.Container impleme
         return port != PORT_EDEFAULT;
       case WorkPackage.TRANSITION_INSTANCE__PATH:
         return PATH_EDEFAULT == null ? path != null : !PATH_EDEFAULT.equals(path);
+      case WorkPackage.TRANSITION_INSTANCE__SUPPORT_COLLECTIONS:
+        return supportCollections != SUPPORT_COLLECTIONS_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -295,6 +349,8 @@ public class TransitionInstanceImpl extends MinimalEObjectImpl.Container impleme
     result.append(port);
     result.append(", path: ");
     result.append(path);
+    result.append(", supportCollections: ");
+    result.append(supportCollections);
     result.append(')');
     return result.toString();
   }

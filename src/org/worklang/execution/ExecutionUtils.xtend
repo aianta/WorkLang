@@ -21,10 +21,40 @@ import org.worklang.work.Instance
 import io.vertx.core.json.JsonObject
 import org.worklang.work.SetStatement
 import org.worklang.work.UseDefinition
+import io.vertx.core.json.JsonArray
+import org.slf4j.LoggerFactory
 
 class ExecutionUtils {
 	
-	def static JsonObject StateInstanceToJson(Instance instance){
+	val static logger = LoggerFactory.getLogger(ExecutionUtils)
+	
+	def static JsonArray collectionInstanceToJsonArray(Instance instance){
+		
+		val JsonArray jsonArrayInstance = new JsonArray
+		
+		
+		//TODO handle n-dimensional array nesting
+		instance.collection.elements.forEach[element|
+
+			//If the element is based on a primitive state, return its value as a simple string in the array
+			if (element.stateDeclaration.state.type.equals("primitive")){
+				jsonArrayInstance.add((element.state.members.get(0) as SetStatement).toDef.value)
+			}
+			
+			//If the element is based on a compound state, let stateInstanceToJson figure it out
+			if (element.stateDeclaration.state.type.equals("compound")){
+				jsonArrayInstance.add(stateInstanceToJson(element))
+			}
+			 
+		]
+		
+		return jsonArrayInstance
+		
+	}
+	
+	def static JsonObject stateInstanceToJson(Instance instance){
+		
+		logger.info("creating json object from state instance")
 		
 		val JsonObject jsonInstance = new JsonObject
 		
@@ -44,7 +74,17 @@ class ExecutionUtils {
 			if (member instanceof UseDefinition){
 				var useDef = member as UseDefinition
 				
-				jsonInstance.put(useDef.predefinedValue.name, StateInstanceToJson(useDef.predefinedValue))
+				var useValue = useDef.predefinedValue
+				
+				if (useValue.collection !== null){
+					jsonInstance.put(useValue.stateDeclaration.state.name, collectionInstanceToJsonArray(useValue))
+				}
+				
+				if (useValue.state !== null){
+					jsonInstance.put(useValue.stateDeclaration.state.name, stateInstanceToJson(useDef.predefinedValue))
+				}
+				
+				
 			}
 			
 		]

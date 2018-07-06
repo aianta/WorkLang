@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.worklang.work.TransitionInstance#getHost <em>Host</em>}</li>
  *   <li>{@link org.worklang.work.TransitionInstance#getPort <em>Port</em>}</li>
  *   <li>{@link org.worklang.work.TransitionInstance#getPath <em>Path</em>}</li>
+ *   <li>{@link org.worklang.work.TransitionInstance#isSupportCollections <em>Support Collections</em>}</li>
  * </ul>
  *
  * @see org.worklang.work.WorkPackage#getTransitionInstance()
@@ -114,5 +115,31 @@ public interface TransitionInstance extends EObject
    * @generated
    */
   void setPath(String value);
+
+  /**
+   * Returns the value of the '<em><b>Support Collections</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Support Collections</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Support Collections</em>' attribute.
+   * @see #setSupportCollections(boolean)
+   * @see org.worklang.work.WorkPackage#getTransitionInstance_SupportCollections()
+   * @model
+   * @generated
+   */
+  boolean isSupportCollections();
+
+  /**
+   * Sets the value of the '{@link org.worklang.work.TransitionInstance#isSupportCollections <em>Support Collections</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Support Collections</em>' attribute.
+   * @see #isSupportCollections()
+   * @generated
+   */
+  void setSupportCollections(boolean value);
 
 } // TransitionInstance
