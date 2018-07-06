@@ -437,16 +437,26 @@ class MetaModelUtils {
 			
 			var elementInstance = element.vertices(Direction.OUT, "is").head
 			
-			logger.info("elementInstance -> {} stateType->{}", elementInstance, elementInstance.property("stateType").value.toString )
+			//Handle case where element instance in collection is a state
+			if (elementInstance.property("type").value.toString.equals("state")){
+				logger.info("elementInstance -> {} stateType->{}", elementInstance, elementInstance.property("stateType").value.toString )
 			
-			if (elementInstance.property("stateType").value.equals("primitive")){
-				result.add(collectionPrimitiveStateInstanceVertexToJson(elementInstance))
+				if (elementInstance.property("stateType").value.equals("primitive")){
+					result.add(collectionPrimitiveStateInstanceVertexToJson(elementInstance))
+				}
+				
+				if (elementInstance.property("stateType").value.equals("compound")){
+					var myDefinitionVertex = collectionInstance.vertices(Direction.OUT, "instanceOf").next;
+					result.add(stateInstanceVertexToJson(elementInstance).getJsonObject(myDefinitionVertex.property("name").value.toString))
+				}
 			}
 			
-			if (elementInstance.property("stateType").value.equals("compound")){
-				var myDefinitionVertex = collectionInstance.vertices(Direction.OUT, "instanceOf").next;
-				result.add(stateInstanceVertexToJson(elementInstance).getJsonObject(myDefinitionVertex.property("name").value.toString))
+			//Handle case where element instance in collection is a collection
+			if (elementInstance.property("type").value.toString.equals("collection")){
+				result.add(collectionInstanceVertexToJson(elementInstance))
 			}
+			
+			
 			
 		]
 		

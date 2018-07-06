@@ -44,6 +44,7 @@ import java.util.ArrayList
 import org.worklang.interpreter.WorkApi
 import org.worklang.execution.ExecutionApiWorkFileProcessor
 import org.worklang.metamodel.adapters.InstanceSpaceAdapter
+import org.worklang.work.Model
 
 /**
  * Generates code from your model files on save.
@@ -78,11 +79,9 @@ class WorkGenerator extends AbstractGenerator {
 		executionApiSetup.processWorkFile(xResource);
 		
 		//Create Read API
-		xResource.allContents.filter[ele|
-			ele.eClass.instanceClass.equals(org.worklang.work.FieldDefinition)
-		].forEach[fieldEObject|
-			val field = fieldEObject as FieldDefinition
-			
+		var model = xResource.contents.get(0) as Model
+		
+		model.fields.forEach[field|
 			//For the field
 			WorkApi.readApi.addField(field.name)
 			
@@ -109,7 +108,7 @@ class WorkGenerator extends AbstractGenerator {
 					WorkApi.readApi.addCollectionInstance(field.name, collectionInstance)
 				]
 			}
-			
 		]
+		
 	}
 }

@@ -480,6 +480,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 			var vertex = createVertex(collection, collectionInstanceMeta)
 			vertex.property(VertexProperty.Cardinality.single, "name", collectionInstance.name);
 			vertex.property(VertexProperty.Cardinality.single, "type", "collection");
+			vertex.property(VertexProperty.Cardinality.single, "isCollectionElement", collectionInstance.isIsCollectionElement.toString)
 			vertex.property(VertexProperty.Cardinality.single, "size", Integer.toString(collection.elements.size))
 			
 			createEdge(instanceSpaceVertex, vertex, "definesInstance");
@@ -519,8 +520,14 @@ class FieldModelFactory extends MetaModelVertexFactory {
 				
 				createEdge(collectionInstanceVertex, elementVertex, "index")
 				
-				//Find the instance that this element represents
+				//Try finding the state instance that this element represents
 				var elementInstanceVertex = graph.vertices("match (n:`"+stateInstanceMeta+"` {field:'"+fieldName+"', name:'"+curr.name+"'}) return n").head
+				
+				//If nothing was found, try finding the collection instance that this element represents 
+				if (elementInstanceVertex === null){
+					elementInstanceVertex = graph.vertices("match (n:`"+collectionInstanceMeta+"`{field:'"+fieldName+"',name:'"+curr.name+"'}) return n").head
+				}
+				
 				createEdge(elementVertex, elementInstanceVertex, "is");
 				
 				count++
@@ -536,6 +543,7 @@ class FieldModelFactory extends MetaModelVertexFactory {
 			var vertex = createVertex(collection, collectionInstanceMeta)
 			vertex.property(VertexProperty.Cardinality.single, "name", collectionInstance.name);
 			vertex.property(VertexProperty.Cardinality.single, "type", "collection");
+			vertex.property(VertexProperty.Cardinality.single, "isCollectionElement", collectionInstance.isIsCollectionElement.toString)
 			vertex.property(VertexProperty.Cardinality.single, "size", Integer.toString(collection.elements.size))
 			
 			createEdge(instanceSpaceVertex, vertex, "definesInstance");
