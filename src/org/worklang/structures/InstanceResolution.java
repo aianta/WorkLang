@@ -93,6 +93,13 @@ public class InstanceResolution {
 			
 			CombinationMatcher bestMatch = validPossibilities.get(validPossibilities.firstKey());
 			
+			/*Create a recursive assemble method that creates the instance
+			 *  with all required child instances.
+			 *  
+			 *  ExtractKeys will have to return the keys rather than void 
+			 *  so we can reuse it to assemble children (where the value 
+			 *  for a json key is a JsonObject). 
+			 */
 			
 			
 		}else {

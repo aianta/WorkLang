@@ -50,6 +50,38 @@ import io.vertx.ext.web.client.WebClient;
  *	Creates 
  */
 
+
+/* Notes on compound execution:
+ * 	
+ * 	Don't forget to pre-calculate state composition objects for all transition
+ * 	input and output definitions so that runtime performance on compound transitions
+ * 	doesn't turn to garbage. 
+ * 
+ * 	ESPECIALLY don't forget that the above advice includes mapped state definitions
+ *  from the input and output definitions.
+ * 
+ *  Don't forget to split arrays that come as input into multiple instances.
+ *  This may be possible through InstanceResolution. But there still needs to be
+ *  execution logic that knows to loop through all the Instances produced by 
+ *  InputResolution and add them to the execution instruction.
+ *  
+ *  Use the input of a definition to try to parse input received from a client
+ *  
+ *  If the input doesn't match the definition of the transition's input,
+ *  go through all mapped states of the input definition and try to parse as those.
+ * 
+ * 	When all inputs are resolved, check to see if the transition can accept the
+ *  resolved inputs as its input. 
+ *  
+ *  If a transition cannot use the resolved input as its input, then go through all
+ * 	the transitions mapped from the current transitions definition to see of one of 
+ * 	them can. 
+ * 
+ * 	If no transitions can be found that can process the resolved input return an error.
+ * 
+ * 	
+ */
+
 public class CompoundTransitionProcessor {
 
 	private static Logger logger = LoggerFactory.getLogger(CompoundTransitionProcessor.class);
@@ -136,6 +168,7 @@ public class CompoundTransitionProcessor {
 					
 					logger.info("END Compound Transition execution for -> {}", transitionName);
 					logger.info("BEGIN PROCESSING Compound transition execution results for ->{}", transitionName);
+					
 					
 					//Assemble compound transition result
 					/* Here I have to find some way of assembling an instance from the last execution instruction's result
