@@ -17,9 +17,12 @@
 
 package org.worklang.structures;
 
+import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.worklang.work.StateDefinition;
+
+import io.vertx.core.json.JsonObject;
 
 public class CompositionElement {
 	
@@ -29,17 +32,17 @@ public class CompositionElement {
 	private String elementName;
 	private StateDefinition elementDefinition;
 	private boolean isCollection;
+	private Vertex elementVertex;
+
 	
-	public CompositionElement (StateDefinition elementDefinition, String elementName, String fieldName) {
+	public CompositionElement (StateDefinition elementDefinition, String elementName, String fieldName, Vertex elementVertex) {
 		this.elementDefinition = elementDefinition;
 		this.elementName = elementName;
 		this.fieldName = fieldName;
-	}
-	
-	public CompositionElement (StateDefinition elementDefinition, String fieldName) {
-		this.elementDefinition = elementDefinition;
-		this.elementName = elementDefinition.getName();
-		this.fieldName = fieldName;
+		this.elementVertex = elementVertex;
+		if (elementDefinition.isList()) {
+			this.isCollection = true;
+		}
 	}
 
 	public String getElementName() {
@@ -65,5 +68,16 @@ public class CompositionElement {
 	public void setCollection(boolean isCollection) {
 		this.isCollection = isCollection;
 	}
+
+	public String getFieldName() {
+		return fieldName;
+	}
+
+	public Vertex getElementVertex() {
+		return elementVertex;
+	}
+	
+	
+
 
 }

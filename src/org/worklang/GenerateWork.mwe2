@@ -27,8 +27,8 @@ Workflow {
 	component = XtextGenerator {
 		configuration = {
 			project = StandardProjectConfig {
-				baseName = "Worklang"
-				rootPath = rootPath
+				baseName = "org.worklang"
+				rootPath = ".."
 				runtimeTest = {
 					enabled = true
 				}

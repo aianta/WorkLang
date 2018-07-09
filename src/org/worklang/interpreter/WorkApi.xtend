@@ -39,6 +39,10 @@ import org.worklang.read.ReadApi
 import java.util.Map
 import java.util.HashMap
 import org.worklang.generator.WorkGenerator
+import org.worklang.work.StateDefinition
+import org.worklang.WorklangResourceUtils
+import org.worklang.structures.StateComposition
+//import org.worklang.structures.InstanceResolution
 
 class WorkApi extends AbstractVerticle {
 	
@@ -111,12 +115,31 @@ class WorkApi extends AbstractVerticle {
 		
 		server = vertx.createHttpServer(options)
 		
-		router.route(HttpMethod.POST, "/").handler(BodyHandler.create)
+		router.route(HttpMethod.POST, "/*").handler(BodyHandler.create)
 		
 		processWorklangDataRoute = router.route(HttpMethod.POST ,"/")
 			.consumes("application/octet-stream")
 		
 		processWorklangDataRoute.handler[rc|processWorkFile(rc)]
+		
+//		router.route(HttpMethod.POST, "/testUnderstanding/")
+//			.consumes("application/json").handler[rc|
+//				
+//				var bodyJson = rc.bodyAsJson;
+//				
+//				println(bodyJson.encodePrettily)
+//				
+//				var StateDefinition connector = WorklangResourceUtils.resolveStateDefinition("SQL", "connector");
+//				
+//				var comp =  new StateComposition ("SQL", connector);
+//				
+//				var resolution = new InstanceResolution(bodyJson.getJsonObject(comp.getName()));
+//				
+//				var result = resolution.resolveAs(comp);
+//				
+//				WorklangResourceUtils.resolveInstanceSpace("SQL").instances.add(result);
+//				
+//			]
 		
 		server.requestHandler[r|router.accept(r)].listen
 		
@@ -160,6 +183,11 @@ class WorkApi extends AbstractVerticle {
 	
 	def static setActiveResource(XtextResource resource){
 		activeResource = resource
+	}
+	
+	def static clearAPIs(){
+		exec.clear
+		read.clear
 	}
 	
 	def static reprocessActiveResource(){

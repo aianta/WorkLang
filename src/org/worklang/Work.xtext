@@ -139,11 +139,11 @@ WithStatesDefinition:
 
 
 InputDefinition:
-	{InputDefinition} 'input' inputState += [StateDefinition]*
+	{InputDefinition} 'INPUT' inputState += [StateDefinition]*
 ;
 
 OutputDefinition:
-	'output' outputState = [StateDefinition]
+	'OUTPUT' outputState = [StateDefinition]
 ;
 
 Instance:
@@ -164,9 +164,10 @@ StateDeclaration:
 
 TransitionInstance:
 	host = STRING
-	port = INT
+	(port = INT)?
 	(path = STRING)?
 	supportCollections?= ('hasCollectionSupport')?
+	blind?=('blind')?
 ;
 
 StateInstance:
@@ -177,8 +178,8 @@ StateInstance:
 ;
 
 CollectionInstance:
-	'['
-		elements += [Instance|COLLECTION_ELEMENT_NAME]+
+	{CollectionInstance} '['
+		elements += [Instance|COLLECTION_ELEMENT_NAME]*
 	']'
 ;
 

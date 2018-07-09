@@ -775,23 +775,23 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.InputDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cInputDefinitionAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cInputKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cINPUTKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cInputStateAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cInputStateStateDefinitionCrossReference_2_0 = (CrossReference)cInputStateAssignment_2.eContents().get(0);
 		private final RuleCall cInputStateStateDefinitionIDTerminalRuleCall_2_0_1 = (RuleCall)cInputStateStateDefinitionCrossReference_2_0.eContents().get(1);
 		
 		//InputDefinition:
-		//	{InputDefinition} 'input' inputState+=[StateDefinition]*;
+		//	{InputDefinition} 'INPUT' inputState+=[StateDefinition]*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{InputDefinition} 'input' inputState+=[StateDefinition]*
+		//{InputDefinition} 'INPUT' inputState+=[StateDefinition]*
 		public Group getGroup() { return cGroup; }
 		
 		//{InputDefinition}
 		public Action getInputDefinitionAction_0() { return cInputDefinitionAction_0; }
 		
-		//'input'
-		public Keyword getInputKeyword_1() { return cInputKeyword_1; }
+		//'INPUT'
+		public Keyword getINPUTKeyword_1() { return cINPUTKeyword_1; }
 		
 		//inputState+=[StateDefinition]*
 		public Assignment getInputStateAssignment_2() { return cInputStateAssignment_2; }
@@ -805,20 +805,20 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	public class OutputDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.OutputDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cOutputKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cOUTPUTKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cOutputStateAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cOutputStateStateDefinitionCrossReference_1_0 = (CrossReference)cOutputStateAssignment_1.eContents().get(0);
 		private final RuleCall cOutputStateStateDefinitionIDTerminalRuleCall_1_0_1 = (RuleCall)cOutputStateStateDefinitionCrossReference_1_0.eContents().get(1);
 		
 		//OutputDefinition:
-		//	'output' outputState=[StateDefinition];
+		//	'OUTPUT' outputState=[StateDefinition];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'output' outputState=[StateDefinition]
+		//'OUTPUT' outputState=[StateDefinition]
 		public Group getGroup() { return cGroup; }
 		
-		//'output'
-		public Keyword getOutputKeyword_0() { return cOutputKeyword_0; }
+		//'OUTPUT'
+		public Keyword getOUTPUTKeyword_0() { return cOUTPUTKeyword_0; }
 		
 		//outputState=[StateDefinition]
 		public Assignment getOutputStateAssignment_1() { return cOutputStateAssignment_1; }
@@ -998,15 +998,18 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cPathSTRINGTerminalRuleCall_2_0 = (RuleCall)cPathAssignment_2.eContents().get(0);
 		private final Assignment cSupportCollectionsAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final Keyword cSupportCollectionsHasCollectionSupportKeyword_3_0 = (Keyword)cSupportCollectionsAssignment_3.eContents().get(0);
+		private final Assignment cBlindAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final Keyword cBlindBlindKeyword_4_0 = (Keyword)cBlindAssignment_4.eContents().get(0);
 		
 		//TransitionInstance:
 		//	host=STRING
-		//	port=INT
+		//	port=INT?
 		//	path=STRING?
-		//	supportCollections?='hasCollectionSupport'?;
+		//	supportCollections?='hasCollectionSupport'?
+		//	blind?='blind'?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//host=STRING port=INT path=STRING? supportCollections?='hasCollectionSupport'?
+		//host=STRING port=INT? path=STRING? supportCollections?='hasCollectionSupport'? blind?='blind'?
 		public Group getGroup() { return cGroup; }
 		
 		//host=STRING
@@ -1015,7 +1018,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getHostSTRINGTerminalRuleCall_0_0() { return cHostSTRINGTerminalRuleCall_0_0; }
 		
-		//port=INT
+		//port=INT?
 		public Assignment getPortAssignment_1() { return cPortAssignment_1; }
 		
 		//INT
@@ -1032,6 +1035,12 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//'hasCollectionSupport'
 		public Keyword getSupportCollectionsHasCollectionSupportKeyword_3_0() { return cSupportCollectionsHasCollectionSupportKeyword_3_0; }
+		
+		//blind?='blind'?
+		public Assignment getBlindAssignment_4() { return cBlindAssignment_4; }
+		
+		//'blind'
+		public Keyword getBlindBlindKeyword_4_0() { return cBlindBlindKeyword_4_0; }
 	}
 	public class StateInstanceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.StateInstance");
@@ -1077,35 +1086,39 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	public class CollectionInstanceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.CollectionInstance");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cElementsInstanceCrossReference_1_0 = (CrossReference)cElementsAssignment_1.eContents().get(0);
-		private final RuleCall cElementsInstanceCOLLECTION_ELEMENT_NAMETerminalRuleCall_1_0_1 = (RuleCall)cElementsInstanceCrossReference_1_0.eContents().get(1);
-		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Action cCollectionInstanceAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftSquareBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cElementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cElementsInstanceCrossReference_2_0 = (CrossReference)cElementsAssignment_2.eContents().get(0);
+		private final RuleCall cElementsInstanceCOLLECTION_ELEMENT_NAMETerminalRuleCall_2_0_1 = (RuleCall)cElementsInstanceCrossReference_2_0.eContents().get(1);
+		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//CollectionInstance:
-		//	'['
-		//	elements+=[Instance|COLLECTION_ELEMENT_NAME]+
+		//	{CollectionInstance} '['
+		//	elements+=[Instance|COLLECTION_ELEMENT_NAME]*
 		//	']';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[' elements+=[Instance|COLLECTION_ELEMENT_NAME]+ ']'
+		//{CollectionInstance} '[' elements+=[Instance|COLLECTION_ELEMENT_NAME]* ']'
 		public Group getGroup() { return cGroup; }
 		
-		//'['
-		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
+		//{CollectionInstance}
+		public Action getCollectionInstanceAction_0() { return cCollectionInstanceAction_0; }
 		
-		//elements+=[Instance|COLLECTION_ELEMENT_NAME]+
-		public Assignment getElementsAssignment_1() { return cElementsAssignment_1; }
+		//'['
+		public Keyword getLeftSquareBracketKeyword_1() { return cLeftSquareBracketKeyword_1; }
+		
+		//elements+=[Instance|COLLECTION_ELEMENT_NAME]*
+		public Assignment getElementsAssignment_2() { return cElementsAssignment_2; }
 		
 		//[Instance|COLLECTION_ELEMENT_NAME]
-		public CrossReference getElementsInstanceCrossReference_1_0() { return cElementsInstanceCrossReference_1_0; }
+		public CrossReference getElementsInstanceCrossReference_2_0() { return cElementsInstanceCrossReference_2_0; }
 		
 		//COLLECTION_ELEMENT_NAME
-		public RuleCall getElementsInstanceCOLLECTION_ELEMENT_NAMETerminalRuleCall_1_0_1() { return cElementsInstanceCOLLECTION_ELEMENT_NAMETerminalRuleCall_1_0_1; }
+		public RuleCall getElementsInstanceCOLLECTION_ELEMENT_NAMETerminalRuleCall_2_0_1() { return cElementsInstanceCOLLECTION_ELEMENT_NAMETerminalRuleCall_2_0_1; }
 		
 		//']'
-		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
+		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
 	}
 	public class UseDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.worklang.Work.UseDefinition");
@@ -2524,7 +2537,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//InputDefinition:
-	//	{InputDefinition} 'input' inputState+=[StateDefinition]*;
+	//	{InputDefinition} 'INPUT' inputState+=[StateDefinition]*;
 	public InputDefinitionElements getInputDefinitionAccess() {
 		return pInputDefinition;
 	}
@@ -2534,7 +2547,7 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//OutputDefinition:
-	//	'output' outputState=[StateDefinition];
+	//	'OUTPUT' outputState=[StateDefinition];
 	public OutputDefinitionElements getOutputDefinitionAccess() {
 		return pOutputDefinition;
 	}
@@ -2577,9 +2590,10 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//TransitionInstance:
 	//	host=STRING
-	//	port=INT
+	//	port=INT?
 	//	path=STRING?
-	//	supportCollections?='hasCollectionSupport'?;
+	//	supportCollections?='hasCollectionSupport'?
+	//	blind?='blind'?;
 	public TransitionInstanceElements getTransitionInstanceAccess() {
 		return pTransitionInstance;
 	}
@@ -2601,8 +2615,8 @@ public class WorkGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//CollectionInstance:
-	//	'['
-	//	elements+=[Instance|COLLECTION_ELEMENT_NAME]+
+	//	{CollectionInstance} '['
+	//	elements+=[Instance|COLLECTION_ELEMENT_NAME]*
 	//	']';
 	public CollectionInstanceElements getCollectionInstanceAccess() {
 		return pCollectionInstance;

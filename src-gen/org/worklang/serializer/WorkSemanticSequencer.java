@@ -248,7 +248,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     CollectionInstance returns CollectionInstance
 	 *
 	 * Constraint:
-	 *     elements+=[Instance|COLLECTION_ELEMENT_NAME]+
+	 *     elements+=[Instance|COLLECTION_ELEMENT_NAME]*
 	 */
 	protected void sequence_CollectionInstance(ISerializationContext context, CollectionInstance semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -863,7 +863,7 @@ public class WorkSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     TransitionInstance returns TransitionInstance
 	 *
 	 * Constraint:
-	 *     (host=STRING port=INT path=STRING? supportCollections?='hasCollectionSupport'?)
+	 *     (host=STRING port=INT? path=STRING? supportCollections?='hasCollectionSupport'? blind?='blind'?)
 	 */
 	protected void sequence_TransitionInstance(ISerializationContext context, TransitionInstance semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

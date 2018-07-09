@@ -62,7 +62,12 @@ class ExecutionApiWorkFileProcessor {
 					]
 				].forEach[primitiveTransition|
 					
-					api.addProxyRoute(field.name, primitiveTransition);
+					if (primitiveTransition.transition.blind){
+						api.addBlindProxyRoute(field.name, primitiveTransition);
+					}else{
+						api.addProxyRoute(field.name, primitiveTransition);
+					}
+					
 				]
 				
 				//Process compound instance transitions
@@ -72,11 +77,16 @@ class ExecutionApiWorkFileProcessor {
 					]
 				].forEach[compoundTransition|
 					
-					/* If a processor doesn't exist for this compound instance transition, 
-					 * create one. 
-					 * 
-					 * IMPORTANT: DO NOT REPLACE EXISTING PROCESSOR
-					 */
+					if (compoundTransition.name.equals("demo")){
+						
+						api.demoWeaver(field.name, compoundTransition)
+						
+					}else{
+						/* If a processor doesn't exist for this compound instance transition, 
+						 * create one. 
+						 * 
+						 * IMPORTANT: DO NOT REPLACE EXISTING PROCESSOR
+						 */
 					 
 					 if (!api.routeExists(
 					 "/" + field.name.toLowerCase + "/" +
@@ -85,6 +95,11 @@ class ExecutionApiWorkFileProcessor {
 					 )){
 					 	api.addCompoundTransitionProcessor(field.name, compoundTransition);
 					 }
+					}
+					
+					
+					
+					
 					
 					
 				]

@@ -37,6 +37,7 @@ import org.worklang.work.WorkPackage;
  *   <li>{@link org.worklang.work.impl.TransitionInstanceImpl#getPort <em>Port</em>}</li>
  *   <li>{@link org.worklang.work.impl.TransitionInstanceImpl#getPath <em>Path</em>}</li>
  *   <li>{@link org.worklang.work.impl.TransitionInstanceImpl#isSupportCollections <em>Support Collections</em>}</li>
+ *   <li>{@link org.worklang.work.impl.TransitionInstanceImpl#isBlind <em>Blind</em>}</li>
  * </ul>
  *
  * @generated
@@ -122,6 +123,26 @@ public class TransitionInstanceImpl extends MinimalEObjectImpl.Container impleme
    * @ordered
    */
   protected boolean supportCollections = SUPPORT_COLLECTIONS_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #isBlind() <em>Blind</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isBlind()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean BLIND_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isBlind() <em>Blind</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isBlind()
+   * @generated
+   * @ordered
+   */
+  protected boolean blind = BLIND_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -241,6 +262,29 @@ public class TransitionInstanceImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isBlind()
+  {
+    return blind;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setBlind(boolean newBlind)
+  {
+    boolean oldBlind = blind;
+    blind = newBlind;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.TRANSITION_INSTANCE__BLIND, oldBlind, blind));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -254,6 +298,8 @@ public class TransitionInstanceImpl extends MinimalEObjectImpl.Container impleme
         return getPath();
       case WorkPackage.TRANSITION_INSTANCE__SUPPORT_COLLECTIONS:
         return isSupportCollections();
+      case WorkPackage.TRANSITION_INSTANCE__BLIND:
+        return isBlind();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -279,6 +325,9 @@ public class TransitionInstanceImpl extends MinimalEObjectImpl.Container impleme
         return;
       case WorkPackage.TRANSITION_INSTANCE__SUPPORT_COLLECTIONS:
         setSupportCollections((Boolean)newValue);
+        return;
+      case WorkPackage.TRANSITION_INSTANCE__BLIND:
+        setBlind((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -306,6 +355,9 @@ public class TransitionInstanceImpl extends MinimalEObjectImpl.Container impleme
       case WorkPackage.TRANSITION_INSTANCE__SUPPORT_COLLECTIONS:
         setSupportCollections(SUPPORT_COLLECTIONS_EDEFAULT);
         return;
+      case WorkPackage.TRANSITION_INSTANCE__BLIND:
+        setBlind(BLIND_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -328,6 +380,8 @@ public class TransitionInstanceImpl extends MinimalEObjectImpl.Container impleme
         return PATH_EDEFAULT == null ? path != null : !PATH_EDEFAULT.equals(path);
       case WorkPackage.TRANSITION_INSTANCE__SUPPORT_COLLECTIONS:
         return supportCollections != SUPPORT_COLLECTIONS_EDEFAULT;
+      case WorkPackage.TRANSITION_INSTANCE__BLIND:
+        return blind != BLIND_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -351,6 +405,8 @@ public class TransitionInstanceImpl extends MinimalEObjectImpl.Container impleme
     result.append(path);
     result.append(", supportCollections: ");
     result.append(supportCollections);
+    result.append(", blind: ");
+    result.append(blind);
     result.append(')');
     return result.toString();
   }

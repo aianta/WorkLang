@@ -18,16 +18,33 @@
 package org.worklang.structures;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+
+/* NOTE, combinations are used to describe all possible variations of 
+ * combinations as well as specific ones for a state, in a single flat map,
+ * so there will be duplicates. 
+ * 
+ * Combinations retrieved by the possibility methods, may cause trouble if they're used 
+ * for direct assembly of object. 
+ * 
+ * Let's find out.
+ * 
+ */
 
 public class Combination {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Combination.class);
 	protected List<CompositionElement> combination = new ArrayList<>();
+
 	
 	public void addElement(CompositionElement element) {
 		combination.add(element);

@@ -57,11 +57,13 @@ import com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdPro
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
+import io.vertx.core.json.DecodeException;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Route;
@@ -160,6 +162,146 @@ public class ExecutionApi extends AbstractVerticle{
 		logger.info("Registering compound instance transition at {}", routePath);
 		
 		Route route = router.route(routePath).handler(processor::process);
+		
+		transitions.add(routePath);
+	}
+	
+	
+	public void addBlindProxyRoute(String fieldName, Instance transition) {
+		
+		String routePath = "/" + fieldName.toLowerCase() + "/" +
+		transition.getTransitionDeclaration().getTransition().getName().toLowerCase() + "/" +
+		transition.getName().replaceAll("\\s", "").toLowerCase();
+		
+		logger.info("Registering transition at {}", routePath);
+		
+		Route route = router.route(HttpMethod.POST, routePath).handler(rc->{
+			logger.info("Blind proxy route hit!");
+			Buffer inputs = rc.getBody();
+			logger.info("body->{}", inputs);
+			
+			client.post(
+					transition.getTransition().getHost(),
+					transition.getTransition().getPath())
+			.sendJson(inputs, ar->{
+		    	if(ar.succeeded()){
+		    				    		
+		        	HttpResponse response = ar.result();
+						
+					System.out.println(response.body().toString());
+					
+					Buffer data = response.bodyAsBuffer();
+					String outputInstanceName = rc.request().getParam("produce");
+					
+					if (transition.getName().equals("dprep")) {
+						JsonArray inputArray = inputs.toJsonArray();
+						if (inputArray.size()>1) {
+							JsonArray dataArray = response.bodyAsJsonArray();
+							dataArray.add(new JsonObject("{\"connector_name\":\"MSSQL\",\"connector_details\":{\"connection_string\":{\"driver\":\"{/opt/microsoft/msodbcsql17/lib64/libmsodbcsql-17.1.so.0.1}\",\"server\":\"dimepocdb.database.windows.net\",\"database\":\"dimepocdb\",\"trusted\":\"no\",\"username\":\"oceanpoc\",\"password\":\"ocean@1234\"},\"queries\":[{\"result_count\":\"10\",\"query_type\":\"select\",\"query_id\":\"3\",\"query_params\":{\"commonname\":[\"grey seal\",\"atlantic cod\"]}}]}}"));
+							BlindDataStore.addData(BlindDataStore.connectorIn, dataArray.toBuffer());
+						}else {
+							BlindDataStore.addData(BlindDataStore.connectorIn, data);
+						}
+						
+						
+					}
+					
+					if (transition.getName().equals("dcon")) {
+						BlindDataStore.addData(BlindDataStore.connectorOut, data);
+					}
+					
+					if (transition.getName().equals("formal")) {
+						BlindDataStore.addData(BlindDataStore.mapInput, data);
+					}
+					
+					
+					rc.response().end(data.toString());
+					
+				}
+			});
+			
+		});
+		
+		transitions.add(routePath);
+	}
+	
+	public void demoWeaver(String fieldName, Instance transition) {
+		String routePath = "/" + fieldName.toLowerCase() + "/" +
+				transition.getTransitionDeclaration().getTransition().getName().toLowerCase() + "/" +
+				transition.getName().replaceAll("\\s", "").toLowerCase();
+		
+		String prepPath = "/exec/oceanscience/dataconnectorprep/dprep";
+		
+		String conPath = "/exec/oceanscience/dataconnector/dcon";
+		
+		String formalPath = "/exec/oceanscience/formalizer/formal";
+		
+		
+		Route route = router.route(HttpMethod.POST, routePath).handler(rc->{
+			
+			logger.info("demo time");
+			
+			Buffer data = rc.getBody();
+			
+			vertx.executeBlocking(fut->{
+				logger.info("hitting data connector creator!");
+				client.post(
+						9000,
+						"localhost",
+						prepPath)
+				.sendJson(data, ar->{
+			    	if(ar.succeeded()){
+			    		logger.info("connector inputs ready");		    		
+						fut.complete();
+					}
+				});
+				
+			}, connectorNext->{
+				
+				vertx.executeBlocking(fut->{
+					
+					Buffer connInData = BlindDataStore.getData(BlindDataStore.connectorIn);
+					logger.info("getting connector outputs");
+					client.post(
+							9000,
+							"localhost",
+							conPath)
+					.sendJson(connInData, ar->{
+				    	if(ar.succeeded()){
+				    		logger.info("connector outputs ready");		
+							fut.complete();
+						}
+					});
+					
+				}, formalNext->{
+					
+					vertx.<Buffer>executeBlocking(fut->{
+						logger.info("getting map inputs ready");
+						Buffer connOutData = BlindDataStore.getData(BlindDataStore.connectorOut);
+						
+						client.post(
+								9000,
+								"localhost",
+								formalPath)
+						.sendJson(connOutData, ar->{
+					    	if(ar.succeeded()){
+					    		logger.info("map inputs ready");		
+								fut.complete();
+							}
+						});
+						
+					}, responseNow->{
+						
+						Buffer mapData = BlindDataStore.getData(BlindDataStore.mapInput);
+						logger.info("response sent");
+						rc.response().putHeader("Content-Type", "application/json").end(mapData);
+						
+					});
+				});
+				
+			});
+			
+		});
 		
 		transitions.add(routePath);
 	}

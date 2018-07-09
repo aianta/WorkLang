@@ -18,6 +18,7 @@
 package org.worklang.structures;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.tinkerpop.gremlin.structure.Direction;
@@ -28,87 +29,51 @@ import org.worklang.WorklangResourceUtils;
 import org.worklang.metamodel.MetaModelUtils;
 import org.worklang.work.StateDefinition;
 
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+
 public class StateComposition {
 	
 	private static final Logger logger = LoggerFactory.getLogger(StateComposition.class);
 
-	protected String fieldName;
+	private String fieldName;
 	private StateDefinition definition;
 	private String stateName;
 	private Vertex definitionVertex;
-	protected List<Composition> compositions =  new ArrayList<>();
-	protected List<Combination> combinations;
-	protected List<Combination> possibilities;
-	private boolean isImplicit = false;
+	private boolean isCollection;
+
+	private List<Combination> combinations;
 	
+	public StateComposition(CompositionElement e) {
+		this.definition = e.getElementDefinition();
+		this.fieldName = e.getFieldName();
+		this.definitionVertex = e.getElementVertex();
+		this.stateName = e.getElementName();
+		isCollection = definition.isList();
+	}
 	
 	public StateComposition(String fieldName, StateDefinition definition) {
 		this.definition = definition;
 		this.fieldName = fieldName;
 		this.stateName = definition.getName();
 		this.definitionVertex = MetaModelUtils.getStateVertex(fieldName, stateName);
+		isCollection = definition.isList();
 	}
-	
-	public StateComposition() {
-		isImplicit = true;
-	}
-	
-	public List<Combination> getPossibilities() {
-		if (possibilities != null) {
-			return possibilities;
-		}else {
-			calculatePossibilities();
-			return possibilities;
-		}
-	}
+
 	
 	public String getName() {
 		return stateName;
 	}
 	
-	public void calculatePossibilities() {
-		possibilities = new ArrayList<>();
-		/* To calculate possibilities we need to calculate combinations 
-		 * for all compositions.
-		 */
-		compositions.forEach(composition->{
-			List<Combination> combinations = composition.getCombinations();
-			combinations.forEach(combination->{
-				possibilities.add(combination);
-			});
-		});
+	public StateDefinition getDefinition() {
+		return definition;
 	}
 	
-	public List<Combination> getCombinations() {
-		if (combinations != null) {
-			return combinations;
-		}else {
-			calculateCombinations();
-			return combinations;
-		}
-	}
-	
-	public void calculateCombinations() {
-		combinations = new ArrayList<>();
-		
-		compositions.forEach(composition->{
-			
-			//Get my compositionElements and create a new combination from them
-			List<CompositionElement> elements = composition.getCompositionElements();
-			Combination c =  new Combination();
-			
-			elements.forEach(element->{
-				c.addElement(element);
-			});
-			
-			combinations.add(c);
-		});
-	}
-	
+
 	public List<CombinationMatcher> getPossibilityMatchers() {
 		
 		List<CombinationMatcher> matchers =  new ArrayList<>();
-		List<Combination> pos = getPossibilities();
+		List<Combination> pos = possibilities();
 		
 		pos.forEach(possibility->{
 			matchers.add(possibility.getMatcher());
@@ -117,19 +82,17 @@ public class StateComposition {
 		return matchers;
 	}
 	
-	public void explorePossibilities () {
+	public List<Combination> possibilities() {
 		
 		Vertex withVertex = definitionVertex.vertices(Direction.OUT, "composedWith").next();
 		
 		Vertex rootPredicate = withVertex.vertices(Direction.OUT, "has").next();
 		
-		Composition composition = new Composition(this);
-		compositions.add(composition);
 		
-		explorePredicate(rootPredicate, composition);
+		return explorePredicate(rootPredicate);
 	}
 	
-	public void explorePredicate(Vertex predicate, Composition composition) {
+	public List<Combination> explorePredicate(Vertex predicate) {
 		
 		/* Cases:
 		 * 	State
@@ -140,36 +103,34 @@ public class StateComposition {
 		
 		//Handle Operations
 		if (predicateChild.property("worklangKey").value().toString().equals("org.worklang.work.Operation")) {
-			exploreOperation(predicateChild, composition);
+			return exploreOperation(predicateChild);
 		}
 		
 		//Handle States
 		if (predicateChild.property("worklangKey").value().toString().equals("org.worklang.work.StateDefinition")) {
 			
-			String elementName = predicateChild.property("name").value().toString();
+			Vertex composedDefinitionVertex = predicateChild.vertices(Direction.OUT, "is").next();
 			
+			String elementName = composedDefinitionVertex.property("name").value().toString();
 			StateDefinition elementDefinition = WorklangResourceUtils.resolveStateDefinition(fieldName, elementName);
-			
-			CompositionElement element = new CompositionElement(elementDefinition, elementName, fieldName);
-			
-			composition.addElement(element);
-			
-			//Create an explicit state composition for this state
 			Vertex elementVertex = MetaModelUtils.getStateVertex(fieldName, elementName);
-		
-			if (elementDefinition.getType().equals("primitive")) {
-				PrimitiveExplicitStateComposition explicitPrimitive = new PrimitiveExplicitStateComposition(elementDefinition, elementName, elementVertex );
-				composition.addElement(explicitPrimitive);
-			}
 			
-			if (elementDefinition.getType().equals("compound")) {
-				CompoundExplicitStateComposition explicitCompound = new CompoundExplicitStateComposition(elementDefinition, elementName, elementVertex);
-				composition.addElement(explicitCompound);
-			}
+			
+			CompositionElement element = new CompositionElement(elementDefinition, elementName, fieldName, elementVertex);
+			
+			Combination c = new Combination();
+			c.addElement(element);
+			
+			List<Combination> listC = new ArrayList<>();
+			listC.add(c);
+			return listC;
 		}
+		
+		logger.error("explore predicate returned null");
+		return null;
 	}
 	
-	public void exploreOperation(Vertex operation, Composition composition) {
+	public List<Combination> exploreOperation(Vertex operation) {
 		
 		Vertex leftOperatorVertex = operation.vertices(Direction.OUT, "leftOperator").next();
 		Vertex rightOperatorVertex = operation.vertices(Direction.OUT, "rightOperator").next();
@@ -182,127 +143,159 @@ public class StateComposition {
 		
 		//Handle AND operation
 		if (operation.property("name").value().toString().equals("AND")) {
-			exploreAndOperator(leftOperatorVertex, composition);
-			exploreAndOperator(rightOperatorVertex, composition);
+			List<Combination> a = exploreAndOperator(leftOperatorVertex);
+			List<Combination> b = exploreAndOperator(rightOperatorVertex);
+			
+			Combination c =  new Combination();
+			
+			a.forEach(combination ->{
+				combination.combination.forEach(element->{
+					c.addElement(element);
+				});
+			});
+			
+			b.forEach(combination->{
+				combination.combination.forEach(element->{
+					c.addElement(element);
+				});
+			});
+			
+			
+			List<Combination> listC = new ArrayList<>();
+			listC.add(c);
+			return listC;
 		}
 		
 		//Handle OR operation
 		if (operation.property("name").value().toString().equals("OR")) {
+			List<Combination> a = exploreOrOperator(leftOperatorVertex);
+			List<Combination> b = exploreOrOperator(rightOperatorVertex);
 			
+			Combination c = new Combination();
+			Combination d = new Combination();
+			Combination e = new Combination();
+			
+			a.forEach(combination ->{
+				combination.combination.forEach(element->{
+					c.addElement(element);
+					d.addElement(element);
+				});
+			});
+			
+			b.forEach(combination->{
+				combination.combination.forEach(element->{
+					c.addElement(element);
+					e.addElement(element);
+				});
+			});
+			
+			List<Combination> listC = new ArrayList<>();
+			listC.add(c);
+			listC.add(d);
+			listC.add(e);
+			return listC;
 		}
 		
+		logger.error("explore operation returned null");
+		return null;
 	}
 	
-	public void exploreAndOperator(Vertex operator, Composition composition) {
+	public List<Combination> exploreAndOperator(Vertex operator) {
+		
+	
 		//Handle AND operator state
 		if (operator.property("worklangKey").value().toString().equals("org.worklang.work.StateDefinition")) {
 			
-			String elementName = operator.property("name").value().toString();
-			StateDefinition elementDefinition = WorklangResourceUtils.resolveStateDefinition(elementName, elementName);
-			CompositionElement element = new CompositionElement(elementDefinition, elementName, fieldName);
-			composition.addElement(element);
+			Vertex composedDefinitionVertex = operator.vertices(Direction.OUT, "is").next();
 			
+			String elementName = composedDefinitionVertex.property("name").value().toString();
+			logger.info("ExploreANDOperator: elementName -> {} fieldName->{}", elementName, fieldName);
+			
+			StateDefinition elementDefinition = WorklangResourceUtils.resolveStateDefinition(fieldName, elementName);
 			Vertex elementVertex = MetaModelUtils.getStateVertex(fieldName, elementName);
 			
-			if (elementDefinition.getType().equals("primitive")) {
-				PrimitiveExplicitStateComposition explicitPrimitive =  new PrimitiveExplicitStateComposition(elementDefinition, elementName, elementVertex);
-				composition.addElement(explicitPrimitive);
-			}
+			CompositionElement element = new CompositionElement(elementDefinition, elementName, fieldName, elementVertex);
 			
-			if (elementDefinition.getType().equals("compound")) {
-				CompoundExplicitStateComposition explicitCompound = new CompoundExplicitStateComposition(elementDefinition, elementName, elementVertex);
-				composition.addElement(explicitCompound);
-			}
+			
+			Combination a = new Combination();
+			a.addElement(element);
+			
+			List<Combination> listC = new ArrayList<>();
+			listC.add(a);
+			return listC;
 		}
 		
 		//Handle AND operator operation
 		if (operator.property("worklangKey").value().toString().equals("org.worklang.work.Operation")) {
 			
-			/* If the operation is an AND operation, then call 
-			 * ourselves again with the same composition. 
-			 */
+
 			if (operator.property("name").value().toString().equals("AND")){
-				exploreOperation(operator, composition);
+				return exploreOperation(operator);
 			}
 			
-			/* If the operation is an OR operation, then call ourselves
-			 * again with a new composition.
-			 */
+
 			if (operator.property("name").value().toString().equals("OR")) {
-				Composition newComposition = new Composition(this);
-				exploreOperation(operator, newComposition);
+				return exploreOperation(operator);
 			}
 			
 		}
 		
-		/* Handle AND operator predicate
-		 *  A new predicate is basically defining a new state composition, so we
-		 *  create an implicit state composition and instruct it to explore its own
-		 *  possibilities.
-		 */
+
 		if (operator.property("worklangKey").value().toString().equals("org.worklang.work.Predicate")) {
-			Composition newComposition = new Composition(this);
-			ImplicitStateComposition implicitState = new ImplicitStateComposition(newComposition);
-			implicitState.explorePossibilities();
+			return explorePredicate(operator);
 		}
+		
+		logger.error("explore and operator returned null");
+		return null;
 	}
 	
-	public void exploreOrOperator(Vertex operator, Composition composition) {
-		/* Handle OR operator state
-		 * When an OR operator is a state we need to create a new composition in this
-		 * state composition and add the state to that composition
-		 */
+	public List<Combination> exploreOrOperator(Vertex operator) {
+
 		if (operator.property("worklangKey").value().toString().equals("org.worklang.work.StateDefinition")) {
-			Composition newComposition = new Composition(this);
-			compositions.add(newComposition);
+
 			
-			String elementName = operator.property("name").value().toString();
-			StateDefinition elementDefinition = WorklangResourceUtils.resolveStateDefinition(elementName, elementName);
-			CompositionElement element = new CompositionElement(elementDefinition, elementName, fieldName);
-			newComposition.addElement(element);	
+			Vertex composedDefinitionVertex = operator.vertices(Direction.OUT, "is").next();
 			
+			String elementName = composedDefinitionVertex.property("name").value().toString();
+			StateDefinition elementDefinition = WorklangResourceUtils.resolveStateDefinition(fieldName, elementName);
 			Vertex elementVertex = MetaModelUtils.getStateVertex(fieldName, elementName);
 			
-			if (elementDefinition.getType().equals("primitive")) {
-				PrimitiveExplicitStateComposition explicitPrimitive =  new PrimitiveExplicitStateComposition(elementDefinition, elementName, elementVertex);
-				newComposition.addElement(explicitPrimitive);
-			}
-			
-			if (elementDefinition.getType().equals("compound")) {
-				CompoundExplicitStateComposition explicitCompound =  new CompoundExplicitStateComposition(elementDefinition, elementName, elementVertex);
-				newComposition.addElement(explicitCompound);
-			}
+			CompositionElement element = new CompositionElement(elementDefinition, elementName, fieldName, elementVertex);
+
+			Combination c = new Combination();
+			c.addElement(element);
+
+			List<Combination> listC = new ArrayList<>();
+			listC.add(c);
+			return listC;
 		}
 		
 		//Handle OR operator operation
 		if (operator.property("worklangKey").value().toString().equals("org.worklang.work.Operation")) {
 			
-			/* If the operation is an AND operation, then call 
-			 * ourselves again with the same composition. 
-			 */
+
 			if (operator.property("name").value().toString().equals("AND")){
-				exploreOperation(operator, composition);
+				return exploreOperation(operator);
 			}
 			
-			/* If the operation is an OR operation, then call ourselves
-			 * again with a new composition.
-			 */
+
 			if (operator.property("name").value().toString().equals("OR")) {
-				Composition newComposition = new Composition(this);
-				exploreOperation(operator, newComposition);
+				return exploreOperation(operator);
 			}
 			
 		}
 		
-		/* Handle OR operator predicate
- 		 *	A new predicate is basically defining a new state composition, so we
-		 *  create an implicit state composition and instruct it to explore its own
-		 *  possibilities.
-		 */
+
 		if (operator.property("worklangKey").value().toString().equals("org.worklang.work.Predicate")) {
-			Composition newComposition = new Composition(this);
-			ImplicitStateComposition implicitState = new ImplicitStateComposition(newComposition);
-			implicitState.explorePossibilities();
+			return explorePredicate(operator);
 		}
+		
+		logger.error("explore or operator returned null");
+		return null;
 	}
+
+	public boolean isCollection() {
+		return isCollection;
+	}	
+
 }

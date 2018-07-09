@@ -1244,9 +1244,9 @@ ruleInputDefinition returns [EObject current=null]
 					$current);
 			}
 		)
-		otherlv_1='input'
+		otherlv_1='INPUT'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getInputDefinitionAccess().getInputKeyword_1());
+			newLeafNode(otherlv_1, grammarAccess.getInputDefinitionAccess().getINPUTKeyword_1());
 		}
 		(
 			(
@@ -1280,9 +1280,9 @@ ruleOutputDefinition returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='output'
+		otherlv_0='OUTPUT'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getOutputDefinitionAccess().getOutputKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getOutputDefinitionAccess().getOUTPUTKeyword_0());
 		}
 		(
 			(
@@ -1621,7 +1621,7 @@ ruleTransitionInstance returns [EObject current=null]
 						"org.eclipse.xtext.common.Terminals.INT");
 				}
 			)
-		)
+		)?
 		(
 			(
 				lv_path_2_0=RULE_STRING
@@ -1651,6 +1651,20 @@ ruleTransitionInstance returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getTransitionInstanceRule());
 					}
 					setWithLastConsumed($current, "supportCollections", true, "hasCollectionSupport");
+				}
+			)
+		)?
+		(
+			(
+				lv_blind_4_0='blind'
+				{
+					newLeafNode(lv_blind_4_0, grammarAccess.getTransitionInstanceAccess().getBlindBlindKeyword_4_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getTransitionInstanceRule());
+					}
+					setWithLastConsumed($current, "blind", true, "blind");
 				}
 			)
 		)?
@@ -1753,9 +1767,16 @@ ruleCollectionInstance returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='['
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getCollectionInstanceAccess().getCollectionInstanceAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='['
 		{
-			newLeafNode(otherlv_0, grammarAccess.getCollectionInstanceAccess().getLeftSquareBracketKeyword_0());
+			newLeafNode(otherlv_1, grammarAccess.getCollectionInstanceAccess().getLeftSquareBracketKeyword_1());
 		}
 		(
 			(
@@ -1764,15 +1785,15 @@ ruleCollectionInstance returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getCollectionInstanceRule());
 					}
 				}
-				otherlv_1=RULE_COLLECTION_ELEMENT_NAME
+				otherlv_2=RULE_COLLECTION_ELEMENT_NAME
 				{
-					newLeafNode(otherlv_1, grammarAccess.getCollectionInstanceAccess().getElementsInstanceCrossReference_1_0());
+					newLeafNode(otherlv_2, grammarAccess.getCollectionInstanceAccess().getElementsInstanceCrossReference_2_0());
 				}
 			)
-		)+
-		otherlv_2=']'
+		)*
+		otherlv_3=']'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getCollectionInstanceAccess().getRightSquareBracketKeyword_2());
+			newLeafNode(otherlv_3, grammarAccess.getCollectionInstanceAccess().getRightSquareBracketKeyword_3());
 		}
 	)
 ;

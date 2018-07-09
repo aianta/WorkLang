@@ -1223,6 +1223,16 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getTransitionInstance_Blind()
+  {
+    return (EAttribute)transitionInstanceEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getStateInstance()
   {
     return stateInstanceEClass;
@@ -1993,6 +2003,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     createEAttribute(transitionInstanceEClass, TRANSITION_INSTANCE__PORT);
     createEAttribute(transitionInstanceEClass, TRANSITION_INSTANCE__PATH);
     createEAttribute(transitionInstanceEClass, TRANSITION_INSTANCE__SUPPORT_COLLECTIONS);
+    createEAttribute(transitionInstanceEClass, TRANSITION_INSTANCE__BLIND);
 
     stateInstanceEClass = createEClass(STATE_INSTANCE);
     createEReference(stateInstanceEClass, STATE_INSTANCE__MEMBERS);
@@ -2231,6 +2242,7 @@ public class WorkPackageImpl extends EPackageImpl implements WorkPackage
     initEAttribute(getTransitionInstance_Port(), ecorePackage.getEInt(), "port", null, 0, 1, TransitionInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTransitionInstance_Path(), ecorePackage.getEString(), "path", null, 0, 1, TransitionInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTransitionInstance_SupportCollections(), ecorePackage.getEBoolean(), "supportCollections", null, 0, 1, TransitionInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTransitionInstance_Blind(), ecorePackage.getEBoolean(), "blind", null, 0, 1, TransitionInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stateInstanceEClass, StateInstance.class, "StateInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getStateInstance_Members(), ecorePackage.getEObject(), null, "members", null, 0, -1, StateInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

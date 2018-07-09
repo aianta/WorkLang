@@ -73,6 +73,8 @@ class WorkGenerator extends AbstractGenerator {
 	
 	def static generateAPIs(XtextResource xResource){
 		
+		WorkApi.clearAPIs
+		
 		//Create Execution API for transition instances
 		var executionApiSetup = new ExecutionApiWorkFileProcessor(WorkApi.executionApi);
 		
