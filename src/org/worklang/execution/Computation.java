@@ -26,7 +26,7 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.worklang.execution.structures.StateInfo;
+import org.worklang.execution.impl.RESTInstruction;
 import org.worklang.interpreter.WorkApi;
 import org.worklang.work.Instance;
 
@@ -42,8 +42,8 @@ public class Computation {
 
 	private UUID id = UUID.randomUUID();
 	private WebClient client;
-	private Stack<ExecutionInstruction> executionStack = new Stack<>();
-	private List<ExecutionInstruction> executionHistory = new ArrayList<>();
+	private Stack<RESTInstruction> executionStack = new Stack<>();
+	private List<RESTInstruction> executionHistory = new ArrayList<>();
 	
 	private ExecutionInstruction lastInstruction; //As in previously executed instruction
 		
@@ -69,7 +69,7 @@ public class Computation {
 	}
 	
 	//Adds a new instruction to the computation and assigns it a UUID
-	public UUID addInstruction(ExecutionInstruction instruction) {
+	public UUID addInstruction(RESTInstruction instruction) {
 		
 		logger.info("Adding instruction to execution stack");
 		
@@ -79,7 +79,7 @@ public class Computation {
 		return UUID.randomUUID();
 	}
 	
-	public void run(Future<ExecutionInstruction> resultFuture) throws Exception{
+	public void run(Future<RESTInstruction> resultFuture) throws Exception{
 		
 		Future<Void> done = Future.future();
 		
@@ -100,7 +100,7 @@ public class Computation {
 	}
 	
 	public void computeNext(Future<Void> done) throws Exception{
-		ExecutionInstruction toCompute = executionStack.pop();
+		RESTInstruction toCompute = executionStack.pop();
 		
 		logger.info("computing next -> {}", toCompute.toString());
 		
@@ -118,7 +118,7 @@ public class Computation {
 				Instance i = lastInstruction.getOutput(curr.getId()).getInstance();
 				logger.info("Resolved instance -> {}", i.toString());
 				
-				ExecutionInstruction inst = toCompute;
+				RESTInstruction inst = toCompute;
 				inst.setInputInstance(curr.getId(), i);
 				toCompute = inst;
 			}
@@ -150,7 +150,7 @@ public class Computation {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void compute(ExecutionInstruction toCompute, Future<Void> done) {
+	private void compute(RESTInstruction toCompute, Future<Void> done) {
 		
 		//Execute instruction
 		toCompute.execute().setHandler(result->{
@@ -196,11 +196,11 @@ public class Computation {
 		});
 	}
 	
-	public Stack<ExecutionInstruction> getExecutionStack() {
+	public Stack<RESTInstruction> getExecutionStack() {
 		return executionStack;
 	}
 
-	public List<ExecutionInstruction> getExecutionHistory() {
+	public List<RESTInstruction> getExecutionHistory() {
 		return executionHistory;
 	}
 	
@@ -212,7 +212,7 @@ public class Computation {
 		
 		logger.info("looking for {}", instruction.getId());
 		
-		Iterator<ExecutionInstruction> it = executionStack.iterator();
+		Iterator<RESTInstruction> it = executionStack.iterator();
 		
 		logger.info("Iterating through the stack");
 		//SimpleEntry<UUID,ExecutionInstruction> last = null;

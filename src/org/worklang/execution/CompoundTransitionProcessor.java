@@ -27,6 +27,8 @@ import org.eclipse.emf.common.util.EList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.worklang.WorklangResourceUtils;
+import org.worklang.execution.impl.RESTInstruction;
+import org.worklang.execution.impl.RESTUtils;
 import org.worklang.work.CompoundStateDefinition;
 import org.worklang.work.CompoundTransitionInstance;
 import org.worklang.work.InputDefinition;
@@ -154,14 +156,14 @@ public class CompoundTransitionProcessor {
 		
 		try {
 			
-			Future<ExecutionInstruction> runResult = Future.future();
+			Future<RESTInstruction> runResult = Future.future();
 			
 			computation.run(runResult);
 			
 			runResult.setHandler(result->{
 				
 				if (result.succeeded()){
-					ExecutionInstruction lastInstruction = result.result();
+					RESTInstruction lastInstruction = result.result();
 					
 					JsonObject resultData = null;
 					JsonArray resultArray = null;
@@ -207,7 +209,7 @@ public class CompoundTransitionProcessor {
 					 * 
 					 */
 					if (outputDefinition instanceof PrimitiveStateDefinition) {
-						resultData =  ExecutionUtils.stateInstanceToJson(lastInstruction.getOutputInstance(outputDefinition));
+						resultData =  RESTUtils.stateInstanceToJson(lastInstruction.getOutputInstance(outputDefinition));
 					}
 					
 					
@@ -220,7 +222,7 @@ public class CompoundTransitionProcessor {
 						i.setName(produceParam != null?produceParam:UUID.randomUUID().toString());
 						
 						WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
-						resultData = ExecutionUtils.stateInstanceToJson(i);
+						resultData = RESTUtils.stateInstanceToJson(i);
 						
 					}
 					
@@ -233,7 +235,7 @@ public class CompoundTransitionProcessor {
 						i.setName(produceParam != null?produceParam:UUID.randomUUID().toString());
 						
 						WorklangResourceUtils.resolveInstanceSpace(fieldName).getInstances().add(i);
-						resultArray = ExecutionUtils.collectionInstanceToJsonArray(i);
+						resultArray = RESTUtils.collectionInstanceToJsonArray(i);
 					}
 					
 					logger.info("END PROCESSING Compound transition execution results for -> {}", transitionName);
@@ -301,7 +303,7 @@ public class CompoundTransitionProcessor {
 			
 			logger.info("creating execution instruction for compute next");
 			
-			instructionComputeNext = new ExecutionInstruction(computation, fieldName);
+			instructionComputeNext = new RESTInstruction(computation, fieldName);
 			
 		}
 		
@@ -316,7 +318,7 @@ public class CompoundTransitionProcessor {
 		logger.info("Create new execution instruction");
 		//Create execution instruction to compute first
 		ExecutionInstruction instructionComputeFirst =
-				new ExecutionInstruction(computation, fieldName);
+				new RESTInstruction(computation, fieldName);
 		
 		
 		if (computeFirst.property("name").value().toString().equals("simple instance instruction")) {
@@ -351,7 +353,7 @@ public class CompoundTransitionProcessor {
 		logger.info("creating a new computation");
 		computation = new Computation(vertx, client);
 		
-		ExecutionInstruction instruction = new ExecutionInstruction(computation, fieldName);
+		ExecutionInstruction instruction = new RESTInstruction(computation, fieldName);
 		
 		processSimpleInstanceInstruction(simpleInstanceInstruction, instruction);
 	}

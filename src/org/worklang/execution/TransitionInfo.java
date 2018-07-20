@@ -1,4 +1,4 @@
-package org.worklang.execution.structures;
+package org.worklang.execution;
 
 import java.util.UUID;
 

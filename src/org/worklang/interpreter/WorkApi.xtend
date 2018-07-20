@@ -35,13 +35,15 @@ import com.steelbridgelabs.oss.neo4j.structure.Neo4JGraph
 import com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdProvider
 import org.neo4j.driver.v1.AuthTokens
 import org.eclipse.xtext.resource.XtextResource
-import org.worklang.read.ReadApi
 import java.util.Map
 import java.util.HashMap
 import org.worklang.generator.WorkGenerator
 import org.worklang.work.StateDefinition
 import org.worklang.WorklangResourceUtils
 import org.worklang.structures.StateComposition
+import org.worklang.read.impl.JsonApi
+import org.worklang.execution.impl.REST
+
 //import org.worklang.structures.InstanceResolution
 
 class WorkApi extends AbstractVerticle {
@@ -65,7 +67,7 @@ class WorkApi extends AbstractVerticle {
 	var Route processWorklangDataRoute
 	
 	var static ExecutionApi exec
-	var static ReadApi read
+	var static JsonApi read
 	
 	new (){
 		try {
@@ -83,11 +85,11 @@ class WorkApi extends AbstractVerticle {
 		
 		//Start Read Api
 		logger.info("Initializing Read Api")
-		read = new ReadApi(graph)
+		read = new JsonApi(graph)
 		
 		//Start Execution Api
 		logger.info("Initializing Execution Api")
-		exec = new ExecutionApi(graph)
+		exec = new REST(graph)
 		
 		logger.info("Attempting to deploy Read Api")
 		vertx.deployVerticle(read, [result|

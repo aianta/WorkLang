@@ -45,6 +45,7 @@ import org.worklang.interpreter.WorkApi
 import org.worklang.execution.ExecutionApiWorkFileProcessor
 import org.worklang.metamodel.adapters.InstanceSpaceAdapter
 import org.worklang.work.Model
+import org.worklang.execution.impl.RESTWorkFileProcessor
 
 /**
  * Generates code from your model files on save.
@@ -76,7 +77,7 @@ class WorkGenerator extends AbstractGenerator {
 		WorkApi.clearAPIs
 		
 		//Create Execution API for transition instances
-		var executionApiSetup = new ExecutionApiWorkFileProcessor(WorkApi.executionApi);
+		var executionApiSetup = new RESTWorkFileProcessor(WorkApi.executionApi);
 		
 		executionApiSetup.processWorkFile(xResource);
 		

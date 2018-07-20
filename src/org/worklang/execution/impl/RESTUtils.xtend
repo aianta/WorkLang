@@ -15,7 +15,7 @@
  * 
  */
 
-package org.worklang.execution
+package org.worklang.execution.impl
 
 import org.worklang.work.Instance
 import io.vertx.core.json.JsonObject
@@ -24,9 +24,9 @@ import org.worklang.work.UseDefinition
 import io.vertx.core.json.JsonArray
 import org.slf4j.LoggerFactory
 
-class ExecutionUtils {
+class RESTUtils {
 	
-	val static logger = LoggerFactory.getLogger(ExecutionUtils)
+	val static logger = LoggerFactory.getLogger(RESTUtils)
 	
 	def static JsonArray collectionInstanceToJsonArray(Instance instance){
 		
