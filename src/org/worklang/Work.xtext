@@ -22,20 +22,290 @@ import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
 generate work "http://www.worklang.org/Work"
 
 
-Model:
-	fields += FieldDefinition*
+WorkNet:
+	{WorkNet}
+	name = '@'
+	':'
+	types += FieldType*
+;
+
+Field:
+	'{'
+	applicationSpace = ApplicationSpace
+//	(definitionSpace = DefinitionSpace)?
+//	(referenceSpace = ReferenceSpace)?
+//	(mapSpace = MapSpace)?
+//	(instanceSpace = InstanceSpace)?
+	'}'
+;
+
+ApplicationSpace:
+	{ApplicationSpace} 'application'':'
+	applications += ApplicationType*
+;
+
+Application:
+	'{'
+	componentSpace = ComponentSpace
+	'}'
+;
+
+ComponentSpace:
+	{ComponentSpace} 'components'':'
+	components += ComponentType*	
+;
+
+Component:
+	'{'
+	objectSpace = ObjectSpace
+	'}'
+;
+
+ObjectSpace:
+	{ObjectSpace} 'objects:'
+	objects += ObjectType*
+;
+
+Object:
+	'{'
+	stateSpace = StateSpace
+	'}'
+;
+
+StateSpace:
+	{StateSpace} 'states'':'
+	states += StateType*
+;
+
+State:
+	'{'
+	identitySpace = IdentitySpace
+	'}'
+;
+
+
+IdentitySpace:
+	{IdentitySpace} 'identities'':'
+	identities += IdentityType*
+;
+
+Identity:
+	'{'
+	primitives += WorklangPrimitiveType+
+	'}'
+;
+
+
+WorklangString:
+	name = STRING
+;
+
+WorklangInteger:
+	name = INT
+;
+
+WorklangDouble:
+	name = DOUBLE
+;
+
+WorklangBoolean:
+	name = BOOLEAN
+;
+
+terminal DOUBLE returns ecore::EDouble:
+	('-')?INT'.'INT
+;
+
+terminal PRIMITIVE_TYPES:
+	'string'|'boolean'|'integer'
+;
+
+terminal SIGN:
+	'++'|'--'
+;
+
+Index:
+	sign = SIGN id = INT
+;
+
+BOOLEAN:
+	TRUE|FALSE
+;
+
+terminal TRUE returns ecore::EBoolean:
+	'TRUE'
+;
+
+terminal FALSE returns ecore::EBoolean:
+	'FALSE'
+;
+
+Identifier:
+	PrimitiveIdentifier|UserIdentifier
+;
+
+PrimitiveIdentifier:
+	index = Index term = ('String'|'Integer'|'Double'|'Boolean')
+;
+
+UserIdentifier:
+	index = Index term = ID
+;
+
+Type:
+	Definition|
+	Reference
+;
+
+FieldType:
+	FieldDefinition|Reference
+;
+
+ApplicationType:
+	ApplicationDefinition|Reference
+;
+
+ComponentType:
+	ComponentDefinition|Reference
+;
+
+ObjectType:
+	ObjectDefinition|Reference
+;
+
+StateType:
+	StateDefinition|Reference
+;
+
+IdentityType:
+	IdentityDefinition|Reference
+;
+
+WorklangPrimitiveType:
+	WorklangPrimitiveDefinition|Reference
+;
+
+
+
+Definition:
+	name = Identifier 
+	worknetDefinition = (
+		FieldDefinition|
+		ApplicationDefinition|
+		ComponentDefinition|
+		ObjectDefinition|
+		StateDefinition|
+		IdentityDefinition|
+		WorklangPrimitiveDefinition
+	)
 ;
 
 FieldDefinition:
-	'field'
-	name = ID
-	'{'
-	(definitionSpace = DefinitionSpace)?
-	(referenceSpace = ReferenceSpace)?
-	(mapSpace = MapSpace)?
-	(instanceSpace = InstanceSpace)?
-	'}'
+	name = UserIdentifier 
+	worknetDefinition = Field
 ;
+
+ApplicationDefinition:
+	name = UserIdentifier 
+	worknetDefinition = Application
+;
+
+ComponentDefinition:
+	name = UserIdentifier 
+	worknetDefinition = Component
+;
+
+ObjectDefinition:
+	name = UserIdentifier 
+	worknetDefinition = Object
+;
+
+StateDefinition:
+	name = UserIdentifier 
+	worknetDefinition = State
+;
+
+IdentityDefinition:
+	name = UserIdentifier 
+	worknetDefinition = Identity
+;
+
+WorklangPrimitiveDefinition:
+	name = PrimitiveIdentifier 
+	worknetDefinition = WorklangPrimitive
+;
+
+WorklangPrimitive:
+	primitiveValue = (
+		WorklangString|
+		WorklangInteger|
+		WorklangDouble|
+		WorklangBoolean
+	)
+;
+
+WorkNetDefinition:
+	Field|Application|Component|Object|State|Identity|WorklangPrimitive
+;
+
+
+Reference:
+	AbstractReference|DefinedReference|CompleteReference
+;
+
+AbstractReference:
+	QuantifiedAbstractReference|VagueReference
+;
+
+QuantifiedAbstractReference:
+	level = Level name = ID 
+;
+
+VagueReference:
+	name = ID
+;
+
+CompleteReference:
+	'('definition = DefinedReference concept = VagueReference')'
+;
+
+DefinedReference:
+	'['name = Address']'
+;
+
+Address:
+	root = AddressRoot
+	address += AddressSegment+
+;
+
+AddressRoot:
+	value = AbstractReference|{AddressRoot} '@'
+;
+
+AddressSegment:
+	'.' (DefinedAddressSegment|ConceptualAddressSegment|CompleteAddressSegment)
+;
+
+DefinedAddressSegment:
+	index = INT
+;
+
+ConceptualAddressSegment:
+	sign = SIGN
+;
+
+CompleteAddressSegment:
+	sign = SIGN index = INT
+;
+
+
+
+Level:
+	'identity'|'state'|'object'|'component'|'application'|'field'
+;
+
+
+
 
 MapSpace:
 	{MapSpace} 'mappings''{'
@@ -45,37 +315,57 @@ MapSpace:
 ;
 
 StateMapping:
-	'state' foreignState=[StateDefinition] 'from' field = [FieldDefinition] 'to' localState=[StateDefinition]
+	'state' foreignState=[StateDefinition] 'from' field = [Field] 'to' localState=[StateDefinition]
 ;
 
 TransitionMapping:
-	'transition' foreignTransition=[TransitionDefinition] 'from' field = [FieldDefinition] 'to' localTransition=[TransitionDefinition]
+	'transition' foreignTransition=[TransitionDefinition] 'from' field = [Field] 'to' localTransition=[TransitionDefinition]
 ;
 
 
 DefinitionSpace:
 	{DefinitionSpace} 'definitions'
 	'{'
-	states += StateDefinition*
+	//states += StateDefinition*
 	transitions += TransitionDefinition*
 	'}'
 ;
 
-StateDefinition:
-	PrimitiveStateDefinition|CompoundStateDefinition
-;
+//StateDefinition:
+//	PrimitiveStateDefinition|CompoundStateDefinition
+//;
 
 PrimitiveStateDefinition:
 	type = 'primitive'
 	'state'
 	name = ID
+	'{'
+	terms = Terms
+	'}'
 ;
 
 CompoundStateDefinition:
 	type = 'compound'
 	'state'
 	name = ID
-	composition= WithStatesDefinition
+	'('
+	arguments += Argument*
+	')'
+	'{'
+	terms = Terms
+	'}'
+;
+
+CompositionArgument:
+	SingularCompositionArgument|PluralCompositionArgument
+;
+
+SingularCompositionArgument:
+	state = [StateDefinition]
+;
+
+PluralCompositionArgument:
+	'[' (count = INT '|')? state = [StateDefinition] ']'
 ;
 
 TransitionDefinition:
@@ -111,7 +401,7 @@ ReferenceTransition:
 	'transition'
 	refTransition = [TransitionDefinition]
 	'from'
-	foreignField = [FieldDefinition]
+	foreignField = [Field]
 	
 ;
 
@@ -119,7 +409,7 @@ ReferenceState:
 	'state'
  	refState = [StateDefinition]
 	'from'
-	foreignField = [FieldDefinition] 
+	foreignField = [Field] 
 ;
 
 
@@ -130,11 +420,15 @@ InstanceSpace:
 	'}'
 ;
 
-WithStatesDefinition:
-	'with'
-	'{'
-	predicate= Predicate
-	'}'
+
+Terms:
+	{Terms} 
+	elements += Term*
+;
+
+Conditions:
+	{Conditions}
+	wffs+=Formula*
 ;
 
 
@@ -143,7 +437,7 @@ InputDefinition:
 ;
 
 OutputDefinition:
-	'OUTPUT' outputState = [StateDefinition]
+	'OUTPUT' (outputState = [StateDefinition]|outputValue = PRIMITIVE_TYPES)
 ;
 
 Instance:
@@ -151,7 +445,7 @@ Instance:
 	(transitionDeclaration = TransitionDeclaration| stateDeclaration = StateDeclaration)
 	isCollectionElement ?= ('collectionElement')? 
 	(name = STRING| name = COLLECTION_ELEMENT_NAME) 
-	(state = StateInstance | transition = TransitionInstance| compoundTransition = CompoundTransitionInstance| collection = CollectionInstance)
+	(state = StateInstance | transition = TransitionInstance| /*compoundTransition = CompoundTransitionInstance|*/ collection = CollectionInstance)
 ;
 
 TransitionDeclaration:
@@ -171,9 +465,8 @@ TransitionInstance:
 ;
 
 StateInstance:
-	'{'
-		members += (SetStatement| UseDefinition| Instance)+
-	'}'
+	':'
+		conditions = Conditions
 			
 ;
 
@@ -200,20 +493,20 @@ ToDefinition:
 ;
 
 //State Composition Expression Rules
-Predicate:
-	(negation?='NOT')? expression = BinaryExpression
-;
-
-BinaryExpression:
-	TerminalBinaryExpression ({Operation.left=current}
-		op= ('AND'|'OR') right = TerminalBinaryExpression)*
-;
-
-TerminalBinaryExpression returns BinaryExpression:
-	'(' Predicate ')'|
-	 {StateDefinition} instance = [StateDefinition]|
-	 {StateDefinition}(list ?= 'collectionOf' instance = [StateDefinition])
-;
+//Predicate:
+//	(negation?='NOT')? expression = BinaryExpression
+//;
+//
+//BinaryExpression:
+//	TerminalBinaryExpression ({Operation.left=current}
+//		op= ('AND'|'OR') right = TerminalBinaryExpression)*
+//;
+//
+//TerminalBinaryExpression returns BinaryExpression:
+//	'(' Predicate ')'|
+//	 {StateDefinition} instance = [StateDefinition]|
+//	 {StateDefinition}(list ?= 'collectionOf' instance = [StateDefinition])
+//;
 
 
 TransitionComposition:
@@ -241,7 +534,7 @@ TerminalInstruction returns InstructionExpression:
 ;
 
 IfInstruction:
-	'IF' '(' testKey = ResolvableValue '=' testValue = TestValue ')' 
+	'IF' '(' testKey = ResolvableValue '==' testValue = TestValue ')' 
 	'{'
 		toComputeIfTrue = InstructionExpression
 	'}' ('ELSE' '{'
@@ -250,7 +543,7 @@ IfInstruction:
 ;
 
 WhileInstruction:
-	'WHILE''(' testKey = ResolvableValue '=' testValue = TestValue ')'
+	'WHILE''(' testKey = ResolvableValue '==' testValue = TestValue ')'
 	'{'
 		toCompute = InstructionExpression
 	'}'
@@ -260,11 +553,11 @@ SimpleInstruction:
 	'THEN' toExecute += [TransitionDefinition]+
 ;
 
-CompoundTransitionInstance:
-	'{'
-		body = CompoundTransitionInstanceBody
-	'}'
-;
+//CompoundTransitionInstance:
+//	'{'
+//		body = CompoundTransitionInstanceBody
+//	'}'
+//;
 
 CompoundTransitionInstanceBody:
 	'START' ('WITH''('startingInputs += [Instance]+')')?
@@ -291,7 +584,7 @@ SimpleInstanceInstruction:
 ;
 
 IfInstanceInstruction:
-	'IF' '(' testKey = ResolvableValue '=' testValue = TestValue ')' 
+	'IF' '(' testKey = ResolvableValue '==' testValue = TestValue ')' 
 	'{'
 		toComputeIfTrue = InstanceInstructionExpression
 	'}' ('ELSE' '{'
@@ -302,7 +595,7 @@ IfInstanceInstruction:
 
 
 WhileInstanceInstruction:
-	'WHILE''(' testKey = ResolvableValue '=' testValue = TestValue ')'
+	'WHILE''(' testKey = ResolvableValue '==' testValue = TestValue ')'
 	'{'
 		toCompute = InstanceInstructionExpression
 	'}'
@@ -328,5 +621,135 @@ ResolvableTransitionOutputValue:
 	'OUTPUT' state = [StateDefinition] '.' key = [StateDefinition]
 ;
 
+Term:
+	Variable|Function
+;
+
+Variable:
+	(key?=('$')? name = STATE_VARIABLE_NAME  state = [StateDefinition])|
+	(key?=('$')? name = PRIMITIVE_VARIABLE_NAME type = PRIMITIVE_TYPES)
+;
+
+Function:
+	(name = FUNCTION_NAME transition = [TransitionDefinition] '(' arguments += Argument* ')')|
+	('->{@}' name = ID transition = [TransitionDefinition]'(' arguments += Argument*')')
+;
+
+Argument:
+	term = [Term|TERM_NAME]
+;
+
+Formula:
+	expression = Expression
+;
+
+Expression:
+	Predicate|
+	Equality|
+	Negation|
+	BinaryConnective|
+	Quantifier
+;
+
+TerminalExpression returns Expression:
+	'{'Expression'}'|
+	{Expression}ExpressionValue
+;
+
+Predicate:
+	'@' predicateState = [StateDefinition] '(' arguments += Argument* ')'
+;
+
+Equality:
+	( left = [Term|TERM_NAME] operator = EqualityOperator right = [Term|TERM_NAME] )
+;
+
+Negation:
+	'NOT' negatedFormula = TerminalExpression
+;
+
+BinaryConnective:
+	leftFormula = TerminalExpression operator = LogicalOperator rightFormula = TerminalExpression 
+;
+
+Quantifier:
+	(quantifier = 'forAll' variable = [Variable] 'thisHolds' formula = TerminalExpression)|
+	(quantifier = 'thereExists' variable = [Variable] 'suchThat' formula = TerminalExpression ) 
+;
+
+LogicalOperator:
+	IMPLIES|BICONDITION|LOGICAL_AND|LOGICAL_OR|LOGICAL_XOR
+;
+
+EqualityOperator:
+	EQUAL|LESS_THAN|GREATER_THAN|LESS_THAN_OR_EQUAL|GREATER_THAN_OR_EQUAL
+;
+
+terminal EQUAL:
+	'='
+;
+
+terminal  LESS_THAN:
+	'<'
+;
+
+terminal GREATER_THAN:
+	'>'
+;
+
+terminal LESS_THAN_OR_EQUAL:
+	'<='
+;
+
+terminal GREATER_THAN_OR_EQUAL:
+	'>='
+;
+
+terminal IMPLIES:
+	'->'
+;
+
+terminal BICONDITION:
+	'<->'
+;
+
+terminal LOGICAL_AND:
+	'AND'
+;
+
+terminal LOGICAL_OR:
+	'OR'
+;
+
+terminal LOGICAL_XOR:
+	'XOR'
+;
+
+ExpressionValue:
+	BOOLEAN|INT|STRING|CHARACTER
+;
+
+
+terminal CHARACTER:
+	"'" ( '\\'('b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\') | !('\\'|"'") ) "'"
+;
+
+
+
+TERM_NAME:
+	STATE_VARIABLE_NAME|PRIMITIVE_VARIABLE_NAME|FUNCTION_NAME
+;
+
+terminal STATE_VARIABLE_NAME:
+	'*@' ID
+;
+
+terminal PRIMITIVE_VARIABLE_NAME:
+	'!@' ID
+;
+
+terminal FUNCTION_NAME:
+	'->@' ID
+; 
 
 
