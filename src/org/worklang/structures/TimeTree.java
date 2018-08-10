@@ -5,6 +5,10 @@ import java.util.Date;
 
 public class TimeTree {
 	
+	private int energy = 0;
+	private int energyLeft = 0;
+	
+	private int index = -1;
 	private Instant timestamp =  Instant.now();
 	private STree sRef = null;
 	private DTree dRef = null;
@@ -13,6 +17,8 @@ public class TimeTree {
 	
 	
 	public TimeTree create(TimeTree t) {
+		
+		index = Problem.CURRENT_TIME;
 		
 		TimeTree next = new TimeTree();
 		
@@ -26,24 +32,37 @@ public class TimeTree {
 		
 		return next;
 	}
-	
+
 	public TimeTree createBySTree(STree s) {
 		
-		TimeTree next = new TimeTree();
-		next.setsRef(s);
+		//Initialize next time node
 		
-		this.next = next;
+		//Create one if necessary
+		if (next == null) {
+			TimeTree next = new TimeTree();
+			this.next = next;
+		}
+		
+		next.setsRef(s);
+		next.setIndex(Problem.CURRENT_TIME + 1);
 		
 		return next;
 		
 	}
-	
+
 	public TimeTree createByDTree(DTree d) {
 		
-		TimeTree next = new TimeTree();
-		next.setdRef(d);
+		//Initialize next time node
 		
-		this.next = next;
+		//Create one if necessary
+		if (next == null) {
+			TimeTree next = new TimeTree();
+			this.next = next;
+		}
+		
+		next.setdRef(d);
+		next.setIndex(Problem.CURRENT_TIME + 1);
+		
 		
 		return next;
 	}
@@ -74,6 +93,15 @@ public class TimeTree {
 	}
 	public Instant getTimestamp() {
 		return timestamp;
+	}
+	public int getIndex() {
+		return index;
+	}
+	public void setIndex(int index) {
+		this.index = index;
+	}
+	public int getEnergyLeft() {
+		return energyLeft;
 	}
 }
 

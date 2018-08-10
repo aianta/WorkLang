@@ -2,10 +2,12 @@ package org.worklang.structures;
 
 public class DTree {
 
+	private double dTime = 0;
+	
 	private TimeTree timeRef = null;
+	private Object value = null;
 	
 	private STree sRef = null;
-	private Object value = null;
 	private DTree parent = null;
 	private DTree child = null;
 	
@@ -102,4 +104,15 @@ public class DTree {
 	public void setTimeRef(TimeTree timeRef) {
 		this.timeRef = timeRef;
 	}
+	public double getTime() {
+		return dTime;
+	}
+
+	public void setTime(int t) {
+		dTime = t;
+	}
+	private double estimateTimeLeft() {
+		return timeRef.getEnergyLeft()/2;
+	}
+
 }

@@ -2,8 +2,11 @@ package org.worklang.structures;
 
 public class STree {
 
+	private double sTime = 0;
+	
 	private TimeTree timeRef = null;
 	private Object value = null;
+
 	private DTree dRef = null;
 	private STree parent = null;
 	private STree child = null;
@@ -99,5 +102,16 @@ public class STree {
 	}
 	public void setTimeRef(TimeTree timeRef) {
 		this.timeRef = timeRef;
+	}
+	public double getTime() {
+		return sTime;
+	}
+
+	public void setTime(int t) {
+		sTime = t;
+	}
+
+	private double estimateTimeLeft() {
+		return timeRef.getEnergyLeft()/2;
 	}
 }
