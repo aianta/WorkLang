@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.lessvoid.com/nifty-gui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://raw.githubusercontent.com/void256/nifty-gui/1.4/nifty-core/src/main/resources/nifty.xsd https://raw.githubusercontent.com/void256/nifty-gui/1.4/nifty-core/src/main/resources/nifty.xsd">
+     <!-- Your IDE now tells you that one <screen></screen> element is expected here, etc. -->
+     <useControls filename="nifty-default-controls.xml" />
+	 <useStyles filename="nifty-default-styles.xml" />
+     <screen id="start" controller="work.worklang.worknet.client.controllers.REPLInterfaceController">
+        <layer id="layer" childLayout="center">
+			<panel id="panel" height="100%" width="30%" align="right" valign="bottom" childLayout="center" visibleToMouse="true">
+				<control id="console" name="nifty-console" lines="25">
+					<effect>
+						<onStartScreen name="move" mode="in" direction="top" length="150"></onStartScreen>
+					</effect>
+				</control>
+			</panel>
+        </layer>
+     </screen>
+</nifty>

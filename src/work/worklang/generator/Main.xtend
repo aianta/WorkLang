@@ -20,7 +20,7 @@ package work.worklang.generator
 
 import io.vertx.core.Vertx
 import org.slf4j.LoggerFactory
-
+import work.worklang.worknet.client.WorknetClient
 
 class Main {
 	
@@ -31,7 +31,10 @@ class Main {
 
 	def static main(String[] args) {
 		
-		logger.info("hit main")
+		logger.info("Launching Worknet Client")
+		var WorknetClient client =  new WorknetClient();
+		
+		client.start
 		
 		return
 	}

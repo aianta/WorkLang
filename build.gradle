@@ -70,7 +70,7 @@
  	
  	
  		resources{
- 			srcDirs += ["src-gen/"]; exclude "**/*.java"
+ 			srcDirs += ["src-gen/", "assets"]; exclude "**/*.java"
  		}
  		
  		output.resourcesDir = "build/classes/java/main/"
