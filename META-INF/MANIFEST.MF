@@ -15,15 +15,15 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.antlr.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.worklang.validation,
- org.worklang.scoping,
- org.worklang.serializer,
- org.worklang.work.impl,
- org.worklang,
- org.worklang.generator,
- org.worklang.services,
- org.worklang.work,
- org.worklang.work.util,
- org.worklang.parser.antlr,
- org.worklang.parser.antlr.internal
+Export-Package: work.worklang.services,
+ work.worklang.parser.antlr,
+ work.worklang.serializer,
+ work.worklang.work,
+ work.worklang.work.util,
+ work.worklang.generator,
+ work.worklang.validation,
+ work.worklang.parser.antlr.internal,
+ work.worklang,
+ work.worklang.work.impl,
+ work.worklang.scoping
 Import-Package: org.apache.log4j

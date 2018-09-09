@@ -3,8 +3,8 @@
 <plugin>
 	<extension point="org.eclipse.emf.ecore.generated_package">
 		<package 
-			uri = "http://www.worklang.org/Work"
-			class = "org.worklang.work.WorkPackage"
+			uri = "http://worklang.work/"
+			class = "work.worklang.work.WorkPackage"
 			genModel = "model/generated/Work.genmodel" />
 	</extension>
 </plugin>

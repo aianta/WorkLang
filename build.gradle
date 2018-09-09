@@ -27,12 +27,21 @@
  apply plugin: 'org.xtext.xtend'
 
  
+ def jme3 = [v:'3.2.0-stable', g:'org.jmonkeyengine']
+ 
  dependencies {
 
  	compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.13.0'
+ 	
  	compile 'io.vertx:vertx-core:3.5.2'
  	compile 'io.vertx:vertx-web:3.5.2'
  	compile 'io.vertx:vertx-web-client:3.5.2'
+ 	
+ 	
+ 	compile "${jme3.g}:jme3-core:${jme3.v}"
+ 	compile "${jme3.g}:jme3-niftygui:${jme3.v}"
+	runtime "${jme3.g}:jme3-desktop:${jme3.v}"
+	runtime "${jme3.g}:jme3-lwjgl3:${jme3.v}"
  	
  	compile group: 'com.google.inject', name: 'guice', version: '4.2.0'
 	compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.common', version: '2.12.0'
@@ -44,6 +53,7 @@
 	
 	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
 	compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+	
 	
  	
  }
@@ -76,19 +86,20 @@
  	jcenter()
  	maven{
  		url "https://mvnrepository.com/artifact/io.vertx/"
+ 		url "http://dl.bintray.com/jmonkeyengine/org.jmonkeyengine"
  	}
  }
  
  //WorkLang metadata
  version = '0.0.1'
 
- mainClassName = 'org.worklang.generator.Main'
+ mainClassName = 'work.worklang.generator.Main'
  
 
  shadowJar {
     classifier = 'fat'
     manifest {
-        attributes 'Main-Verticle': 'org.worklang.generator.Main'
+        attributes 'Main-Verticle': 'work.worklang.generator.Main'
     }
     mergeServiceFiles {
         include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
