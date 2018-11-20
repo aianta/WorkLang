@@ -24,11 +24,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.worklang.work.CompoundTransitionInstance;
 import org.worklang.work.Instance;
-import org.worklang.work.StateDeclaration;
-import org.worklang.work.StateInstance;
-import org.worklang.work.TransitionDeclaration;
+import org.worklang.work.Transition;
 import org.worklang.work.TransitionInstance;
 import org.worklang.work.WorkPackage;
 
@@ -40,12 +37,9 @@ import org.worklang.work.WorkPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.InstanceImpl#getTransitionDeclaration <em>Transition Declaration</em>}</li>
- *   <li>{@link org.worklang.work.impl.InstanceImpl#getStateDeclaration <em>State Declaration</em>}</li>
+ *   <li>{@link org.worklang.work.impl.InstanceImpl#getConceptualTransition <em>Conceptual Transition</em>}</li>
  *   <li>{@link org.worklang.work.impl.InstanceImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.worklang.work.impl.InstanceImpl#getState <em>State</em>}</li>
  *   <li>{@link org.worklang.work.impl.InstanceImpl#getTransition <em>Transition</em>}</li>
- *   <li>{@link org.worklang.work.impl.InstanceImpl#getCompoundTransition <em>Compound Transition</em>}</li>
  * </ul>
  *
  * @generated
@@ -53,24 +47,14 @@ import org.worklang.work.WorkPackage;
 public class InstanceImpl extends MinimalEObjectImpl.Container implements Instance
 {
   /**
-   * The cached value of the '{@link #getTransitionDeclaration() <em>Transition Declaration</em>}' containment reference.
+   * The cached value of the '{@link #getConceptualTransition() <em>Conceptual Transition</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTransitionDeclaration()
+   * @see #getConceptualTransition()
    * @generated
    * @ordered
    */
-  protected TransitionDeclaration transitionDeclaration;
-
-  /**
-   * The cached value of the '{@link #getStateDeclaration() <em>State Declaration</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getStateDeclaration()
-   * @generated
-   * @ordered
-   */
-  protected StateDeclaration stateDeclaration;
+  protected Transition conceptualTransition;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -93,16 +77,6 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getState() <em>State</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getState()
-   * @generated
-   * @ordered
-   */
-  protected StateInstance state;
-
-  /**
    * The cached value of the '{@link #getTransition() <em>Transition</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -111,16 +85,6 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
    * @ordered
    */
   protected TransitionInstance transition;
-
-  /**
-   * The cached value of the '{@link #getCompoundTransition() <em>Compound Transition</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getCompoundTransition()
-   * @generated
-   * @ordered
-   */
-  protected CompoundTransitionInstance compoundTransition;
 
   /**
    * <!-- begin-user-doc -->
@@ -148,9 +112,19 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionDeclaration getTransitionDeclaration()
+  public Transition getConceptualTransition()
   {
-    return transitionDeclaration;
+    if (conceptualTransition != null && conceptualTransition.eIsProxy())
+    {
+      InternalEObject oldConceptualTransition = (InternalEObject)conceptualTransition;
+      conceptualTransition = (Transition)eResolveProxy(oldConceptualTransition);
+      if (conceptualTransition != oldConceptualTransition)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkPackage.INSTANCE__CONCEPTUAL_TRANSITION, oldConceptualTransition, conceptualTransition));
+      }
+    }
+    return conceptualTransition;
   }
 
   /**
@@ -158,85 +132,22 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTransitionDeclaration(TransitionDeclaration newTransitionDeclaration, NotificationChain msgs)
+  public Transition basicGetConceptualTransition()
   {
-    TransitionDeclaration oldTransitionDeclaration = transitionDeclaration;
-    transitionDeclaration = newTransitionDeclaration;
+    return conceptualTransition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setConceptualTransition(Transition newConceptualTransition)
+  {
+    Transition oldConceptualTransition = conceptualTransition;
+    conceptualTransition = newConceptualTransition;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__TRANSITION_DECLARATION, oldTransitionDeclaration, newTransitionDeclaration);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTransitionDeclaration(TransitionDeclaration newTransitionDeclaration)
-  {
-    if (newTransitionDeclaration != transitionDeclaration)
-    {
-      NotificationChain msgs = null;
-      if (transitionDeclaration != null)
-        msgs = ((InternalEObject)transitionDeclaration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.INSTANCE__TRANSITION_DECLARATION, null, msgs);
-      if (newTransitionDeclaration != null)
-        msgs = ((InternalEObject)newTransitionDeclaration).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.INSTANCE__TRANSITION_DECLARATION, null, msgs);
-      msgs = basicSetTransitionDeclaration(newTransitionDeclaration, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__TRANSITION_DECLARATION, newTransitionDeclaration, newTransitionDeclaration));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public StateDeclaration getStateDeclaration()
-  {
-    return stateDeclaration;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetStateDeclaration(StateDeclaration newStateDeclaration, NotificationChain msgs)
-  {
-    StateDeclaration oldStateDeclaration = stateDeclaration;
-    stateDeclaration = newStateDeclaration;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__STATE_DECLARATION, oldStateDeclaration, newStateDeclaration);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setStateDeclaration(StateDeclaration newStateDeclaration)
-  {
-    if (newStateDeclaration != stateDeclaration)
-    {
-      NotificationChain msgs = null;
-      if (stateDeclaration != null)
-        msgs = ((InternalEObject)stateDeclaration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.INSTANCE__STATE_DECLARATION, null, msgs);
-      if (newStateDeclaration != null)
-        msgs = ((InternalEObject)newStateDeclaration).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.INSTANCE__STATE_DECLARATION, null, msgs);
-      msgs = basicSetStateDeclaration(newStateDeclaration, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__STATE_DECLARATION, newStateDeclaration, newStateDeclaration));
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__CONCEPTUAL_TRANSITION, oldConceptualTransition, conceptualTransition));
   }
 
   /**
@@ -260,54 +171,6 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
     name = newName;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__NAME, oldName, name));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public StateInstance getState()
-  {
-    return state;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetState(StateInstance newState, NotificationChain msgs)
-  {
-    StateInstance oldState = state;
-    state = newState;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__STATE, oldState, newState);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setState(StateInstance newState)
-  {
-    if (newState != state)
-    {
-      NotificationChain msgs = null;
-      if (state != null)
-        msgs = ((InternalEObject)state).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.INSTANCE__STATE, null, msgs);
-      if (newState != null)
-        msgs = ((InternalEObject)newState).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.INSTANCE__STATE, null, msgs);
-      msgs = basicSetState(newState, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__STATE, newState, newState));
   }
 
   /**
@@ -363,69 +226,13 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
    * <!-- end-user-doc -->
    * @generated
    */
-  public CompoundTransitionInstance getCompoundTransition()
-  {
-    return compoundTransition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetCompoundTransition(CompoundTransitionInstance newCompoundTransition, NotificationChain msgs)
-  {
-    CompoundTransitionInstance oldCompoundTransition = compoundTransition;
-    compoundTransition = newCompoundTransition;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__COMPOUND_TRANSITION, oldCompoundTransition, newCompoundTransition);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setCompoundTransition(CompoundTransitionInstance newCompoundTransition)
-  {
-    if (newCompoundTransition != compoundTransition)
-    {
-      NotificationChain msgs = null;
-      if (compoundTransition != null)
-        msgs = ((InternalEObject)compoundTransition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - WorkPackage.INSTANCE__COMPOUND_TRANSITION, null, msgs);
-      if (newCompoundTransition != null)
-        msgs = ((InternalEObject)newCompoundTransition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - WorkPackage.INSTANCE__COMPOUND_TRANSITION, null, msgs);
-      msgs = basicSetCompoundTransition(newCompoundTransition, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.INSTANCE__COMPOUND_TRANSITION, newCompoundTransition, newCompoundTransition));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCE__TRANSITION_DECLARATION:
-        return basicSetTransitionDeclaration(null, msgs);
-      case WorkPackage.INSTANCE__STATE_DECLARATION:
-        return basicSetStateDeclaration(null, msgs);
-      case WorkPackage.INSTANCE__STATE:
-        return basicSetState(null, msgs);
       case WorkPackage.INSTANCE__TRANSITION:
         return basicSetTransition(null, msgs);
-      case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
-        return basicSetCompoundTransition(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -440,18 +247,13 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCE__TRANSITION_DECLARATION:
-        return getTransitionDeclaration();
-      case WorkPackage.INSTANCE__STATE_DECLARATION:
-        return getStateDeclaration();
+      case WorkPackage.INSTANCE__CONCEPTUAL_TRANSITION:
+        if (resolve) return getConceptualTransition();
+        return basicGetConceptualTransition();
       case WorkPackage.INSTANCE__NAME:
         return getName();
-      case WorkPackage.INSTANCE__STATE:
-        return getState();
       case WorkPackage.INSTANCE__TRANSITION:
         return getTransition();
-      case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
-        return getCompoundTransition();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -466,23 +268,14 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCE__TRANSITION_DECLARATION:
-        setTransitionDeclaration((TransitionDeclaration)newValue);
-        return;
-      case WorkPackage.INSTANCE__STATE_DECLARATION:
-        setStateDeclaration((StateDeclaration)newValue);
+      case WorkPackage.INSTANCE__CONCEPTUAL_TRANSITION:
+        setConceptualTransition((Transition)newValue);
         return;
       case WorkPackage.INSTANCE__NAME:
         setName((String)newValue);
         return;
-      case WorkPackage.INSTANCE__STATE:
-        setState((StateInstance)newValue);
-        return;
       case WorkPackage.INSTANCE__TRANSITION:
         setTransition((TransitionInstance)newValue);
-        return;
-      case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
-        setCompoundTransition((CompoundTransitionInstance)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -498,23 +291,14 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCE__TRANSITION_DECLARATION:
-        setTransitionDeclaration((TransitionDeclaration)null);
-        return;
-      case WorkPackage.INSTANCE__STATE_DECLARATION:
-        setStateDeclaration((StateDeclaration)null);
+      case WorkPackage.INSTANCE__CONCEPTUAL_TRANSITION:
+        setConceptualTransition((Transition)null);
         return;
       case WorkPackage.INSTANCE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case WorkPackage.INSTANCE__STATE:
-        setState((StateInstance)null);
-        return;
       case WorkPackage.INSTANCE__TRANSITION:
         setTransition((TransitionInstance)null);
-        return;
-      case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
-        setCompoundTransition((CompoundTransitionInstance)null);
         return;
     }
     super.eUnset(featureID);
@@ -530,18 +314,12 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
   {
     switch (featureID)
     {
-      case WorkPackage.INSTANCE__TRANSITION_DECLARATION:
-        return transitionDeclaration != null;
-      case WorkPackage.INSTANCE__STATE_DECLARATION:
-        return stateDeclaration != null;
+      case WorkPackage.INSTANCE__CONCEPTUAL_TRANSITION:
+        return conceptualTransition != null;
       case WorkPackage.INSTANCE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case WorkPackage.INSTANCE__STATE:
-        return state != null;
       case WorkPackage.INSTANCE__TRANSITION:
         return transition != null;
-      case WorkPackage.INSTANCE__COMPOUND_TRANSITION:
-        return compoundTransition != null;
     }
     return super.eIsSet(featureID);
   }
@@ -556,7 +334,7 @@ public class InstanceImpl extends MinimalEObjectImpl.Container implements Instan
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

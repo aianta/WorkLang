@@ -40,7 +40,7 @@ public interface DefinitionSpace extends EObject
 {
   /**
    * Returns the value of the '<em><b>States</b></em>' containment reference list.
-   * The list contents are of type {@link org.worklang.work.StateDefinition}.
+   * The list contents are of type {@link org.worklang.work.State}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>States</em>' containment reference list isn't clear,
@@ -52,11 +52,11 @@ public interface DefinitionSpace extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<StateDefinition> getStates();
+  EList<State> getStates();
 
   /**
    * Returns the value of the '<em><b>Transitions</b></em>' containment reference list.
-   * The list contents are of type {@link org.worklang.work.TransitionDefinition}.
+   * The list contents are of type {@link org.worklang.work.Transition}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Transitions</em>' containment reference list isn't clear,
@@ -68,6 +68,6 @@ public interface DefinitionSpace extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<TransitionDefinition> getTransitions();
+  EList<Transition> getTransitions();
 
 } // DefinitionSpace

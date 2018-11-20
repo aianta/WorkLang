@@ -15,40 +15,50 @@
  */
 package org.worklang.work;
 
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Simple Instance Instruction</b></em>'.
+ * A representation of the model object '<em><b>State</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.SimpleInstanceInstruction#getToExecute <em>To Execute</em>}</li>
+ *   <li>{@link org.worklang.work.State#getName <em>Name</em>}</li>
  * </ul>
  *
- * @see org.worklang.work.WorkPackage#getSimpleInstanceInstruction()
+ * @see org.worklang.work.WorkPackage#getState()
  * @model
  * @generated
  */
-public interface SimpleInstanceInstruction extends InstanceInstructionExpression
+public interface State extends EObject
 {
   /**
-   * Returns the value of the '<em><b>To Execute</b></em>' reference list.
-   * The list contents are of type {@link org.worklang.work.Instance}.
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>To Execute</em>' reference list isn't clear,
+   * If the meaning of the '<em>Name</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>To Execute</em>' reference list.
-   * @see org.worklang.work.WorkPackage#getSimpleInstanceInstruction_ToExecute()
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.worklang.work.WorkPackage#getState_Name()
    * @model
    * @generated
    */
-  EList<Instance> getToExecute();
+  String getName();
 
-} // SimpleInstanceInstruction
+  /**
+   * Sets the value of the '{@link org.worklang.work.State#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
+  void setName(String value);
+
+} // State

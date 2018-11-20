@@ -22,17 +22,20 @@ import java.io.IOException
 import java.util.Map
 import com.steelbridgelabs.oss.neo4j.structure.Neo4JGraph
 import org.apache.tinkerpop.gremlin.structure.VertexProperty
-import org.worklang.work.FieldDefinition
 import org.apache.tinkerpop.gremlin.structure.Vertex
 import org.eclipse.xtext.scoping.IScopeProvider
 import com.google.inject.Inject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource
-import org.worklang.metamodel.FieldModelFactory
-import java.util.ArrayList
 import org.worklang.interpreter.WorkApi
+import org.worklang.work.Domain
+import java.util.Date
+import java.time.Instant
+import org.slf4j.LoggerFactory
 
 class WorklangResource extends LazyLinkingResource{
+	
+	val static logger = LoggerFactory.getLogger(WorkApi)
 	
 	@Inject
 	IScopeProvider scopeProvider
@@ -43,6 +46,9 @@ class WorklangResource extends LazyLinkingResource{
 	var Neo4JGraph graph
 	
 	var Vertex globalWorkspace
+	
+	val worklangKey = "worklangKey"
+	val date = Date.from(Instant.now)
 	
 	new (){
 		super()
@@ -62,27 +68,75 @@ class WorklangResource extends LazyLinkingResource{
 		 	
 		 	//Clear previous meta model from db and APIs
 		 	graph.execute("match (n) detach delete n")
-		 	initMetaModel
 		 	
-		 	val fieldFactories = new ArrayList<FieldModelFactory>
 		 	
-		 	//Generate static meta models for all fields in the work file
 		 	allContents.filter[ele|
-		 		ele.eClass.instanceClass.equals(org.worklang.work.FieldDefinition)
+		 		ele.eClass.instanceClass.equals(org.worklang.work.Domain)
 		 	].forEach[ele|
 		 		
-		 		val field = ele as FieldDefinition
+		 		val domain = ele as Domain
 		 		
-		 		var fieldFactory =  new FieldModelFactory(graph, field, globalWorkspace)
-		 		fieldFactory.generateInternal
+		 		/* 
+		 		var domainVertex = graph.addVertex("Domain")
+		 		domainVertex.property(VertexProperty.Cardinality.single, "name", domain.name)
+		 		domainVertex.property(VertexProperty.Cardinality.single, worklangKey, domain.eClass.instanceTypeName)
+		 		domainVertex.property(VertexProperty.Cardinality.single, "created", date.toString) */
 		 		
-		 		fieldFactories.add(fieldFactory)
+		 		var tx = graph.tx
+		 		
+		 		//Create vertices for all states in the definition space of the domain
+		 		domain.definitionSpace.states.forEach[state|
+		 			var stateVertex = graph.addVertex("State")
+		 			stateVertex.property(VertexProperty.Cardinality.single, "name", state.name)
+		 			stateVertex.property(VertexProperty.Cardinality.single, worklangKey, state.eClass.instanceTypeName)
+		 			stateVertex.property(VertexProperty.Cardinality.single, "created", date.toString)
+		 			
+		 		]
+		 		
+		 		//Commit states to the model graph, we must do this before we create edges
+		 		tx.commit
+		 		
+		 		tx = graph.tx
+		 		
+		 		//Create edges for all transitions in the definition space of the domain
+		 		domain.definitionSpace.transitions.forEach[transition|
+		 			var inputState = graph.vertices("match (n:State {name:'"+ transition.input.name +"'}) return n").head
+		 			var outputState = graph.vertices("match (n:State {name:'"+ transition.output.name + "'}) return n").head
+		 			
+		 			inputState.addEdge("transition", outputState,
+		 				"name", transition.name,
+		 				worklangKey, transition.eClass.instanceTypeName,
+		 				"created", date.toString
+		 			)
+		 		]
+		 		
+		 		
+		 		tx.commit
+		 		
+		 		logger.info("testing path")
+		 		
+		 		var inputState = graph.vertices("match (n:State {name:'name'}) return n").head
+		 		var outputState = graph.vertices("match (n:State {name:'accountBalance'}) return n").head
+		 		
+		 		//graph.traversal.V(inputState.id).repeat(graph.traversal.V().outE().inV.simplePath).until(hasId(outputState.id))
+		 		
+		 		var traversal = graph.traversal.V(inputState.id)
+		 		
+		 		var repeat = graph.traversal.V.outE.inV.simplePath
+		 		
+		 		var path = traversal.repeat(repeat).until(traversal.hasId(outputState.id)).path.limit(1)
+		 		
+		 		
+		 		
+		 		
+		 		
+		 		
+		 		
 		 	]
+		 	  
+		 	  
 		 	
-		 	//Generate dynamic meta models for all fields in the work file
-			fieldFactories.forEach[fieldFactory|
-				fieldFactory.generateExternal
-			]
+		 
 		 	
 		 
 		 }else{
@@ -92,24 +146,4 @@ class WorklangResource extends LazyLinkingResource{
 		 
 	}
 
-	def initMetaModel(){
-			val t = graph.tx
-			
-			//Check to see if global workspace vertex exists, if not, create it
-			var globalWorkspaceQuery  = graph.vertices("match (n:globalWorkspace) return n")
-			
-			var head =  globalWorkspaceQuery.head
-			
-			if ( head !== null){
-				println("found global workspace")
-				this.globalWorkspace = head
-			}else{
-				println("new global workspace")
-				this.globalWorkspace = graph.addVertex("globalWorkspace")
-				this.globalWorkspace.property(VertexProperty.Cardinality.single, "name", "Global Workspace")
-			}
-			
-			
-			t.commit
-	}
 }

@@ -20,14 +20,14 @@ module org.worklang.GenerateWork
 import org.eclipse.xtext.xtext.generator.*
 import org.eclipse.xtext.xtext.generator.model.project.*
 
-var rootPath = "C:/Users/aiant/"
+var rootPath = ".."
 
 Workflow {
 	
 	component = XtextGenerator {
 		configuration = {
 			project = StandardProjectConfig {
-				baseName = "Worklang"
+				baseName = "work.worklang"
 				rootPath = rootPath
 				runtimeTest = {
 					enabled = true

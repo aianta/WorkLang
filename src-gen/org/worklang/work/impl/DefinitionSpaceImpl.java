@@ -30,8 +30,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.worklang.work.DefinitionSpace;
-import org.worklang.work.StateDefinition;
-import org.worklang.work.TransitionDefinition;
+import org.worklang.work.State;
+import org.worklang.work.Transition;
 import org.worklang.work.WorkPackage;
 
 /**
@@ -58,7 +58,7 @@ public class DefinitionSpaceImpl extends MinimalEObjectImpl.Container implements
    * @generated
    * @ordered
    */
-  protected EList<StateDefinition> states;
+  protected EList<State> states;
 
   /**
    * The cached value of the '{@link #getTransitions() <em>Transitions</em>}' containment reference list.
@@ -68,7 +68,7 @@ public class DefinitionSpaceImpl extends MinimalEObjectImpl.Container implements
    * @generated
    * @ordered
    */
-  protected EList<TransitionDefinition> transitions;
+  protected EList<Transition> transitions;
 
   /**
    * <!-- begin-user-doc -->
@@ -96,11 +96,11 @@ public class DefinitionSpaceImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<StateDefinition> getStates()
+  public EList<State> getStates()
   {
     if (states == null)
     {
-      states = new EObjectContainmentEList<StateDefinition>(StateDefinition.class, this, WorkPackage.DEFINITION_SPACE__STATES);
+      states = new EObjectContainmentEList<State>(State.class, this, WorkPackage.DEFINITION_SPACE__STATES);
     }
     return states;
   }
@@ -110,11 +110,11 @@ public class DefinitionSpaceImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<TransitionDefinition> getTransitions()
+  public EList<Transition> getTransitions()
   {
     if (transitions == null)
     {
-      transitions = new EObjectContainmentEList<TransitionDefinition>(TransitionDefinition.class, this, WorkPackage.DEFINITION_SPACE__TRANSITIONS);
+      transitions = new EObjectContainmentEList<Transition>(Transition.class, this, WorkPackage.DEFINITION_SPACE__TRANSITIONS);
     }
     return transitions;
   }
@@ -168,11 +168,11 @@ public class DefinitionSpaceImpl extends MinimalEObjectImpl.Container implements
     {
       case WorkPackage.DEFINITION_SPACE__STATES:
         getStates().clear();
-        getStates().addAll((Collection<? extends StateDefinition>)newValue);
+        getStates().addAll((Collection<? extends State>)newValue);
         return;
       case WorkPackage.DEFINITION_SPACE__TRANSITIONS:
         getTransitions().clear();
-        getTransitions().addAll((Collection<? extends TransitionDefinition>)newValue);
+        getTransitions().addAll((Collection<? extends Transition>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

@@ -16,7 +16,6 @@
 package org.worklang.work;
 
 import org.eclipse.emf.ecore.EObject;
-import org.worklang.work.StateInstance;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,12 +26,9 @@ import org.worklang.work.StateInstance;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.Instance#getTransitionDeclaration <em>Transition Declaration</em>}</li>
- *   <li>{@link org.worklang.work.Instance#getStateDeclaration <em>State Declaration</em>}</li>
+ *   <li>{@link org.worklang.work.Instance#getConceptualTransition <em>Conceptual Transition</em>}</li>
  *   <li>{@link org.worklang.work.Instance#getName <em>Name</em>}</li>
- *   <li>{@link org.worklang.work.Instance#getState <em>State</em>}</li>
  *   <li>{@link org.worklang.work.Instance#getTransition <em>Transition</em>}</li>
- *   <li>{@link org.worklang.work.Instance#getCompoundTransition <em>Compound Transition</em>}</li>
  * </ul>
  *
  * @see org.worklang.work.WorkPackage#getInstance()
@@ -42,56 +38,30 @@ import org.worklang.work.StateInstance;
 public interface Instance extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Transition Declaration</b></em>' containment reference.
+   * Returns the value of the '<em><b>Conceptual Transition</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Transition Declaration</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Conceptual Transition</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Transition Declaration</em>' containment reference.
-   * @see #setTransitionDeclaration(TransitionDeclaration)
-   * @see org.worklang.work.WorkPackage#getInstance_TransitionDeclaration()
-   * @model containment="true"
+   * @return the value of the '<em>Conceptual Transition</em>' reference.
+   * @see #setConceptualTransition(Transition)
+   * @see org.worklang.work.WorkPackage#getInstance_ConceptualTransition()
+   * @model
    * @generated
    */
-  TransitionDeclaration getTransitionDeclaration();
+  Transition getConceptualTransition();
 
   /**
-   * Sets the value of the '{@link org.worklang.work.Instance#getTransitionDeclaration <em>Transition Declaration</em>}' containment reference.
+   * Sets the value of the '{@link org.worklang.work.Instance#getConceptualTransition <em>Conceptual Transition</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Transition Declaration</em>' containment reference.
-   * @see #getTransitionDeclaration()
+   * @param value the new value of the '<em>Conceptual Transition</em>' reference.
+   * @see #getConceptualTransition()
    * @generated
    */
-  void setTransitionDeclaration(TransitionDeclaration value);
-
-  /**
-   * Returns the value of the '<em><b>State Declaration</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>State Declaration</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>State Declaration</em>' containment reference.
-   * @see #setStateDeclaration(StateDeclaration)
-   * @see org.worklang.work.WorkPackage#getInstance_StateDeclaration()
-   * @model containment="true"
-   * @generated
-   */
-  StateDeclaration getStateDeclaration();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.Instance#getStateDeclaration <em>State Declaration</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>State Declaration</em>' containment reference.
-   * @see #getStateDeclaration()
-   * @generated
-   */
-  void setStateDeclaration(StateDeclaration value);
+  void setConceptualTransition(Transition value);
 
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -120,32 +90,6 @@ public interface Instance extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>State</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>State</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>State</em>' containment reference.
-   * @see #setState(StateInstance)
-   * @see org.worklang.work.WorkPackage#getInstance_State()
-   * @model containment="true"
-   * @generated
-   */
-  StateInstance getState();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.Instance#getState <em>State</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>State</em>' containment reference.
-   * @see #getState()
-   * @generated
-   */
-  void setState(StateInstance value);
-
-  /**
    * Returns the value of the '<em><b>Transition</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
@@ -170,33 +114,5 @@ public interface Instance extends EObject
    * @generated
    */
   void setTransition(TransitionInstance value);
-
-  /**
-   * Returns the value of the '<em><b>Compound Transition</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Compound Transition</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Compound Transition</em>' containment reference.
-   * @see #setCompoundTransition(CompoundTransitionInstance)
-   * @see org.worklang.work.WorkPackage#getInstance_CompoundTransition()
-   * @model containment="true"
-   * @generated
-   */
-  CompoundTransitionInstance getCompoundTransition();
-
-  /**
-   * Sets the value of the '{@link org.worklang.work.Instance#getCompoundTransition <em>Compound Transition</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Compound Transition</em>' containment reference.
-   * @see #getCompoundTransition()
-   * @generated
-   */
-  void setCompoundTransition(CompoundTransitionInstance value);
-
-
 
 } // Instance

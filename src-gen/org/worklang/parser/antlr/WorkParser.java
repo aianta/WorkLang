@@ -40,7 +40,7 @@ public class WorkParser extends AbstractAntlrParser {
 
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Model";
+		return "Domain";
 	}
 
 	public WorkGrammarAccess getGrammarAccess() {

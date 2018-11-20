@@ -18,46 +18,54 @@ package org.worklang.work.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.worklang.work.Instance;
-import org.worklang.work.UseDefinition;
+import org.worklang.work.State;
 import org.worklang.work.WorkPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Use Definition</b></em>'.
+ * An implementation of the model object '<em><b>State</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.worklang.work.impl.UseDefinitionImpl#getPredefinedValue <em>Predefined Value</em>}</li>
+ *   <li>{@link org.worklang.work.impl.StateImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements UseDefinition
+public class StateImpl extends MinimalEObjectImpl.Container implements State
 {
   /**
-   * The cached value of the '{@link #getPredefinedValue() <em>Predefined Value</em>}' reference.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPredefinedValue()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected Instance predefinedValue;
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected UseDefinitionImpl()
+  protected StateImpl()
   {
     super();
   }
@@ -70,7 +78,7 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
   @Override
   protected EClass eStaticClass()
   {
-    return WorkPackage.Literals.USE_DEFINITION;
+    return WorkPackage.Literals.STATE;
   }
 
   /**
@@ -78,19 +86,9 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
    * <!-- end-user-doc -->
    * @generated
    */
-  public Instance getPredefinedValue()
+  public String getName()
   {
-    if (predefinedValue != null && predefinedValue.eIsProxy())
-    {
-      InternalEObject oldPredefinedValue = (InternalEObject)predefinedValue;
-      predefinedValue = (Instance)eResolveProxy(oldPredefinedValue);
-      if (predefinedValue != oldPredefinedValue)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, WorkPackage.USE_DEFINITION__PREDEFINED_VALUE, oldPredefinedValue, predefinedValue));
-      }
-    }
-    return predefinedValue;
+    return name;
   }
 
   /**
@@ -98,22 +96,12 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
    * <!-- end-user-doc -->
    * @generated
    */
-  public Instance basicGetPredefinedValue()
+  public void setName(String newName)
   {
-    return predefinedValue;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setPredefinedValue(Instance newPredefinedValue)
-  {
-    Instance oldPredefinedValue = predefinedValue;
-    predefinedValue = newPredefinedValue;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.USE_DEFINITION__PREDEFINED_VALUE, oldPredefinedValue, predefinedValue));
+      eNotify(new ENotificationImpl(this, Notification.SET, WorkPackage.STATE__NAME, oldName, name));
   }
 
   /**
@@ -126,9 +114,8 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
   {
     switch (featureID)
     {
-      case WorkPackage.USE_DEFINITION__PREDEFINED_VALUE:
-        if (resolve) return getPredefinedValue();
-        return basicGetPredefinedValue();
+      case WorkPackage.STATE__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -143,8 +130,8 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
   {
     switch (featureID)
     {
-      case WorkPackage.USE_DEFINITION__PREDEFINED_VALUE:
-        setPredefinedValue((Instance)newValue);
+      case WorkPackage.STATE__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -160,8 +147,8 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
   {
     switch (featureID)
     {
-      case WorkPackage.USE_DEFINITION__PREDEFINED_VALUE:
-        setPredefinedValue((Instance)null);
+      case WorkPackage.STATE__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -177,10 +164,27 @@ public class UseDefinitionImpl extends MinimalEObjectImpl.Container implements U
   {
     switch (featureID)
     {
-      case WorkPackage.USE_DEFINITION__PREDEFINED_VALUE:
-        return predefinedValue != null;
+      case WorkPackage.STATE__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }
 
-} //UseDefinitionImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
+  }
+
+} //StateImpl
