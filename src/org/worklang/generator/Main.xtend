@@ -18,7 +18,7 @@
 package org.worklang.generator
 
 
-import io.vertx.core.Vertx
+import io.vertx.reactivex.core.Vertx
 import org.slf4j.LoggerFactory
 import org.worklang.interpreter.WorkApi
 
@@ -28,15 +28,16 @@ class Main {
 	//Logging
 	val static logger = LoggerFactory.getLogger(Main)
 	
-	static Vertx vertx = Vertx.vertx(); 
 
 	def static main(String[] args) {
+		
+		var Vertx vertx = Vertx.vertx();
 		
 		logger.info("Initializing REST API")
 		var WorkApi restapi = new WorkApi()
 		 
 		logger.info("Attempting to deploy REST API")
-		vertx.deployVerticle(restapi)
+		vertx.getDelegate.deployVerticle(restapi)
 		
 		return
 	}

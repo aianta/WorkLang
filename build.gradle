@@ -33,6 +33,9 @@
  	compile 'io.vertx:vertx-core:3.5.2'
  	compile 'io.vertx:vertx-web:3.5.2'
  	compile 'io.vertx:vertx-web-client:3.5.2'
+ 	compile 'io.vertx:vertx-rx-java2:3.5.4'
+ 	// https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava
+	compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.3'
  	
  	compile group: 'com.google.inject', name: 'guice', version: '4.2.0'
 	compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.common', version: '2.12.0'

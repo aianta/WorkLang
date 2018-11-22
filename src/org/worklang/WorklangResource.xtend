@@ -32,6 +32,11 @@ import org.worklang.work.Domain
 import java.util.Date
 import java.time.Instant
 import org.slf4j.LoggerFactory
+import org.apache.tinkerpop.gremlin.process.traversal.Traversal
+import org.apache.tinkerpop.gremlin.structure.Edge
+import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__
+import org.apache.tinkerpop.gremlin.structure.Element
+import org.worklang.adapters.DefinitionSpaceAdapter
 
 class WorklangResource extends LazyLinkingResource{
 	
@@ -76,13 +81,10 @@ class WorklangResource extends LazyLinkingResource{
 		 		
 		 		val domain = ele as Domain
 		 		
-		 		/* 
-		 		var domainVertex = graph.addVertex("Domain")
-		 		domainVertex.property(VertexProperty.Cardinality.single, "name", domain.name)
-		 		domainVertex.property(VertexProperty.Cardinality.single, worklangKey, domain.eClass.instanceTypeName)
-		 		domainVertex.property(VertexProperty.Cardinality.single, "created", date.toString) */
-		 		
 		 		var tx = graph.tx
+		 		
+		 		var dsa =  new DefinitionSpaceAdapter();
+		 		domain.definitionSpace.eAdapters.add(dsa)
 		 		
 		 		//Create vertices for all states in the definition space of the domain
 		 		domain.definitionSpace.states.forEach[state|
@@ -110,32 +112,10 @@ class WorklangResource extends LazyLinkingResource{
 		 			)
 		 		]
 		 		
-		 		
 		 		tx.commit
 		 		
-		 		logger.info("testing path")
-		 		
-		 		var inputState = graph.vertices("match (n:State {name:'name'}) return n").head
-		 		var outputState = graph.vertices("match (n:State {name:'accountBalance'}) return n").head
-		 		
-		 		//graph.traversal.V(inputState.id).repeat(graph.traversal.V().outE().inV.simplePath).until(hasId(outputState.id))
-		 		
-		 		var traversal = graph.traversal.V(inputState.id)
-		 		
-		 		var repeat = graph.traversal.V.outE.inV.simplePath
-		 		
-		 		var path = traversal.repeat(repeat).until(traversal.hasId(outputState.id)).path.limit(1)
-		 		
-		 		
-		 		
-		 		
-		 		
-		 		
-		 		
 		 	]
-		 	  
-		 	  
-		 	
+		 		
 		 
 		 	
 		 
@@ -145,5 +125,7 @@ class WorklangResource extends LazyLinkingResource{
 		 }
 		 
 	}
+	
+	
 
 }
